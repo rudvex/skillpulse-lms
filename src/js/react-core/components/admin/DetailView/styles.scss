@@ -1,0 +1,1520 @@
+/**
+ * DetailView Component Styles
+ * WordPress post-edit-like detail page styling
+ */
+
+// WordPress Design Tokens.
+@use "sass:color";
+
+$wp-background: #f0f0f1;
+$wp-white: #ffffff;
+$wp-border: #c3c4c7;
+$wp-text-primary: #1d2327;
+$wp-text-secondary: #50575e;
+$wp-link: #2271b1;
+
+$status-success: #00a32a;
+$status-warning: #dba617;
+$status-error: #d63638;
+$status-info: #2271b1;
+
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+
+// Detail View Container.
+.splms-detail-view {
+	background: $wp-white;
+	margin: -20px -20px 0;
+	padding: 0;
+
+	// Subtitle area below AdminHeader.
+	.splms-detail-subtitle {
+		padding: $spacing-md $spacing-xl;
+		background: $wp-white;
+		border-bottom: 1px solid $wp-border;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: $spacing-lg;
+
+		.splms-subtitle-left {
+			display: flex;
+			align-items: center;
+			gap: $spacing-md;
+			flex: 1;
+
+			p {
+				margin: 0;
+				font-size: var(--splms-font-size-sm);
+				color: $wp-text-secondary;
+				line-height: var(--splms-line-height-snug);
+			}
+
+			.splms-status-badge {
+				display: inline-block;
+				padding: 6px 12px;
+				border-radius: var(--splms-border-radius-base);
+				font-size: var(--splms-font-size-xs);
+				font-weight: var(--splms-font-weight-bold);
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+				line-height: var(--splms-line-height-none);
+				flex-shrink: 0;
+
+				&.splms-status-success {
+					background: rgba($status-success, 0.1);
+					color: $status-success;
+					border: 1px solid rgba($status-success, 0.3);
+				}
+
+				&.splms-status-warning {
+					background: rgba($status-warning, 0.1);
+					color: color.adjust($status-warning, $lightness: -10%);
+					border: 1px solid rgba($status-warning, 0.3);
+				}
+
+				&.splms-status-error {
+					background: rgba($status-error, 0.1);
+					color: $status-error;
+					border: 1px solid rgba($status-error, 0.3);
+				}
+
+				&.splms-status-info {
+					background: rgba($status-info, 0.1);
+					color: $status-info;
+					border: 1px solid rgba($status-info, 0.3);
+				}
+			}
+		}
+
+		// Actions in subtitle area.
+		.splms-detail-actions {
+			display: flex;
+			gap: $spacing-xs;
+			align-items: center;
+			flex-shrink: 0;
+
+			.splms-action-button {
+				display: inline-flex;
+				align-items: center;
+				gap: $spacing-xs;
+			}
+		}
+	}
+}
+
+// Detail Header.
+.splms-detail-header {
+	background: $wp-white;
+	border-bottom: 1px solid $wp-border;
+	padding: $spacing-md $spacing-xl $spacing-lg;
+
+	.splms-detail-back {
+		margin-bottom: $spacing-sm;
+
+		.splms-back-button {
+			color: $wp-link;
+			text-decoration: none;
+			font-size: var(--splms-font-size-sm);
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			padding: 6px 0;
+			height: auto;
+			border: none;
+			background: none;
+			box-shadow: none;
+			font-weight: var(--splms-font-weight-medium);
+			transition: all 0.15s ease;
+
+			&:hover {
+				color: color.adjust($wp-link, $lightness: -10%);
+				transform: translateX(-2px);
+			}
+
+			.splms-icon {
+				font-size: var(--splms-font-size-sm);
+			}
+		}
+	}
+
+	.splms-detail-title-row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: $spacing-lg;
+		min-height: 36px;
+
+		.splms-detail-title {
+			display: flex;
+			align-items: center;
+			gap: $spacing-md;
+			flex: 1;
+
+			.splms-icon {
+				color: $wp-text-secondary;
+			}
+
+			> div {
+				flex: 1;
+			}
+
+			h1 {
+				margin: 0;
+				font-size: 20px;
+				font-weight: var(--splms-font-weight-semibold);
+				line-height: 1.3;
+				color: $wp-text-primary;
+			}
+
+			.splms-detail-subtitle {
+				margin: 2px 0 0;
+				font-size: var(--splms-font-size-sm);
+				color: $wp-text-secondary;
+				line-height: var(--splms-line-height-snug);
+			}
+		}
+
+		.splms-detail-meta {
+			display: flex;
+			align-items: center;
+			gap: $spacing-sm;
+			flex-shrink: 0;
+
+			.splms-detail-status {
+				padding: 6px 12px;
+				border-radius: var(--splms-border-radius-base);
+				font-size: var(--splms-font-size-xs);
+				font-weight: var(--splms-font-weight-bold);
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+				line-height: var(--splms-line-height-none);
+
+				&.splms-status-success {
+					background: rgba($status-success, 0.1);
+					color: $status-success;
+					border: 1px solid rgba($status-success, 0.3);
+				}
+
+				&.splms-status-warning {
+					background: rgba($status-warning, 0.1);
+					color: color.adjust($status-warning, $lightness: -10%);
+					border: 1px solid rgba($status-warning, 0.3);
+				}
+
+				&.splms-status-error {
+					background: rgba($status-error, 0.1);
+					color: $status-error;
+					border: 1px solid rgba($status-error, 0.3);
+				}
+
+				&.splms-status-info {
+					background: rgba($status-info, 0.1);
+					color: $status-info;
+					border: 1px solid rgba($status-info, 0.3);
+				}
+			}
+
+			.splms-detail-actions {
+				display: flex;
+				gap: $spacing-xs;
+			}
+		}
+	}
+}
+
+// Detail Body.
+.splms-detail-body {
+	display: flex;
+	gap: $spacing-lg;
+	background: $wp-background;
+	min-height: 60vh;
+
+	&.has-sidebar {
+		.splms-detail-main {
+			flex: 1 1 70%;
+			min-width: 0; // Allow flex item to shrink below content width.
+		}
+
+		.splms-detail-sidebar {
+			flex: 0 0 30%;
+			max-width: 300px;
+		}
+	}
+
+	// Full-width mode for space-intensive interfaces like certificate builder.
+	&.full-width {
+		gap: 0;
+
+		.splms-detail-main {
+			flex: 1 1 100%;
+			width: 100%;
+			max-width: 100%;
+		}
+
+		// Hide sidebar in full-width mode.
+		.splms-detail-sidebar {
+			display: none;
+		}
+	}
+
+	.splms-detail-main {
+		flex: 1;
+		min-width: 0; // Allow flex item to shrink below content width.
+	}
+}
+
+// Detail Sections (Tabs or Simple).
+.splms-detail-sections {
+	width: 100%;
+	min-width: 0;
+
+	.splms-detail-tabs {
+		background: $wp-white;
+		border: 1px solid $wp-border;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+		border-radius: 0;
+
+		.components-tab-panel__tabs {
+			border-bottom: 1px solid $wp-border;
+			background: $wp-white;
+			padding: 0;
+			margin: 0;
+			display: flex;
+		}
+
+		.components-button.components-tab-panel__tabs-item {
+			border: none;
+			border-bottom: 3px solid transparent;
+			background: transparent;
+			border-radius: 0;
+			margin: 0;
+			padding: 14px 20px;
+			font-size: var(--splms-font-size-sm);
+			font-weight: var(--splms-font-weight-medium);
+			color: $wp-text-secondary;
+			transition: all 0.15s ease;
+			position: relative;
+
+			.splms-icon {
+				margin-right: 6px;
+				opacity: 0.7;
+			}
+
+			&:hover {
+				background: $wp-background;
+				color: $wp-text-primary;
+
+				.splms-icon {
+					opacity: 1;
+				}
+			}
+
+			&.is-active {
+				border-bottom-color: $wp-link;
+				color: $wp-link;
+				background: $wp-white;
+
+				.splms-icon {
+					opacity: 1;
+					color: $wp-link;
+				}
+			}
+
+			&:focus {
+				box-shadow: none;
+				outline: none;
+			}
+		}
+
+		.components-tab-panel__tab-content {
+			padding: 0;
+		}
+
+		.splms-detail-section-content {
+			padding: $spacing-lg;
+			overflow-x: auto;
+
+			// Ensure tables and cards don't force the layout to expand.
+			.components-card {
+				max-width: 100%;
+				overflow-x: auto;
+
+				.components-card__body {
+					overflow-x: auto;
+				}
+			}
+
+			// Quiz overview table specific styles.
+			.splms-quiz-overview-table {
+				min-width: 100%;
+				white-space: nowrap;
+
+				th,
+				td {
+					white-space: normal;
+					word-wrap: break-word;
+				}
+
+				// Allow question and answer columns to wrap.
+				th:nth-child(3),
+				td:nth-child(3),
+				th:nth-child(4),
+				td:nth-child(4),
+				th:nth-child(5),
+				td:nth-child(5) {
+					white-space: normal;
+					min-width: 150px;
+					max-width: 250px;
+				}
+			}
+
+			table {
+				max-width: 100%;
+			}
+		}
+	}
+
+	.splms-detail-section {
+		margin-bottom: $spacing-md;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		.splms-detail-section-header {
+			display: flex;
+			align-items: center;
+			gap: $spacing-sm;
+			padding: $spacing-md $spacing-lg;
+			background: $wp-background;
+			border-bottom: 1px solid $wp-border;
+
+			h2 {
+				margin: 0;
+				font-size: var(--splms-font-size-sm);
+				font-weight: var(--splms-font-weight-semibold);
+				color: $wp-text-primary;
+			}
+		}
+	}
+}
+
+// Sidebar Meta Boxes.
+.splms-detail-sidebar {
+	.splms-detail-meta-box {
+		margin-bottom: $spacing-md;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		.splms-meta-box-title {
+			padding: $spacing-md;
+			background: $wp-background;
+			border-bottom: 1px solid $wp-border;
+
+			h3 {
+				margin: 0;
+				font-size: var(--splms-font-size-sm);
+				font-weight: var(--splms-font-weight-semibold);
+				color: $wp-text-primary;
+				line-height: var(--splms-line-height-snug);
+			}
+		}
+
+		.components-card__body {
+			padding: $spacing-md;
+		}
+	}
+
+	// Quiz meta table styling.
+	.splms-quiz-meta {
+		table {
+			width: 100%;
+			border-collapse: collapse;
+
+			tbody {
+				tr {
+					border-bottom: 1px solid rgba($wp-border, 0.5);
+
+					&:last-child {
+						border-bottom: none;
+					}
+
+					td {
+						padding: $spacing-sm 0;
+						font-size: var(--splms-font-size-sm);
+						line-height: var(--splms-line-height-normal);
+						vertical-align: top;
+
+						&:first-child {
+							color: $wp-text-secondary;
+							font-weight: var(--splms-font-weight-medium);
+							padding-right: $spacing-sm;
+						}
+
+						&:last-child {
+							color: $wp-text-primary;
+							font-weight: var(--splms-font-weight-normal);
+							text-align: right;
+
+							strong {
+								font-weight: var(--splms-font-weight-semibold);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// Loading State.
+.splms-detail-loading {
+	background: $wp-white;
+	padding: 60px 20px;
+	text-align: center;
+}
+
+// Breadcrumbs Navigation.
+.splms-breadcrumbs {
+	padding: 10px $spacing-xl;
+	background: $wp-white;
+	border-bottom: 1px solid $wp-border;
+	font-size: var(--splms-font-size-sm);
+	color: $wp-text-secondary;
+	line-height: var(--splms-line-height-snug);
+
+	.separator {
+		color: $wp-text-secondary;
+		opacity: 0.4;
+		margin: 0 6px;
+	}
+
+	.breadcrumb-link {
+		color: $wp-link;
+		text-decoration: none;
+		transition: color 0.15s ease;
+
+		&:hover {
+			color: color.adjust($wp-link, $lightness: -10%);
+		}
+	}
+
+	.breadcrumb-current {
+		color: $wp-text-primary;
+		font-weight: var(--splms-font-weight-medium);
+	}
+}
+
+// PublishBox Sidebar Component.
+.splms-publish-box {
+	.publish-status {
+		margin-bottom: $spacing-md;
+		padding-bottom: $spacing-md;
+		border-bottom: 1px solid rgba($wp-border, 0.5);
+		text-align: center;
+
+		.status-badge {
+			display: inline-block;
+			padding: $spacing-sm $spacing-lg;
+			border-radius: var(--splms-border-radius-base);
+			font-size: var(--splms-font-size-xs);
+			font-weight: var(--splms-font-weight-bold);
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			border: 1px solid;
+			box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+			&.status-success {
+				background: rgba($status-success, 0.1);
+				color: $status-success;
+				border-color: rgba($status-success, 0.3);
+			}
+
+			&.status-warning {
+				background: rgba($status-warning, 0.1);
+				color: color.adjust($status-warning, $lightness: -10%);
+				border-color: rgba($status-warning, 0.3);
+			}
+
+			&.status-error {
+				background: rgba($status-error, 0.1);
+				color: $status-error;
+				border-color: rgba($status-error, 0.3);
+			}
+
+			&.status-info {
+				background: rgba($status-info, 0.1);
+				color: $status-info;
+				border-color: rgba($status-info, 0.3);
+			}
+		}
+	}
+
+	.publish-actions {
+		display: flex;
+		flex-direction: column;
+		gap: $spacing-sm;
+		margin-bottom: $spacing-md;
+		padding-bottom: $spacing-md;
+		border-bottom: 1px solid rgba($wp-border, 0.5);
+
+		.publish-action-button {
+			width: 100%;
+			justify-content: center;
+			height: 36px;
+			font-size: var(--splms-font-size-sm);
+			font-weight: var(--splms-font-weight-medium);
+
+			.splms-icon {
+				margin-right: $spacing-xs;
+			}
+		}
+	}
+
+	.publish-metadata {
+		.metadata-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			padding: $spacing-sm 0;
+			font-size: var(--splms-font-size-sm);
+			line-height: var(--splms-line-height-normal);
+			border-bottom: 1px solid rgba($wp-border, 0.3);
+
+			&:first-child {
+				padding-top: 0;
+			}
+
+			&:last-child {
+				border-bottom: none;
+				padding-bottom: 0;
+			}
+
+			.metadata-label {
+				color: $wp-text-secondary;
+				font-weight: var(--splms-font-weight-medium);
+				flex-shrink: 0;
+			}
+
+			.metadata-value {
+				color: $wp-text-primary;
+				font-weight: var(--splms-font-weight-normal);
+				text-align: right;
+			}
+		}
+	}
+}
+
+// QuickActions Sidebar Component.
+.splms-quick-actions {
+	.quick-actions-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		.quick-action-item {
+			margin: 0;
+			padding: 0;
+
+			&:not(:last-child) {
+				margin-bottom: $spacing-md;
+			}
+
+			.quick-action-link,
+			.quick-action-button {
+				display: flex;
+				align-items: center;
+				gap: $spacing-md;
+				width: 100%;
+				padding: 0;
+				font-size: var(--splms-font-size-sm);
+				text-decoration: none;
+				background: none;
+				border: none;
+				cursor: pointer;
+				text-align: left;
+				transition: var(--splms-transition-base);
+				line-height: var(--splms-line-height-relaxed);
+
+				&:hover {
+					color: color.adjust($wp-link, $lightness: -10%);
+
+					.quick-action-icon {
+						transform: scale(1.1);
+
+						.splms-icon {
+							opacity: 1;
+						}
+					}
+
+					.external-icon {
+						transform: translateX(2px);
+					}
+				}
+
+				.quick-action-icon {
+					flex-shrink: 0;
+					width: 36px;
+					height: 36px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					background: rgba($wp-link, 0.08);
+					border-radius: var(--splms-border-radius-md);
+					transition: var(--splms-transition-base);
+
+					.splms-icon {
+						opacity: 0.9;
+						transition: opacity 0.2s ease;
+						color: $wp-link;
+					}
+				}
+
+				.quick-action-label {
+					flex: 1;
+					font-weight: var(--splms-font-weight-medium);
+					color: $wp-text-primary;
+				}
+
+				.external-icon {
+					font-size: var(--splms-font-size-base);
+					opacity: 0.4;
+					margin-left: auto;
+					flex-shrink: 0;
+					transition: var(--splms-transition-base);
+					color: $wp-text-secondary;
+				}
+			}
+		}
+	}
+}
+
+// ActivityLog Timeline Component.
+.splms-activity-log {
+	.activity-timeline {
+		position: relative;
+
+		// Vertical timeline line.
+		&::before {
+			content: '';
+			position: absolute;
+			left: 15px;
+			top: 8px;
+			bottom: 8px;
+			width: 2px;
+			background: rgba($wp-border, 0.5);
+		}
+
+		.activity-item {
+			display: flex;
+			gap: $spacing-md;
+			padding: $spacing-sm 0;
+			position: relative;
+
+			&:first-child {
+				padding-top: 0;
+			}
+
+			&:last-child {
+				padding-bottom: 0;
+
+				&::before {
+					display: none;
+				}
+			}
+
+			.activity-icon {
+				flex-shrink: 0;
+				width: 32px;
+				height: 32px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 50%;
+				background: $wp-white;
+				color: $wp-text-secondary;
+				border: 2px solid $wp-background;
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+				position: relative;
+				z-index: 1;
+
+				.splms-icon {
+					font-size: var(--splms-font-size-sm);
+				}
+			}
+
+			.activity-content {
+				flex: 1;
+				min-width: 0;
+				padding-bottom: $spacing-md;
+
+				.activity-title {
+					font-size: var(--splms-font-size-sm);
+					font-weight: var(--splms-font-weight-semibold);
+					color: $wp-text-primary;
+					margin-bottom: 2px;
+					line-height: var(--splms-line-height-snug);
+				}
+
+				.activity-description {
+					font-size: var(--splms-font-size-xs);
+					color: $wp-text-secondary;
+					margin-bottom: 2px;
+					line-height: var(--splms-line-height-snug);
+				}
+
+				.activity-timestamp {
+					font-size: var(--splms-font-size-xs);
+					color: rgba($wp-text-secondary, 0.7);
+					line-height: var(--splms-line-height-snug);
+				}
+			}
+
+			&.activity-success {
+				.activity-icon {
+					background: rgba($status-success, 0.15);
+					color: $status-success;
+					border-color: rgba($status-success, 0.3);
+				}
+			}
+
+			&.activity-pending {
+				.activity-icon {
+					background: rgba($status-warning, 0.15);
+					color: $status-warning;
+					border-color: rgba($status-warning, 0.3);
+				}
+			}
+
+			&.activity-error {
+				.activity-icon {
+					background: rgba($status-error, 0.15);
+					color: $status-error;
+					border-color: rgba($status-error, 0.3);
+				}
+			}
+
+			&.activity-info {
+				.activity-icon {
+					background: rgba($status-info, 0.15);
+					color: $status-info;
+					border-color: rgba($status-info, 0.3);
+				}
+			}
+		}
+	}
+}
+
+// Question Review List (Card-based layout).
+.splms-question-review-list {
+	.splms-review-stats {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		gap: $spacing-md;
+		margin-bottom: $spacing-lg;
+
+		.splms-stat-card {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: $spacing-md;
+			background: $wp-white;
+			border: 2px solid $wp-border;
+			border-radius: var(--splms-border-radius-lg);
+			text-align: center;
+			transition: var(--splms-transition-base);
+
+			.splms-stat-value {
+				font-size: 32px;
+				font-weight: var(--splms-font-weight-bold);
+				line-height: 1.2;
+				margin-bottom: $spacing-xs;
+			}
+
+			.splms-stat-label {
+				font-size: var(--splms-font-size-xs);
+				font-weight: var(--splms-font-weight-semibold);
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+				color: $wp-text-secondary;
+			}
+
+			&.splms-stat-total {
+				border-color: $wp-link;
+
+				.splms-stat-value {
+					color: $wp-link;
+				}
+			}
+
+			&.splms-stat-correct {
+				border-color: $status-success;
+
+				.splms-stat-value {
+					color: $status-success;
+				}
+			}
+
+			&.splms-stat-incorrect {
+				border-color: $status-error;
+
+				.splms-stat-value {
+					color: $status-error;
+				}
+			}
+
+			&.splms-stat-pending {
+				border-color: $status-warning;
+
+				.splms-stat-value {
+					color: $status-warning;
+				}
+			}
+		}
+	}
+
+	.splms-review-controls {
+		display: flex;
+		gap: $spacing-lg;
+		margin-bottom: $spacing-lg;
+		padding: $spacing-md;
+		background: $wp-white;
+		border: 1px solid $wp-border;
+		border-radius: var(--splms-border-radius-lg);
+
+		.components-base-control {
+			flex: 1;
+			margin-bottom: 0;
+		}
+	}
+
+	.splms-questions-list {
+		display: flex;
+		flex-direction: column;
+		gap: $spacing-md;
+	}
+}
+
+// Question Review Card.
+.splms-question-card {
+	border-radius: var(--splms-border-radius-lg);
+	border-width: 2px;
+	transition: all 0.3s ease;
+
+	&.is-collapsed {
+		.components-card__body {
+			padding: $spacing-md $spacing-lg;
+		}
+
+		.splms-question-header {
+			margin-bottom: 0;
+			padding-bottom: 0;
+			border-bottom: none;
+		}
+	}
+
+	&.is-expanded {
+		.splms-question-header {
+			cursor: default;
+		}
+	}
+
+	&.splms-question-pending {
+		border-color: $status-warning;
+
+		&.is-expanded {
+			box-shadow: 0 4px 12px rgba($status-warning, 0.2);
+		}
+	}
+
+	&.splms-question-correct {
+		border-color: $status-success;
+
+		&.is-expanded {
+			box-shadow: 0 4px 12px rgba($status-success, 0.15);
+		}
+	}
+
+	&.splms-question-incorrect {
+		border-color: $status-error;
+
+		&.is-expanded {
+			box-shadow: 0 4px 12px rgba($status-error, 0.15);
+		}
+	}
+
+	.splms-question-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: $spacing-md;
+		cursor: pointer;
+		transition: var(--splms-transition-base);
+		padding: $spacing-xs 0;
+		margin-bottom: $spacing-md;
+		border-bottom: 1px solid $wp-border;
+
+		&:hover {
+			background: rgba($wp-background, 0.5);
+			margin: 0 (-$spacing-md);
+			padding: $spacing-xs $spacing-md $spacing-md;
+			border-radius: var(--splms-border-radius-md);
+		}
+
+		.splms-question-header-left {
+			display: flex;
+			align-items: center;
+			gap: $spacing-md;
+			flex: 1;
+			min-width: 0;
+		}
+
+		.splms-question-header-right {
+			display: flex;
+			align-items: center;
+			gap: $spacing-sm;
+			flex-shrink: 0;
+		}
+
+		.splms-expand-toggle {
+			min-width: auto;
+			padding: 6px;
+		}
+
+		.splms-question-meta {
+			display: flex;
+			align-items: center;
+			gap: $spacing-sm;
+			flex-shrink: 0;
+
+			.splms-question-number {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 32px;
+				height: 32px;
+				background: $wp-link;
+				color: $wp-white;
+				border-radius: 50%;
+				font-size: var(--splms-font-size-sm);
+				font-weight: var(--splms-font-weight-bold);
+			}
+
+			.splms-question-type-badge {
+				display: inline-block;
+				padding: 4px 12px;
+				background: $wp-background;
+				color: $wp-text-primary;
+				border-radius: var(--splms-border-radius-base);
+				font-size: var(--splms-font-size-xs);
+				font-weight: var(--splms-font-weight-semibold);
+				text-transform: uppercase;
+			}
+		}
+
+		.splms-question-preview {
+			flex: 1;
+			font-size: var(--splms-font-size-sm);
+			line-height: var(--splms-line-height-normal);
+			color: $wp-text-primary;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		.splms-question-status {
+			display: flex;
+			align-items: center;
+			gap: $spacing-xs;
+			padding: 6px 12px;
+			border-radius: var(--splms-border-radius-md);
+			font-size: var(--splms-font-size-sm);
+			font-weight: var(--splms-font-weight-semibold);
+			text-transform: uppercase;
+
+			&.splms-status-pending {
+				background: rgba($status-warning, 0.1);
+				color: $status-warning;
+				border: 1px solid $status-warning;
+			}
+
+			&.splms-status-correct {
+				background: rgba($status-success, 0.1);
+				color: $status-success;
+				border: 1px solid $status-success;
+			}
+
+			&.splms-status-incorrect {
+				background: rgba($status-error, 0.1);
+				color: $status-error;
+				border: 1px solid $status-error;
+			}
+		}
+	}
+
+	.splms-question-expanded-content {
+		margin-top: $spacing-lg;
+		padding-top: $spacing-lg;
+		border-top: 1px solid $wp-border;
+		animation: slideDown 0.3s ease;
+	}
+
+	@keyframes slideDown {
+		from {
+			opacity: 0;
+			transform: translateY(-10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.splms-question-text {
+		margin-bottom: $spacing-lg;
+
+		h4 {
+			margin: 0 0 $spacing-sm;
+			font-size: var(--splms-font-size-sm);
+			font-weight: var(--splms-font-weight-bold);
+			color: $wp-text-secondary;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+		}
+
+		p {
+			margin: 0;
+			font-size: 15px;
+			line-height: var(--splms-line-height-relaxed);
+			color: $wp-text-primary;
+		}
+	}
+
+	.splms-answer-section {
+		margin-bottom: $spacing-lg;
+
+		.splms-answer-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: $spacing-md;
+		}
+
+		.splms-answer-box {
+			padding: $spacing-md;
+			border-radius: var(--splms-border-radius-lg);
+			border: 2px solid;
+
+			.splms-answer-label {
+				display: flex;
+				align-items: center;
+				gap: $spacing-xs;
+				margin-bottom: $spacing-sm;
+
+				strong {
+					font-size: var(--splms-font-size-sm);
+					font-weight: var(--splms-font-weight-bold);
+					text-transform: uppercase;
+					letter-spacing: 0.5px;
+				}
+			}
+
+			.splms-answer-content {
+				.splms-answer-text {
+					font-size: var(--splms-font-size-sm);
+					line-height: var(--splms-line-height-relaxed);
+					color: $wp-text-primary;
+					white-space: pre-wrap;
+					word-break: break-word;
+				}
+
+				.splms-file-link {
+					display: inline-flex;
+					align-items: center;
+					gap: $spacing-xs;
+					padding: $spacing-sm $spacing-md;
+					background: $wp-link;
+					color: $wp-white;
+					border-radius: var(--splms-border-radius-md);
+					text-decoration: none;
+					font-size: var(--splms-font-size-sm);
+					font-weight: var(--splms-font-weight-medium);
+					transition: var(--splms-transition-base);
+
+					&:hover {
+						background: color.adjust($wp-link, $lightness: -10%);
+						transform: translateY(-1px);
+					}
+				}
+
+				.splms-no-answer {
+					color: $wp-text-secondary;
+					font-style: italic;
+					font-size: var(--splms-font-size-sm);
+				}
+			}
+
+			&.splms-student-answer {
+				&.correct {
+					background: rgba($status-success, 0.05);
+					border-color: $status-success;
+
+					.splms-answer-label {
+						color: $status-success;
+					}
+				}
+
+				&.incorrect {
+					background: rgba($status-error, 0.05);
+					border-color: $status-error;
+
+					.splms-answer-label {
+						color: $status-error;
+					}
+				}
+			}
+
+			&.splms-correct-answer {
+				background: rgba($status-success, 0.05);
+				border-color: $status-success;
+
+				.splms-answer-label {
+					color: $status-success;
+				}
+			}
+		}
+	}
+
+	.splms-options-section {
+		margin-bottom: $spacing-lg;
+		padding: $spacing-md;
+		background: $wp-background;
+		border-radius: var(--splms-border-radius-lg);
+
+		h5 {
+			margin: 0 0 $spacing-sm;
+			font-size: var(--splms-font-size-sm);
+			font-weight: var(--splms-font-weight-bold);
+			color: $wp-text-secondary;
+			text-transform: uppercase;
+		}
+
+		.splms-options-list {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			flex-direction: column;
+			gap: $spacing-xs;
+
+			li {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				padding: $spacing-sm $spacing-md;
+				background: $wp-white;
+				border: 1px solid $wp-border;
+				border-radius: var(--splms-border-radius-md);
+				font-size: var(--splms-font-size-sm);
+
+				&.splms-correct-option {
+					background: rgba($status-success, 0.05);
+					border-color: $status-success;
+					font-weight: var(--splms-font-weight-semibold);
+
+					.splms-option-text {
+						color: $status-success;
+					}
+				}
+
+				.splms-correct-indicator {
+					display: flex;
+					align-items: center;
+					gap: $spacing-xs;
+					color: $status-success;
+					font-size: var(--splms-font-size-xs);
+					font-weight: var(--splms-font-weight-semibold);
+				}
+			}
+		}
+	}
+
+	.splms-explanation-section {
+		margin-bottom: $spacing-lg;
+		padding: $spacing-md;
+		background: rgba($status-info, 0.05);
+		border-left: 4px solid $status-info;
+		border-radius: var(--splms-border-radius-md);
+
+		h5 {
+			display: flex;
+			align-items: center;
+			gap: $spacing-xs;
+			margin: 0 0 $spacing-sm;
+			font-size: var(--splms-font-size-sm);
+			font-weight: var(--splms-font-weight-bold);
+			color: $status-info;
+			text-transform: uppercase;
+		}
+
+		p {
+			margin: 0;
+			font-size: var(--splms-font-size-sm);
+			line-height: var(--splms-line-height-relaxed);
+			color: $wp-text-primary;
+		}
+	}
+
+	.splms-grading-section {
+		padding: $spacing-md;
+		background: rgba($status-warning, 0.05);
+		border: 2px solid $status-warning;
+		border-radius: var(--splms-border-radius-lg);
+
+		h5 {
+			margin: 0 0 $spacing-md;
+			font-size: var(--splms-font-size-sm);
+			font-weight: var(--splms-font-weight-bold);
+			color: $status-warning;
+			text-transform: uppercase;
+		}
+
+		.splms-grading-controls {
+			display: flex;
+			flex-direction: column;
+			gap: $spacing-md;
+
+			.splms-grading-input {
+				.splms-grade-input {
+					max-width: 200px;
+				}
+			}
+
+			.splms-grading-buttons {
+				display: flex;
+				gap: $spacing-sm;
+				flex-wrap: wrap;
+
+				.components-button {
+					display: inline-flex;
+					align-items: center;
+					gap: $spacing-xs;
+				}
+			}
+		}
+	}
+
+	.splms-points-display {
+		display: flex;
+		align-items: center;
+		gap: $spacing-xs;
+		padding: $spacing-sm $spacing-md;
+		background: $wp-background;
+		border-radius: var(--splms-border-radius-md);
+		font-size: var(--splms-font-size-sm);
+
+		.splms-icon {
+			color: $status-warning;
+		}
+
+		.splms-points-value {
+			margin-left: $spacing-xs;
+			font-weight: var(--splms-font-weight-bold);
+			color: $wp-text-primary;
+		}
+	}
+}
+
+// Responsive Design.
+@media screen and (max-width: 782px) {
+	.splms-breadcrumbs {
+		padding: 8px $spacing-md;
+		font-size: var(--splms-font-size-xs);
+
+		.separator {
+			margin: 0 4px;
+		}
+	}
+
+	.splms-detail-header {
+		padding: $spacing-md;
+
+		.splms-detail-back {
+			.splms-back-button {
+				font-size: var(--splms-font-size-xs);
+			}
+		}
+
+		.splms-detail-title-row {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: $spacing-md;
+
+			.splms-detail-title {
+				h1 {
+					font-size: var(--splms-font-size-lg);
+				}
+
+				.splms-detail-subtitle {
+					font-size: var(--splms-font-size-xs);
+				}
+			}
+
+			.splms-detail-meta {
+				flex-direction: row;
+				flex-wrap: wrap;
+				align-items: center;
+				width: 100%;
+
+				.splms-detail-status {
+					font-size: var(--splms-font-size-xs);
+					padding: 5px 10px;
+				}
+
+				.splms-detail-actions {
+					width: 100%;
+					flex-direction: column;
+					gap: $spacing-xs;
+
+					.components-button {
+						width: 100%;
+						justify-content: center;
+					}
+				}
+			}
+		}
+	}
+
+	.splms-detail-body {
+		flex-direction: column;
+		padding: $spacing-md;
+
+		&.has-sidebar {
+			.splms-detail-main,
+			.splms-detail-sidebar {
+				flex: 1 1 100%;
+				max-width: 100%;
+			}
+		}
+	}
+
+	.splms-detail-tabs {
+		.components-tab-panel__tabs {
+			overflow-x: auto;
+			white-space: nowrap;
+			-webkit-overflow-scrolling: touch;
+
+			&::-webkit-scrollbar {
+				height: 3px;
+			}
+
+			&::-webkit-scrollbar-track {
+				background: $wp-background;
+			}
+
+			&::-webkit-scrollbar-thumb {
+				background: $wp-border;
+				border-radius: var(--splms-border-radius-base);
+			}
+		}
+
+		.components-button.components-tab-panel__tabs-item {
+			padding: 12px $spacing-md;
+			font-size: var(--splms-font-size-sm);
+			flex-shrink: 0;
+
+			.splms-icon {
+				margin-right: 4px;
+			}
+		}
+	}
+
+	// Question Review List responsive.
+	.splms-question-review-list {
+		.splms-review-stats {
+			grid-template-columns: repeat(2, 1fr);
+
+			.splms-stat-card {
+				.splms-stat-value {
+					font-size: 24px;
+				}
+			}
+		}
+
+		.splms-review-controls {
+			flex-direction: column;
+		}
+	}
+
+	.splms-question-card {
+		.splms-question-header {
+			.splms-question-header-left {
+				flex-direction: column;
+				align-items: flex-start;
+				gap: $spacing-xs;
+			}
+
+			.splms-question-header-right {
+				flex-direction: column;
+				align-items: flex-end;
+			}
+
+			.splms-question-preview {
+				font-size: var(--splms-font-size-sm);
+			}
+		}
+
+		.splms-answer-section .splms-answer-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.splms-grading-section .splms-grading-controls .splms-grading-buttons {
+			flex-direction: column;
+
+			.components-button {
+				width: 100%;
+				justify-content: center;
+			}
+		}
+	}
+
+	// Subtitle responsive.
+	.splms-detail-subtitle {
+		padding: $spacing-sm $spacing-md;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: $spacing-md;
+
+		.splms-subtitle-left {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: $spacing-sm;
+
+			p {
+				font-size: var(--splms-font-size-xs);
+			}
+
+			.splms-status-badge {
+				font-size: var(--splms-font-size-xs);
+				padding: 5px 10px;
+			}
+		}
+
+		.splms-detail-actions {
+			width: 100%;
+			flex-direction: column;
+			gap: $spacing-xs;
+
+			.components-button {
+				width: 100%;
+				justify-content: center;
+			}
+		}
+	}
+}

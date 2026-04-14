@@ -1,0 +1,112 @@
+@use "variables" as *;
+
+// Screen Reader Text
+.screen-reader-text {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+// Text Utilities
+.text {
+  &-center { text-align: center; }
+  &-left { text-align: left; }
+  &-right { text-align: right; }
+}
+
+// Display Utilities
+.d {
+  &-flex { display: flex; }
+  &-block { display: block; }
+  &-inline { display: inline; }
+  &-none { display: none; }
+}
+
+// Flex Utilities
+.flex {
+  &-row { flex-direction: row; }
+  &-column { flex-direction: column; }
+  &-wrap { flex-wrap: wrap; }
+  &-nowrap { flex-wrap: nowrap; }
+  
+  &-justify {
+    &-start { justify-content: flex-start; }
+    &-end { justify-content: flex-end; }
+    &-center { justify-content: center; }
+    &-between { justify-content: space-between; }
+    &-around { justify-content: space-around; }
+  }
+  
+  &-align {
+    &-start { align-items: flex-start; }
+    &-end { align-items: flex-end; }
+    &-center { align-items: center; }
+    &-baseline { align-items: baseline; }
+    &-stretch { align-items: stretch; }
+  }
+}
+
+// Spacing Utilities
+@each $space in (0, 1, 2, 3, 4, 5) {
+  $value: $space * 0.25rem;
+  
+  .m-#{$space} { margin: $value; }
+  .mt-#{$space} { margin-top: $value; }
+  .mb-#{$space} { margin-bottom: $value; }
+  .ml-#{$space} { margin-left: $value; }
+  .mr-#{$space} { margin-right: $value; }
+  .mx-#{$space} { 
+    margin-left: $value;
+    margin-right: $value;
+  }
+  .my-#{$space} {
+    margin-top: $value;
+    margin-bottom: $value;
+  }
+  
+  .p-#{$space} { padding: $value; }
+  .pt-#{$space} { padding-top: $value; }
+  .pb-#{$space} { padding-bottom: $value; }
+  .pl-#{$space} { padding-left: $value; }
+  .pr-#{$space} { padding-right: $value; }
+  .px-#{$space} {
+    padding-left: $value;
+    padding-right: $value;
+  }
+  .py-#{$space} {
+    padding-top: $value;
+    padding-bottom: $value;
+  }
+}
+
+// Colors
+@each $color, $value in (
+  "primary": var(--splms-primary),
+  "secondary": var(--splms-secondary),
+  "accent": var(--splms-secondary),
+  "warning": var(--splms-warning),
+  "danger": var(--splms-danger),
+  "white": var(--splms-white)
+) {
+  .text-#{$color} { color: $value; }
+  .bg-#{$color} { background-color: $value; }
+}
+
+// Border Radius
+.rounded {
+  border-radius: var(--splms-border-radius-base);
+
+  &-lg {
+    border-radius: var(--splms-border-radius-lg);
+  }
+  
+  &-full {
+    border-radius: 9999px;
+  }
+} 

@@ -1,0 +1,511 @@
+/**
+ * Dashboard Orders Styles
+ * Modern card layout with clean, icon-free design
+ */
+
+@use "../base/variables" as *;
+
+.splms-dashboard-wrapper,
+.splms-dashboard-tab {
+
+	// Modern Order Cards (Icon-free Design)
+	.splms-order-card {
+		.splms-order-info-full {
+			flex: 1;
+			width: 100%;
+		}
+
+		.splms-course-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			gap: 1rem;
+			margin-bottom: 1rem;
+
+			@media (max-width: 640px) {
+				flex-direction: column;
+				gap: 0.75rem;
+				align-items: flex-start;
+			}
+		}
+
+		.splms-course-title {
+			font-size: 1.125rem;
+			font-weight: var(--splms-font-weight-semibold);
+			color: var(--splms-gray-900);
+			margin: 0;
+			flex: 1;
+			line-height: var(--splms-line-height-snug);
+		}
+
+		.splms-enrollment-status-badge {
+			font-size: 0.8rem;
+			font-weight: var(--splms-font-weight-semibold);
+			padding: 0.5rem 1rem;
+			border-radius: var(--splms-border-radius-xxl);
+			text-transform: uppercase;
+			letter-spacing: 0.025em;
+			white-space: nowrap;
+		}
+	}
+
+	// Orders Table Wrapper
+	.splms-orders-table-wrapper {
+		background: var(--splms-white);
+		border: 1px solid var(--splms-gray-200);
+		border-radius: 10px;
+		overflow: hidden;
+		margin-bottom: 1.5rem;
+	}
+
+	// Orders Table
+	.splms-orders-table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.875rem;
+
+		thead {
+			background: var(--splms-gray-50);
+			border-bottom: 2px solid var(--splms-gray-200);
+
+			th {
+				padding: 1rem;
+				text-align: left;
+				font-weight: var(--splms-font-weight-semibold);
+				color: var(--splms-gray-700);
+				font-size: 0.8125rem;
+				text-transform: uppercase;
+				letter-spacing: 0.025em;
+			}
+		}
+
+		tbody {
+			tr {
+				border-bottom: 1px solid var(--splms-gray-100);
+				transition: var(--splms-transition-base);
+
+				&:hover {
+					background: var(--splms-gray-50);
+				}
+
+				&:last-child {
+					border-bottom: none;
+				}
+			}
+
+			td {
+				padding: 1rem;
+				color: var(--splms-gray-700);
+				vertical-align: middle;
+
+				a {
+					color: var(--splms-primary);
+					text-decoration: none;
+					font-weight: var(--splms-font-weight-medium);
+					transition: var(--splms-transition-base);
+
+					&:hover {
+						color: var(--splms-primary-dark) ;
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+
+		// Specific column styles
+		.splms-order-id {
+			font-family: var(--splms-font-family-mono);
+			font-weight: var(--splms-font-weight-semibold);
+			color: var(--splms-gray-900);
+		}
+
+		.splms-order-course {
+			max-width: 300px;
+
+			a {
+				display: inline-block;
+				max-width: 100%;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+		}
+
+		.splms-order-amount {
+			font-weight: var(--splms-font-weight-semibold);
+			color: var(--splms-gray-900);
+		}
+
+		.splms-order-date {
+			color: var(--splms-gray-500);
+			white-space: nowrap;
+		}
+
+		.splms-order-actions {
+			white-space: nowrap;
+		}
+
+		// Responsive table
+		@media (max-width: var(--splms-breakpoint-lg)) {
+			thead {
+				display: none;
+			}
+
+			tbody {
+				tr {
+					display: block;
+					border: 1px solid var(--splms-gray-200);
+					border-radius: var(--splms-border-radius-lg);
+					margin-bottom: 1rem;
+					padding: 1rem;
+					background: var(--splms-white);
+				}
+
+				td {
+					display: block;
+					padding: 0.5rem 0;
+					border-bottom: 1px solid var(--splms-gray-100);
+					text-align: left;
+
+					&:before {
+						content: attr(data-label);
+						font-weight: var(--splms-font-weight-semibold);
+						color: var(--splms-gray-700);
+						display: inline-block;
+						width: 120px;
+						margin-right: 0.5rem;
+					}
+
+					&:last-child {
+						border-bottom: none;
+					}
+				}
+			}
+		}
+	}
+
+	// Status Badge
+	.splms-status-badge {
+		display: inline-block;
+		padding: 0.25rem 0.75rem;
+		border-radius: 9999px;
+		font-size: 0.75rem;
+		font-weight: var(--splms-font-weight-semibold);
+		text-transform: uppercase;
+		letter-spacing: 0.025em;
+		line-height: var(--splms-line-height-snug);
+
+		&-completed {
+			background: var(--splms-success-light);
+			color: var(--splms-success-hover);
+		}
+
+		&-pending {
+			background: var(--splms-warning)-light;
+			color: var(--splms-warning-dark);
+		}
+
+		&-failed {
+			background: var(--splms-danger-light);
+			color: var(--splms-danger-dark);
+		}
+
+		&-refunded {
+			background: var(--splms-gray-100);
+			color: var(--splms-gray-700);
+		}
+
+		&-cancelled {
+			background: var(--splms-danger-light);
+			color: var(--splms-danger-dark);
+		}
+	}
+
+	// Pagination
+	.splms-pagination {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		padding: 1.5rem 0;
+		flex-wrap: wrap;
+		flex-direction: row;
+
+		.splms-page-btn {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 0.375rem;
+			padding: 0.5rem 1rem;
+			border: 1px solid var(--splms-gray-300);
+			background: var(--splms-white);
+			color: var(--splms-gray-700);
+			border-radius: var(--splms-border-radius-base);
+			font-size: 0.875rem;
+			font-weight: var(--splms-font-weight-medium);
+			cursor: pointer;
+			transition: var(--splms-transition-base);
+
+			&:hover:not(:disabled) {
+				background: var(--splms-gray-50);
+				border-color: var(--splms-gray-400);
+				color: var(--splms-gray-900);
+			}
+
+			&:disabled {
+				opacity: 0.5;
+				cursor: not-allowed;
+			}
+
+			svg {
+				width: var(--splms-spacing-4);
+				height: var(--splms-spacing-4);
+			}
+		}
+
+		.splms-page-numbers {
+			display: flex;
+			align-items: center;
+			gap: 0.25rem;
+		}
+
+		.splms-page-number {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-width: 36px;
+			height: 36px;
+			padding: 0 0.5rem;
+			border: 1px solid var(--splms-gray-300);
+			background: var(--splms-white);
+			color: var(--splms-gray-700);
+			border-radius: var(--splms-border-radius-base);
+			font-size: 0.875rem;
+			font-weight: var(--splms-font-weight-medium);
+			cursor: pointer;
+			transition: var(--splms-transition-base);
+
+			&:hover:not(.splms-page-active) {
+				background: var(--splms-gray-50);
+				border-color: var(--splms-gray-400);
+				color: var(--splms-gray-900);
+			}
+
+			&.splms-page-active {
+				background: var(--splms-primary);
+				border-color: var(--splms-primary);
+				color: var(--splms-white);
+				cursor: default;
+			}
+		}
+
+		.splms-page-dots {
+			padding: 0 0.25rem;
+			color: var(--splms-gray-400);
+		}
+	}
+}
+
+// Order Detail View
+.splms-order-detail-view {
+	.splms-order-detail-wrapper {
+		background: var(--splms-white);
+		border-radius: 10px;
+		padding: 2rem;
+	}
+
+	.splms-order-detail-header {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		margin-bottom: 2rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid var(--splms-gray-200);
+
+		h2 {
+			margin: 0;
+			font-size: 1.5rem;
+			font-weight: var(--splms-font-weight-semibold);
+			color: var(--splms-gray-900);
+		}
+	}
+
+	.splms-order-detail-section {
+		margin-bottom: 2rem;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		h3 {
+			margin: 0 0 1.25rem 0;
+			font-size: 1.125rem;
+			font-weight: var(--splms-font-weight-semibold);
+			color: var(--splms-gray-900);
+		}
+	}
+
+	// Order Summary List
+	.splms-order-summary-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.splms-order-summary-item {
+		display: flex;
+		align-items: flex-start;
+		gap: 1rem;
+		padding: 0.75rem 0;
+		border-bottom: 1px solid var(--splms-gray-100);
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		label {
+			font-weight: var(--splms-font-weight-semibold);
+			color: var(--splms-gray-700);
+			min-width: 140px;
+			flex-shrink: 0;
+		}
+
+		span {
+			color: var(--splms-gray-700);
+			flex: 1;
+		}
+
+		.splms-order-total {
+			font-size: 1.125rem;
+			font-weight: var(--splms-font-weight-semibold);
+			color: var(--splms-gray-900);
+		}
+	}
+
+	// Billing Details
+	.splms-billing-details {
+		p {
+			margin: 0 0 0.75rem 0;
+			color: var(--splms-gray-700);
+			line-height: var(--splms-line-height-relaxed);
+
+			strong {
+				font-weight: var(--splms-font-weight-semibold);
+				color: var(--splms-gray-900);
+				margin-right: 0.5rem;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	// Order Courses
+	.splms-order-courses {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.splms-order-course-item {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 1rem;
+		background: var(--splms-gray-50);
+		border-radius: var(--splms-border-radius-base);
+		border: 1px solid var(--splms-gray-200);
+
+		.splms-order-course-thumbnail {
+			width: 80px;
+			height: 60px;
+			flex-shrink: 0;
+			border-radius: var(--splms-border-radius-base);
+			overflow: hidden;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+
+		.splms-order-course-info {
+			flex: 1;
+
+			h4 {
+				margin: 0 0 0.5rem 0;
+				font-size: 1rem;
+				font-weight: var(--splms-font-weight-semibold);
+				color: var(--splms-gray-900);
+
+				a {
+					color: var(--splms-gray-900);
+					text-decoration: none;
+					transition: var(--splms-transition-base);
+
+					&:hover {
+						color: var(--splms-primary);
+					}
+				}
+			}
+		}
+
+		.splms-order-course-action {
+			flex-shrink: 0;
+		}
+	}
+
+	// Invoice Actions
+	.splms-order-invoice-actions {
+		display: flex;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+	}
+}
+
+// Responsive Design
+@media (max-width: var(--splms-breakpoint-md)) {
+	.splms-order-detail-view {
+		.splms-order-detail-wrapper {
+			padding: 1.5rem;
+		}
+
+		.splms-order-detail-header {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.splms-order-summary-item {
+			flex-direction: column;
+			gap: 0.5rem;
+
+			label {
+				min-width: auto;
+			}
+		}
+
+		.splms-order-course-item {
+			flex-direction: column;
+			align-items: flex-start;
+
+			.splms-order-course-action {
+				width: 100%;
+
+				.splms-btn {
+					width: 100%;
+				}
+			}
+		}
+
+		.splms-order-invoice-actions {
+			flex-direction: column;
+
+			.splms-btn {
+				width: 100%;
+			}
+		}
+	}
+}
+

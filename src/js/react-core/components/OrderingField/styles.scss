@@ -1,0 +1,84 @@
+/**
+ * OrderingField Styles
+ */
+.splms-ordering-field {
+    margin-bottom: 1.5rem;
+}
+
+.splms-ordering-field-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.splms-ordering-field-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: #fff;
+    border: 1px solid var(--splms-gray-300);
+    border-radius: var(--splms-border-radius-base);
+    cursor: move;
+    transition: var(--splms-transition-base);
+
+    &:hover {
+        border-color: var(--splms-primary, #7e75ff);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    &.splms-ordering-item-dragging {
+        opacity: 0.5;
+        transform: rotate(2deg);
+    }
+
+    &.splms-ordering-item-drag-over {
+        border-color: var(--splms-primary, #7e75ff);
+        background: #f0f0ff;
+    }
+}
+
+.splms-ordering-field-handle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: var(--splms-gray-500);
+    font-size: 1.25rem;
+    cursor: grab;
+    user-select: none;
+    flex-shrink: 0;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+.splms-ordering-field-text {
+    flex: 1;
+    margin: 0;
+}
+
+.splms-ordering-field-remove {
+    flex-shrink: 0;
+    min-width: 32px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.splms-ordering-field-add {
+    margin-top: 0.5rem;
+}
+
+.splms-ordering-field-max-note {
+    margin-top: 0.5rem;
+    color: var(--splms-gray-500);
+    font-size: 0.875rem;
+    font-style: italic;
+}
+

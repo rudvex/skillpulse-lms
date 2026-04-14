@@ -1,0 +1,264 @@
+/**
+ * Finish Step Component
+ *
+ * Final step of the setup wizard. Shows completion message,
+ * summary of what was accomplished, and clear next action.
+ * Streamlined for better user experience and business focus.
+ *
+ * @since [SPLMS_VERSION]
+ */
+
+import { __ } from '@wordpress/i18n';
+import { Button, Card, CardBody } from '@wordpress/components';
+import { useSelect } from '@wordpress/data';
+import { SplmsIcon } from '../../../../../components/SplmsIcon';
+
+/**
+ * Finish Step Component
+ */
+const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
+	// Get license info from existing store
+	const { licenseInfo, isTrialActive } = useSelect(select => {
+		try {
+			const licenseStore = select('splms/license');
+			const trialStore = select('splms/trial');
+			return {
+				licenseInfo: licenseStore ? licenseStore.getLicenseInfo() : {},
+				isTrialActive: trialStore ? trialStore.isTrialActive() : false
+			};
+		} catch (err) {
+			return {
+				licenseInfo: {},
+				isTrialActive: false
+			};
+		}
+	}, []);
+
+	// Get wizard data and setup information
+	const { splmsWizardData } = window;
+	const setupMethod = wizardData?.steps_data?.license?.method || 'limited';
+
+	/**
+	 * Get setup status and personalized messaging
+	 */
+	const getSetupStatus = () => {
+		// Determine actual status based on setup method and current state
+		const hasActiveLicense = licenseInfo?.status === 'active';
+		const hasActiveTrial = isTrialActive || setupMethod === 'trial';
+
+		if (hasActiveLicense) {
+			return {
+				type: 'license',
+				icon: 'admin-network',
+				color: 'primary',
+				title: __('Premium Features Unlocked', 'skillpulse-lms'),
+				message: __('Your license gives you access to all SkillPulse LMS features.', 'skillpulse-lms'),
+				nextStep: __('Build advanced courses with unlimited features', 'skillpulse-lms')
+			};
+		}
+
+		if (hasActiveTrial) {
+			return {
+				type: 'trial',
+				icon: 'star-filled',
+				color: 'success',
+				title: __('Free Trial Active', 'skillpulse-lms'),
+				message: __('All features are available for 14 days. No credit card required.', 'skillpulse-lms'),
+				nextStep: __('Start creating courses and explore all features', 'skillpulse-lms')
+			};
+		}
+
+		return {
+			type: 'free',
+			icon: 'admin-generic',
+			color: 'warning',
+			title: __('Basic Features Available', 'skillpulse-lms'),
+			message: __('Create up to 3 courses with 25 students. Upgrade anytime for unlimited access.', 'skillpulse-lms'),
+			nextStep: __('Start with your first course', 'skillpulse-lms')
+		};
+	};
+
+	/**
+	 * Handle going to dashboard
+	 */
+	const handleGoToDashboard = async () => {
+		try {
+			// Complete wizard via AJAX
+			const response = await wp.ajax.post('splms_wizard_complete', {
+				nonce: splmsWizardData.nonce,
+			});
+
+			// Redirect to dashboard
+			if (response.redirect_url) {
+				window.location.href = response.redirect_url;
+			} else {
+				// Fallback redirect to dashboard
+				const { siteUrl } = splmsWizardData || {};
+				const mainUrl = splmsWizardData?.mainUrl;
+				window.location.href = mainUrl;
+			}
+		} catch (err) {
+			console.error('Failed to complete wizard:', err);
+			// Fallback redirect even if completion fails
+			const { siteUrl } = splmsWizardData || {};
+			const mainUrl = splmsWizardData?.mainUrl;
+			window.location.href = mainUrl;
+		}
+	};
+
+	/**
+	 * Quick actions for next steps
+	 */
+	const getQuickActions = () => {
+		const { siteUrl } = splmsWizardData || {};
+		const baseUrl = siteUrl || window.location.origin;
+
+		return [
+			{
+				title: __('Create Your First Course', 'skillpulse-lms'),
+				description: __('Start building your learning content', 'skillpulse-lms'),
+				icon: 'book',
+				url: `${baseUrl}/wp-admin/post-new.php?post_type=sp-course`,
+				primary: true
+			},
+			{
+				title: __('Manage Students', 'skillpulse-lms'),
+				description: __('Add students and manage enrollments', 'skillpulse-lms'),
+				icon: 'groups',
+				url: splmsWizardData?.dashboardUrl || `${baseUrl}/wp-admin/admin.php?page=skillpulse-lms`,
+				primary: false
+			},
+			{
+				title: __('View Documentation', 'skillpulse-lms'),
+				description: __('Learn more about SkillPulse LMS features', 'skillpulse-lms'),
+				icon: 'book-alt',
+				url: 'https://skillpulselms.com/docs',
+				external: true,
+				primary: false
+			}
+		];
+	};
+
+	const setupStatus = getSetupStatus();
+	const quickActions = getQuickActions();
+
+	return (
+		<div className="splms-wizard-step splms-finish-step">
+			{/* Success Hero */}
+			<div className="splms-finish-hero">
+				<div className="splms-finish-icon">
+					<SplmsIcon name="yes-alt" size={64} className="splms-finish-success-icon" />
+				</div>
+				<h1 className="splms-finish-title">
+					{__('🎉 Setup Complete!', 'skillpulse-lms')}
+				</h1>
+				<p className="splms-finish-subtitle">
+					{__('Your SkillPulse LMS is ready to go. Let\'s start building amazing learning experiences!', 'skillpulse-lms')}
+				</p>
+			</div>
+
+			{/* Status Summary */}
+			<div className="splms-finish-status">
+				<Card className={`splms-status-card splms-status-${setupStatus.type}`}>
+					<CardBody>
+						<div className="splms-finish-status-content">
+							<div className="splms-finish-status-icon">
+								<SplmsIcon name={setupStatus.icon} size={32} />
+							</div>
+							<div className="splms-finish-status-details">
+								<h3 className="splms-finish-status-title">
+									{setupStatus.title}
+								</h3>
+								<p className="splms-finish-status-message">
+									{setupStatus.message}
+								</p>
+								<p className="splms-finish-status-next">
+									{setupStatus.nextStep}
+								</p>
+							</div>
+						</div>
+					</CardBody>
+				</Card>
+			</div>
+
+			{/* Primary Action */}
+			<div className="splms-finish-primary-action">
+				<Button
+					isPrimary
+					size="large"
+					href={(() => {
+						const { siteUrl } = splmsWizardData || {};
+						const baseUrl = siteUrl || window.location.origin;
+						return `${baseUrl}/wp-admin/post-new.php?post_type=sp-course`;
+					})()}
+					className="splms-finish-primary-button"
+				>
+					<SplmsIcon name="book" size={16} />
+					{__('Create Your First Course', 'skillpulse-lms')}
+				</Button>
+			</div>
+
+			{/* Quick Actions */}
+			<div className="splms-finish-actions">
+				<h2 className="splms-finish-actions-title">
+					{__('Quick Actions', 'skillpulse-lms')}
+				</h2>
+				<div className="splms-finish-actions-grid">
+					{quickActions.slice(1).map((action, index) => (
+						<div key={index} className="splms-finish-action-item">
+							<div className="splms-finish-action-icon">
+								<SplmsIcon name={action.icon} size={20} />
+							</div>
+							<div className="splms-finish-action-content">
+								<h4 className="splms-finish-action-title">
+									{action.title}
+								</h4>
+								<p className="splms-finish-action-description">
+									{action.description}
+								</p>
+							</div>
+							<div className="splms-finish-action-button">
+								<Button
+									isLink
+									href={action.url}
+									target={action.external ? '_blank' : undefined}
+									rel={action.external ? 'noopener noreferrer' : undefined}
+								>
+									{action.external ? __('Learn More', 'skillpulse-lms') : __('Go', 'skillpulse-lms')}
+									{action.external && <SplmsIcon name="external" size={16} />}
+								</Button>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+
+			{/* Secondary Actions */}
+			<div className="splms-finish-secondary">
+				<Button
+					isSecondary
+					size="large"
+					onClick={handleGoToDashboard}
+					disabled={loading}
+					className="splms-finish-dashboard-button"
+				>
+					<SplmsIcon name="dashboard" size={16} />
+					{__('Go to Dashboard', 'skillpulse-lms')}
+				</Button>
+
+				<p className="splms-finish-help-text">
+					{__('Need help getting started?', 'skillpulse-lms')}{' '}
+					<a
+						href="https://skillpulselms.com/docs/getting-started"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						{__('Check out our getting started guide', 'skillpulse-lms')}
+					</a>
+				</p>
+			</div>
+		</div>
+	);
+};
+
+export default FinishStep;

@@ -1,0 +1,2326 @@
+/**
+ * Modern Dashboard Styles
+ * Based on demo dashboard design with grid layout and modern UI
+ * All styles scoped under specific classes to prevent conflicts
+ */
+
+@use "../base/variables";
+@use "certificates";
+@use "orders";
+@use "notifications";
+@use "settings";
+
+// Print Styles for Order Receipt
+@media print {
+	* {
+		-webkit-print-color-adjust: exact !important;
+		color-adjust: exact !important;
+	}
+
+	body, html {
+		margin: 0;
+		padding: 0;
+		background: white !important;
+		font-family: var(--splms-font-family-base);
+		font-size: 12pt;
+		line-height: var(--splms-line-height-snug);
+	}
+
+	// Hide unnecessary elements
+	.site-header,
+	.site-footer,
+	.splms-dashboard-navigation,
+	.splms-back-navigation,
+	.splms-breadcrumbs,
+	.splms-sidebar {
+		display: none !important;
+	}
+
+	// Hide Order Actions section completely for print
+	.splms-order-actions {
+		display: none !important;
+	}
+
+	// Hide the entire section that contains Order Actions
+	.splms-order-detail-section {
+		&:has(.splms-order-actions) {
+			display: none !important;
+		}
+	}
+
+	// Alternative approach - hide based on button content
+	button[onclick*="window.print"] {
+		display: none !important;
+	}
+
+	// Hide parent section of print button
+	.splms-order-detail-section:has(button[onclick*="window.print"]) {
+		display: none !important;
+	}
+
+	// Print-specific order details styles
+	.splms-order-details-tab {
+		margin: 0;
+		padding: 20pt;
+		background: white !important;
+
+		// Company header for receipt
+		&::before {
+			content: "";
+			display: block;
+			text-align: center;
+			font-size: 18pt;
+			font-weight: bold;
+			margin-bottom: 20pt;
+			padding-bottom: 10pt;
+			border-bottom: 2pt solid var(--splms-black);
+		}
+
+		.splms-section-title {
+			text-align: center;
+			font-size: 16pt;
+			font-weight: bold;
+			margin-bottom: 20pt;
+			color: var(--splms-black) !important;
+
+			i {
+				display: none;
+			}
+		}
+
+		// Order summary for print
+		.splms-order-summary-card {
+			background: white !important;
+			border: 1pt solid var(--splms-black);
+			border-radius: 0;
+			margin-bottom: 15pt;
+			page-break-inside: avoid;
+
+			.splms-order-summary-header {
+				background: var(--splms-gray-100) !important;
+				border-bottom: 1pt solid var(--splms-black);
+				padding: 10pt;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
+				.splms-order-status-info {
+					.splms-status-badge {
+						background: var(--splms-black) !important;
+						color: white !important;
+						border: none;
+						padding: 3pt 8pt;
+						border-radius: 2pt;
+						font-weight: bold;
+						text-transform: uppercase;
+					}
+
+					.splms-order-date {
+						display: block;
+						margin-top: 5pt;
+						font-size: 10pt;
+						color: var(--splms-text-secondary);
+					}
+				}
+
+				.splms-order-total-display {
+					text-align: right;
+
+					.splms-order-total-label {
+						display: block;
+						font-size: 10pt;
+						color: var(--splms-text-secondary);
+						margin-bottom: 2pt;
+					}
+
+					.splms-order-total-amount {
+						font-size: 16pt;
+						font-weight: bold;
+						color: var(--splms-black);
+					}
+				}
+			}
+
+			.splms-order-summary-grid {
+				padding: 10pt;
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 10pt;
+
+				.splms-order-summary-item {
+					display: flex;
+					justify-content: space-between;
+					padding: 5pt 0;
+					border-bottom: 1pt dotted var(--splms-gray-300);
+
+					label {
+						font-weight: bold;
+						color: var(--splms-black);
+					}
+
+					span {
+						color: var(--splms-text-primary);
+					}
+				}
+			}
+		}
+
+		// Section headers
+		.splms-order-detail-section h3 {
+			font-size: 12pt;
+			font-weight: bold;
+			color: var(--splms-black);
+			margin: 15pt 0 8pt 0;
+			padding-bottom: 3pt;
+			border-bottom: 1pt solid var(--splms-black);
+		}
+
+		// Course information for print
+		.splms-order-course-card {
+			background: white !important;
+			border: 1pt solid var(--splms-black);
+			border-radius: 0;
+			padding: 10pt;
+			margin-bottom: 10pt;
+			page-break-inside: avoid;
+
+			display: flex;
+			align-items: center;
+			gap: 10pt;
+
+			.splms-course-icon {
+				background: var(--splms-gray-100) !important;
+				color: var(--splms-black) !important;
+				border: 1pt solid var(--splms-black);
+				width: 30pt;
+				height: 30pt;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 2pt;
+
+				i::before {
+					font-size: 12pt;
+				}
+			}
+
+			.splms-course-info {
+				flex: 1;
+
+				.splms-course-title {
+					font-size: 11pt;
+					font-weight: bold;
+					margin: 0 0 3pt 0;
+					color: var(--splms-black);
+
+					a {
+						color: var(--splms-black) !important;
+						text-decoration: none;
+					}
+				}
+
+				.splms-course-meta {
+					font-size: 9pt;
+					color: var(--splms-text-secondary);
+				}
+			}
+
+			.splms-course-actions {
+				display: none;
+			}
+		}
+
+		// Billing details for print
+		.splms-billing-details-card {
+			background: white !important;
+			border: 1pt solid var(--splms-black);
+			border-radius: 0;
+			padding: 10pt;
+			page-break-inside: avoid;
+
+			.splms-billing-item {
+				display: flex;
+				justify-content: space-between;
+				padding: 3pt 0;
+				border-bottom: 1pt dotted var(--splms-gray-300);
+
+				&:last-child {
+					border-bottom: none;
+				}
+
+				label {
+					font-weight: bold;
+					color: var(--splms-black);
+				}
+
+				span {
+					color: var(--splms-text-primary);
+				}
+			}
+		}
+
+		// Alert boxes for print
+		.splms-alert {
+			background: var(--splms-gray-50) !important;
+			border: 1pt solid var(--splms-black);
+			border-radius: 0;
+			padding: 8pt;
+			margin: 10pt 0;
+
+			p {
+				margin: 0;
+				color: var(--splms-black);
+				font-size: 10pt;
+			}
+		}
+	}
+
+	// Receipt footer
+	.splms-order-details-tab::after {
+		content: "Thank you for your business!";
+		display: block;
+		text-align: center;
+		font-size: 10pt;
+		margin-top: 20pt;
+		padding-top: 10pt;
+		border-top: 1pt solid var(--splms-black);
+		color: var(--splms-text-secondary);
+	}
+
+	// Page break controls
+	.splms-order-detail-section {
+		page-break-inside: avoid;
+		margin-bottom: 15pt;
+	}
+}
+
+// Dashboard container styling (matches archive pattern)
+.splms-container .splms-dashboard-wrapper {
+	margin: 20px 0;
+}
+
+// Dashboard Page Template Styles (matching archive pattern)
+.page-id-7,
+body.page-template-dashboard,
+body.page-template-page-dashboard {
+	font-family: var(--splms-font-family);
+	margin: 0;
+	padding: 0;
+
+	// Astra theme container adjustments (matching archive)
+	.site-content {
+		.ast-container {
+			max-width: 100%;
+			padding: 0;
+			flex-direction: column;
+		}
+	}
+
+	// Hide default page title
+	.entry-title,
+	.page-title,
+	.post-title,
+	.entry-header h1 {
+		display: none !important;
+	}
+
+	// Full width for dashboard
+	.content-area {
+		width: 100%;
+		max-width: 100%;
+		padding: 0;
+		margin: 0;
+	}
+
+	// Override theme wrapper for full-width layout
+	#primary,
+	.wp-site-blocks {
+		padding: 0;
+		margin: 0;
+	}
+}
+
+// Main Dashboard Wrapper - All dashboard styles nested within this
+.splms-dashboard-wrapper {
+	position: relative;
+
+	// Loading state
+	&.is-loading {
+		opacity: 0.6;
+		pointer-events: none;
+	}
+
+	// Main Dashboard Container
+	.splms-dashboard {
+		display: flex;
+		flex-direction: column;
+		min-height: 80vh;
+		background: var(--splms-gray-50);
+		border-radius: var(--splms-border-radius-xl);
+
+		// Header
+		&-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 1.5rem 2rem;
+			background: var(--splms-white);
+			border-radius: 12px 12px 0 0;
+			border-bottom: 1px solid var(--splms-gray-200);
+
+			&-left {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+
+				h1 {
+					margin: 0;
+					font-size: 1.5rem;
+					font-weight: var(--splms-font-weight-semibold);
+					color: var(--splms-gray-900);
+				}
+			}
+
+			&-right {
+				display: flex;
+				align-items: center;
+				gap: 1.5rem;
+			}
+		}
+
+		&-sidebar-toggle {
+			display: block;
+			background: transparent;
+			border: none;
+			padding: 0.25rem;
+			cursor: pointer;
+			color: var(--splms-primary);
+			transition: color 0.2s;
+
+			svg {
+				width: 20px;
+				height: 20px;
+			}
+
+			&:hover {
+				color: var(--splms-primary);
+				background: var(--splms-primary);
+			}
+
+			@media (min-width: 769px) {
+				padding: 0.375rem;
+			}
+		}
+
+		// User Info
+		&-user-info {
+			display: flex;
+			align-items: center;
+			gap: 0.75rem;
+		}
+
+		&-avatar {
+			width: 40px;
+			height: var(--splms-spacing-10);
+			border-radius: 50%;
+			object-fit: cover;
+		}
+
+		&-user-details {
+			display: flex;
+			flex-direction: column;
+
+			&-name {
+				font-weight: var(--splms-font-weight-semibold);
+				color: var(--splms-gray-900);
+				font-size: 0.875rem;
+			}
+
+			&-role {
+				font-size: 0.75rem;
+				color: var(--splms-gray-500);
+				text-transform: capitalize;
+			}
+		}
+
+		&-logout {
+			display: flex;
+			align-items: center;
+			padding: 0.5rem;
+			color: var(--splms-gray-500);
+			text-decoration: none;
+			border-radius: 0.5rem;
+			transition: all 0.2s;
+
+			&:hover {
+				background: var(--splms-gray-100);
+				color: var(--splms-gray-900);
+			}
+		}
+
+		// Overlay for mobile
+		&-overlay {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(0, 0, 0, 0.5);
+			z-index: 998;
+			
+			@media (max-width: 768px) {
+				display: block;
+				opacity: 0;
+				pointer-events: none;
+				transition: opacity 0.3s ease;
+				
+				body.sidebar-open & {
+					opacity: 1;
+					pointer-events: all;
+				}
+			}
+		}
+
+		// Body
+		&-body {
+			display: flex;
+			flex: 1;
+			position: relative;
+
+			@media (max-width: 768px) {
+				flex-direction: column;
+			}
+
+			// Collapsed sidebar state for desktop
+			.splms-dashboard-sidebar.is-collapsed {
+				width: 0;
+				border-right: none;
+				overflow: hidden;
+
+				.splms-dashboard-nav {
+					opacity: 0;
+					pointer-events: none;
+				}
+			}
+		}
+
+		// Sidebar
+		&-sidebar {
+			width: 240px;
+			background: var(--splms-white);
+			border-right: 1px solid var(--splms-gray-200);
+			padding: 1.5rem 0;
+			transition: all 0.3s ease;
+			overflow: visible; // allow tooltips to overflow outside
+
+			@media (max-width: 768px) {
+				position: fixed;
+				left: 0;
+				top: 70px;
+				bottom: 0;
+				width: 280px;
+				z-index: 999;
+				border-right: 1px solid var(--splms-gray-200);
+				box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+				transform: translateX(-100%);
+				max-height: calc(100vh - 70px);
+
+				&.is-open {
+					transform: translateX(0);
+				}
+			}
+		}
+
+		&-nav {
+			display: flex;
+			flex-direction: column;
+			gap: 0.25rem;
+			padding: 0 1rem;
+
+			// Ensure consistent icon sizing
+			.splms-dashboard-nav-item svg {
+				width: 20px;
+				height: 20px;
+				flex-shrink: 0;
+			}
+
+			// Tooltip tweaks in sidebar nav
+			.splms-tooltip {
+				margin-left: 6px;
+			}
+
+			.splms-tooltip .splms-tooltip-content {
+				left: 0;
+				top: calc(100% + 6px);
+				transform: none;
+				z-index: 1001;
+			}
+
+			&-item {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+				padding: 0.75rem 1rem;
+				border-radius: 0.5rem;
+				background: transparent;
+				border: none;
+				cursor: pointer;
+				color: var(--splms-gray-500);
+				text-align: left;
+				transition: all 0.2s;
+				text-decoration: none;
+
+				&:hover {
+					background: var(--splms-gray-100);
+					color: var(--splms-gray-900);
+				}
+
+				&.is-active,
+				&.active {
+					background: var(--splms-info-light);
+					color: var(--splms-info);
+					font-weight: var(--splms-font-weight-semibold);
+				}
+
+				svg {
+					width: 20px;
+					height: 20px;
+				}
+			}
+		}
+
+		// Content
+		&-content {
+			flex: 1;
+			padding: 2rem;
+			background: var(--splms-white);
+			border-radius: 0 0 12px 12px;
+			position: relative;
+
+			@media (max-width: 768px) {
+				padding: 1.5rem;
+				width: 100%;
+			}
+		}
+
+		// Tab Header
+		&-tab-header {
+			margin-bottom: 2rem;
+
+			h2 {
+				margin: 0 0 0.5rem 0;
+				font-size: 1.5rem;
+				font-weight: var(--splms-font-weight-semibold);
+				color: var(--splms-gray-900);
+			}
+
+			p {
+				margin: 0;
+				color: var(--splms-gray-500);
+				font-size: 0.875rem;
+			}
+
+			.splms-btn {
+				margin-top: 1rem;
+			}
+		}
+
+		// Clean courses summary (replaces cluttered filter tabs)
+		.splms-courses-summary {
+			margin-bottom: 2rem;
+			padding: 1rem 0;
+
+			.splms-summary-text {
+				font-size: 0.875rem;
+				color: var(--splms-gray-500);
+				margin: 0;
+				font-weight: var(--splms-font-weight-medium);
+			}
+		}
+
+		// Progress Statistics Summary
+		.splms-progress-summary {
+			background: linear-gradient(135deg, var(--splms-info) 0%, var(--splms-info-dark) 100%);
+			border-radius: 16px;
+			padding: 2rem;
+			margin-bottom: 2rem;
+			color: white;
+
+			.splms-summary-stats {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+				gap: 1.5rem;
+				align-items: center;
+
+				@media (max-width: 640px) {
+					grid-template-columns: repeat(2, 1fr);
+					gap: 1rem;
+				}
+			}
+
+			.splms-stat-item {
+				text-align: center;
+				display: flex;
+				flex-direction: column;
+				gap: 0.25rem;
+
+				.splms-stat-number {
+					font-size: 2rem;
+					font-weight: var(--splms-font-weight-bold);
+					line-height: var(--splms-line-height-none);
+					color: white;
+
+					@media (max-width: 640px) {
+						font-size: 1.5rem;
+					}
+				}
+
+				.splms-stat-label {
+					font-size: 0.875rem;
+					font-weight: var(--splms-font-weight-medium);
+					opacity: 0.9;
+					text-transform: uppercase;
+					letter-spacing: 0.05em;
+				}
+			}
+		}
+
+		// Progress Badge Styles
+		.splms-progress-badge {
+			font-size: 0.75rem;
+			font-weight: var(--splms-font-weight-semibold);
+			padding: 0.375rem 0.75rem;
+			border-radius: var(--splms-border-radius-xl);
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+
+			&.splms-progress-completed {
+				background: var(--splms-success-light);
+				color: var(--splms-success-dark);
+			}
+
+			&.splms-progress-in_progress {
+				background: var(--splms-info-light);
+				color: var(--splms-info-dark);
+			}
+
+			&.splms-progress-not_started {
+				background: var(--splms-gray-100);
+				color: var(--splms-gray-500);
+			}
+		}
+
+		// Optional: Keep enrollment subtabs available but hidden by default
+		.splms-enrollment-subtabs {
+			display: none; // Hidden for cleaner UI
+			gap: 0.75rem;
+			margin-bottom: 2rem;
+			padding: 0;
+			border: none;
+
+			&.show-filters {
+				display: flex; // Can be shown via JS if needed
+			}
+
+			.splms-subtab-btn {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				padding: 0.875rem 1.5rem;
+				background: var(--splms-gray-50);
+				border: 1px solid var(--splms-gray-200);
+				border-radius: var(--splms-border-radius-lg);
+				cursor: pointer;
+				color: var(--splms-gray-500);
+				font-weight: var(--splms-font-weight-medium);
+				font-size: 0.875rem;
+				transition: all 0.3s ease;
+
+				&:hover {
+					color: var(--splms-gray-900);
+					background: var(--splms-gray-100);
+					border-color: var(--splms-gray-300);
+					transform: translateY(-1px);
+				}
+
+				&.is-active {
+					color: var(--splms-white);
+					background: var(--splms-primary);
+					border-color: var(--splms-primary);
+					font-weight: var(--splms-font-weight-semibold);
+				}
+
+				.splms-badge {
+					background: rgba(255, 255, 255, 0.2);
+					color: inherit;
+					padding: 0.125rem 0.5rem;
+					border-radius: var(--splms-border-radius-xl);
+					font-size: 0.75rem;
+					font-weight: var(--splms-font-weight-semibold);
+				}
+
+				&:not(.is-active) .splms-badge {
+					background: var(--splms-gray-200);
+					color: var(--splms-gray-500);
+				}
+			}
+
+			@media (max-width: 768px) {
+				flex-wrap: wrap;
+				gap: 0.5rem;
+
+				.splms-subtab-btn {
+					padding: 0.625rem 1rem;
+					font-size: 0.8125rem;
+				}
+			}
+		}
+
+		// Stats Grid
+		&-stats-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 1.5rem;
+			margin-bottom: 2rem;
+		}
+
+		&-stat-card {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			padding: 1.5rem;
+			background: var(--splms-gray-50);
+			border-radius: var(--splms-border-radius-xl);
+			border-left: 4px solid var(--splms-info);
+			transition: all 0.2s;
+
+			&:hover {
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+			}
+
+			&-icon {
+				width: 48px;
+				height: 48px;
+				border-radius: var(--splms-border-radius-xl);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 1.5rem;
+				background: rgba(42, 122, 228, 0.1);
+				color: var(--splms-info);
+			}
+
+			&-content {
+				flex: 1;
+
+				h3 {
+					margin: 0 0 0.25rem 0;
+					font-size: 1.5rem;
+					font-weight: var(--splms-font-weight-semibold);
+					color: var(--splms-gray-900);
+				}
+
+				p {
+					margin: 0;
+					font-size: 0.875rem;
+					color: var(--splms-gray-500);
+				}
+			}
+		}
+
+		// Courses Grid
+		&-courses-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+			gap: 1.5rem;
+		}
+
+		&-course-card {
+			background: var(--splms-white);
+			border-radius: var(--splms-border-radius-xl);
+			overflow: hidden;
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+			transition: all 0.2s;
+
+			&:hover {
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			}
+		}
+
+		// Empty State
+		&-empty-state {
+			text-align: center;
+			padding: 4rem 2rem;
+
+			svg {
+				margin-bottom: 1rem;
+				opacity: 0.5;
+				color: var(--splms-gray-400);
+			}
+
+			h3 {
+				margin: 0 0 0.5rem 0;
+				font-size: 1.125rem;
+				font-weight: var(--splms-font-weight-semibold);
+				color: var(--splms-gray-900);
+			}
+		}
+
+		// Login Required
+		&-login-required {
+			text-align: center;
+			padding: 4rem 2rem;
+			background: var(--splms-white);
+			border-radius: var(--splms-border-radius-xl);
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+			h3 {
+				margin: 0 0 1rem 0;
+				color: var(--splms-gray-900);
+			}
+
+			p {
+				margin: 0 0 1.5rem 0;
+				color: var(--splms-gray-500);
+			}
+		}
+	}
+
+	// Spinner
+	.splms-spinner {
+		border: 3px solid var(--splms-gray-200);
+		border-top-color: var(--splms-info);
+		border-radius: 50%;
+		width: 40px;
+		height: var(--splms-spacing-10);
+		animation: splms-spin 0.8s linear infinite;
+		margin: 2rem auto;
+	}
+
+	// Course Card Styles
+	.splms-course-thumbnail {
+		width: 100%;
+		height: 200px;
+		object-fit: cover;
+		background: linear-gradient(135deg, var(--splms-info) 0%, var(--splms-info-dark) 100%);
+	}
+
+	.splms-course-content {
+		padding: 1.5rem;
+
+		h3 {
+			margin: 0 0 0.75rem 0;
+			font-size: 1.25rem;
+			font-weight: var(--splms-font-weight-semibold);
+			color: var(--splms-gray-900);
+			line-height: var(--splms-line-height-snug);
+		}
+
+		.splms-enrollment-status-badge {
+			display: inline-block;
+			padding: 0.25rem 0.75rem;
+			border-radius: var(--splms-border-radius-base);
+			font-size: 0.75rem;
+			font-weight: var(--splms-font-weight-medium);
+			margin-bottom: 0.75rem;
+			text-transform: capitalize;
+
+			&.splms-enrollment-status-active {
+				background: var(--splms-success-light);
+				color: var(--splms-success-dark);
+			}
+
+			&.splms-enrollment-status-completed {
+				background: var(--splms-info-light);
+				color: var(--splms-info-dark);
+			}
+
+			&.splms-enrollment-status-cancelled,
+			&.splms-enrollment-status-suspended {
+				background: var(--splms-danger-light);
+				color: var(--splms-danger-dark);
+			}
+		}
+
+		.splms-course-excerpt {
+			margin: 0 0 1rem 0;
+			color: var(--splms-gray-500);
+			font-size: 0.875rem;
+			line-height: var(--splms-line-height-relaxed);
+		}
+	}
+
+	.splms-course-progress {
+		margin: 1rem 0;
+
+		&-bar {
+			height: 6px;
+			background: var(--splms-gray-200);
+			border-radius: var(--splms-border-radius-base);
+			overflow: hidden;
+			margin-bottom: 0.5rem;
+		}
+
+		&-fill {
+			height: 100%;
+			background: linear-gradient(90deg, var(--splms-info) 0%, var(--splms-info) 100%);
+			border-radius: var(--splms-border-radius-base);
+			transition: width 0.3s ease;
+		}
+
+		span {
+			font-size: 0.75rem;
+			color: var(--splms-gray-500);
+			font-weight: var(--splms-font-weight-medium);
+		}
+	}
+
+	// Status Badges
+	.splms-status-badge {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.375rem 0.75rem;
+		border-radius: var(--splms-border-radius-md);
+		font-size: 0.75rem;
+		font-weight: var(--splms-font-weight-semibold);
+		text-transform: capitalize;
+
+		&-publish,
+		&-completed {
+			background: var(--splms-success-light);
+			color: var(--splms-success-dark);
+		}
+
+		&-draft,
+		&-not-started {
+			background: var(--splms-danger-light);
+			color: var(--splms-danger-dark);
+		}
+
+		&-pending,
+		&-in-progress {
+			background: var(--splms-info-light);
+			color: var(--splms-info-dark);
+		}
+	}
+
+	// Progress Summary
+	.splms-progress-summary {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1.5rem;
+		margin-bottom: 2rem;
+
+		&-item {
+			background: var(--splms-white);
+			padding: 1.5rem;
+			border-radius: var(--splms-border-radius-xl);
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+			text-align: center;
+			transition: all 0.2s;
+
+			&:hover {
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			}
+		}
+
+		&-value {
+			font-size: 2rem;
+			font-weight: var(--splms-font-weight-bold);
+			color: var(--splms-info);
+			margin-bottom: 0.5rem;
+		}
+
+		&-label {
+			font-size: 0.875rem;
+			color: var(--splms-gray-500);
+			font-weight: var(--splms-font-weight-medium);
+		}
+	}
+
+
+	// Alert Messages
+	.splms-alert {
+		padding: 1rem 1.5rem;
+		border-radius: var(--splms-border-radius-lg);
+		margin-bottom: 1.5rem;
+
+		&-success {
+			background: var(--splms-success-light);
+			color: var(--splms-success-dark);
+		}
+
+		&-error {
+			background: var(--splms-danger-light);
+			color: var(--splms-danger-dark);
+		}
+	}
+
+
+
+	// Tooltip
+	.splms-tooltip {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.375rem;
+
+		.splms-tooltip-trigger {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.375rem;
+			color: var(--splms-gray-500);
+			font-size: 0.8125rem;
+		}
+
+		.splms-tooltip-label {
+			line-height: var(--splms-line-height-none);
+		}
+
+		.splms-tooltip-content {
+			position: absolute;
+			left: 0;
+			top: calc(100% + 6px);
+			z-index: 50;
+			min-width: 220px;
+			background: var(--splms-gray-900);
+			color: var(--splms-gray-50);
+			border-radius: var(--splms-border-radius-lg);
+			padding: 0.75rem 1rem;
+			font-size: 0.8125rem;
+			box-shadow: 0 10px 30px rgba(0,0,0,.15);
+			opacity: 0;
+			pointer-events: none;
+			transform: translateY(-4px);
+			transition: opacity .15s ease, transform .15s ease;
+
+			p {
+				margin: 0;
+			}
+		}
+
+		&:hover .splms-tooltip-content,
+		&:focus-within .splms-tooltip-content {
+			opacity: 1;
+			transform: translateY(0);
+			pointer-events: auto;
+		}
+
+		.splms-tooltip-info { background: var(--splms-gray-900); }
+		.splms-tooltip-error { background: var(--splms-danger-dark); }
+	}
+}
+
+// Modern Dashboard Grid Layout
+.splms-dashboard-wrapper.splms-modern {
+	padding: 20px 0;
+	box-sizing: border-box;
+
+	.splms-dashboard-container {
+		display: grid;
+		grid-template-columns: 280px 1fr;
+		gap: 24px;
+		max-width: 1400px;
+		margin: 0 auto;
+
+		@media (max-width: 1024px) {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	// Modern Sidebar
+	.splms-sidebar {
+        border-radius: var(--splms-border-radius-xl);
+        background-color: var(--splms-white);
+        padding: var(--splms-spacing-6);
+        box-shadow: var(--splms-shadow-md);
+		height: fit-content;
+
+		.splms-user-profile {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			margin-bottom: 32px;
+			padding-bottom: 20px;
+			border-bottom: 1px solid var(--splms-gray-200);
+
+			.splms-avatar {
+				width: 48px;
+				height: 48px;
+				overflow: hidden;
+				flex-shrink: 0;
+
+				img {
+					width: 100%;
+					height: 100%;
+					border-radius: 50%;
+					object-fit: cover;
+					display: block;
+				}
+			}
+
+			.splms-user-info {
+				flex: 1;
+				min-width: 0;
+
+				h3 {
+					margin: 0 0 4px 0;
+					font-size: var(--splms-font-size-base);
+					font-weight: var(--splms-font-weight-semibold);
+					color: var(--splms-text);
+					line-height: 1.2;
+				}
+
+				span {
+					font-size: var(--splms-font-size-sm);
+					color: var(--splms-text-muted);
+					font-weight: var(--splms-font-weight-normal);
+					line-height: 1.2;
+				}
+			}
+		}
+
+		.splms-nav-menu {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+
+			.splms-nav-item {
+				margin-bottom: var(--splms-spacing-2);
+
+				.splms-nav-link {
+					display: flex;
+					align-items: center;
+					gap: 12px;
+					padding: var(--splms-spacing-3) var(--splms-spacing-4);
+					border-radius: var(--splms-border-radius-lg);
+					color: var(--splms-text);
+					text-decoration: none;
+					transition: all 0.3s ease;
+					font-weight: var(--splms-font-weight-medium);
+					width: 100%;
+					box-sizing: border-box;
+
+					&:hover,
+					&.active {
+						background-color: var(--splms-info-light);
+						color: var(--splms-primary);
+						transform: translateX(2px);
+					}
+
+					i, svg {
+						font-size: 20px;
+						flex-shrink: 0;
+						transition: all 0.3s ease;
+					}
+
+					&:hover i, &:hover svg,
+					&.active i, &.active svg {
+						transform: scale(1.1);
+					}
+				}
+			}
+		}
+	}
+
+	// Main Content
+	.splms-main-content {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+	}
+
+	// Modern Greeting Card with improved design
+	.splms-greeting-card {
+		background: var(--splms-primary-hover);
+		color: white;
+		padding: 2.5rem;
+		border-radius: var(--splms-border-radius-xxl);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		box-shadow: 0 20px 40px rgba(var(--splms-primary-rgb), 0.15), 0 8px 20px rgba(0, 0, 0, 0.08);
+		position: relative;
+		overflow: hidden;
+
+		// Add subtle pattern overlay
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3Ccircle cx='27' cy='7' r='1'/%3E%3Ccircle cx='47' cy='7' r='1'/%3E%3Ccircle cx='7' cy='27' r='1'/%3E%3Ccircle cx='27' cy='27' r='1'/%3E%3Ccircle cx='47' cy='27' r='1'/%3E%3Ccircle cx='7' cy='47' r='1'/%3E%3Ccircle cx='27' cy='47' r='1'/%3E%3Ccircle cx='47' cy='47' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+			pointer-events: none;
+		}
+
+		.splms-greeting-text {
+			position: relative;
+			z-index: 2;
+			max-width: 60%;
+
+			h1 {
+				margin: 0 0 12px 0;
+				font-size: 2rem;
+				font-weight: var(--splms-font-weight-bold);
+				line-height: 1.2;
+				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                color: white;
+
+				@media (max-width: 768px) {
+					font-size: 1.5rem;
+				}
+			}
+
+			p {
+				margin: 0;
+				opacity: 0.95;
+				font-size: 1rem;
+				font-weight: var(--splms-font-weight-normal);
+				line-height: var(--splms-line-height-normal);
+				text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+				@media (max-width: 768px) {
+					font-size: 0.875rem;
+				}
+			}
+		}
+
+		.splms-streak-badge {
+			background: rgba(255, 255, 255, 0.15);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			padding: 1.25rem 1.75rem;
+			border-radius: var(--splms-border-radius-xxl);
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			backdrop-filter: blur(20px);
+			box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+			position: relative;
+			z-index: 2;
+			transition: all 0.3s ease;
+
+			&:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+			}
+
+			i {
+				font-size: 2rem;
+				color: var(--splms-warning);
+				filter: drop-shadow(0 2px 4px rgba(252, 211, 77, 0.3));
+
+				@media (max-width: 768px) {
+					font-size: 1.5rem;
+				}
+			}
+
+			div {
+				text-align: center;
+			}
+
+			.splms-streak-count {
+				font-size: 1.75rem;
+				font-weight: 800;
+				line-height: var(--splms-line-height-none);
+				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+				@media (max-width: 768px) {
+					font-size: 1.5rem;
+				}
+			}
+
+			.splms-streak-label {
+				font-size: 0.75rem;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				font-weight: var(--splms-font-weight-semibold);
+				opacity: 0.9;
+				margin-top: 0.25rem;
+				text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+				@media (max-width: 768px) {
+					font-size: 0.6875rem;
+				}
+			}
+		}
+
+		// Responsive adjustments
+		@media (max-width: 768px) {
+			padding: 1.5rem;
+			flex-direction: column;
+			text-align: center;
+			gap: 1.5rem;
+
+			.splms-greeting-text {
+				max-width: 100%;
+			}
+
+			.splms-streak-badge {
+				padding: 1rem 1.5rem;
+				gap: 0.75rem;
+			}
+		}
+
+		@media (max-width: 480px) {
+			padding: 1.25rem;
+			border-radius: 16px;
+
+			.splms-greeting-text h1 {
+				font-size: 1.25rem;
+			}
+
+			.splms-greeting-text p {
+				font-size: 0.8125rem;
+			}
+
+			.splms-streak-badge {
+				padding: 0.75rem 1.25rem;
+				border-radius: 16px;
+
+				.splms-streak-count {
+					font-size: 1.25rem;
+				}
+
+				.splms-streak-label {
+					font-size: 0.625rem;
+				}
+			}
+		}
+	}
+
+	// Section Title
+	.splms-section-title {
+		font-size: 20px;
+		font-weight: var(--splms-font-weight-bold);
+		margin-bottom: var(--splms-spacing-4);
+		display: flex;
+		align-items: center;
+		gap: var(--splms-spacing-2);
+	}
+
+	// Stats Grid
+	.splms-stats-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 20px;
+
+		.splms-stat-card {
+			background-color: var(--splms-white);
+			padding: var(--splms-spacing-6);
+			border-radius: var(--splms-border-radius-xl);
+			box-shadow: var(--splms-shadow-md);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+
+			.splms-circular-chart {
+				width: 100px;
+				height: 100px;
+				border-radius: 50%;
+				background: conic-gradient(var(--splms-primary) var(--percentage, 0%), var(--splms-gray-200) 0);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-bottom: var(--splms-spacing-4);
+				position: relative;
+
+				&::before {
+					content: '';
+					position: absolute;
+					width: 80px;
+					height: 80px;
+					background-color: var(--splms-surface);
+					border-radius: 50%;
+				}
+
+				.splms-chart-value {
+					position: relative;
+					font-size: 20px;
+					font-weight: var(--splms-font-weight-bold);
+					color: var(--splms-primary);
+				}
+			}
+
+			.splms-stat-label {
+				font-weight: var(--splms-font-weight-semibold);
+				color: var(--splms-text);
+				margin-bottom: 4px;
+			}
+
+			.splms-stat-sub {
+				font-size: var(--splms-font-size-xs);
+				color: var(--splms-text-muted);
+			}
+		}
+	}
+
+	// Course List - Clean minimal design
+	.splms-course-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+
+		.splms-course-card {
+			padding: 1.75rem 2rem;
+			border-radius: 16px;
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+			display: flex;
+			align-items: center;
+			gap: 2rem;
+			flex-wrap: wrap;
+			flex-direction: row;
+			transition: all 0.3s ease;
+			border: 1px solid var(--splms-gray-50);
+
+			&:hover {
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+				transform: translateY(-2px);
+			}
+
+          .splms-course-icon {
+                width: 64px;
+				height: 64px;
+				border-radius: var(--splms-border-radius-xl);
+				flex-shrink: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 28px;
+			}
+
+			.splms-course-info {
+				flex: 1;
+				min-width: 250px;
+
+				.splms-course-header {
+					display: flex;
+					justify-content: space-between;
+					align-items: flex-start;
+					margin-bottom: 0.75rem;
+					flex-wrap: wrap;
+					gap: 0.5rem;
+				}
+
+				.splms-course-title {
+					font-size: 1.125rem;
+					font-weight: var(--splms-font-weight-semibold);
+					margin: 0;
+					color: var(--splms-gray-900);
+					line-height: var(--splms-line-height-snug);
+				}
+
+				.splms-course-excerpt {
+					font-size: 0.875rem;
+					color: var(--splms-gray-500);
+					margin: 0 0 1rem 0;
+					line-height: var(--splms-line-height-normal);
+				}
+
+				.splms-progress-bar {
+					height: 6px;
+					background-color: var(--splms-gray-200);
+					border-radius: var(--splms-border-radius-base);
+					overflow: hidden;
+					margin-bottom: 0.5rem;
+
+					.splms-progress-fill {
+						height: 100%;
+						border-radius: var(--splms-border-radius-base);
+						transition: width 0.3s ease;
+					}
+				}
+
+				.splms-progress-text {
+					font-size: 0.8125rem;
+					color: var(--splms-gray-500);
+					font-weight: var(--splms-font-weight-medium);
+
+					.splms-enrollment-date {
+						opacity: 0.8;
+					}
+				}
+
+				.splms-enrollment-status-badge {
+					display: inline-flex;
+					align-items: center;
+					padding: 0.25rem 0.75rem;
+					border-radius: var(--splms-border-radius-xl);
+					font-size: 0.75rem;
+					font-weight: var(--splms-font-weight-semibold);
+					text-transform: capitalize;
+
+					&.splms-enrollment-status-active {
+						background: var(--splms-info-light);
+						color: var(--splms-info-dark);
+					}
+
+					&.splms-enrollment-status-completed {
+						background: var(--splms-success-light);
+						color: var(--splms-success-dark);
+					}
+
+					&.splms-enrollment-status-cancelled {
+						background: var(--splms-danger-light);
+						color: var(--splms-danger-dark);
+					}
+				}
+			}
+
+			.splms-course-actions {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+			}
+
+			.splms-btn {
+				padding: 0.75rem 1.5rem;
+				border-radius: var(--splms-border-radius-lg);
+				border: none;
+				font-weight: var(--splms-font-weight-semibold);
+				cursor: pointer;
+				transition: all 0.2s;
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				text-decoration: none;
+				font-size: 0.875rem;
+
+				i, svg {
+					width: var(--splms-spacing-4);
+					height: var(--splms-spacing-4);
+				}
+			}
+
+			@media (max-width: 768px) {
+				padding: 1rem;
+				flex-direction: column;
+				align-items: stretch;
+				gap: 1rem;
+
+				.splms-course-icon {
+					width: 48px;
+					height: 48px;
+					font-size: 20px;
+				}
+
+				.splms-course-info {
+					min-width: auto;
+				}
+
+				.splms-course-actions {
+					justify-content: stretch;
+				}
+
+				.splms-btn {
+					flex: 1;
+					justify-content: center;
+				}
+			}
+		}
+	}
+
+	// Recommendations Grid
+	.splms-recommendations-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+		gap: 20px;
+
+		.splms-rec-card {
+            background-color: var(--splms-white);
+            border-radius: var(--splms-border-radius-xl);
+			overflow: hidden;
+			box-shadow: var(--splms-shadow-md);
+			transition: transform 0.2s;
+
+			&:hover {
+				transform: translateY(-4px);
+			}
+
+			.splms-rec-image {
+				height: 140px;
+				background-color: var(--splms-gray-200);
+				position: relative;
+
+				.splms-rec-tag {
+					position: absolute;
+					top: 12px;
+					left: 12px;
+					background-color: rgba(0,0,0,0.6);
+					color: white;
+					padding: 4px 8px;
+					border-radius: var(--splms-border-radius-base);
+					font-size: var(--splms-font-size-xs);
+					font-weight: var(--splms-font-weight-medium);
+				}
+			}
+
+			.splms-rec-content {
+				padding: var(--splms-spacing-4);
+
+				.splms-rec-title {
+					font-size: var(--splms-font-size-base);
+					font-weight: var(--splms-font-weight-semibold);
+					margin: 0 0 8px 0;
+					line-height: var(--splms-line-height-snug);
+				}
+
+				.splms-rec-meta {
+					display: flex;
+					gap: 12px;
+					font-size: var(--splms-font-size-xs);
+					color: var(--splms-text-muted);
+					margin-bottom: var(--splms-spacing-4);
+
+					span {
+						display: flex;
+						align-items: center;
+						gap: var(--splms-spacing-1);
+					}
+				}
+
+				.splms-btn-outline {
+					//width: 100%;
+					justify-content: center;
+					border: 1px solid var(--splms-gray-200);
+					background-color: transparent;
+					color: var(--splms-text);
+
+					&:hover {
+						background-color: var(--splms-bg);
+						border-color: var(--splms-text);
+					}
+				}
+			}
+		}
+	}
+}
+
+// Dashboard Tab Content with smooth transitions
+.splms-dashboard-tab {
+	opacity: 1;
+	visibility: visible;
+	position: relative;
+	width: 100%;
+	transform: translateY(0);
+	animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+// Dashboard page template wrapper (outside wrapper for page-level styling)
+.splms-dashboard-page-template {
+	width: 100%;
+	min-height: 80vh;
+	padding: 0;
+
+	// Ensure dashboard takes full width
+	.splms-dashboard-wrapper {
+		.splms-dashboard {
+			max-width: 100%;
+			margin: 0;
+			border-radius: 0;
+			min-height: calc(100vh - 80px);
+		}
+	}
+}
+
+// Enhanced Orders Tab Styling
+.splms-orders-tab {
+	.splms-order-card {
+		.splms-order-details {
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: 1rem;
+			margin-top: 0.5rem;
+
+			span {
+				font-size: 0.875rem;
+				color: var(--splms-gray-500);
+				display: flex;
+				align-items: center;
+
+				&.splms-order-id {
+					color: var(--splms-gray-700);
+					font-weight: var(--splms-font-weight-semibold);
+				}
+
+				&.splms-order-amount {
+					font-weight: var(--splms-font-weight-semibold);
+					color: var(--splms-secondary-hover);
+					font-size: 1rem;
+				}
+
+				&.splms-order-payment {
+					color: var(--splms-primary);
+					font-weight: var(--splms-font-weight-medium);
+				}
+
+				&.splms-order-date {
+					color: var(--splms-gray-500);
+				}
+
+				&:not(:last-child)::after {
+					content: "•";
+					margin-left: 1rem;
+					color: var(--splms-gray-300);
+				}
+			}
+
+			@media (max-width: 768px) {
+				gap: 0.5rem;
+
+				span {
+					font-size: 0.8125rem;
+
+					&:not(:last-child)::after {
+						margin-left: 0.5rem;
+					}
+				}
+			}
+		}
+	}
+}
+
+// Status-specific icon colors
+.splms-orders-tab .splms-course-icon {
+	i.hgi-tick-02 {
+		color: inherit !important;
+	}
+
+	i.hgi-time-04 {
+		color: inherit !important;
+	}
+
+	i.hgi-cancel-01 {
+		color: inherit !important;
+	}
+
+	i.hgi-shopping-cart-01 {
+		color: inherit !important;
+	}
+}
+
+// Order Details Modal Styling
+.splms-order-detail-modal {
+	.splms-modal-content {
+		max-width: 800px;
+		max-height: 90vh;
+		overflow-y: auto;
+	}
+
+	.splms-modal-header {
+		border-bottom: 1px solid var(--splms-gray-200);
+		padding: 1.5rem;
+
+		h3 {
+			margin: 0;
+			font-size: 1.25rem;
+			font-weight: var(--splms-font-weight-semibold);
+			color: var(--splms-gray-900);
+		}
+	}
+
+	.splms-modal-body {
+		padding: 0;
+	}
+
+	.splms-order-detail-content {
+		padding: 1.5rem;
+
+		.splms-loading-spinner {
+			text-align: center;
+			padding: 3rem;
+
+			.splms-spinner {
+				margin: 0 auto 1rem;
+			}
+
+			p {
+				color: var(--splms-gray-500);
+				margin: 0;
+			}
+		}
+
+		.splms-error {
+			text-align: center;
+			padding: 2rem;
+			color: var(--splms-danger);
+		}
+	}
+}
+
+// Order Details Content Styling
+.splms-order-detail-section {
+	margin-bottom: 2rem;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	h3 {
+		font-size: 1.125rem;
+		font-weight: var(--splms-font-weight-semibold);
+		color: var(--splms-gray-900);
+		margin: 0 0 1rem;
+		padding-bottom: 0.5rem;
+		border-bottom: 1px solid var(--splms-gray-200);
+	}
+}
+
+.splms-order-summary-list {
+	display: grid;
+	gap: 0.75rem;
+
+	.splms-order-summary-item {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0.75rem 0;
+
+		&:not(:last-child) {
+			border-bottom: 1px solid var(--splms-gray-100);
+		}
+
+		label {
+			font-weight: var(--splms-font-weight-medium);
+			color: var(--splms-gray-500);
+			margin: 0;
+		}
+
+		span {
+			font-weight: var(--splms-font-weight-semibold);
+			color: var(--splms-gray-900);
+
+			&.splms-order-total {
+				font-size: 1.125rem;
+				color: var(--splms-secondary-hover);
+			}
+		}
+	}
+}
+
+.splms-billing-details {
+	p {
+		margin: 0 0 0.5rem;
+		color: var(--splms-gray-700);
+
+		strong {
+			color: var(--splms-gray-900);
+			margin-right: 0.5rem;
+		}
+	}
+}
+
+.splms-order-courses {
+	.splms-order-course-item {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 1rem;
+		border: 1px solid var(--splms-gray-200);
+		border-radius: var(--splms-border-radius-lg);
+		margin-bottom: 1rem;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		.splms-order-course-thumbnail {
+			flex-shrink: 0;
+			width: 80px;
+			height: 60px;
+			border-radius: var(--splms-border-radius-md);
+			overflow: hidden;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+
+		.splms-order-course-info {
+			flex: 1;
+
+			h4 {
+				margin: 0 0 0.5rem;
+				font-size: 1rem;
+				font-weight: var(--splms-font-weight-semibold);
+				color: var(--splms-gray-900);
+
+				a {
+					color: inherit;
+					text-decoration: none;
+
+					&:hover {
+						color: var(--splms-primary);
+					}
+				}
+			}
+		}
+
+		.splms-order-course-action {
+			flex-shrink: 0;
+		}
+	}
+}
+
+.splms-order-invoice-actions {
+	display: flex;
+	gap: 0.75rem;
+	flex-wrap: wrap;
+}
+
+// Order Status Badges in Modal
+.splms-status-badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.25rem 0.75rem;
+	border-radius: var(--splms-border-radius-xl);
+	font-size: 0.75rem;
+	font-weight: var(--splms-font-weight-semibold);
+	text-transform: uppercase;
+
+	&.splms-status-completed {
+		background-color: var(--splms-success-light);
+		color: var(--splms-success-dark);
+	}
+
+	&.splms-status-pending {
+		background-color: var(--splms-warning-light);
+		color: var(--splms-warning-dark);
+	}
+
+	&.splms-status-cancelled,
+	&.splms-status-refunded {
+		background-color: var(--splms-danger-light);
+		color: var(--splms-danger-dark);
+	}
+}
+
+// Order Details Page Styling
+.splms-order-details-tab {
+	.splms-back-navigation {
+		margin-bottom: 2rem;
+
+		.splms-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+	}
+
+	.splms-order-details-content {
+		max-width: 900px;
+	}
+
+	// Enhanced Order Summary Card
+	.splms-order-summary-card {
+		background: var(--splms-white);
+		border: 1px solid var(--splms-gray-200);
+		border-radius: var(--splms-border-radius-xl);
+		overflow: hidden;
+
+		.splms-order-summary-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 1.5rem;
+			background: linear-gradient(135deg, var(--splms-gray-50) 0%, var(--splms-gray-100) 100%);
+			border-bottom: 1px solid var(--splms-gray-200);
+
+			.splms-order-status-info {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+
+				.splms-order-date {
+					color: var(--splms-gray-500);
+					font-size: 0.9375rem;
+				}
+			}
+
+			.splms-order-total-display {
+				text-align: right;
+
+				.splms-order-total-label {
+					display: block;
+					font-size: 0.8125rem;
+					color: var(--splms-gray-500);
+					font-weight: var(--splms-font-weight-medium);
+					text-transform: uppercase;
+					letter-spacing: 0.025em;
+				}
+
+				.splms-order-total-amount {
+					display: block;
+					font-size: 1.5rem;
+					font-weight: var(--splms-font-weight-bold);
+					color: var(--splms-secondary-hover);
+					margin-top: 0.25rem;
+				}
+			}
+		}
+
+		.splms-order-summary-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 0;
+
+			@media (max-width: 640px) {
+				grid-template-columns: 1fr;
+			}
+
+			.splms-order-summary-item {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 1.25rem 1.5rem;
+				border-right: 1px solid var(--splms-gray-100);
+
+				&:last-child {
+					border-right: none;
+				}
+
+				@media (max-width: 640px) {
+					border-right: none;
+					border-bottom: 1px solid var(--splms-gray-100);
+
+					&:last-child {
+						border-bottom: none;
+					}
+				}
+
+				label {
+					font-weight: var(--splms-font-weight-medium);
+					color: var(--splms-gray-500);
+					margin: 0;
+					font-size: 0.875rem;
+				}
+
+				span {
+					font-weight: var(--splms-font-weight-semibold);
+					color: var(--splms-gray-900);
+				}
+			}
+		}
+	}
+
+	.splms-order-detail-section {
+		margin-bottom: 2rem;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		h3 {
+			font-size: 1.125rem;
+			font-weight: var(--splms-font-weight-semibold);
+			color: var(--splms-gray-900);
+			margin: 0 0 1rem;
+			padding-bottom: 0.5rem;
+			border-bottom: 2px solid var(--splms-gray-200);
+		}
+	}
+
+	.splms-order-course-card {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 1.5rem;
+		border: 1px solid var(--splms-gray-200);
+		border-radius: var(--splms-border-radius-lg);
+		background: var(--splms-white);
+
+		.splms-course-icon {
+			flex-shrink: 0;
+			width: 60px;
+			height: 60px;
+			border-radius: var(--splms-border-radius-lg);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			i {
+				font-size: 1.5rem;
+			}
+		}
+
+		.splms-course-info {
+			flex: 1;
+
+			.splms-course-title {
+				margin: 0 0 0.5rem;
+				font-size: 1.125rem;
+				font-weight: var(--splms-font-weight-semibold);
+				color: var(--splms-gray-900);
+
+				a {
+					color: inherit;
+					text-decoration: none;
+
+					&:hover {
+						color: var(--splms-primary);
+					}
+				}
+			}
+
+			.splms-course-meta {
+				font-size: 0.875rem;
+				color: var(--splms-gray-500);
+			}
+		}
+
+		.splms-course-actions {
+			flex-shrink: 0;
+		}
+	}
+
+	.splms-billing-details-card {
+		background: var(--splms-white);
+		border: 1px solid var(--splms-gray-200);
+		border-radius: var(--splms-border-radius-lg);
+		padding: 1.5rem;
+
+		.splms-billing-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0.75rem 0;
+			border-bottom: 1px solid var(--splms-gray-100);
+
+			&:last-child {
+				border-bottom: none;
+			}
+
+			label {
+				font-weight: var(--splms-font-weight-medium);
+				color: var(--splms-gray-500);
+				margin: 0;
+				font-size: 0.875rem;
+			}
+
+			span {
+				color: var(--splms-gray-900);
+				font-weight: var(--splms-font-weight-semibold);
+			}
+		}
+	}
+
+	.splms-order-actions {
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.splms-alert {
+		padding: 1rem 1.25rem;
+		border-radius: var(--splms-border-radius-lg);
+		margin-bottom: 1rem;
+
+		p {
+			margin: 0;
+			font-size: 0.9375rem;
+		}
+
+		&.splms-alert-warning {
+			background-color: var(--splms-warning-light);
+			border: 1px solid var(--splms-warning);
+			color: var(--splms-warning-dark);
+		}
+
+		&.splms-alert-info {
+			background-color: var(--splms-info-light);
+			border: 1px solid var(--splms-info);
+			color: var(--splms-info-dark);
+		}
+	}
+}
+
+// Progress Statistics Summary for Dashboard Tabs
+.splms-dashboard-tab {
+	.splms-progress-summary {
+		background: var(--splms-primary-hover);
+		border-radius: 16px;
+		padding: 2rem;
+		margin-bottom: 2rem;
+		color: white;
+
+		.splms-summary-stats {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+			gap: 1.5rem;
+			align-items: center;
+
+			@media (max-width: 640px) {
+				grid-template-columns: repeat(2, 1fr);
+				gap: 1rem;
+			}
+		}
+
+		.splms-stat-item {
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			gap: 0.25rem;
+
+			.splms-stat-number {
+				font-size: 2rem;
+				font-weight: var(--splms-font-weight-bold);
+				line-height: var(--splms-line-height-none);
+				color: white;
+
+				@media (max-width: 640px) {
+					font-size: 1.5rem;
+				}
+			}
+
+			.splms-stat-label {
+				font-size: 0.875rem;
+				font-weight: var(--splms-font-weight-medium);
+				opacity: 0.9;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+			}
+		}
+	}
+
+	// Progress Badge Styles
+	.splms-progress-badge {
+		font-size: 0.75rem;
+		font-weight: var(--splms-font-weight-semibold);
+		padding: 0.375rem 0.75rem;
+		border-radius: var(--splms-border-radius-xl);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+
+		&.splms-progress-completed {
+			background: var(--splms-success-light);
+			color: var(--splms-success-dark);
+		}
+
+		&.splms-progress-in_progress {
+			background: var(--splms-info-light);
+			color: var(--splms-info-dark);
+		}
+
+		&.splms-progress-not_started {
+			background: var(--splms-gray-100);
+			color: var(--splms-gray-500);
+		}
+	}
+}

@@ -1,0 +1,362 @@
+/**
+ * SPLMS ListView Component - Common Styles
+ *
+ * Centralized styles for the reusable ListView component
+ * Used by: Enrollments, Quiz Attempts, Orders, etc.
+ */
+
+// ============================================================================
+// List View Container
+// ============================================================================
+.splms-list-view {
+    background: var(--splms-white);
+    border: 1px solid var(--splms-gray-300);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+
+    .components-card__body {
+        padding: var(--splms-spacing-6);
+    }
+}
+
+// ============================================================================
+// User Info Display (Avatar + Name + Email)
+// ============================================================================
+.splms-user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .splms-user-avatar {
+        width: 40px;
+        height: var(--splms-spacing-10);
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+
+    .row-title {
+        color: var(--splms-info);
+        text-decoration: none;
+        font-weight: var(--splms-font-weight-semibold);
+
+        &:hover {
+            color: var(--splms-info-dark);
+        }
+    }
+
+    small {
+        color: var(--splms-gray-500);
+        font-size: var(--splms-font-size-sm);
+        display: block;
+        margin-top: var(--splms-spacing-1);
+    }
+}
+
+// ============================================================================
+// Filters Section
+// ============================================================================
+.splms-filters {
+    margin-bottom: var(--splms-spacing-4);
+
+    .components-flex {
+        gap: 12px;
+        align-items: flex-end;
+        flex-wrap: wrap;
+    }
+
+    .splms-field {
+        margin: 0;
+
+        &.splms-field-search {
+            flex: 1;
+            min-width: 250px;
+        }
+    }
+}
+
+// ============================================================================
+// Bulk Actions Bar
+// ============================================================================
+.splms-bulk-actions {
+    margin-bottom: var(--splms-spacing-4);
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--splms-gray-300);
+
+    .components-flex {
+        gap: var(--splms-spacing-2);
+        align-items: center;
+    }
+
+    .splms-selected-count {
+        color: var(--splms-gray-500);
+        font-size: var(--splms-font-size-sm);
+        margin-left: 8px;
+    }
+}
+
+// ============================================================================
+// Table Styles
+// ============================================================================
+.splms-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background: var(--splms-white);
+
+    // Table Header
+    thead {
+        background: var(--splms-gray-50);
+
+        th {
+            padding: var(--splms-spacing-2) var(--splms-spacing-4);
+            text-align: left;
+            font-weight: var(--splms-font-weight-semibold);
+            font-size: var(--splms-font-size-sm);
+            color: var(--splms-gray-900);
+            border-bottom: 2px solid var(--splms-gray-300);
+            white-space: nowrap;
+
+            &.splms-checkbox-column {
+                width: 40px;
+                padding: var(--splms-spacing-2);
+                text-align: center;
+            }
+
+            // Sortable columns
+            &.splms-sortable {
+                cursor: pointer;
+                user-select: none;
+                position: relative;
+                transition: background-color 0.1s ease;
+
+                &:hover {
+                    background-color: var(--splms-gray-200);
+                }
+
+                .splms-icon {
+                    margin-left: 5px;
+                    opacity: 0.5;
+                    vertical-align: middle;
+                }
+
+                &.sorted-asc,
+                &.sorted-desc {
+                    .splms-icon {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+
+    // Table Body
+    tbody {
+        tr {
+            border-bottom: 1px solid var(--splms-gray-300);
+            transition: background-color 0.1s ease;
+
+            &:hover {
+                background-color: var(--splms-gray-50);
+
+                .row-actions {
+                    visibility: visible;
+                }
+            }
+
+            &.splms-clickable-row {
+                cursor: pointer;
+            }
+
+            td {
+                padding: var(--splms-spacing-4);
+                font-size: var(--splms-font-size-sm);
+                color: var(--splms-gray-900);
+                vertical-align: middle;
+
+                &.splms-checkbox-column {
+                    width: 40px;
+                    padding: var(--splms-spacing-2);
+                    text-align: center;
+                }
+
+                // Primary column (with row actions)
+                &.column-primary {
+                    font-weight: var(--splms-font-weight-medium);
+
+                    .row-title {
+                        font-weight: var(--splms-font-weight-semibold);
+                        display: inline-block;
+                    }
+
+                    .row-actions {
+                        margin-top: var(--splms-spacing-2);
+                        font-size: var(--splms-font-size-sm);
+                        line-height: 1.8;
+                        visibility: visible; // Always visible for accessibility
+
+                        span {
+                            display: inline;
+
+                            a {
+                                color: var(--splms-info);
+                                text-decoration: none;
+                                padding: 0 4px;
+
+                                &:hover {
+                                    color: var(--splms-info-dark);
+                                }
+
+                                &.delete {
+                                    color: var(--splms-danger);
+
+                                    &:hover {
+                                        color: var(--splms-danger-dark);
+                                    }
+                                }
+                            }
+
+                            &:not(:last-child)::after {
+                                content: ' | ';
+                                color: var(--splms-gray-500);
+                                padding: 0 2px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ============================================================================
+// Pagination
+// ============================================================================
+.splms-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--splms-gray-300);
+
+    .splms-pagination-info {
+        color: var(--splms-gray-500);
+        font-size: var(--splms-font-size-sm);
+    }
+
+    .splms-pagination-controls {
+        display: flex;
+        gap: var(--splms-spacing-1);
+        align-items: center;
+
+        .splms-page-numbers {
+            display: flex;
+            gap: var(--splms-spacing-1);
+            margin: 0 8px;
+        }
+
+        .components-button {
+            min-width: 32px;
+            height: 32px;
+        }
+    }
+}
+
+// ============================================================================
+// Empty State
+// ============================================================================
+.splms-empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--splms-gray-500);
+
+    .splms-icon {
+        margin-bottom: var(--splms-spacing-4);
+        opacity: 0.5;
+    }
+
+    h3 {
+        margin: 16px 0 8px;
+        color: var(--splms-gray-900);
+        font-size: var(--splms-font-size-lg);
+        font-weight: var(--splms-font-weight-semibold);
+    }
+
+    p {
+        margin: 0 0 24px;
+        color: var(--splms-gray-500);
+        font-size: var(--splms-font-size-sm);
+    }
+
+    .splms-empty-action {
+        margin-top: 24px;
+    }
+}
+
+// ============================================================================
+// Loading State
+// ============================================================================
+.splms-loading-container {
+    text-align: center;
+    padding: 60px 20px;
+
+    p {
+        margin-top: 15px;
+        color: var(--splms-gray-500);
+    }
+}
+
+// ============================================================================
+// Responsive Design
+// ============================================================================
+@media screen and (max-width: 782px) {
+    // Filters stack vertically on mobile
+    .splms-filters {
+        .components-flex {
+            flex-direction: column;
+            align-items: stretch;
+
+            .components-flex__item {
+                width: 100%;
+            }
+        }
+
+        .splms-field-search {
+            min-width: 100%;
+        }
+    }
+
+    // Pagination stacks vertically
+    .splms-pagination {
+        flex-direction: column;
+        gap: var(--splms-spacing-4);
+        text-align: center;
+
+        .splms-pagination-info {
+            order: 2;
+        }
+
+        .splms-pagination-controls {
+            order: 1;
+        }
+    }
+
+    // Table adjustments
+    .splms-list-table {
+        font-size: var(--splms-font-size-xs);
+
+        thead th,
+        tbody td {
+            padding: var(--splms-spacing-2);
+        }
+
+        .splms-user-info {
+            gap: var(--splms-spacing-2);
+
+            .splms-user-avatar {
+                width: 32px;
+                height: 32px;
+            }
+        }
+    }
+}

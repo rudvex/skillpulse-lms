@@ -1,0 +1,17 @@
+/**
+ * Enrollments Listing Page Styles
+ * Page-specific overrides only - common styles are in /src/scss/admin/common/_list-view.scss
+ */
+
+// Course link styling (enrollment-specific)
+.splms-course-link {
+    color: #2271b1;
+    text-decoration: none;
+
+    &:hover {
+        color: #135e96;
+        text-decoration: underline;
+    }
+}
+
+// Add any other enrollment-specific listing styles here

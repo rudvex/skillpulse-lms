@@ -1,0 +1,35 @@
+
+/** Hide the postbox header */
+#splms-course-curriculum,
+#splms-course-settings,
+#splms-lesson-settings,
+#splms-section-settings,
+#splms-quiz-questions,
+#splms-quiz-settings {
+  box-shadow: none;
+
+  .inside {
+    border-bottom: none;
+  }
+
+  .postbox-header {
+    display: none;
+  }
+}
+
+//
+///** Default styles for the course editor */
+//.post-type-sp-course {
+//  .edit-post-layout__metaboxes {
+//    border-top: 0 !important;
+//  }
+//
+//  .edit-post-layout__metaboxes:not(:empty) .edit-post-meta-boxes-area {
+//    margin-left: 0;
+//    margin-right: 0;
+//  }
+//
+//  .edit-post-layout .interface-interface-skeleton__content {
+//    background-color: #fff !important;
+//  }
+//}

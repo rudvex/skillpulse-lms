@@ -1,0 +1,393 @@
+// ====== SkillPulse LMS TinyMCE Editor Component Styles ======
+
+// TinyMCE Editor Component Wrapper
+.splms-tinymce-editor {
+  margin: var(--splms-spacing-4) 0;
+  font-family: var(--splms-font-family-base);
+
+  // Field Label
+  .splms-field-label {
+    display: block;
+    margin-bottom: var(--splms-spacing-2);
+    font-size: var(--splms-font-size-sm);
+    font-weight: var(--splms-font-weight-semibold);
+    color: var(--splms-gray-800);
+    line-height: var(--splms-line-height-snug);
+  }
+
+  // Editor Container
+  .splms-editor-container {
+    position: relative;
+    
+    &:focus-within {
+      .tox-tinymce {
+        border-color: var(--splms-primary) !important;
+        box-shadow: 0 0 0 2px rgba(126, 117, 255, 0.15) !important;
+      }
+    }
+
+    // Main Editor Styling
+    .tox-tinymce {
+      border: 1px solid var(--splms-gray-300) !important;
+      border-radius: var(--splms-border-radius-sm) !important;
+      background: var(--splms-white) !important;
+      font-family: var(--splms-font-family-base) !important;
+      min-height: 350px !important;
+      overflow: visible !important;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+      
+      // Full width
+      width: 100% !important;
+    }
+  }
+
+  // Editor Mode Tabs (WordPress Style)
+  .splms-editor-tabs {
+    display: flex;
+    margin-bottom: 0;
+    border: 1px solid var(--splms-gray-300);
+    background: var(--splms-gray-50);
+    border-top-left-radius: var(--splms-border-radius-sm);
+    border-top-right-radius: var(--splms-border-radius-sm);
+    overflow: hidden;
+
+    .splms-editor-tab {
+      background: transparent;
+      border: none;
+      padding: var(--splms-spacing-2) var(--splms-spacing-4);
+      font-size: var(--splms-font-size-sm);
+      font-weight: var(--splms-font-weight-medium);
+      color: var(--splms-gray-600);
+      cursor: pointer;
+      transition: var(--splms-transition-base);
+      border-bottom: 2px solid transparent;
+      position: relative;
+
+      &:hover:not(:disabled) {
+        background: var(--splms-white);
+        color: var(--splms-gray-800);
+      }
+
+      &.active {
+        background: var(--splms-white);
+        color: var(--splms-primary);
+        border-bottom-color: var(--splms-primary);
+        font-weight: var(--splms-font-weight-semibold);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      &:focus {
+        outline: 2px solid var(--splms-primary);
+        outline-offset: -2px;
+      }
+    }
+  }
+
+  // Text Mode Textarea Styling
+  .splms-text-editor textarea{
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-top: none !important;
+    font-family: var(--splms-font-family-mono) !important;
+    font-size: var(--splms-font-size-sm) !important;
+    line-height: 1.6 !important;
+    resize: vertical !important;
+    border: 1px solid var(--splms-gray-300);
+
+    &:focus {
+      border-color: var(--splms-primary) !important;
+      box-shadow: 0 0 0 2px rgba(126, 117, 255, 0.15) !important;
+    }
+  }
+
+  // Adjust editor container when tabs are present
+  &:has(.splms-editor-tabs) {
+    .splms-editor-container {
+      .tox-tinymce {
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+        border-top: none !important;
+      }
+    }
+  }
+
+  // Help Text
+  .splms-field-description {
+    margin: 8px 0 0 0;
+    font-size: var(--splms-font-size-sm);
+    color: var(--splms-gray-500);
+    line-height: var(--splms-line-height-snug);
+  }
+}
+
+.tox .tox-toolbar {
+  background: transparent !important;
+  border: none !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 4px !important;
+}
+
+.tox .tox-toolbar__group {
+  border: none !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 2px !important;
+}
+
+.tox .tox-tbtn {
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  border-radius: 4px !important;
+  color: var(--splms-gray-700) !important;
+  height: 36px !important;
+  width: 36px !important;
+  min-width: 36px !important;
+  margin: 0 1px !important;
+  padding: 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
+
+  &:hover:not([disabled]) {
+    background: var(--splms-gray-100) !important;
+    border-color: var(--splms-gray-300) !important;
+    color: var(--splms-gray-900) !important;
+  }
+
+  &[aria-pressed="true"] {
+    background: var(--splms-primary) !important;
+    border-color: var(--splms-primary) !important;
+    color: var(--splms-white) !important;
+  }
+
+  // For text-based buttons (like dropdown buttons)
+  .tox-tbtn__select-label {
+    font-size: var(--splms-font-size-sm) !important;
+    font-weight: 500 !important;
+    color: currentColor !important;
+  }
+}
+
+// Special styling for dropdown buttons
+.tox .tox-tbtn--select {
+  width: auto !important;
+  min-width: 60px !important;
+  padding: 4px 8px !important;
+
+  .tox-tbtn__select-label {
+    margin-right: 4px !important;
+  }
+}
+
+// Style for list buttons (bulleted/numbered lists)
+.tox .tox-split-button__chevron {
+  width: 16px !important;
+}
+
+.tox .tox-split-button {
+  .tox-tbtn {
+    border-radius: 4px 0 0 4px !important;
+  }
+
+  .tox-tbtn + .tox-tbtn {
+    border-radius: 0 4px 4px 0 !important;
+    border-left: none !important;
+  }
+}
+
+.tox .tox-listboxfield {
+  background: var(--splms-white) !important;
+  border: 1px solid var(--splms-gray-300) !important;
+  border-radius: 4px !important;
+  color: var(--splms-gray-700) !important;
+  padding: 4px 8px !important;
+  transition: all 0.2s ease !important;
+
+  &:hover {
+    border-color: var(--splms-gray-400) !important;
+  }
+
+  &:focus {
+    border-color: var(--splms-primary) !important;
+    box-shadow: 0 0 0 2px rgba(126, 117, 255, 0.15) !important;
+  }
+}
+
+.tox .tox-edit-area {
+  background: var(--splms-white) !important;
+  border: none !important;
+  border-radius: 0 0 var(--splms-border-radius-sm) var(--splms-border-radius-sm) !important;
+}
+
+.tox .tox-edit-area__iframe {
+  background: var(--splms-white) !important;
+  border: none !important;
+  border-radius: 0 0 var(--splms-border-radius-sm) var(--splms-border-radius-sm) !important;
+}
+
+.tox .tox-statusbar {
+  background: var(--splms-gray-25) !important;
+  border-top: 1px solid var(--splms-gray-200) !important;
+  color: var(--splms-gray-500) !important;
+  padding: 4px 8px !important;
+  font-size: 12px !important;
+  border-radius: 0 0 var(--splms-border-radius-sm) var(--splms-border-radius-sm) !important;
+
+  .tox-statusbar__text-container {
+    color: var(--splms-gray-500) !important;
+  }
+
+  .tox-statusbar__path {
+    color: var(--splms-gray-600) !important;
+  }
+
+  .tox-statusbar__wordcount {
+    color: var(--splms-gray-500) !important;
+  }
+}
+
+// Menu and dropdown styles
+.tox .tox-menu {
+  background: var(--splms-white) !important;
+  border: 1px solid var(--splms-gray-200) !important;
+  border-radius: var(--splms-border-radius-sm) !important;
+  box-shadow: var(--splms-shadow-lg) !important;
+}
+
+.tox .tox-collection__item {
+  background: transparent !important;
+  color: var(--splms-gray-700) !important;
+
+  &:hover {
+    background: var(--splms-gray-50) !important;
+  }
+
+  &[aria-selected="true"] {
+    background: var(--splms-primary-light) !important;
+    color: var(--splms-primary) !important;
+  }
+}
+
+// WordPress-specific button styling
+.tox .tox-tbtn[title*="Placeholder"],
+.tox .tox-tbtn[title*="Shortcode"] {
+  background: var(--splms-primary-light) !important;
+  color: var(--splms-primary) !important;
+  border: 1px solid var(--splms-primary) !important;
+
+  &:hover:not([disabled]) {
+    background: var(--splms-primary) !important;
+    color: var(--splms-white) !important;
+  }
+}
+
+// Image button special styling (WordPress media integration)
+.tox .tox-tbtn[title*="image"],
+.tox .tox-tbtn[title*="Image"] {
+  position: relative;
+
+  &::after {
+    content: "WP";
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: var(--splms-success);
+    color: white;
+    font-size: 8px;
+    padding: 1px 2px;
+    border-radius: var(--splms-border-radius-sm);
+    line-height: var(--splms-line-height-none);
+  }
+}
+
+// Override default TinyMCE content styles
+.mce-content-body {
+  font-family: var(--splms-font-family-base) !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  color: var(--splms-gray-700) !important;
+  padding: 12px !important;
+  min-height: 200px !important;
+
+  p {
+    margin: 0 0 10px 0 !important;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 10px 0 !important;
+    font-weight: 600 !important;
+    color: var(--splms-gray-900) !important;
+  }
+
+  ul, ol {
+    margin: 0 0 10px 0 !important;
+    padding-left: 20px !important;
+  }
+
+  a {
+    color: var(--splms-primary) !important;
+    text-decoration: underline !important;
+
+    &:hover {
+      color: var(--splms-primary-dark) !important;
+    }
+  }
+
+  blockquote {
+    border-left: 4px solid var(--splms-primary) !important;
+    margin: 0 0 10px 0 !important;
+    padding-left: 16px !important;
+    font-style: italic !important;
+    color: var(--splms-gray-600) !important;
+  }
+
+  table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    margin: 0 0 10px 0 !important;
+
+    td, th {
+      border: 1px solid var(--splms-gray-300) !important;
+      padding: 8px !important;
+    }
+
+    th {
+      background-color: var(--splms-gray-50) !important;
+      font-weight: 600 !important;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .splms-tinymce-editor {
+    .tox .tox-toolbar__group {
+      margin: 0 8px 4px 0 !important;
+    }
+
+    .tox .tox-tbtn {
+      height: 32px !important;
+      width: 32px !important;
+      min-width: 32px !important;
+
+      svg {
+        width: 16px !important;
+        height: 16px !important;
+      }
+    }
+  }
+}
+
+//// Dark mode support (optional)
+//@media (prefers-color-scheme: dark) {
+//  .splms-tinymce-editor {
+//    // Add dark mode styles if needed
+//  }
+//}

@@ -1,0 +1,124 @@
+/**
+ * Certificate Print Styles
+ *
+ * Optimized styles for printing certificates
+ * Ensures certificates look professional when printed
+ */
+
+@media print {
+    // Hide all other elements when printing certificates
+    body.splms-printing-certificate {
+        * {
+            visibility: hidden;
+        }
+
+        .splms-certificate-container,
+        .splms-certificate-container * {
+            visibility: visible;
+        }
+
+        .splms-certificate-container {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100% !important;
+            height: 100% !important;
+            max-width: none !important;
+            max-height: none !important;
+            margin: 0 !important;
+            padding: 20px !important;
+            background: white !important;
+            border: none !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+        }
+
+        // Hide navigation, headers, footers
+        header,
+        nav,
+        .site-header,
+        .site-navigation,
+        .site-footer,
+        footer,
+        .splms-dashboard-nav,
+        .splms-dashboard-tab-header,
+        .splms-modal-footer,
+        .splms-certificate-actions,
+        .splms-btn,
+        button {
+            display: none !important;
+        }
+
+        // Ensure text is black for printing
+        .splms-certificate-container,
+        .splms-certificate-container * {
+            color: var(--splms-black) !important;
+            background: transparent !important;
+        }
+
+        // Ensure proper typography for printing
+        .splms-certificate-container {
+            font-family: 'Times New Roman', serif !important;
+            line-height: 1.4 !important;
+        }
+
+        // Certificate elements optimizations
+        .certificate-element {
+            page-break-inside: avoid;
+        }
+
+        .certificate-title {
+            font-weight: bold !important;
+            text-align: center !important;
+        }
+
+        .certificate-student-name {
+            font-weight: bold !important;
+            text-decoration: underline !important;
+        }
+
+        // Remove any interactive elements
+        a {
+            text-decoration: none !important;
+            color: inherit !important;
+        }
+
+        // Ensure images print properly
+        img {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+
+        // Remove any shadows or effects that don't print well
+        * {
+            box-shadow: none !important;
+            text-shadow: none !important;
+            border-radius: 0 !important;
+        }
+    }
+}
+
+// Non-print styles for certificate printing preparation
+.splms-certificate-print-ready {
+    .splms-certificate-container {
+        background: white;
+        border: 1px solid var(--splms-border-secondary);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        padding: var(--splms-spacing-10);
+        max-width: 800px;
+    }
+}
+
+// Print button styles
+.certificate-print,
+.certificate-print-modal {
+    .dashicons-printer {
+        margin-right: 5px;
+    }
+
+    &:hover {
+        background-color: var(--splms-info) !important;
+        border-color: var(--splms-info) !important;
+    }
+}

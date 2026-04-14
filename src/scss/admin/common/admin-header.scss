@@ -1,0 +1,513 @@
+@use "../base/_variables" as *;
+
+
+  /* ===================================================================
+   SkillPulse LMS - Admin Header Styles (Modern Design)
+   ================================================================== */
+
+  /* Hide default WordPress post type headers when our custom headers are present */
+  body.post-type-sp-course,
+  body.post-type-sp-lesson,
+  body.post-type-sp-section,
+  body.post-type-sp-quiz,
+  body.post-type-sp-certificate {
+
+    .wrap h1.wp-heading-inline,
+    .wrap .page-title-action,
+    .wrap .wp-header-end {
+      display: none !important;
+    }
+
+    /* Also hide the subtitle search results text if present */
+    .wrap .subtitle {
+      display: none !important;
+    }
+  }
+
+.skillpulse-lms-user-admin {
+
+  /* Base Admin Header Styles */
+  #splms-admin-header {
+
+    /* ===================================================================
+   Header Actions (Modern Design)
+   ================================================================== */
+
+    .splms-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      /* Primary Action Buttons */
+      .splms-add-button,
+      .splms-add-course-button,
+      .splms-add-lesson-button,
+      .splms-add-section-button,
+      .splms-add-quiz-button,
+      .splms-add-certificate-button {
+        display: flex;
+        align-items: center;
+        gap: var(--splms-spacing-2);
+        padding: 10px 18px;
+        background: var(--splms-primary);
+        border: 1px solid var(--splms-primary);
+        border-radius: var(--splms-border-radius-sm);
+        color: var(--splms-white);
+        text-decoration: none;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: var(--splms-font-weight-medium);
+        font-size: var(--splms-font-size-sm);
+
+        /* Shine effect */
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          transition: left 0.5s;
+        }
+
+        &:hover {
+          background: var(--splms-white);
+          color: var(--splms-primary);
+
+          &::before {
+            left: 100%;
+          }
+        }
+
+        &:active {
+          transform: translateY(0);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: 0 4px 12px rgba(126, 117, 255, 0.3), 0 0 0 3px rgba(126, 117, 255, 0.2);
+        }
+
+        .dashicon {
+          width: 18px;
+          height: 18px;
+          filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+        }
+      }
+
+      /* Secondary Action Buttons */
+      .splms-secondary-button,
+      .splms-taxonomy-button,
+      .splms-actions-button {
+        display: flex;
+        align-items: center;
+        gap: var(--splms-spacing-2);
+        padding: 10px 18px;
+        background: var(--splms-white);
+        color: var(--splms-primary);
+        border: 1px solid var(--splms-primary);
+        border-radius: var(--splms-border-radius-sm);
+        text-decoration: none;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: var(--splms-font-weight-medium);
+        font-size: var(--splms-font-size-sm);
+        box-shadow:none;
+
+        &:hover {
+          background: var(--splms-primary);
+          border-color: var(--splms-primary);
+          color: var(--splms-white);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(126, 117, 255, 0.15);
+        }
+
+        &:active {
+          transform: translateY(0);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        &:focus {
+          outline: none;
+          border-color: var(--splms-primary);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 0 0 3px rgba(126, 117, 255, 0.2);
+        }
+
+        .dashicon {
+          width: 18px;
+          height: 18px;
+          opacity: 0.8;
+          transition: opacity 0.2s ease;
+        }
+
+        &:hover .dashicon {
+          opacity: 1;
+        }
+      }
+    }
+
+    &.enhanced-title {
+      .splms-header-title {
+        font-size: 24px;
+        font-weight: var(--splms-font-weight-semibold);
+        background: linear-gradient(135deg, var(--splms-primary) 0%, var(--splms-primary-light) 50%, var(--splms-primary-dark) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(0 2px 4px rgba(126, 117, 255, 0.2));
+      }
+    }
+
+    /* Subtle top accent */
+
+  }
+
+  // Responsive header styles
+  @media (max-width: 1024px) {
+    #splms-admin-header {
+      margin-bottom: 24px;
+
+      .splms-header-logo {
+        padding: 20px 24px;
+
+        .logo {
+          gap: var(--splms-spacing-4);
+
+          svg {
+            width: 40px;
+            height: var(--splms-spacing-10);
+          }
+
+          .splms-header-title {
+            font-size: 22px;
+          }
+        }
+      }
+
+      .splms-header-nav {
+        padding: 0 20px;
+
+        ul {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+
+          li a {
+            padding: 14px 16px;
+            font-size: var(--splms-font-size-sm);
+          }
+        }
+      }
+
+      .splms-header-actions {
+        gap: 10px;
+
+        .splms-add-button,
+        .splms-add-course-button,
+        .splms-add-lesson-button,
+        .splms-add-section-button,
+        .splms-add-quiz-button,
+        .splms-add-certificate-button,
+        .splms-secondary-button,
+        .splms-taxonomy-button,
+        .splms-actions-button {
+          padding: 10px 16px;
+          font-size: var(--splms-font-size-sm);
+
+          .dashicon {
+            width: var(--splms-spacing-4);
+            height: var(--splms-spacing-4);
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    #splms-admin-header {
+      border-radius: var(--splms-border-radius-lg);
+
+      .splms-header-logo {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+        padding: 20px;
+
+        .logo {
+          align-self: center;
+
+          .splms-header-title {
+            font-size: 20px;
+          }
+        }
+
+        .splms-header-icon {
+          align-self: stretch;
+          justify-content: center;
+        }
+      }
+
+      .splms-header-nav {
+        ul {
+          flex-direction: column;
+          gap: 0;
+
+          li a {
+            padding: var(--splms-spacing-4);
+            border-radius: 0;
+            border-bottom: 1px solid var(--splms-primary);
+            border-left: 3px solid transparent;
+
+            &:hover {
+              background: var(--splms-primary-light);
+            }
+          }
+
+          li.active a {
+            border-left-color: var(--splms-primary);
+            border-bottom-color: transparent;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    #splms-admin-header {
+      .splms-header-logo {
+        padding: var(--splms-spacing-4);
+
+        .logo {
+          gap: 12px;
+
+          svg {
+            width: 36px;
+            height: 36px;
+          }
+
+          .splms-header-title {
+            font-size: var(--splms-font-size-lg);
+          }
+        }
+
+        .splms-header-icon-help-text {
+          display: none;
+        }
+      }
+
+      .splms-header-nav {
+        padding: 0 16px;
+      }
+    }
+  }
+
+
+  // Print styles
+  @media print {
+
+    #splms-admin-header,
+    .enrollment-filters,
+    .table-header-controls,
+    .enrollments-pagination {
+      display: none;
+    }
+  }
+
+  /* ===================================================================
+   Dropdown Components (Modern Design)
+   ================================================================== */
+
+  .splms-dropdown-content,
+  .splms-taxonomy-dropdown-content,
+  .splms-actions-dropdown-content {
+
+
+    .components-menu-group {
+      padding: var(--splms-spacing-2);
+      border-radius: var(--splms-border-radius-xl);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+      z-index: var(--splms-z-index-dropdown);
+      backdrop-filter: blur(8px);
+
+      .splms-dropdown-item,
+      .splms-taxonomy-item,
+      .splms-actions-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: var(--splms-spacing-1) var(--splms-spacing-2);
+        color: var(--splms-primary);
+        font-weight: var(--splms-font-weight-medium);
+        font-size: var(--splms-font-size-sm);
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+
+        .components-menu-item__item {
+          gap: 10px;
+        }
+
+        &:hover {
+          background: var(--splms-primary);
+          color: var(--splms-white);
+        }
+
+        &:focus{
+          outline: none;
+          box-shadow: none;
+          border: none;
+        }
+
+        &:active {
+          transform: translateX(2px);
+        }
+
+        .dashicon {
+          width: 18px;
+          height: 18px;
+          opacity: 0.8;
+          transition: opacity 0.2s ease;
+        }
+
+        &:hover .dashicon {
+          opacity: 1;
+          filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+        }
+      }
+    }
+  }
+
+  /* ===================================================================
+   Page Container Consistency
+   ================================================================== */
+
+  /* Consistent page wrapper for all admin pages */
+  .splms-admin-container,
+  .splms-overview-container,
+  .splms-course-listing-container,
+  .splms-lesson-listing-container,
+  .splms-section-listing-container,
+  .splms-quiz-listing-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px;
+    background: linear-gradient(135deg, var(--splms-gray-50) 0%, var(--splms-gray-100) 100%);
+    min-height: 100vh;
+    font-family: var(--splms-font-family-base);
+    line-height: var(--splms-line-height-relaxed);
+    color: var(--splms-primary);
+    box-sizing: border-box;
+
+    * {
+      box-sizing: border-box;
+    }
+  }
+
+  /* ===================================================================
+   Responsive Design
+   ================================================================== */
+
+  /* Tablet and smaller desktops */
+  @media (max-width: 1024px) {
+
+    .splms-admin-container,
+    .splms-overview-container,
+    .splms-course-listing-container,
+    .splms-lesson-listing-container,
+    .splms-section-listing-container,
+    .splms-quiz-listing-container {
+      padding: var(--splms-spacing-6);
+    }
+  }
+
+  /* Tablets */
+  @media (max-width: 768px) {
+    .splms-header-actions {
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+
+      .splms-add-button,
+      .splms-add-course-button,
+      .splms-add-lesson-button,
+      .splms-add-section-button,
+      .splms-add-quiz-button,
+      .splms-secondary-button,
+      .splms-taxonomy-button,
+      .splms-actions-button {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+      }
+    }
+
+    .splms-admin-container,
+    .splms-overview-container,
+    .splms-course-listing-container,
+    .splms-lesson-listing-container,
+    .splms-section-listing-container,
+    .splms-quiz-listing-container {
+      padding: 20px;
+    }
+  }
+
+  /* Mobile phones */
+  @media (max-width: 480px) {
+
+
+    .splms-admin-container,
+    .splms-overview-container,
+    .splms-course-listing-container,
+    .splms-lesson-listing-container,
+    .splms-section-listing-container,
+    .splms-quiz-listing-container {
+      padding: var(--splms-spacing-4);
+    }
+  }
+
+  /* ===================================================================
+   Animations & Micro-interactions
+   ================================================================== */
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes pulse {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+
+  /* Loading states */
+  .splms-loading {
+    .dashicon {
+      animation: pulse 1.5s infinite;
+    }
+  }
+}

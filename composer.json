@@ -1,0 +1,122 @@
+{
+  "name": "skillpulse/lms",
+  "description": "SkillPulse LMS is a comprehensive learning management system for WordPress, allowing instructors to create, manage, and deliver online courses with ease.",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "SkillPulseLMS Team",
+      "email": "dev@skillpulselms.com",
+      "homepage": "https://skillpulselms.com"
+    }
+  ],
+  "homepage": "https://skillpulselms.com",
+  "support": {
+    "docs": "https://docs.skillpulselms.com/"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "lms",
+    "learning-management-system",
+    "courses",
+    "education",
+    "e-learning"
+  ],
+  "require": {
+    "php": ">=7.4",
+    "dompdf/dompdf": "^3.0",
+    "firebase/php-jwt": "^6.10"
+  },
+  "require-dev": {
+    "brianhenryie/strauss": "^0.20",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+    "wp-coding-standards/wpcs": "*",
+    "phpunit/phpunit": "^9.6",
+    "yoast/phpunit-polyfills": "^4.0",
+    "skillpulse/splms-build-cli": "dev-main"
+  },
+  "autoload": {
+    "psr-4": {
+      "SkillPulseLMS\\": "includes/",
+      "SkillPulseLMS\\RestApi\\": "includes/rest-api/",
+      "SkillPulseLMS\\Auth\\": "includes/rest-api/auth/"
+    }
+  },
+  "scripts": {
+    "cs:check": "phpcs --standard=phpcs.xml.dist",
+    "cs:check:report": "phpcs --standard=phpcs.xml.dist --report=full --report-file=phpcs-report.txt",
+    "cs:check:summary": "phpcs --standard=phpcs.xml.dist --report=summary",
+    "cs:fix": "phpcbf --standard=phpcs.xml.dist",
+    "strauss": "strauss",
+    "test": "phpunit",
+    "test:unit": "phpunit --testsuite unit",
+    "test:integration": "phpunit --testsuite integration",
+    "test:multisite": "WP_MULTISITE=1 phpunit",
+    "build-test": [
+      "@cs:check",
+      "@test"
+    ],
+    "build-test:full": [
+      "@strauss",
+      "@cs:check",
+      "@test"
+    ],
+    "strauss:manual": "echo 'Note: Strauss may fail due to Composer compatibility. Use existing lib/vendor/ files.'; strauss || true",
+    "build": "./vendor/bin/splms-cli build",
+    "build:free": "./vendor/bin/splms-cli build --source=./ --no-after-build-commands --validate skillpulse ../skillpulse-lms/"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    },
+    "sort-packages": true,
+    "audit": {
+      "abandoned": "report",
+      "ignore": ["PKSA-y2cr-5h3j-g3ys"]
+    }
+  },
+  "extra": {
+    "installer-name": "skillpulse-lms",
+    "wordpress-install-dir": "wp-content/plugins/skillpulse-lms",
+    "strauss": {
+      "target_directory": "lib/vendor",
+      "namespace_prefix": "SkillPulseLMS\\Vendor\\",
+      "classmap_prefix": "SkillPulseLMS_Vendor_",
+      "constant_prefix": "SKILLPULSELMS_VENDOR_",
+      "packages": [
+        "firebase/php-jwt",
+        "dompdf/dompdf"
+      ],
+      "exclude_from_copy": {
+        "packages": [],
+        "namespaces": [],
+        "file_patterns": [
+          "~/tests/~",
+          "~/test/~",
+          "~/.git/~",
+          "~/docs/~",
+          "~/examples/~",
+          "~/sample/~",
+          "~\\.md$~"
+        ]
+      },
+      "exclude_from_prefix": {
+        "packages": [],
+        "namespaces": [
+          "Psr\\Log"
+        ],
+        "file_patterns": []
+      },
+      "delete_vendor_files": true
+    }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/rudvex/splms-build-cli.git"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

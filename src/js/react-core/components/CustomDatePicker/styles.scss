@@ -1,0 +1,400 @@
+// Custom Date Picker Component Styles
+.splms-custom-date-picker {
+    position: relative;
+    
+    .date-picker-input {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 12px;
+        border: 1px solid var(--splms-gray-300);
+        border-radius: var(--splms-border-radius-base);
+        background: #fff;
+        cursor: pointer;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        min-height: var(--splms-spacing-10);
+
+        &:hover {
+            border-color: #0073aa;
+        }
+
+        &:focus-within {
+            border-color: #0073aa;
+            box-shadow: 0 0 0 1px #0073aa;
+            outline: none;
+        }
+
+        .input-content {
+            display: flex;
+            align-items: center;
+            gap: var(--splms-spacing-2);
+            flex: 1;
+
+            .input-text {
+                color: #32373c;
+                font-size: var(--splms-font-size-sm);
+                line-height: var(--splms-line-height-snug);
+                
+                &.placeholder {
+                    color: #8c8f94;
+                    font-style: italic;
+                }
+            }
+        }
+
+        .calendar-icon {
+            color: var(--splms-gray-500);
+            opacity: 0.7;
+            flex-shrink: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        &.has-error {
+            border-color: #d63638;
+            
+            &:hover,
+            &:focus-within {
+                border-color: #d63638;
+                box-shadow: 0 0 0 1px #d63638;
+            }
+
+            .calendar-icon {
+                color: #d63638;
+                opacity: 1;
+            }
+        }
+    }
+    
+    .date-picker-error {
+        margin-top: 4px;
+        font-size: var(--splms-font-size-xs);
+        color: #d63638;
+        font-weight: var(--splms-font-weight-medium);
+        display: flex;
+        align-items: center;
+        gap: var(--splms-spacing-1);
+        
+        &::before {
+            content: "⚠";
+            font-size: var(--splms-font-size-sm);
+        }
+    }
+
+    // New validation notice styles
+    .date-picker-validation-notice {
+        margin: 8px 0 0 0 !important;
+
+        .components-notice__content {
+            margin: 0;
+            padding: var(--splms-spacing-2) var(--splms-spacing-3);
+            font-size: var(--splms-font-size-sm);
+            line-height: var(--splms-line-height-snug);
+        }
+    }
+
+    // Validation loading state
+    .date-picker-validating {
+        display: flex;
+        align-items: center;
+        margin-top: var(--splms-spacing-2);
+        font-size: var(--splms-font-size-sm);
+        color: #757575;
+
+        .spinner {
+            float: none;
+            margin: 0 5px 0 0;
+        }
+    }
+}
+
+// Popover content styles
+.splms-date-picker-popover {
+    z-index: var(--splms-z-index-toast);
+
+    .components-popover__content {
+        padding: 0;
+        border-radius: var(--splms-border-radius-base);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+}
+
+.date-picker-content {
+    padding: var(--splms-spacing-4);
+    min-width: 300px;
+    background: #fff;
+    border-radius: var(--splms-border-radius-base);
+
+    .date-picker-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: var(--splms-spacing-4);
+        padding-bottom: 12px;
+        border-bottom: 1px solid #e0e0e0;
+
+        h4 {
+            margin: 0;
+            font-size: var(--splms-font-size-base);
+            font-weight: var(--splms-font-weight-semibold);
+            color: #1e1e1e;
+        }
+
+        .close-button {
+            padding: var(--splms-spacing-1);
+            min-width: auto;
+            height: auto;
+        }
+    }
+
+    .date-picker-fields {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: var(--splms-spacing-4);
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+
+            label {
+                font-size: var(--splms-font-size-xs);
+                font-weight: var(--splms-font-weight-semibold);
+                color: #1e1e1e;
+                margin-bottom: 4px;
+            }
+
+            .date-input,
+            .time-input {
+                padding: var(--splms-spacing-2) var(--splms-spacing-3);
+                border: 1px solid var(--splms-gray-300);
+                border-radius: var(--splms-border-radius-base);
+                font-size: var(--splms-font-size-sm);
+                background: #fff;
+                transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+                &:focus {
+                    border-color: #0073aa;
+                    box-shadow: 0 0 0 1px #0073aa;
+                    outline: none;
+                }
+
+                &:invalid {
+                    border-color: #d63638;
+                    box-shadow: 0 0 0 1px #d63638;
+                }
+            }
+        }
+    }
+
+    .date-picker-actions {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--splms-spacing-2);
+
+        .clear-button,
+        .apply-button {
+            flex: 1;
+            justify-content: center;
+            padding: var(--splms-spacing-2) var(--splms-spacing-4);
+            border-radius: var(--splms-border-radius-base);
+            font-size: var(--splms-font-size-sm);
+            font-weight: var(--splms-font-weight-medium);
+            transition: var(--splms-transition-base);
+        }
+
+        .clear-button {
+            color: #d63638;
+            border-color: #d63638;
+            background: transparent;
+
+            &:hover:not(:disabled) {
+                background: #d63638;
+                color: #fff;
+                transform: translateY(-1px);
+            }
+        }
+
+        .apply-button {
+            background: #0073aa;
+            border-color: #0073aa;
+            color: #fff;
+
+            &:hover:not(:disabled) {
+                background: #005a87;
+                border-color: #005a87;
+                transform: translateY(-1px);
+            }
+        }
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+    .splms-custom-date-picker {
+        .date-picker-input {
+            padding: 8px 10px;
+            min-height: 36px;
+        }
+    }
+
+    .date-picker-content {
+        min-width: 280px;
+        padding: 12px;
+
+        .date-picker-fields {
+            grid-template-columns: 1fr;
+            gap: var(--splms-spacing-2);
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .date-picker-content {
+        min-width: 260px;
+        padding: 10px;
+
+        .date-picker-header h4 {
+            font-size: var(--splms-font-size-sm);
+        }
+
+        .date-picker-fields .field-group {
+            gap: var(--splms-spacing-1);
+
+            label {
+                font-size: var(--splms-font-size-xs);
+            }
+
+            .date-input,
+            .time-input {
+                padding: 6px 8px;
+                font-size: var(--splms-font-size-sm);
+            }
+        }
+
+        .date-picker-actions {
+            .clear-button,
+            .apply-button {
+                padding: 6px 12px;
+                font-size: var(--splms-font-size-sm);
+            }
+        }
+    }
+}
+
+// Dark mode support
+// @media (prefers-color-scheme: dark) {
+//     .splms-custom-date-picker {
+//         .date-picker-input {
+//             background: #1e1e1e;
+//             border-color: #3c434a;
+//             color: #f0f0f0;
+
+//             &:hover {
+//                 border-color: #0073aa;
+//             }
+
+//             .input-content .input-text {
+//                 color: #f0f0f0;
+
+//                 &.placeholder {
+//                     color: #a7aaad;
+//                 }
+//             }
+
+//             .calendar-icon {
+//                 color: #a7aaad;
+//             }
+//         }
+
+//         .date-picker-validating {
+//             color: #a7aaad;
+//         }
+//     }
+
+//     .date-picker-content {
+//         background: #1e1e1e;
+//         color: #f0f0f0;
+//         border: 1px solid #3c434a;
+
+//         .date-picker-header {
+//             border-bottom-color: #3c434a;
+
+//             h4 {
+//                 color: #f0f0f0;
+//             }
+//         }
+
+//         .date-picker-fields .field-group {
+//             label {
+//                 color: #f0f0f0;
+//             }
+
+//             .date-input,
+//             .time-input {
+//                 background: #2c3338;
+//                 border-color: #3c434a;
+//                 color: #f0f0f0;
+
+//                 &:focus {
+//                     border-color: #0073aa;
+//                     box-shadow: 0 0 0 1px #0073aa;
+//                 }
+
+//                 &::placeholder {
+//                     color: #a7aaad;
+//                 }
+//             }
+//         }
+
+//         .date-picker-actions {
+//             .clear-button {
+//                 &:hover:not(:disabled) {
+//                     background: #d63638;
+//                     color: #fff;
+//                 }
+//             }
+
+//             .apply-button {
+//                 &:hover:not(:disabled) {
+//                     background: #005a87;
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+    .splms-custom-date-picker {
+        .date-picker-input {
+            border-width: 2px;
+
+            &.has-error {
+                border-width: 3px;
+            }
+        }
+    }
+
+    .date-picker-content .date-picker-fields .field-group {
+        .date-input,
+        .time-input {
+            border-width: 2px;
+
+            &:focus {
+                border-width: 3px;
+            }
+        }
+    }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+    .splms-custom-date-picker .date-picker-input,
+    .date-picker-content .date-picker-fields .field-group .date-input,
+    .date-picker-content .date-picker-fields .field-group .time-input,
+    .date-picker-content .date-picker-actions .clear-button,
+    .date-picker-content .date-picker-actions .apply-button {
+        transition: none;
+    }
+}

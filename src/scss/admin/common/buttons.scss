@@ -1,0 +1,38 @@
+@use "../base/_variables" as *;
+
+.skillpulse-lms-user-admin {
+  .splms-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: var(--splms-font-weight-medium);
+    border: 1px solid transparent;
+    border-radius: var(--splms-border-radius-base);
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--splms-transition);
+
+    &-primary {
+      background-color: var(--splms-primary);
+     color: var(--splms-white);
+      border-color: var(--splms-primary);
+      &:hover { background-color: var(--splms-primary-dark) ; text-decoration: none; }
+    }
+    &-secondary {
+      background-color: var(--splms-gray-100);
+      color: var(--splms-gray-700);
+      border-color: var(--splms-gray-300);
+      &:hover { background-color: var(--splms-gray-200); color: var(--splms-gray-800); }
+    }
+    &-outline {
+      background-color: transparent;
+      border-color: var(--splms-gray-300);
+      &:hover { background-color: var(--splms-gray-50); }
+    }
+    &-large { padding: 1rem 2rem; font-size: 1rem; }
+  }
+}
+
+

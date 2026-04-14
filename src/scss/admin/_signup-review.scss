@@ -1,0 +1,378 @@
+/**
+ * Simple & Clean Signup Review Modal
+ * Branded with SkillPulse LMS colors and minimal design
+ */
+
+// Import Sass color module for modern color functions
+@use "sass:color";
+
+// Import variables for branding
+@use "base/variables" as *;
+
+/* Signup Review Modal Specific Styles */
+.splms-signup-review-modal {
+	
+	.modal-content {
+		max-width: 520px; // Slightly smaller
+	}
+
+	.modal-header {
+		background: linear-gradient(135deg, var(--splms-primary), var(--splms-primary-dark) );
+		color: var(--splms-white);
+		padding: 1.5rem 2rem;
+		border-bottom: none;
+
+		h2 {
+			margin: 0;
+			font-size: 1.25rem;
+			font-weight: var(--splms-font-weight-semibold);
+			color: var(--splms-white);
+		}
+
+		.modal-close {
+			position: absolute;
+			top: 1rem;
+			right: 1.5rem;
+			background: none;
+			border: none;
+			color: var(--splms-white);
+			font-size: 1.5rem;
+			cursor: pointer;
+			padding: 0.25rem;
+			line-height: var(--splms-line-height-none);
+			transition: opacity 0.2s ease;
+
+			&:hover {
+				opacity: 0.7;
+			}
+		}
+	}
+
+	.modal-body {
+		padding: 0;
+		max-height: calc(85vh - 120px);
+		overflow-y: auto;
+	}
+
+	// Loading state
+	.loading-content {
+		padding: 3rem 2rem;
+		text-align: center;
+		color: var(--splms-gray-600);
+
+		.spinner {
+			margin: 0 auto 1rem;
+		}
+
+		p {
+			margin: 0;
+			font-size: 0.95rem;
+		}
+	}
+
+	// Signup details section
+	.signup-details {
+		padding: 1.5rem 2rem 0;
+	}
+
+	.signup-info {
+		display: flex;
+		align-items: center;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid var(--splms-gray-200);
+		margin-bottom: 1.5rem;
+
+		.signup-data {
+			h3 {
+				margin: 0 0 0.25rem 0;
+				font-size: 1.125rem;
+				font-weight: var(--splms-font-weight-semibold);
+				color: var(--splms-gray-900);
+			}
+
+			.email {
+				margin: 0 0 0.25rem 0;
+				color: var(--splms-gray-700);
+				font-size: 0.95rem;
+			}
+
+			.username {
+				margin: 0;
+				color: var(--splms-gray-500);
+				font-size: 0.9rem;
+				font-family: var(--splms-font-family-mono);
+			}
+		}
+	}
+
+	.signup-form-data {
+		.data-section {
+			margin-bottom: 1.5rem;
+
+			h4 {
+				margin: 0 0 0.5rem 0;
+				font-size: 0.9rem;
+				font-weight: var(--splms-font-weight-semibold);
+				color: var(--splms-gray-700);
+				text-transform: uppercase;
+				letter-spacing: 0.025em;
+			}
+
+			.date-value {
+				margin: 0;
+				color: var(--splms-gray-800);
+				font-size: 0.95rem;
+			}
+
+			.activation-key {
+				margin: 0;
+				
+				code {
+					background: var(--splms-gray-100);
+					padding: 0.5rem;
+					border-radius: var(--splms-border-radius-base);
+					font-family: var(--splms-font-family-mono);
+					font-size: 0.85rem;
+					color: var(--splms-gray-700);
+					word-break: break-all;
+					display: block;
+				}
+			}
+
+			.meta-content {
+				p {
+					margin: 0 0 0.5rem 0;
+					font-size: 0.9rem;
+					color: var(--splms-gray-700);
+
+					strong {
+						color: var(--splms-gray-800);
+					}
+
+					&:last-child {
+						margin-bottom: 0;
+					}
+				}
+			}
+		}
+	}
+
+	// Review actions section
+	.review-actions {
+		background: var(--splms-gray-50);
+		padding: 1.5rem 2rem 2rem;
+		border-top: 1px solid var(--splms-gray-200);
+	}
+
+	.action-section {
+		display: flex;
+		flex-direction: column;
+		gap: var(--splms-spacing-4);
+
+		// Primary action (activate) - full width and prominent
+		.activate-section {
+			.button {
+				width: 100%;
+				background: var(--splms-success);
+				border: 1px solid var(--splms-success);
+				color: var(--splms-white);
+				padding: 10px 16px;
+				border-radius: var(--splms-border-radius-base);
+				font-size: var(--splms-font-size-sm);
+				font-weight: var(--splms-font-weight-semibold);
+				cursor: pointer;
+				transition: var(--splms-transition-base);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: var(--splms-spacing-2);
+				text-decoration: none;
+
+				&:hover {
+					background: var(--splms-success-hover);
+					border-color: var(--splms-success-hover);
+					transform: translateY(-1px);
+					box-shadow: var(--splms-shadow-md);
+					color: var(--splms-white);
+				}
+
+				.dashicons {
+					font-size: var(--splms-font-size-base);
+				}
+			}
+
+			.action-description {
+				margin: 8px 0 0 0;
+				font-size: var(--splms-font-size-xs);
+				color: var(--splms-gray-600);
+				line-height: var(--splms-line-height-snug);
+				text-align: center;
+			}
+		}
+
+		// Secondary actions side-by-side
+		.secondary-actions {
+			display: flex;
+			gap: 12px;
+
+			.resend-section, .delete-section {
+				flex: 1;
+			}
+
+			.resend-section .button {
+				width: 100%;
+				background: var(--splms-secondary);
+				border: 1px solid var(--splms-secondary);
+				color: var(--splms-white);
+				padding: var(--splms-spacing-2) var(--splms-spacing-3);
+				border-radius: var(--splms-border-radius-base);
+				font-size: var(--splms-font-size-sm);
+				font-weight: var(--splms-font-weight-semibold);
+				cursor: pointer;
+				transition: var(--splms-transition-base);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 6px;
+				text-decoration: none;
+
+				&:hover {
+					background: var(--splms-secondary-hover);
+					border-color: var(--splms-secondary-hover);
+					transform: translateY(-1px);
+					box-shadow: var(--splms-shadow-md);
+					color: var(--splms-white);
+				}
+
+				.dashicons {
+					font-size: var(--splms-font-size-sm);
+				}
+			}
+
+			.delete-section .button {
+				width: 100%;
+				background: var(--splms-white);
+				border: 1px solid var(--splms-danger);
+				color: var(--splms-danger);
+				padding: var(--splms-spacing-2) var(--splms-spacing-3);
+				border-radius: var(--splms-border-radius-base);
+				font-size: var(--splms-font-size-sm);
+				font-weight: var(--splms-font-weight-semibold);
+				cursor: pointer;
+				transition: var(--splms-transition-base);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 6px;
+				text-decoration: none;
+
+				&:hover {
+					background: var(--splms-danger);
+					border-color: var(--splms-danger);
+					color: var(--splms-white);
+					transform: translateY(-1px);
+					box-shadow: var(--splms-shadow-md);
+				}
+
+				.dashicons {
+					font-size: var(--splms-font-size-sm);
+				}
+			}
+
+			.action-description {
+				margin: 6px 0 0 0;
+				font-size: var(--splms-font-size-xs);
+				color: var(--splms-gray-600);
+				line-height: 1.3;
+				text-align: center;
+			}
+
+			// Mobile responsive
+			@media (max-width: 600px) {
+				flex-direction: column;
+				gap: 12px;
+
+				.resend-section, .delete-section {
+					flex: none;
+				}
+			}
+		}
+	}
+
+	// Loading state overlay
+	&.splms-modal-loading {
+		.modal-body {
+			position: relative;
+
+			&::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(255, 255, 255, 0.8);
+				z-index: 10;
+			}
+
+			&::before {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 20px;
+				height: 20px;
+				border: 2px solid var(--splms-gray-300);
+				border-top-color: var(--splms-primary);
+				border-radius: 50%;
+				animation: spin 1s linear infinite;
+				z-index: 11;
+			}
+		}
+	}
+}
+
+// Responsive adjustments
+@media (max-width: 600px) {
+	.splms-signup-review-modal {
+		.modal-content {
+			width: 95%;
+			max-width: none;
+		}
+
+		.modal-header {
+			padding: 1rem 1.5rem;
+
+			h2 {
+				font-size: 1.125rem;
+			}
+
+			.modal-close {
+				top: 0.75rem;
+				right: 1rem;
+			}
+		}
+
+		.signup-details {
+			padding: 1rem 1.5rem 0;
+		}
+
+		.review-actions {
+			padding: 1rem 1.5rem 1.5rem;
+		}
+
+		.signup-info {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 1rem;
+		}
+	}
+}
+
+// Spin animation for loading
+@keyframes spin {
+	to {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}

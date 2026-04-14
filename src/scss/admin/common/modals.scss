@@ -1,0 +1,55 @@
+@use "../base/_variables" as *;
+
+.skillpulse-lms-user-admin {
+  .splms-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.5);
+    &.is-open { display: flex; }
+    &-dialog {background: var(--splms-white); border-radius: var(--splms-border-radius-base); border: 1px solid var(--splms-gray-200); width: min(640px, 92vw); }
+    &-header { padding: var(--splms-spacing-3) var(--splms-spacing-4); border-bottom: 1px solid var(--splms-gray-200); }
+    &-body { padding: var(--splms-spacing-4); }
+    &-footer { padding: var(--splms-spacing-3) var(--splms-spacing-4); border-top: 1px solid var(--splms-gray-200); }
+  }
+
+  // Section Pricing Modal.
+  .splms-section-pricing-modal {
+    .components-modal__content {
+      padding: 0;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+
+      .components-modal__header {
+        flex-shrink: 0;
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--splms-border-secondary);
+        background: var(--splms-white);
+      }
+
+      .splms-modal-wrapper {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-height: 0;
+
+        .pricing-panel-content {
+          flex: 1;
+          overflow-y: auto;
+          overflow-x: hidden;
+          padding: 20px;
+        }
+
+        .modal-footer {
+          flex-shrink: 0;
+          border-top: 1px solid var(--splms-border-secondary);
+        }
+      }
+    }
+  }
+}
+
+

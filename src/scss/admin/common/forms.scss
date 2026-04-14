@@ -1,0 +1,10 @@
+@use "../base/_variables" as *;
+
+.skillpulse-lms-user-admin {
+  .splms-form { }
+  .splms-form-group { margin-bottom: var(--splms-spacing-4); }
+  .splms-form-label { display: block; margin-bottom: var(--splms-spacing-2); font-weight: var(--splms-font-weight-medium); }
+  .splms-description { font-style: italic; color: var(--splms-gray-600); }
+}
+
+

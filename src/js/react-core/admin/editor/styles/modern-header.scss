@@ -1,0 +1,143 @@
+/* Course Editor Header Styles - Modern styling for working Header.js */
+#splms-course-header-wrapper,
+#splms-lesson-header-wrapper,
+#splms-section-header-wrapper,
+#splms-quiz-header-wrapper {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+
+#splms-course-header,
+#splms-lesson-header,
+#splms-section-header,
+#splms-quiz-header {
+    background: var(--splms-white, #fff);
+    border-bottom: 1px solid var(--splms-gray-200, #e5e7eb);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 32px; // WordPress admin bar height
+    z-index: 100;
+    margin: 0;
+    width: 100%;
+    
+    .splms-header-logo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 24px;
+        border-bottom: 1px solid var(--splms-gray-200, #e5e7eb);
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--splms-spacing-4);
+            
+            &.inline {
+                display: flex;
+            }
+
+            svg {
+                width: 40px;
+                height: var(--splms-spacing-10);
+                flex-shrink: 0;
+                filter: drop-shadow(0 2px 4px rgba(37, 99, 235, 0.1));
+            }
+            
+            .splms-header-separator {
+                width: 1px;
+                height: 24px;
+                background: var(--splms-gray-300, #d1d5db);
+            }
+            
+            .splms-header-title {
+                margin: 0;
+                font-size: 24px;
+                font-weight: var(--splms-font-weight-bold);
+                color: var(--splms-gray-900, #111827);
+                letter-spacing: -0.025em;
+                line-height: 1.2;
+                
+                &.inline {
+                    display: inline-block;
+                }
+            }
+        }
+        
+        .splms-header-icon {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            
+            .splms-header-icon-help {
+                .splms-header-icon-help-button {
+                    display: flex;
+                    align-items: center;
+                    gap: var(--splms-spacing-2);
+                    padding: var(--splms-spacing-2) var(--splms-spacing-4);
+                    background: var(--splms-gray-100);
+                    border: 1px solid var(--splms-gray-300);
+                    border-radius: var(--splms-border-radius-sm);
+                    color: var(--splms-gray-700);
+                    text-decoration: none;
+                    transition: var(--splms-transition-base);
+                    
+                    &:hover {
+                        background: var(--splms-gray-200);
+                        border-color: var(--splms-gray-400);
+                        color: var(--splms-gray-900);
+                    }
+                    
+                    .splms-header-back-text {
+                        font-size: var(--splms-font-size-sm);
+                        font-weight: var(--splms-font-weight-medium);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Responsive design
+@media (max-width: 1024px) {
+    #splms-course-header,
+    #splms-lesson-header,
+    #splms-section-header,
+    #splms-quiz-header {
+        .splms-header-logo {
+            padding: 14px 20px;
+            
+            .logo {
+                gap: 12px;
+                
+                .splms-header-title {
+                    font-size: var(--splms-font-size-lg);
+                }
+            }
+        }
+
+    }
+}
+
+@media (max-width: 768px) {
+    #splms-course-header,
+    #splms-lesson-header,
+    #splms-section-header,
+    #splms-quiz-header {
+        .splms-header-logo {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            
+            .splms-header-icon {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+    }
+}
+
+// Variables are now managed centrally in src/scss/shared/ 

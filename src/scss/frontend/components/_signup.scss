@@ -1,0 +1,661 @@
+@use "../base/variables" as *;
+
+/* ========================================
+   SkillPulse LMS Signup Page - Clean Modern Design
+   Minimal, elegant, responsive onboarding style
+   All styles scoped under .splms-signup-page to prevent conflicts
+   ======================================== */
+
+// Keyframe animations (global, no scoping needed)
+@keyframes splms-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes splms-dash {
+    0% {
+        stroke-dasharray: 1, 150;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -35;
+    }
+
+    100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -124;
+    }
+}
+
+.splms-signup-container {
+    max-width: 500px;
+    width: 100%;
+}
+
+.splms-signup-page {
+    background: linear-gradient(90deg, var(--splms-gray-100) 100%, var(--splms-gray-100) 0%);
+    font-family: var(--splms-font-family-base);
+    min-height: calc(100dvh - 48px);
+    height: auto;
+    margin: 0;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+    .splms-signup-wrapper {
+        width: 100%;
+        padding: 34px 24px;
+        background: linear-gradient(135deg, var(--splms-gray-50) 70.71%, var(--splms-gray-50) 0%);
+        box-shadow: 0px 4px 12px 0px var(--splms-black)14;
+        border-radius: var(--splms-border-radius-xl);
+        margin: auto;
+        border: 1px solid var(--splms-border-primary);
+        animation: fadeIn 0.4s ease-in-out;
+
+        .splms-auth-header {
+            margin-bottom: 32px;
+
+            h2 {
+                color: var(--splms-primary);
+                font-size: 34px;
+                line-height: 42px;
+                font-weight: var(--splms-font-weight-bold);
+                display: block;
+                text-align: center;
+                margin-bottom: var(--splms-spacing-4);
+            }
+
+            p {
+                color: var(--splms-gray-700);
+                font-size: var(--splms-font-size-sm);
+                line-height: 20px;
+                margin: 0;
+                font-weight: var(--splms-font-weight-normal);
+                text-align: center;
+            }
+        }
+    }
+}
+
+.splms-form-row {
+    display: flex;
+    column-gap: var(--splms-spacing-4);
+}
+
+.splms-form-group {
+    margin-bottom: var(--splms-spacing-4);
+    position: relative;
+    width: 100%;
+
+    .splms-form-label {
+        display: block;
+        font-weight: var(--splms-font-weight-semibold);
+        margin-bottom: 4px;
+        font-size: var(--splms-font-size-sm);
+        line-height: 20px;
+        color: var(--splms-gray-700);
+    }
+
+    .splms-form-control {
+        width: 100%;
+        padding: 0 16px;
+        border: 1px solid var(--splms-border-secondary);
+        border-radius: var(--splms-border-radius-lg);
+        font-size: var(--splms-font-size-base);
+        line-height: 24px;
+        transition: var(--splms-transition-base);
+        background-color: transparent;
+        color: var(--splms-gray-900);
+        box-sizing: border-box;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+
+    .splms-password-field {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 0;
+        z-index: 1;
+
+        .splms-form-control {
+            padding-right: 40px;
+            width: 100%;
+            background: var(--splms-white);
+            position: relative;
+
+            &:focus {
+                outline: unset;
+                box-shadow: unset;
+                border: 1px solid var(--splms-border-secondary);
+            }
+        }
+
+        .splms-password-toggle {
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            background: transparent;
+
+            &:hover {
+                background: transparent;
+            }
+
+            svg {
+                width: var(--splms-spacing-4);
+                height: var(--splms-spacing-4);
+            }
+        }
+    }
+
+    .splms-checkbox-label {
+        position: relative;
+        padding-left: 24px;
+
+        input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            opacity: 0;
+        }
+
+        .splms-checkbox-mark {
+            position: absolute;
+            top: 2px;
+            left: 0;
+            height: 18px;
+            width: 18px;
+            background-color: var(--splms-white);
+            border: 1px solid var(--splms-border-secondary);
+            border-radius: var(--splms-border-radius-base);
+            margin: 0;
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 2px;
+                left: 5px;
+                width: 5px;
+                height: 10px;
+                border: solid white;
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg);
+                display: none;
+            }
+        }
+
+        .splms-checkbox-text {
+            color: var(--splms-gray-900);
+            font-size: var(--splms-font-size-sm);
+            font-style: normal;
+            font-weight: var(--splms-font-weight-medium);
+            line-height: 20px;
+
+            a {
+                color: var(--splms-primary);
+                text-decoration: none;
+                font-weight: var(--splms-font-weight-medium);
+                transition: all 0.3s ease-in-out;
+
+                &:hover {
+                    text-decoration: underline;
+                    color: var(--splms-gray-900);
+                }
+            }
+        }
+
+        input[type="checkbox"] {
+            &:checked+.splms-checkbox-mark {
+                background: var(--splms-primary);
+                border-color: var(--splms-primary);
+
+                &::after {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .splms-auth-btn {
+        display: flex;
+        width: 100%;
+        background: var(--splms-primary-light);
+        padding: 9px 15px;
+        font-size: var(--splms-font-size-base);
+        line-height: 24px;
+        font-weight: var(--splms-font-weight-medium);
+        margin-bottom: 0;
+        border-radius: var(--splms-border-radius-lg);
+        border: 1px solid var(--splms-primary-light);
+        color: var(--splms-white);
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: transparent;
+            color: var(--splms-primary-light);
+
+        }
+    }
+}
+
+.splms-auth-footer {
+    text-align: center;
+    margin-top: 16px;
+
+    p {
+        color: var(--splms-gray-500);
+        font-size: var(--splms-font-size-sm);
+        line-height: 20px;
+        margin: 0;
+
+        a {
+            color: var(--splms-primary);
+            text-decoration: none;
+            font-weight: var(--splms-font-weight-medium);
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                text-decoration: underline;
+                color: var(--splms-gray-900);
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .splms-signup-page {
+        .splms-signup-wrapper {
+            .splms-auth-header h2 {
+                font-size: 28px;
+                line-height: 38px;
+            }
+        }
+    }
+}
+
+/* ========================================
+   Signup Success Page Styles
+   Clean, centered design for post-registration
+   ======================================== */
+
+.splms-signup-page .splms-success-wrapper {
+    text-align: center;
+    max-width: 600px;
+    padding: 48px 32px;
+
+    // Success Icon
+    .splms-success-icon {
+        margin-bottom: 32px;
+        display: flex;
+        justify-content: center;
+
+        svg {
+            width: 80px;
+            height: 80px;
+            drop-shadow: 0 4px 8px rgba(16, 185, 129, 0.2);
+        }
+    }
+
+    // Success Header
+    .splms-success-header {
+        margin-bottom: 40px;
+
+        h1 {
+            color: var(--splms-gray-900);
+            font-size: 32px;
+            font-weight: var(--splms-font-weight-bold);
+            line-height: 1.25;
+            margin-bottom: var(--splms-spacing-4);
+            margin-top: 0;
+        }
+
+        p {
+            color: var(--splms-gray-500);
+            font-size: var(--splms-font-size-base);
+            line-height: var(--splms-line-height-normal);
+            margin: 0;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    // Info Sections
+    .splms-info-section {
+        display: flex;
+        align-items: flex-start;
+        text-align: left;
+        margin-bottom: 32px;
+        gap: var(--splms-spacing-4);
+
+        .splms-section-icon {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: var(--splms-gray-100);
+            border-radius: var(--splms-border-radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 4px;
+
+            svg {
+                width: 24px;
+                height: 24px;
+                color: var(--splms-gray-500);
+            }
+        }
+
+        .splms-section-content {
+            flex: 1;
+
+            h2 {
+                color: var(--splms-gray-900);
+                font-size: 20px;
+                font-weight: var(--splms-font-weight-semibold);
+                line-height: 1.3;
+                margin: 0 0 8px 0;
+            }
+
+            p {
+                color: var(--splms-gray-500);
+                font-size: var(--splms-font-size-sm);
+                line-height: var(--splms-line-height-normal);
+                margin: 0;
+            }
+        }
+    }
+
+    // Resend Section
+    .splms-resend-section {
+        display: flex;
+        align-items: flex-start;
+        text-align: left;
+        margin-top: 40px;
+        padding-top: 32px;
+        border-top: 1px solid var(--splms-gray-200);
+        gap: var(--splms-spacing-4);
+
+        .splms-section-icon {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: var(--splms-warning-light);
+            border-radius: var(--splms-border-radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 4px;
+
+            svg {
+                width: 20px;
+                height: 20px;
+                color: var(--splms-warning-hover);
+            }
+        }
+
+        .splms-section-content {
+            flex: 1;
+
+            h2 {
+                color: var(--splms-gray-900);
+                font-size: var(--splms-font-size-lg);
+                font-weight: var(--splms-font-weight-semibold);
+                line-height: 1.3;
+                margin: 0 0 8px 0;
+            }
+
+            p {
+                color: var(--splms-gray-500);
+                font-size: var(--splms-font-size-sm);
+                line-height: var(--splms-line-height-normal);
+                margin: 0 0 16px 0;
+            }
+
+            .splms-resend-form {
+                display: flex;
+                gap: 12px;
+                align-items: flex-end;
+
+                .splms-email-input {
+                    flex: 1;
+
+                    input[type="email"] {
+                        width: 100%;
+                        padding: var(--splms-spacing-3) var(--splms-spacing-4);
+                        border: 1px solid var(--splms-gray-300);
+                        border-radius: var(--splms-border-radius-lg);
+                        font-size: var(--splms-font-size-sm);
+                        line-height: var(--splms-line-height-normal);
+                        transition: border-color 0.2s;
+                        box-sizing: border-box;
+
+                        &:focus {
+                            outline: none;
+                            border-color: var(--splms-primary-light);
+                            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+                        }
+
+                        &::placeholder {
+                            color: var(--splms-gray-400);
+                        }
+                    }
+                }
+
+                .splms-resend-btn {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: var(--splms-spacing-2);
+                    background: var(--splms-primary-light);
+                    color: white;
+                    border: none;
+                    padding: 12px 20px;
+                    border-radius: var(--splms-border-radius-lg);
+                    font-size: var(--splms-font-size-sm);
+                    font-weight: var(--splms-font-weight-medium);
+                    cursor: pointer;
+                    transition: background-color 0.2s;
+                    flex-shrink: 0;
+
+                    &:hover {
+                        background: var(--splms-primary-dark) ;
+                    }
+
+                    &:focus {
+                        outline: none;
+                        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+                    }
+
+                    svg {
+                        width: var(--splms-spacing-4);
+                        height: var(--splms-spacing-4);
+                        flex-shrink: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .splms-signup-page .splms-success-wrapper {
+        padding: 32px 24px;
+
+        .splms-success-header {
+            margin-bottom: 32px;
+
+            h1 {
+                font-size: 28px;
+            }
+
+            p {
+                font-size: 15px;
+            }
+        }
+
+        .splms-info-section,
+        .splms-resend-section {
+            flex-direction: column;
+            text-align: center;
+
+            .splms-section-icon {
+                align-self: center;
+                margin-bottom: 12px;
+                margin-top: 0;
+            }
+
+            .splms-section-content {
+                text-align: center;
+
+                .splms-resend-form {
+                    flex-direction: column;
+                    gap: var(--splms-spacing-4);
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 512px) {
+    .splms-form-row {
+        flex-wrap: wrap;
+    }
+}
+
+/* ========================================
+   Activation Form - Minimal Additional Styles
+   Reusing existing signup form patterns
+   ======================================== */
+
+// Account Details Section Header
+.splms-account-details-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--splms-spacing-2);
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--splms-gray-200);
+
+    svg {
+        color: var(--splms-gray-500);
+        flex-shrink: 0;
+    }
+
+    h3 {
+        color: var(--splms-gray-900);
+        font-size: var(--splms-font-size-lg);
+        font-weight: var(--splms-font-weight-semibold);
+        margin: 0;
+    }
+}
+
+// Read-only form controls for account details
+.splms-readonly {
+    background-color: var(--splms-gray-50);
+    color: var(--splms-gray-700);
+    cursor: default;
+    border: 1px solid var(--splms-gray-200);
+    font-weight: var(--splms-font-weight-medium);
+
+    &:focus {
+        border-color: var(--splms-gray-200);
+        box-shadow: none;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .splms-account-details-header {
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+
+        h3 {
+            font-size: var(--splms-font-size-base);
+        }
+
+        svg {
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+    .splms-readonly {
+        font-size: var(--splms-font-size-sm);
+    }
+}
+
+// Message Boxes (Error/Info states)
+.splms-message-box {
+    padding: 20px;
+    border-radius: var(--splms-border-radius-lg);
+    margin-bottom: 24px;
+    text-align: center;
+
+    &.splms-error {
+        background: var(--splms-danger-light);
+        border-left: 4px solid var(--splms-danger);
+    }
+
+    &.splms-info {
+        background: var(--splms-info-light);
+        border-left: 4px solid var(--splms-info);
+    }
+
+    h3 {
+        color: var(--splms-gray-900);
+        font-size: var(--splms-font-size-lg);
+        font-weight: var(--splms-font-weight-semibold);
+        margin: 0 0 12px 0;
+    }
+
+    p {
+        color: var(--splms-gray-500);
+        font-size: var(--splms-font-size-sm);
+        line-height: var(--splms-line-height-normal);
+        margin: 0 0 12px 0;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .splms-example-code {
+        margin: var(--splms-spacing-4) 0;
+        padding: 12px;
+        background: var(--splms-gray-100);
+        border-radius: var(--splms-border-radius-md);
+
+        code {
+            font-size: var(--splms-font-size-xs);
+            color: var(--splms-gray-700);
+            word-break: break-all;
+            font-family: var(--splms-font-family-mono);
+        }
+    }
+}

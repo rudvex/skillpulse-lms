@@ -1,0 +1,367 @@
+/**
+ * Contextual Upgrade Prompt Modal Styles
+ *
+ * Professional styling for upgrade prompt modal with accessible design
+ * and responsive layout that encourages conversion without being pushy.
+ *
+ * @since [SPLMS_VERSION]
+ */
+
+.splms-contextual-upgrade-prompt {
+	/* Modal container styling */
+	.components-modal__content {
+		max-width: 600px;
+		padding: 0;
+		border-radius: 8px;
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+	}
+
+	.components-modal__header {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: #fff;
+		padding: 24px 32px 20px;
+		border-radius: 8px 8px 0 0;
+		border-bottom: none;
+
+		.components-modal__header-heading {
+			color: #fff;
+			font-size: 1.25rem;
+			font-weight: 600;
+			margin: 0;
+		}
+
+		.components-button {
+			color: #fff;
+			background: rgba(255, 255, 255, 0.1);
+			border-radius: 4px;
+			transition: background-color 0.2s ease;
+
+			&:hover:not(:disabled) {
+				background: rgba(255, 255, 255, 0.2);
+				color: #fff;
+			}
+		}
+	}
+}
+
+/* Upgrade Prompt Content */
+.splms-upgrade-prompt-content {
+	padding: 32px;
+}
+
+/* Urgency Notice */
+.splms-upgrade-prompt__urgency {
+	margin-bottom: 24px;
+
+	.splms-upgrade-urgency-notice {
+		margin: 0;
+		border-left-width: 4px;
+		font-weight: 500;
+	}
+}
+
+/* Feature Usage Display */
+.splms-upgrade-prompt__usage {
+	margin-bottom: 32px;
+	padding: 24px;
+	background: #f8f9fa;
+	border-radius: 8px;
+	border: 1px solid #e1e5e9;
+}
+
+.splms-upgrade-prompt__usage-header {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	margin-bottom: 16px;
+}
+
+.splms-upgrade-prompt__icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	background: #667eea;
+	border-radius: 8px;
+	flex-shrink: 0;
+
+	.splms-feature-icon {
+		color: #fff;
+	}
+}
+
+.splms-upgrade-prompt__usage-text {
+	flex: 1;
+	min-width: 0;
+}
+
+.splms-upgrade-prompt__usage-title {
+	font-size: 1.1rem;
+	font-weight: 600;
+	color: #2c3e50;
+	margin: 0 0 4px;
+}
+
+.splms-upgrade-prompt__usage-stats {
+	margin: 0;
+	color: #6c757d;
+	font-size: 0.9rem;
+}
+
+/* Progress Bar */
+.splms-upgrade-prompt__progress {
+	.splms-usage-progress {
+		height: 8px;
+		border-radius: 4px;
+		background: #e9ecef;
+		overflow: hidden;
+
+		.components-progress-bar__indicator {
+			border-radius: 4px;
+			transition: background-color 0.3s ease;
+		}
+
+		&.splms-usage-progress--normal .components-progress-bar__indicator {
+			background-color: #28a745;
+		}
+
+		&.splms-usage-progress--warning .components-progress-bar__indicator {
+			background-color: #ffc107;
+		}
+
+		&.splms-usage-progress--full .components-progress-bar__indicator {
+			background-color: #dc3545;
+		}
+	}
+}
+
+/* Upgrade Benefits */
+.splms-upgrade-prompt__benefits {
+	margin-bottom: 24px;
+}
+
+.splms-upgrade-prompt__benefits-title {
+	font-size: 1.1rem;
+	font-weight: 600;
+	color: #2c3e50;
+	margin: 0 0 16px;
+}
+
+.splms-upgrade-prompt__benefits-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: grid;
+	gap: 12px;
+}
+
+.splms-upgrade-prompt__benefit-item {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px 16px;
+	background: #f8f9fa;
+	border-radius: 6px;
+	border: 1px solid #e9ecef;
+
+	.splms-benefit-check-icon {
+		color: #28a745;
+		flex-shrink: 0;
+	}
+}
+
+.splms-upgrade-prompt__benefit-text {
+	font-weight: 500;
+	color: #495057;
+}
+
+/* Value Proposition */
+.splms-upgrade-prompt__value {
+	margin-bottom: 32px;
+	padding: 20px;
+	background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+	border-radius: 8px;
+	text-align: center;
+}
+
+.splms-upgrade-prompt__value-highlight {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	color: #fff;
+	font-weight: 600;
+	font-size: 1.05rem;
+
+	.splms-value-star-icon {
+		color: #fff;
+	}
+}
+
+/* Action Buttons */
+.splms-upgrade-prompt__actions {
+	margin-bottom: 24px;
+}
+
+.splms-upgrade-prompt__primary-actions {
+	display: flex;
+	gap: 16px;
+	justify-content: center;
+	margin-bottom: 16px;
+
+	@media (max-width: 480px) {
+		flex-direction: column;
+		gap: 12px;
+	}
+}
+
+.splms-upgrade-prompt__upgrade-btn {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	border: none;
+	box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+	font-weight: 600;
+	transition: all 0.3s ease;
+
+	&:hover:not(:disabled) {
+		background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+		box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+		transform: translateY(-1px);
+	}
+
+	.splms-upgrade-btn-icon {
+		margin-right: 8px;
+	}
+}
+
+.splms-upgrade-prompt__license-btn {
+	border: 2px solid #667eea;
+	color: #667eea;
+	font-weight: 600;
+	transition: all 0.2s ease;
+
+	&:hover:not(:disabled) {
+		background: #667eea;
+		color: #fff;
+	}
+}
+
+.splms-upgrade-prompt__secondary-actions {
+	text-align: center;
+}
+
+.splms-upgrade-prompt__dismiss-btn {
+	color: #6c757d;
+	text-decoration: none;
+	font-size: 0.9rem;
+
+	&:hover:not(:disabled) {
+		color: #495057;
+		text-decoration: underline;
+	}
+}
+
+/* Data Assurance */
+.splms-upgrade-prompt__assurance {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 16px;
+	background: #e8f5e8;
+	border: 1px solid #c3e6c3;
+	border-radius: 6px;
+
+	.splms-upgrade-prompt__assurance-icon {
+		flex-shrink: 0;
+
+		.splms-assurance-shield-icon {
+			color: #28a745;
+		}
+	}
+
+	.splms-upgrade-prompt__assurance-text {
+		margin: 0;
+		font-size: 0.9rem;
+		color: #155724;
+		font-weight: 500;
+	}
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+	.splms-contextual-upgrade-prompt {
+		.components-modal__content {
+			max-width: 95vw;
+			margin: 20px auto;
+		}
+	}
+
+	.splms-upgrade-prompt-content {
+		padding: 24px 20px;
+	}
+
+	.splms-upgrade-prompt__usage {
+		padding: 20px 16px;
+	}
+
+	.splms-upgrade-prompt__usage-header {
+		gap: 12px;
+	}
+
+	.splms-upgrade-prompt__icon {
+		width: 40px;
+		height: 40px;
+	}
+
+	.splms-upgrade-prompt__value {
+		padding: 16px;
+	}
+
+	.splms-upgrade-prompt__value-highlight {
+		font-size: 1rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.splms-upgrade-prompt__usage-header {
+		flex-direction: column;
+		text-align: center;
+		gap: 16px;
+	}
+
+	.splms-upgrade-prompt__benefits-list {
+		gap: 8px;
+	}
+
+	.splms-upgrade-prompt__benefit-item {
+		padding: 10px 12px;
+		font-size: 0.95rem;
+	}
+}
+
+/* Focus States for Accessibility */
+.splms-upgrade-prompt__upgrade-btn:focus,
+.splms-upgrade-prompt__license-btn:focus {
+	outline: 2px solid #667eea;
+	outline-offset: 2px;
+}
+
+.splms-upgrade-prompt__dismiss-btn:focus {
+	outline: 2px solid #6c757d;
+	outline-offset: 2px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+	.splms-upgrade-prompt__usage {
+		border-width: 2px;
+	}
+
+	.splms-upgrade-prompt__benefit-item {
+		border-width: 2px;
+	}
+
+	.splms-upgrade-prompt__assurance {
+		border-width: 2px;
+	}
+}

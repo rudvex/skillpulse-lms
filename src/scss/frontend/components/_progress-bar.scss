@@ -1,0 +1,325 @@
+@use "../base/variables" as *;
+@use "../../shared/core-variables" as *;
+
+// ===================================
+// UNIFIED PROGRESS BAR COMPONENT
+// ===================================
+
+.splms-content-progress {
+  margin-bottom: var(--splms-spacing-6);
+  background: var(--splms-white);
+  padding: var(--splms-spacing-4);
+  border-radius: var(--splms-border-radius-lg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--splms-gray-200);
+
+  // Progress information section (label, stats, percentage)
+  .splms-progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--splms-spacing-3);
+
+    .splms-progress-label {
+      font-size: var(--splms-font-size-sm);
+      font-weight: var(--splms-font-weight-medium);
+      color: var(--splms-gray-700);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .splms-progress-stats {
+      display: flex;
+      align-items: center;
+      gap: var(--splms-spacing-3);
+      font-size: var(--splms-font-size-sm);
+    }
+
+    .splms-progress-count {
+      color: var(--splms-gray-600);
+      font-weight: var(--splms-font-weight-medium);
+
+      .completed {
+        color: var(--splms-primary);
+        font-weight: var(--splms-font-weight-semibold);
+      }
+
+      .total {
+        color: var(--splms-gray-500);
+      }
+    }
+
+    .splms-progress-percentage {
+      font-size: var(--splms-font-size-sm);
+      font-weight: var(--splms-font-weight-bold);
+      color: var(--splms-primary);
+      padding: var(--splms-spacing-1) var(--splms-spacing-2);
+      background: rgba(var(--splms-primary-rgb), 0.1);
+      border-radius: var(--splms-border-radius-base);
+      min-width: 3rem;
+      text-align: center;
+    }
+  }
+
+  // Progress bar container and fill
+  .splms-progress-bar {
+    @include progress-bar;
+    position: relative;
+
+    .splms-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--splms-primary), var(--splms-primary-light));
+      border-radius: inherit;
+      transition: width var(--splms-transition-base) ease-out;
+      position: relative;
+      overflow: hidden;
+
+      // Animated shimmer effect for visual appeal
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        animation: shimmer 2s infinite;
+      }
+
+      // Accessibility: ensure proper ARIA labeling is handled in PHP
+      &[aria-valuenow="100"] {
+        background: linear-gradient(90deg, var(--splms-success), var(--splms-success-light));
+
+        &::after {
+          content: '✓';
+          position: absolute;
+          right: var(--splms-spacing-1);
+          top: 50%;
+          transform: translateY(-50%);
+          color: white;
+          font-size: 0.7rem;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+// Context-specific styling variants
+.splms-quiz-progress {
+  border-color: var(--splms-info);
+
+  .splms-progress-info .splms-progress-label {
+    color: var(--splms-info);
+  }
+
+  .splms-progress-bar .splms-progress-fill {
+    background: linear-gradient(90deg, var(--splms-info), var(--splms-info-light));
+  }
+}
+
+.splms-lesson-progress {
+  border-color: var(--splms-primary);
+}
+
+.splms-course-sidebar-progress {
+  background: linear-gradient(135deg, rgba(var(--splms-primary-rgb), 0.04) 0%, rgba(var(--splms-primary-rgb), 0.02) 100%);
+  border: 1px solid rgba(var(--splms-primary-rgb), 0.15);
+  padding: var(--splms-spacing-3);
+  margin-top: var(--splms-spacing-4);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--splms-primary) 50%, transparent 100%);
+    opacity: 0.4;
+  }
+
+  .splms-progress-info .splms-progress-count {
+    font-size: var(--splms-font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-weight: var(--splms-font-weight-bold);
+  }
+
+  .splms-progress-bar {
+    height: 12px;
+    background: rgba(var(--splms-gray-300-rgb), 0.5);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(var(--splms-gray-400-rgb), 0.2);
+
+    .splms-progress-fill {
+      background: linear-gradient(90deg, var(--splms-primary) 0%, var(--splms-primary-dark) 100%);
+      box-shadow: 0 2px 6px rgba(var(--splms-primary-rgb), 0.4);
+
+      &::before {
+        animation-duration: 3s; // Slower shimmer for sidebar
+      }
+    }
+  }
+}
+
+.splms-lesson-sidebar-progress {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+
+  .splms-progress-info {
+    margin-bottom: var(--splms-spacing-2);
+
+    .splms-progress-count {
+      font-size: 0.75rem;
+      color: var(--splms-gray-600);
+      font-weight: var(--splms-font-weight-medium);
+      text-transform: none;
+      letter-spacing: 0;
+      order: 1; // Show count below the bar
+    }
+  }
+
+  .splms-progress-bar {
+    height: 4px;
+    background: var(--splms-gray-200);
+    border-radius: var(--splms-border-radius-base);
+    box-shadow: none;
+    border: none;
+    margin-bottom: var(--splms-spacing-1);
+
+    .splms-progress-fill {
+      background: var(--splms-primary);
+      box-shadow: none;
+      border-radius: var(--splms-border-radius-base);
+
+      &::before {
+        display: none; // No shimmer effect for lesson sidebar
+      }
+
+      &::after {
+        display: none; // No completion checkmark
+      }
+    }
+  }
+
+  // Reverse the order to show count below bar
+  .splms-progress-info {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+}
+
+// Fullscreen header progress bar styling
+.splms-fullscreen-header-progress {
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  border-bottom: 1px solid var(--splms-gray-200);
+
+  .splms-progress-info {
+    margin-bottom: var(--splms-spacing-2);
+    justify-content: flex-end; // Align percentage and count to the right
+
+    .splms-progress-stats {
+      gap: var(--splms-spacing-2);
+      font-size: var(--splms-font-size-xs);
+    }
+
+    .splms-progress-percentage {
+      font-size: var(--splms-font-size-xs);
+      font-weight: var(--splms-font-weight-semibold);
+      padding: var(--splms-spacing-1) var(--splms-spacing-1);
+      min-width: 2.5rem;
+    }
+
+    .splms-progress-count {
+      font-size: var(--splms-font-size-xs);
+    }
+  }
+
+  .splms-progress-bar {
+    height: 3px; // Thinner for header
+    background: rgba(var(--splms-gray-300-rgb), 0.3);
+    border-radius: var(--splms-border-radius-base);
+    box-shadow: none;
+    border: none;
+
+    .splms-progress-fill {
+      background: var(--splms-primary);
+      box-shadow: none;
+      border-radius: var(--splms-border-radius-base);
+
+      &::before {
+        display: none; // No shimmer effect for header
+      }
+
+      &::after {
+        display: none; // No completion checkmark for header
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: #{$splms-breakpoint-md}) {
+  .splms-content-progress {
+    padding: var(--splms-spacing-3);
+
+    .splms-progress-info {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--splms-spacing-2);
+
+      .splms-progress-stats {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+  }
+}
+
+// Shimmer animation keyframes
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .splms-content-progress {
+    border-width: 2px;
+
+    .splms-progress-bar .splms-progress-fill {
+      &::before {
+        display: none; // Remove shimmer for better contrast
+      }
+    }
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .splms-content-progress .splms-progress-bar .splms-progress-fill {
+    transition: none;
+
+    &::before {
+      animation: none;
+    }
+  }
+}

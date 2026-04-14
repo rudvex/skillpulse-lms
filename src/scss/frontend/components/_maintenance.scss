@@ -1,0 +1,525 @@
+@use "../base/variables" as *;
+
+/**
+ * SkillPulse LMS Maintenance Mode Styles
+ *
+ * Modern, responsive design for maintenance/upgrade pages
+ * Optimized for learning platforms with LMS-specific messaging
+ */
+
+// Main Layout
+.splms-maintenance {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: var(--splms-font-family-base);
+  background: linear-gradient(135deg, var(--splms-maintenance-gradient-start) 0%, var(--splms-maintenance-gradient-end) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--splms-maintenance-text-primary);
+  line-height: var(--splms-line-height-relaxed);
+}
+
+// Container
+.maintenance-container {
+  width: 100%;
+  max-width: 680px;
+  padding: 2rem 1rem;
+  margin: 0 auto;
+}
+
+// Main Content Card
+.maintenance-content {
+  background: var(--splms-maintenance-card-bg);
+  border-radius: var(--splms-border-radius-xxl);
+  padding: 3.5rem 3rem;
+  text-align: center;
+  box-shadow: var(--splms-maintenance-shadow);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--splms-maintenance-gradient-start), var(--splms-maintenance-gradient-end));
+  }
+}
+
+// Logo/Icon
+.maintenance-logo {
+  margin-bottom: 2rem;
+
+  .lms-icon {
+    width: 80px;
+    height: 80px;
+    color: var(--splms-maintenance-gradient-start);
+    filter: drop-shadow(0 4px 12px rgba(126, 117, 255, 0.25));
+    animation: float 3s ease-in-out infinite;
+  }
+}
+
+// Title
+.maintenance-title {
+  font-size: 2.25rem;
+  font-weight: var(--splms-font-weight-bold);
+  color: var(--splms-maintenance-text-primary);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+
+  .upgrade-icon {
+    font-size: 2rem;
+    animation: rotate 4s linear infinite;
+  }
+}
+
+// Main Message
+.maintenance-message {
+  margin-bottom: 2.5rem;
+
+  .lead-text {
+    font-size: 1.25rem;
+    line-height: var(--splms-line-height-relaxed);
+    color: var(--splms-maintenance-text-secondary);
+    margin-bottom: 1rem;
+    font-weight: var(--splms-font-weight-normal);
+  }
+
+  .assurance-text {
+    color: var(--splms-maintenance-accent);
+    font-size: 1.125rem;
+    margin: 0;
+
+    strong {
+      font-weight: var(--splms-font-weight-semibold);
+    }
+  }
+}
+
+// Upgrades Section
+.maintenance-upgrades {
+  margin-bottom: 2.5rem;
+  padding: 2rem;
+  background: linear-gradient(145deg, var(--splms-gray-50) 0%, var(--splms-gray-50) 100%);
+  border-radius: 16px;
+  border: 1px solid var(--splms-maintenance-border);
+
+  .upgrades-title {
+    font-size: 1.375rem;
+    font-weight: var(--splms-font-weight-semibold);
+    color: var(--splms-maintenance-text-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    .briefcase-icon {
+      font-size: 1.5rem;
+    }
+  }
+
+  .maintenance-features-content {
+    text-align: left;
+    font-size: 1rem;
+    color: var(--splms-maintenance-text-secondary);
+    line-height: var(--splms-line-height-relaxed);
+
+    // Style for bullet points
+    ul, ol {
+      margin: 0 0 1rem 0;
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+
+    ul li {
+      &::marker {
+        color: var(--splms-maintenance-accent);
+        font-weight: var(--splms-font-weight-bold);
+      }
+    }
+
+    ol li {
+      &::marker {
+        color: var(--splms-maintenance-accent);
+        font-weight: var(--splms-font-weight-semibold);
+      }
+    }
+
+    // Style for manual bullet points (•)
+    p {
+      margin: 0.5rem 0;
+    }
+
+    // Support for bold/italic from editor
+    strong {
+      font-weight: var(--splms-font-weight-semibold);
+      color: var(--splms-maintenance-text-primary);
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    // Links styling
+    a {
+      color: var(--splms-maintenance-gradient-start);
+      text-decoration: none;
+      font-weight: var(--splms-font-weight-medium);
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+
+// Data Safety Section
+.data-safety {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(145deg, var(--splms-gray-100) 0%, var(--splms-success-light) 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(34, 197, 94, 0.15);
+
+  .safety-title {
+    font-size: 1.125rem;
+    font-weight: var(--splms-font-weight-semibold);
+    color: var(--splms-maintenance-text-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    .shield-icon {
+      font-size: 1.25rem;
+    }
+  }
+
+  .safety-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.5rem;
+    text-align: left;
+
+    li {
+      font-size: 0.9375rem;
+      color: var(--splms-maintenance-text-secondary);
+      position: relative;
+      padding-left: 1.5rem;
+
+      &::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--splms-maintenance-accent);
+        font-weight: var(--splms-font-weight-bold);
+        font-size: 1.25rem;
+        line-height: var(--splms-line-height-none);
+      }
+    }
+  }
+}
+
+// Contact Section
+.maintenance-contact {
+  margin-bottom: 2rem;
+
+  .contact-text {
+    font-size: 1.125rem;
+    font-weight: var(--splms-font-weight-semibold);
+    color: var(--splms-maintenance-text-primary);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    .email-icon {
+      font-size: 1.25rem;
+    }
+  }
+
+  .contact-details {
+    font-size: 1rem;
+    color: var(--splms-maintenance-text-secondary);
+    margin: 0;
+
+    .email-link {
+      color: var(--splms-maintenance-gradient-start);
+      text-decoration: none;
+      font-weight: var(--splms-font-weight-medium);
+      margin-left: 0.5rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Social Media Section
+.maintenance-social {
+  margin-bottom: 2.5rem;
+
+  .social-text {
+    font-size: 1rem;
+    font-weight: var(--splms-font-weight-semibold);
+    color: var(--splms-maintenance-text-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    .phone-icon {
+      font-size: 1.125rem;
+    }
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--splms-border-radius-xl);
+      background: var(--splms-gray-100);
+      color: var(--splms-maintenance-text-secondary);
+      text-decoration: none;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: var(--splms-maintenance-gradient-start);
+        color: var(--splms-white);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(126, 117, 255, 0.3);
+      }
+    }
+  }
+}
+
+// Footer Section
+.maintenance-footer {
+  border-top: 1px solid var(--splms-maintenance-border);
+  padding-top: 1.5rem;
+
+  .maintenance-timestamp {
+    font-size: 0.875rem;
+    color: var(--splms-maintenance-text-secondary);
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
+}
+
+// Admin Panel
+.maintenance-admin-panel {
+  margin-top: 1.5rem;
+
+  .admin-notice {
+    background: linear-gradient(145deg, var(--splms-warning-light) 0%, var(--splms-white) 100%);
+    border: 1px solid var(--splms-warning);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: left;
+
+    .admin-title {
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .tools-icon {
+        font-size: 1.125rem;
+      }
+
+      strong {
+        color: var(--splms-warning-dark);
+      }
+    }
+
+    .admin-info {
+      font-size: 0.9375rem;
+      color: var(--splms-warning-dark);
+      margin-bottom: 1rem;
+      line-height: var(--splms-line-height-normal);
+    }
+
+    .admin-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .admin-button {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.625rem 1.25rem;
+      background: var(--splms-warning);
+      color: var(--splms-white);
+      text-decoration: none;
+      border-radius: var(--splms-border-radius-lg);
+      font-size: 0.875rem;
+      font-weight: var(--splms-font-weight-medium);
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: var(--splms-warning-hover);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+      }
+
+      &.secondary {
+        background: transparent;
+        color: var(--splms-warning-dark);
+        border: 1px solid var(--splms-warning);
+
+        &:hover {
+          background: var(--splms-warning);
+          color: var(--splms-white);
+        }
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+// Responsive Design
+@media (max-width: 768px) {
+  .maintenance-container {
+    padding: 1rem 0.75rem;
+  }
+
+  .maintenance-content {
+    padding: 2.5rem 1.5rem;
+    border-radius: 16px;
+  }
+
+  .maintenance-logo .lms-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .maintenance-title {
+    font-size: 1.875rem;
+
+    .upgrade-icon {
+      font-size: 1.5rem;
+    }
+  }
+
+  .maintenance-message .lead-text {
+    font-size: 1.125rem;
+  }
+
+  .maintenance-upgrades {
+    padding: 1.5rem 1rem;
+
+    .maintenance-features-content {
+      font-size: 0.9375rem;
+
+      ul, ol {
+        padding-left: 1.25rem;
+      }
+    }
+  }
+
+  .data-safety {
+    padding: 1.25rem 1rem;
+  }
+
+  .data-safety .safety-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .maintenance-content {
+    padding: 2rem 1.25rem;
+  }
+
+  .maintenance-title {
+    font-size: 1.625rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .maintenance-upgrades .upgrades-title {
+    font-size: 1.25rem;
+  }
+
+  .admin-actions {
+    flex-direction: column;
+  }
+
+  .admin-button {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+// Print Styles
+@media print {
+  .splms-maintenance {
+    background: var(--splms-white) !important;
+    color: var(--splms-black) !important;
+  }
+
+  .maintenance-container {
+    max-width: none;
+  }
+
+  .maintenance-content {
+    box-shadow: none !important;
+    border: 1px solid var(--splms-gray-300) !important;
+  }
+
+  .maintenance-logo,
+  .maintenance-admin-panel,
+  .maintenance-social {
+    display: none !important;
+  }
+} 

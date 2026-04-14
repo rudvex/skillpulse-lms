@@ -1,0 +1,64 @@
+/**
+ * SkillPulse LMS Admin Variables
+ * Admin-specific variables for WordPress admin integration
+ */
+
+// Import shared core variables and custom properties
+@use '../../shared/core-variables' as *;
+@use '../../shared/custom-properties' as *;
+
+// ===================================
+// ADMIN CSS CUSTOM PROPERTIES
+// ===================================
+:root {
+  // Include shared core custom properties
+  @include core-custom-properties;
+
+  // Include admin-specific custom properties
+  @include admin-custom-properties;
+}
+
+// ===================================
+// ADMIN MIXINS
+// ===================================
+@mixin admin-card {
+  background: var(--splms-admin-content-bg);
+  border: 1px solid var(--splms-admin-border);
+  border-radius: var(--splms-border-radius-lg);
+  box-shadow: var(--splms-shadow-sm);
+}
+
+@mixin admin-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--splms-spacing-2) var(--splms-spacing-4);
+  border-radius: var(--splms-border-radius-base);
+  font-size: $splms-font-size-sm;
+  font-weight: $splms-font-weight-medium;
+  text-decoration: none;
+  transition: var(--splms-transition-base);
+  cursor: pointer;
+  border: none;
+  outline: none;
+
+  &:focus {
+    box-shadow: 0 0 0 2px rgba(var(--splms-primary-rgb), 0.2);
+  }
+}
+
+@mixin admin-input {
+  width: 100%;
+  padding: var(--splms-spacing-2);
+  border: 1px solid var(--splms-admin-input-border);
+  border-radius: var(--splms-border-radius-base);
+  background: var(--splms-admin-input-bg);
+  font-size: $splms-font-size-sm;
+  transition: var(--splms-transition-base);
+
+  &:focus {
+    border-color: var(--splms-admin-input-focus-border);
+    box-shadow: 0 0 0 1px var(--splms-admin-input-focus-border);
+    outline: none;
+  }
+}

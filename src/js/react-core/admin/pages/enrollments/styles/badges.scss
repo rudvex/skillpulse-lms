@@ -1,0 +1,215 @@
+// Status Badges
+.enrollment-status {
+    font-size: var(--splms-font-size-xs);
+    font-weight: var(--splms-font-weight-medium);
+    padding: 4px 8px;
+    border-radius: var(--splms-border-radius-xl);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid transparent;
+    display: inline-block;
+    white-space: nowrap;
+
+    &.status-active {
+        background: var(--splms-success-light);
+        color: var(--splms-success-dark);
+        border-color: var(--splms-success);
+    }
+
+    &.status-inactive {
+        background: var(--splms-gray-100);
+        color: var(--splms-gray-600);
+        border-color: var(--splms-gray-300);
+    }
+
+    &.status-completed {
+        background: var(--splms-primary-light);
+        color: var(--splms-primary-dark);
+        border-color: var(--splms-primary);
+    }
+
+    &.status-cancelled {
+        background: var(--splms-danger-light);
+        color: var(--splms-danger-dark);
+        border-color: var(--splms-danger);
+    }
+    
+    &.status-suspended {
+        background: var(--splms-warning-light);
+        color: var(--splms-warning-dark);
+        border-color: var(--splms-warning);
+    }
+
+    &.status-unknown {
+        background: var(--splms-gray-100);
+        color: var(--splms-gray-500);
+        border-color: var(--splms-gray-300);
+    }
+}
+
+// Enrollment Method Badges
+.enrollment-method {
+    font-size: var(--splms-font-size-xs);
+    font-weight: var(--splms-font-weight-medium);
+    padding: 4px 8px;
+    border-radius: var(--splms-border-radius-xl);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid transparent;
+    display: inline-block;
+    white-space: nowrap;
+    
+    &.method-manual {
+        background: var(--splms-info-light);
+        color: var(--splms-info-dark);
+        border-color: var(--splms-info);
+    }
+    
+    &.method-self {
+        background: var(--splms-success-light);
+        color: var(--splms-success-dark);
+        border-color: var(--splms-success);
+    }
+    
+    &.method-purchase {
+        background: var(--splms-warning-light);
+        color: var(--splms-warning-dark);
+        border-color: var(--splms-warning);
+    }
+    
+    &.method-admin {
+        background: var(--splms-gray-100);
+        color: var(--splms-gray-700);
+        border-color: var(--splms-gray-300);
+    }
+    
+    &.method-bulk {
+        background: var(--splms-purple-light);
+        color: var(--splms-purple-dark);
+        border-color: var(--splms-purple);
+    }
+    
+    &.method-unknown {
+        background: var(--splms-gray-100);
+        color: var(--splms-gray-500);
+        border-color: var(--splms-gray-300);
+    }
+}
+
+// Progress Bar
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: var(--splms-spacing-2);
+    min-width: 120px;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: var(--splms-gray-200);
+    border-radius: var(--splms-border-radius-base);
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--splms-primary), var(--splms-primary-light));
+    border-radius: var(--splms-border-radius-base);
+    transition: width 0.3s ease;
+    position: relative;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        animation: shimmer 2s infinite;
+    }
+}
+
+.progress-text {
+    font-size: var(--splms-font-size-xs);
+    font-weight: var(--splms-font-weight-medium);
+    color: var(--splms-gray-600);
+    min-width: 35px;
+    text-align: right;
+}
+
+// Certificate Status Styling
+.certificate-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    
+    &.earned {
+        color: var(--splms-success);
+        font-weight: var(--splms-font-weight-medium);
+        
+        .components-icon {
+            color: var(--splms-success);
+        }
+    }
+    
+    + a {
+        margin-left: 12px;
+        color: var(--splms-primary);
+        text-decoration: none;
+        font-weight: var(--splms-font-weight-medium);
+        
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+// Responsive badge styles
+@media (max-width: 768px) {
+    .enrollment-status,
+    .enrollment-method {
+        font-size: var(--splms-font-size-xs);
+        padding: 2px 6px;
+    }
+    
+    .progress-container {
+        min-width: 100px;
+        gap: 6px;
+    }
+    
+    .progress-text {
+        font-size: var(--splms-font-size-xs);
+        min-width: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .enrollment-status,
+    .enrollment-method {
+        font-size: 9px;
+        padding: 2px 4px;
+    }
+    
+    .progress-container {
+        min-width: 80px;
+        gap: var(--splms-spacing-1);
+    }
+    
+    .progress-text {
+        font-size: var(--splms-font-size-xs);
+        min-width: 25px;
+    }
+}
+
+// Shimmer animation for progress bars
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+} 

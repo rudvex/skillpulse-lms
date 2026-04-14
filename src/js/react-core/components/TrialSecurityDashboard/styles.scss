@@ -1,0 +1,480 @@
+/**
+ * Trial Security Dashboard Styles
+ */
+
+.splms-trial-dashboard {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    &.loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 300px;
+        text-align: center;
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--splms-primary, #2271b1);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    }
+
+    &.error {
+        .error-message {
+            text-align: center;
+            padding: 40px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+            h3 {
+                color: #d63638;
+                margin-bottom: 10px;
+            }
+
+            p {
+                margin-bottom: 20px;
+                color: #666;
+            }
+        }
+    }
+
+    .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+
+        h2 {
+            margin: 0;
+            color: var(--splms-text-primary, #1d2327);
+        }
+
+        .dashboard-actions {
+            .button {
+                &.refreshing {
+                    opacity: 0.6;
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+
+    .dashboard-content {
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+
+            @media (max-width: 768px) {
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+}
+
+// Dashboard Card Base Styles
+.dashboard-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+    border: 1px solid #e1e5e9;
+
+    .card-header {
+        padding: 20px 20px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h3 {
+            margin: 0;
+            font-size: 18px;
+            color: var(--splms-text-primary, #1d2327);
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+
+            &.active {
+                background: #d1e7dd;
+                color: #0f5132;
+            }
+
+            &.expired {
+                background: #f8d7da;
+                color: #721c24;
+            }
+
+            &.expiring {
+                background: #fff3cd;
+                color: #856404;
+            }
+
+            &.licensed {
+                background: #cff4fc;
+                color: #055160;
+            }
+
+            &.secure {
+                background: #d1e7dd;
+                color: #0f5132;
+            }
+
+            &.warning {
+                background: #fff3cd;
+                color: #856404;
+            }
+        }
+    }
+
+    .card-content {
+        padding: 15px 20px 20px;
+    }
+
+    .card-actions {
+        padding: 0 20px 20px;
+        border-top: 1px solid #f0f0f1;
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+}
+
+// Trial Status Card
+.trial-status {
+    &.expired {
+        border-left: 4px solid #d63638;
+    }
+
+    &.expiring {
+        border-left: 4px solid #dba617;
+    }
+
+    &.active {
+        border-left: 4px solid #00a32a;
+    }
+
+    &.licensed {
+        border-left: 4px solid #0073aa;
+    }
+
+    .status-metric {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+
+        label {
+            font-weight: 600;
+            color: var(--splms-text-secondary, #646970);
+        }
+
+        .metric-value {
+            color: var(--splms-text-primary, #1d2327);
+            font-weight: 500;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .license-info {
+        text-align: center;
+        color: #0073aa;
+        font-weight: 500;
+
+        p {
+            margin: 0;
+        }
+    }
+}
+
+// Security Status Card
+.security-status {
+    .security-metrics {
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+
+            label {
+                font-weight: 600;
+                color: var(--splms-text-secondary, #646970);
+            }
+
+            .valid {
+                color: #00a32a;
+                font-weight: 500;
+            }
+
+            .invalid {
+                color: #d63638;
+                font-weight: 500;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+// Usage Analytics Card
+.usage-analytics {
+    .usage-metrics {
+        .usage-item {
+            margin-bottom: 15px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        .usage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+
+            label {
+                font-weight: 600;
+                color: var(--splms-text-secondary, #646970);
+            }
+
+            .usage-numbers {
+                font-size: 14px;
+                color: var(--splms-text-primary, #1d2327);
+            }
+        }
+
+        .usage-bar {
+            height: 8px;
+            background: #f0f0f1;
+            border-radius: 4px;
+            overflow: hidden;
+
+            .usage-fill {
+                height: 100%;
+                transition: width 0.3s ease;
+
+                &.normal {
+                    background: #00a32a;
+                }
+
+                &.warning {
+                    background: #dba617;
+                }
+
+                &.exceeded {
+                    background: #d63638;
+                }
+            }
+        }
+    }
+}
+
+// Restrictions Card
+.restrictions {
+    .no-restrictions {
+        text-align: center;
+        color: #00a32a;
+        font-weight: 500;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .restrictions-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f1;
+            color: #d63638;
+            position: relative;
+            padding-left: 20px;
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            &::before {
+                content: "⚠";
+                position: absolute;
+                left: 0;
+                color: #dba617;
+            }
+        }
+    }
+}
+
+// Trial Timeline Card
+.trial-timeline {
+    .timeline-progress {
+        margin-bottom: 20px;
+
+        .progress-bar {
+            height: 12px;
+            background: #f0f0f1;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 10px;
+
+            .progress-fill {
+                height: 100%;
+                background: linear-gradient(90deg, #00a32a, #dba617);
+                transition: width 0.5s ease;
+
+                &.expired {
+                    background: #d63638;
+                }
+            }
+        }
+
+        .timeline-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--splms-text-secondary, #646970);
+        }
+    }
+
+    .timeline-stats {
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+
+        .stat {
+            label {
+                display: block;
+                font-size: 12px;
+                color: var(--splms-text-secondary, #646970);
+                margin-bottom: 5px;
+            }
+
+            span {
+                font-size: 24px;
+                font-weight: 700;
+                color: var(--splms-text-primary, #1d2327);
+            }
+        }
+    }
+}
+
+// Security Logs Card
+.security-logs {
+    .logs-list {
+        max-height: 300px;
+        overflow-y: auto;
+
+        .log-entry {
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            border-left: 3px solid;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            &.info {
+                background: #f0f6ff;
+                border-left-color: #0073aa;
+            }
+
+            &.warning {
+                background: #fffbf0;
+                border-left-color: #dba617;
+            }
+
+            &.success {
+                background: #f0f9f0;
+                border-left-color: #00a32a;
+            }
+
+            &.error {
+                background: #fdf0f0;
+                border-left-color: #d63638;
+            }
+
+            .log-time {
+                font-size: 11px;
+                color: var(--splms-text-secondary, #646970);
+                margin-bottom: 3px;
+            }
+
+            .log-event {
+                font-size: 13px;
+                color: var(--splms-text-primary, #1d2327);
+                line-height: 1.4;
+            }
+        }
+    }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+    .splms-trial-dashboard {
+        padding: 15px;
+
+        .dashboard-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+
+            .dashboard-actions {
+                align-self: stretch;
+            }
+        }
+
+        .dashboard-content {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+
+    .dashboard-card {
+        .card-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+    }
+
+    .trial-timeline {
+        .timeline-stats {
+            flex-direction: column;
+            gap: 15px;
+            text-align: left;
+        }
+    }
+}

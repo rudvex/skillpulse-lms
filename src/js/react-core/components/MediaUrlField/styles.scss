@@ -1,0 +1,30 @@
+.splms-media-url-field {
+    .splms-media-url-field__wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: var(--splms-spacing-2);
+    }
+
+    .splms-media-url-field__input-wrapper {
+        display: flex;
+        gap: var(--splms-spacing-2);
+        align-items: flex-start;
+
+        .splms-media-url-field__input {
+            flex: 1;
+        }
+
+        .splms-media-url-field__button {
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+    }
+
+    .splms-media-url-field__help-text {
+        margin: 0;
+        font-size: var(--splms-font-size-xs);
+        color: #757575;
+        font-style: italic;
+    }
+}
+

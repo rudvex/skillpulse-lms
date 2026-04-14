@@ -66,7 +66,7 @@ class SkillPulse_LMS_Email_Sender {
 		// Hook for processing email queue.
 		add_action( 'splms_process_email_queue', array( $this, 'process_email_queue' ) );
 
-		// Setup trial email limit filters (since 1.0.1).
+		// Setup trial email limit filters (since [SPLMS_VERSION]).
 		add_filter( 'splms_before_send_email', array( $this, 'check_trial_email_limits' ), 5, 3 );
 		add_action( 'splms_email_sent', array( $this, 'track_email_usage' ), 10, 6 );
 	}
@@ -76,7 +76,7 @@ class SkillPulse_LMS_Email_Sender {
 	 *
 	 * Prevents email sending when trial limit is exceeded and adds upgrade prompts.
 	 *
-	 * @since 1.0.1
+	 * @since [SPLMS_VERSION]
 	 *
 	 * @param bool   $send_email  Whether to send email (default true).
 	 * @param array  $email_data  Email data including template and recipient.
@@ -129,7 +129,7 @@ class SkillPulse_LMS_Email_Sender {
 	 *
 	 * Increments email usage counter during trial period.
 	 *
-	 * @since 1.0.1
+	 * @since [SPLMS_VERSION]
 	 *
 	 * @param bool   $email_sent    Whether email was sent successfully.
 	 * @param string $to_email      Recipient email address.
@@ -167,7 +167,7 @@ class SkillPulse_LMS_Email_Sender {
 	 *
 	 * Shows upgrade prompt when email limit is reached.
 	 *
-	 * @since 1.0.1
+	 * @since [SPLMS_VERSION]
 	 *
 	 * @return void
 	 */
@@ -196,7 +196,7 @@ class SkillPulse_LMS_Email_Sender {
 	 *
 	 * Critical emails are sent even when approaching limits.
 	 *
-	 * @since 1.0.1
+	 * @since [SPLMS_VERSION]
 	 *
 	 * @param string $email_type Email type identifier.
 	 * @return bool True if critical email type.
@@ -213,7 +213,7 @@ class SkillPulse_LMS_Email_Sender {
 		/**
 		 * Filter critical email types that bypass trial limits.
 		 *
-		 * @since 1.0.1
+		 * @since [SPLMS_VERSION]
 		 *
 		 * @param array $critical_types Array of critical email type identifiers.
 		 */
@@ -239,7 +239,7 @@ class SkillPulse_LMS_Email_Sender {
 			return new WP_Error( 'emails_disabled', __( 'Email notifications are currently disabled.', 'skillpulse-lms' ) );
 		}
 
-		// Check trial email limits (since 1.0.1).
+		// Check trial email limits (since [SPLMS_VERSION]).
 		$email_data    = array(
 			'to_email'     => $to_email,
 			'template'     => $template,

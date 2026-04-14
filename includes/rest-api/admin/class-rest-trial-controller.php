@@ -6,7 +6,7 @@
  * Provides endpoints for trial status, usage statistics, and conversion tracking.
  *
  * @package SkillPulse_LMS
- * @since 1.0.1
+ * @since [SPLMS_VERSION]
  *
  * @api
  * Available endpoints:
@@ -20,14 +20,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Trial REST API Controller class.
  *
- * @since 1.0.1
+ * @since [SPLMS_VERSION]
  */
 class SkillPulse_LMS_Rest_Trial_Controller extends WP_REST_Controller {
 
 	/**
 	 * Class instance.
 	 *
-	 * @since 1.0.1
+	 * @since [SPLMS_VERSION]
 	 * @var SkillPulse_LMS_Rest_Trial_Controller|null
 	 */
 	private static $instance = null;
@@ -35,7 +35,7 @@ class SkillPulse_LMS_Rest_Trial_Controller extends WP_REST_Controller {
 	/**
 	 * Constructor.
 	 *
-	 * @since 1.0.1
+	 * @since [SPLMS_VERSION]
 	 *
 	 * @return void
 	 */
@@ -47,7 +47,7 @@ class SkillPulse_LMS_Rest_Trial_Controller extends WP_REST_Controller {
 	/**
 	 * Get class instance.
 	 *
-	 * @since 1.0.1
+	 * @since [SPLMS_VERSION]
 	 *
 	 * @return SkillPulse_LMS_Rest_Trial_Controller
 	 */
@@ -62,7 +62,7 @@ class SkillPulse_LMS_Rest_Trial_Controller extends WP_REST_Controller {
 	/**
 	 * Register the trial routes.
 	 *
-	 * @since 1.0.1
+	 * @since [SPLMS_VERSION]
 	 *
 	 * @return void
 	 */
@@ -82,7 +82,7 @@ class SkillPulse_LMS_Rest_Trial_Controller extends WP_REST_Controller {
 	/**
 	 * Check if a given request has access to trial data.
 	 *
-	 * @since 1.0.1
+	 * @since [SPLMS_VERSION]
 	 *
 	 * @param WP_REST_Request $request Full data about the request.
 	 *
@@ -106,7 +106,7 @@ class SkillPulse_LMS_Rest_Trial_Controller extends WP_REST_Controller {
 	 * Retrieves comprehensive trial information including status, days remaining,
 	 * usage statistics, limits, and expiration details.
 	 *
-	 * @since 1.0.1
+	 * @since [SPLMS_VERSION]
 	 *
 	 * @api {get} /skillpulse-lms/v1/trial/status Get Trial Status
 	 * @apiName GetTrialStatus

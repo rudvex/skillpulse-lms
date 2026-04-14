@@ -1,0 +1,282 @@
+/**
+ * ListView Component Styles
+ * WordPress-like admin table styling
+ */
+
+@use "sass:color";
+
+// WordPress Design Tokens.
+$wp-background: #f0f0f1;
+$wp-white: #ffffff;
+$wp-border: #c3c4c7;
+$wp-text-primary: #1d2327;
+$wp-text-secondary: #50575e;
+$wp-link: #2271b1;
+
+$status-success: #00a32a;
+$status-warning: #dba617;
+$status-error: #d63638;
+$status-info: #2271b1;
+
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+
+// List View Container.
+.splms-list-view {
+	background: $wp-white;
+	border: 1px solid $wp-border;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+
+	.components-card__body {
+		padding: $spacing-lg;
+	}
+}
+
+// Filters.
+.splms-filters {
+	margin-bottom: $spacing-lg;
+
+	.components-flex {
+		gap: $spacing-sm;
+		flex-wrap: wrap;
+	}
+
+	.splms-field {
+		margin: 0;
+	}
+
+	.splms-field-search {
+		min-width: 250px;
+	}
+}
+
+// Bulk Actions.
+.splms-bulk-actions {
+	margin-bottom: $spacing-md;
+	padding-bottom: $spacing-md;
+	border-bottom: 1px solid $wp-border;
+
+	.components-flex {
+		gap: $spacing-sm;
+		align-items: center;
+	}
+
+	.splms-selected-count {
+		color: $wp-text-secondary;
+		font-size: var(--splms-font-size-sm);
+		margin-left: $spacing-sm;
+	}
+}
+
+// Table.
+.splms-list-table {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	background: $wp-white;
+
+	thead {
+		background: $wp-background;
+
+		th {
+			padding: $spacing-sm $spacing-md;
+			text-align: left;
+			font-weight: var(--splms-font-weight-semibold);
+			font-size: var(--splms-font-size-sm);
+			color: $wp-text-primary;
+			border-bottom: 2px solid $wp-border;
+			white-space: nowrap;
+
+			&.splms-sortable {
+				cursor: pointer;
+				user-select: none;
+
+				&:hover {
+					background: color.adjust($wp-background, $lightness: -3%);
+				}
+
+				.splms-icon {
+					margin-left: $spacing-xs;
+					opacity: 0.5;
+				}
+
+				&.sorted-asc,
+				&.sorted-desc {
+					.splms-icon {
+						opacity: 1;
+					}
+				}
+			}
+
+			&.splms-checkbox-column {
+				width: 40px;
+				padding: $spacing-sm;
+				text-align: center;
+			}
+		}
+	}
+
+	tbody {
+		tr {
+			border-bottom: 1px solid $wp-border;
+
+			&:hover {
+				background: #f6f7f7;
+			}
+
+			&.splms-clickable-row {
+				cursor: pointer;
+			}
+
+			td {
+				padding: $spacing-md;
+				font-size: var(--splms-font-size-sm);
+				color: $wp-text-primary;
+				vertical-align: middle;
+
+				&.splms-checkbox-column {
+					width: 40px;
+					padding: $spacing-sm;
+					text-align: center;
+				}
+
+				// Primary column (with row actions).
+				&.column-primary {
+					.row-title {
+						font-weight: var(--splms-font-weight-semibold);
+						display: block;
+					}
+
+					.row-actions {
+						margin-top: $spacing-xs;
+						font-size: var(--splms-font-size-sm);
+						line-height: 2;
+
+						span {
+							display: inline-block;
+
+							a {
+								color: $wp-link;
+								text-decoration: none;
+								padding: 0 4px;
+
+								&:hover {
+									color: color.adjust($wp-link, $lightness: -10%);
+								}
+
+								&.delete {
+									color: $status-error;
+
+									&:hover {
+										color: color.adjust($status-error, $lightness: -10%);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// Pagination.
+.splms-pagination {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: $spacing-lg;
+	padding-top: $spacing-md;
+	border-top: 1px solid $wp-border;
+
+	.splms-pagination-info {
+		color: $wp-text-secondary;
+		font-size: var(--splms-font-size-sm);
+	}
+
+	.splms-pagination-controls {
+		display: flex;
+		gap: $spacing-xs;
+		align-items: center;
+
+		.splms-page-numbers {
+			display: flex;
+			gap: $spacing-xs;
+			margin: 0 $spacing-sm;
+		}
+
+		.components-button {
+			min-width: 32px;
+			height: 32px;
+		}
+	}
+}
+
+// Empty State.
+.splms-empty-state {
+	text-align: center;
+	padding: 60px 20px;
+	color: $wp-text-secondary;
+
+	.splms-icon {
+		margin-bottom: $spacing-md;
+		opacity: 0.5;
+	}
+
+	h3 {
+		margin: $spacing-md 0 $spacing-sm;
+		color: $wp-text-primary;
+		font-size: var(--splms-font-size-lg);
+	}
+
+	p {
+		margin: 0 0 $spacing-lg;
+		color: $wp-text-secondary;
+		font-size: var(--splms-font-size-sm);
+	}
+
+	.splms-empty-action {
+		margin-top: $spacing-lg;
+	}
+}
+
+// Responsive Design.
+@media screen and (max-width: 782px) {
+	.splms-filters {
+		.components-flex {
+			flex-direction: column;
+
+			.components-flex__item {
+				width: 100%;
+			}
+		}
+
+		.splms-field-search {
+			min-width: 100%;
+		}
+	}
+
+	.splms-pagination {
+		flex-direction: column;
+		gap: $spacing-md;
+
+		.splms-pagination-info {
+			order: 2;
+		}
+
+		.splms-pagination-controls {
+			order: 1;
+		}
+	}
+
+	.splms-list-table {
+		font-size: var(--splms-font-size-xs);
+
+		thead th,
+		tbody td {
+			padding: $spacing-sm;
+		}
+	}
+}

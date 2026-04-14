@@ -1,0 +1,315 @@
+/**
+ * SkillPulse LMS Custom Properties Mixins
+ * Centralized CSS custom properties to eliminate duplication
+ * Usage: @include core-custom-properties; in your :root blocks
+ */
+
+@use 'core-variables' as *;
+
+// ===================================
+// CORE CUSTOM PROPERTIES MIXIN
+// ===================================
+// Shared properties used by both admin and frontend
+@mixin core-custom-properties {
+  // Brand colors - Primary palette
+  --splms-primary-50: #{$splms-primary-50};
+  --splms-primary-100: #{$splms-primary-100};
+  --splms-primary-200: #{$splms-primary-200};
+  --splms-primary-300: #{$splms-primary-300};
+  --splms-primary-400: #{$splms-primary-400};
+  --splms-primary-500: #{$splms-primary-500};
+  --splms-primary-600: #{$splms-primary-600};
+  --splms-primary-700: #{$splms-primary-700};
+  --splms-primary-800: #{$splms-primary-800};
+  --splms-primary-900: #{$splms-primary-900};
+
+  // RGB variants for primary palette
+  --splms-primary-50-rgb: 233, 235, 243;
+  --splms-primary-100-rgb: 185, 194, 219;
+  --splms-primary-200-rgb: 152, 164, 201;
+  --splms-primary-300-rgb: 104, 123, 177;
+  --splms-primary-400-rgb: 75, 97, 161;
+  --splms-primary-500-rgb: 30, 58, 138;
+  --splms-primary-600-rgb: 27, 53, 126;
+  --splms-primary-700-rgb: 21, 41, 98;
+  --splms-primary-800-rgb: 17, 32, 76;
+  --splms-primary-900-rgb: 13, 24, 58;
+
+  // Core brand colors
+  --splms-primary: #{$splms-primary};
+  --splms-primary-hover: #{$splms-primary-hover};
+  --splms-primary-dark: #{$splms-primary-dark};
+  --splms-primary-light: #{$splms-primary-light};
+
+  // RGB variants for core colors
+  --splms-primary-rgb: 30, 58, 138;
+  --splms-primary-hover-rgb: 27, 53, 126;
+  --splms-primary-dark-rgb: 21, 41, 98;
+
+  --splms-secondary: #{$splms-secondary};
+  --splms-secondary-hover: #{$splms-secondary-hover};
+  --splms-secondary-dark: #{$splms-secondary-dark};
+  --splms-secondary-light: #{$splms-secondary-light};
+  --splms-secondary-rgb: 16, 185, 129;
+  --splms-secondary-hover-rgb: 5, 150, 105;
+
+  // Semantic colors
+  --splms-success: #{$splms-success};
+  --splms-success-hover: #{$splms-success-hover};
+  --splms-success-light: #{$splms-success-light};
+  --splms-success-dark: #{$splms-success-dark};
+  --splms-success-rgb: 16, 185, 129;
+  --splms-success-hover-rgb: 5, 150, 105;
+
+  --splms-warning: #{$splms-warning};
+  --splms-warning-hover: #{$splms-warning-hover};
+  --splms-warning-light: #{$splms-warning-light};
+  --splms-warning-dark: #{$splms-warning-dark};
+  --splms-warning-rgb: 245, 158, 11;
+  --splms-warning-hover-rgb: 217, 119, 6;
+
+  --splms-danger: #{$splms-danger};
+  --splms-danger-hover: #{$splms-danger-hover};
+  --splms-danger-light: #{$splms-danger-light};
+  --splms-danger-border: #{$splms-danger-border};
+  --splms-danger-dark: #{$splms-danger-dark};
+  --splms-danger-rgb: 239, 68, 68;
+  --splms-danger-hover-rgb: 220, 38, 38;
+
+  --splms-info: #{$splms-info};
+  --splms-info-hover: #{$splms-info-hover};
+  --splms-info-light: #{$splms-info-light};
+  --splms-info-dark: #{$splms-info-dark};
+  --splms-info-rgb: 59, 130, 246;
+  --splms-info-hover-rgb: 37, 99, 235;
+
+  // Neutral colors
+  --splms-white: #{$splms-white};
+  --splms-black: #{$splms-black};
+  --splms-white-rgb: 255, 255, 255;
+
+  // Gray palette
+  --splms-gray-50: #{$splms-gray-50};
+  --splms-gray-100: #{$splms-gray-100};
+  --splms-gray-200: #{$splms-gray-200};
+  --splms-gray-300: #{$splms-gray-300};
+  --splms-gray-400: #{$splms-gray-400};
+  --splms-gray-500: #{$splms-gray-500};
+  --splms-gray-600: #{$splms-gray-600};
+  --splms-gray-700: #{$splms-gray-700};
+  --splms-gray-800: #{$splms-gray-800};
+  --splms-gray-900: #{$splms-gray-900};
+
+  // Gray RGB variants
+  --splms-gray-50-rgb: 249, 250, 251;
+  --splms-gray-100-rgb: 243, 244, 246;
+  --splms-gray-200-rgb: 229, 231, 235;
+
+  // Typography
+  --splms-font-family-base: #{$splms-font-family-base};
+  --splms-font-family-heading: #{$splms-font-family-heading};
+  --splms-font-family-mono: #{$splms-font-family-mono};
+
+  // Font sizes
+  --splms-font-size-xs: #{$splms-font-size-xs};
+  --splms-font-size-sm: #{$splms-font-size-sm};
+  --splms-font-size-base: #{$splms-font-size-base};
+  --splms-font-size-lg: #{$splms-font-size-lg};
+  --splms-font-size-xl: #{$splms-font-size-xl};
+  --splms-font-size-2xl: #{$splms-font-size-2xl};
+  --splms-font-size-3xl: #{$splms-font-size-3xl};
+  --splms-font-size-4xl: #{$splms-font-size-4xl};
+  --splms-font-size-5xl: #{$splms-font-size-5xl};
+  --splms-font-size-6xl: #{$splms-font-size-6xl};
+
+  // Font weights
+  --splms-font-weight-thin: #{$splms-font-weight-thin};
+  --splms-font-weight-light: #{$splms-font-weight-light};
+  --splms-font-weight-normal: #{$splms-font-weight-normal};
+  --splms-font-weight-medium: #{$splms-font-weight-medium};
+  --splms-font-weight-semibold: #{$splms-font-weight-semibold};
+  --splms-font-weight-bold: #{$splms-font-weight-bold};
+  --splms-font-weight-extrabold: #{$splms-font-weight-extrabold};
+  --splms-font-weight-black: #{$splms-font-weight-black};
+
+  // Line heights
+  --splms-line-height-none: #{$splms-line-height-none};
+  --splms-line-height-tight: #{$splms-line-height-tight};
+  --splms-line-height-snug: #{$splms-line-height-snug};
+  --splms-line-height-normal: #{$splms-line-height-normal};
+  --splms-line-height-relaxed: #{$splms-line-height-relaxed};
+  --splms-line-height-loose: #{$splms-line-height-loose};
+
+  // Spacing system
+  --splms-spacing-0: #{$splms-spacing-0};
+  --splms-spacing-1: #{$splms-spacing-1};
+  --splms-spacing-2: #{$splms-spacing-2};
+  --splms-spacing-3: #{$splms-spacing-3};
+  --splms-spacing-4: #{$splms-spacing-4};
+  --splms-spacing-5: #{$splms-spacing-5};
+  --splms-spacing-6: #{$splms-spacing-6};
+  --splms-spacing-8: #{$splms-spacing-8};
+  --splms-spacing-10: #{$splms-spacing-10};
+  --splms-spacing-12: #{$splms-spacing-12};
+  --splms-spacing-16: #{$splms-spacing-16};
+  --splms-spacing-20: #{$splms-spacing-20};
+  --splms-spacing-24: #{$splms-spacing-24};
+  --splms-spacing-32: #{$splms-spacing-32};
+
+  // Border radius
+  --splms-border-radius-none: #{$splms-border-radius-none};
+  --splms-border-radius-sm: #{$splms-border-radius-sm};
+  --splms-border-radius-base: #{$splms-border-radius-base};
+  --splms-border-radius-md: #{$splms-border-radius-md};
+  --splms-border-radius-lg: #{$splms-border-radius-lg};
+  --splms-border-radius-xl: #{$splms-border-radius-xl};
+  --splms-border-radius-2xl: #{$splms-border-radius-2xl};
+  --splms-border-radius-xxl: #{$splms-border-radius-xxl};
+  --splms-border-radius-3xl: #{$splms-border-radius-3xl};
+  --splms-border-radius-full: #{$splms-border-radius-full};
+
+  // Shadows
+  --splms-shadow-sm: #{$splms-shadow-sm};
+  --splms-shadow-base: #{$splms-shadow-base};
+  --splms-shadow-md: #{$splms-shadow-md};
+  --splms-shadow-lg: #{$splms-shadow-lg};
+  --splms-shadow-xl: #{$splms-shadow-xl};
+  --splms-shadow-2xl: #{$splms-shadow-2xl};
+  --splms-shadow-inner: #{$splms-shadow-inner};
+
+  // Transitions
+  --splms-transition-fast: #{$splms-transition-fast};
+  --splms-transition-base: #{$splms-transition-base};
+  --splms-transition-slow: #{$splms-transition-slow};
+
+  // Z-Index scale
+  --splms-z-index-dropdown: #{$splms-z-index-dropdown};
+  --splms-z-index-sticky: #{$splms-z-index-sticky};
+  --splms-z-index-fixed: #{$splms-z-index-fixed};
+  --splms-z-index-modal-backdrop: #{$splms-z-index-modal-backdrop};
+  --splms-z-index-modal: #{$splms-z-index-modal};
+  --splms-z-index-popover: #{$splms-z-index-popover};
+  --splms-z-index-tooltip: #{$splms-z-index-tooltip};
+  --splms-z-index-toast: #{$splms-z-index-toast};
+}
+
+// ===================================
+// ADMIN-SPECIFIC CUSTOM PROPERTIES
+// ===================================
+@mixin admin-custom-properties {
+  // WordPress admin integration
+  --splms-admin-bar-height: #{$splms-admin-bar-height};
+  --splms-admin-menu-width: #{$splms-admin-menu-width};
+
+  // Admin colors
+  --splms-admin-bg: #{$splms-admin-bg};
+  --splms-admin-content-bg: #{$splms-admin-content-bg};
+  --splms-admin-border: #{$splms-admin-border};
+  --splms-admin-text: #{$splms-admin-text};
+  --splms-admin-text-muted: #{$splms-admin-text-muted};
+
+  // WordPress admin color scheme integration
+  --splms-wp-admin-blue: #{$splms-wp-admin-blue};
+  --splms-wp-admin-blue-hover: #{$splms-wp-admin-blue-hover};
+  --splms-wp-admin-green: #{$splms-wp-admin-green};
+  --splms-wp-admin-red: #{$splms-wp-admin-red};
+
+  // Admin layout
+  --splms-admin-header-height: #{$splms-admin-header-height};
+  --splms-admin-sidebar-width: #{$splms-admin-sidebar-width};
+  --splms-admin-content-padding: #{$splms-admin-content-padding};
+
+  // Metabox styling
+  --splms-metabox-border: #{$splms-metabox-border};
+  --splms-metabox-bg: #{$splms-metabox-bg};
+  --splms-metabox-header-bg: #{$splms-metabox-header-bg};
+
+  // Admin table styling
+  --splms-admin-table-border: #{$splms-admin-table-border};
+  --splms-admin-table-header-bg: #{$splms-admin-table-header-bg};
+  --splms-admin-table-hover-bg: #{$splms-admin-table-hover-bg};
+
+  // Admin form styling
+  --splms-admin-input-border: #{$splms-admin-input-border};
+  --splms-admin-input-focus-border: #{$splms-admin-input-focus-border};
+  --splms-admin-input-bg: #{$splms-admin-input-bg};
+}
+
+// ===================================
+// FRONTEND-SPECIFIC CUSTOM PROPERTIES
+// ===================================
+@mixin frontend-custom-properties {
+  // Layout dimensions
+  --splms-header-height: #{$splms-header-height};
+  --splms-footer-height: #{$splms-footer-height};
+  --splms-sidebar-width: #{$splms-sidebar-width};
+
+  // Course layout
+  --splms-course-sidebar-width: #{$splms-course-sidebar-width};
+  --splms-lesson-content-max-width: #{$splms-lesson-content-max-width};
+
+  // Dashboard layout
+  --splms-dashboard-sidebar-width: #{$splms-dashboard-sidebar-width};
+  --splms-dashboard-content-padding: #{$splms-dashboard-content-padding};
+
+  // Frontend surface colors
+  --splms-surface: #{$splms-surface};
+  --splms-surface-secondary: #{$splms-surface-secondary};
+  --splms-surface-tertiary: #{$splms-surface-tertiary};
+
+  // Background colors
+  --splms-bg: #{$splms-bg};
+  --splms-bg-secondary: #{$splms-bg-secondary};
+
+  // Text colors
+  --splms-text-primary: #{$splms-text-primary};
+  --splms-text-secondary: #{$splms-text-secondary};
+  --splms-text-muted: #{$splms-text-muted};
+  --splms-text-subtle: #{$splms-text-subtle};
+
+  // Border colors
+  --splms-border-primary: #{$splms-border-primary};
+  --splms-border-secondary: #{$splms-border-secondary};
+
+  // Progress indicators
+  --splms-progress-bg: #{$splms-progress-bg};
+  --splms-progress-fill: #{$splms-progress-fill};
+  --splms-progress-complete: #{$splms-progress-complete};
+
+  // Course status colors
+  --splms-status-draft: #{$splms-status-draft};
+  --splms-status-published: #{$splms-status-published};
+  --splms-status-featured: #{$splms-status-featured};
+  --splms-status-archived: #{$splms-status-archived};
+
+  // Difficulty levels
+  --splms-difficulty-beginner: #{$splms-difficulty-beginner};
+  --splms-difficulty-intermediate: #{$splms-difficulty-intermediate};
+  --splms-difficulty-advanced: #{$splms-difficulty-advanced};
+
+  // Pricing colors
+  --splms-price-free: #{$splms-price-free};
+  --splms-price-paid: #{$splms-price-paid};
+  --splms-price-sale: #{$splms-price-sale};
+  --splms-price-currency: #{$splms-price-currency};
+
+  // Button variants
+  --splms-btn-primary-bg: #{$splms-btn-primary-bg};
+  --splms-btn-primary-color: #{$splms-btn-primary-color};
+  --splms-btn-primary-hover: #{$splms-btn-primary-hover};
+
+  --splms-btn-secondary-bg: #{$splms-btn-secondary-bg};
+  --splms-btn-secondary-color: #{$splms-btn-secondary-color};
+  --splms-btn-secondary-hover: #{$splms-btn-secondary-hover};
+
+  --splms-btn-outline-bg: #{$splms-btn-outline-bg};
+  --splms-btn-outline-color: #{$splms-btn-outline-color};
+  --splms-btn-outline-border: #{$splms-btn-outline-border};
+  --splms-btn-outline-hover-bg: #{$splms-btn-outline-hover-bg};
+  --splms-btn-outline-hover-color: #{$splms-btn-outline-hover-color};
+
+  // Link colors
+  --splms-link-color: #{$splms-link-color};
+  --splms-link-hover-color: #{$splms-link-hover-color};
+  --splms-link-visited-color: #{$splms-link-visited-color};
+}

@@ -1,0 +1,192 @@
+// Guest Preview Styles
+.splms-guest-preview {
+  // Guest preview notice banner
+  .splms-guest-preview-banner {
+    background: linear-gradient(135deg, var(--splms-info) 0%, var(--splms-info-dark) 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: var(--splms-border-radius-lg);
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    .preview-banner-content {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .preview-icon {
+        font-size: 2rem;
+        flex-shrink: 0;
+      }
+
+      .preview-text {
+        flex: 1;
+
+        h3 {
+          margin: 0 0 0.5rem 0;
+          font-size: 1.25rem;
+          font-weight: var(--splms-font-weight-semibold);
+        }
+
+        p {
+          margin: 0 0 1rem 0;
+          opacity: 0.9;
+          line-height: var(--splms-line-height-normal);
+        }
+
+        .btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          background: rgba(255, 255, 255, 0.2);
+          color: white;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          padding: 0.75rem 1.5rem;
+          border-radius: var(--splms-border-radius-md);
+          text-decoration: none;
+          font-weight: var(--splms-font-weight-medium);
+          transition: var(--splms-transition-base);
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+          }
+        }
+      }
+    }
+  }
+
+  // Guest preview actions
+  .splms-guest-preview-actions {
+    text-align: center;
+    padding: 2rem;
+    background: var(--splms-gray-50);
+    border-radius: var(--splms-border-radius-lg);
+    border: 1px solid var(--splms-border-primary);
+
+    .preview-notice {
+      color: var(--splms-text-muted);
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .splms-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+}
+
+// Guest preview notice in content
+.splms-guest-preview-notice {
+  background: linear-gradient(135deg, var(--splms-info) 0%, var(--splms-info-dark) 100%);
+  color: white;
+  padding: 1.5rem;
+  border-radius: var(--splms-border-radius-lg);
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  .notice-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .notice-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .notice-text {
+      flex: 1;
+
+      h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.25rem;
+        font-weight: var(--splms-font-weight-semibold);
+      }
+
+      p {
+        margin: 0 0 1rem 0;
+        opacity: 0.9;
+        line-height: var(--splms-line-height-normal);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 0.75rem 1.5rem;
+        border-radius: var(--splms-border-radius-md);
+        text-decoration: none;
+        font-weight: var(--splms-font-weight-medium);
+        transition: var(--splms-transition-base);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.3);
+          transform: translateY(-1px);
+        }
+      }
+    }
+  }
+}
+
+// Curriculum guest preview styles
+.curriculum-item {
+  &.guest-preview {
+    .item-title {
+      color: var(--splms-info);
+      font-weight: var(--splms-font-weight-medium);
+    }
+
+    .status-icon.guest-preview {
+      color: var(--splms-info);
+    }
+
+    .preview-btn {
+      background: var(--splms-info);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: var(--splms-border-radius-base);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: var(--splms-font-weight-medium);
+      transition: var(--splms-transition-base);
+
+      &:hover {
+        background: var(--splms-info-dark);
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .splms-guest-preview {
+    .splms-guest-preview-banner {
+      .preview-banner-content {
+        flex-direction: column;
+        text-align: center;
+
+        .preview-icon {
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+  }
+
+  .splms-guest-preview-notice {
+    .notice-content {
+      flex-direction: column;
+      text-align: center;
+
+      .notice-icon {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}

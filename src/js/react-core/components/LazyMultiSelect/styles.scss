@@ -1,0 +1,292 @@
+/**
+ * LazyMultiSelect Component Styles
+ * SkillPulse LMS Admin Design System
+ *
+ * Uses CSS custom properties from the SkillPulse design system
+ */
+
+.splms-lazy-multi-select {
+    position: relative;
+    margin-bottom: 1rem;
+
+    // Base Control Label
+    .components-base-control__label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: var(--splms-font-size-sm);
+        font-weight: var(--splms-font-weight-semibold);
+        color: var(--splms-gray-700);
+        line-height: var(--splms-line-height-snug);
+    }
+
+    // Help Text
+    .components-base-control__help {
+        margin-top: 4px;
+        margin-bottom: var(--splms-spacing-2);
+        font-size: var(--splms-font-size-xs);
+        color: var(--splms-gray-500);
+        line-height: var(--splms-line-height-snug);
+        font-style: italic;
+    }
+
+    // FormTokenField Input Container
+    .components-form-token-field__input-container {
+        border: 0;
+        box-shadow: unset;
+        padding: 0;
+
+        .components-flex {
+            border: 1px solid #e9eaeb;
+            border-radius: var(--splms-border-radius-lg);
+            width: 100%;
+            font-size: var(--splms-font-size-sm);
+            font-weight: var(--splms-font-weight-normal);
+            line-height: 24px;
+            min-height: 42px;
+        }
+    }
+
+    // Token Pills (Selected Items)
+    .components-form-token-field__token {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        gap: 5px;
+        padding: 4px 8px;
+       color: var(--splms-white);
+        background: linear-gradient(135deg, #6C63FF 70.71%, #7E75FF 0%);
+        border-radius: var(--splms-border-radius-base);
+        font-size: var(--splms-font-size-sm);
+        line-height: 18px;
+
+        // Token Text
+        .components-form-token-field__token-text {
+            color: inherit;
+            font-weight: inherit;
+            font-size: inherit;
+            background: transparent;
+            margin: 0;
+            padding: 0;
+        }
+
+        // Remove Button (X icon)
+        .components-form-token-field__remove-token {
+            width: 18px;
+            max-width: 18px;
+            min-width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+           color: var(--splms-white);
+            &:hover {
+                background: transparent !important;
+               color: var(--splms-white !important);
+            }
+            svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            &:focus {
+                border: 0;
+                outline: none;
+                box-shadow: none;
+            }
+        }
+
+        &:hover .components-form-token-field__remove-token {
+            opacity: 1;
+
+            // When token is hovered, show white background for remove button
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+        }
+    }
+
+    // Input Field
+    .components-form-token-field__input {
+        flex: 1;
+        min-width: 120px;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-size: var(--splms-font-size-sm);
+        color: var(--splms-gray-800);
+        padding: 2px 4px;
+        margin: 0;
+        font-family: inherit;
+
+        &::placeholder {
+            color: var(--splms-gray-400);
+            font-style: italic;
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+    }
+
+    // Suggestions Dropdown
+    .components-form-token-field__suggestions-list {
+        max-height: 240px;
+        overflow-y: auto;
+        margin-top: 4px;
+        padding: var(--splms-spacing-1);
+        border: 1px solid var(--splms-gray-200);
+       background: var(--splms-white);
+        box-shadow: unset;
+        z-index: var(--splms-z-dropdown, 1000);
+
+        // Custom Scrollbar
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: var(--splms-gray-50);
+            border-radius: var(--splms-border-radius-base);
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--splms-gray-300);
+            border-radius: var(--splms-border-radius-base);
+            transition: background var(--splms-transition-fast);
+
+            &:hover {
+                background: var(--splms-gray-400);
+            }
+        }
+
+        // Suggestion Items
+        .components-form-token-field__suggestion {
+            padding: var(--splms-spacing-2) var(--splms-spacing-3);
+            cursor: pointer;
+            transition: background-color var(--splms-transition-fast);
+            font-size: var(--splms-font-size-sm);
+            color: var(--splms-gray-800);
+            margin: 2px 0;
+
+            &:hover,
+            &.is-selected {
+                background-color: var(--splms-primary-light);
+                color: var(--splms-primary-dark);
+            }
+        }
+    }
+
+    // Loading Indicator
+    &__loading,
+    &__loading-more {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--splms-spacing-2);
+        margin-top: var(--splms-spacing-2);
+        padding: var(--splms-spacing-2) var(--splms-spacing-3);
+        color: var(--splms-gray-600);
+        font-size: var(--splms-font-size-sm);
+        background-color: var(--splms-gray-50);
+        border: 1px solid var(--splms-gray-200);
+        font-weight: var(--splms-font-weight-medium);
+
+        .components-spinner {
+            margin: 0;
+            width: var(--splms-spacing-4);
+            height: var(--splms-spacing-4);
+        }
+
+        span {
+            font-weight: var(--splms-font-weight-medium);
+        }
+    }
+
+    &__loading-more {
+        padding: 6px 10px;
+        font-size: var(--splms-font-size-xs);
+        background-color: transparent;
+        border: none;
+        margin-top: 4px;
+        color: var(--splms-gray-500);
+    }
+
+    // Error Message
+    &__error {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: var(--splms-spacing-2);
+        padding: var(--splms-spacing-2) var(--splms-spacing-3);
+        color: var(--splms-danger);
+        font-size: var(--splms-font-size-sm);
+        background-color: var(--splms-danger-light);
+        border: 1px solid #fee2e2;
+        font-weight: var(--splms-font-weight-medium);
+
+        &::before {
+            content: "⚠";
+            font-size: var(--splms-font-size-base);
+            line-height: var(--splms-line-height-none);
+            flex-shrink: 0;
+        }
+
+        span {
+            flex: 1;
+        }
+    }
+
+    // End of Results Message
+    &__end {
+        margin-top: var(--splms-spacing-2);
+        padding: 6px 12px;
+        color: var(--splms-gray-500);
+        font-size: var(--splms-font-size-xs);
+        font-style: italic;
+        text-align: center;
+        background-color: var(--splms-gray-50);
+    }
+
+    // Disabled State
+    &.is-disabled {
+        opacity: 0.7;
+        pointer-events: none;
+
+        .components-form-token-field__input-container {
+            background-color: var(--splms-gray-50);
+            border-color: var(--splms-gray-200);
+            cursor: not-allowed;
+        }
+    }
+
+    // Responsive Adjustments
+    @media (max-width: var(--splms-breakpoint-md)) {
+        .components-form-token-field__suggestions-list {
+            max-height: 200px;
+        }
+
+        &__loading,
+        &__loading-more,
+        &__error,
+        &__end {
+            font-size: var(--splms-font-size-xs);
+            padding: 6px 10px;
+        }
+    }
+}
+
+// Ensure tokens don't break layout
+.components-form-token-field__token {
+    word-break: break-word;
+    max-width: 100%;
+}
+
+// Improve focus visibility
+.components-form-token-field__input-container:focus-within {
+    .components-form-token-field__input {
+        color: var(--splms-gray-800);
+    }
+}

@@ -1,0 +1,130 @@
+/**
+ * SearchableSelect Component Styles
+ * Side-by-side dropdown and button layout
+ */
+
+.splms-searchable-select-wrapper {
+  // Field label
+  .splms-field-label {
+    margin-bottom: 6px;
+    font-weight: var(--splms-font-weight-medium);
+    color: #1e1e1e;
+    font-size: var(--splms-font-size-sm);
+  }
+  
+  // Main control row - dropdown and button side by side
+  .splms-control-row {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--splms-spacing-2);
+    
+    .splms-dropdown-container {
+      flex: 1;
+      min-width: 400px; // Allows flex item to shrink
+      
+      .components-combobox-control {
+        margin-bottom: 0;
+        
+        .components-base-control__label {
+          display: none; // Hide label since we show it above
+        }
+      }
+    }
+    
+    .splms-action-container {
+      flex-shrink: 0;
+      display: flex;
+      gap: var(--splms-spacing-2);
+
+      .splms-create-button,
+      .splms-view-button {
+        height: 36px; // Match ComboboxControl height
+        padding: 0 12px;
+        font-size: var(--splms-font-size-xs);
+        display: inline-flex;
+        align-items: center;
+        gap: var(--splms-spacing-1);
+        white-space: nowrap;
+
+        &:hover {
+          background-color: #f0f0f0;
+        }
+      }
+
+      .splms-create-button {
+        &.is-primary {
+          background-color: #0073aa;
+          color: white;
+          border-color: #0073aa;
+
+          &:hover:not(:disabled) {
+            background-color: #005a87;
+            border-color: #005a87;
+          }
+
+          &:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+  
+  // Help text
+  .splms-field-help {
+    margin-top: 6px;
+    color: var(--splms-gray-500);
+    font-size: var(--splms-font-size-xs);
+    line-height: var(--splms-line-height-snug);
+  }
+  
+  // Loading indicator
+  .splms-loading-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: var(--splms-spacing-2);
+    padding: 4px 8px;
+    background-color: #f8f9fa;
+    border-radius: var(--splms-border-radius-base);
+    color: var(--splms-gray-500);
+    font-size: var(--splms-font-size-xs);
+    
+    svg {
+      animation: spin 1s linear infinite;
+    }
+  }
+}
+
+// Spin animation for loading icon
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .splms-searchable-select-wrapper {
+    .splms-control-row {
+      flex-direction: column;
+      align-items: stretch;
+      
+      .splms-action-container {
+        margin-top: var(--splms-spacing-2);
+        flex-direction: column;
+        gap: var(--splms-spacing-2);
+
+        .splms-create-button,
+        .splms-view-button {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}

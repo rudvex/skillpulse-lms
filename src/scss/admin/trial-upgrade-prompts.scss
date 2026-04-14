@@ -1,0 +1,385 @@
+/**
+ * Trial Upgrade Prompts Styles
+ *
+ * Professional styling for upgrade prompt modals and related UI components.
+ *
+ * @since [SPLMS_VERSION]
+ */
+
+// Modal overlay and container
+.splms-upgrade-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    // Overlay background
+    .splms-upgrade-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(2px);
+    }
+
+    // Main modal content
+    .splms-upgrade-content {
+        position: relative;
+        background: var(--splms-white, #ffffff);
+        padding: 2.5rem;
+        border-radius: 12px;
+        max-width: 560px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        text-align: center;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        animation: modalSlideIn 0.3s ease-out;
+
+        // Modal animations
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+    }
+
+    // Icon styling
+    .splms-upgrade-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1.5rem;
+        background: linear-gradient(135deg, var(--splms-primary, #007cba), #0096dc);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+            font-size: 2.5rem;
+            color: var(--splms-white, #ffffff);
+        }
+    }
+
+    // Title styling
+    .splms-upgrade-title {
+        font-size: 1.75rem;
+        font-weight: var(--splms-font-weight-semibold, 600);
+        color: var(--splms-text-primary, #1a1a1a);
+        margin: 0 0 1rem 0;
+        line-height: 1.3;
+    }
+
+    // Message text
+    .splms-upgrade-message {
+        font-size: 1.1rem;
+        color: var(--splms-text-secondary, #666);
+        line-height: 1.6;
+        margin: 0 0 2rem 0;
+    }
+
+    // Usage statistics section
+    .splms-upgrade-stats {
+        background: var(--splms-gray-50, #f8f9fa);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 1.5rem 0;
+
+        h4 {
+            font-size: 1rem;
+            font-weight: var(--splms-font-weight-medium, 500);
+            color: var(--splms-text-primary, #1a1a1a);
+            margin: 0 0 1rem 0;
+        }
+
+        .splms-usage-overview {
+            text-align: left;
+
+            .splms-usage-bars {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .splms-usage-item {
+                .splms-usage-label {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 0.5rem;
+
+                    .feature-name {
+                        font-weight: var(--splms-font-weight-medium, 500);
+                        color: var(--splms-text-primary, #1a1a1a);
+                    }
+
+                    .usage-numbers {
+                        font-size: 0.9rem;
+                        color: var(--splms-text-muted, #999);
+                        font-family: monospace;
+                    }
+                }
+
+                .usage-bar {
+                    background: var(--splms-gray-200, #e0e0e0);
+                    height: 8px;
+                    border-radius: 4px;
+                    overflow: hidden;
+
+                    .usage-fill {
+                        height: 100%;
+                        background: linear-gradient(90deg, var(--splms-primary, #007cba), #0096dc);
+                        border-radius: 4px;
+                        transition: width 0.3s ease;
+                    }
+                }
+            }
+        }
+    }
+
+    // Benefits list
+    .splms-upgrade-benefits {
+        text-align: left;
+        margin: 2rem 0;
+
+        h4 {
+            font-size: 1.1rem;
+            font-weight: var(--splms-font-weight-medium, 500);
+            color: var(--splms-text-primary, #1a1a1a);
+            margin: 0 0 1rem 0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+                position: relative;
+                padding-left: 2rem;
+                margin-bottom: 0.75rem;
+                color: var(--splms-text-secondary, #666);
+                line-height: 1.5;
+
+                &:before {
+                    content: '✓';
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    background: var(--splms-success, #28a745);
+                    color: white;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 0.8rem;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    // Action buttons
+    .splms-upgrade-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin: 2rem 0 1rem 0;
+        flex-wrap: wrap;
+
+        .button {
+            min-width: 140px;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: var(--splms-font-weight-medium, 500);
+            transition: all 0.2s ease;
+
+            &.button-primary {
+                background: linear-gradient(135deg, var(--splms-primary, #007cba), #0096dc);
+                border-color: var(--splms-primary, #007cba);
+                box-shadow: 0 2px 8px rgba(0, 124, 186, 0.3);
+
+                &:hover {
+                    background: var(--splms-primary-dark, #005a8b);
+                    transform: translateY(-1px);
+                    box-shadow: 0 4px 12px rgba(0, 124, 186, 0.4);
+                }
+            }
+
+            &.button-secondary {
+                background: transparent;
+                color: var(--splms-text-muted, #666);
+                border: 1px solid var(--splms-gray-300, #ccc);
+
+                &:hover {
+                    background: var(--splms-gray-50, #f8f9fa);
+                    color: var(--splms-text-primary, #1a1a1a);
+                }
+            }
+        }
+    }
+
+    // Footer text
+    .splms-upgrade-footer {
+        margin-top: 1rem;
+
+        small {
+            color: var(--splms-text-muted, #999);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+    }
+}
+
+// Admin notice enhancements for trial notices
+.splms-trial-notice {
+    border-left: 4px solid var(--splms-primary, #007cba);
+    background: var(--splms-white, #ffffff);
+
+    .notice-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        p {
+            margin: 0;
+            flex: 1;
+        }
+
+        .button {
+            flex-shrink: 0;
+        }
+    }
+
+    .usage-summary {
+        font-size: 0.9em;
+        color: var(--splms-text-muted, #666);
+        margin-top: 0.5rem;
+        display: block;
+    }
+}
+
+// Body class when modal is open (prevents scrolling)
+.splms-modal-open {
+    overflow: hidden;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+    .splms-upgrade-modal {
+        .splms-upgrade-content {
+            padding: 2rem;
+            margin: 1rem;
+            max-width: calc(100vw - 2rem);
+        }
+
+        .splms-upgrade-title {
+            font-size: 1.5rem;
+        }
+
+        .splms-upgrade-actions {
+            flex-direction: column;
+            align-items: stretch;
+
+            .button {
+                min-width: auto;
+                width: 100%;
+            }
+        }
+
+        .splms-upgrade-benefits ul li {
+            padding-left: 1.5rem;
+
+            &:before {
+                width: 1.2rem;
+                height: 1.2rem;
+                font-size: 0.7rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .splms-upgrade-modal {
+        .splms-upgrade-content {
+            padding: 1.5rem;
+        }
+
+        .splms-upgrade-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+
+            i {
+                font-size: 2rem;
+            }
+        }
+
+        .splms-upgrade-title {
+            font-size: 1.3rem;
+        }
+
+        .splms-upgrade-message {
+            font-size: 1rem;
+        }
+    }
+}
+
+// Print styles (hide modals in print)
+@media print {
+    .splms-upgrade-modal {
+        display: none !important;
+    }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+    .splms-upgrade-modal {
+        .splms-upgrade-content {
+            border: 2px solid var(--splms-text-primary, #000);
+        }
+
+        .splms-upgrade-icon {
+            background: var(--splms-text-primary, #000);
+        }
+
+        .usage-fill {
+            background: var(--splms-text-primary, #000) !important;
+        }
+    }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+    .splms-upgrade-modal .splms-upgrade-content {
+        animation: none;
+    }
+
+    .usage-fill {
+        transition: none;
+    }
+
+    .button {
+        transition: none;
+
+        &:hover {
+            transform: none;
+        }
+    }
+}

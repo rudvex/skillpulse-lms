@@ -1,0 +1,385 @@
+/**
+ * SPLMS DetailView Component - Common Styles
+ *
+ * Centralized styles for the reusable DetailView component
+ * Used by: Enrollments, Quiz Attempts, Orders, etc.
+ */
+
+// ============================================================================
+// Detail View Container
+// ============================================================================
+.splms-detail-view {
+    background: var(--splms-white);
+}
+
+// ============================================================================
+// Detail Subtitle (below header, before tabs)
+// ============================================================================
+.splms-detail-subtitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background: var(--splms-white);
+    border-bottom: 1px solid var(--splms-gray-300);
+
+    .splms-subtitle-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        p {
+            margin: 0;
+            color: var(--splms-gray-500);
+            font-size: var(--splms-font-size-sm);
+        }
+
+        .splms-status-badge {
+            font-size: var(--splms-font-size-xs);
+            font-weight: var(--splms-font-weight-medium);
+            padding: 4px 8px;
+            border-radius: var(--splms-border-radius-xl);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid transparent;
+            white-space: nowrap;
+
+            &.splms-status-passed,
+            &.splms-status-completed,
+            &.splms-status-active {
+                background: var(--splms-success-light);
+                color: var(--splms-success-dark);
+                border-color: var(--splms-success-light);
+            }
+
+            &.splms-status-failed,
+            &.splms-status-cancelled {
+                background: var(--splms-danger-light);
+                color: var(--splms-danger-dark);
+                border-color: var(--splms-danger-light);
+            }
+
+            &.splms-status-pending,
+            &.splms-status-suspended {
+                background: var(--splms-white)3cd;
+                color: var(--splms-warning-dark);
+                border-color: var(--splms-warning-light);
+            }
+        }
+    }
+
+    .splms-detail-actions {
+        display: flex;
+        gap: var(--splms-spacing-2);
+        align-items: center;
+    }
+}
+
+// ============================================================================
+// Detail Body Layout (Main + Sidebar)
+// ============================================================================
+.splms-detail-body {
+    &.has-sidebar {
+        grid-template-columns: 1fr 320px;
+    }
+
+    .splms-detail-main {
+        min-width: 0; // Prevent grid overflow
+    }
+}
+
+// ============================================================================
+// Sidebar Meta Boxes
+// ============================================================================
+.splms-detail-sidebar {
+    .splms-detail-meta-box {
+        margin-bottom: var(--splms-spacing-4);
+        border: 1px solid var(--splms-gray-300);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .splms-meta-box-title {
+            padding: var(--splms-spacing-3) var(--splms-spacing-4);
+            background: var(--splms-gray-50);
+            border-bottom: 1px solid var(--splms-gray-300);
+
+            h3 {
+                margin: 0;
+                font-size: var(--splms-font-size-sm);
+                font-weight: var(--splms-font-weight-semibold);
+                color: var(--splms-gray-900);
+            }
+        }
+
+        .components-card__body {
+            padding: var(--splms-spacing-4);
+        }
+    }
+}
+
+// ============================================================================
+// Quick Actions (Sidebar)
+// ============================================================================
+.splms-quick-actions {
+    .quick-actions-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        .quick-action-item {
+            margin-bottom: 12px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            .quick-action-link,
+            .quick-action-button {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                width: 100%;
+                padding: 10px 12px;
+                background: none;
+                border: 1px solid var(--splms-gray-200);
+                border-radius: var(--splms-border-radius-base);
+                text-decoration: none;
+                font-size: var(--splms-font-size-sm);
+                font-weight: var(--splms-font-weight-medium);
+                cursor: pointer;
+                transition: var(--splms-transition-base);
+
+                &:hover {
+                    background: var(--splms-gray-50);
+                    border-color: var(--splms-info);
+                }
+
+                .quick-action-icon {
+                    flex-shrink: 0;
+                    width: 36px;
+                    height: 36px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(34, 113, 177, 0.08);
+                    border-radius: var(--splms-border-radius-md);
+                    transition: var(--splms-transition-base);
+                }
+
+                &:hover .quick-action-icon {
+                    background: rgba(34, 113, 177, 0.15);
+                }
+
+                .quick-action-label {
+                    flex: 1;
+                    text-align: left;
+                }
+
+                .external-icon {
+                    margin-left: auto;
+                    opacity: 0.6;
+                }
+
+                // Delete action styling
+                &.delete {
+                    color: var(--splms-danger);
+
+                    &:hover {
+                        border-color: var(--splms-danger);
+                    }
+
+                    .quick-action-icon {
+                        background: rgba(214, 54, 56, 0.08);
+                    }
+
+                    &:hover .quick-action-icon {
+                        background: rgba(214, 54, 56, 0.15);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ============================================================================
+// Info List (Sidebar)
+// ============================================================================
+.splms-info-list {
+    .splms-info-item {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--splms-gray-50);
+
+        &:first-child {
+            padding-top: 0;
+        }
+
+        &:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .splms-info-label {
+            display: flex;
+            align-items: center;
+            gap: var(--splms-spacing-2);
+            font-size: var(--splms-font-size-xs);
+            font-weight: var(--splms-font-weight-semibold);
+            color: var(--splms-gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+
+            .splms-icon {
+                opacity: 0.7;
+            }
+        }
+
+        .splms-info-value {
+            font-size: var(--splms-font-size-sm);
+            color: var(--splms-gray-900);
+            font-weight: var(--splms-font-weight-medium);
+            padding-left: 24px; // Align with label text after icon
+        }
+    }
+}
+
+// ============================================================================
+// Activity Log (Sidebar)
+// ============================================================================
+.splms-activity-log {
+    .activity-timeline {
+        position: relative;
+
+        // Vertical timeline line
+        &::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: rgba(195, 196, 199, 0.5);
+        }
+
+        .activity-item {
+            position: relative;
+            padding-left: 40px;
+            padding-bottom: 16px;
+
+            &:last-child {
+                padding-bottom: 0;
+            }
+
+            .activity-icon {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--splms-white);
+                border: 2px solid var(--splms-gray-300);
+                border-radius: 50%;
+                z-index: 1;
+            }
+
+            .activity-content {
+                .activity-title {
+                    font-size: var(--splms-font-size-sm);
+                    font-weight: var(--splms-font-weight-semibold);
+                    color: var(--splms-gray-900);
+                    margin-bottom: 4px;
+                }
+
+                .activity-description {
+                    font-size: var(--splms-font-size-xs);
+                    color: var(--splms-gray-500);
+                    margin-bottom: 4px;
+                }
+
+                .activity-time {
+                    font-size: var(--splms-font-size-xs);
+                    color: var(--splms-gray-400);
+                }
+            }
+        }
+    }
+
+    .activity-empty {
+        text-align: center;
+        padding: 20px;
+        color: var(--splms-gray-500);
+        font-size: var(--splms-font-size-sm);
+    }
+}
+
+// ============================================================================
+// Detail Sections / Tabs Content
+// ============================================================================
+.splms-detail-section {
+    .section-content {
+        // Common section content styles
+    }
+}
+
+// ============================================================================
+// Loading State
+// ============================================================================
+.splms-detail-loading {
+    text-align: center;
+    padding: 60px 20px;
+
+    p {
+        margin-top: 15px;
+        color: var(--splms-gray-500);
+    }
+}
+
+// ============================================================================
+// Responsive Design
+// ============================================================================
+@media screen and (max-width: 1024px) {
+    .splms-detail-body.has-sidebar {
+        grid-template-columns: 1fr 280px;
+    }
+}
+
+@media screen and (max-width: 782px) {
+    // Stack sidebar below main content on mobile
+    .splms-detail-body.has-sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .splms-detail-sidebar {
+        order: 2;
+    }
+
+    .splms-detail-main {
+        order: 1;
+    }
+
+    // Subtitle stacks vertically
+    .splms-detail-subtitle {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+
+        .splms-detail-actions {
+            width: 100%;
+            justify-content: flex-start;
+        }
+    }
+
+    // Reduce padding on mobile
+    .splms-detail-body {
+        padding: var(--splms-spacing-4);
+        gap: var(--splms-spacing-4);
+    }
+}

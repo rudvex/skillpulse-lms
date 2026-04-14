@@ -1,0 +1,343 @@
+/**
+ * SkillPulse LMS Core Variables
+ * Foundation variables shared across admin and frontend
+ * Colors, spacing, typography, and design tokens
+ */
+
+// ===================================
+// BRAND COLORS
+// ===================================
+// Primary accessible palette
+$splms-primary-50:  #e9ebf3 !default;
+$splms-primary-100: #b9c2db !default;
+$splms-primary-200: #98a4c9 !default;
+$splms-primary-300: #687bb1 !default;
+$splms-primary-400: #4b61a1 !default;
+$splms-primary-500: #1e3a8a !default; // Brand color
+$splms-primary-600: #1b357e !default;
+$splms-primary-700: #152962 !default;
+$splms-primary-800: #11204c !default;
+$splms-primary-900: #0d183a !default;
+
+
+$splms-primary: $splms-primary-500 !default;
+$splms-primary-hover: $splms-primary-600 !default;
+$splms-primary-dark: $splms-primary-700 !default;
+$splms-primary-light: $splms-primary-300 !default;
+
+$splms-secondary: #10B981 !default;
+$splms-secondary-hover: #059669 !default;
+$splms-secondary-dark: #047857 !default;
+$splms-secondary-light: #34D399 !default;
+
+// ===================================
+// SEMANTIC COLORS
+// ===================================
+$splms-success: #10B981 !default;
+$splms-success-hover: #059669 !default;
+$splms-success-light: #D1FAE5 !default;
+$splms-success-dark: #059669 !default;
+
+$splms-warning: #F59E0B !default;
+$splms-warning-hover: #D97706 !default;
+$splms-warning-light: #FEF3C7 !default;
+$splms-warning-dark: #D97706 !default;
+
+$splms-danger: #EF4444 !default;
+$splms-danger-hover: #DC2626 !default;
+$splms-danger-light: #FEE2E2 !default;
+$splms-danger-border: #FECACA !default;
+$splms-danger-dark: #B91C1C !default;
+
+$splms-info: #3B82F6 !default;
+$splms-info-hover: #2563EB !default;
+$splms-info-light: #DBEAFE !default;
+$splms-info-dark: #1E40AF !default;
+
+// ===================================
+// NEUTRAL COLORS
+// ===================================
+$splms-white: #FFFFFF !default;
+$splms-black: #000000 !default;
+
+// Gray palette
+$splms-gray-50: #F9FAFB !default;
+$splms-gray-100: #F3F4F6 !default;
+$splms-gray-200: #E5E7EB !default;
+$splms-gray-300: #D1D5DB !default;
+$splms-gray-400: #9CA3AF !default;
+$splms-gray-500: #6B7280 !default;
+$splms-gray-600: #4B5563 !default;
+$splms-gray-700: #374151 !default;
+$splms-gray-800: #1F2937 !default;
+$splms-gray-900: #111827 !default;
+
+// ===================================
+// TYPOGRAPHY
+// ===================================
+$splms-font-family-base: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !default;
+$splms-font-family-heading: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !default;
+$splms-font-family-mono: 'SF Mono', Monaco, Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace !default;
+
+// Font weights
+$splms-font-weight-thin: 100 !default;
+$splms-font-weight-light: 300 !default;
+$splms-font-weight-normal: 400 !default;
+$splms-font-weight-medium: 500 !default;
+$splms-font-weight-semibold: 600 !default;
+$splms-font-weight-bold: 700 !default;
+$splms-font-weight-extrabold: 800 !default;
+$splms-font-weight-black: 900 !default;
+
+// Font sizes
+$splms-font-size-xs: 0.75rem !default; // 12px
+$splms-font-size-sm: 0.875rem !default; // 14px
+$splms-font-size-base: 1rem !default; // 16px
+$splms-font-size-lg: 1.125rem !default; // 18px
+$splms-font-size-xl: 1.25rem !default; // 20px
+$splms-font-size-2xl: 1.5rem !default; // 24px
+$splms-font-size-3xl: 1.875rem !default; // 30px
+$splms-font-size-4xl: 2.25rem !default; // 36px
+$splms-font-size-5xl: 3rem !default; // 48px
+$splms-font-size-6xl: 3.75rem !default; // 60px
+
+// Line heights
+$splms-line-height-none: 1 !default;
+$splms-line-height-tight: 1.25 !default;
+$splms-line-height-snug: 1.375 !default;
+$splms-line-height-normal: 1.5 !default;
+$splms-line-height-relaxed: 1.625 !default;
+$splms-line-height-loose: 2 !default;
+
+// ===================================
+// SPACING
+// ===================================
+$splms-spacing-0: 0 !default;
+$splms-spacing-1: 0.25rem !default; // 4px
+$splms-spacing-2: 0.5rem !default; // 8px
+$splms-spacing-3: 0.75rem !default; // 12px
+$splms-spacing-4: 1rem !default; // 16px
+$splms-spacing-5: 1.25rem !default; // 20px
+$splms-spacing-6: 1.5rem !default; // 24px
+$splms-spacing-8: 2rem !default; // 32px
+$splms-spacing-10: 2.5rem !default; // 40px
+$splms-spacing-12: 3rem !default; // 48px
+$splms-spacing-16: 4rem !default; // 64px
+$splms-spacing-20: 5rem !default; // 80px
+$splms-spacing-24: 6rem !default; // 96px
+$splms-spacing-32: 8rem !default; // 128px
+
+// ===================================
+// BORDER RADIUS
+// ===================================
+$splms-border-radius-none: 0 !default;
+$splms-border-radius-sm: 0.125rem !default; // 2px
+$splms-border-radius-base: 0.25rem !default; // 4px
+$splms-border-radius-md: 0.375rem !default; // 6px
+$splms-border-radius-lg: 0.5rem !default; // 8px
+$splms-border-radius-xl: 0.75rem !default; // 12px
+$splms-border-radius-2xl: 1rem !default; // 16px
+$splms-border-radius-xxl: 1.25rem !default; // 20px
+$splms-border-radius-3xl: 1.5rem !default; // 24px
+$splms-border-radius-full: 9999px !default;
+
+// ===================================
+// SHADOWS
+// ===================================
+$splms-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !default;
+$splms-shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !default;
+$splms-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !default;
+$splms-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !default;
+$splms-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !default;
+$splms-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !default;
+$splms-shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06) !default;
+
+// ===================================
+// TRANSITIONS
+// ===================================
+$splms-transition-fast: 150ms ease !default;
+$splms-transition-base: 250ms ease !default;
+$splms-transition-slow: 350ms ease !default;
+
+// ===================================
+// Z-INDEX STACK
+// ===================================
+$splms-z-index-dropdown: 1000 !default;
+$splms-z-index-sticky: 1020 !default;
+$splms-z-index-fixed: 1030 !default;
+$splms-z-index-modal-backdrop: 1040 !default;
+$splms-z-index-modal: 1050 !default;
+$splms-z-index-popover: 1060 !default;
+$splms-z-index-tooltip: 1070 !default;
+$splms-z-index-toast: 1080 !default;
+
+// ===================================
+// BREAKPOINTS
+// ===================================
+$splms-breakpoint-sm: 640px !default;
+$splms-breakpoint-md: 768px !default;
+$splms-breakpoint-lg: 1024px !default;
+$splms-breakpoint-xl: 1280px !default;
+$splms-breakpoint-2xl: 1536px !default;
+
+// ===================================
+// COMPONENT SIZES
+// ===================================
+$splms-container-max-width: 1200px !default;
+$splms-container-padding: 1rem !default;
+
+// Form elements
+$splms-input-height-sm: 2rem !default;
+$splms-input-height-base: 2.5rem !default;
+$splms-input-height-lg: 3rem !default;
+
+$splms-button-height-sm: 2rem !default;
+$splms-button-height-base: 2.5rem !default;
+$splms-button-height-lg: 3rem !default;
+
+// ===================================
+// ADMIN COLORS
+// ===================================
+// WordPress admin integration
+$splms-admin-bar-height: 32px !default;
+$splms-admin-menu-width: 160px !default;
+
+// Admin-specific colors
+$splms-admin-bg: #f1f1f1 !default;
+$splms-admin-content-bg: #ffffff !default;
+$splms-admin-border: var(--splms-gray-300) !default;
+$splms-admin-text: #23282d !default;
+$splms-admin-text-muted: var(--splms-gray-500) !default;
+
+// WordPress admin color scheme integration
+$splms-wp-admin-blue: #0073aa !default;
+$splms-wp-admin-blue-hover: #005a87 !default;
+$splms-wp-admin-green: #46b450 !default;
+$splms-wp-admin-red: #dc3232 !default;
+
+// ===================================
+// ADMIN LAYOUT
+// ===================================
+$splms-admin-header-height: 60px !default;
+$splms-admin-sidebar-width: 260px !default;
+$splms-admin-content-padding: 20px !default;
+
+// Admin container widths
+$splms-admin-container-sm: 600px !default;
+$splms-admin-container-md: 900px !default;
+$splms-admin-container-lg: 1200px !default;
+
+// ===================================
+// ADMIN COMPONENTS
+// ===================================
+// Metabox styling
+$splms-metabox-border: #e5e5e5 !default;
+$splms-metabox-bg: #fff !default;
+$splms-metabox-header-bg: #f1f1f1 !default;
+
+// Admin table styling
+$splms-admin-table-border: var(--splms-gray-300) !default;
+$splms-admin-table-header-bg: #f1f1f1 !default;
+$splms-admin-table-hover-bg: #f9f9f9 !default;
+
+// Admin form styling
+$splms-admin-input-border: var(--splms-gray-300) !default;
+$splms-admin-input-focus-border: #5b9dd9 !default;
+$splms-admin-input-bg: #fff !default;
+
+// ===================================
+// FRONTEND LAYOUT
+// ===================================
+$splms-header-height: 70px !default;
+$splms-footer-height: 200px !default;
+$splms-sidebar-width: 300px !default;
+
+// Course layout
+$splms-course-sidebar-width: 350px !default;
+$splms-lesson-content-max-width: 800px !default;
+
+// Dashboard layout
+$splms-dashboard-sidebar-width: 260px !default;
+$splms-dashboard-content-padding: 30px !default;
+
+// ===================================
+// FRONTEND SPECIFIC COLORS
+// ===================================
+// Surface colors
+$splms-surface: $splms-white !default;
+$splms-surface-secondary: $splms-gray-50 !default;
+$splms-surface-tertiary: $splms-gray-100 !default;
+
+// Background colors
+$splms-bg: $splms-gray-50 !default;
+$splms-bg-secondary: $splms-white !default;
+
+// Text colors
+$splms-text-primary: $splms-gray-900 !default;
+$splms-text-secondary: $splms-gray-600 !default;
+$splms-text-muted: $splms-gray-500 !default;
+$splms-text-subtle: $splms-gray-400 !default;
+
+// Border colors
+$splms-border-primary: $splms-gray-200 !default;
+$splms-border-secondary: $splms-gray-300 !default;
+
+// ===================================
+// LEARNING INTERFACE COLORS
+// ===================================
+// Progress indicators
+$splms-progress-bg: $splms-gray-200 !default;
+$splms-progress-fill: $splms-primary !default;
+$splms-progress-complete: $splms-success !default;
+
+// Course status colors
+$splms-status-draft: $splms-gray-400 !default;
+$splms-status-published: $splms-success !default;
+$splms-status-featured: $splms-warning !default;
+$splms-status-archived: $splms-gray-500 !default;
+
+// Difficulty levels
+$splms-difficulty-beginner: $splms-success !default;
+$splms-difficulty-intermediate: $splms-warning !default;
+$splms-difficulty-advanced: $splms-danger !default;
+
+// ===================================
+// PRICING COLORS
+// ===================================
+$splms-price-free: $splms-success !default;
+$splms-price-paid: $splms-primary !default;
+$splms-price-sale: $splms-danger !default;
+$splms-price-currency: $splms-gray-600 !default;
+
+// ===================================
+// INTERACTIVE ELEMENTS
+// ===================================
+// Button variants
+$splms-btn-primary-bg: $splms-primary !default;
+$splms-btn-primary-color: $splms-white !default;
+$splms-btn-primary-hover: $splms-primary-hover !default;
+
+$splms-btn-secondary-bg: $splms-gray-100 !default;
+$splms-btn-secondary-color: $splms-gray-700 !default;
+$splms-btn-secondary-hover: $splms-gray-200 !default;
+
+$splms-btn-outline-bg: transparent !default;
+$splms-btn-outline-color: $splms-primary !default;
+$splms-btn-outline-border: $splms-primary !default;
+$splms-btn-outline-hover-bg: $splms-primary !default;
+$splms-btn-outline-hover-color: $splms-white !default;
+
+// Link colors
+$splms-link-color: $splms-primary !default;
+$splms-link-hover-color: $splms-primary-hover !default;
+$splms-link-visited-color: $splms-primary-dark !default;
+
+// ===================================
+// NOTE: CSS CUSTOM PROPERTIES
+// ===================================
+// CSS custom properties are now managed via mixins in:
+// _custom-properties.scss
+//
+// Use @include core-custom-properties; in your :root blocks
+// Use @include admin-custom-properties; for admin-specific properties
+// Use @include frontend-custom-properties; for frontend-specific properties

@@ -1,0 +1,11 @@
+@use "../base/_variables" as *;
+@use "./_mixins" as mixins;
+
+.skillpulse-lms-user-admin {
+  .splms-card { @include mixins.splms-card(16px); }
+  .splms-card-header { padding: var(--splms-spacing-3) var(--splms-spacing-4); border-bottom: 1px solid var(--splms-gray-200); }
+  .splms-card-body { padding: var(--splms-spacing-4); }
+  .splms-card-footer { padding: var(--splms-spacing-3) var(--splms-spacing-4); border-top: 1px solid var(--splms-gray-200); }
+}
+
+

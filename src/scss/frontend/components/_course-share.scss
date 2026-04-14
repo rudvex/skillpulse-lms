@@ -1,0 +1,146 @@
+/**
+ * Course Share Component
+ *
+ * Styles for course completion sharing functionality.
+ */
+
+.splms-course-share {
+	margin-top: 1.5rem;
+	padding: 1.5rem;
+	background: var(--splms-gray-50);
+	border-radius: var(--splms-border-radius-lg);
+	border: 1px solid var(--splms-border-primary);
+
+	&__title {
+		margin: 0 0 0.5rem 0;
+		font-size: 1.125rem;
+		font-weight: var(--splms-font-weight-semibold);
+		color: var(--splms-text-primary);
+	}
+
+	&__description {
+		margin: 0 0 1rem 0;
+		font-size: 0.875rem;
+		color: var(--splms-text-secondary);
+	}
+
+	&__buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+
+	&__message {
+		margin-top: 0.75rem;
+		padding: 0.5rem;
+		background: var(--splms-success-light);
+		color: var(--splms-success-dark);
+		border-radius: var(--splms-border-radius-base);
+		font-size: 0.875rem;
+		text-align: center;
+	}
+}
+
+.splms-share-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.625rem 1rem;
+	border: 1px solid var(--splms-border-primary);
+	border-radius: var(--splms-border-radius-md);
+	background: var(--splms-white);
+	color: var(--splms-text-secondary);
+	text-decoration: none;
+	font-size: 0.875rem;
+	font-weight: var(--splms-font-weight-medium);
+	cursor: pointer;
+	transition: var(--splms-transition-base);
+
+	&:hover {
+		background: var(--splms-gray-50);
+		border-color: var(--splms-border-secondary);
+		transform: translateY(-1px);
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+
+	&:active {
+		transform: translateY(0);
+	}
+
+	svg {
+		flex-shrink: 0;
+		width: 18px;
+		height: 18px;
+	}
+
+	span {
+		white-space: nowrap;
+	}
+
+	&--facebook {
+		color: var(--splms-info);
+		border-color: var(--splms-info);
+
+		&:hover {
+			background: var(--splms-info);
+			color: var(--splms-white);
+		}
+	}
+
+	&--twitter {
+		color: var(--splms-info);
+		border-color: var(--splms-info);
+
+		&:hover {
+			background: var(--splms-info);
+			color: var(--splms-white);
+		}
+	}
+
+	&--linkedin {
+		color: var(--splms-info);
+		border-color: var(--splms-info);
+
+		&:hover {
+			background: var(--splms-info);
+			color: var(--splms-white);
+		}
+	}
+
+	&--whatsapp {
+		color: var(--splms-success);
+		border-color: var(--splms-success);
+
+		&:hover {
+			background: var(--splms-success);
+			color: var(--splms-white);
+		}
+	}
+
+	&--copy {
+		color: var(--splms-text-muted);
+		border-color: var(--splms-text-muted);
+
+		&:hover {
+			background: var(--splms-text-muted);
+			color: var(--splms-white);
+		}
+	}
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+	.splms-course-share {
+		padding: 1rem;
+
+		&__buttons {
+			flex-direction: column;
+		}
+
+		.splms-share-btn {
+			width: 100%;
+			justify-content: center;
+		}
+	}
+}
+

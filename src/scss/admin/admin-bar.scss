@@ -1,0 +1,79 @@
+/**
+ * SkillPulse LMS Admin Bar Styles
+ *
+ * Styles for the WordPress admin bar customizations
+ * Based on SkillPulse LMS admin-bar.css structure
+ *
+ * @package SkillPulse_LMS\Admin
+ * @since 1.0.0
+ */
+
+// Main account menu styling
+#wpadminbar {
+	.splms-my-account-with-avatar {
+		.ab-item {
+			display: flex;
+			align-items: center;
+		}
+		
+		img {
+			margin-left: 6px;
+			border-radius: 50%;
+		}
+	}
+
+	// Submenu container
+	#wp-admin-bar-my-account .ab-submenu {
+		min-width: 240px;
+	}
+
+	// SkillPulse specific menu items
+	#wp-admin-bar-splms-my-courses {
+		.ab-item {
+			padding: var(--splms-spacing-2) var(--splms-spacing-3);
+			font-size: var(--splms-font-size-sm);
+			color: var(--splms-gray-50);
+		}
+	}
+
+}
+
+// Course count styling - similar to
+#wpadminbar .quicklinks {
+	li#wp-admin-bar-my-account a span.splms-count,
+	li#wp-admin-bar-my-account-with-avatar a span.splms-count {
+		background: var(--splms-info);
+		color: var(--splms-white);
+		text-shadow: none;
+		display: inline;
+		padding: 2px 5px;
+		font-size: var(--splms-font-size-xs);
+		font-weight: var(--splms-font-weight-bold);
+		border-radius: 10px;
+		margin-left: 6px;
+	}
+}
+
+#wpadminbar .splms-count {
+	background: var(--splms-info);
+	color: var(--splms-white);
+	text-shadow: none;
+	display: inline;
+	padding: 2px 5px;
+	font-size: var(--splms-font-size-xs);
+	font-weight: var(--splms-font-weight-bold);
+	border-radius: 10px;
+	margin-left: 6px;
+}
+
+// Remove additional arrows from appearing on SkillPulse admin bar menu
+// on large screens. Add back arrows for screen widths 600px and lower.
+#wpadminbar .wp-admin-bar-arrow-right {
+	display: none;
+}
+
+@media screen and (max-width: 600px) {
+	#wpadminbar .wp-admin-bar-arrow-right {
+		display: block;
+	}
+}

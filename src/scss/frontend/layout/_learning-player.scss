@@ -1,0 +1,94 @@
+@use "../base/variables" as *;
+
+/**
+ * Shared Learning Player Layout
+ * Used by both Lesson and Quiz pages
+ * 
+ * Provides consistent sidebar + content layout with theme-independent styling
+ */
+
+// Main player container
+.splms-learning-player,
+.splms-learning-player.splms-lesson-container,
+.splms-learning-player.splms-quiz-container {
+  width: 100%;
+  min-height: 100vh;
+ background: var(--splms-white);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+// Layout wrapper for sidebar + content
+.splms-learning-layout,
+.splms-learning-layout.splms-lesson-main,
+.splms-learning-layout.splms-quiz-main {
+  display: flex;
+  flex: 1;
+  min-height: calc(100vh - 120px); // Adjust based on hero height
+  width: 100%;
+}
+
+// Sidebar (left, fixed width)
+.splms-learning-sidebar,
+.splms-lesson-sidebar,
+.splms-quiz-sidebar {
+  width: 320px;
+  background: var(--splms-gray-50);
+  border-right: 1px solid var(--splms-gray-200);
+  overflow-y: auto;
+  flex-shrink: 0;
+  min-height: calc(100vh - 120px);
+}
+
+// Content area (takes remaining width)
+.splms-learning-content,
+.splms-lesson-content,
+.splms-quiz-content {
+  flex: 1;
+ background: var(--splms-white);
+  overflow-x: hidden;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 2px 8px;
+}
+
+// Responsive Design
+@media (max-width: var(--splms-breakpoint-md)) {
+  .splms-learning-layout,
+  .splms-learning-layout.splms-lesson-main,
+  .splms-learning-layout.splms-quiz-main {
+    flex-direction: column;
+  }
+  
+  .splms-learning-sidebar,
+  .splms-lesson-sidebar,
+  .splms-quiz-sidebar {
+    width: 100%;
+    min-height: auto;
+    max-height: 40vh;
+    order: 2;
+    border-right: none;
+    border-top: 1px solid var(--splms-gray-200);
+  }
+  
+  .splms-learning-content,
+  .splms-lesson-content,
+  .splms-quiz-content {
+    order: 1;
+    min-height: 60vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .splms-learning-sidebar,
+  .splms-lesson-sidebar,
+  .splms-quiz-sidebar {
+    max-height: 30vh;
+  }
+  
+  .splms-learning-content,
+  .splms-lesson-content,
+  .splms-quiz-content {
+    min-height: 70vh;
+  }
+}

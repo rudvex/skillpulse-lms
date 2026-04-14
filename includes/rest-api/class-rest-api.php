@@ -166,7 +166,7 @@ class SkillPulse_LMS_Rest_API {
 	 * @return void
 	 */
 	protected function setup_filters() {
-		// Setup trial API limits (since 1.0.1).
+		// Setup trial API limits (since [SPLMS_VERSION]).
 		add_filter( 'rest_pre_dispatch', array( $this, 'check_trial_api_limits' ), 10, 3 );
 		add_action( 'rest_after_insert_splms_course', array( $this, 'track_api_usage' ), 10, 3 );
 		add_action( 'rest_after_insert_splms_lesson', array( $this, 'track_api_usage' ), 10, 3 );
@@ -179,7 +179,7 @@ class SkillPulse_LMS_Rest_API {
 	 *
 	 * Prevents API requests when trial limit is exceeded and returns 429 status.
 	 *
-	 * @since 1.0.1
+	 * @since [SPLMS_VERSION]
 	 *
 	 * @param mixed           $result  Response to replace the requested version with.
 	 * @param WP_REST_Server  $server  Server instance.
@@ -216,7 +216,7 @@ class SkillPulse_LMS_Rest_API {
 			/**
 			 * Fire action to track API usage.
 			 *
-			 * @since 1.0.1
+			 * @since [SPLMS_VERSION]
 			 *
 			 * @param string $route   API route being accessed.
 			 * @param array  $args    Request arguments.
@@ -232,7 +232,7 @@ class SkillPulse_LMS_Rest_API {
 	 *
 	 * Tracks usage for data modification endpoints during trial period.
 	 *
-	 * @since 1.0.1
+	 * @since [SPLMS_VERSION]
 	 *
 	 * @param WP_Post         $post     Inserted or updated post object.
 	 * @param WP_REST_Request $request  Request object.
@@ -261,7 +261,7 @@ class SkillPulse_LMS_Rest_API {
 	 *
 	 * Provides clients with information about API limits and remaining calls.
 	 *
-	 * @since 1.0.1
+	 * @since [SPLMS_VERSION]
 	 *
 	 * @param WP_HTTP_Response $response Result to send to the client.
 	 * @param WP_REST_Server   $server   Server instance.
@@ -303,7 +303,7 @@ class SkillPulse_LMS_Rest_API {
 	 *
 	 * Essential endpoints are never blocked during trial period.
 	 *
-	 * @since 1.0.1
+	 * @since [SPLMS_VERSION]
 	 *
 	 * @param string $route API route path.
 	 * @return bool True if essential endpoint.
@@ -319,7 +319,7 @@ class SkillPulse_LMS_Rest_API {
 		/**
 		 * Filter essential API endpoints that bypass trial limits.
 		 *
-		 * @since 1.0.1
+		 * @since [SPLMS_VERSION]
 		 *
 		 * @param array $essential_patterns Array of essential endpoint patterns.
 		 */

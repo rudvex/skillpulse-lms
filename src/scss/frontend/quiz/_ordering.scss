@@ -1,0 +1,287 @@
+/**
+ * Ordering Question Styles
+ *
+ * Styles for drag-and-drop ordering questions.
+ *
+ * @package SkillPulse_LMS
+ * @version 1.0.0
+ */
+
+.splms-ordering-container {
+	margin: var(--splms-spacing-4) 0;
+
+	.splms-ordering-instruction {
+		font-size: var(--splms-font-sm);
+		color: var(--splms-gray-600);
+		margin-bottom: var(--splms-spacing-4);
+		padding: var(--splms-spacing-3) var(--splms-spacing-4);
+		background-color: var(--splms-gray-50);
+		border-left: 3px solid var(--splms-primary);
+		border-radius: var(--splms-border-radius-base);
+	}
+
+	.splms-ordering-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.splms-ordering-item {
+		display: flex;
+		align-items: center;
+		gap: var(--splms-spacing-3);
+		padding: var(--splms-spacing-4);
+		margin-bottom: var(--splms-spacing-3);
+		background-color: var(--splms-white);
+		border: 2px solid var(--splms-gray-200);
+		border-radius: var(--splms-border-radius-lg);
+		cursor: move;
+		transition: all var(--splms-transition-base);
+		position: relative;
+
+		&:hover {
+			border-color: var(--splms-primary);
+			background-color: rgba(59, 130, 246, 0.05);
+			transform: translateY(-2px);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+
+		&.ui-sortable-helper {
+			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+			transform: scale(1.02);
+			border-color: var(--splms-primary);
+			background-color: white;
+			z-index: var(--splms-z-index-dropdown);
+		}
+
+		&.ui-sortable-placeholder {
+			background-color: rgba(59, 130, 246, 0.1);
+			border: 2px dashed var(--splms-primary);
+			visibility: visible !important;
+		}
+
+		.splms-ordering-position {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 32px;
+			height: 32px;
+			flex-shrink: 0;
+			background-color: var(--splms-primary);
+			color: white;
+			font-size: var(--splms-font-sm);
+			font-weight: var(--splms-font-weight-bold);
+			border-radius: var(--splms-border-radius-md);
+		}
+
+		.splms-ordering-handle {
+			flex-shrink: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: var(--splms-gray-400);
+			cursor: grab;
+			padding: var(--splms-spacing-1);
+			transition: color var(--splms-transition-base);
+
+			&:active {
+				cursor: grabbing;
+			}
+
+			svg {
+				width: 20px;
+				height: 20px;
+			}
+		}
+
+		&:hover .splms-ordering-handle {
+			color: var(--splms-primary);
+		}
+
+		.splms-ordering-text {
+			flex: 1;
+			font-size: var(--splms-font-base);
+			color: var(--splms-gray-800);
+			line-height: var(--splms-line-height-normal);
+			font-weight: var(--splms-font-weight-medium);
+		}
+
+		.splms-ordering-arrow {
+			flex-shrink: 0;
+			font-size: var(--splms-font-size-lg);
+			color: var(--splms-gray-300);
+			margin-left: auto;
+		}
+	}
+}
+
+// Review mode (results).
+.splms-ordering-review-mode {
+	.splms-ordering-item {
+		cursor: default;
+
+		&:hover {
+			transform: none;
+			box-shadow: none;
+		}
+
+		.splms-ordering-handle {
+			cursor: default;
+			opacity: 0.3;
+		}
+	}
+
+	.splms-ordering-item.correct {
+		border-color: var(--splms-success);
+		background-color: rgba(16, 185, 129, 0.05);
+
+		.splms-ordering-position {
+			background-color: var(--splms-success);
+		}
+	}
+
+	.splms-ordering-item.incorrect {
+		border-color: var(--splms-error);
+		background-color: rgba(239, 68, 68, 0.05);
+
+		.splms-ordering-position {
+			background-color: var(--splms-error);
+		}
+	}
+}
+
+// Mobile interaction styles
+.splms-ordering-item {
+	&.splms-ordering-dragging {
+		opacity: 0.8;
+		transform: scale(1.05);
+		z-index: var(--splms-z-index-dropdown);
+		border-color: var(--splms-primary);
+		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+	}
+
+	&.splms-ordering-touch-dragging {
+		opacity: 0.7;
+		transform: scale(0.95) rotate(2deg);
+		z-index: var(--splms-z-index-dropdown);
+	}
+
+	&.splms-ordering-touch-over,
+	&.splms-ordering-drag-over {
+		border-color: var(--splms-primary);
+		background-color: rgba(59, 130, 246, 0.1);
+		transform: translateY(-2px);
+		animation: pulse-border 0.8s ease-in-out infinite alternate;
+	}
+
+	&.splms-ordering-selected {
+		border-color: var(--splms-primary);
+		background-color: rgba(59, 130, 246, 0.15);
+		transform: scale(1.02);
+		box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+
+		.splms-ordering-position {
+			background-color: var(--splms-primary-dark) ;
+		}
+	}
+}
+
+.splms-ordering-reordered {
+	transition: all 0.3s ease-out;
+}
+
+@keyframes pulse-border {
+	from { border-color: var(--splms-primary); }
+	to { border-color: var(--splms-primary-dark) ; }
+}
+
+// Mobile instruction
+.splms-mobile-instruction {
+	padding: var(--splms-spacing-4);
+	background: var(--splms-primary-light);
+	border: 2px solid var(--splms-primary);
+	border-radius: var(--splms-border-radius-lg);
+	color: var(--splms-primary-dark) ;
+	font-size: 0.875rem;
+	font-weight: var(--splms-font-weight-medium);
+	text-align: center;
+	margin-bottom: var(--splms-spacing-4);
+	display: none;
+	animation: slideInFromTop 0.3s ease-out;
+}
+
+@keyframes slideInFromTop {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+// Mobile responsive adjustments
+@media (max-width: 768px) {
+	.splms-ordering-container {
+		.splms-ordering-instruction {
+			font-size: 0.85rem;
+			padding: var(--splms-spacing-3);
+		}
+	}
+
+	.splms-ordering-item {
+		padding: var(--splms-spacing-3);
+		gap: var(--splms-spacing-2);
+		min-height: 56px; // Better touch target
+
+		&:active {
+			transform: scale(0.98);
+		}
+
+		.splms-ordering-position {
+			width: 28px;
+			height: 28px;
+			font-size: 0.75rem;
+		}
+
+		.splms-ordering-text {
+			font-size: 0.9rem;
+		}
+
+		.splms-ordering-handle {
+			padding: 6px;
+
+			svg {
+				width: 18px;
+				height: 18px;
+			}
+		}
+	}
+}
+
+@media (max-width: 640px) {
+	.splms-ordering-item {
+		padding: var(--splms-spacing-2);
+		min-height: 52px;
+
+		.splms-ordering-position {
+			width: 24px;
+			height: 24px;
+			font-size: 0.7rem;
+		}
+
+		.splms-ordering-text {
+			font-size: 0.85rem;
+		}
+
+		.splms-ordering-handle {
+			padding: var(--splms-spacing-1);
+
+			svg {
+				width: var(--splms-spacing-4);
+				height: var(--splms-spacing-4);
+			}
+		}
+	}
+}

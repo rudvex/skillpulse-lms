@@ -1,0 +1,122 @@
+@use "../base/variables" as *;
+@use "sass:color";
+
+.splms-wishlist-btn {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--splms-gray-300);
+	background: var(--splms-white);
+	color: var(--splms-gray-700);
+	border-radius: var(--splms-border-radius-base);
+	font-size: 0.875rem;
+	font-weight: var(--splms-font-weight-medium);
+	cursor: pointer;
+	transition: var(--splms-transition-base);
+
+	&:hover {
+		background: var(--splms-gray-50);
+		border-color: var(--splms-gray-400);
+		color: var(--splms-gray-900);
+	}
+
+	&.loading {
+		opacity: 0.6;
+		cursor: not-allowed;
+		pointer-events: none;
+	}
+
+	&.in-wishlist,
+	&.active {
+		background: var(--splms-primary);
+		border-color: var(--splms-primary);
+		color: var(--splms-white);
+
+		&:hover {
+			background: var(--splms-primary-hover);
+			border-color: var(--splms-primary-hover);
+		}
+	}
+
+	svg {
+		width: 18px;
+		height: 18px;
+		fill: currentColor;
+	}
+}
+
+// Wishlist Grid (Dashboard)
+.splms-cards-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 1.5rem;
+	margin-top: 2rem;
+
+	@media (max-width: 768px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+.splms-card {
+	background: var(--splms-white);
+	border: 1px solid var(--splms-gray-200);
+	border-radius: var(--splms-border-radius-base);
+	overflow: hidden;
+	transition: var(--splms-transition-base);
+	display: flex;
+	flex-direction: column;
+
+	&:hover {
+		box-shadow: var(--splms-shadow-md);
+		transform: translateY(-2px);
+	}
+
+	.splms-card-thumb {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 16/9;
+		overflow: hidden;
+		background: var(--splms-gray-100);
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.splms-card-body {
+		padding: 1.5rem;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.splms-card-title {
+		margin: 0 0 1rem 0;
+		font-size: 1.125rem;
+		font-weight: var(--splms-font-weight-semibold);
+		line-height: var(--splms-line-height-snug);
+
+		a {
+			color: var(--splms-gray-900);
+			text-decoration: none;
+			transition: var(--splms-transition-base);
+
+			&:hover {
+				color: var(--splms-primary);
+			}
+		}
+	}
+
+	.splms-card-actions {
+		display: flex;
+		gap: 0.75rem;
+		margin-top: auto;
+		padding-top: 1rem;
+		border-top: 1px solid var(--splms-gray-100);
+	}
+}
+

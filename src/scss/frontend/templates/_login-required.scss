@@ -1,0 +1,121 @@
+/**
+ * Login Required Template Styles
+ * Modern, styled template that matches the SkillPulse LMS dashboard design
+ */
+
+.splms-login-required-wrapper {
+    margin: 0 auto;
+
+  .splms-login-required-card {
+    background: var(--splms-white);
+    padding: 3rem 2rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .splms-login-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+
+    svg,
+    i {
+      font-size: 2rem;
+    }
+  }
+
+  .splms-login-required-card {
+    h2 {
+      font-size: 1.8rem;
+      font-weight: var(--splms-font-weight-semibold);
+      color: var(--splms-text-primary);
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+
+    p {
+      font-size: 1rem;
+      color: var(--splms-text-secondary);
+      margin-bottom: 2rem;
+      line-height: var(--splms-line-height-relaxed);
+    }
+  }
+
+  .splms-login-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .splms-features-preview {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--splms-border-primary);
+
+    h3 {
+      font-size: 1.1rem;
+      color: var(--splms-gray-700);
+      margin-bottom: 1rem;
+      font-weight: var(--splms-font-weight-semibold);
+    }
+  }
+
+  .splms-features-list {
+    display: grid;
+    justify-content: center;
+  }
+
+  .splms-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+  }
+
+  .splms-feature-icon {
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, var(--splms-info) 0%, var(--splms-info-dark) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    svg,
+    i {
+      font-size: 0.75rem;
+      color: var(--splms-white);
+    }
+  }
+
+  .splms-feature-text {
+    font-size: 0.9rem;
+    color: var(--splms-text-muted);
+    font-weight: var(--splms-font-weight-medium);
+  }
+
+
+  // Responsive design
+  @media (max-width: 640px) {
+    .splms-login-required-card {
+      padding: 2rem 1.5rem;
+    }
+
+    .splms-login-actions {
+      flex-direction: column;
+      align-items: stretch;
+
+      .splms-btn {
+        width: 100%;
+      }
+    }
+  }
+}
+

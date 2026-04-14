@@ -1,0 +1,124 @@
+@use "../base/variables" as *;
+
+.splms-btn,
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--splms-spacing-2);
+  padding: var(--splms-spacing-3) var(--splms-spacing-4);
+  border-radius: var(--splms-border-radius-lg);
+  text-decoration: none;
+  font-weight: var(--splms-font-weight-medium);
+  font-size: var(--splms-font-size-sm);
+  transition: all 0.3s ease-in-out;
+
+  // Primary Button
+  &-primary {
+    background-color: var(--splms-primary);
+    color: var(--splms-white);
+    border: 1px solid var(--splms-primary);
+
+    &:hover {
+      text-decoration: none;
+      color: var(--splms-primary);
+      background: var(--splms-white);
+    }
+  }
+
+  // Secondary Button
+  &-secondary {
+    background-color: var(--splms-gray-100);
+    color: var(--splms-gray-700);
+    border-color: var(--splms-gray-300);
+
+    &:hover {
+      background-color: var(--splms-gray-200);
+      color: var(--splms-gray-800);
+    }
+  }
+
+  // Outline Button
+  &-outline {
+    background-color: transparent;
+    border-color: var(--splms-gray-300);
+
+    &:hover {
+      background-color: var(--splms-gray-50);
+    }
+  }
+
+  // Large Button
+  &-large {
+    padding: var(--splms-spacing-4) var(--splms-spacing-8);
+    font-size: var(--splms-font-size-base);
+  }
+
+  // Continue Button
+  &-continue {
+    background-color: var(--splms-primary-dark);
+    border: 1px solid var(--splms-primary-dark);
+    color: var(--splms-white);
+
+    &:hover {
+      text-decoration: none;
+      color: var(--splms-primary);
+      background: var(--splms-white);
+    }
+  }
+
+  // Focus States
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(var(--splms-primary-rgb), 0.2);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--splms-primary);
+    outline-offset: 2px;
+  }
+
+  // Disabled State
+  &:disabled,
+  &.disabled {
+    opacity: 0.65;
+    pointer-events: none;
+  }
+
+  // Loading State
+  &.loading {
+    position: relative;
+    opacity: 0.8;
+    pointer-events: none;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      margin: -10px 0 0 -10px;
+      border: 2px solid transparent;
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .btn-text,
+    span:not(.loading-text) {
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} 

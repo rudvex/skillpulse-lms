@@ -1,0 +1,15 @@
+@use "../base/_variables" as *;
+
+@mixin splms-focus-ring($color: var(--splms-primary)) {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba($color, 0.2);
+}
+
+@mixin splms-card($padding: 16px) {
+ background: var(--splms-white);
+  border: 1px solid var(--splms-gray-200);
+  border-radius: var(--splms-border-radius-base);
+  padding: $padding;
+}
+
+

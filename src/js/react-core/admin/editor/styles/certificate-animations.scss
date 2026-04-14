@@ -1,0 +1,59 @@
+// Certificate Builder Animations
+
+@keyframes elementSelect {
+	0% {
+		transform: scale(1);
+		box-shadow: 0 0 0 1px rgba(34, 113, 177, 0.2);
+	}
+	50% {
+		transform: scale(1.01);
+		box-shadow: 0 0 0 2px rgba(34, 113, 177, 0.4);
+	}
+	100% {
+		transform: scale(1);
+		box-shadow:
+			0 0 0 1px rgba(34, 113, 177, 0.5),
+			0 4px 16px rgba(0, 0, 0, 0.15),
+			0 0 20px rgba(34, 113, 177, 0.2);
+	}
+}
+
+@keyframes elementDrag {
+	0% {
+		transform: scale(1) rotate(0deg);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	}
+	100% {
+		transform: scale(1.02) rotate(1deg);
+		box-shadow:
+			0 6px 20px rgba(0, 0, 0, 0.25),
+			0 2px 12px rgba(0, 124, 186, 0.3);
+	}
+}
+
+@keyframes controlsAppear {
+	0% {
+		opacity: 0;
+		transform: scale(0.8) translateY(-5px);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1) translateY(0);
+	}
+}
+
+@keyframes handlesAppear {
+	0% {
+		opacity: 0;
+		transform: scale(0.8);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}

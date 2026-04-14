@@ -1,0 +1,133 @@
+@use "../base/variables" as *;
+@use "sass:color";
+
+.splms-bookmark-btn {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--splms-gray-300);
+	background: var(--splms-white);
+	color: var(--splms-gray-700);
+	border-radius: var(--splms-border-radius-base);
+	font-size: 0.875rem;
+	font-weight: var(--splms-font-weight-medium);
+	cursor: pointer;
+	transition: var(--splms-transition-base);
+
+	&:hover {
+		background: var(--splms-gray-50);
+		border-color: var(--splms-gray-400);
+		color: var(--splms-gray-900);
+	}
+
+	&.loading {
+		opacity: 0.6;
+		cursor: not-allowed;
+		pointer-events: none;
+	}
+
+	&.bookmarked,
+	&.active {
+		background: var(--splms-secondary);
+		border-color: var(--splms-secondary);
+		color: var(--splms-white);
+
+		&:hover {
+			background: var(--splms-secondary-hover);
+			border-color: var(--splms-secondary-hover);
+		}
+	}
+
+	svg {
+		width: 18px;
+		height: 18px;
+		stroke: currentColor;
+		fill: none;
+	}
+}
+
+// Bookmarks List (Dashboard)
+.splms-list {
+	list-style: none;
+	padding: 0;
+	margin: 2rem 0 0 0;
+}
+
+.splms-list-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1rem;
+	margin-bottom: 0.75rem;
+	background: var(--splms-white);
+	border: 1px solid var(--splms-gray-200);
+	border-radius: var(--splms-border-radius-base);
+	transition: var(--splms-transition-base);
+
+	&:hover {
+		box-shadow: var(--splms-shadow-md);
+		border-color: var(--splms-gray-300);
+	}
+
+	a {
+		flex: 1;
+		color: var(--splms-gray-900);
+		text-decoration: none;
+		font-weight: var(--splms-font-weight-medium);
+		transition: var(--splms-transition-base);
+
+		&:hover {
+			color: var(--splms-primary);
+		}
+	}
+}
+
+.splms-bookmark-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+
+	> a {
+		flex: 1;
+		font-size: 1rem;
+	}
+}
+
+// Course hero bookmark button
+.course-bookmark {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	padding: 0.5rem;
+	background: rgba(var(--splms-white-rgb), 0.9);
+	border: 1px solid var(--splms-gray-300);
+	border-radius: 50%;
+	width: 40px;
+	height: var(--splms-spacing-10);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: var(--splms-transition-base);
+	z-index: 10;
+
+	&:hover {
+		background: var(--splms-white);
+		transform: scale(1.1);
+	}
+
+	&.bookmarked {
+		background: var(--splms-secondary);
+		border-color: var(--splms-secondary);
+		color: var(--splms-white);
+	}
+
+	svg {
+		width: 20px;
+		height: 20px;
+	}
+}
+
