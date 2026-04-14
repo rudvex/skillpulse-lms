@@ -1,0 +1,23 @@
+/vendor/
+/node_modules/*
+/output/
+
+# Build artifacts - Source maps
+*.map
+assets/js/*.map
+assets/css/*.map
+
+# PHPUnit artifacts and test results
+/.phpunit.result.cache
+/.phpunit.cache/*
+/coverage/
+coverage.xml
+coverage.txt
+test-results.xml
+testdox.html
+testdox.txt
+teamcity.txt
+
+# WordPress test environment
+/tmp/
+/wordpress-tests-lib/

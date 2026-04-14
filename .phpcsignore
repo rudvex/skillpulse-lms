@@ -1,0 +1,33 @@
+# PHPCS Ignore File
+# Files and directories to ignore during code sniffing
+
+# Vendor and dependencies
+vendor/
+node_modules/
+
+# Build and compiled assets
+assets/
+*.min.js
+*.min.css
+*.map
+
+# Test files (if you want to exclude them)
+tests/
+dummy/
+demo/
+
+# Documentation
+docs/
+*.md
+
+# Configuration files
+composer.json
+composer.lock
+package.json
+package-lock.json
+Gruntfile.js
+webpack*.js
+
+# Language files
+languages/
+

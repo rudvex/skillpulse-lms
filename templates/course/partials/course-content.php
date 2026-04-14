@@ -1,0 +1,20 @@
+<?php
+/**
+ * Single course content template part
+ *
+ * This template can be overridden by copying it to yourtheme/skillpulse-lms/single-course-content.php.
+ *
+ * @package SkillPulse_LMS
+ * @version 1.0.0
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+$course_id = get_the_ID();
+// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, nonce verification handled at higher level.
+$current_tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'overview';
+
+// Load the appropriate tab template.
+splms_get_template_part( 'course/partials/tabs/' . $current_tab );

@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm:*)",
+      "Bash(npm run build)",
+      "Bash(wp post list:*)",
+      "Bash(wp eval:*)",
+      "Read(//Users/hardip/Workspace/devilbox/data/www/sp-lms/htdocs/wp-admin/includes/**)",
+      "Read(//Users/hardip/Workspace/devilbox/data/www/sp-lms/htdocs/wp-includes/**)",
+      "WebFetch(domain:prnt.sc)",
+      "Read(//Users/hardip/Downloads/c-sc/**)",
+      "Bash(wp plugin list:*)",
+      "Bash(wp option get:*)",
+      "Bash(wp post meta update:*)",
+      "Read(//Users/hardip/Workspace/devilbox/data/www/sp-lms/htdocs/wp-content/plugins/**)",
+      "Bash(curl:*)",
+      "Bash(find:*)",
+      "Bash(node:*)",
+      "Bash(mkdir:*)",
+      "Bash(composer install:*)",
+      "Bash(composer update:*)",
+      "Bash(vendor/bin/phpunit:*)",
+      "Bash(php:*)",
+      "Read(//private/var/folders/hz/dx6s0p4x4kz3vn3tgxnvq2pm0000gn/T/wordpress/wp-includes/PHPMailer/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
