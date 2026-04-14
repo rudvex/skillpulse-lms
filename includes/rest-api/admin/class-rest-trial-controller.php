@@ -176,7 +176,7 @@ class SkillPulse_LMS_Rest_Trial_Controller extends WP_REST_Controller {
 			);
 		}
 
-		$trial_system = SkillPulse_LMS_Trial_System::get_instance();
+		$trial_system  = SkillPulse_LMS_Trial_System::get_instance();
 		$trial_manager = $trial_system->get_trial_manager();
 
 		if ( ! $trial_manager ) {
@@ -189,18 +189,18 @@ class SkillPulse_LMS_Rest_Trial_Controller extends WP_REST_Controller {
 
 		// Get trial status.
 		$is_trial_active = $trial_manager->is_trial_active();
-		$trial_data = $trial_manager->get_trial_data();
+		$trial_data      = $trial_manager->get_trial_data();
 
 		// Calculate days remaining.
 		$days_remaining = 0;
-		$expires_at = null;
+		$expires_at     = null;
 
 		if ( $is_trial_active && isset( $trial_data['expires_at'] ) ) {
 			$expires_timestamp = is_numeric( $trial_data['expires_at'] ) ? (int) $trial_data['expires_at'] : strtotime( $trial_data['expires_at'] );
 			$current_timestamp = time();
 			$seconds_remaining = $expires_timestamp - $current_timestamp;
-			$days_remaining = max( 0, ceil( $seconds_remaining / DAY_IN_SECONDS ) );
-			$expires_at = gmdate( 'c', $expires_timestamp );
+			$days_remaining    = max( 0, ceil( $seconds_remaining / DAY_IN_SECONDS ) );
+			$expires_at        = gmdate( 'c', $expires_timestamp );
 		}
 
 		// Get usage statistics from trial system.
@@ -214,75 +214,75 @@ class SkillPulse_LMS_Rest_Trial_Controller extends WP_REST_Controller {
 
 		if ( isset( $trial_usage_data['courses'] ) ) {
 			$structured_usage_stats['courses'] = array(
-				'used' => (int) $trial_usage_data['courses']['used'],
-				'limit' => (int) $trial_usage_data['courses']['limit'],
+				'used'      => (int) $trial_usage_data['courses']['used'],
+				'limit'     => (int) $trial_usage_data['courses']['limit'],
 				'remaining' => max( 0, (int) $trial_usage_data['courses']['limit'] - (int) $trial_usage_data['courses']['used'] ),
 			);
 		}
 
 		if ( isset( $trial_usage_data['enrollments'] ) ) {
 			$structured_usage_stats['enrollments'] = array(
-				'used' => (int) $trial_usage_data['enrollments']['used'],
-				'limit' => (int) $trial_usage_data['enrollments']['limit'],
+				'used'      => (int) $trial_usage_data['enrollments']['used'],
+				'limit'     => (int) $trial_usage_data['enrollments']['limit'],
 				'remaining' => max( 0, (int) $trial_usage_data['enrollments']['limit'] - (int) $trial_usage_data['enrollments']['used'] ),
 			);
 		}
 
 		if ( isset( $trial_usage_data['api_calls'] ) ) {
 			$structured_usage_stats['api_calls'] = array(
-				'used' => (int) $trial_usage_data['api_calls']['used'],
-				'limit' => (int) $trial_usage_data['api_calls']['limit'],
+				'used'      => (int) $trial_usage_data['api_calls']['used'],
+				'limit'     => (int) $trial_usage_data['api_calls']['limit'],
 				'remaining' => max( 0, (int) $trial_usage_data['api_calls']['limit'] - (int) $trial_usage_data['api_calls']['used'] ),
 			);
 		}
 
 		if ( isset( $trial_usage_data['emails'] ) ) {
 			$structured_usage_stats['emails'] = array(
-				'used' => (int) $trial_usage_data['emails']['used'],
-				'limit' => (int) $trial_usage_data['emails']['limit'],
+				'used'      => (int) $trial_usage_data['emails']['used'],
+				'limit'     => (int) $trial_usage_data['emails']['limit'],
 				'remaining' => max( 0, (int) $trial_usage_data['emails']['limit'] - (int) $trial_usage_data['emails']['used'] ),
 			);
 		}
 
 		if ( isset( $trial_usage_data['certificates'] ) ) {
 			$structured_usage_stats['certificates'] = array(
-				'used' => (int) $trial_usage_data['certificates']['used'],
-				'limit' => (int) $trial_usage_data['certificates']['limit'],
+				'used'      => (int) $trial_usage_data['certificates']['used'],
+				'limit'     => (int) $trial_usage_data['certificates']['limit'],
 				'remaining' => max( 0, (int) $trial_usage_data['certificates']['limit'] - (int) $trial_usage_data['certificates']['used'] ),
 			);
 		}
 
 		// Get feature flags.
 		$feature_flags_instance = $trial_system->get_feature_flags();
-		$feature_flags = array(
-			'advanced_analytics' => false,
-			'white_label' => false,
-			'priority_support' => false,
-			'unlimited_courses' => false,
+		$feature_flags          = array(
+			'advanced_analytics'    => false,
+			'white_label'           => false,
+			'priority_support'      => false,
+			'unlimited_courses'     => false,
 			'unlimited_enrollments' => false,
 		);
 
 		if ( $feature_flags_instance && method_exists( $feature_flags_instance, 'is_feature_enabled' ) ) {
-			$feature_flags['advanced_analytics'] = $feature_flags_instance->is_feature_enabled( 'advanced_analytics' );
-			$feature_flags['white_label'] = $feature_flags_instance->is_feature_enabled( 'white_label' );
-			$feature_flags['priority_support'] = $feature_flags_instance->is_feature_enabled( 'priority_support' );
-			$feature_flags['unlimited_courses'] = $feature_flags_instance->is_feature_enabled( 'unlimited_courses' );
+			$feature_flags['advanced_analytics']    = $feature_flags_instance->is_feature_enabled( 'advanced_analytics' );
+			$feature_flags['white_label']           = $feature_flags_instance->is_feature_enabled( 'white_label' );
+			$feature_flags['priority_support']      = $feature_flags_instance->is_feature_enabled( 'priority_support' );
+			$feature_flags['unlimited_courses']     = $feature_flags_instance->is_feature_enabled( 'unlimited_courses' );
 			$feature_flags['unlimited_enrollments'] = $feature_flags_instance->is_feature_enabled( 'unlimited_enrollments' );
 		}
 
 		// Prepare response data.
 		$response_data = array(
-			'success' => true,
-			'trial_status' => $is_trial_active ? 'active' : 'expired',
+			'success'        => true,
+			'trial_status'   => $is_trial_active ? 'active' : 'expired',
 			'days_remaining' => $days_remaining,
-			'expires_at' => $expires_at,
-			'usage_stats' => $structured_usage_stats,
-			'feature_flags' => $feature_flags,
-			'conversion' => array(
+			'expires_at'     => $expires_at,
+			'usage_stats'    => $structured_usage_stats,
+			'feature_flags'  => $feature_flags,
+			'conversion'     => array(
 				'upgrade_url' => admin_url( 'admin.php?page=splms-license' ),
 				'contact_url' => 'https://skillpulselms.com/contact/',
 			),
-			'system_status' => isset( $usage_stats['system_status'] ) ? $usage_stats['system_status'] : array(),
+			'system_status'  => isset( $usage_stats['system_status'] ) ? $usage_stats['system_status'] : array(),
 		);
 
 		return rest_ensure_response( $response_data );

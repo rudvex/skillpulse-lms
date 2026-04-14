@@ -96,8 +96,6 @@ class SkillPulse_LMS_Admin {
 		if ( splms_get_setting( 'user_signup_enabled', false ) ) {
 			SkillPulse_LMS_Signup_Admin::get_instance();
 		}
-
-		// Wizard classes will be initialized later on init hook to ensure textdomain is loaded
 	}
 
 	/**
@@ -110,7 +108,6 @@ class SkillPulse_LMS_Admin {
 		add_action( 'all_admin_notices', array( $this, 'admin_header' ), 0 );
 		add_action( 'admin_body_class', array( $this, 'admin_body_class' ) );
 		add_action( 'admin_notices', array( $this, 'course_pricing_validation_notice' ) );
-		// Initialize wizard classes after textdomain is loaded
 		add_action( 'init', array( $this, 'init_wizard_classes' ) );
 	}
 

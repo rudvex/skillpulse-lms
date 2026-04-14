@@ -521,7 +521,7 @@ class SkillPulse_LMS_Admin_Menus {
 	 * @since 1.0.0
 	 */
 	public function setup_wizard_page() {
-		// Delegate to the wizard class if it exists
+		// Delegate to the wizard class if it exists.
 		if ( class_exists( 'SkillPulse_LMS_Setup_Wizard' ) ) {
 			$wizard = SkillPulse_LMS_Setup_Wizard::get_instance();
 			if ( method_exists( $wizard, 'render_wizard_page' ) ) {
@@ -530,7 +530,7 @@ class SkillPulse_LMS_Admin_Menus {
 			}
 		}
 
-		// Fallback if wizard class not available
+		// Fallback if wizard class not available.
 		if ( ! current_user_can( 'manage_options' ) ) {
 			printf( '<p>%1$s</p>', esc_html__( 'You don\'t have permission to access this page.', 'skillpulse-lms' ) );
 			return;
@@ -543,5 +543,4 @@ class SkillPulse_LMS_Admin_Menus {
 		</div>
 		<?php
 	}
-
 }

@@ -75,7 +75,7 @@ if ( ! function_exists( 'splms_get_user_role_options' ) ) {
 	}
 }
 
-$general_tab       = array(
+$general_tab = array(
 	'id'          => 'general',
 	'title'       => 'General',
 	'icon'        => 'admin-generic',
@@ -331,7 +331,7 @@ $general_tab       = array(
 		),
 	),
 );
-$courses_tab       = array(
+$courses_tab = array(
 	'id'          => 'courses',
 	'title'       => 'Courses',
 	'icon'        => 'admin-post',
@@ -567,8 +567,8 @@ $courses_tab       = array(
 					'value'       => isset( $all_settings['courses']['enrollment_settings']['allow_student_unenrollment'] ) ? $all_settings['courses']['enrollment_settings']['allow_student_unenrollment'] : false,
 				),
 			),
-		)
-		
+		),
+
 	),
 );
 

@@ -66,8 +66,8 @@ class SkillPulse_LMS_Setup_Wizard {
 	 * Constructor.
 	 */
 	private function __construct() {
-		$this->steps = $this->define_steps();
-		$this->wizard_data = get_option( 'splms_wizard_data', array() );
+		$this->steps        = $this->define_steps();
+		$this->wizard_data  = get_option( 'splms_wizard_data', array() );
 		$this->current_step = $this->get_current_step();
 	}
 
@@ -88,12 +88,12 @@ class SkillPulse_LMS_Setup_Wizard {
 	 */
 	private function define_steps() {
 		return array(
-			'welcome' => array(
+			'welcome'     => array(
 				'title'       => __( 'Welcome', 'skillpulse-lms' ),
 				'description' => __( 'Welcome to SkillPulse LMS', 'skillpulse-lms' ),
 				'required'    => true,
 			),
-			'license' => array(
+			'license'     => array(
 				'title'       => __( 'License Setup', 'skillpulse-lms' ),
 				'description' => __( 'Activate your license or start a trial', 'skillpulse-lms' ),
 				'required'    => false,
@@ -103,7 +103,7 @@ class SkillPulse_LMS_Setup_Wizard {
 				'description' => __( 'Configure essential settings', 'skillpulse-lms' ),
 				'required'    => true,
 			),
-			'finish' => array(
+			'finish'      => array(
 				'title'       => __( 'Complete', 'skillpulse-lms' ),
 				'description' => __( 'Setup complete', 'skillpulse-lms' ),
 				'required'    => true,
@@ -119,6 +119,7 @@ class SkillPulse_LMS_Setup_Wizard {
 	public function activation_redirect( $plugin ) {
 		if ( plugin_basename( SKILLPULSE_LMS_FILE ) === $plugin ) {
 			// Only redirect if this is a single plugin activation (not bulk).
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only presence check on standard WP activation parameter.
 			if ( ! isset( $_GET['activate-multi'] ) ) {
 				set_transient( 'splms_wizard_redirect', true, 30 );
 			}
@@ -148,7 +149,7 @@ class SkillPulse_LMS_Setup_Wizard {
 	public function render_wizard_page() {
 		// Verify user capabilities.
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( __( 'You do not have sufficient permissions to access this page.', 'skillpulse-lms' ) );
+			wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'skillpulse-lms' ) );
 		}
 
 		// Check if wizard is already completed.
@@ -217,9 +218,9 @@ class SkillPulse_LMS_Setup_Wizard {
 				'adminEmail'    => get_option( 'admin_email' ),
 				'siteUrl'       => home_url(),
 				'siteName'      => get_bloginfo( 'name' ),
-				'timezone'      => get_option( 'timezone_string' ) ?: 'UTC',
+				'timezone'      => get_option( 'timezone_string' ) ? get_option( 'timezone_string' ) : 'UTC',
 				'timezones'     => $this->get_wordpress_timezones(),
-				'mainUrl'  => admin_url( 'admin.php?page=skillpulse-lms' ),
+				'mainUrl'       => admin_url( 'admin.php?page=skillpulse-lms' ),
 				'isTrialActive' => $this->is_trial_active(),
 				'licenseStatus' => $this->get_license_status(),
 			)
@@ -266,7 +267,7 @@ class SkillPulse_LMS_Setup_Wizard {
 	private function get_license_status() {
 		if ( class_exists( 'SkillPulse_LMS_License_Manager' ) ) {
 			$license_manager = SkillPulse_LMS_License_Manager::get_instance();
-			$license_info = $license_manager->get_license_info();
+			$license_info    = $license_manager->get_license_info();
 			return $license_info['status'] ?? 'inactive';
 		}
 		return 'inactive';
@@ -286,16 +287,16 @@ class SkillPulse_LMS_Setup_Wizard {
 		// Initialize if empty.
 		if ( empty( $wizard_data ) ) {
 			$wizard_data = array(
-				'version'     => SKILLPULSE_LMS_VERSION,
-				'started_at'  => time(),
-				'steps_data'  => array(),
+				'version'    => SKILLPULSE_LMS_VERSION,
+				'started_at' => time(),
+				'steps_data' => array(),
 			);
 		}
 
 		// Save step data.
 		$wizard_data['steps_data'][ $step ] = $data;
-		$wizard_data['current_step'] = $step;
-		$wizard_data['updated_at'] = time();
+		$wizard_data['current_step']        = $step;
+		$wizard_data['updated_at']          = time();
 
 		// Update option.
 		update_option( 'splms_wizard_data', $wizard_data );
@@ -316,8 +317,8 @@ class SkillPulse_LMS_Setup_Wizard {
 		update_option( 'splms_wizard_completed', true );
 
 		// Update wizard data.
-		$wizard_data = get_option( 'splms_wizard_data', array() );
-		$wizard_data['completed'] = true;
+		$wizard_data                 = get_option( 'splms_wizard_data', array() );
+		$wizard_data['completed']    = true;
 		$wizard_data['completed_at'] = time();
 		update_option( 'splms_wizard_data', $wizard_data );
 
@@ -345,10 +346,10 @@ class SkillPulse_LMS_Setup_Wizard {
 
 			if ( ! empty( $matches[1] ) && ! empty( $matches[2] ) ) {
 				foreach ( $matches[1] as $index => $value ) {
-					$label = isset( $matches[2][ $index ] ) ? $matches[2][ $index ] : $value;
+					$label       = isset( $matches[2][ $index ] ) ? $matches[2][ $index ] : $value;
 					$timezones[] = array(
 						'value' => $value,
-						'label' => html_entity_decode( $label, ENT_QUOTES | ENT_HTML5, 'UTF-8' )
+						'label' => html_entity_decode( $label, ENT_QUOTES | ENT_HTML5, 'UTF-8' ),
 					);
 				}
 			}
@@ -357,17 +358,50 @@ class SkillPulse_LMS_Setup_Wizard {
 		// If no timezones found, provide fallback.
 		if ( empty( $timezones ) ) {
 			$timezones = array(
-				array( 'value' => 'UTC', 'label' => __( 'UTC', 'skillpulse-lms' ) ),
-				array( 'value' => 'America/New_York', 'label' => __( 'Eastern Time (US)', 'skillpulse-lms' ) ),
-				array( 'value' => 'America/Chicago', 'label' => __( 'Central Time (US)', 'skillpulse-lms' ) ),
-				array( 'value' => 'America/Denver', 'label' => __( 'Mountain Time (US)', 'skillpulse-lms' ) ),
-				array( 'value' => 'America/Los_Angeles', 'label' => __( 'Pacific Time (US)', 'skillpulse-lms' ) ),
-				array( 'value' => 'Europe/London', 'label' => __( 'London', 'skillpulse-lms' ) ),
-				array( 'value' => 'Europe/Paris', 'label' => __( 'Paris', 'skillpulse-lms' ) ),
-				array( 'value' => 'Europe/Berlin', 'label' => __( 'Berlin', 'skillpulse-lms' ) ),
-				array( 'value' => 'Asia/Tokyo', 'label' => __( 'Tokyo', 'skillpulse-lms' ) ),
-				array( 'value' => 'Asia/Shanghai', 'label' => __( 'Shanghai', 'skillpulse-lms' ) ),
-				array( 'value' => 'Australia/Sydney', 'label' => __( 'Sydney', 'skillpulse-lms' ) )
+				array(
+					'value' => 'UTC',
+					'label' => __( 'UTC', 'skillpulse-lms' ),
+				),
+				array(
+					'value' => 'America/New_York',
+					'label' => __( 'Eastern Time (US)', 'skillpulse-lms' ),
+				),
+				array(
+					'value' => 'America/Chicago',
+					'label' => __( 'Central Time (US)', 'skillpulse-lms' ),
+				),
+				array(
+					'value' => 'America/Denver',
+					'label' => __( 'Mountain Time (US)', 'skillpulse-lms' ),
+				),
+				array(
+					'value' => 'America/Los_Angeles',
+					'label' => __( 'Pacific Time (US)', 'skillpulse-lms' ),
+				),
+				array(
+					'value' => 'Europe/London',
+					'label' => __( 'London', 'skillpulse-lms' ),
+				),
+				array(
+					'value' => 'Europe/Paris',
+					'label' => __( 'Paris', 'skillpulse-lms' ),
+				),
+				array(
+					'value' => 'Europe/Berlin',
+					'label' => __( 'Berlin', 'skillpulse-lms' ),
+				),
+				array(
+					'value' => 'Asia/Tokyo',
+					'label' => __( 'Tokyo', 'skillpulse-lms' ),
+				),
+				array(
+					'value' => 'Asia/Shanghai',
+					'label' => __( 'Shanghai', 'skillpulse-lms' ),
+				),
+				array(
+					'value' => 'Australia/Sydney',
+					'label' => __( 'Sydney', 'skillpulse-lms' ),
+				),
 			);
 		}
 

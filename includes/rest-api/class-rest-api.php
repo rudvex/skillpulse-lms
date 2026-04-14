@@ -119,7 +119,6 @@ class SkillPulse_LMS_Rest_API {
 			'includes/rest-api/admin/class-rest-admin-email-templates-controller',
 			'includes/rest-api/admin/class-rest-admin-notifications-controller',
 			'includes/rest-api/admin/class-rest-orders-controller',
-			// 'includes/rest-api/admin/class-rest-trial-controller', // Disabled - using simplified trial manager REST API
 
 			// REST API Reviews.
 			'includes/rest-api/reviews/class-rest-reviews-controller',
@@ -292,7 +291,7 @@ class SkillPulse_LMS_Rest_API {
 		if ( $trial_data ) {
 			$response->header( 'X-Trial-Active', 'true' );
 			$response->header( 'X-Trial-Days-Remaining', $trial_manager->get_days_remaining() );
-			$response->header( 'X-Trial-Expires', date( 'c', $trial_data['expires_at'] ) );
+			$response->header( 'X-Trial-Expires', gmdate( 'c', $trial_data['expires_at'] ) );
 		}
 
 		return $response;

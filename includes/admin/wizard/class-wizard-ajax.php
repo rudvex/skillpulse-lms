@@ -66,20 +66,24 @@ class SkillPulse_LMS_Wizard_Ajax {
 
 		// Verify capabilities.
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array(
-				'message' => __( 'Insufficient permissions.', 'skillpulse-lms' ),
-			) );
+			wp_send_json_error(
+				array(
+					'message' => __( 'Insufficient permissions.', 'skillpulse-lms' ),
+				)
+			);
 		}
 
 		// Get and sanitize input.
-		$step = sanitize_text_field( $_POST['step'] ?? '' );
-		$data = $_POST['data'] ?? array();
+		$step = ! empty( $_POST['step'] ) ? sanitize_text_field( wp_unslash( $_POST['step'] ) ) : '';
+		$data = ! empty( $_POST['data'] ) ? sanitize_text_field( wp_unslash( $_POST['data'] ) ) : array();
 
 		// Validate step.
 		if ( empty( $step ) ) {
-			wp_send_json_error( array(
-				'message' => __( 'Invalid step.', 'skillpulse-lms' ),
-			) );
+			wp_send_json_error(
+				array(
+					'message' => __( 'Invalid step.', 'skillpulse-lms' ),
+				)
+			);
 		}
 
 		// Sanitize data based on step.
@@ -105,9 +109,11 @@ class SkillPulse_LMS_Wizard_Ajax {
 
 		// Verify capabilities.
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array(
-				'message' => __( 'Insufficient permissions.', 'skillpulse-lms' ),
-			) );
+			wp_send_json_error(
+				array(
+					'message' => __( 'Insufficient permissions.', 'skillpulse-lms' ),
+				)
+			);
 		}
 
 		// Get wizard instance and complete.
@@ -130,23 +136,30 @@ class SkillPulse_LMS_Wizard_Ajax {
 
 		// Verify capabilities.
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array(
-				'message' => __( 'Insufficient permissions.', 'skillpulse-lms' ),
-			) );
+			wp_send_json_error(
+				array(
+					'message' => __( 'Insufficient permissions.', 'skillpulse-lms' ),
+				)
+			);
 		}
 
 		// Mark wizard as completed but skipped.
 		update_option( 'splms_wizard_completed', true );
-		update_option( 'splms_wizard_data', array(
-			'completed'    => true,
-			'skipped'      => true,
-			'completed_at' => time(),
-		) );
+		update_option(
+			'splms_wizard_data',
+			array(
+				'completed'    => true,
+				'skipped'      => true,
+				'completed_at' => time(),
+			)
+		);
 
-		wp_send_json_success( array(
-			'message'      => __( 'Wizard skipped successfully.', 'skillpulse-lms' ),
-			'redirect_url' => admin_url( 'admin.php?page=skillpulse-lms' ),
-		) );
+		wp_send_json_success(
+			array(
+				'message'      => __( 'Wizard skipped successfully.', 'skillpulse-lms' ),
+				'redirect_url' => admin_url( 'admin.php?page=skillpulse-lms' ),
+			)
+		);
 	}
 
 	/**
@@ -157,14 +170,16 @@ class SkillPulse_LMS_Wizard_Ajax {
 		check_ajax_referer( 'splms_wizard_nonce', 'nonce' );
 
 		// Get wizard data.
-		$wizard_data = get_option( 'splms_wizard_data', array() );
+		$wizard_data  = get_option( 'splms_wizard_data', array() );
 		$is_completed = get_option( 'splms_wizard_completed', false );
 
-		wp_send_json_success( array(
-			'completed'    => $is_completed,
-			'wizard_data'  => $wizard_data,
-			'current_step' => $wizard_data['current_step'] ?? 'welcome',
-		) );
+		wp_send_json_success(
+			array(
+				'completed'    => $is_completed,
+				'wizard_data'  => $wizard_data,
+				'current_step' => $wizard_data['current_step'] ?? 'welcome',
+			)
+		);
 	}
 
 	/**
@@ -179,12 +194,12 @@ class SkillPulse_LMS_Wizard_Ajax {
 
 		switch ( $step ) {
 			case 'welcome':
-				$sanitized['viewed'] = true;
+				$sanitized['viewed']    = true;
 				$sanitized['viewed_at'] = time();
 				break;
 
 			case 'license':
-				$sanitized['method'] = sanitize_text_field( $data['method'] ?? '' );
+				$sanitized['method']       = sanitize_text_field( $data['method'] ?? '' );
 				$sanitized['completed_at'] = time();
 
 				// License key (if provided).
@@ -199,9 +214,9 @@ class SkillPulse_LMS_Wizard_Ajax {
 				break;
 
 			case 'basic-setup':
-				$sanitized['site_name'] = sanitize_text_field( $data['site_name'] ?? '' );
-				$sanitized['admin_email'] = sanitize_email( $data['admin_email'] ?? get_option( 'admin_email' ) );
-				$sanitized['timezone'] = sanitize_text_field( $data['timezone'] ?? 'UTC' );
+				$sanitized['site_name']    = sanitize_text_field( $data['site_name'] ?? '' );
+				$sanitized['admin_email']  = sanitize_email( $data['admin_email'] ?? get_option( 'admin_email' ) );
+				$sanitized['timezone']     = sanitize_text_field( $data['timezone'] ?? 'UTC' );
 				$sanitized['completed_at'] = time();
 
 				// Save basic settings to WordPress core options.
@@ -217,7 +232,7 @@ class SkillPulse_LMS_Wizard_Ajax {
 				break;
 
 			case 'finish':
-				$sanitized['completed'] = true;
+				$sanitized['completed']    = true;
 				$sanitized['completed_at'] = time();
 				break;
 

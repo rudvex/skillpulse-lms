@@ -240,13 +240,13 @@ class SkillPulse_LMS_Email_Sender {
 		}
 
 		// Check trial email limits (since [SPLMS_VERSION]).
-		$email_data    = array(
+		$email_data   = array(
 			'to_email'     => $to_email,
 			'template'     => $template,
 			'replacements' => $replacements,
 			'attachments'  => $attachments,
 		);
-		$send_allowed  = apply_filters( 'splms_before_send_email', true, $email_data, 'direct_send' );
+		$send_allowed = apply_filters( 'splms_before_send_email', true, $email_data, 'direct_send' );
 
 		if ( is_wp_error( $send_allowed ) ) {
 			return $send_allowed;
