@@ -12,37 +12,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Get passed variables.
-$lesson_embed_code = isset( $args['lesson_embed_code'] ) ? $args['lesson_embed_code'] : '';
 
-if ( ! $lesson_embed_code ) {
+
+// Get passed variables.
+$splms_lesson_embed_code = isset( $args['splms_lesson_embed_code'] ) ? $args['splms_lesson_embed_code'] : '';
+
+if ( ! $splms_lesson_embed_code ) {
 	return;
 }
 
-$lesson_embed_code = trim( $lesson_embed_code );
+$splms_lesson_embed_code = trim( $splms_lesson_embed_code );
 
 // Check if content contains shortcodes.
-$has_shortcodes = splms_has_shortcodes( $lesson_embed_code );
+$splms_has_shortcodes = splms_has_shortcodes( $splms_lesson_embed_code );
 ?>
 
 <div class="splms-interactive-content">
-	<?php if ( $has_shortcodes ) : ?>
+	<?php if ( $splms_has_shortcodes ) : ?>
 		<?php
 		// Extract shortcode tags from the original content to check if they're registered.
-		preg_match_all( '/\[([a-zA-Z0-9_-]+)/', $lesson_embed_code, $shortcode_matches );
+		preg_match_all( '/\[([a-zA-Z0-9_-]+)/', $splms_lesson_embed_code, $splms_shortcode_matches );
 
-		$shortcode_error = false;
-		if ( ! empty( $shortcode_matches[1] ) ) {
-			foreach ( $shortcode_matches[1] as $shortcode_tag ) {
+		$splms_shortcode_error = false;
+		if ( ! empty( $splms_shortcode_matches[1] ) ) {
+			foreach ( $splms_shortcode_matches[1] as $splms_shortcode_tag ) {
 				// Check if shortcode is registered.
-				if ( ! shortcode_exists( $shortcode_tag ) ) {
-					$shortcode_error = $shortcode_tag;
+				if ( ! shortcode_exists( $splms_shortcode_tag ) ) {
+					$splms_shortcode_error = $splms_shortcode_tag;
 					break;
 				}
 			}
 		}
 
-		if ( $shortcode_error ) :
+		if ( $splms_shortcode_error ) :
 			?>
 			<div class="splms-notice splms-notice--warning">
 				<div class="splms-notice__icon">
@@ -54,7 +56,7 @@ $has_shortcodes = splms_has_shortcodes( $lesson_embed_code );
 					<p>
 						<?php
 						/* translators: %s: Shortcode tag name. */
-						echo esc_html( sprintf( __( 'The shortcode [%s] could not be rendered. Please ensure the related plugin is active.', 'skillpulse-lms' ), $shortcode_error ) );
+						echo esc_html( sprintf( __( 'The shortcode [%s] could not be rendered. Please ensure the related plugin is active.', 'skillpulse-lms' ), $splms_shortcode_error ) );
 						?>
 					</p>
 				</div>
@@ -62,9 +64,9 @@ $has_shortcodes = splms_has_shortcodes( $lesson_embed_code );
 		<?php else : ?>
 			<?php
 			// Process shortcodes and sanitize output.
-			$processed = do_shortcode( $lesson_embed_code );
+			$splms_processed = do_shortcode( $splms_lesson_embed_code );
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output sanitized with wp_kses_post.
-			echo wp_kses_post( $processed );
+			echo wp_kses_post( $splms_processed );
 			?>
 		<?php endif; ?>
 
@@ -72,24 +74,24 @@ $has_shortcodes = splms_has_shortcodes( $lesson_embed_code );
 		<?php
 		// Treat as HTML embed code.
 		// Check if it contains embed tags.
-		$has_embed_tags = (
-			false !== strpos( $lesson_embed_code, '<iframe' ) ||
-			false !== strpos( $lesson_embed_code, '<embed' ) ||
-			false !== strpos( $lesson_embed_code, '<object' ) ||
-			false !== strpos( $lesson_embed_code, '<script' )
+		$splms_has_embed_tags = (
+			false !== strpos( $splms_lesson_embed_code, '<iframe' ) ||
+			false !== strpos( $splms_lesson_embed_code, '<embed' ) ||
+			false !== strpos( $splms_lesson_embed_code, '<object' ) ||
+			false !== strpos( $splms_lesson_embed_code, '<script' )
 		);
 
-		if ( $has_embed_tags ) :
+		if ( $splms_has_embed_tags ) :
 			// Validate iframe src if present.
-			$iframe_error = false;
-			if ( preg_match( '/<iframe[^>]*>/i', $lesson_embed_code, $iframe_match ) ) {
+			$splms_iframe_error = false;
+			if ( preg_match( '/<iframe[^>]*>/i', $splms_lesson_embed_code, $splms_iframe_match ) ) {
 				// Check if iframe has src attribute.
-				if ( ! preg_match( '/src\s*=\s*["\']([^"\']+)["\']/', $iframe_match[0] ) ) {
-					$iframe_error = true;
+				if ( ! preg_match( '/src\s*=\s*["\']([^"\']+)["\']/', $splms_iframe_match[0] ) ) {
+					$splms_iframe_error = true;
 				}
 			}
 
-			if ( $iframe_error ) :
+			if ( $splms_iframe_error ) :
 				?>
 				<div class="splms-notice splms-notice--error">
 					<div class="splms-notice__icon">
@@ -104,11 +106,11 @@ $has_shortcodes = splms_has_shortcodes( $lesson_embed_code );
 			<?php else : ?>
 				<?php
 				// Sanitize embed HTML with custom allowed tags.
-				$allowed_html = splms_allowed_embed_html();
-				$sanitized    = wp_kses( $lesson_embed_code, $allowed_html );
+				$splms_allowed_html = splms_allowed_embed_html();
+				$splms_sanitized    = wp_kses( $splms_lesson_embed_code, $splms_allowed_html );
 
 				// Check if sanitization removed important tags (indicates invalid HTML).
-				if ( empty( $sanitized ) || ( $has_embed_tags && ! preg_match( '/<(iframe|embed|object|script)/i', $sanitized ) ) ) :
+				if ( empty( $splms_sanitized ) || ( $splms_has_embed_tags && ! preg_match( '/<(iframe|embed|object|script)/i', $splms_sanitized ) ) ) :
 					?>
 					<div class="splms-notice splms-notice--warning">
 						<div class="splms-notice__icon">
@@ -123,20 +125,20 @@ $has_shortcodes = splms_has_shortcodes( $lesson_embed_code );
 				<?php else : ?>
 					<?php
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output sanitized with wp_kses.
-					echo $sanitized; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Content is sanitized via wp_kses above.
+					echo $splms_sanitized; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Content is sanitized via wp_kses above.
 					?>
 				<?php endif; ?>
 			<?php endif; ?>
 
-		<?php elseif ( preg_match( '/<[^>]+>/', $lesson_embed_code ) ) : ?>
+		<?php elseif ( preg_match( '/<[^>]+>/', $splms_lesson_embed_code ) ) : ?>
 			<?php
 			// Contains HTML tags but not embed tags - sanitize as regular HTML.
-			$allowed_html = splms_allowed_embed_html();
-			$sanitized    = wp_kses( $lesson_embed_code, $allowed_html );
+			$splms_allowed_html = splms_allowed_embed_html();
+			$splms_sanitized    = wp_kses( $splms_lesson_embed_code, $splms_allowed_html );
 
-			if ( ! empty( $sanitized ) ) :
+			if ( ! empty( $splms_sanitized ) ) :
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output sanitized with wp_kses.
-				echo $sanitized; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Content is sanitized via wp_kses above.
+				echo $splms_sanitized; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Content is sanitized via wp_kses above.
 			else :
 				?>
 				<div class="splms-notice splms-notice--warning">
@@ -151,7 +153,7 @@ $has_shortcodes = splms_has_shortcodes( $lesson_embed_code );
 				</div>
 			<?php endif; ?>
 
-		<?php elseif ( filter_var( trim( $lesson_embed_code ), FILTER_VALIDATE_URL ) ) : ?>
+		<?php elseif ( filter_var( trim( $splms_lesson_embed_code ), FILTER_VALIDATE_URL ) ) : ?>
 			<!-- Plain URL detected - show info notice. -->
 			<div class="splms-notice splms-notice--info">
 				<div class="splms-notice__icon">
@@ -162,7 +164,7 @@ $has_shortcodes = splms_has_shortcodes( $lesson_embed_code );
 				<div class="splms-notice__content">
 					<p>
 						<?php esc_html_e( 'Please use an iframe embed code or shortcode for interactive content. URL detected:', 'skillpulse-lms' ); ?>
-						<a href="<?php echo esc_url( $lesson_embed_code ); ?>" target="_blank"><?php echo esc_html( $lesson_embed_code ); ?></a>
+						<a href="<?php echo esc_url( $splms_lesson_embed_code ); ?>" target="_blank"><?php echo esc_html( $splms_lesson_embed_code ); ?></a>
 					</p>
 				</div>
 			</div>
@@ -171,7 +173,7 @@ $has_shortcodes = splms_has_shortcodes( $lesson_embed_code );
 			<?php
 			// Plain text - treat as regular content.
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output sanitized with wp_kses_post.
-			echo wp_kses_post( $lesson_embed_code );
+			echo wp_kses_post( $splms_lesson_embed_code );
 			?>
 		<?php endif; ?>
 	<?php endif; ?>

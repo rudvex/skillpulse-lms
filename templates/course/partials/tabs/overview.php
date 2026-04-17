@@ -12,7 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$course_id = get_the_ID();
+
+
+$splms_course_id = get_the_ID();
 ?>
 
 <div class="course-content-tabs">
@@ -23,15 +25,15 @@ $course_id = get_the_ID();
 
 			<?php
 			// Course requirements/prerequisites.
-			$prerequisites = splms_get_course_prerequisites( $course_id );
-			if ( ! empty( $prerequisites ) ) {
+			$splms_prerequisites = splms_get_course_prerequisites( $splms_course_id );
+			if ( ! empty( $splms_prerequisites ) ) {
 				?>
 				<div class="course-requirements">
 					<h3><?php esc_html_e( 'Prerequisites & Requirements', 'skillpulse-lms' ); ?></h3>
 					<div class="requirements-content">
 						<?php
 						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wpautop output is safe when used with wp_kses_post.
-						echo wpautop( wp_kses_post( $prerequisites ) );
+						echo wpautop( wp_kses_post( $splms_prerequisites ) );
 						?>
 					</div>
 				</div>
@@ -39,16 +41,16 @@ $course_id = get_the_ID();
 
 			<?php
 			// What you'll learn - learning outcomes.
-			$content_info      = splms_get_course_content_info( $course_id );
-			$learning_outcomes = $content_info['learning_outcomes'];
-			if ( ! empty( $learning_outcomes ) ) {
+			$splms_content_info      = splms_get_course_content_info( $splms_course_id );
+			$splms_learning_outcomes = $splms_content_info['learning_outcomes'];
+			if ( ! empty( $splms_learning_outcomes ) ) {
 				?>
 				<div class="course-learning-outcomes">
 					<h3><?php esc_html_e( 'What You\'ll Learn', 'skillpulse-lms' ); ?></h3>
 					<div class="learning-outcomes-content">
 						<?php
 						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wpautop output is safe when used with wp_kses_post.
-						echo wpautop( wp_kses_post( $learning_outcomes ) );
+						echo wpautop( wp_kses_post( $splms_learning_outcomes ) );
 						?>
 					</div>
 				</div>

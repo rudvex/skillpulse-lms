@@ -40,9 +40,9 @@ wp_enqueue_script( 'splms-frontend-script' );
 			<div class="splms-success-header">
 				<?php
 				// translators: %s: Site name.
-				$welcome_text = sprintf( __( 'Welcome to %s', 'skillpulse-lms' ), get_bloginfo( 'name' ) );
+				$splms_welcome_text = sprintf( __( 'Welcome to %s', 'skillpulse-lms' ), get_bloginfo( 'name' ) );
 				?>
-				<h1><?php echo esc_html( $welcome_text ); ?></h1>
+				<h1><?php echo esc_html( $splms_welcome_text ); ?></h1>
 				<p><?php esc_html_e( 'Your account has been created successfully. We\'re excited to have you join our learning community!', 'skillpulse-lms' ); ?></p>
 			</div>
 

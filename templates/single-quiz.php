@@ -13,27 +13,29 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+
+
 // Get quiz and course data.
 global $post;
-$quiz_id   = get_the_ID();
-$user_id   = get_current_user_id();
-$course_id = splms_get_quiz_course( $quiz_id );
+$splms_quiz_id   = get_the_ID();
+$splms_user_id   = get_current_user_id();
+$splms_course_id = splms_get_quiz_course( $splms_quiz_id );
 
 // Get quiz settings.
-$quizzes_instance = SkillPulse_LMS_Quizzes::get_instance();
-$quiz_settings    = $quizzes_instance->get_quiz_settings( $quiz_id );
-$quiz_type        = isset( $quiz_settings['quiz_type_settings']['quiz_type'] ) ? $quiz_settings['quiz_type_settings']['quiz_type'] : 'graded';
+$splms_quizzes_instance = SkillPulse_LMS_Quizzes::get_instance();
+$splms_quiz_settings    = $splms_quizzes_instance->get_quiz_settings( $splms_quiz_id );
+$splms_quiz_type        = isset( $splms_quiz_settings['quiz_type_settings']['quiz_type'] ) ? $splms_quiz_settings['quiz_type_settings']['quiz_type'] : 'graded';
 
 // Get navigation.
-$navigation = $quizzes_instance->get_quiz_navigation( $quiz_id, $user_id );
+$splms_navigation = $splms_quizzes_instance->get_quiz_navigation( $splms_quiz_id, $splms_user_id );
 
 // Get course info.
-$course_title = $course_id ? get_the_title( $course_id ) : '';
-$course_url   = $course_id ? get_permalink( $course_id ) : '';
+$splms_course_title = $splms_course_id ? get_the_title( $splms_course_id ) : '';
+$splms_course_url   = $splms_course_id ? get_permalink( $splms_course_id ) : '';
 
 // Check if quiz is passed.
-$attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
-$has_passed     = $user_id ? $attempts_query->has_user_passed( $user_id, $quiz_id ) : false;
+$splms_attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+$splms_has_passed     = $splms_user_id ? $splms_attempts_query->has_user_passed( $splms_user_id, $splms_quiz_id ) : false;
 
 ?>
 <!DOCTYPE html>
@@ -54,7 +56,7 @@ do_action( 'splms_before_quiz_fullscreen' );
 ?>
 
 <!-- Full-Screen Quiz Layout -->
-<div id="splms-quiz-fullscreen-container" class="splms-fullscreen-container splms-quiz-container" data-quiz-id="<?php echo esc_attr( $quiz_id ); ?>" data-course-id="<?php echo esc_attr( $course_id ); ?>">
+<div id="splms-quiz-fullscreen-container" class="splms-fullscreen-container splms-quiz-container" data-quiz-id="<?php echo esc_attr( $splms_quiz_id ); ?>" data-course-id="<?php echo esc_attr( $splms_course_id ); ?>">
 
 	<!-- Header Bar -->
 	<?php splms_get_template_part( 'quiz/header' ); ?>

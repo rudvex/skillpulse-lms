@@ -13,18 +13,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$course_id      = get_the_ID();
-$user_id        = get_current_user_id();
-$author_id      = get_the_author_meta( 'ID' );
-$rating_summary = splms_get_course_rating( $course_id );
+
+
+$splms_course_id      = get_the_ID();
+$splms_user_id        = get_current_user_id();
+$splms_author_id      = get_the_author_meta( 'ID' );
+$splms_rating_summary = splms_get_course_rating( $splms_course_id );
 
 // Ensure we have the proper structure.
-if ( ! is_array( $rating_summary ) ) {
-	$rating_summary = array();
+if ( ! is_array( $splms_rating_summary ) ) {
+	$splms_rating_summary = array();
 }
 
 // Set default values if keys are missing.
-$rating_summary = array_merge(
+$splms_rating_summary = array_merge(
 	array(
 		'average_rating'   => 0,
 		'total_reviews'    => 0,
@@ -36,104 +38,104 @@ $rating_summary = array_merge(
 			1 => 0,
 		),
 	),
-	$rating_summary
+	$splms_rating_summary
 );
 
 // Get instructor stats.
-$instructor_courses_count = count_user_posts( $author_id, SPLMS_POST_TYPES['course'] );
-$instructor_meta          = get_user_meta( $author_id, 'splms_instructor_stats', true );
+$splms_instructor_courses_count = count_user_posts( $splms_author_id, SPLMS_POST_TYPES['course'] );
+$splms_instructor_meta          = get_user_meta( $splms_author_id, 'splms_instructor_stats', true );
 
-if ( ! is_array( $instructor_meta ) ) {
-	$instructor_meta = array();
+if ( ! is_array( $splms_instructor_meta ) ) {
+	$splms_instructor_meta = array();
 }
 
-$instructor_stats = array_merge(
+$splms_instructor_stats = array_merge(
 	array(
 		'total_subscribers' => 0,
 		'total_views'       => 0,
 		'subjects_count'    => 0,
 		'instructor_rating' => 0,
 	),
-	$instructor_meta
+	$splms_instructor_meta
 );
 
 // Get course statistics.
-$duration       = splms_get_course_duration( $course_id );
-$students_count = splms_get_course_enrollment_count( $course_id );
+$splms_duration       = splms_get_course_duration( $splms_course_id );
+$splms_students_count = splms_get_course_enrollment_count( $splms_course_id );
 
 // Get all course sections.
-$all_sections       = array();
-$total_videos       = 0;
-$total_notes        = 0;
-$total_duration_min = 0;
+$splms_all_sections       = array();
+$splms_total_videos       = 0;
+$splms_total_notes        = 0;
+$splms_total_duration_min = 0;
 
-$course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
-if ( $course_items_query ) {
-	$course_items = $course_items_query->get_items( $course_id );
+$splms_course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+if ( $splms_course_items_query ) {
+	$splms_course_items = $splms_course_items_query->get_items( $splms_course_id );
 
-	foreach ( $course_items as $course_item ) {
-		if ( SPLMS_POST_TYPES['section'] !== $course_item->item_type ) {
+	foreach ( $splms_course_items as $splms_course_item ) {
+		if ( SPLMS_POST_TYPES['section'] !== $splms_course_item->item_type ) {
 			continue;
 		}
 
-		$section_id       = $course_item->item_id;
-		$section_pricing  = splms_get_section_pricing_with_access( $section_id, $user_id );
-		$section_stats    = splms_get_section_content_stats( $section_id );
-		$section_duration = splms_get_section_duration( $section_id );
+		$splms_section_id       = $splms_course_item->item_id;
+		$splms_section_pricing  = splms_get_section_pricing_with_access( $splms_section_id, $splms_user_id );
+		$splms_section_stats    = splms_get_section_content_stats( $splms_section_id );
+		$splms_section_duration = splms_get_section_duration( $splms_section_id );
 
 		// Calculate total stats.
-		$total_videos += $section_stats['lessons'];
-		$total_notes  += $section_stats['quizzes'];
+		$splms_total_videos += $splms_section_stats['lessons'];
+		$splms_total_notes  += $splms_section_stats['quizzes'];
 
 		// Convert duration to minutes.
-		if ( $section_duration ) {
-			preg_match_all( '/(\d+)hr|(\d+)min/', $section_duration, $matches );
-			$hours               = isset( $matches[1][0] ) && '' !== $matches[1][0] ? (int) $matches[1][0] : 0;
-			$minutes             = isset( $matches[2][0] ) && '' !== $matches[2][0] ? (int) $matches[2][0] : 0;
-			$total_duration_min += ( $hours * 60 ) + $minutes;
+		if ( $splms_section_duration ) {
+			preg_match_all( '/(\d+)hr|(\d+)min/', $splms_section_duration, $splms_matches );
+			$splms_hours               = isset( $splms_matches[1][0] ) && '' !== $splms_matches[1][0] ? (int) $splms_matches[1][0] : 0;
+			$splms_minutes             = isset( $splms_matches[2][0] ) && '' !== $splms_matches[2][0] ? (int) $splms_matches[2][0] : 0;
+			$splms_total_duration_min += ( $splms_hours * 60 ) + $splms_minutes;
 		}
 
-		$all_sections[] = array(
-			'id'           => $section_id,
-			'title'        => get_the_title( $section_id ),
-			'is_purchased' => in_array( $section_id, splms_get_user_purchased_sections( $course_id, $user_id ), true ),
-			'pricing'      => $section_pricing,
-			'stats'        => $section_stats,
-			'duration'     => $section_duration,
-			'permalink'    => get_permalink( $section_id ),
+		$splms_all_sections[] = array(
+			'id'           => $splms_section_id,
+			'title'        => get_the_title( $splms_section_id ),
+			'is_purchased' => in_array( $splms_section_id, splms_get_user_purchased_sections( $splms_course_id, $splms_user_id ), true ),
+			'pricing'      => $splms_section_pricing,
+			'stats'        => $splms_section_stats,
+			'duration'     => $splms_section_duration,
+			'permalink'    => get_permalink( $splms_section_id ),
 		);
 	}
 }
 
 // Format total duration.
-$total_duration_hours   = floor( $total_duration_min / 60 );
-$total_duration_minutes = $total_duration_min % 60;
-$formatted_duration     = '';
-if ( $total_duration_hours > 0 ) {
+$splms_total_duration_hours   = floor( $splms_total_duration_min / 60 );
+$splms_total_duration_minutes = $splms_total_duration_min % 60;
+$splms_formatted_duration     = '';
+if ( $splms_total_duration_hours > 0 ) {
 	/* translators: %d: Number of hours. */
-	$formatted_duration .= sprintf( _n( '%dhr', '%dhr', $total_duration_hours, 'skillpulse-lms' ), $total_duration_hours ) . ' ';
+	$splms_formatted_duration .= sprintf( _n( '%dhr', '%dhr', $splms_total_duration_hours, 'skillpulse-lms' ), $splms_total_duration_hours ) . ' ';
 }
-if ( $total_duration_minutes > 0 ) {
+if ( $splms_total_duration_minutes > 0 ) {
 	/* translators: %d: Number of minutes. */
-	$formatted_duration .= sprintf( _n( '%dmin', '%dmin', $total_duration_minutes, 'skillpulse-lms' ), $total_duration_minutes );
+	$splms_formatted_duration .= sprintf( _n( '%dmin', '%dmin', $splms_total_duration_minutes, 'skillpulse-lms' ), $splms_total_duration_minutes );
 }
 
 // Get university/institution.
-$instructor_university = get_the_author_meta( 'university', $author_id );
-if ( empty( $instructor_university ) ) {
-	$instructor_university = get_the_author_meta( 'institution', $author_id );
+$splms_instructor_university = get_the_author_meta( 'university', $splms_author_id );
+if ( empty( $splms_instructor_university ) ) {
+	$splms_instructor_university = get_the_author_meta( 'institution', $splms_author_id );
 }
 
 // Get access info.
-$access_info        = splms_get_course_access_info( $course_id, $user_id );
-$course_access_type = isset( $access_info['course_access_type'] ) ? $access_info['course_access_type'] : 'public_free';
-$enrollment_dates   = splms_get_course_enrollment_dates( $course_id );
-$capacity_info      = splms_get_course_max_enrollment_info( $course_id );
-$is_enrolled        = splms_is_user_enrolled( $course_id );
-$can_wishlist       = splms_get_setting( 'enable_course_wishlist', true ) && ! $is_enrolled;
-$user_wishlist      = is_user_logged_in() ? get_user_meta( $user_id, '_splms_course_wishlist', true ) : array();
-$user_wishlist      = is_array( $user_wishlist ) ? array_map( 'intval', $user_wishlist ) : array();
-$in_wishlist        = in_array( $course_id, $user_wishlist, true );
+$splms_access_info        = splms_get_course_access_info( $splms_course_id, $splms_user_id );
+$splms_course_access_type = isset( $splms_access_info['course_access_type'] ) ? $splms_access_info['course_access_type'] : 'public_free';
+$splms_enrollment_dates   = splms_get_course_enrollment_dates( $splms_course_id );
+$splms_capacity_info      = splms_get_course_max_enrollment_info( $splms_course_id );
+$splms_is_enrolled        = splms_is_user_enrolled( $splms_course_id );
+$splms_can_wishlist       = splms_get_setting( 'enable_course_wishlist', true ) && ! $splms_is_enrolled;
+$splms_user_wishlist      = is_user_logged_in() ? get_user_meta( $splms_user_id, '_splms_course_wishlist', true ) : array();
+$splms_user_wishlist      = is_array( $splms_user_wishlist ) ? array_map( 'intval', $splms_user_wishlist ) : array();
+$splms_in_wishlist        = in_array( $splms_course_id, $splms_user_wishlist, true );
 ?>
 
 <div class="splms-hero-v2">
@@ -157,33 +159,33 @@ $in_wishlist        = in_array( $course_id, $user_wishlist, true );
 
 				<!-- Instructor Name (Arabic) -->
 				<div class="splms-hero-v2__instructor-name">
-					<a href="<?php echo esc_url( get_author_posts_url( $author_id ) ); ?>">
-						<?php echo esc_html( get_the_author_meta( 'display_name', $author_id ) ); ?>
+					<a href="<?php echo esc_url( get_author_posts_url( $splms_author_id ) ); ?>">
+						<?php echo esc_html( get_the_author_meta( 'display_name', $splms_author_id ) ); ?>
 					</a>
 				</div>
 
 				<!-- Institution -->
-				<?php if ( $instructor_university ) { ?>
+				<?php if ( $splms_instructor_university ) { ?>
 					<div class="splms-hero-v2__institution">
-						<?php echo esc_html( $instructor_university ); ?>
+						<?php echo esc_html( $splms_instructor_university ); ?>
 					</div>
 				<?php } ?>
 
 				<!-- Rating and Stats -->
 				<div class="splms-hero-v2__rating-stats">
-					<?php if ( $rating_summary['average_rating'] > 0 ) { ?>
+					<?php if ( $splms_rating_summary['average_rating'] > 0 ) { ?>
 						<div class="splms-hero-v2__rating">
 							<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 								<path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
 							</svg>
-							<span class="splms-hero-v2__rating-value"><?php echo number_format( $rating_summary['average_rating'], 1 ); ?>/5</span>
+							<span class="splms-hero-v2__rating-value"><?php echo number_format( $splms_rating_summary['average_rating'], 1 ); ?>/5</span>
 						</div>
 					<?php } ?>
 					<span class="splms-hero-v2__separator">•</span>
 					<span class="splms-hero-v2__stat">
 						<?php
 						/* translators: %d: Number of courses. */
-						printf( esc_html( _n( '%d Course', '%d Courses', $instructor_courses_count, 'skillpulse-lms' ) ), (int) $instructor_courses_count );
+						printf( esc_html( _n( '%d Course', '%d Courses', $splms_instructor_courses_count, 'skillpulse-lms' ) ), (int) $splms_instructor_courses_count );
 						?>
 					</span>
 				</div>
@@ -206,10 +208,10 @@ $in_wishlist        = in_array( $course_id, $user_wishlist, true );
 				<div class="splms-hero-v2__stat-value">
 					<?php
 					// Format subscriber count.
-					if ( $students_count >= 1000 ) {
-						echo esc_html( number_format( $students_count / 1000, 2 ) . 'K' );
+					if ( $splms_students_count >= 1000 ) {
+						echo esc_html( number_format( $splms_students_count / 1000, 2 ) . 'K' );
 					} else {
-						echo esc_html( number_format( $students_count ) );
+						echo esc_html( number_format( $splms_students_count ) );
 					}
 					?>
 				</div>
@@ -217,12 +219,12 @@ $in_wishlist        = in_array( $course_id, $user_wishlist, true );
 			</div>
 
 			<div class="splms-hero-v2__stat-item">
-				<div class="splms-hero-v2__stat-value"><?php echo esc_html( $formatted_duration ); ?></div>
+				<div class="splms-hero-v2__stat-value"><?php echo esc_html( $splms_formatted_duration ); ?></div>
 				<div class="splms-hero-v2__stat-label"><?php esc_html_e( 'Total Duration', 'skillpulse-lms' ); ?></div>
 			</div>
 
 			<div class="splms-hero-v2__stat-item">
-				<div class="splms-hero-v2__stat-value"><?php echo esc_html( $total_videos ); ?></div>
+				<div class="splms-hero-v2__stat-value"><?php echo esc_html( $splms_total_videos ); ?></div>
 				<div class="splms-hero-v2__stat-label"><?php esc_html_e( 'Videos', 'skillpulse-lms' ); ?></div>
 			</div>
 		</div>
@@ -233,22 +235,22 @@ $in_wishlist        = in_array( $course_id, $user_wishlist, true );
 			<div class="splms-hero-v2__instructor-details">
 				<!-- Avatar -->
 				<div class="splms-hero-v2__instructor-avatar">
-					<?php echo get_avatar( $author_id, 48, '', get_the_author_meta( 'display_name', $author_id ), array( 'class' => 'splms-avatar' ) ); ?>
+					<?php echo get_avatar( $splms_author_id, 48, '', get_the_author_meta( 'display_name', $splms_author_id ), array( 'class' => 'splms-avatar' ) ); ?>
 				</div>
 
 				<!-- Name and Info -->
 				<div class="splms-hero-v2__instructor-info">
-					<a href="<?php echo esc_url( get_author_posts_url( $author_id ) ); ?>" class="splms-hero-v2__instructor-link">
-						<?php echo esc_html( get_the_author_meta( 'display_name', $author_id ) ); ?>
+					<a href="<?php echo esc_url( get_author_posts_url( $splms_author_id ) ); ?>" class="splms-hero-v2__instructor-link">
+						<?php echo esc_html( get_the_author_meta( 'display_name', $splms_author_id ) ); ?>
 					</a>
-					<?php if ( $instructor_stats['instructor_rating'] > 0 ) { ?>
+					<?php if ( $splms_instructor_stats['instructor_rating'] > 0 ) { ?>
 						<div class="splms-hero-v2__instructor-rating">
-							<?php for ( $i = 0; $i < 5; $i++ ) : ?>
-								<svg width="14" height="14" viewBox="0 0 24 24" fill="<?php echo esc_attr( $i <= $instructor_stats['instructor_rating'] ? 'currentColor' : 'none' ); ?>" xmlns="http://www.w3.org/2000/svg">
+							<?php for ( $splms_i = 0; $splms_i < 5; $splms_i++ ) : ?>
+								<svg width="14" height="14" viewBox="0 0 24 24" fill="<?php echo esc_attr( $splms_i <= $splms_instructor_stats['instructor_rating'] ? 'currentColor' : 'none' ); ?>" xmlns="http://www.w3.org/2000/svg">
 									<path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2"/>
 								</svg>
 							<?php endfor; ?>
-							<span class="splms-hero-v2__rating-number"><?php echo esc_html( $instructor_stats['instructor_rating'] ); ?>/5</span>
+							<span class="splms-hero-v2__rating-number"><?php echo esc_html( $splms_instructor_stats['instructor_rating'] ); ?>/5</span>
 						</div>
 					<?php } ?>
 				</div>
@@ -260,12 +262,12 @@ $in_wishlist        = in_array( $course_id, $user_wishlist, true );
 					<span class="splms-hero-v2__instructor-stat-value">
 						<?php
 						// Format views.
-						if ( $instructor_stats['total_views'] >= 1000000 ) {
-							echo esc_html( number_format( $instructor_stats['total_views'] / 1000000, 2 ) . 'M' );
-						} elseif ( $instructor_stats['total_views'] >= 1000 ) {
-							echo esc_html( number_format( $instructor_stats['total_views'] / 1000, 2 ) . 'K' );
+						if ( $splms_instructor_stats['total_views'] >= 1000000 ) {
+							echo esc_html( number_format( $splms_instructor_stats['total_views'] / 1000000, 2 ) . 'M' );
+						} elseif ( $splms_instructor_stats['total_views'] >= 1000 ) {
+							echo esc_html( number_format( $splms_instructor_stats['total_views'] / 1000, 2 ) . 'K' );
 						} else {
-							echo esc_html( number_format( $instructor_stats['total_views'] ) );
+							echo esc_html( number_format( $splms_instructor_stats['total_views'] ) );
 						}
 						?>
 						<?php esc_html_e( 'Views', 'skillpulse-lms' ); ?>
@@ -276,10 +278,10 @@ $in_wishlist        = in_array( $course_id, $user_wishlist, true );
 					<span class="splms-hero-v2__instructor-stat-value">
 						<?php
 						// Format subscribers.
-						if ( $instructor_stats['total_subscribers'] >= 1000 ) {
-							echo esc_html( number_format( $instructor_stats['total_subscribers'] / 1000, 2 ) . 'K' );
+						if ( $splms_instructor_stats['total_subscribers'] >= 1000 ) {
+							echo esc_html( number_format( $splms_instructor_stats['total_subscribers'] / 1000, 2 ) . 'K' );
 						} else {
-							echo esc_html( number_format( $instructor_stats['total_subscribers'] ) );
+							echo esc_html( number_format( $splms_instructor_stats['total_subscribers'] ) );
 						}
 						?>
 						<?php esc_html_e( 'Subscribers', 'skillpulse-lms' ); ?>
@@ -290,7 +292,7 @@ $in_wishlist        = in_array( $course_id, $user_wishlist, true );
 					<span class="splms-hero-v2__instructor-stat-value">
 						<?php
 						/* translators: %d: Number of subjects. */
-						printf( esc_html( _n( '%d Subject', '%d Subjects', $instructor_stats['subjects_count'], 'skillpulse-lms' ) ), (int) $instructor_stats['subjects_count'] );
+						printf( esc_html( _n( '%d Subject', '%d Subjects', $splms_instructor_stats['subjects_count'], 'skillpulse-lms' ) ), (int) $splms_instructor_stats['subjects_count'] );
 						?>
 					</span>
 				</div>
@@ -305,37 +307,37 @@ $in_wishlist        = in_array( $course_id, $user_wishlist, true );
 
 			<!-- Sections List -->
 			<div class="splms-hero-v2__sections-list">
-				<?php foreach ( $all_sections as $index => $section ) : ?>
-					<a href="<?php echo esc_url( $section['permalink'] ); ?>" class="splms-hero-v2__section-item">
+				<?php foreach ( $splms_all_sections as $splms_index => $splms_section ) : ?>
+					<a href="<?php echo esc_url( $splms_section['permalink'] ); ?>" class="splms-hero-v2__section-item">
 						<div class="splms-hero-v2__section-content">
-							<h4 class="splms-hero-v2__section-name"><?php echo esc_html( $section['title'] ); ?></h4>
+							<h4 class="splms-hero-v2__section-name"><?php echo esc_html( $splms_section['title'] ); ?></h4>
 							<div class="splms-hero-v2__section-label"><?php esc_html_e( 'Section', 'skillpulse-lms' ); ?></div>
 							<div class="splms-hero-v2__section-meta">
-								<?php if ( $section['duration'] ) : ?>
-									<span><?php echo esc_html( $section['duration'] ); ?></span>
+								<?php if ( $splms_section['duration'] ) : ?>
+									<span><?php echo esc_html( $splms_section['duration'] ); ?></span>
 								<?php endif; ?>
-								<?php if ( $section['duration'] && $section['stats']['lessons'] > 0 ) : ?>
+								<?php if ( $splms_section['duration'] && $splms_section['stats']['lessons'] > 0 ) : ?>
 									<span class="splms-hero-v2__meta-separator">•</span>
 								<?php endif; ?>
-								<?php if ( $section['stats']['lessons'] > 0 ) : ?>
+								<?php if ( $splms_section['stats']['lessons'] > 0 ) : ?>
 									<span>
 										<?php
 										printf(
 											/* translators: %d: Number of videos. */
-											esc_html( _n( '%d Video', '%d Videos', $section['stats']['lessons'], 'skillpulse-lms' ) ),
-											(int) $section['stats']['lessons']
+											esc_html( _n( '%d Video', '%d Videos', $splms_section['stats']['lessons'], 'skillpulse-lms' ) ),
+											(int) $splms_section['stats']['lessons']
 										);
 										?>
 									</span>
 								<?php endif; ?>
-								<?php if ( $section['stats']['quizzes'] > 0 ) : ?>
+								<?php if ( $splms_section['stats']['quizzes'] > 0 ) : ?>
 									<span class="splms-hero-v2__meta-separator">•</span>
 									<span>
 										<?php
 										printf(
 											/* translators: %d: Number of notes. */
-											esc_html( _n( '%d Note', '%d Notes', $section['stats']['quizzes'], 'skillpulse-lms' ) ),
-											(int) $section['stats']['quizzes']
+											esc_html( _n( '%d Note', '%d Notes', $splms_section['stats']['quizzes'], 'skillpulse-lms' ) ),
+											(int) $splms_section['stats']['quizzes']
 										);
 										?>
 									</span>
@@ -343,17 +345,17 @@ $in_wishlist        = in_array( $course_id, $user_wishlist, true );
 							</div>
 						</div>
 						<div class="splms-hero-v2__section-actions">
-							<?php if ( $section['is_purchased'] ) : ?>
+							<?php if ( $splms_section['is_purchased'] ) : ?>
 								<span class="splms-hero-v2__price-badge splms-hero-v2__price-badge--purchased">
 									<?php esc_html_e( 'Purchased', 'skillpulse-lms' ); ?>
 								</span>
-							<?php elseif ( $section['pricing']['is_free'] ) : ?>
+							<?php elseif ( $splms_section['pricing']['is_free'] ) : ?>
 								<span class="splms-hero-v2__price-badge splms-hero-v2__price-badge--free">
 									<?php esc_html_e( 'Free', 'skillpulse-lms' ); ?>
 								</span>
 							<?php else : ?>
 								<span class="splms-hero-v2__price-badge splms-hero-v2__price-badge--paid">
-									<?php echo esc_html( get_splms_price_format( $section['pricing']['effective_price'] ) ); ?>
+									<?php echo esc_html( get_splms_price_format( $splms_section['pricing']['effective_price'] ) ); ?>
 								</span>
 							<?php endif; ?>
 							<svg class="splms-hero-v2__arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -367,22 +369,22 @@ $in_wishlist        = in_array( $course_id, $user_wishlist, true );
 			<!-- Course Enrollment Card -->
 			<div class="splms-hero-v2__bundle-offer">
 				<?php
-				$course_type_data = splms_get_course_type_data( $access_info );
-				$full_price       = isset( $access_info['effective_price'] ) ? $access_info['effective_price'] : 0;
-				$original_price   = isset( $access_info['regular_price'] ) ? $access_info['regular_price'] : $full_price;
-				$discount_percent = 0;
+				$splms_course_type_data = splms_get_course_type_data( $splms_access_info );
+				$splms_full_price       = isset( $splms_access_info['effective_price'] ) ? $splms_access_info['effective_price'] : 0;
+				$splms_original_price   = isset( $splms_access_info['regular_price'] ) ? $splms_access_info['regular_price'] : $splms_full_price;
+				$splms_discount_percent = 0;
 
-				if ( $original_price > 0 && $full_price < $original_price ) {
-					$discount_percent = round( ( ( $original_price - $full_price ) / $original_price ) * 100 );
+				if ( $splms_original_price > 0 && $splms_full_price < $splms_original_price ) {
+					$splms_discount_percent = round( ( ( $splms_original_price - $splms_full_price ) / $splms_original_price ) * 100 );
 				}
 
 				// Show discount badge for paid courses with discount.
-				if ( 'public_paid' === $course_access_type && $discount_percent > 0 ) :
+				if ( 'public_paid' === $splms_course_access_type && $splms_discount_percent > 0 ) :
 					?>
 					<div class="splms-hero-v2__discount-badge">
 						<?php
 						/* translators: %d: Discount percentage. */
-						printf( esc_html__( 'At %d%% OFF', 'skillpulse-lms' ), (int) $discount_percent );
+						printf( esc_html__( 'At %d%% OFF', 'skillpulse-lms' ), (int) $splms_discount_percent );
 						?>
 					</div>
 				<?php endif; ?>
@@ -391,31 +393,31 @@ $in_wishlist        = in_array( $course_id, $user_wishlist, true );
 
 				<?php
 				// Display pricing based on course type.
-				if ( 'public_free' === $course_access_type ) :
+				if ( 'public_free' === $splms_course_access_type ) :
 					?>
 					<div class="splms-hero-v2__course-type">
 						<span class="splms-hero-v2__type-badge splms-hero-v2__type-badge--free">
 							<?php esc_html_e( 'Free', 'skillpulse-lms' ); ?>
 						</span>
 					</div>
-				<?php elseif ( 'public_paid' === $course_access_type && splms_is_paid_courses_enabled() ) : ?>
+				<?php elseif ( 'public_paid' === $splms_course_access_type && splms_is_paid_courses_enabled() ) : ?>
 					<div class="splms-hero-v2__bundle-price">
 						<span class="splms-hero-v2__bundle-price-current">
-							<?php echo esc_html( get_splms_price_format( $full_price ) ); ?>
+							<?php echo esc_html( get_splms_price_format( $splms_full_price ) ); ?>
 						</span>
-						<?php if ( $discount_percent > 0 ) : ?>
+						<?php if ( $splms_discount_percent > 0 ) : ?>
 							<span class="splms-hero-v2__bundle-price-original">
-								<?php echo esc_html( get_splms_price_format( $original_price ) ); ?>
+								<?php echo esc_html( get_splms_price_format( $splms_original_price ) ); ?>
 							</span>
 						<?php endif; ?>
 					</div>
-				<?php elseif ( 'invitation_only' === $course_access_type ) : ?>
+				<?php elseif ( 'invitation_only' === $splms_course_access_type ) : ?>
 					<div class="splms-hero-v2__course-type">
 						<span class="splms-hero-v2__type-badge splms-hero-v2__type-badge--invitation">
 							<?php esc_html_e( 'Invitation Only', 'skillpulse-lms' ); ?>
 						</span>
 					</div>
-				<?php elseif ( 'prerequisite_required' === $course_access_type ) : ?>
+				<?php elseif ( 'prerequisite_required' === $splms_course_access_type ) : ?>
 					<div class="splms-hero-v2__course-type">
 						<span class="splms-hero-v2__type-badge splms-hero-v2__type-badge--prerequisite">
 							<?php esc_html_e( 'Prerequisite Required', 'skillpulse-lms' ); ?>
@@ -423,16 +425,16 @@ $in_wishlist        = in_array( $course_id, $user_wishlist, true );
 					</div>
 					<?php
 					// Get prerequisite course info.
-					$prerequisite_courses = isset( $access_info['prerequisite_courses'] ) ? $access_info['prerequisite_courses'] : array();
-					if ( ! empty( $prerequisite_courses ) ) {
-						$prereq_course_id = $prerequisite_courses[0];
+					$splms_prerequisite_courses = isset( $splms_access_info['prerequisite_courses'] ) ? $splms_access_info['prerequisite_courses'] : array();
+					if ( ! empty( $splms_prerequisite_courses ) ) {
+						$splms_prereq_course_id = $splms_prerequisite_courses[0];
 						?>
 						<div class="splms-hero-v2__prerequisite-info">
 							<p class="splms-hero-v2__prerequisite-text">
 								<?php esc_html_e( 'Complete the prerequisite course first:', 'skillpulse-lms' ); ?>
 							</p>
-							<a href="<?php echo esc_url( get_permalink( $prereq_course_id ) ); ?>" class="splms-hero-v2__prerequisite-link">
-								<?php echo esc_html( get_the_title( $prereq_course_id ) ); ?>
+							<a href="<?php echo esc_url( get_permalink( $splms_prereq_course_id ) ); ?>" class="splms-hero-v2__prerequisite-link">
+								<?php echo esc_html( get_the_title( $splms_prereq_course_id ) ); ?>
 								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 								</svg>
@@ -445,34 +447,34 @@ $in_wishlist        = in_array( $course_id, $user_wishlist, true );
 
 				<?php
 				// Show enrollment button based on course type.
-				if ( 'public_free' === $course_access_type ) :
+				if ( 'public_free' === $splms_course_access_type ) :
 					?>
-					<a href="<?php echo esc_url( add_query_arg( 'enroll', 'free', get_permalink( $course_id ) ) ); ?>" class="splms-hero-v2__enroll-btn splms-hero-v2__enroll-btn--free">
+					<a href="<?php echo esc_url( add_query_arg( 'enroll', 'free', get_permalink( $splms_course_id ) ) ); ?>" class="splms-hero-v2__enroll-btn splms-hero-v2__enroll-btn--free">
 						<?php esc_html_e( 'Enroll Now', 'skillpulse-lms' ); ?>
 					</a>
-				<?php elseif ( 'public_paid' === $course_access_type && splms_is_paid_courses_enabled() && $full_price > 0 ) : ?>
+				<?php elseif ( 'public_paid' === $splms_course_access_type && splms_is_paid_courses_enabled() && $splms_full_price > 0 ) : ?>
 					<?php
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
 					echo splms_render_enrollment_button(
-						$course_id,
-						is_user_logged_in() ? $user_id : 0,
-						$access_info,
-						$enrollment_dates,
-						$capacity_info,
-						$is_enrolled
+						$splms_course_id,
+						is_user_logged_in() ? $splms_user_id : 0,
+						$splms_access_info,
+						$splms_enrollment_dates,
+						$splms_capacity_info,
+						$splms_is_enrolled
 					);
 					?>
-				<?php elseif ( 'invitation_only' !== $course_access_type && 'prerequisite_required' !== $course_access_type ) : ?>
+				<?php elseif ( 'invitation_only' !== $splms_course_access_type && 'prerequisite_required' !== $splms_course_access_type ) : ?>
 					<?php
 					// For other course types, show generic enrollment button.
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
 					echo splms_render_enrollment_button(
-						$course_id,
-						is_user_logged_in() ? $user_id : 0,
-						$access_info,
-						$enrollment_dates,
-						$capacity_info,
-						$is_enrolled
+						$splms_course_id,
+						is_user_logged_in() ? $splms_user_id : 0,
+						$splms_access_info,
+						$splms_enrollment_dates,
+						$splms_capacity_info,
+						$splms_is_enrolled
 					);
 					?>
 				<?php endif; ?>

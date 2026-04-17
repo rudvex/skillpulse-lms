@@ -13,37 +13,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+
+
 // Extract variables from args.
 // phpcs:ignore WordPress.PHP.DontExtract.extract_extract -- Template file uses extract for convenience.
 extract( $args );
 
 // Get user certificates.
-$user_certificates = array();
+$splms_user_certificates = array();
 if ( class_exists( 'SkillPulse_LMS_Certificate_Display' ) && class_exists( 'SkillPulse_LMS_Enrollments_Query' ) ) {
-	$enrollments_query = SkillPulse_LMS_Enrollments_Query::get_instance();
-	$enrolled_courses  = $enrollments_query->get_user_courses( $user_id );
+	$splms_enrollments_query = SkillPulse_LMS_Enrollments_Query::get_instance();
+	$splms_enrolled_courses  = $splms_enrollments_query->get_user_courses( $splms_user_id );
 
-	foreach ( $enrolled_courses as $enrollment ) {
-		$course_id = $enrollment->course_id ?? $enrollment['course_id'];
+	foreach ( $splms_enrolled_courses as $splms_enrollment ) {
+		$splms_course_id = $splms_enrollment->course_id ?? $splms_enrollment['course_id'];
 
 		// Check if course is completed.
-		$progress = 0;
+		$splms_progress = 0;
 		if ( class_exists( 'SkillPulse_LMS_Dashboard_API' ) ) {
-			$dashboard_api = SkillPulse_LMS_Dashboard_API::get_instance();
-			$progress_data = $dashboard_api->get_course_progress( $course_id, $user_id );
-			$progress      = $progress_data['percentage'] ?? 0;
+			$splms_dashboard_api = SkillPulse_LMS_Dashboard_API::get_instance();
+			$splms_progress_data = $splms_dashboard_api->get_course_progress( $splms_course_id, $splms_user_id );
+			$splms_progress      = $splms_progress_data['percentage'] ?? 0;
 		}
 
-		if ( $progress >= 100 ) {
-			$course_post = get_post( $course_id );
-			if ( $course_post ) {
-				$user_certificates[] = array(
-					'course_id'       => $course_id,
-					'course_title'    => $course_post->post_title,
+		if ( $splms_progress >= 100 ) {
+			$splms_course_post = get_post( $splms_course_id );
+			if ( $splms_course_post ) {
+				$splms_user_certificates[] = array(
+					'course_id'       => $splms_course_id,
+					'course_title'    => $splms_course_post->post_title,
 					'completion_date' => gmdate( 'F j, Y' ), // You might want to get actual completion date.
-					'certificate_id'  => 'CERT-' . strtoupper( substr( md5( $course_id . $user_id ), 0, 8 ) ),
-					'user_id'         => $user_id,
-					'instructor_name' => get_the_author_meta( 'display_name', $course_post->post_author ),
+					'certificate_id'  => 'CERT-' . strtoupper( substr( md5( $splms_course_id . $splms_user_id ), 0, 8 ) ),
+					'user_id'         => $splms_user_id,
+					'instructor_name' => get_the_author_meta( 'display_name', $splms_course_post->post_author ),
 				);
 			}
 		}
@@ -60,7 +62,7 @@ if ( class_exists( 'SkillPulse_LMS_Certificate_Display' ) && class_exists( 'Skil
 
 	<!-- Certificates Content -->
 	<div class="splms-certificates-content">
-		<?php if ( ! empty( $user_certificates ) ) : ?>
+		<?php if ( ! empty( $splms_user_certificates ) ) : ?>
 			<!-- Simple summary -->
 			<div class="splms-courses-summary">
 				<p class="splms-summary-text">
@@ -68,7 +70,7 @@ if ( class_exists( 'SkillPulse_LMS_Certificate_Display' ) && class_exists( 'Skil
 					printf(
 						/* translators: %d: number of certificates */
 						esc_html__( 'You have earned %d certificates', 'skillpulse-lms' ),
-						count( $user_certificates )
+						count( $splms_user_certificates )
 					);
 					?>
 				</p>
@@ -76,24 +78,24 @@ if ( class_exists( 'SkillPulse_LMS_Certificate_Display' ) && class_exists( 'Skil
 
 			<div class="splms-course-list">
 				<?php
-				$course_colors = array( '#4F46E5', '#EC4899', '#10B981', '#F59E0B', '#8B5CF6', '#06B6D4' );
+				$splms_course_colors = array( '#4F46E5', '#EC4899', '#10B981', '#F59E0B', '#8B5CF6', '#06B6D4' );
 				?>
 				<?php
-				foreach ( $user_certificates as $index => $certificate ) :
-					$color = $course_colors[ $index % count( $course_colors ) ];
+				foreach ( $splms_user_certificates as $splms_index => $splms_certificate ) :
+					$splms_color = $splms_course_colors[ $splms_index % count( $splms_course_colors ) ];
 					?>
 					<div class="splms-course-card"
-						data-course-id="<?php echo esc_attr( $certificate['course_id'] ); ?>"
-						data-user-id="<?php echo esc_attr( $certificate['user_id'] ); ?>"
-						data-certificate-id="<?php echo esc_attr( $certificate['certificate_id'] ); ?>">
+						data-course-id="<?php echo esc_attr( $splms_certificate['course_id'] ); ?>"
+						data-user-id="<?php echo esc_attr( $splms_certificate['user_id'] ); ?>"
+						data-certificate-id="<?php echo esc_attr( $splms_certificate['certificate_id'] ); ?>">
 
-						<div class="splms-course-icon" style="color: <?php echo esc_attr( $color ); ?>; background-color: <?php echo esc_attr( $color ); ?>20;">
+						<div class="splms-course-icon" style="color: <?php echo esc_attr( $splms_color ); ?>; background-color: <?php echo esc_attr( $splms_color ); ?>20;">
 							<i class="hgi-stroke hgi-certificate-01"></i>
 						</div>
 
 						<div class="splms-course-info">
 							<div class="splms-course-header">
-								<h3 class="splms-course-title"><?php echo esc_html( $certificate['course_title'] ); ?></h3>
+								<h3 class="splms-course-title"><?php echo esc_html( $splms_certificate['course_title'] ); ?></h3>
 								<span class="splms-enrollment-status-badge splms-enrollment-status-completed">
 									<?php esc_html_e( 'Earned', 'skillpulse-lms' ); ?>
 								</span>
@@ -105,16 +107,16 @@ if ( class_exists( 'SkillPulse_LMS_Certificate_Display' ) && class_exists( 'Skil
 									printf(
 										/* translators: %1$s: certificate ID, %2$s: completion date */
 										esc_html__( 'Certificate ID: %1$s • Completed on %2$s', 'skillpulse-lms' ),
-										esc_html( $certificate['certificate_id'] ),
-										esc_html( $certificate['completion_date'] )
+										esc_html( $splms_certificate['certificate_id'] ),
+										esc_html( $splms_certificate['completion_date'] )
 									);
 									?>
-									<?php if ( $certificate['instructor_name'] ) : ?>
+									<?php if ( $splms_certificate['instructor_name'] ) : ?>
 										<?php
 										printf(
 											/* translators: %s: instructor name */
 											esc_html__( ' • Instructor: %s', 'skillpulse-lms' ),
-											esc_html( $certificate['instructor_name'] )
+											esc_html( $splms_certificate['instructor_name'] )
 										);
 										?>
 									<?php endif; ?>
@@ -125,8 +127,8 @@ if ( class_exists( 'SkillPulse_LMS_Certificate_Display' ) && class_exists( 'Skil
 						<div class="splms-course-actions">
 							<button type="button"
 									class="splms-btn splms-btn-primary certificate-print"
-									data-course-id="<?php echo esc_attr( $certificate['course_id'] ); ?>"
-									data-user-id="<?php echo esc_attr( $certificate['user_id'] ); ?>"
+									data-course-id="<?php echo esc_attr( $splms_certificate['course_id'] ); ?>"
+									data-user-id="<?php echo esc_attr( $splms_certificate['user_id'] ); ?>"
 									title="<?php esc_attr_e( 'Print Certificate', 'skillpulse-lms' ); ?>">
 								<?php esc_html_e( 'Print', 'skillpulse-lms' ); ?>
 								<i class="hgi-stroke hgi-printer"></i>

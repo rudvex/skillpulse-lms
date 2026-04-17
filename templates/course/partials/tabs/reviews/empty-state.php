@@ -14,13 +14,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$permission = isset( $args['permission'] ) ? $args['permission'] : array();
-$user_id    = get_current_user_id();
+
+
+$splms_permission = isset( $args['splms_permission'] ) ? $args['splms_permission'] : array();
+$splms_user_id    = get_current_user_id();
 
 // Get permission status if not provided.
-if ( empty( $permission ) && $user_id ) {
-	$course_id  = get_the_ID();
-	$permission = SPLMS_Review_Permissions::can_user_review( $user_id, $course_id );
+if ( empty( $splms_permission ) && $splms_user_id ) {
+	$splms_course_id  = get_the_ID();
+	$splms_permission = SPLMS_Review_Permissions::can_user_review( $splms_user_id, $splms_course_id );
 }
 ?>
 
@@ -34,7 +36,7 @@ if ( empty( $permission ) && $user_id ) {
 	<h3><?php esc_html_e( 'No reviews yet', 'skillpulse-lms' ); ?></h3>
 	<p><?php esc_html_e( 'Be the first to share your experience with this course and help other students make informed decisions.', 'skillpulse-lms' ); ?></p>
 
-	<?php if ( $user_id && isset( $permission['can_review'] ) && $permission['can_review'] ) { ?>
+	<?php if ( $splms_user_id && isset( $splms_permission['can_review'] ) && $splms_permission['can_review'] ) { ?>
 		<button class="btn btn-primary write-review-btn" data-course-id="<?php echo esc_attr( get_the_ID() ); ?>">
 			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path d="M12 4V20M20 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>

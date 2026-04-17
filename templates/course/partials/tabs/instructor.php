@@ -12,10 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$course_id = get_the_ID();
+
+
+$splms_course_id = get_the_ID();
 
 // Get instructor courses and stats.
-$instructor_courses = new WP_Query(
+$splms_instructor_courses = new WP_Query(
 	array(
 		'post_type'      => SPLMS_POST_TYPES['course'],
 		'author'         => get_the_author_meta( 'ID' ),
@@ -25,16 +27,16 @@ $instructor_courses = new WP_Query(
 );
 
 // Calculate total students across all courses.
-$total_students = 0;
-if ( $instructor_courses->have_posts() ) {
-	while ( $instructor_courses->have_posts() ) {
-		$instructor_courses->the_post();
-		$total_students += splms_get_course_enrollment_count( get_the_ID() );
+$splms_total_students = 0;
+if ( $splms_instructor_courses->have_posts() ) {
+	while ( $splms_instructor_courses->have_posts() ) {
+		$splms_instructor_courses->the_post();
+		$splms_total_students += splms_get_course_enrollment_count( get_the_ID() );
 	}
 	wp_reset_postdata();
 }
 
-$total_courses = $instructor_courses->found_posts;
+$splms_total_courses = $splms_instructor_courses->found_posts;
 ?>
 
 <div class="course-content-tabs">
@@ -72,7 +74,7 @@ $total_courses = $instructor_courses->found_posts;
 							<span>
 								<?php
 								/* translators: %d: Number of courses. */
-								printf( esc_html( _n( '%d Course', '%d Courses', $total_courses, 'skillpulse-lms' ) ), (int) $total_courses );
+								printf( esc_html( _n( '%d Course', '%d Courses', $splms_total_courses, 'skillpulse-lms' ) ), (int) $splms_total_courses );
 								?>
 							</span>
 						</div>
@@ -84,7 +86,7 @@ $total_courses = $instructor_courses->found_posts;
 							<span>
 								<?php
 								/* translators: %d: Number of students. */
-								printf( esc_html( _n( '%d Student', '%d Students', $total_students, 'skillpulse-lms' ) ), (int) $total_students );
+								printf( esc_html( _n( '%d Student', '%d Students', $splms_total_students, 'skillpulse-lms' ) ), (int) $splms_total_students );
 								?>
 							</span>
 						</div>
@@ -97,10 +99,10 @@ $total_courses = $instructor_courses->found_posts;
 				<h4 class="bio-section-title"><?php esc_html_e( 'About', 'skillpulse-lms' ); ?></h4>
 				<div class="instructor-bio-content">
 					<?php
-					$bio = get_the_author_meta( 'description' );
-					if ( $bio ) {
+					$splms_bio = get_the_author_meta( 'description' );
+					if ( $splms_bio ) {
 						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wpautop output is safe when used with esc_html.
-						echo wpautop( esc_html( $bio ) );
+						echo wpautop( esc_html( $splms_bio ) );
 					} else {
 						echo '<p>' . esc_html__(
 							'This instructor is passionate about sharing knowledge and helping students achieve their learning goals. With extensive experience in their field, they bring practical insights and real-world applications to every course.',
@@ -112,7 +114,7 @@ $total_courses = $instructor_courses->found_posts;
 			</div>
 
 			<!-- Other Courses Section -->
-			<?php if ( $total_courses > 1 ) { ?>
+			<?php if ( $splms_total_courses > 1 ) { ?>
 				<div class="instructor-other-courses-section">
 					<h4 class="other-courses-section-title">
 						<?php
@@ -122,21 +124,21 @@ $total_courses = $instructor_courses->found_posts;
 					</h4>
 					<div class="other-courses-list">
 						<?php
-						$other_courses = new WP_Query(
+						$splms_other_courses = new WP_Query(
 							array(
 								'post_type'      => SPLMS_POST_TYPES['course'],
 								'author'         => get_the_author_meta( 'ID' ),
 								'post_status'    => 'publish',
 								'posts_per_page' => 3,
-								'post__not_in'   => array( $course_id ),
+								'post__not_in'   => array( $splms_course_id ),
 							)
 						);
 
-						if ( $other_courses->have_posts() ) {
-							while ( $other_courses->have_posts() ) {
-								$other_courses->the_post();
-								$students_count = splms_get_course_enrollment_count( get_the_ID() );
-								$course_price   = splms_get_course_access_info( get_the_ID() );
+						if ( $splms_other_courses->have_posts() ) {
+							while ( $splms_other_courses->have_posts() ) {
+								$splms_other_courses->the_post();
+								$splms_students_count = splms_get_course_enrollment_count( get_the_ID() );
+								$splms_course_price   = splms_get_course_access_info( get_the_ID() );
 								?>
 								<div class="course-card-horizontal">
 									<div class="course-card-thumbnail">
@@ -166,23 +168,23 @@ $total_courses = $instructor_courses->found_posts;
 												<?php
 												printf(
 													/* translators: %d: Number of students. */
-													esc_html( _n( '%d student', '%d students', $students_count, 'skillpulse-lms' ) ),
-													(int) $students_count
+													esc_html( _n( '%d student', '%d students', $splms_students_count, 'skillpulse-lms' ) ),
+													(int) $splms_students_count
 												);
 												?>
 											</span>
 											<span class="course-meta-separator">•</span>
 											<span class="course-meta-item course-price-meta">
 												<?php
-												if ( ! empty( $course_price['course_mode'] ) ) {
-													switch ( $course_price['course_mode'] ) {
+												if ( ! empty( $splms_course_price['course_mode'] ) ) {
+													switch ( $splms_course_price['course_mode'] ) {
 														case 'free':
 															esc_html_e( 'Free', 'skillpulse-lms' );
 															break;
 														case 'paid':
 															// Only show paid prices if paid courses are enabled.
 															if ( splms_is_paid_courses_enabled() ) {
-																echo esc_html( get_splms_price_format( $course_price['price'] ) );
+																echo esc_html( get_splms_price_format( $splms_course_price['price'] ) );
 															} else {
 																esc_html_e( 'Free', 'skillpulse-lms' );
 															}
@@ -192,9 +194,9 @@ $total_courses = $instructor_courses->found_posts;
 															break;
 														default:
 															// For invitation_only, show appropriate label.
-															if ( ! empty( $course_price['course_access_type'] ) ) {
-																$access_type = $course_price['course_access_type'];
-																if ( 'invitation_only' === $access_type ) {
+															if ( ! empty( $splms_course_price['course_access_type'] ) ) {
+																$splms_access_type = $splms_course_price['course_access_type'];
+																if ( 'invitation_only' === $splms_access_type ) {
 																	esc_html_e( 'Invitation Only', 'skillpulse-lms' );
 																}
 															}
@@ -213,12 +215,12 @@ $total_courses = $instructor_courses->found_posts;
 						?>
 					</div>
 
-					<?php if ( $total_courses > 3 ) { ?>
+					<?php if ( $splms_total_courses > 3 ) { ?>
 						<div class="view-all-courses-footer">
 							<a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" class="btn-view-all-courses">
 								<?php
 								/* translators: %d: Total number of courses. */
-								printf( esc_html__( 'View All %d Courses', 'skillpulse-lms' ), (int) $total_courses );
+								printf( esc_html__( 'View All %d Courses', 'skillpulse-lms' ), (int) $splms_total_courses );
 								?>
 								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

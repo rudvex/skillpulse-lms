@@ -13,35 +13,37 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+
+
 // Get lesson and course data.
 global $post;
-$lesson_id = get_the_ID();
-$user_id   = get_current_user_id();
-$course_id = splms_get_lesson_course( $lesson_id );
+$splms_lesson_id = get_the_ID();
+$splms_user_id   = get_current_user_id();
+$splms_course_id = splms_get_lesson_course( $splms_lesson_id );
 
 // Get lesson settings.
-$lesson_settings = splms_get_lesson_settings( $lesson_id );
-$lesson_type     = isset( $lesson_settings['lesson_type'] ) ? $lesson_settings['lesson_type'] : 'text';
+$splms_lesson_settings = splms_get_lesson_settings( $splms_lesson_id );
+$splms_lesson_type     = isset( $splms_lesson_settings['lesson_type'] ) ? $splms_lesson_settings['lesson_type'] : 'text';
 
 // Get navigation.
-$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
-$navigation       = $lessons_instance->get_lesson_navigation( $lesson_id, $user_id );
+$splms_lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+$splms_navigation       = $splms_lessons_instance->get_lesson_navigation( $splms_lesson_id, $splms_user_id );
 
 // Get course info.
-$course_title = $course_id ? get_the_title( $course_id ) : '';
-$course_url   = $course_id ? get_permalink( $course_id ) : '';
+$splms_course_title = $splms_course_id ? get_the_title( $splms_course_id ) : '';
+$splms_course_url   = $splms_course_id ? get_permalink( $splms_course_id ) : '';
 
 // Check if lesson is completed.
-$is_completed = $user_id ? splms_is_lesson_completed( $lesson_id, $user_id ) : false;
+$splms_is_completed = $splms_user_id ? splms_is_lesson_completed( $splms_lesson_id, $splms_user_id ) : false;
 
 // Get progress data.
-$progress_data = array(
+$splms_progress_data = array(
 	'completed_lessons' => 0,
 	'total_lessons'     => 0,
 	'percentage'        => 0,
 );
-if ( $user_id && $course_id ) {
-	$progress_data = $lessons_instance->calculate_course_progress( $user_id, $course_id );
+if ( $splms_user_id && $splms_course_id ) {
+	$splms_progress_data = $splms_lessons_instance->calculate_course_progress( $splms_user_id, $splms_course_id );
 }
 
 ?>
@@ -63,7 +65,7 @@ do_action( 'splms_before_lesson_fullscreen' );
 ?>
 
 <!-- Full-Screen Lesson Layout -->
-<div id="splms-lesson-fullscreen-container" class="splms-fullscreen-container" data-lesson-id="<?php echo esc_attr( $lesson_id ); ?>" data-course-id="<?php echo esc_attr( $course_id ); ?>">
+<div id="splms-lesson-fullscreen-container" class="splms-fullscreen-container" data-lesson-id="<?php echo esc_attr( $splms_lesson_id ); ?>" data-course-id="<?php echo esc_attr( $splms_course_id ); ?>">
 
 	<!-- Header Bar -->
 	<?php splms_get_template_part( 'lesson/header' ); ?>

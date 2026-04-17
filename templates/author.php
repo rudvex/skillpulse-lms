@@ -15,80 +15,82 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+
+
 get_header();
 
 // Get the queried author.
-$author = get_queried_object();
+$splms_author = get_queried_object();
 
 // Safety check - make sure we have valid author data.
-if ( ! $author || ! isset( $author->ID ) ) {
+if ( ! $splms_author || ! isset( $splms_author->ID ) ) {
 	echo '<div class="splms-error">Author not found.</div>';
 	get_footer();
 	return;
 }
 
-$author_id = $author->ID;
+$splms_author_id = $splms_author->ID;
 
 // Get user role and capabilities.
-$user       = get_user_by( 'ID', $author_id );
-$user_roles = $user ? $user->roles : array();
+$splms_user       = get_user_by( 'ID', $splms_author_id );
+$splms_user_roles = $splms_user ? $splms_user->roles : array();
 
 // Determine if user is instructor (can create courses).
-$is_instructor = user_can( $author_id, 'edit_posts' ) || in_array( 'instructor', $user_roles, true ) || in_array( 'administrator', $user_roles, true );
+$splms_is_instructor = user_can( $splms_author_id, 'edit_posts' ) || in_array( 'instructor', $splms_user_roles, true ) || in_array( 'administrator', $splms_user_roles, true );
 
 // Get pagination parameters.
-$courses_per_page = 10;
+$splms_courses_per_page = 10;
 
 // For author pages, use a simple GET parameter for pagination.
-$current_page = max( 1, isset( $_GET['course_page'] ) ? intval( $_GET['course_page'] ) : 1 ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Configuration file for admin context, no data processing.
+$splms_current_page = max( 1, isset( $_GET['course_page'] ) ? intval( $_GET['course_page'] ) : 1 ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Configuration file for admin context, no data processing.
 
 // Get author's total published courses count (for stats and pagination).
-$total_courses_query = new WP_Query(
+$splms_total_courses_query = new WP_Query(
 	array(
 		'post_type'      => SPLMS_POST_TYPES['course'],
-		'author'         => $author_id,
+		'author'         => $splms_author_id,
 		'post_status'    => 'publish',
 		'posts_per_page' => -1,
 		'fields'         => 'ids',
 	)
 );
-$total_courses       = $total_courses_query->found_posts;
+$splms_total_courses       = $splms_total_courses_query->found_posts;
 
 // Get paginated author's published courses.
-$author_courses_query = new WP_Query(
+$splms_author_courses_query = new WP_Query(
 	array(
 		'post_type'      => SPLMS_POST_TYPES['course'],
-		'author'         => $author_id,
+		'author'         => $splms_author_id,
 		'post_status'    => 'publish',
-		'posts_per_page' => $courses_per_page,
-		'paged'          => $current_page,
+		'posts_per_page' => $splms_courses_per_page,
+		'paged'          => $splms_current_page,
 	)
 );
 
-$author_courses = $author_courses_query->posts;
-$total_pages    = $author_courses_query->max_num_pages;
+$splms_author_courses = $splms_author_courses_query->posts;
+$splms_total_pages    = $splms_author_courses_query->max_num_pages;
 
 // Get enrollment information for students.
-$enrolled_course_ids = array();
-$enrolled_courses    = array();
-$total_enrolled      = 0;
-if ( ! $is_instructor || empty( $author_courses ) ) {
-	$enrolled_course_ids = splms_get_user_enrolled_courses( $author_id );
-	$total_enrolled      = count( $enrolled_course_ids );
+$splms_enrolled_course_ids = array();
+$splms_enrolled_courses    = array();
+$splms_total_enrolled      = 0;
+if ( ! $splms_is_instructor || empty( $splms_author_courses ) ) {
+	$splms_enrolled_course_ids = splms_get_user_enrolled_courses( $splms_author_id );
+	$splms_total_enrolled      = count( $splms_enrolled_course_ids );
 
-	if ( ! empty( $enrolled_course_ids ) ) {
+	if ( ! empty( $splms_enrolled_course_ids ) ) {
 		// For students, also paginate enrolled courses.
-		$enrolled_courses_query = new WP_Query(
+		$splms_enrolled_courses_query = new WP_Query(
 			array(
 				'post_type'      => SPLMS_POST_TYPES['course'],
-				'post__in'       => $enrolled_course_ids,
+				'post__in'       => $splms_enrolled_course_ids,
 				'post_status'    => 'publish',
-				'posts_per_page' => $courses_per_page,
-				'paged'          => $current_page,
+				'posts_per_page' => $splms_courses_per_page,
+				'paged'          => $splms_current_page,
 			)
 		);
-		$enrolled_courses       = $enrolled_courses_query->posts;
-		$total_pages            = max( $total_pages, $enrolled_courses_query->max_num_pages );
+		$splms_enrolled_courses       = $splms_enrolled_courses_query->posts;
+		$splms_total_pages            = max( $splms_total_pages, $splms_enrolled_courses_query->max_num_pages );
 	}
 }
 ?>
@@ -99,17 +101,17 @@ if ( ! $is_instructor || empty( $author_courses ) ) {
 	/**
 	 * Hook: splms_before_author_content
 	 */
-	do_action( 'splms_before_author_content', $author );
+	do_action( 'splms_before_author_content', $splms_author );
 	?>
 
 	<header class="splms-author-header">
 		<div class="splms-author-header-content">
 			<div class="splms-author-avatar">
-				<?php echo get_avatar( $author_id, 80 ); ?>
+				<?php echo get_avatar( $splms_author_id, 80 ); ?>
 			</div>
 			<div class="splms-author-info">
 				<div class="splms-author-role-badge">
-					<?php if ( $is_instructor ) : ?>
+					<?php if ( $splms_is_instructor ) : ?>
 						<span class="splms-author-role instructor">
 							<?php esc_html_e( 'Instructor', 'skillpulse-lms' ); ?>
 						</span>
@@ -120,38 +122,38 @@ if ( ! $is_instructor || empty( $author_courses ) ) {
 					<?php endif; ?>
 				</div>
 
-				<h1 class="splms-author-name"><?php echo esc_html( $author->display_name ); ?></h1>
+				<h1 class="splms-author-name"><?php echo esc_html( $splms_author->display_name ); ?></h1>
 
-				<?php if ( ! empty( $author->description ) ) { ?>
+				<?php if ( ! empty( $splms_author->description ) ) { ?>
 					<div class="splms-author-bio">
-						<?php echo wp_kses_post( $author->description ); ?>
+						<?php echo wp_kses_post( $splms_author->description ); ?>
 					</div>
 				<?php } ?>
 
-				<?php if ( $is_instructor && $total_courses > 0 ) : ?>
+				<?php if ( $splms_is_instructor && $splms_total_courses > 0 ) : ?>
 					<div class="splms-author-stats">
 						<div class="splms-stat">
-							<span class="splms-stat-number"><?php echo esc_html( $total_courses ); ?></span>
+							<span class="splms-stat-number"><?php echo esc_html( $splms_total_courses ); ?></span>
 							<span class="splms-stat-label">
-								<?php echo esc_html( _n( 'Course', 'Courses', $total_courses, 'skillpulse-lms' ) ); ?>
+								<?php echo esc_html( _n( 'Course', 'Courses', $splms_total_courses, 'skillpulse-lms' ) ); ?>
 							</span>
 						</div>
 
 						<?php
 						// Additional stats for instructors.
-						$total_students = 0;
+						$splms_total_students = 0;
 
-						foreach ( $author_courses as $course ) {
-							$enrolled_count  = splms_get_course_enrollment_count( $course->ID );
-							$total_students += $enrolled_count;
+						foreach ( $splms_author_courses as $splms_course ) {
+							$splms_enrolled_count  = splms_get_course_enrollment_count( $splms_course->ID );
+							$splms_total_students += $splms_enrolled_count;
 						}
 
-						if ( $total_students > 0 ) :
+						if ( $splms_total_students > 0 ) :
 							?>
 							<div class="splms-stat">
-								<span class="splms-stat-number"><?php echo esc_html( number_format( $total_students ) ); ?></span>
+								<span class="splms-stat-number"><?php echo esc_html( number_format( $splms_total_students ) ); ?></span>
 								<span class="splms-stat-label">
-									<?php echo esc_html( _n( 'Student', 'Students', $total_students, 'skillpulse-lms' ) ); ?>
+									<?php echo esc_html( _n( 'Student', 'Students', $splms_total_students, 'skillpulse-lms' ) ); ?>
 								</span>
 							</div>
 						<?php endif; ?>
@@ -165,20 +167,20 @@ if ( ! $is_instructor || empty( $author_courses ) ) {
 	/**
 	 * Hook: splms_author_before_courses
 	 */
-	do_action( 'splms_author_before_courses', $author );
+	do_action( 'splms_author_before_courses', $splms_author );
 	?>
 
 	<main class="splms-author-main">
 		<div class="splms-author-content">
 
-			<?php if ( $is_instructor && ! empty( $author_courses ) ) : ?>
+			<?php if ( $splms_is_instructor && ! empty( $splms_author_courses ) ) : ?>
 				<!-- Instructor Courses -->
 				<section class="splms-author-courses">
 					<div class="splms-section-header">
 						<h2 class="splms-section-title">
 							<?php
 							/* translators: %d: Number of courses */
-							printf( esc_html( _n( '%d Course', '%d Courses', $total_courses, 'skillpulse-lms' ) ), esc_html( $total_courses ) );
+							printf( esc_html( _n( '%d Course', '%d Courses', $splms_total_courses, 'skillpulse-lms' ) ), esc_html( $splms_total_courses ) );
 							?>
 						</h2>
 						<p class="splms-section-description">
@@ -189,8 +191,8 @@ if ( ! $is_instructor || empty( $author_courses ) ) {
 					<div class="splms-courses-grid">
 						<?php
 						global $post;
-						foreach ( $author_courses as $course ) :
-							$post = $course; // phpcs:ignore
+						foreach ( $splms_author_courses as $splms_course ) :
+							$post = $splms_course; // phpcs:ignore
 							setup_postdata( $post );
 
 							// Include the standard course card template.
@@ -202,9 +204,9 @@ if ( ! $is_instructor || empty( $author_courses ) ) {
 					</div>
 
 					<?php
-					$total_pages = $total_pages;
+					$splms_total_pages = $splms_total_pages;
 
-					if ( $total_pages <= 1 ) {
+					if ( $splms_total_pages <= 1 ) {
 						return;
 					}
 
@@ -214,10 +216,10 @@ if ( ! $is_instructor || empty( $author_courses ) ) {
 					echo '</div>';
 					echo '<div class="pagination-links">';
 
-					$prev_label = esc_attr__( 'Previous', 'skillpulse-lms' );
-					$next_label = esc_attr__( 'Next', 'skillpulse-lms' );
+					$splms_prev_label = esc_attr__( 'Previous', 'skillpulse-lms' );
+					$splms_next_label = esc_attr__( 'Next', 'skillpulse-lms' );
 
-					$prev_text = '<span class="page-prev" aria-label="' . $prev_label . '">
+					$splms_prev_text = '<span class="page-prev" aria-label="' . $splms_prev_label . '">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M5 12H19" stroke="#374151" stroke-width="1.5" stroke-linecap="round"/>
                     <path d="M5 12L9 16" stroke="#374151" stroke-width="1.5" stroke-linecap="round"/>
@@ -225,7 +227,7 @@ if ( ! $is_instructor || empty( $author_courses ) ) {
                 </svg>
             </span>';
 
-					$next_text = '<span class="page-next" aria-label="' . $next_label . '">
+					$splms_next_text = '<span class="page-next" aria-label="' . $splms_next_label . '">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M5 12H19" stroke="#374151" stroke-width="1.5" stroke-linecap="round"/>
                     <path d="M15 16L19 12" stroke="#374151" stroke-width="1.5" stroke-linecap="round"/>
@@ -236,13 +238,13 @@ if ( ! $is_instructor || empty( $author_courses ) ) {
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
 					echo paginate_links(
 						array(
-							'current'   => $current_page,
-							'total'     => $total_pages,
-							'prev_text' => $prev_text,
-							'next_text' => $next_text,
-							'type'      => 'list',
-							'end_size'  => 2,
-							'mid_size'  => 2,
+							'splms_current'   => $splms_current_page,
+							'splms_total'     => $splms_total_pages,
+							'splms_prev_text' => $splms_prev_text,
+							'splms_next_text' => $splms_next_text,
+							'splms_type'      => 'list',
+							'splms_end_size'  => 2,
+							'splms_mid_size'  => 2,
 						)
 					);
 
@@ -250,39 +252,39 @@ if ( ! $is_instructor || empty( $author_courses ) ) {
 					echo '</nav>';
 					?>
 
-					<?php if ( $total_pages > 1 ) : ?>
+					<?php if ( $splms_total_pages > 1 ) : ?>
 						<div class="splms-pagination-wrapper">
 							<?php
 							// Custom pagination for author pages using query parameters.
 							echo '<nav class="splms-pagination" role="navigation" aria-label="' . esc_attr__( 'Courses pagination', 'skillpulse-lms' ) . '">';
 							echo '<ul class="splms-pagination-list">';
 
-							$author_link = get_author_posts_url( $author_id );
+							$splms_author_link = get_author_posts_url( $splms_author_id );
 
 							// Previous link.
-							if ( $current_page > 1 ) {
-								$prev_page = $current_page - 1;
-								$prev_link = ( 1 === $prev_page ) ? $author_link : add_query_arg( 'course_page', $prev_page, $author_link );
-								echo '<li class="splms-pagination-item"><a href="' . esc_url( $prev_link ) . '"><span class="splms-pagination-prev">‹ ' . esc_html__( 'Previous', 'skillpulse-lms' ) . '</span></a></li>';
+							if ( $splms_current_page > 1 ) {
+								$splms_prev_page = $splms_current_page - 1;
+								$splms_prev_link = ( 1 === $splms_prev_page ) ? $splms_author_link : add_query_arg( 'course_page', $splms_prev_page, $splms_author_link );
+								echo '<li class="splms-pagination-item"><a href="' . esc_url( $splms_prev_link ) . '"><span class="splms-pagination-prev">‹ ' . esc_html__( 'Previous', 'skillpulse-lms' ) . '</span></a></li>';
 							}
 
 							// Page numbers.
-							for ( $i = 1; $i <= $total_pages; $i++ ) {
-								$page_link = ( 1 === $i ) ? $author_link : add_query_arg( 'course_page', $i, $author_link );
-								$class     = ( $i === $current_page ) ? 'current' : '';
+							for ( $splms_i = 1; $splms_i <= $splms_total_pages; $splms_i++ ) {
+								$splms_page_link = ( 1 === $splms_i ) ? $splms_author_link : add_query_arg( 'course_page', $splms_i, $splms_author_link );
+								$splms_class     = ( $splms_i === $splms_current_page ) ? 'current' : '';
 
-								if ( $i === $current_page ) {
-									printf( '<li class="splms-pagination-item"><span class="%s">%s</span></li>', esc_attr( $class ), esc_html( $i ) );
+								if ( $splms_i === $splms_current_page ) {
+									printf( '<li class="splms-pagination-item"><span class="%s">%s</span></li>', esc_attr( $splms_class ), esc_html( $splms_i ) );
 								} else {
-									printf( '<li class="splms-pagination-item"><a href="%s" >%s</a></li>', esc_url( $page_link ), esc_html( $i ) );
+									printf( '<li class="splms-pagination-item"><a href="%s" >%s</a></li>', esc_url( $splms_page_link ), esc_html( $splms_i ) );
 								}
 							}
 
 							// Next link.
-							if ( $current_page < $total_pages ) {
-								$next_page = $current_page + 1;
-								$next_link = add_query_arg( 'course_page', $next_page, $author_link );
-								echo '<li class="splms-pagination-item"><a href="' . esc_url( $next_link ) . '"><span class="splms-pagination-next">' . esc_html__( 'Next', 'skillpulse-lms' ) . ' ›</span></a></li>';
+							if ( $splms_current_page < $splms_total_pages ) {
+								$splms_next_page = $splms_current_page + 1;
+								$splms_next_link = add_query_arg( 'course_page', $splms_next_page, $splms_author_link );
+								echo '<li class="splms-pagination-item"><a href="' . esc_url( $splms_next_link ) . '"><span class="splms-pagination-next">' . esc_html__( 'Next', 'skillpulse-lms' ) . ' ›</span></a></li>';
 							}
 
 							echo '</ul>';
@@ -292,7 +294,7 @@ if ( ! $is_instructor || empty( $author_courses ) ) {
 					<?php endif; ?>
 				</section>
 
-			<?php elseif ( $is_instructor && empty( $author_courses ) ) : ?>
+			<?php elseif ( $splms_is_instructor && empty( $splms_author_courses ) ) : ?>
 				<!-- No Courses Message for Instructor -->
 				<section class="splms-no-courses">
 					<div class="splms-empty-state">
@@ -328,22 +330,22 @@ if ( ! $is_instructor || empty( $author_courses ) ) {
 								</svg>
 							</div>
 							<div class="splms-stat-content">
-								<span class="splms-stat-number"><?php echo esc_html( $total_enrolled ); ?></span>
+								<span class="splms-stat-number"><?php echo esc_html( $splms_total_enrolled ); ?></span>
 								<span class="splms-stat-label">
-									<?php echo esc_html( _n( 'Enrolled Course', 'Enrolled Courses', $total_enrolled, 'skillpulse-lms' ) ); ?>
+									<?php echo esc_html( _n( 'Enrolled Course', 'Enrolled Courses', $splms_total_enrolled, 'skillpulse-lms' ) ); ?>
 								</span>
 							</div>
 						</div>
 					</div>
 
-					<?php if ( ! empty( $enrolled_courses ) ) : ?>
+					<?php if ( ! empty( $splms_enrolled_courses ) ) : ?>
 						<div class="splms-enrolled-courses">
 							<h3 class="splms-subsection-title"><?php esc_html_e( 'Enrolled Courses', 'skillpulse-lms' ); ?></h3>
 							<div class="splms-courses-grid">
 								<?php
 								global $post;
-								foreach ( $enrolled_courses as $course ) :
-									$post = $course; // phpcs:ignore
+								foreach ( $splms_enrolled_courses as $splms_course ) :
+									$post = $splms_course; // phpcs:ignore
 									setup_postdata( $post );
 
 									// Include the standard course card template.
@@ -354,39 +356,39 @@ if ( ! $is_instructor || empty( $author_courses ) ) {
 								?>
 							</div>
 
-							<?php if ( $max_pages > 1 ) : ?>
+							<?php if ( $splms_max_pages > 1 ) : ?>
 								<div class="splms-pagination-wrapper">
 									<?php
 									// Custom pagination for author pages using query parameters.
 									echo '<nav class="splms-pagination" role="navigation" aria-label="' . esc_attr__( 'Courses pagination', 'skillpulse-lms' ) . '">';
 									echo '<ul class="splms-pagination-list">';
 
-									$author_link = get_author_posts_url( $author_id );
+									$splms_author_link = get_author_posts_url( $splms_author_id );
 
 									// Previous link.
-									if ( $current_page > 1 ) {
-										$prev_page = $current_page - 1;
-										$prev_link = ( 1 === $prev_page ) ? $author_link : add_query_arg( 'course_page', $prev_page, $author_link );
-										echo '<li class="splms-pagination-item"><a href="' . esc_url( $prev_link ) . '"><span class="splms-pagination-prev">‹ ' . esc_html__( 'Previous', 'skillpulse-lms' ) . '</span></a></li>';
+									if ( $splms_current_page > 1 ) {
+										$splms_prev_page = $splms_current_page - 1;
+										$splms_prev_link = ( 1 === $splms_prev_page ) ? $splms_author_link : add_query_arg( 'course_page', $splms_prev_page, $splms_author_link );
+										echo '<li class="splms-pagination-item"><a href="' . esc_url( $splms_prev_link ) . '"><span class="splms-pagination-prev">‹ ' . esc_html__( 'Previous', 'skillpulse-lms' ) . '</span></a></li>';
 									}
 
 									// Page numbers.
-									for ( $i = 1; $i <= $max_pages; $i++ ) {
-										$page_link = ( 1 === $i ) ? $author_link : add_query_arg( 'course_page', $i, $author_link );
-										$class     = ( $i === $current_page ) ? 'current' : '';
+									for ( $splms_i = 1; $splms_i <= $splms_max_pages; $splms_i++ ) {
+										$splms_page_link = ( 1 === $splms_i ) ? $splms_author_link : add_query_arg( 'course_page', $splms_i, $splms_author_link );
+										$splms_class     = ( $splms_i === $splms_current_page ) ? 'current' : '';
 
-										if ( $i === $current_page ) {
-											printf( '<li class="splms-pagination-item"><span class="%s">%s</span></li>', esc_attr( $class ), esc_html( $i ) );
+										if ( $splms_i === $splms_current_page ) {
+											printf( '<li class="splms-pagination-item"><span class="%s">%s</span></li>', esc_attr( $splms_class ), esc_html( $splms_i ) );
 										} else {
-											printf( '<li class="splms-pagination-item"><a href="%s">%s</a></li>', esc_url( $page_link ), esc_html( $i ) );
+											printf( '<li class="splms-pagination-item"><a href="%s">%s</a></li>', esc_url( $splms_page_link ), esc_html( $splms_i ) );
 										}
 									}
 
 									// Next link.
-									if ( $current_page < $max_pages ) {
-										$next_page = $current_page + 1;
-										$next_link = add_query_arg( 'course_page', $next_page, $author_link );
-										echo '<li class="splms-pagination-item"><a href="' . esc_url( $next_link ) . '"><span class="splms-pagination-next">' . esc_html__( 'Next', 'skillpulse-lms' ) . ' ›</span></a></li>';
+									if ( $splms_current_page < $splms_max_pages ) {
+										$splms_next_page = $splms_current_page + 1;
+										$splms_next_link = add_query_arg( 'course_page', $splms_next_page, $splms_author_link );
+										echo '<li class="splms-pagination-item"><a href="' . esc_url( $splms_next_link ) . '"><span class="splms-pagination-next">' . esc_html__( 'Next', 'skillpulse-lms' ) . ' ›</span></a></li>';
 									}
 
 									echo '</ul>';
@@ -409,7 +411,7 @@ if ( ! $is_instructor || empty( $author_courses ) ) {
 								<?php esc_html_e( 'This student hasn\'t enrolled in any courses yet.', 'skillpulse-lms' ); ?>
 							</p>
 
-							<?php if ( get_current_user_id() === $author_id ) : ?>
+							<?php if ( get_current_user_id() === $splms_author_id ) : ?>
 								<div class="splms-empty-actions">
 									<a href="<?php echo esc_url( get_post_type_archive_link( SPLMS_POST_TYPES['course'] ) ); ?>" class="splms-button splms-button-primary">
 										<?php esc_html_e( 'Browse Courses', 'skillpulse-lms' ); ?>
@@ -427,7 +429,7 @@ if ( ! $is_instructor || empty( $author_courses ) ) {
 	/**
 	 * Hook: splms_after_author_content
 	 */
-	do_action( 'splms_after_author_content', $author );
+	do_action( 'splms_after_author_content', $splms_author );
 	?>
 
 </div>

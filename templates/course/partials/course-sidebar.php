@@ -12,21 +12,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$course_id      = get_the_ID();
-$access_info    = splms_get_course_access_info( $course_id );
-$is_enrolled    = splms_is_user_enrolled( $course_id );
-$duration       = splms_get_course_duration( $course_id );
-$students_count = splms_get_course_enrollment_count( $course_id );
-$difficulty     = splms_get_course_difficulty( $course_id );
-$rating_summary = splms_get_course_rating( $course_id );
+
+
+$splms_course_id      = get_the_ID();
+$splms_access_info    = splms_get_course_access_info( $splms_course_id );
+$splms_is_enrolled    = splms_is_user_enrolled( $splms_course_id );
+$splms_duration       = splms_get_course_duration( $splms_course_id );
+$splms_students_count = splms_get_course_enrollment_count( $splms_course_id );
+$splms_difficulty     = splms_get_course_difficulty( $splms_course_id );
+$splms_rating_summary = splms_get_course_rating( $splms_course_id );
 
 // Ensure we have the proper structure.
-if ( ! is_array( $rating_summary ) ) {
-	$rating_summary = array();
+if ( ! is_array( $splms_rating_summary ) ) {
+	$splms_rating_summary = array();
 }
 
 // Set default values if keys are missing.
-$rating_summary = array_merge(
+$splms_rating_summary = array_merge(
 	array(
 		'average_rating'   => 0,
 		'total_reviews'    => 0,
@@ -38,15 +40,15 @@ $rating_summary = array_merge(
 			1 => 0,
 		),
 	),
-	$rating_summary
+	$splms_rating_summary
 );
 ?>
 
 <div class="course-sidebar-content">
 	<!-- Course Categories -->
 	<?php
-	$categories = get_the_terms( $course_id, SPLMS_TAXONOMIES['course_category'] );
-	if ( $categories && ! is_wp_error( $categories ) ) {
+	$splms_categories = get_the_terms( $splms_course_id, SPLMS_TAXONOMIES['course_category'] );
+	if ( $splms_categories && ! is_wp_error( $splms_categories ) ) {
 		?>
 		<div class="sidebar-widget course-categories-widget">
 			<h3 class="widget-title">
@@ -58,12 +60,12 @@ $rating_summary = array_merge(
 				<?php esc_html_e( 'Categories', 'skillpulse-lms' ); ?>
 			</h3>
 			<div class="course-categories-list">
-				<?php foreach ( $categories as $category ) { ?>
-					<a href="<?php echo esc_url( get_term_link( $category ) ); ?>" class="category-link">
+				<?php foreach ( $splms_categories as $splms_category ) { ?>
+					<a href="<?php echo esc_url( get_term_link( $splms_category ) ); ?>" class="category-link">
 						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 						</svg>
-						<?php echo esc_html( $category->name ); ?>
+						<?php echo esc_html( $splms_category->name ); ?>
 					</a>
 				<?php } ?>
 			</div>
@@ -72,8 +74,8 @@ $rating_summary = array_merge(
 
 	<!-- Course Tags -->
 	<?php
-	$tags = get_the_terms( $course_id, SPLMS_TAXONOMIES['course_tag'] );
-	if ( $tags && ! is_wp_error( $tags ) ) {
+	$splms_tags = get_the_terms( $splms_course_id, SPLMS_TAXONOMIES['course_tag'] );
+	if ( $splms_tags && ! is_wp_error( $splms_tags ) ) {
 		?>
 		<div class="sidebar-widget course-tags-widget">
 			<h3 class="widget-title">
@@ -85,9 +87,9 @@ $rating_summary = array_merge(
 				<?php esc_html_e( 'Tags', 'skillpulse-lms' ); ?>
 			</h3>
 			<div class="course-tags-list">
-				<?php foreach ( $tags as $course_tag ) { ?>
-					<a href="<?php echo esc_url( get_term_link( $course_tag ) ); ?>" class="tag-link">
-						#<?php echo esc_html( $course_tag->name ); ?>
+				<?php foreach ( $splms_tags as $splms_course_tag ) { ?>
+					<a href="<?php echo esc_url( get_term_link( $splms_course_tag ) ); ?>" class="tag-link">
+						#<?php echo esc_html( $splms_course_tag->name ); ?>
 					</a>
 				<?php } ?>
 			</div>
@@ -96,16 +98,16 @@ $rating_summary = array_merge(
 
 	<!-- Certificate Section -->
 	<?php
-	$user_id             = get_current_user_id();
-	$certificate_enabled = splms_is_certificate_enabled( $course_id );
-	$is_enrolled         = splms_is_user_enrolled( $course_id );
-	$enrollment_status   = splms_get_user_enrollment_status( $course_id );
-	$is_completed        = 'completed' === $enrollment_status;
+	$splms_user_id             = get_current_user_id();
+	$splms_certificate_enabled = splms_is_certificate_enabled( $splms_course_id );
+	$splms_is_enrolled         = splms_is_user_enrolled( $splms_course_id );
+	$splms_enrollment_status   = splms_get_user_enrollment_status( $splms_course_id );
+	$splms_is_completed        = 'completed' === $splms_enrollment_status;
 
-	if ( $certificate_enabled && $is_enrolled && $is_completed ) {
-		$certificate_manager = SkillPulse_LMS_Certificates::get_instance();
-		$has_certificate     = $certificate_manager->user_has_certificate( $user_id, $course_id );
-		$certificate_link    = $certificate_manager->get_certificate_link( $user_id, $course_id );
+	if ( $splms_certificate_enabled && $splms_is_enrolled && $splms_is_completed ) {
+		$splms_certificate_manager = SkillPulse_LMS_Certificates::get_instance();
+		$splms_has_certificate     = $splms_certificate_manager->user_has_certificate( $splms_user_id, $splms_course_id );
+		$splms_certificate_link    = $splms_certificate_manager->get_certificate_link( $splms_user_id, $splms_course_id );
 
 		?>
 		<div class="sidebar-widget certificate-widget">
@@ -117,7 +119,7 @@ $rating_summary = array_merge(
 				<?php esc_html_e( 'Certificate', 'skillpulse-lms' ); ?>
 			</h3>
 			<div class="certificate-content">
-				<?php if ( $has_certificate && $certificate_link ) { ?>
+				<?php if ( $splms_has_certificate && $splms_certificate_link ) { ?>
 					<div class="certificate-available">
 						<div class="certificate-status">
 							<span class="status-badge status-completed">
@@ -132,7 +134,7 @@ $rating_summary = array_merge(
 							<?php esc_html_e( 'Congratulations! You have successfully completed this course and earned your certificate.', 'skillpulse-lms' ); ?>
 						</p>
 						<div class="certificate-actions">
-							<a href="<?php echo esc_url( $certificate_link ); ?>" class="btn btn-primary certificate-view" target="_blank">
+							<a href="<?php echo esc_url( $splms_certificate_link ); ?>" class="btn btn-primary certificate-view" target="_blank">
 								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M1 12S5 4 12 4S23 12 23 12S19 20 12 20S1 12 1 12Z" stroke="currentColor" stroke-width="2"/>
 									<circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>

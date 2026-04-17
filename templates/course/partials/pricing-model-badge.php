@@ -12,10 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$course_id = get_the_ID();
+
+
+$splms_course_id = get_the_ID();
 
 // Check if course uses section-based pricing.
-if ( splms_course_uses_section_pricing( $course_id ) ) {
+if ( splms_course_uses_section_pricing( $splms_course_id ) ) {
 	?>
 	<span class="course-pricing-model-badge section-based" style="display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);">
 		<svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

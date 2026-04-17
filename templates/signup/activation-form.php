@@ -10,15 +10,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$activation_key = get_query_var( 'activation_key' );
-$signup         = null;
 
-if ( ! empty( $activation_key ) ) {
-	$signup = SkillPulse_LMS_Signup::get_instance()->get_signup_by_key( $activation_key );
+
+$splms_activation_key = get_query_var( 'activation_key' );
+$splms_signup         = null;
+
+if ( ! empty( $splms_activation_key ) ) {
+	$splms_signup = SkillPulse_LMS_Signup::get_instance()->get_signup_by_key( $splms_activation_key );
 }
 
 // Check if we have an activation key in the URL.
-$has_activation_key = ! empty( $activation_key );
+$splms_has_activation_key = ! empty( $splms_activation_key );
 ?>
 
 <div class="splms-signup-container">
@@ -29,9 +31,9 @@ $has_activation_key = ! empty( $activation_key );
 		</div>
 
 		<?php
-		if ( $has_activation_key ) {
-			if ( $signup ) {
-				if ( 'pending' === $signup->status ) {
+		if ( $splms_has_activation_key ) {
+			if ( $splms_signup ) {
+				if ( 'pending' === $splms_signup->status ) {
 					?>
 					<div class="splms-account-details-header">
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -44,17 +46,17 @@ $has_activation_key = ! empty( $activation_key );
 
 					<div class="splms-form-group">
 						<label class="splms-form-label"><?php esc_html_e( 'Name:', 'skillpulse-lms' ); ?></label>
-						<div class="splms-form-control splms-readonly"><?php echo esc_html( $signup->user_name ); ?></div>
+						<div class="splms-form-control splms-readonly"><?php echo esc_html( $splms_signup->user_name ); ?></div>
 					</div>
 
 					<div class="splms-form-group">
 						<label class="splms-form-label"><?php esc_html_e( 'Email:', 'skillpulse-lms' ); ?></label>
-						<div class="splms-form-control splms-readonly"><?php echo esc_html( $signup->user_email ); ?></div>
+						<div class="splms-form-control splms-readonly"><?php echo esc_html( $splms_signup->user_email ); ?></div>
 					</div>
 
 					<div class="splms-form-group">
 						<label class="splms-form-label"><?php esc_html_e( 'User Type:', 'skillpulse-lms' ); ?></label>
-						<div class="splms-form-control splms-readonly"><?php echo esc_html( ucfirst( $signup->user_type ) ); ?></div>
+						<div class="splms-form-control splms-readonly"><?php echo esc_html( ucfirst( $splms_signup->user_type ) ); ?></div>
 					</div>
 
 					<div class="splms-form-group">
@@ -64,7 +66,7 @@ $has_activation_key = ! empty( $activation_key );
 							echo esc_html(
 								date_i18n(
 									get_option( 'date_format' ),
-									strtotime( $signup->registered )
+									strtotime( $splms_signup->registered )
 								)
 							);
 							?>
@@ -74,7 +76,7 @@ $has_activation_key = ! empty( $activation_key );
 					<form id="splms-activation-form" class="splms-auth-form" method="post">
 						<?php wp_nonce_field( 'splms_signup_nonce', 'splms_nonce' ); ?>
 						<input type="hidden" name="splms_activate_submit" value="1"/>
-						<input type="hidden" name="activation_key" value="<?php echo esc_attr( $activation_key ); ?>"/>
+						<input type="hidden" name="activation_key" value="<?php echo esc_attr( $splms_activation_key ); ?>"/>
 
 						<div class="splms-form-group">
 							<button type="submit" class="splms-auth-btn splms-auth-btn-primary">
@@ -137,7 +139,7 @@ $has_activation_key = ! empty( $activation_key );
 			</div>
 			<?php
 		}
-		if ( ! $has_activation_key || ! $signup || 'pending' !== $signup->status ) {
+		if ( ! $splms_has_activation_key || ! $splms_signup || 'pending' !== $splms_signup->status ) {
 			?>
 			<div class="splms-resend-activation">
 				<h3><?php esc_html_e( 'Need Help?', 'skillpulse-lms' ); ?></h3>
