@@ -216,10 +216,10 @@ function splms_is_lesson_completed( $lesson_id, $user_id = null ) {
 	// Use direct database query.
 	global $wpdb;
 
-	$table_name = $wpdb->prefix . 'splms_lesson_progress';
+	$table_name = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
 	$completed  = $wpdb->get_var(
 		$wpdb->prepare(
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, values are prepared.
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
 			"SELECT is_completed FROM {$table_name} WHERE user_id = %d AND lesson_id = %d",
 			$user_id,
 			$lesson_id
@@ -643,10 +643,10 @@ function splms_get_lesson_completion_rate( $lesson_id = null ) {
 
 	// Get completed students for this lesson.
 	global $wpdb;
-	$lesson_progress_table = $wpdb->prefix . 'splms_lesson_progress';
+	$lesson_progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
 	$completed_students    = $wpdb->get_var(
 		$wpdb->prepare(
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, values are prepared.
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
 			"SELECT COUNT(*) FROM {$lesson_progress_table} WHERE lesson_id = %d AND is_completed = 1",
 			$lesson_id
 		)
@@ -673,7 +673,7 @@ function splms_get_lesson_average_completion_time( $lesson_id = null ) {
 	}
 
 	global $wpdb;
-	$lesson_progress_table = $wpdb->prefix . 'splms_lesson_progress';
+	$lesson_progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
 
 	// Get completion times for this lesson.
 	// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, values are prepared.

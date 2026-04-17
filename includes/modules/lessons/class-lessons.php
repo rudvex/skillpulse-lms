@@ -691,10 +691,10 @@ class SkillPulse_LMS_Lessons {
 		global $wpdb;
 
 		// Get completed lessons from lesson_progress table.
-		$lesson_progress_table = $wpdb->prefix . 'splms_lesson_progress';
+		$lesson_progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
 		$completed_lessons     = $wpdb->get_var(
 			$wpdb->prepare(
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, values are prepared.
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
 				"SELECT COUNT(*) FROM {$lesson_progress_table} WHERE user_id = %d AND course_id = %d AND is_completed = 1",
 				$user_id,
 				$course_id
@@ -706,11 +706,11 @@ class SkillPulse_LMS_Lessons {
 		}
 
 		// Get passed quizzes from quiz_attempts table (only graded quizzes).
-		$quiz_attempts_table = $wpdb->prefix . 'splms_quiz_attempts';
+		$quiz_attempts_table = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 		// Get all passed quiz IDs first.
 		$passed_quiz_ids = $wpdb->get_col(
 			$wpdb->prepare(
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, values are prepared.
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
 				"SELECT DISTINCT quiz_id FROM {$quiz_attempts_table} WHERE user_id = %d AND course_id = %d AND passed = 1",
 				$user_id,
 				$course_id
@@ -983,10 +983,10 @@ class SkillPulse_LMS_Lessons {
 	public function get_user_enrollment_date( $user_id, $course_id ) {
 		// Get enrollment date from database.
 		global $wpdb;
-		$enrollment_table = $wpdb->prefix . 'splms_enrollments';
+		$enrollment_table = esc_sql( $wpdb->prefix . 'splms_enrollments' );
 		$result           = $wpdb->get_var(
 			$wpdb->prepare(
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, values are prepared.
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
 				"SELECT enrolled_at FROM {$enrollment_table} WHERE user_id = %d AND course_id = %d LIMIT 1",
 				$user_id,
 				$course_id
@@ -1029,8 +1029,8 @@ class SkillPulse_LMS_Lessons {
 	public function get_previous_lesson( $lesson_id, $course_id ) {
 		global $wpdb;
 
-		$relationships_table = $wpdb->prefix . 'splms_relationships';
-		$course_items_table  = $wpdb->prefix . 'splms_course_items';
+		$relationships_table = esc_sql( $wpdb->prefix . 'splms_relationships' );
+		$course_items_table  = esc_sql( $wpdb->prefix . 'splms_course_items' );
 
 		// Get all lessons for this course ordered by section and lesson order.
 		$query = "
@@ -1043,10 +1043,10 @@ class SkillPulse_LMS_Lessons {
 			ORDER BY ci.order_index ASC, r.order_index ASC
 		";
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table names are safe, using wpdb prepare.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table names are safe, using wpdb prepare.
 		$lessons = $wpdb->get_col(
 			$wpdb->prepare(
-				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query variable is properly constructed above.
+				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query variable is properly constructed above.
 				$query,
 				$course_id,
 				SPLMS_POST_TYPES['lesson'],
@@ -1100,8 +1100,8 @@ class SkillPulse_LMS_Lessons {
 	private function check_prevent_skip_access( $lesson_id, $user_id, $course_id ) {
 		global $wpdb;
 
-		$relationships_table = $wpdb->prefix . 'splms_relationships';
-		$course_items_table  = $wpdb->prefix . 'splms_course_items';
+		$relationships_table = esc_sql( $wpdb->prefix . 'splms_relationships' );
+		$course_items_table  = esc_sql( $wpdb->prefix . 'splms_course_items' );
 
 		// Get all lessons for this course ordered by section and lesson order.
 		$query = "
@@ -1114,10 +1114,10 @@ class SkillPulse_LMS_Lessons {
 			ORDER BY ci.order_index ASC, r.order_index ASC
 		";
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table names are safe, using wpdb prepare.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table names are safe, using wpdb prepare.
 		$lessons = $wpdb->get_results(
 			$wpdb->prepare(
-				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query variable is properly constructed above.
+				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query variable is properly constructed above.
 				$query,
 				$course_id,
 				SPLMS_POST_TYPES['lesson'],
@@ -1388,10 +1388,10 @@ class SkillPulse_LMS_Lessons {
 		global $wpdb;
 
 		// Get completed lessons.
-		$lesson_table      = $wpdb->prefix . 'splms_lesson_progress';
+		$lesson_table      = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
 		$completed_lessons = $wpdb->get_col(
 			$wpdb->prepare(
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, values are prepared.
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
 				"SELECT lesson_id FROM {$lesson_table} WHERE user_id = %d AND course_id = %d AND is_completed = 1",
 				$user_id,
 				$course_id
@@ -1399,10 +1399,10 @@ class SkillPulse_LMS_Lessons {
 		);
 
 		// Get passed quizzes.
-		$quiz_table     = $wpdb->prefix . 'splms_quiz_attempts';
+		$quiz_table     = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 		$passed_quizzes = $wpdb->get_col(
 			$wpdb->prepare(
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, values are prepared.
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
 				"SELECT DISTINCT quiz_id FROM {$quiz_table} WHERE user_id = %d AND course_id = %d AND passed = 1",
 				$user_id,
 				$course_id

@@ -181,7 +181,7 @@ class SkillPulse_LMS_REST_Course_Controller extends WP_REST_Controller {
 				? array_map( 'absint', $request->get_param( 'categories' ) )
 				: array( absint( $request->get_param( 'categories' ) ) );
 
-			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Tax query is necessary for category filtering.
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Tax query is necessary for category filtering.
 			$args['tax_query'] = array(
 				array(
 					'taxonomy' => 'sp-course-category',

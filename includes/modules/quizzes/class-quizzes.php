@@ -844,8 +844,8 @@ class SkillPulse_LMS_Quizzes {
 	public function get_user_quiz_attempts( $user_id, $quiz_id = null ) {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . 'splms_quiz_attempts';
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared.
+		$table_name = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
 		$query  = "SELECT * FROM $table_name WHERE user_id = %d";
 		$params = array( $user_id );
 
@@ -856,7 +856,7 @@ class SkillPulse_LMS_Quizzes {
 
 		$query .= ' ORDER BY attempt_time DESC';
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query is prepared with $wpdb->prepare().
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with $wpdb->prepare().
 		return $wpdb->get_results( $wpdb->prepare( $query, $params ) );
 	}
 
@@ -1715,10 +1715,10 @@ class SkillPulse_LMS_Quizzes {
 		global $wpdb;
 
 		// Get completed lessons from lesson_progress table.
-		$lesson_progress_table = $wpdb->prefix . 'splms_lesson_progress';
+		$lesson_progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
 		$completed_lessons     = $wpdb->get_var(
 			$wpdb->prepare(
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared.
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
 				"SELECT COUNT(*) FROM {$lesson_progress_table} WHERE user_id = %d AND course_id = %d AND is_completed = 1",
 				$user_id,
 				$course_id
@@ -1726,11 +1726,11 @@ class SkillPulse_LMS_Quizzes {
 		);
 
 		// Get passed quizzes from quiz_attempts table (only graded quizzes).
-		$quiz_attempts_table = $wpdb->prefix . 'splms_quiz_attempts';
+		$quiz_attempts_table = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 		// Get all passed quiz IDs first.
 		$passed_quiz_ids = $wpdb->get_col(
 			$wpdb->prepare(
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared.
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
 				"SELECT DISTINCT quiz_id FROM {$quiz_attempts_table} WHERE user_id = %d AND course_id = %d AND passed = 1",
 				$user_id,
 				$course_id
@@ -2704,11 +2704,11 @@ class SkillPulse_LMS_Quizzes {
 			);
 		}
 
-		$table_name = $wpdb->prefix . 'splms_quiz_attempts';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 
 		$attempt = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM {$table_name} WHERE id = %d", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+				"SELECT * FROM {$table_name} WHERE id = %d", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter
 				$attempt_id
 			)
 		);
@@ -2792,11 +2792,11 @@ class SkillPulse_LMS_Quizzes {
 	public function get_attempt_status( $attempt_id ) {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . 'splms_quiz_attempts';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 
 		$status = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT status FROM {$table_name} WHERE id = %d", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+				"SELECT status FROM {$table_name} WHERE id = %d", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter
 				$attempt_id
 			)
 		);
@@ -2817,7 +2817,7 @@ class SkillPulse_LMS_Quizzes {
 	public function get_attempts_by_status( $status, $args = array() ) {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . 'splms_quiz_attempts';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 
 		if ( is_array( $status ) ) {
 			$status_placeholders = implode( ',', array_fill( 0, count( $status ), '%s' ) );
@@ -2828,7 +2828,7 @@ class SkillPulse_LMS_Quizzes {
 			$status_values    = array( $status );
 		}
 
-		$query = "SELECT * FROM {$table_name} WHERE {$status_condition}"; // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		$query = "SELECT * FROM {$table_name} WHERE {$status_condition}"; // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter
 
 		$query_values = $status_values;
 
@@ -2862,12 +2862,12 @@ class SkillPulse_LMS_Quizzes {
 		}
 
 		if ( empty( $query_values ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query has no placeholders when values is empty.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query has no placeholders when values is empty.
 			return $wpdb->get_results( $query );
 		}
 
 		return $wpdb->get_results(
-			$wpdb->prepare( $query, ...$query_values ) // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare( $query, ...$query_values ) // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter
 		);
 	}
 

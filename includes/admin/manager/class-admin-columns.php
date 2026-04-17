@@ -880,10 +880,10 @@ class SkillPulse_LMS_Admin_Columns {
 	 */
 	private function render_quiz_attempts_column( $quiz_id ) {
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'splms_quiz_attempts';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 		$count      = $wpdb->get_var(
 			$wpdb->prepare(
-				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared.
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
 				"SELECT COUNT(*) FROM {$table_name} WHERE quiz_id = %d",
 				$quiz_id
 			)

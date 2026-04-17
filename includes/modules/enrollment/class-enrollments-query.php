@@ -132,7 +132,7 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 		// Use direct database upsert to handle duplicate key conflicts.
 		global $wpdb;
 
-		$table_name    = $wpdb->prefix . 'splms_enrollments';
+		$table_name    = esc_sql( $wpdb->prefix . 'splms_enrollments' );
 		$format_values = $access_expires ? array( '%d', '%d', '%s', '%s', '%s', '%s', '%s' ) : array( '%d', '%d', '%s', '%s', '%s', '%s' );
 
 		// Build the INSERT query with ON DUPLICATE KEY UPDATE.
@@ -240,7 +240,7 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 		$placeholders = implode( ',', array_fill( 0, count( $statuses ), '%s' ) );
 
 		// Final SQL with proper placeholders.
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, values are prepared.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
 		$sql = "SELECT COUNT(*) FROM {$this->table_name} WHERE user_id = %d AND course_id = %d AND status IN ($placeholders)";
 
 		// Merge values for prepare.
@@ -248,9 +248,9 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 
 		// Run the query.
 		if ( empty( $values ) ) {
-			$count = $wpdb->get_var( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is prepared with placeholders.
+			$count = $wpdb->get_var( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared with placeholders.
 		} else {
-			$count = $wpdb->get_var( $wpdb->prepare( $sql, ...$values ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is prepared with placeholders.
+			$count = $wpdb->get_var( $wpdb->prepare( $sql, ...$values ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared with placeholders.
 		}
 
 		return intval( $count ) > 0;
@@ -295,7 +295,7 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 			return self::$enrollment_cache[ $cache_key ];
 		}
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, values are prepared.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
 		$sql = "SELECT * FROM {$this->table_name} WHERE user_id = %d AND course_id = %d";
 
 		$enrollment = $this->get_row( $sql, array( $user_id, $course_id ) );
@@ -347,7 +347,7 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, values are prepared.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
 		$sql = "SELECT * FROM {$this->table_name} WHERE user_id = %d";
 
 		$values = array( $user_id );
@@ -364,12 +364,12 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 		$allowed_order   = array( 'ASC', 'DESC' );
 		$orderby         = in_array( $args['orderby'], $allowed_orderby, true ) ? $args['orderby'] : 'enrolled_at';
 		$order           = in_array( strtoupper( $args['order'] ), $allowed_order, true ) ? strtoupper( $args['order'] ) : 'DESC';
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Orderby and order are validated.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Orderby and order are validated.
 		$sql .= " ORDER BY {$orderby} {$order}";
 
 		if ( $args['limit'] ) {
 			$limit = intval( $args['limit'] );
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Limit is sanitized.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Limit is sanitized.
 			$sql .= " LIMIT {$limit}";
 		}
 
@@ -413,7 +413,7 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 	 * @return object|null Enrollment data or null if not found.
 	 */
 	public function get_enrollment_by_id( $enrollment_id ) {
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, values are prepared.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
 		$sql = "SELECT * FROM {$this->table_name} WHERE id = %d";
 
 		return $this->get_row( $sql, array( $enrollment_id ) );
@@ -524,7 +524,7 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 
 		try {
 			// 1. Delete lesson progress data.
-			$lesson_progress_table = $wpdb->prefix . 'splms_lesson_progress';
+			$lesson_progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
 			$wpdb->delete(
 				$lesson_progress_table,
 				array(
@@ -535,7 +535,7 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 			);
 
 			// 2. Delete quiz attempts data.
-			$quiz_attempts_table = $wpdb->prefix . 'splms_quiz_attempts';
+			$quiz_attempts_table = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 			$wpdb->delete(
 				$quiz_attempts_table,
 				array(
@@ -546,7 +546,7 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 			);
 
 			// 3. Delete user activity logs for this course.
-			$user_activity_table = $wpdb->prefix . 'splms_user_activity';
+			$user_activity_table = esc_sql( $wpdb->prefix . 'splms_user_activity' );
 			$wpdb->delete(
 				$user_activity_table,
 				array(
@@ -625,16 +625,16 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 		}
 
 		$set_clause = implode( ', ', $set_clauses );
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
 		$query = "UPDATE {$this->table_name} SET $set_clause WHERE id IN ($placeholders)";
 
 		$query_values = array_merge( $values, $enrollment_ids );
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query is prepared above.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared above.
 		if ( empty( $query_values ) ) {
-			$result = $wpdb->query( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query is prepared with placeholders.
+			$result = $wpdb->query( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders.
 		} else {
-			$result = $wpdb->query( $wpdb->prepare( $query, ...$query_values ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query is prepared with placeholders.
+			$result = $wpdb->query( $wpdb->prepare( $query, ...$query_values ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders.
 		}
 
 		// Clear all cache after bulk update.
@@ -662,14 +662,14 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 
 		$placeholders = implode( ',', array_fill( 0, count( $enrollment_ids ), '%d' ) );
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
 		$query = "DELETE FROM {$this->table_name} WHERE id IN ($placeholders)";
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query is prepared above.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared above.
 		if ( empty( $enrollment_ids ) ) {
-			$result = $wpdb->query( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query is prepared with placeholders.
+			$result = $wpdb->query( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders.
 		} else {
-			$result = $wpdb->query( $wpdb->prepare( $query, ...$enrollment_ids ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query is prepared with placeholders.
+			$result = $wpdb->query( $wpdb->prepare( $query, ...$enrollment_ids ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders.
 		}
 
 		// Clear all cache after bulk delete.
@@ -699,6 +699,7 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 		} else {
 			// Count all enrollments regardless of status.
 			$sql    = "SELECT COUNT(*) FROM {$this->table_name} WHERE course_id = %d";
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is safely prepared via $wpdb->prepare().
 			$result = (int) $wpdb->get_var( $wpdb->prepare( $sql, $course_id ) );
 		}
 		// phpcs:enable

@@ -933,7 +933,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 
 		// Save attempt.
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'splms_quiz_attempts';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 
 		$attempt_data = array(
 			'quiz_id'        => $quiz_id,
@@ -1013,18 +1013,18 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 		}
 
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'splms_quiz_attempts';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 
 		// Get best attempt.
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safe, validated constant.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
 		$best_attempt = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table_name} WHERE quiz_id = %d AND user_id = %d ORDER BY score DESC, attempt_date DESC LIMIT 1", $quiz_id, $user_id ) );
 
 		// Get latest attempt.
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safe, validated constant.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
 		$latest_attempt = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table_name} WHERE quiz_id = %d AND user_id = %d ORDER BY attempt_date DESC LIMIT 1", $quiz_id, $user_id ) );
 
 		// Get attempt count.
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safe, validated constant.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
 		$attempt_count = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$table_name} WHERE quiz_id = %d AND user_id = %d", $quiz_id, $user_id ) );
 
 		$results = array(

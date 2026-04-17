@@ -348,10 +348,10 @@ class SkillPulse_LMS_Dashboard_API {
 		global $wpdb;
 
 		// Get progress from the lesson_progress table.
-		$lesson_progress_table = $wpdb->prefix . 'splms_lesson_progress';
+		$lesson_progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
 		$completed_lessons     = $wpdb->get_var(
 			$wpdb->prepare(
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared.
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
 				"SELECT COUNT(DISTINCT lesson_id) FROM {$lesson_progress_table} 
 			WHERE user_id = %d AND course_id = %d AND is_completed = 1",
 				$user_id,
@@ -360,11 +360,11 @@ class SkillPulse_LMS_Dashboard_API {
 		);
 
 		// Get passed quizzes from quiz_attempts table (only graded quizzes).
-		$quiz_attempts_table = $wpdb->prefix . 'splms_quiz_attempts';
+		$quiz_attempts_table = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 		// Get all passed quiz IDs first.
 		$passed_quiz_ids = $wpdb->get_col(
 			$wpdb->prepare(
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared.
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
 				"SELECT DISTINCT quiz_id FROM {$quiz_attempts_table} 
 			WHERE user_id = %d AND course_id = %d AND passed = 1",
 				$user_id,

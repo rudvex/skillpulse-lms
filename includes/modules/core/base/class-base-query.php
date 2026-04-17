@@ -140,11 +140,11 @@ class SkillPulse_LMS_Base_Query {
 		global $wpdb;
 
 		if ( empty( $args ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query has no placeholders when args is empty.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query has no placeholders when args is empty.
 			return $wpdb->get_results( $query );
 		}
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query is prepared with $wpdb->prepare() and spread operator.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with $wpdb->prepare() and spread operator.
 		return $wpdb->get_results( $wpdb->prepare( $query, ...$args ) );
 	}
 
@@ -161,11 +161,11 @@ class SkillPulse_LMS_Base_Query {
 		global $wpdb;
 
 		if ( empty( $args ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query has no placeholders when args is empty.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query has no placeholders when args is empty.
 			return $wpdb->get_row( $query );
 		}
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query is prepared with $wpdb->prepare() and spread operator.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with $wpdb->prepare() and spread operator.
 		return $wpdb->get_row( $wpdb->prepare( $query, ...$args ) );
 	}
 
@@ -182,11 +182,11 @@ class SkillPulse_LMS_Base_Query {
 		global $wpdb;
 
 		if ( empty( $args ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query has no placeholders when args is empty.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query has no placeholders when args is empty.
 			return $wpdb->get_var( $query );
 		}
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query is prepared with $wpdb->prepare() and spread operator.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with $wpdb->prepare() and spread operator.
 		return $wpdb->get_var( $wpdb->prepare( $query, ...$args ) );
 	}
 
@@ -203,11 +203,11 @@ class SkillPulse_LMS_Base_Query {
 		global $wpdb;
 
 		if ( empty( $args ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query has no placeholders when args is empty.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query has no placeholders when args is empty.
 			return $wpdb->get_col( $query );
 		}
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query is prepared with $wpdb->prepare() and spread operator.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with $wpdb->prepare() and spread operator.
 		return $wpdb->get_col( $wpdb->prepare( $query, ...$args ) );
 	}
 

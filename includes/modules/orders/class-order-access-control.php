@@ -158,11 +158,11 @@ class SkillPulse_LMS_Order_Access_Control {
 	public static function get_order_items( $order_id ) {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . 'splms_order_items';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_order_items' );
 
 		$items = $wpdb->get_results(
 			$wpdb->prepare(
-				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safely constructed with $wpdb->prefix.
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safely constructed with $wpdb->prefix.
 				"SELECT * FROM {$table_name} WHERE order_id = %s ORDER BY id ASC",
 				$order_id
 			)

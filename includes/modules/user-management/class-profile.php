@@ -199,31 +199,6 @@ class SkillPulse_LMS_Profile {
 	}
 
 	/**
-	 * Get student count for a specific course.
-	 *
-	 * @param int $course_id Course ID.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return int
-	 */
-	private function get_course_student_count( $course_id ) {
-		global $wpdb;
-
-		$enrollments_table = $wpdb->prefix . 'splms_enrollments';
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table_name is safe, generated from $wpdb->prefix.
-		$query = "
-			SELECT COUNT(*) 
-			FROM {$enrollments_table} 
-			WHERE course_id = %d 
-			AND status = 'active'
-		";
-
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is prepared with $wpdb->prepare().
-		return intval( $wpdb->get_var( $wpdb->prepare( $query, $course_id ) ) );
-	}
-
-	/**
 	 * Get profile picture URL.
 	 *
 	 * @param int $user_id User ID.

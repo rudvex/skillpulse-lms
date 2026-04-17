@@ -87,12 +87,12 @@ if ( $is_enrolled && $user_id ) {
 	// Get last activity time (from lesson progress table).
 	if ( $lessons_instance ) {
 		global $wpdb;
-		$progress_table = $wpdb->prefix . 'splms_lesson_progress';
+		$progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Performance-critical query.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Performance-critical query.
 		$last_activity = $wpdb->get_var(
 			$wpdb->prepare(
-				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safely constructed with $wpdb->prefix.
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safely constructed with $wpdb->prefix.
 				"SELECT MAX(completed_at) FROM {$progress_table} WHERE user_id = %d AND course_id = %d",
 				$user_id,
 				$course_id

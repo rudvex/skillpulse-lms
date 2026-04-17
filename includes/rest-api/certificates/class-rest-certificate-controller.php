@@ -234,7 +234,7 @@ class SkillPulse_LMS_REST_Certificate_Controller extends WP_REST_Controller {
 			'post_status'    => 'publish',
 			'posts_per_page' => $request->get_param( 'per_page' ) ? $request->get_param( 'per_page' ) : 10,
 			'paged'          => $request->get_param( 'page' ) ? $request->get_param( 'page' ) : 1,
-			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Necessary for filtering out issued certificates.
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Necessary for filtering out issued certificates.
 		);
 
 		// Add search if provided.
@@ -1516,7 +1516,7 @@ class SkillPulse_LMS_REST_Certificate_Controller extends WP_REST_Controller {
 			'post_type'      => SPLMS_POST_TYPES['certificate'],
 			'post_status'    => 'publish',
 			'posts_per_page' => 1,
-			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Necessary for filtering certificates by user.
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Necessary for filtering certificates by user.
 			'meta_query'     => array(
 				'relation' => 'AND',
 				array(
@@ -1834,7 +1834,7 @@ class SkillPulse_LMS_REST_Certificate_Controller extends WP_REST_Controller {
 			'post_type'      => SPLMS_POST_TYPES['certificate'],
 			'post_status'    => 'publish',
 			'posts_per_page' => -1,
-			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Necessary for filtering certificates by user and status.
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Necessary for filtering certificates by user and status.
 			'meta_query'     => array(
 				array(
 					'key'     => '_splms_certificate_user_id',
@@ -1848,7 +1848,7 @@ class SkillPulse_LMS_REST_Certificate_Controller extends WP_REST_Controller {
 				),
 			),
 			'orderby'        => 'meta_value',
-			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Necessary for ordering certificates by generation date.
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Necessary for ordering certificates by generation date.
 			'meta_key'       => '_splms_certificate_generated_date',
 			'order'          => 'DESC',
 		);

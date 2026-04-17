@@ -486,8 +486,8 @@ class SkillPulse_LMS_REST_Lesson_Controller extends WP_REST_Controller {
 		if ( $user_id > 0 ) {
 			// Get lesson progress for current user.
 			global $wpdb;
-			$table_name = $wpdb->prefix . 'splms_lesson_progress';
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safe, validated constant.
+			$table_name = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
 			$progress = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table_name} WHERE lesson_id = %d AND user_id = %d", $lesson_id, $user_id ) );
 
 			if ( $progress ) {

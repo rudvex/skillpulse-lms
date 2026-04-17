@@ -101,7 +101,7 @@ class SkillPulse_LMS_Database {
 		$charset_collate = $wpdb->get_charset_collate();
 
 		// Course enrollments table.
-		$table_name = $wpdb->prefix . 'splms_enrollments';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_enrollments' );
 		$sql        = "CREATE TABLE $table_name (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			user_id bigint(20) NOT NULL,
@@ -123,7 +123,7 @@ class SkillPulse_LMS_Database {
 		dbDelta( $sql );
 
 		// Lesson progress table.
-		$table_name = $wpdb->prefix . 'splms_lesson_progress';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
 		$sql        = "CREATE TABLE $table_name (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			user_id bigint(20) NOT NULL,
@@ -142,7 +142,7 @@ class SkillPulse_LMS_Database {
 		dbDelta( $sql );
 
 		// Quiz attempts table.
-		$table_name = $wpdb->prefix . 'splms_quiz_attempts';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 		$sql        = "CREATE TABLE $table_name (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			user_id bigint(20) NOT NULL,
@@ -172,7 +172,7 @@ class SkillPulse_LMS_Database {
 		dbDelta( $sql );
 
 		// User activity log table.
-		$table_name = $wpdb->prefix . 'splms_user_activity';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_user_activity' );
 		$sql        = "CREATE TABLE $table_name (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			user_id bigint(20) NOT NULL,
@@ -191,7 +191,7 @@ class SkillPulse_LMS_Database {
 		dbDelta( $sql );
 
 		// Course items table (for course-to-item relationships).
-		$table_name = $wpdb->prefix . 'splms_course_items';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_course_items' );
 		$sql        = "CREATE TABLE $table_name (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			course_id bigint(20) NOT NULL,
@@ -208,7 +208,7 @@ class SkillPulse_LMS_Database {
 		dbDelta( $sql );
 
 		// Relationships table (for hierarchical parent-child relationships).
-		$table_name = $wpdb->prefix . 'splms_relationships';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_relationships' );
 		$sql        = "CREATE TABLE $table_name (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			parent_id bigint(20) NOT NULL,
@@ -225,7 +225,7 @@ class SkillPulse_LMS_Database {
 		dbDelta( $sql );
 
 		// Quiz questions table.
-		$table_name = $wpdb->prefix . 'splms_quiz_questions';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_quiz_questions' );
 		$sql        = "CREATE TABLE $table_name (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			quiz_id bigint(20) NOT NULL,
@@ -252,7 +252,7 @@ class SkillPulse_LMS_Database {
 		dbDelta( $sql );
 
 		// Signups table for pending user signups.
-		$table_name = $wpdb->prefix . 'splms_signups';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_signups' );
 		$sql        = "CREATE TABLE $table_name (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			user_login varchar(60) NOT NULL,
@@ -275,7 +275,7 @@ class SkillPulse_LMS_Database {
 		dbDelta( $sql );
 
 		// Orders table - Only essential fields.
-		$table_name = $wpdb->prefix . 'splms_orders';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_orders' );
 		$sql        = "CREATE TABLE $table_name (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			user_id bigint(20) NOT NULL,
@@ -295,7 +295,7 @@ class SkillPulse_LMS_Database {
 		dbDelta( $sql );
 
 		// Order meta table.
-		$table_name = $wpdb->prefix . 'splms_order_meta';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_order_meta' );
 		$sql        = "CREATE TABLE $table_name (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			order_id bigint(20) NOT NULL,
@@ -309,7 +309,7 @@ class SkillPulse_LMS_Database {
 		dbDelta( $sql );
 
 		// Order items table.
-		$table_name = $wpdb->prefix . 'splms_order_items';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_order_items' );
 		$sql        = "CREATE TABLE $table_name (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			order_id bigint(20) NOT NULL,
@@ -327,7 +327,7 @@ class SkillPulse_LMS_Database {
 		dbDelta( $sql );
 
 		// Section access table.
-		$table_name = $wpdb->prefix . 'splms_section_access';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_section_access' );
 		$sql        = "CREATE TABLE $table_name (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			user_id bigint(20) NOT NULL,
@@ -347,7 +347,7 @@ class SkillPulse_LMS_Database {
 		dbDelta( $sql );
 
 		// Notifications table.
-		$table_name = $wpdb->prefix . 'splms_notifications';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_notifications' );
 		$sql        = "CREATE TABLE $table_name (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			user_id bigint(20) NOT NULL,
@@ -573,7 +573,7 @@ class SkillPulse_LMS_Database {
 		);
 
 		foreach ( $tables as $table ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.SchemaChange,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safe, schema change is intentional.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.SchemaChange,WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, schema change is intentional.
 			$wpdb->query( "DROP TABLE IF EXISTS {$table}" );
 		}
 
@@ -597,7 +597,7 @@ class SkillPulse_LMS_Database {
 		}
 
 		// 3. Delete dynamic options (email & in-app templates).
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- Uninstall operation, no caching needed.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Uninstall operation, no caching needed.
 		$wpdb->query(
 			"DELETE FROM {$wpdb->options}
 			 WHERE option_name LIKE 'splms_email_template_%'
@@ -605,7 +605,7 @@ class SkillPulse_LMS_Database {
 		);
 
 		// 4. Delete transients.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- Uninstall operation, no caching needed.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Uninstall operation, no caching needed.
 		$wpdb->query(
 			"DELETE FROM {$wpdb->options}
 			 WHERE option_name LIKE '_transient_splms_%'
@@ -615,7 +615,7 @@ class SkillPulse_LMS_Database {
 		);
 
 		// 5. Delete post meta.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- Uninstall operation, no caching needed.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Uninstall operation, no caching needed.
 		$wpdb->query(
 			"DELETE FROM {$wpdb->postmeta}
 			 WHERE meta_key LIKE '_splms_%'
@@ -623,7 +623,7 @@ class SkillPulse_LMS_Database {
 		);
 
 		// 6. Delete user meta.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- Uninstall operation, no caching needed.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Uninstall operation, no caching needed.
 		$wpdb->query(
 			"DELETE FROM {$wpdb->usermeta}
 			 WHERE meta_key LIKE 'splms_%'"

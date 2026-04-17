@@ -105,11 +105,11 @@ class SkillPulse_LMS_Lesson_Progress_Query extends SkillPulse_LMS_Base_Query {
 	 * @return bool True if completed, false otherwise.
 	 */
 	public function is_lesson_completed( $lesson_id, $user_id ) {
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name cannot be prepared, values are prepared.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
 		$sql = "SELECT is_completed FROM {$this->table_name} WHERE lesson_id = %d AND user_id = %d";
 
 		global $wpdb;
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is prepared above, $sql variable usage is safe.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above, $sql variable usage is safe.
 		$result = $wpdb->get_var( $wpdb->prepare( $sql, $lesson_id, $user_id ) );
 
 		return intval( $result ) === 1;
@@ -126,7 +126,7 @@ class SkillPulse_LMS_Lesson_Progress_Query extends SkillPulse_LMS_Base_Query {
 	 * @return object|null Progress object on success, null on failure.
 	 */
 	public function get_lesson_progress( $user_id, $lesson_id ) {
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name cannot be prepared, values are prepared.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
 		$sql = "SELECT * FROM {$this->table_name} WHERE user_id = %d AND lesson_id = %d";
 
 		return $this->get_row( $sql, array( $user_id, $lesson_id ) );
