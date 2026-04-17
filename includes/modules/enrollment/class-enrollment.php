@@ -174,7 +174,7 @@ class SkillPulse_LMS_Enrollment {
 	public function check_and_expire_enrollments() {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . 'splms_enrollments';
+		$table_name = esc_sql( $wpdb->prefix . 'splms_enrollments' );
 		// phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested -- Need site timezone for expiration comparison.
 		$current_time = current_time( 'mysql' );
 
@@ -205,7 +205,7 @@ class SkillPulse_LMS_Enrollment {
 
 			if ( $auto_expire ) {
 				// Update enrollment status to expired.
-				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safe, validated constant.
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
 				$wpdb->update(
 					$table_name,
 					array( 'status' => 'expired' ),

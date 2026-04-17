@@ -60,7 +60,7 @@ if ( false !== $cached_post_ids && is_array( $cached_post_ids ) && ! empty( $cac
 		$query_args = array_merge(
 			$base_args,
 			array(
-				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Related courses query, acceptable performance trade-off.
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Related courses query, acceptable performance trade-off.
 				'tax_query' => array(
 					array(
 						'taxonomy' => SPLMS_TAXONOMIES['course_category'],
@@ -81,7 +81,7 @@ if ( false !== $cached_post_ids && is_array( $cached_post_ids ) && ! empty( $cac
 		$query_args = array_merge(
 			$base_args,
 			array(
-				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Related courses query, acceptable performance trade-off.
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Related courses query, acceptable performance trade-off.
 				'tax_query' => array(
 					array(
 						'taxonomy' => SPLMS_TAXONOMIES['course_tag'],

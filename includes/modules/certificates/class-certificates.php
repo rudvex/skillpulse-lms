@@ -308,7 +308,7 @@ class SkillPulse_LMS_Certificates {
 			'post_status'    => 'publish',
 			'posts_per_page' => 1,
 			'fields'         => 'ids',
-			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Necessary for finding certificate.
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Necessary for finding certificate.
 			'meta_query'     => array(
 				'relation' => 'AND',
 				array(

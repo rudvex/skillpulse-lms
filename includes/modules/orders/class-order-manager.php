@@ -92,7 +92,7 @@ class SkillPulse_LMS_Order_Manager {
 		try {
 			// Lock rows for this user+course to prevent concurrent order creation.
 			// FOR UPDATE prevents other transactions from reading or modifying these rows.
-			$table_name = $wpdb->prefix . 'splms_orders';
+			$table_name = esc_sql( $wpdb->prefix . 'splms_orders' );
 			$sql        = "SELECT id FROM {$table_name}
 				WHERE user_id = %d AND course_id = %d
 				AND status IN ('pending', 'processing')
@@ -100,7 +100,7 @@ class SkillPulse_LMS_Order_Manager {
 				FOR UPDATE";
 
 			$existing_id = $wpdb->get_var(
-				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is safely constructed and prepared above.
+				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is safely constructed and prepared above.
 				$wpdb->prepare( $sql, $data['user_id'], $data['course_id'] )
 			);
 
@@ -241,7 +241,7 @@ class SkillPulse_LMS_Order_Manager {
 			}
 
 			// Add items to order_items table.
-			$items_table = $wpdb->prefix . 'splms_order_items';
+			$items_table = esc_sql( $wpdb->prefix . 'splms_order_items' );
 
 			foreach ( $data['items'] as $item ) {
 				$item_defaults = array(

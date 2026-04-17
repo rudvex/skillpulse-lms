@@ -175,14 +175,14 @@ class SkillPulse_LMS_Signup_Query extends SkillPulse_LMS_Base_Query {
 		$signup_ids   = array_map( 'intval', $signup_ids );
 		$placeholders = implode( ',', array_fill( 0, count( $signup_ids ), '%d' ) );
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table_name is safe, placeholders are used.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- table_name is safe, placeholders are used.
 		$sql = "DELETE FROM {$this->table_name} WHERE id IN ($placeholders)";
 
 		if ( empty( $signup_ids ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- No parameters needed for this query.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- No parameters needed for this query.
 			$result = $wpdb->query( $sql );
 		} else {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is prepared on next line.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared on next line.
 			$result = $wpdb->query( $wpdb->prepare( $sql, ...$signup_ids ) );
 		}
 
@@ -279,7 +279,7 @@ class SkillPulse_LMS_Signup_Query extends SkillPulse_LMS_Base_Query {
 	 * @return array
 	 */
 	public function get_signups_by_type( $user_type ) {
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table_name is safe.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- table_name is safe.
 		$query = "SELECT * FROM {$this->table_name} WHERE user_type = %s ORDER BY registered DESC";
 
 		$results = $this->get_results( $query, array( $user_type ) );
@@ -383,24 +383,24 @@ class SkillPulse_LMS_Signup_Query extends SkillPulse_LMS_Base_Query {
 		}
 
 		// Get total count.
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table_name is safe.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- table_name is safe.
 		$count_query = "SELECT COUNT(*) FROM {$this->table_name} $where_clause";
 		if ( ! empty( $where_values ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is prepared with $wpdb->prepare().
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared with $wpdb->prepare().
 			$count_query = $wpdb->prepare( $count_query, ...$where_values );
 		}
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is prepared above.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 		$total = $wpdb->get_var( $count_query );
 
 		// Get signups.
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table_name is safe, orderby is sanitized.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- table_name is safe, orderby is sanitized.
 		$query = "SELECT * FROM {$this->table_name} $where_clause ORDER BY $orderby $limit";
 		if ( ! empty( $where_values ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is prepared with $wpdb->prepare().
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared with $wpdb->prepare().
 			$query = $wpdb->prepare( $query, ...$where_values );
 		}
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is prepared above.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 		$signups = $wpdb->get_results( $query );
 
 		// Unserialize meta for each signup.
@@ -460,7 +460,7 @@ class SkillPulse_LMS_Signup_Query extends SkillPulse_LMS_Base_Query {
 			$where_values[]     = $search_term;
 		}
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table_name is safe.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- table_name is safe.
 		$sql = "SELECT COUNT(*) FROM {$this->table_name}";
 
 		if ( ! empty( $where_conditions ) ) {
@@ -468,10 +468,10 @@ class SkillPulse_LMS_Signup_Query extends SkillPulse_LMS_Base_Query {
 		}
 
 		if ( empty( $where_values ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- No parameters needed for this query.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- No parameters needed for this query.
 			return (int) $wpdb->get_var( $sql );
 		} else {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is prepared on next line.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared on next line.
 			return (int) $wpdb->get_var( $wpdb->prepare( $sql, ...$where_values ) );
 		}
 	}

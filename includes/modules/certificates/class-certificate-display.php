@@ -13,6 +13,10 @@
  * @copyright  2025 SkillPulseLMS Team
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Certificate Display Class
  *

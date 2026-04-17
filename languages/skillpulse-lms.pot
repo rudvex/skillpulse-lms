@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkillPulse LMS v1.0.1\n"
 "Report-Msgid-Bugs-To: https://skillpulselms.com/contact\n"
-"POT-Creation-Date: 2026-04-17 11:04:22+00:00\n"
+"POT-Creation-Date: 2026-04-17 11:59:17+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -955,13 +955,13 @@ msgstr ""
 #: includes/modules/notifications/in-app/class-in-app-notifications.php:332
 #: includes/modules/notifications/in-app/class-in-app-notifications.php:377
 #: includes/modules/quizzes/class-quizzes.php:954
-#: includes/modules/user-management/class-profile.php:268
-#: includes/modules/user-management/class-profile.php:375
-#: includes/modules/user-management/class-profile.php:437
-#: includes/modules/user-management/class-profile.php:504
-#: includes/modules/user-management/class-profile.php:596
-#: includes/modules/user-management/class-profile.php:704
-#: includes/modules/user-management/class-profile.php:754
+#: includes/modules/user-management/class-profile.php:243
+#: includes/modules/user-management/class-profile.php:350
+#: includes/modules/user-management/class-profile.php:412
+#: includes/modules/user-management/class-profile.php:479
+#: includes/modules/user-management/class-profile.php:571
+#: includes/modules/user-management/class-profile.php:679
+#: includes/modules/user-management/class-profile.php:729
 #: includes/modules/user-management/login/class-login.php:607
 #: includes/modules/user-management/login/class-login.php:638
 #: includes/modules/user-management/signup/class-signup.php:122
@@ -1570,31 +1570,31 @@ msgstr ""
 msgid "Purchase"
 msgstr ""
 
-#: includes/modules/certificates/class-certificate-display.php:82
+#: includes/modules/certificates/class-certificate-display.php:86
 msgid "Security verification failed"
 msgstr ""
 
-#: includes/modules/certificates/class-certificate-display.php:86
+#: includes/modules/certificates/class-certificate-display.php:90
 msgid "You must be logged in to access certificates"
 msgstr ""
 
-#: includes/modules/certificates/class-certificate-display.php:94
+#: includes/modules/certificates/class-certificate-display.php:98
 msgid "Invalid user or course ID"
 msgstr ""
 
-#: includes/modules/certificates/class-certificate-display.php:100
+#: includes/modules/certificates/class-certificate-display.php:104
 msgid "You can only access your own certificates"
 msgstr ""
 
-#: includes/modules/certificates/class-certificate-display.php:106
+#: includes/modules/certificates/class-certificate-display.php:110
 msgid "Certificate not found"
 msgstr ""
 
-#: includes/modules/certificates/class-certificate-display.php:115
+#: includes/modules/certificates/class-certificate-display.php:119
 msgid "Certificate loaded successfully"
 msgstr ""
 
-#: includes/modules/certificates/class-certificate-display.php:119
+#: includes/modules/certificates/class-certificate-display.php:123
 msgid "Certificate not found or access denied"
 msgstr ""
 
@@ -1999,10 +1999,10 @@ msgstr ""
 
 #: includes/modules/courses/class-courses.php:361
 #: includes/modules/orders/class-purchase-token.php:90
-#: includes/modules/user-management/class-profile.php:280
-#: includes/modules/user-management/class-profile.php:392
-#: includes/modules/user-management/class-profile.php:449
-#: includes/modules/user-management/class-profile.php:761
+#: includes/modules/user-management/class-profile.php:255
+#: includes/modules/user-management/class-profile.php:367
+#: includes/modules/user-management/class-profile.php:424
+#: includes/modules/user-management/class-profile.php:736
 #: includes/rest-api/admin/class-rest-orders-controller.php:454
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:364
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:502
@@ -4873,7 +4873,7 @@ msgid "Payment completed, course access granted"
 msgstr ""
 
 #: includes/modules/orders/class-order-status-manager.php:60
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1635
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1636
 #: templates/quiz/content.php:652
 msgid "Failed"
 msgstr ""
@@ -4970,7 +4970,7 @@ msgstr ""
 
 #: includes/modules/orders/class-purchase-token.php:96
 #: includes/modules/orders/class-purchase-token.php:222
-#: includes/modules/user-management/class-profile.php:398
+#: includes/modules/user-management/class-profile.php:373
 #: includes/rest-api/certificates/class-rest-certificate-controller.php:1085
 #: includes/rest-api/courses/admin/class-rest-course-settings-controller.php:117
 #: includes/rest-api/courses/admin/class-rest-course-settings-controller.php:184
@@ -5693,13 +5693,13 @@ msgstr ""
 msgid "Company name (optional)"
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:272
+#: includes/modules/user-management/class-profile.php:247
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:480
 msgid "You must be logged in to enroll in courses."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:286
-#: includes/modules/user-management/class-profile.php:767
+#: includes/modules/user-management/class-profile.php:261
+#: includes/modules/user-management/class-profile.php:742
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:370
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:719
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:932
@@ -5707,217 +5707,217 @@ msgstr ""
 msgid "Course not found or not available."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:296
+#: includes/modules/user-management/class-profile.php:271
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:380
 #. translators: %1$s: Start date, %2$s: End date.
 msgid "Enrollment is closed for this course. Enrollment period: %1$s to %2$s"
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:298
+#: includes/modules/user-management/class-profile.php:273
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:387
 msgid "Enrollment is currently closed for this course."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:308
+#: includes/modules/user-management/class-profile.php:283
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:395
 #. translators: %1$d: Enrolled count, %2$d: Max enrollment.
 msgid "This course is full (%1$d/%2$d students). No more enrollments are allowed."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:323
+#: includes/modules/user-management/class-profile.php:298
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:411
 msgid "You must purchase this course before enrolling."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:329
+#: includes/modules/user-management/class-profile.php:304
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:425
 msgid "This course requires a membership. Please purchase a membership to enroll."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:340
+#: includes/modules/user-management/class-profile.php:315
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:440
 msgid "You are already enrolled in this course."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:350
+#: includes/modules/user-management/class-profile.php:325
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:451
 msgid "Failed to enroll in course. Please try again."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:359
+#: includes/modules/user-management/class-profile.php:334
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:461
 msgid "Successfully enrolled in course!"
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:379
+#: includes/modules/user-management/class-profile.php:354
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:559
 msgid "You must be logged in to unenroll from courses."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:384
+#: includes/modules/user-management/class-profile.php:359
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:509
 msgid "Student unenrollment is disabled. Please contact an administrator."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:406
+#: includes/modules/user-management/class-profile.php:381
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:525
 msgid "You are not enrolled in this course."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:413
+#: includes/modules/user-management/class-profile.php:388
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:532
 msgid "Failed to unenroll from course. Please try again."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:421
+#: includes/modules/user-management/class-profile.php:396
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:541
 msgid "Successfully unenrolled from course."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:441
+#: includes/modules/user-management/class-profile.php:416
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:873
 msgid "You must be logged in to manage your wishlist."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:455
+#: includes/modules/user-management/class-profile.php:430
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:725
 msgid "Wishlist is disabled by site admin."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:470
+#: includes/modules/user-management/class-profile.php:445
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:740
 msgid "Course removed from wishlist."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:475
+#: includes/modules/user-management/class-profile.php:450
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:745
 msgid "Course added to wishlist."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:508
+#: includes/modules/user-management/class-profile.php:483
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:893
 msgid "You must be logged in to manage your bookmarks."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:517
+#: includes/modules/user-management/class-profile.php:492
 msgid "Invalid item ID."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:523
+#: includes/modules/user-management/class-profile.php:498
 msgid "Invalid item. Bookmarks are only available for lessons and quizzes."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:536
+#: includes/modules/user-management/class-profile.php:511
 #: templates/course/partials/tabs/curriculum.php:349
 #: templates/dashboard/bookmarks.php:75 templates/single-section.php:195
 #: templates/single-section.php:339
 msgid "Quiz"
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:536
+#: includes/modules/user-management/class-profile.php:511
 #: templates/course/partials/tabs/curriculum.php:346
 #: templates/dashboard/bookmarks.php:75 templates/single-section.php:179
 #: templates/single-section.php:337
 msgid "Lesson"
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:538
+#: includes/modules/user-management/class-profile.php:513
 #. translators: %s: Item type.
 msgid "%s must belong to a course."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:543
+#: includes/modules/user-management/class-profile.php:518
 msgid "quizzes"
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:543
+#: includes/modules/user-management/class-profile.php:518
 msgid "lessons"
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:545
+#: includes/modules/user-management/class-profile.php:520
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:823
 #. translators: %s: Item type.
 #. translators: %s: Item type (lesson or quiz).
 msgid "You must be enrolled in the course to bookmark %s."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:551
+#: includes/modules/user-management/class-profile.php:526
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:814
 msgid "Bookmarks are disabled by site admin."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:564
+#: includes/modules/user-management/class-profile.php:539
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:837
 msgid "Removed from bookmarks."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:569
+#: includes/modules/user-management/class-profile.php:544
 #: includes/rest-api/courses/class-rest-course-actions-controller.php:842
 msgid "Added to bookmarks."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:601
+#: includes/modules/user-management/class-profile.php:576
 msgid "You must be logged in to upload an avatar."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:608
+#: includes/modules/user-management/class-profile.php:583
 msgid "No file uploaded or upload error occurred."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:613
+#: includes/modules/user-management/class-profile.php:588
 #: includes/rest-api/admin/class-rest-admin-tools-controller.php:606
 msgid "Invalid file upload."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:622
+#: includes/modules/user-management/class-profile.php:597
 msgid "Invalid file type. Please upload a JPG, PNG, or GIF image."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:627
+#: includes/modules/user-management/class-profile.php:602
 msgid "File size too large. Please upload an image smaller than 5MB."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:644
+#: includes/modules/user-management/class-profile.php:619
 msgid "Invalid file type. Please upload a valid image file."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:651
+#: includes/modules/user-management/class-profile.php:626
 msgid "Invalid image file. The file does not appear to be a valid image."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:657
+#: includes/modules/user-management/class-profile.php:632
 msgid "Invalid image MIME type. Please upload a valid image file."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:671
+#: includes/modules/user-management/class-profile.php:646
 msgid "Failed to upload image. Please try again."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:681
+#: includes/modules/user-management/class-profile.php:656
 msgid "Failed to update avatar. Please try again."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:686
+#: includes/modules/user-management/class-profile.php:661
 msgid "Avatar updated successfully!"
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:709
+#: includes/modules/user-management/class-profile.php:684
 msgid "You must be logged in to remove your avatar."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:718
+#: includes/modules/user-management/class-profile.php:693
 msgid "No custom avatar found to remove."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:725
+#: includes/modules/user-management/class-profile.php:700
 msgid "Failed to remove avatar. Please try again."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:732
+#: includes/modules/user-management/class-profile.php:707
 msgid "Failed to update user profile. Please try again."
 msgstr ""
 
-#: includes/modules/user-management/class-profile.php:737
+#: includes/modules/user-management/class-profile.php:712
 msgid "Avatar removed successfully!"
 msgstr ""
 
@@ -7643,7 +7643,7 @@ msgstr ""
 #: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:647
 #: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:698
 #: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1480
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1572
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1573
 msgid "Enrollment not found."
 msgstr ""
 
@@ -7786,63 +7786,63 @@ msgstr ""
 msgid "Failed to send email for enrollment #%1$d: %2$s"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1585
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1586
 msgid "Enrolled in course"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1586
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1587
 msgid "Student enrolled in the course"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1612
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1613
 msgid "Completed lesson"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1614
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1615
 #. translators: %d: Lesson ID.
 msgid "Lesson #%d"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1635
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1636
 #: templates/quiz/content.php:661 templates/shared/fullscreen-header.php:55
 msgid "Passed"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1639
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1640
 msgid "Quiz attempt"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1642
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1643
 #. translators: %1$s: Quiz title, %2$s: Status
 msgid "%1$s - %2$s"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1645
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1646
 #. translators: %d: Quiz ID.
 msgid "Quiz #%d"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1662
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1663
 msgid "Course completed"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1663
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1664
 msgid "Student completed the course"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1675
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1676
 msgid "Certificate earned"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1676
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1677
 msgid "Student earned a certificate for completing the course"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1714
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1715
 msgid "Failed to renew enrollment."
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1723
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1724
 msgid "Enrollment renewed successfully."
 msgstr ""
 

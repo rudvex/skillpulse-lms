@@ -362,8 +362,8 @@ class SkillPulse_LMS_Access_Control {
 	private function is_lesson_within_preview_limit( $lesson_id, $course_id, $preview_limit ) {
 		global $wpdb;
 
-		$relationships_table = $wpdb->prefix . 'splms_relationships';
-		$course_items_table  = $wpdb->prefix . 'splms_course_items';
+		$relationships_table = esc_sql( $wpdb->prefix . 'splms_relationships' );
+		$course_items_table  = esc_sql( $wpdb->prefix . 'splms_course_items' );
 
 		// Get all lessons for this course ordered by section and lesson order.
 		$query = "
@@ -378,7 +378,7 @@ class SkillPulse_LMS_Access_Control {
 
 		$all_lessons = $wpdb->get_col(
 			$wpdb->prepare(
-				$query, // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query is prepared with placeholders, table names are safe.
+				$query, // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders, table names are safe.
 				$course_id,
 				SPLMS_POST_TYPES['lesson'],
 				SPLMS_POST_TYPES['section']
@@ -450,8 +450,8 @@ class SkillPulse_LMS_Access_Control {
 	private function is_quiz_within_preview_limit( $quiz_id, $course_id, $preview_limit ) {
 		global $wpdb;
 
-		$relationships_table = $wpdb->prefix . 'splms_relationships';
-		$course_items_table  = $wpdb->prefix . 'splms_course_items';
+		$relationships_table = esc_sql( $wpdb->prefix . 'splms_relationships' );
+		$course_items_table  = esc_sql( $wpdb->prefix . 'splms_course_items' );
 
 		// Get all quizzes for this course ordered by section and quiz order.
 		$query = "
@@ -466,7 +466,7 @@ class SkillPulse_LMS_Access_Control {
 
 		$all_quizzes = $wpdb->get_col(
 			$wpdb->prepare(
-				$query, // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query is prepared with placeholders, table names are safe.
+				$query, // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders, table names are safe.
 				$course_id,
 				SPLMS_POST_TYPES['quiz'],
 				SPLMS_POST_TYPES['section']

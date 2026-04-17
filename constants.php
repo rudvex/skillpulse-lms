@@ -6,6 +6,10 @@
  * @subpackage Constants
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Internal constants, not to be overridden
  */

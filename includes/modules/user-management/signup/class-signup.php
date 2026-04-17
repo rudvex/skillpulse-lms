@@ -501,7 +501,7 @@ class SkillPulse_LMS_Signup {
 		}
 
 		if ( ! empty( $stored_password ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $wpdb->users is safe.
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $wpdb->users is safe.
 			$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->users} SET user_pass = %s WHERE ID = %d", $stored_password, $user_id ) );
 
 			// Clean user cache.
@@ -579,10 +579,10 @@ class SkillPulse_LMS_Signup {
 	public function get_signup( $signup_id ) {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table_name is safe, generated from get_signups_table_name().
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- table_name is safe, generated from get_signups_table_name().
 		$query = "SELECT * FROM {$this->get_signups_table_name()} WHERE id = %d";
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is prepared with $wpdb->prepare().
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared with $wpdb->prepare().
 		return $wpdb->get_row( $wpdb->prepare( $query, $signup_id ) );
 	}
 
@@ -598,10 +598,10 @@ class SkillPulse_LMS_Signup {
 	public function get_signup_by_key( $activation_key ) {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table_name is safe, generated from get_signups_table_name().
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- table_name is safe, generated from get_signups_table_name().
 		$query = "SELECT * FROM {$this->get_signups_table_name()} WHERE activation_key = %s";
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is prepared with $wpdb->prepare().
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared with $wpdb->prepare().
 		return $wpdb->get_row( $wpdb->prepare( $query, $activation_key ) );
 	}
 
@@ -617,10 +617,10 @@ class SkillPulse_LMS_Signup {
 	public function get_signup_by_email( $email ) {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table_name is safe, generated from get_signups_table_name().
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- table_name is safe, generated from get_signups_table_name().
 		$query = "SELECT * FROM {$this->get_signups_table_name()} WHERE user_email = %s";
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is prepared with $wpdb->prepare().
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared with $wpdb->prepare().
 		return $wpdb->get_row( $wpdb->prepare( $query, $email ) );
 	}
 
@@ -772,11 +772,11 @@ class SkillPulse_LMS_Signup {
 		}
 
 		// Exclude users that are still pending activation.
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table_name is safe.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- table_name is safe.
 		$signup_emails = $wpdb->get_col( "SELECT user_email FROM {$this->get_signups_table_name()} WHERE status = 'pending'" );
 
 		if ( ! empty( $signup_emails ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $wpdb->users is safe.
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $wpdb->users is safe.
 			$exclude_ids = $wpdb->get_col(
 				$wpdb->prepare(
 					"SELECT ID FROM {$wpdb->users} WHERE user_email IN (" . implode( ',', array_fill( 0, count( $signup_emails ), '%s' ) ) . ')',

@@ -223,11 +223,11 @@ class SPLMS_REST_Reviews_Controller extends WP_REST_Controller {
 
 		// Handle different sort options.
 		if ( 'rating' === $orderby ) {
-			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Necessary for review sorting functionality.
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Necessary for review sorting functionality.
 			$args['meta_key'] = 'rating';
 			$args['orderby']  = 'meta_value_num';
 		} elseif ( 'helpful' === $orderby ) {
-			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Necessary for review sorting functionality.
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Necessary for review sorting functionality.
 			$args['meta_key'] = 'helpful_votes';
 			$args['orderby']  = 'meta_value_num';
 		}

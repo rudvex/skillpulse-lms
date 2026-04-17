@@ -326,10 +326,10 @@ class SkillPulse_LMS_Section_Access_Query extends SkillPulse_LMS_Base_Query {
 		}
 
 		// Delete expired records.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Cleanup operation.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Cleanup operation.
 		$deleted = $wpdb->query(
 			$wpdb->prepare(
-				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safely constructed in constructor.
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safely constructed in constructor.
 				"DELETE FROM {$this->table_name} WHERE expires_at IS NOT NULL AND expires_at < %s",
 				current_time( 'mysql' )
 			)

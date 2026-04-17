@@ -954,7 +954,7 @@ class SkillPulse_LMS_Rest_Admin_Tools_Controller extends WP_REST_Controller {
 
 		// Get students count - check if table exists first.
 		$students_count    = 0;
-		$enrollments_table = $wpdb->prefix . 'splms_enrollments';
+		$enrollments_table = esc_sql( $wpdb->prefix . 'splms_enrollments' );
 		$table_exists      = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $enrollments_table ) ) === $enrollments_table;
 
 		if ( $table_exists ) {

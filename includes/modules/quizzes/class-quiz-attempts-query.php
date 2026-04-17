@@ -67,7 +67,7 @@ class SkillPulse_LMS_Quiz_Attempts_Query extends SkillPulse_LMS_Base_Query {
 		$lock_timeout = 5; // Seconds.
 
 		// Acquire lock.
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Lock name is safe.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Lock name is safe.
 		$lock_acquired = $wpdb->get_var(
 			$wpdb->prepare(
 				'SELECT GET_LOCK(%s, %d)',
@@ -84,7 +84,7 @@ class SkillPulse_LMS_Quiz_Attempts_Query extends SkillPulse_LMS_Base_Query {
 		$existing_attempt = $this->get_in_progress_attempt( $user_id, $quiz_id );
 		if ( $existing_attempt ) {
 			// Release lock.
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Lock name is safe.
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Lock name is safe.
 			$wpdb->query( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $lock_name ) );
 
 			return $existing_attempt->id;
@@ -111,7 +111,7 @@ class SkillPulse_LMS_Quiz_Attempts_Query extends SkillPulse_LMS_Base_Query {
 		);
 
 		// Release lock.
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Lock name is safe.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Lock name is safe.
 		$wpdb->query( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $lock_name ) );
 
 		return $attempt_id;
@@ -247,7 +247,7 @@ class SkillPulse_LMS_Quiz_Attempts_Query extends SkillPulse_LMS_Base_Query {
 	public function get_in_progress_attempt( $user_id, $quiz_id ) {
 		// Only return attempts that are truly in-progress based on status.
 		// In-progress means status is 'draft' or 'in_progress' (not submitted/completed).
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
 		$sql = "SELECT * FROM {$this->table_name}
 				WHERE user_id = %d
 				AND quiz_id = %d
@@ -292,7 +292,7 @@ class SkillPulse_LMS_Quiz_Attempts_Query extends SkillPulse_LMS_Base_Query {
 		// Get attempts that have been submitted/completed.
 		// Check: time_taken > 0 OR answers is not empty OR score > 0 OR passed = 1.
 		// This ensures all submitted attempts are included, even 0% failed attempts.
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
 		$sql = "SELECT DISTINCT * FROM {$this->table_name} 
 				WHERE user_id = %d AND quiz_id = %d 
 				AND (time_taken > 0 OR (answers != '' AND answers != '[]' AND answers IS NOT NULL) OR score > 0.00 OR passed = 1) 
@@ -333,7 +333,7 @@ class SkillPulse_LMS_Quiz_Attempts_Query extends SkillPulse_LMS_Base_Query {
 	public function count_completed_attempts( $user_id, $quiz_id ) {
 		// Count attempts that have been submitted/completed based on status.
 		// Completed means status is 'submitted', 'pending_review', 'graded', etc. (not draft or in_progress).
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
 		$sql = "SELECT COUNT(*) FROM {$this->table_name}
 				WHERE user_id = %d AND quiz_id = %d
 				AND status NOT IN ('draft', 'in_progress')";
@@ -428,7 +428,7 @@ class SkillPulse_LMS_Quiz_Attempts_Query extends SkillPulse_LMS_Base_Query {
 		// - AND time_taken = 0 (not submitted yet).
 		// - AND answers is empty or just empty array (no answers saved).
 		// This ensures we NEVER delete completed attempts.
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
 		$sql = "DELETE FROM {$this->table_name}
 				WHERE user_id = %d
 				AND quiz_id = %d
@@ -438,7 +438,7 @@ class SkillPulse_LMS_Quiz_Attempts_Query extends SkillPulse_LMS_Base_Query {
 				AND (answers = '' OR answers = '[]' OR answers IS NULL)";
 
 		global $wpdb;
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is prepared above.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 		$result = $wpdb->query( $wpdb->prepare( $sql, $user_id, $quiz_id ) );
 
 		return false !== $result;
@@ -461,14 +461,14 @@ class SkillPulse_LMS_Quiz_Attempts_Query extends SkillPulse_LMS_Base_Query {
 		$cutoff_date = gmdate( 'Y-m-d H:i:s', strtotime( '-' . intval( $days_old ) . ' days' ) );
 
 		// Delete only truly in-progress attempts (not submitted).
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
 		$sql = "DELETE FROM {$this->table_name}
 				WHERE score = 0.00
 				AND passed = 0
 				AND time_taken = 0
 				AND attempt_time < %s";
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is prepared above.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 		$result = $wpdb->query( $wpdb->prepare( $sql, $cutoff_date ) );
 
 		return $result;

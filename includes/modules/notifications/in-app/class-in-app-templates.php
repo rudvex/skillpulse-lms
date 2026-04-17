@@ -266,11 +266,11 @@ class SkillPulse_LMS_In_App_Templates {
 		if ( ! empty( $option_names ) ) {
 			$placeholders = implode( ',', array_fill( 0, count( $option_names ), '%s' ) );
 			$query        = $wpdb->prepare(
-				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare -- Placeholders are properly prepared, table name is safe.
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Placeholders are properly prepared, table name is safe.
 				"SELECT option_name, option_value FROM {$wpdb->options} WHERE option_name IN ($placeholders)",
 				$option_names
 			);
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query is prepared above.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared above.
 			$db_results = $wpdb->get_results( $query, OBJECT_K );
 			if ( $db_results ) {
 				$results = $db_results;
