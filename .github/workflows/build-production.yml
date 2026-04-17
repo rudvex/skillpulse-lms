@@ -1,7 +1,7 @@
 # Build production-ready SkillPulse LMS Free plugin and deploy to production branch.
 # The production branch contains the clean, minified plugin ready for WordPress.org distribution.
 
-name: Build Production Zip
+name: Build Production
 
 on:
   push:
@@ -43,17 +43,11 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Validate composer.json
-        run: composer validate
-
       - name: Run Build Script
         run: bash ./bin/build.sh
 
       - name: Verify Build Output
         run: |
-          echo "Checking for output files..."
-          ls -la ./output/ || echo "Output directory not found!"
-
           PRODUCT_NAME=$(basename $PWD)
           echo "Product name: $PRODUCT_NAME"
 
@@ -62,36 +56,11 @@ jobs:
             exit 1
           fi
 
-          echo "ZIP file found: ./output/${PRODUCT_NAME}.zip"
+          echo "Build ZIP found: ./output/${PRODUCT_NAME}.zip"
           ls -lh ./output/${PRODUCT_NAME}.zip
-
-      - name: Prepare Artifact
-        run: |
-          PRODUCT_NAME=$(basename $PWD)
-          echo "Preparing artifact for: $PRODUCT_NAME"
-          mkdir -p ./output/${PRODUCT_NAME}/
-          unzip -q ./output/${PRODUCT_NAME}.zip -d ./output/${PRODUCT_NAME}/
-          rm ./output/${PRODUCT_NAME}.zip
-
-      - name: Create Final Plugin Zip
-        run: |
-          PRODUCT_NAME=$(basename $PWD)
-          cd output
-          zip ${PRODUCT_NAME}.zip ${PRODUCT_NAME} -r
-          ls -lh ${PRODUCT_NAME}.zip
-
-      - name: Upload Zip to Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ github.event.repository.name }}-build.zip
-          path: output/${{ github.event.repository.name }}.zip
-          retention-days: 30
-        env:
-          CI: true
 
       # Deploy to production branch.
       - name: Deploy to production branch
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -139,3 +108,20 @@ jobs:
 
         env:
           CI: true
+
+      # NOTE: ZIP artifact upload and WordPress.org deployment are disabled for now.
+      # Uncomment the sections below when ready for WordPress.org release.
+      #
+      # - name: Upload Zip to Artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: ${{ github.event.repository.name }}-build.zip
+      #     path: output/${{ github.event.repository.name }}.zip
+      #     retention-days: 30
+      #
+      # - name: Deploy to WordPress.org
+      #   uses: 10up/action-wordpress-plugin-deploy@stable
+      #   env:
+      #     SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+      #     SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+      #     SLUG: skillpulse-lms
