@@ -93,7 +93,7 @@ $course_sections = isset( $curriculum_result['sections'] ) ? $curriculum_result[
 						$is_expanded = $has_current_lesson ? 'true' : 'false';
 						?>
 
-						<div class="splms-curriculum-section <?php echo $has_current_lesson ? 'is-expanded' : ''; ?>" data-section-id="<?php echo esc_attr( $section_id ); ?>">
+						<div class="splms-curriculum-section <?php echo esc_attr( $has_current_lesson ? 'is-expanded' : '' ); ?>" data-section-id="<?php echo esc_attr( $section_id ); ?>">
 							<!-- Section Header -->
 							<button type="button" class="splms-section-header" aria-expanded="<?php echo esc_attr( $is_expanded ); ?>">
 								<div class="splms-section-toggle">

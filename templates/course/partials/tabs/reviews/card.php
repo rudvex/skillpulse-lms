@@ -43,7 +43,7 @@ if ( is_user_logged_in() ) {
 }
 ?>
 
-<div class="review-item <?php echo $is_instructor ? 'instructor-review' : 'student-review'; ?> <?php echo $is_course_author ? 'course-author-review' : ''; ?>" data-review-id="<?php echo esc_attr( $review['id'] ?? 0 ); ?>">
+<div class="review-item <?php echo esc_attr( $is_instructor ? 'instructor-review' : 'student-review' ); ?> <?php echo $is_course_author ? 'course-author-review' : ''; ?>" data-review-id="<?php echo esc_attr( $review['id'] ?? 0 ); ?>">
 	<div class="review-header">
 		<div class="student-info">
 			<div class="student-avatar">
@@ -54,7 +54,7 @@ if ( is_user_logged_in() ) {
 				<div class="review-meta">
 					<div class="review-rating">
 						<?php for ( $i = 1; $i <= 5; $i++ ) { ?>
-							<span class="star <?php echo $i <= ( $review['rating'] ?? 0 ) ? 'filled' : 'empty'; ?>">★</span>
+							<span class="star <?php echo esc_attr( $i <= ( $review['rating'] ?? 0 ) ? 'filled' : 'empty' ); ?>">★</span>
 						<?php } ?>
 					</div>
 					<span class="review-date"><?php echo esc_html( human_time_diff( strtotime( $review['created_at'] ?? 'now' ) ) ); ?> <?php esc_html_e( 'ago', 'skillpulse-lms' ); ?></span>
@@ -89,7 +89,7 @@ if ( is_user_logged_in() ) {
 		</div>
 
 		<div class="review-actions">
-			<button class="helpful-btn <?php echo $user_has_voted ? 'active' : ''; ?>" data-review-id="<?php echo esc_attr( $review['id'] ?? 0 ); ?>" <?php echo ! is_user_logged_in() ? 'disabled title="' . esc_attr__( 'Please login to vote', 'skillpulse-lms' ) . '"' : ''; ?>>
+			<button class="helpful-btn <?php echo esc_attr( $user_has_voted ? 'active' : '' ); ?>" data-review-id="<?php echo esc_attr( $review['id'] ?? 0 ); ?>" <?php echo ! is_user_logged_in() ? 'disabled title="' . esc_attr__( 'Please login to vote', 'skillpulse-lms' ) . '"' : ''; ?>>
 				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M14 9V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 5V9L7 12V20H20.28C20.7623 20.0047 21.2304 19.8369 21.6056 19.524C21.9808 19.2111 22.2377 18.7744 22.33 18.29L23.73 11.29C23.8202 10.8048 23.7498 10.3038 23.5321 9.86619C23.3144 9.42862 22.9616 9.08262 22.53 8.88L21 8.17C20.6755 8.05752 20.3245 8.05752 20 8.17L18.47 8.88C18.0384 9.08262 17.6856 9.42862 17.4679 9.86619C17.2502 10.3038 17.1798 10.8048 17.27 11.29L18.67 18.29C18.7623 18.7744 19.0192 19.2111 19.3944 19.524C19.7696 19.8369 20.2377 20.0047 20.72 20H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>

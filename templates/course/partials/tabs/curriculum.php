@@ -394,8 +394,8 @@ if ( $uses_section_pricing && $current_user_id ) {
 																? ( $is_item_bookmarked ? esc_attr__( 'Remove bookmark', 'skillpulse-lms' ) : esc_attr__( 'Bookmark lesson', 'skillpulse-lms' ) )
 																: ( $is_item_bookmarked ? esc_attr__( 'Remove bookmark', 'skillpulse-lms' ) : esc_attr__( 'Bookmark quiz', 'skillpulse-lms' ) );
 															?>
-															<button type="button" class="bookmark-btn-item bookmark-btn <?php echo $is_item_bookmarked ? 'bookmarked active' : ''; ?>" <?php echo esc_attr( $data_attr ); ?>="<?php echo esc_attr( $item['id'] ); ?>" aria-pressed="<?php echo $is_item_bookmarked ? 'true' : 'false'; ?>" title="<?php echo esc_attr( $title_text ); ?>">
-																<svg width="16" height="16" viewBox="0 0 24 24" fill="<?php echo $is_item_bookmarked ? 'currentColor' : 'none'; ?>" xmlns="http://www.w3.org/2000/svg">
+															<button type="button" class="bookmark-btn-item bookmark-btn <?php echo esc_attr( $is_item_bookmarked ? 'bookmarked active' : '' ); ?>" <?php echo esc_attr( $data_attr ); ?>="<?php echo esc_attr( $item['id'] ); ?>" aria-pressed="<?php echo esc_attr( $is_item_bookmarked ? 'true' : 'false' ); ?>" title="<?php echo esc_attr( $title_text ); ?>">
+																<svg width="16" height="16" viewBox="0 0 24 24" fill="<?php echo esc_attr( $is_item_bookmarked ? 'currentColor' : 'none' ); ?>" xmlns="http://www.w3.org/2000/svg">
 																	<path d="M5 4C5 2.89543 5.89543 2 7 2H17C18.1046 2 19 2.89543 19 4V22L12 17.5L5 22V4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
 																</svg>
 															</button>

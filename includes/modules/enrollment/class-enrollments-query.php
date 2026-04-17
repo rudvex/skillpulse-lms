@@ -698,7 +698,7 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 			$result = (int) $wpdb->get_var( $wpdb->prepare( $sql, $course_id, $status ) );
 		} else {
 			// Count all enrollments regardless of status.
-			$sql    = "SELECT COUNT(*) FROM {$this->table_name} WHERE course_id = %d";
+			$sql = "SELECT COUNT(*) FROM {$this->table_name} WHERE course_id = %d";
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is safely prepared via $wpdb->prepare().
 			$result = (int) $wpdb->get_var( $wpdb->prepare( $sql, $course_id ) );
 		}

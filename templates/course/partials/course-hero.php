@@ -455,7 +455,7 @@ $is_enable_rating = splms_get_setting( 'enable_course_reviews', true );
 									<div class="splms-sections-scroll-container">
 										<?php foreach ( $section_summary['sections'] as $index => $section ) { ?>
 											<a href="<?php echo esc_url( $section['permalink'] ); ?>"
-												class="splms-section-row <?php echo $index < $section_summary['total_sections'] - 1 ? 'has-border' : ''; ?>">
+												class="splms-section-row <?php echo esc_attr( $index < $section_summary['total_sections'] - 1 ? 'has-border' : '' ); ?>">
 
 												<!-- Left -->
 												<div class="splms-section-left">
@@ -589,7 +589,7 @@ $is_enable_rating = splms_get_setting( 'enable_course_reviews', true );
 										if ( isset( $course_type_data['price_display'] ) ) {
 											echo '<div class="splms-price-container">';
 		                                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
-											echo $course_type_data['price_display'];
+											echo wp_kses_post( $course_type_data['price_display'] );
 											echo '</div>';
 										}
 										?>
@@ -615,8 +615,8 @@ $is_enable_rating = splms_get_setting( 'enable_course_reviews', true );
 								<div class="splms-secondary-actions">
 									<?php if ( $can_wishlist ) { ?>
 										<button type="button"
-												class="splms-action-btn splms-action-btn--wishlist wishlist-btn <?php echo $in_wishlist ? 'in-wishlist active' : ''; ?>"
-												data-course-id="<?php echo esc_attr( $course_id ); ?>" aria-pressed="<?php echo $in_wishlist ? 'true' : 'false'; ?>"
+												class="splms-action-btn splms-action-btn--wishlist wishlist-btn <?php echo esc_attr( $in_wishlist ? 'in-wishlist active' : '' ); ?>"
+												data-course-id="<?php echo esc_attr( $course_id ); ?>" aria-pressed="<?php echo esc_attr( $in_wishlist ? 'true' : 'false' ); ?>"
 												title="
 													<?php
 													echo $in_wishlist ? esc_attr__( 'Remove from Wishlist', 'skillpulse-lms' ) : esc_attr__(
@@ -625,7 +625,7 @@ $is_enable_rating = splms_get_setting( 'enable_course_reviews', true );
 													);
 													?>
 														">
-											<svg width="20" height="20" viewBox="0 0 24 24" fill="<?php echo $in_wishlist ? 'currentColor' : 'none'; ?>"
+											<svg width="20" height="20" viewBox="0 0 24 24" fill="<?php echo esc_attr( $in_wishlist ? 'currentColor' : 'none' ); ?>"
 												xmlns="http://www.w3.org/2000/svg">
 												<path d="M20.84 4.61A5.5 5.5 0 0 0 16.5 2.5A5.5 5.5 0 0 0 12 5.5A5.5 5.5 0 0 0 7.5 2.5A5.5 5.5 0 0 0 3.16 4.61A5.5 5.5 0 0 0 2 8.89A5.5 5.5 0 0 0 3.16 13.17L12 22L20.84 13.17A5.5 5.5 0 0 0 22 8.89A5.5 5.5 0 0 0 20.84 4.61Z"
 														stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -697,10 +697,10 @@ $is_enable_rating = splms_get_setting( 'enable_course_reviews', true );
 								<?php
 								if ( isset( $course_type_data['price_display'] ) ) {
 									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
-									echo $course_type_data['price_display'];
+									echo wp_kses_post( $course_type_data['price_display'] );
 								} elseif ( isset( $course_type_data['restriction_display'] ) ) {
 									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
-									echo $course_type_data['restriction_display'];
+									echo wp_kses_post( $course_type_data['restriction_display'] );
 								} else {
 									echo esc_html( $course_type_data['display'] );
 								}
@@ -828,7 +828,7 @@ $is_enable_rating = splms_get_setting( 'enable_course_reviews', true );
 						</div>
 						<div class="info-content">
 							<span class="info-label"><?php esc_html_e( 'Capacity', 'skillpulse-lms' ); ?></span>
-							<span class="info-value capacity-<?php echo $capacity_info_modal['is_full'] ? 'full' : 'available'; ?>">
+							<span class="info-value capacity-<?php echo esc_attr( $capacity_info_modal['is_full'] ? 'full' : 'available' ); ?>">
 							<?php
 							if ( $capacity_info_modal['is_full'] ) {
 								$capacity_text = sprintf(

@@ -96,7 +96,7 @@ if ( $smart_course_price > 0 && $smart_course_price !== $original_course_price )
 
 			<div class="sections-list">
 				<?php foreach ( $section_items as $index => $section ) : ?>
-					<div class="section-item <?php echo $section['is_purchased'] ? 'purchased' : ''; ?>">
+					<div class="section-item <?php echo esc_attr( $section['is_purchased'] ? 'purchased' : '' ); ?>">
 						<div class="section-number"><?php echo esc_html( $index + 1 ); ?></div>
 
 						<div class="section-content">

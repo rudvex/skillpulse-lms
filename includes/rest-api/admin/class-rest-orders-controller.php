@@ -1204,6 +1204,7 @@ class SkillPulse_LMS_REST_Orders_Controller extends WP_REST_Controller {
 			nocache_headers();
 
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Invoice HTML is already escaped in get_invoice_html method.
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Invoice HTML is generated internally by the certificate HTML generator with controlled markup.
 			echo $invoice_html;
 			exit;
 		}

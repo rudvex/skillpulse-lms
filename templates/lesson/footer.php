@@ -38,11 +38,11 @@ ob_start();
 <?php if ( $has_access ) : ?>
 	<button
 		type="button"
-		class="splms-btn splms-btn-complete <?php echo $is_completed ? 'is-completed' : ''; ?>"
+		class="splms-btn splms-btn-complete <?php echo esc_attr( $is_completed ? 'is-completed' : '' ); ?>"
 		id="splms-mark-complete-btn"
 		data-lesson-id="<?php echo esc_attr( $lesson_id ); ?>"
 		data-course-id="<?php echo esc_attr( $course_id ); ?>"
-		<?php echo $is_completed ? 'disabled' : ''; ?>
+		<?php echo esc_attr( $is_completed ? 'disabled' : '' ); ?>
 	>
 		<svg class="splms-complete-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

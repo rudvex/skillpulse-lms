@@ -77,7 +77,7 @@ $next_label = 'quiz' === $next_type ? __( 'Next Quiz', 'skillpulse-lms' ) : __( 
 			<div class="splms-footer-center">
 				<?php
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Content is expected to be pre-escaped HTML from calling template
-				echo $center_content;
+				echo wp_kses_post( $center_content );
 				?>
 			</div>
 

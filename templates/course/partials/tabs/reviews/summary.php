@@ -43,7 +43,7 @@ $rating_summary = array_merge(
 			<span class="score-number"><?php echo number_format( $rating_summary['average_rating'], 1 ); ?></span>
 			<div class="rating-stars">
 				<?php for ( $i = 1; $i <= 5; $i++ ) { ?>
-					<span class="star <?php echo $i <= $rating_summary['average_rating'] ? 'filled' : ''; ?>">★</span>
+					<span class="star <?php echo esc_attr( $i <= $rating_summary['average_rating'] ? 'filled' : '' ); ?>">★</span>
 				<?php } ?>
 			</div>
 			<p class="rating-text">

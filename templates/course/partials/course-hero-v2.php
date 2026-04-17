@@ -244,7 +244,7 @@ $in_wishlist        = in_array( $course_id, $user_wishlist, true );
 					<?php if ( $instructor_stats['instructor_rating'] > 0 ) { ?>
 						<div class="splms-hero-v2__instructor-rating">
 							<?php for ( $i = 0; $i < 5; $i++ ) : ?>
-								<svg width="14" height="14" viewBox="0 0 24 24" fill="<?php echo $i < $instructor_stats['instructor_rating'] ? 'currentColor' : 'none'; ?>" xmlns="http://www.w3.org/2000/svg">
+								<svg width="14" height="14" viewBox="0 0 24 24" fill="<?php echo esc_attr( $i <= $instructor_stats['instructor_rating'] ? 'currentColor' : 'none' ); ?>" xmlns="http://www.w3.org/2000/svg">
 									<path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2"/>
 								</svg>
 							<?php endfor; ?>

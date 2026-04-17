@@ -562,7 +562,7 @@ get_header(); ?>
 									$nav_section_count = $nav_section['item_count'];
 									$is_current        = intval( $nav_section_id ) === intval( $section_id );
 									?>
-									<div class="navigation-item <?php echo $is_current ? 'is-current' : ''; ?>">
+									<div class="navigation-item <?php echo esc_attr( $is_current ? 'is-current' : '' ); ?>">
 										<div class="navigation-item-content">
 											<a href="<?php echo esc_url( $nav_section_url ); ?>" class="navigation-item-link">
 												<span class="navigation-item-title"><?php echo esc_html( $nav_section_title ); ?></span>

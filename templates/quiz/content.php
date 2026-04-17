@@ -310,7 +310,7 @@ if ( $current_user_id ) {
 		<?php else : ?>
 
 			<!-- Quiz Statistics -->
-			<div class="splms-quiz-stats" <?php echo $show_latest_results ? 'style="display: none;"' : ''; ?>>
+			<div class="splms-quiz-stats" <?php echo esc_attr( $show_latest_results ? 'style="display: none;"' : '' ); ?>>
 				<div class="splms-quiz-stat">
 					<div class="splms-quiz-stat-icon">
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -370,7 +370,7 @@ if ( $current_user_id ) {
 
 			<!-- Quiz Description -->
 			<?php if ( $quiz_content || $quiz_description ) : ?>
-				<div class="splms-quiz-description" <?php echo $show_latest_results ? 'style="display: none;"' : ''; ?>>
+				<div class="splms-quiz-description" <?php echo esc_attr( $show_latest_results ? 'style="display: none;"' : '' ); ?>>
 					<h2 class="splms-quiz-description-title"><?php esc_html_e( 'About This Quiz', 'skillpulse-lms' ); ?></h2>
 					<?php
 					if ( $quiz_content ) {
@@ -383,7 +383,7 @@ if ( $current_user_id ) {
 			<?php endif; ?>
 
 			<!-- Quiz Actions -->
-			<div class="splms-quiz-actions" <?php echo $show_latest_results ? 'style="display: none;"' : ''; ?>>
+			<div class="splms-quiz-actions" <?php echo esc_attr( $show_latest_results ? 'style="display: none;"' : '' ); ?>>
 				<?php
 				// Restructured conditional logic with clear state priorities.
 				if ( ! $access_granted && $is_enrolled ) :
@@ -505,7 +505,7 @@ if ( $current_user_id ) {
 			</div>
 
 			<!-- Quiz Results Container (hidden by default, shown after submission) -->
-			<div id="splms-quiz-results" class="splms-quiz-results" <?php echo $show_latest_results ? '' : 'style="display: none;"'; ?>>
+			<div id="splms-quiz-results" class="splms-quiz-results" <?php echo esc_attr( $show_latest_results ? '' : 'style="display: none;"' ); ?>>
 				<?php if ( $show_latest_results && $latest_attempt_data ) : ?>
 					<?php
 					// Render the quiz results directly in PHP instead of using JavaScript.

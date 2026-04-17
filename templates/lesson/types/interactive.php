@@ -123,7 +123,7 @@ $has_shortcodes = splms_has_shortcodes( $lesson_embed_code );
 				<?php else : ?>
 					<?php
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output sanitized with wp_kses.
-					echo $sanitized;
+					echo $sanitized; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Content is sanitized via wp_kses above.
 					?>
 				<?php endif; ?>
 			<?php endif; ?>
@@ -136,7 +136,7 @@ $has_shortcodes = splms_has_shortcodes( $lesson_embed_code );
 
 			if ( ! empty( $sanitized ) ) :
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output sanitized with wp_kses.
-				echo $sanitized;
+				echo $sanitized; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Content is sanitized via wp_kses above.
 			else :
 				?>
 				<div class="splms-notice splms-notice--warning">

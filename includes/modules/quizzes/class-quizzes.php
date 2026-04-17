@@ -1864,7 +1864,8 @@ class SkillPulse_LMS_Quizzes {
 		$unique_filename = $file_basename . '_' . time() . '_' . wp_generate_password( 8, false ) . '.' . $file_ext;
 		$target_path     = trailingslashit( $full_sub_dir ) . $unique_filename;
 
-		// Move uploaded file.
+		// Move uploaded file to custom quiz uploads directory.
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_move_uploaded_file -- Custom directory structure for quiz file submissions; wp_handle_upload() doesn't support custom target paths.
 		if ( ! move_uploaded_file( $file['tmp_name'], $target_path ) ) {
 			return new WP_Error(
 				'file_upload_failed',

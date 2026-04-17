@@ -151,7 +151,7 @@ if ( $course_id && $is_enrolled ) {
 								class="<?php echo esc_attr( $item_class_string ); ?>" 
 								data-item-id="<?php echo esc_attr( $item['id'] ); ?>" 
 								data-item-type="<?php echo esc_attr( $item['type'] ); ?>"
-								<?php echo $item['locked'] ? 'tabindex="-1" aria-disabled="true"' : ''; ?>
+								<?php echo esc_attr( $item['locked'] ? 'tabindex="-1" aria-disabled="true"' : '' ); ?>
 							>
 								<span class="splms-sidebar-item__icon">
 									<?php if ( 'lesson' === $item['type'] ) { ?>

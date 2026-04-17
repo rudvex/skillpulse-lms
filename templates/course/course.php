@@ -61,7 +61,7 @@ if ( $can_wishlist && is_user_logged_in() ) {
 do_action( 'splms_before_single_course_card', $course_id );
 ?>
 
-<div class="splms-course-card <?php echo $is_enrolled ? 'enrolled' : ''; ?>" data-course-id="<?php echo esc_attr( $course_id ); ?>">
+<div class="splms-course-card <?php echo esc_attr( $is_enrolled ? 'enrolled' : '' ); ?>" data-course-id="<?php echo esc_attr( $course_id ); ?>">
 	<div class="course-card-image">
 		<a href="<?php the_permalink(); ?>" class="course-image-link">
 			<?php splms_course_thumbnail( $course_id, 'medium' ); ?>
@@ -72,8 +72,8 @@ do_action( 'splms_before_single_course_card', $course_id );
 				<?php echo esc_html( ucfirst( $difficulty ) ); ?>
 			</span>
 			<?php if ( $can_wishlist ) { ?>
-				<button type="button" class="course-wishlist-btn wishlist-btn <?php echo $in_wishlist ? 'in-wishlist active' : ''; ?>" data-course-id="<?php echo esc_attr( $course_id ); ?>" aria-pressed="<?php echo $in_wishlist ? 'true' : 'false'; ?>" title="<?php echo $in_wishlist ? esc_attr__( 'Remove from Wishlist', 'skillpulse-lms' ) : esc_attr__( 'Add to Wishlist', 'skillpulse-lms' ); ?>">
-					<svg width="18" height="18" viewBox="0 0 24 24" fill="<?php echo $in_wishlist ? 'currentColor' : 'none'; ?>" xmlns="http://www.w3.org/2000/svg">
+				<button type="button" class="course-wishlist-btn wishlist-btn <?php echo esc_attr( $in_wishlist ? 'in-wishlist active' : '' ); ?>" data-course-id="<?php echo esc_attr( $course_id ); ?>" aria-pressed="<?php echo esc_attr( $in_wishlist ? 'true' : 'false' ); ?>" title="<?php echo $in_wishlist ? esc_attr__( 'Remove from Wishlist', 'skillpulse-lms' ) : esc_attr__( 'Add to Wishlist', 'skillpulse-lms' ); ?>">
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="<?php echo esc_attr( $in_wishlist ? 'currentColor' : 'none' ); ?>" xmlns="http://www.w3.org/2000/svg">
 						<path d="M20.84 4.61A5.5 5.5 0 0 0 16.5 2.5A5.5 5.5 0 0 0 12 5.5A5.5 5.5 0 0 0 7.5 2.5A5.5 5.5 0 0 0 3.16 4.61A5.5 5.5 0 0 0 2 8.89A5.5 5.5 0 0 0 3.16 13.17L12 22L20.84 13.17A5.5 5.5 0 0 0 22 8.89A5.5 5.5 0 0 0 20.84 4.61Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 					</svg>
 				</button>

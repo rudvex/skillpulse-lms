@@ -391,7 +391,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 						</div>
 					<?php } ?>
 
-					<div class="splms-sections-list" <?php echo $show_both_options ? 'style="display:none;"' : ''; ?>>
+					<div class="splms-sections-list" <?php echo esc_attr( $show_both_options ? 'style="display:none;"' : '' ); ?>>
 						<?php foreach ( $sections_with_pricing as $section ) { ?>
 							<?php
 							$final_section_price = $section['sale_price'] > 0 ? $section['sale_price'] : $section['price'];
@@ -409,7 +409,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 									data-price="<?php echo esc_attr( $final_section_price ); ?>"
 									data-section-id="<?php echo esc_attr( $section['id'] ); ?>"
 									class="splms-section-checkbox"
-									<?php echo $is_requested && ! $disabled ? 'checked' : ''; ?>
+									<?php echo esc_attr( $is_requested && ! $disabled ? 'checked' : '' ); ?>
 									<?php echo esc_attr( $disabled ); ?>>
 								<label for="section-<?php echo esc_attr( $section['id'] ); ?>">
 									<div class="splms-section-info">
@@ -464,7 +464,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 				<!-- Billing Information -->
 				<div class="splms-billing-info">
 					<div class="splms-step-header">
-						<span class="splms-step-number"><?php echo $show_section_pricing ? '2' : '1'; ?></span>
+						<span class="splms-step-number"><?php echo esc_attr( $show_section_pricing ? '2' : '1' ); ?></span>
 						<h3><?php echo esc_html__( 'Billing Information', 'skillpulse-lms' ); ?></h3>
 					</div>
 
@@ -660,7 +660,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 								// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Form display only, nonce verified on form submission.
 								?>
 								<input type="radio" id="<?php echo esc_attr( $method_id ); ?>-payment" name="payment_method"
-										value="<?php echo esc_attr( $method_id ); ?>" <?php echo $first_method ? 'checked' : ''; ?>>
+										value="<?php echo esc_attr( $method_id ); ?>" <?php echo esc_attr( $first_method ? 'checked' : '' ); ?>>
 								<label for="<?php echo esc_attr( $method_id ); ?>-payment" class="splms-payment-label">
 									<div class="splms-payment-icon">
 										<?php if ( 'paypal' === $method_id ) { ?>
@@ -691,7 +691,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 				<!-- Order Summary -->
 				<div class="splms-order-summary">
 					<div class="splms-step-header">
-						<span class="splms-step-number"><?php echo $show_section_pricing ? '3' : '2'; ?></span>
+						<span class="splms-step-number"><?php echo esc_attr( $show_section_pricing ? '3' : '2' ); ?></span>
 						<h3><?php echo esc_html( __( 'Order Summary', 'skillpulse-lms' ) ); ?></h3>
 					</div>
 					<div id="splms-summary-items">
@@ -735,7 +735,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 								</div>
 							<?php } ?>
 						<?php } else { ?>
-							<div class="splms-summary-line splms-full-course-summary" style="<?php echo $show_both_options ? '' : 'display:none;'; ?>">
+							<div class="splms-summary-line splms-full-course-summary" style="<?php echo esc_attr( $show_both_options ? '' : 'display:none;' ); ?>">
 								<span class="splms-summary-label">
 									<?php
 									/* translators: %s: Course title. */
@@ -746,7 +746,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 									<?php echo esc_html( $currency . ' ' . number_format( $price, 2 ) ); ?>
 								</span>
 							</div>
-							<div class="splms-sections-summary" style="<?php echo $show_both_options ? 'display:none;' : ''; ?>">
+							<div class="splms-sections-summary" style="<?php echo esc_attr( $show_both_options ? 'display:none;' : '' ); ?>">
 								<!-- Section items will be added dynamically by JavaScript -->
 							</div>
 						<?php } ?>
@@ -870,7 +870,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 	const currency = '<?php echo esc_js( $currency ); ?>';
 	const fullCoursePrice = parseFloat('<?php echo esc_js( $price ); ?>');
 	const sectionsData = <?php echo wp_json_encode( $sections_with_pricing ); ?>;
-	const showBothOptions = <?php echo $show_both_options ? 'true' : 'false'; ?>;
+	const showBothOptions = <?php echo esc_attr( $show_both_options ? 'true' : 'false' ); ?>;
 
 	// DOM Elements.
 	const purchaseTypeRadios = document.querySelectorAll('input[name="purchase_type"]');
