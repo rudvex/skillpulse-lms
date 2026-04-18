@@ -4338,12 +4338,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:rudvex/splms-build-cli.git",
-                "reference": "55a15c96cdc609cb830244e41da662fd18702616"
+                "reference": "83be854432da5d66b747c4af6d23c6b36e18cab2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rudvex/splms-build-cli/zipball/55a15c96cdc609cb830244e41da662fd18702616",
-                "reference": "55a15c96cdc609cb830244e41da662fd18702616",
+                "url": "https://api.github.com/repos/rudvex/splms-build-cli/zipball/83be854432da5d66b747c4af6d23c6b36e18cab2",
+                "reference": "83be854432da5d66b747c4af6d23c6b36e18cab2",
                 "shasum": ""
             },
             "require": {
@@ -4395,7 +4395,7 @@
                 "source": "https://github.com/rudvex/splms-build-cli/tree/main",
                 "issues": "https://github.com/rudvex/splms-build-cli/issues"
             },
-            "time": "2026-04-14T08:16:50+00:00"
+            "time": "2026-04-17T11:19:53+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
