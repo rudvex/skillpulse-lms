@@ -444,7 +444,7 @@ class SkillPulse_LMS_Certificate_HTML_Generator {
 			/* Print Styles with canvas background preservation */
 			@media print {
 				@page {
-					size: <?php echo $canvas_data['width'] > $canvas_data['height'] ? 'A4 landscape' : 'A4 portrait'; ?>;
+					size: <?php echo esc_attr( $canvas_data['width'] > $canvas_data['height'] ? 'A4 landscape' : 'A4 portrait' ); ?>;
 					margin: 1mm;
 				}
 

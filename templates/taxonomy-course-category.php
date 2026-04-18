@@ -13,15 +13,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+
+
 get_header();
 
 // Get the current term object.
-$current_term = get_queried_object();
+$splms_current_term = get_queried_object();
 
 // Get archive setup data from centralized function.
-$setup_data = SkillPulse_LMS_Course_Frontend::get_course_archive_setup( 'category', $current_term );
+$splms_setup_data = SkillPulse_LMS_Course_Frontend::get_course_archive_setup( 'category', $splms_current_term );
 // phpcs:ignore WordPress.PHP.DontExtract.extract_extract -- Template file uses extract for convenience with controlled data.
-extract( $setup_data );
+extract( $splms_setup_data );
 
 
 /**
@@ -44,11 +46,11 @@ do_action( 'splms_before_archive_content' );
 						</svg>
 					</span>
 					<?php
-					$courses_page_id = splms_get_course_page_id();
-					if ( $courses_page_id ) {
+					$splms_courses_page_id = splms_get_course_page_id();
+					if ( $splms_courses_page_id ) {
 						?>
-						<a href="<?php echo esc_url( get_permalink( $courses_page_id ) ); ?>"  class="splms-breadcrumb__link">
-							<?php echo esc_html( get_the_title( $courses_page_id ) ); ?>
+						<a href="<?php echo esc_url( get_permalink( $splms_courses_page_id ) ); ?>"  class="splms-breadcrumb__link">
+							<?php echo esc_html( get_the_title( $splms_courses_page_id ) ); ?>
 						</a>
 						<span class="splms-breadcrumb__separator">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -66,22 +68,22 @@ do_action( 'splms_before_archive_content' );
 			<h1 class="title" id="main-heading" tabindex="-1">
 				<?php echo esc_html( single_term_title( '', false ) ); ?>
 				<?php
-				$course_count = $current_term->count;
-				if ( $course_count > 0 ) {
+				$splms_course_count = $splms_current_term->count;
+				if ( $splms_course_count > 0 ) {
 					?>
 					<?php /* translators: %d: Number of courses available */ ?>
-					<span class="course-count" aria-label="<?php echo esc_attr( sprintf( _n( '%d course available', '%d courses available', $course_count, 'skillpulse-lms' ), absint( $course_count ) ) ); ?>">
+					<span class="course-count" aria-label="<?php echo esc_attr( sprintf( _n( '%d course available', '%d courses available', $splms_course_count, 'skillpulse-lms' ), absint( $splms_course_count ) ) ); ?>">
 						<?php
 						/* translators: %d: Number of courses */
-						echo esc_html( sprintf( _n( '(%d course)', '(%d courses)', $course_count, 'skillpulse-lms' ), absint( $course_count ) ) );
+						echo esc_html( sprintf( _n( '(%d course)', '(%d courses)', $splms_course_count, 'skillpulse-lms' ), absint( $splms_course_count ) ) );
 						?>
 					</span>
 					<?php
 				}
 				?>
 			</h1>
-			<?php if ( $current_term && $current_term->description ) { ?>
-				<p class="archive-subtitle"><?php echo esc_html( wp_strip_all_tags( $current_term->description ) ); ?></p>
+			<?php if ( $splms_current_term && $splms_current_term->description ) { ?>
+				<p class="archive-subtitle"><?php echo esc_html( wp_strip_all_tags( $splms_current_term->description ) ); ?></p>
 			<?php } else { ?>
 				<p class="archive-subtitle">
 					<?php
@@ -94,7 +96,7 @@ do_action( 'splms_before_archive_content' );
 	</div>
 </div>
 
-<div class="splms-container <?php echo esc_attr( implode( ' ', $archive_classes ) ); ?>">
+<div class="splms-container <?php echo esc_attr( implode( ' ', $splms_archive_classes ) ); ?>">
 	<?php
 	/**
 	 * Hook: splms_archive_before_courses
@@ -103,7 +105,7 @@ do_action( 'splms_before_archive_content' );
 	?>
 	<div class="splms-courses-main">
 		<?php
-		if ( $has_sidebar_filters ) {
+		if ( $splms_has_sidebar_filters ) {
 			splms_get_template_part( 'course/course-sidebar-filters' );
 		}
 		?>

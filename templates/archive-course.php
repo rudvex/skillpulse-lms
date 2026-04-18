@@ -13,14 +13,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+
+
 get_header();
 
-$courses_page_id = splms_get_course_page_id();
+$splms_courses_page_id = splms_get_course_page_id();
 
 // Get archive setup data from centralized function.
-$setup_data = SkillPulse_LMS_Course_Frontend::get_course_archive_setup( 'archive' );
+$splms_setup_data = SkillPulse_LMS_Course_Frontend::get_course_archive_setup( 'archive' );
 // phpcs:ignore WordPress.PHP.DontExtract.extract_extract -- Template file requires variable extraction for backwards compatibility.
-extract( $setup_data );
+extract( $splms_setup_data );
 /**
  * Hook: splms_before_archive_content
  */
@@ -34,11 +36,11 @@ do_action( 'splms_before_archive_content' );
 				<?php
 				if ( is_search() ) {
 					// translators: %s: Search query.
-					$search_title = sprintf( __( 'Search Results for: %s', 'skillpulse-lms' ), '<span>' . esc_html( get_search_query() ) . '</span>' );
-					echo wp_kses_post( $search_title );
-				} elseif ( $courses_page_id && ( is_page( $courses_page_id ) || is_post_type_archive( SPLMS_POST_TYPES['course'] ) ) ) {
+					$splms_search_title = sprintf( __( 'Search Results for: %s', 'skillpulse-lms' ), '<span>' . esc_html( get_search_query() ) . '</span>' );
+					echo wp_kses_post( $splms_search_title );
+				} elseif ( $splms_courses_page_id && ( is_page( $splms_courses_page_id ) || is_post_type_archive( SPLMS_POST_TYPES['course'] ) ) ) {
 					// Use the courses page title if set, otherwise default.
-					echo esc_html( get_the_title( $courses_page_id ) );
+					echo esc_html( get_the_title( $splms_courses_page_id ) );
 				} else {
 					esc_html_e( 'All Courses', 'skillpulse-lms' );
 				}
@@ -48,7 +50,7 @@ do_action( 'splms_before_archive_content' );
 		</div>
 	</div>
 </div>
-<div class="splms-container <?php echo esc_attr( implode( ' ', $archive_classes ) ); ?>">
+<div class="splms-container <?php echo esc_attr( implode( ' ', $splms_archive_classes ) ); ?>">
 	<?php
 	/**
 	 * Hook: splms_archive_before_courses
@@ -57,7 +59,7 @@ do_action( 'splms_before_archive_content' );
 	?>
 	<div class="splms-courses-main">
 		<?php
-		if ( $has_sidebar_filters ) {
+		if ( $splms_has_sidebar_filters ) {
 			splms_get_template_part( 'course/course-sidebar-filters' );
 		}
 		?>

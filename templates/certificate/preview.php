@@ -41,105 +41,105 @@ function splms_get_spinner_icon() {
 /**
  * Generate social share links for certificate.
  *
- * @param string $certificate_url Certificate URL.
- * @param string $share_text      Share text.
+ * @param string $splms_certificate_url Certificate URL.
+ * @param string $splms_share_text      Share text.
  * @return array Social sharing platform data.
  */
-function splms_get_certificate_share_links( $certificate_url, $share_text ) {
-	$platforms = array(
+function splms_get_certificate_share_links( $splms_certificate_url, $splms_share_text ) {
+	$splms_platforms = array(
 		'linkedin' => array(
-			'url'   => 'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode( $certificate_url ),
+			'url'   => 'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode( $splms_certificate_url ),
 			'label' => __( 'Share on LinkedIn', 'skillpulse-lms' ),
 			'class' => 'share-linkedin',
 		),
 		'facebook' => array(
-			'url'   => 'https://www.facebook.com/sharer/sharer.php?u=' . rawurlencode( $certificate_url ),
+			'url'   => 'https://www.facebook.com/sharer/sharer.php?u=' . rawurlencode( $splms_certificate_url ),
 			'label' => __( 'Share on Facebook', 'skillpulse-lms' ),
 			'class' => 'share-facebook',
 		),
 		'twitter'  => array(
-			'url'   => 'https://twitter.com/intent/tweet?text=' . rawurlencode( $share_text ) . '&url=' . rawurlencode( $certificate_url ),
+			'url'   => 'https://twitter.com/intent/tweet?text=' . rawurlencode( $splms_share_text ) . '&url=' . rawurlencode( $splms_certificate_url ),
 			'label' => __( 'Share on Twitter', 'skillpulse-lms' ),
 			'class' => 'share-twitter',
 		),
 	);
 
-	return apply_filters( 'splms_certificate_share_platforms', $platforms );
+	return apply_filters( 'splms_certificate_share_platforms', $splms_platforms );
 }
 
 // Get certificate data from query var (like signup system).
-$certificate_key = get_query_var( 'certificate_key' );
+$splms_certificate_key = get_query_var( 'certificate_key' );
 
-if ( ! $certificate_key ) {
+if ( ! $splms_certificate_key ) {
 	wp_die( esc_html__( 'Invalid certificate key.', 'skillpulse-lms' ) );
 }
 
 // Decode certificate data.
-$certificates_instance = SkillPulse_LMS_Certificates::get_instance();
-$data                  = $certificates_instance->decode_certificate_data( $certificate_key );
+$splms_certificates_instance = SkillPulse_LMS_Certificates::get_instance();
+$splms_data                  = $splms_certificates_instance->decode_certificate_data( $splms_certificate_key );
 
-if ( ! $data ) {
+if ( ! $splms_data ) {
 	wp_die( esc_html__( 'Invalid certificate data.', 'skillpulse-lms' ) );
 }
 
-$user_id   = $data['user_id'];
-$course_id = $data['course_id'];
+$splms_user_id   = $splms_data['user_id'];
+$splms_course_id = $splms_data['course_id'];
 
 // Validate data.
-if ( ! $user_id || ! $course_id ) {
+if ( ! $splms_user_id || ! $splms_course_id ) {
 	wp_die( esc_html__( 'Invalid certificate data.', 'skillpulse-lms' ) );
 }
 
 // Get user and course data.
-$user   = get_userdata( $user_id );
-$course = get_post( $course_id );
+$splms_user   = get_userdata( $splms_user_id );
+$splms_course = get_post( $splms_course_id );
 
-if ( ! $user || ! $course ) {
+if ( ! $splms_user || ! $splms_course ) {
 	wp_die( esc_html__( 'Certificate data not found.', 'skillpulse-lms' ) );
 }
 
 // Get certificate template configured for this course.
-$content_info   = splms_get_course_content_info( $course_id );
-$certificate_id = isset( $content_info['certificate_template_id'] ) ? $content_info['certificate_template_id'] : '';
+$splms_content_info   = splms_get_course_content_info( $splms_course_id );
+$splms_certificate_id = isset( $splms_content_info['certificate_template_id'] ) ? $splms_content_info['certificate_template_id'] : '';
 
 // If no specific certificate set, use default.
-if ( ! $certificate_id ) {
-	$certificate_id = $certificates_instance->get_default_certificate();
+if ( ! $splms_certificate_id ) {
+	$splms_certificate_id = $splms_certificates_instance->get_default_certificate();
 }
 
-if ( ! $certificate_id ) {
+if ( ! $splms_certificate_id ) {
 	wp_die( esc_html__( 'Certificate template not available.', 'skillpulse-lms' ) );
 }
 
 // Get certificate post data.
-$certificate_post = get_post( $certificate_id );
-if ( ! $certificate_post ) {
+$splms_certificate_post = get_post( $splms_certificate_id );
+if ( ! $splms_certificate_post ) {
 	wp_die( esc_html__( 'Certificate template not found.', 'skillpulse-lms' ) );
 }
 
 // Certificate metadata.
-$certificate_title = $certificate_post->post_title;
+$splms_certificate_title = $splms_certificate_post->post_title;
 
 // Generate meta description for SEO and social sharing.
-$meta_description = sprintf(
+$splms_meta_description = sprintf(
 	/* translators: %1$s: User display name, %2$s: Course title. */
 	__( '%1$s has successfully completed %2$s', 'skillpulse-lms' ),
-	$user->display_name,
-	$course->post_title
+	$splms_user->display_name,
+	$splms_course->post_title
 );
 
 // Generate certificate content using unified HTML generator.
 // Canvas dimensions and styling are handled automatically by the HTML generator.
-$certificate_content = '';
+$splms_certificate_content = '';
 if ( class_exists( 'SkillPulse_LMS_Certificate_HTML_Generator' ) ) {
-	$certificate_content = SkillPulse_LMS_Certificate_HTML_Generator::generate_certificate_html(
-		$certificate_id,
+	$splms_certificate_content = SkillPulse_LMS_Certificate_HTML_Generator::generate_certificate_html(
+		$splms_certificate_id,
 		array(
-			'user_id'         => $user_id,
-			'course_id'       => $course_id,
+			'user_id'         => $splms_user_id,
+			'course_id'       => $splms_course_id,
 			'context'         => 'print', // Use print context to include print styles.
 			'include_css'     => true,
-			'certificate_key' => $certificate_key, // For QR code generation.
+			'certificate_key' => $splms_certificate_key, // For QR code generation.
 		)
 	);
 }
@@ -150,22 +150,22 @@ if ( class_exists( 'SkillPulse_LMS_Certificate_HTML_Generator' ) ) {
 	<head>
 		<meta charset="<?php bloginfo( 'charset' ); ?>">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title><?php echo esc_html( sprintf( /* translators: %1$s: Certificate title, %2$s: User display name, %3$s: Course title. */ __( '%1$s - %2$s - %3$s', 'skillpulse-lms' ), $certificate_title, $user->display_name, $course->post_title ) ); ?></title>
+		<title><?php echo esc_html( sprintf( /* translators: %1$s: Certificate title, %2$s: User display name, %3$s: Course title. */ __( '%1$s - %2$s - %3$s', 'skillpulse-lms' ), $splms_certificate_title, $splms_user->display_name, $splms_course->post_title ) ); ?></title>
 
 		<!-- Social Media Meta Tags -->
-		<meta property="og:title" content="<?php echo esc_attr( sprintf( /* translators: %s: User display name. */ __( 'Certificate of Completion - %s', 'skillpulse-lms' ), $user->display_name ) ); ?>" />
-		<meta property="og:description" content="<?php echo esc_attr( $meta_description ); ?>" />
+		<meta property="og:title" content="<?php echo esc_attr( sprintf( /* translators: %s: User display name. */ __( 'Certificate of Completion - %s', 'skillpulse-lms' ), $splms_user->display_name ) ); ?>" />
+		<meta property="og:description" content="<?php echo esc_attr( $splms_meta_description ); ?>" />
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content="<?php echo esc_url( home_url( "/certificate/{$certificate_key}" ) ); ?>" />
+		<meta property="og:url" content="<?php echo esc_url( home_url( "/certificate/{$splms_certificate_key}" ) ); ?>" />
 		<meta property="og:site_name" content="<?php bloginfo( 'name' ); ?>" />
 
 		<!-- Twitter Card Meta Tags -->
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content="<?php echo esc_attr( sprintf( /* translators: %s: User display name. */ __( 'Certificate of Completion - %s', 'skillpulse-lms' ), $user->display_name ) ); ?>" />
-		<meta name="twitter:description" content="<?php echo esc_attr( $meta_description ); ?>" />
+		<meta name="twitter:title" content="<?php echo esc_attr( sprintf( /* translators: %s: User display name. */ __( 'Certificate of Completion - %s', 'skillpulse-lms' ), $splms_user->display_name ) ); ?>" />
+		<meta name="twitter:description" content="<?php echo esc_attr( $splms_meta_description ); ?>" />
 
 		<!-- LinkedIn specific -->
-		<meta name="description" content="<?php echo esc_attr( $meta_description ); ?>" />
+		<meta name="description" content="<?php echo esc_attr( $splms_meta_description ); ?>" />
 
 		<!-- Favicon -->
 		<?php if ( function_exists( 'get_site_icon_url' ) && get_site_icon_url() ) : ?>
@@ -177,11 +177,11 @@ if ( class_exists( 'SkillPulse_LMS_Certificate_HTML_Generator' ) ) {
 		{
 			"@context": "https://schema.org",
 			"@type": "EducationalOccupationalCredential",
-			"name": "<?php echo esc_js( $certificate_title ); ?>",
-			"description": "<?php echo esc_js( sprintf( /* translators: %s: Course title. */ __( 'Certificate of completion for %s', 'skillpulse-lms' ), $course->post_title ) ); ?>",
+			"name": "<?php echo esc_js( $splms_certificate_title ); ?>",
+			"description": "<?php echo esc_js( sprintf( /* translators: %s: Course title. */ __( 'Certificate of completion for %s', 'skillpulse-lms' ), $splms_course->post_title ) ); ?>",
 			"credentialCategory": "Certificate",
-			"dateCreated": "<?php echo esc_js( get_the_date( 'c', $course_id ) ); ?>",
-			"url": "<?php echo esc_js( home_url( "/certificate/{$certificate_key}" ) ); ?>",
+			"dateCreated": "<?php echo esc_js( get_the_date( 'c', $splms_course_id ) ); ?>",
+			"url": "<?php echo esc_js( home_url( "/certificate/{$splms_certificate_key}" ) ); ?>",
 			"recognizedBy": {
 				"@type": "Organization",
 				"name": "<?php echo esc_js( get_bloginfo( 'name' ) ); ?>",
@@ -189,8 +189,8 @@ if ( class_exists( 'SkillPulse_LMS_Certificate_HTML_Generator' ) ) {
 			},
 			"about": {
 				"@type": "Course",
-				"name": "<?php echo esc_js( $course->post_title ); ?>",
-				"description": "<?php echo esc_js( wp_strip_all_tags( get_the_excerpt( $course_id ) ) ); ?>",
+				"name": "<?php echo esc_js( $splms_course->post_title ); ?>",
+				"description": "<?php echo esc_js( wp_strip_all_tags( get_the_excerpt( $splms_course_id ) ) ); ?>",
 				"provider": {
 					"@type": "Organization",
 					"name": "<?php echo esc_js( get_bloginfo( 'name' ) ); ?>"
@@ -198,7 +198,7 @@ if ( class_exists( 'SkillPulse_LMS_Certificate_HTML_Generator' ) ) {
 			},
 			"holder": {
 				"@type": "Person",
-				"name": "<?php echo esc_js( $user->display_name ); ?>"
+				"name": "<?php echo esc_js( $splms_user->display_name ); ?>"
 			}
 		}
 		</script>
@@ -586,7 +586,7 @@ if ( class_exists( 'SkillPulse_LMS_Certificate_HTML_Generator' ) ) {
 						<div class="generated-certificate">
 							<?php
 							// Output certificate content directly since it's generated by our own system.
-							echo $certificate_content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							echo $splms_certificate_content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							?>
 						</div>
 
@@ -604,18 +604,18 @@ if ( class_exists( 'SkillPulse_LMS_Certificate_HTML_Generator' ) ) {
 					<!-- Social Sharing -->
 					<div class="share-buttons">
 						<?php
-						$certificate_url = esc_url( home_url( "/certificate/{$certificate_key}" ) );
-						$share_text      = sprintf( /* translators: %s: Course title. */ __( 'I just completed %s and earned my certificate!', 'skillpulse-lms' ), $course->post_title );
-						$share_platforms = splms_get_certificate_share_links( $certificate_url, $share_text );
+						$splms_certificate_url = esc_url( home_url( "/certificate/{$splms_certificate_key}" ) );
+						$splms_share_text      = sprintf( /* translators: %s: Course title. */ __( 'I just completed %s and earned my certificate!', 'skillpulse-lms' ), $splms_course->post_title );
+						$splms_share_platforms = splms_get_certificate_share_links( $splms_certificate_url, $splms_share_text );
 
-						foreach ( $share_platforms as $platform => $data ) :
+						foreach ( $splms_share_platforms as $splms_platform => $splms_data ) :
 							?>
-							<a href="<?php echo esc_url( $data['url'] ); ?>"
+							<a href="<?php echo esc_url( $splms_data['url'] ); ?>"
 								target="_blank"
-								class="share-btn <?php echo esc_attr( $data['class'] ); ?>"
-								title="<?php echo esc_attr( $data['label'] ); ?>"
-								aria-label="<?php echo esc_attr( $data['label'] ); ?>">
-								<?php echo esc_html( ucfirst( $platform ) ); ?>
+								class="share-btn <?php echo esc_attr( $splms_data['class'] ); ?>"
+								title="<?php echo esc_attr( $splms_data['label'] ); ?>"
+								aria-label="<?php echo esc_attr( $splms_data['label'] ); ?>">
+								<?php echo esc_html( ucfirst( $splms_platform ) ); ?>
 							</a>
 							<?php
 						endforeach;
@@ -627,7 +627,7 @@ if ( class_exists( 'SkillPulse_LMS_Certificate_HTML_Generator' ) ) {
 						printf(
 							/* translators: %1$s: Certificate ID, %2$s: Verification URL. */
 							esc_html__( 'Certificate ID: %1$s | Verify at %2$s', 'skillpulse-lms' ),
-							esc_html( substr( $certificate_key, 0, 16 ) . '...' ),
+							esc_html( substr( $splms_certificate_key, 0, 16 ) . '...' ),
 							esc_html( home_url() )
 						);
 						?>

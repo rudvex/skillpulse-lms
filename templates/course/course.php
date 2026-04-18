@@ -12,23 +12,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+
+
 extract( $args ); // phpcs:ignore
 
-$course_id      = ! empty( $course_id ) ? $course_id : get_the_ID();
-$course_post    = get_post( $course_id );
-$difficulty     = splms_get_course_difficulty( $course_id );
-$access_info    = splms_get_course_access_info( $course_id );
-$duration       = splms_get_course_duration( $course_id );
-$students_count = splms_get_course_enrollment_count( $course_id );
-$rating_summary = splms_get_course_rating( $course_id );
+$splms_course_id      = ! empty( $splms_course_id ) ? $splms_course_id : get_the_ID();
+$splms_course_post    = get_post( $splms_course_id );
+$splms_difficulty     = splms_get_course_difficulty( $splms_course_id );
+$splms_access_info    = splms_get_course_access_info( $splms_course_id );
+$splms_duration       = splms_get_course_duration( $splms_course_id );
+$splms_students_count = splms_get_course_enrollment_count( $splms_course_id );
+$splms_rating_summary = splms_get_course_rating( $splms_course_id );
 
 // Ensure we have the proper structure.
-if ( ! is_array( $rating_summary ) ) {
-	$rating_summary = array();
+if ( ! is_array( $splms_rating_summary ) ) {
+	$splms_rating_summary = array();
 }
 
 // Set default values if keys are missing.
-$rating_summary    = array_merge(
+$splms_rating_summary    = array_merge(
 	array(
 		'average_rating'   => 0,
 		'total_reviews'    => 0,
@@ -40,40 +42,40 @@ $rating_summary    = array_merge(
 			1 => 0,
 		),
 	),
-	$rating_summary
+	$splms_rating_summary
 );
-$is_enrolled       = splms_is_user_enrolled( $course_id );
-$enrollment_status = splms_get_user_enrollment_status( $course_id );
-$is_enable_rating  = splms_get_setting( 'enable_course_reviews', true );
+$splms_is_enrolled       = splms_is_user_enrolled( $splms_course_id );
+$splms_enrollment_status = splms_get_user_enrollment_status( $splms_course_id );
+$splms_is_enable_rating  = splms_get_setting( 'enable_course_reviews', true );
 
 // Wishlist: only show if NOT enrolled (pre-enrollment feature).
-$can_wishlist = splms_get_setting( 'enable_course_wishlist', true ) && ! $is_enrolled;
-$in_wishlist  = false;
-if ( $can_wishlist && is_user_logged_in() ) {
-	$user_wishlist = get_user_meta( get_current_user_id(), '_splms_course_wishlist', true );
-	$user_wishlist = is_array( $user_wishlist ) ? array_map( 'intval', $user_wishlist ) : array();
-	$in_wishlist   = in_array( $course_id, $user_wishlist, true );
+$splms_can_wishlist = splms_get_setting( 'enable_course_wishlist', true ) && ! $splms_is_enrolled;
+$splms_in_wishlist  = false;
+if ( $splms_can_wishlist && is_user_logged_in() ) {
+	$splms_user_wishlist = get_user_meta( get_current_user_id(), '_splms_course_wishlist', true );
+	$splms_user_wishlist = is_array( $splms_user_wishlist ) ? array_map( 'intval', $splms_user_wishlist ) : array();
+	$splms_in_wishlist   = in_array( $splms_course_id, $splms_user_wishlist, true );
 }
 
 /**
  * Hook: splms_before_single_course_card
  */
-do_action( 'splms_before_single_course_card', $course_id );
+do_action( 'splms_before_single_course_card', $splms_course_id );
 ?>
 
-<div class="splms-course-card <?php echo $is_enrolled ? 'enrolled' : ''; ?>" data-course-id="<?php echo esc_attr( $course_id ); ?>">
+<div class="splms-course-card <?php echo esc_attr( $splms_is_enrolled ? 'enrolled' : '' ); ?>" data-course-id="<?php echo esc_attr( $splms_course_id ); ?>">
 	<div class="course-card-image">
 		<a href="<?php the_permalink(); ?>" class="course-image-link">
-			<?php splms_course_thumbnail( $course_id, 'medium' ); ?>
+			<?php splms_course_thumbnail( $splms_course_id, 'medium' ); ?>
 		</a>
 
 		<div class="course-card-overlay">
-			<span class="course-difficulty difficulty-<?php echo esc_attr( strtolower( $difficulty ) ); ?>">
-				<?php echo esc_html( ucfirst( $difficulty ) ); ?>
+			<span class="course-difficulty difficulty-<?php echo esc_attr( strtolower( $splms_difficulty ) ); ?>">
+				<?php echo esc_html( ucfirst( $splms_difficulty ) ); ?>
 			</span>
-			<?php if ( $can_wishlist ) { ?>
-				<button type="button" class="course-wishlist-btn wishlist-btn <?php echo $in_wishlist ? 'in-wishlist active' : ''; ?>" data-course-id="<?php echo esc_attr( $course_id ); ?>" aria-pressed="<?php echo $in_wishlist ? 'true' : 'false'; ?>" title="<?php echo $in_wishlist ? esc_attr__( 'Remove from Wishlist', 'skillpulse-lms' ) : esc_attr__( 'Add to Wishlist', 'skillpulse-lms' ); ?>">
-					<svg width="18" height="18" viewBox="0 0 24 24" fill="<?php echo $in_wishlist ? 'currentColor' : 'none'; ?>" xmlns="http://www.w3.org/2000/svg">
+			<?php if ( $splms_can_wishlist ) { ?>
+				<button type="button" class="course-wishlist-btn wishlist-btn <?php echo esc_attr( $splms_in_wishlist ? 'in-wishlist active' : '' ); ?>" data-course-id="<?php echo esc_attr( $splms_course_id ); ?>" aria-pressed="<?php echo esc_attr( $splms_in_wishlist ? 'true' : 'false' ); ?>" title="<?php echo $splms_in_wishlist ? esc_attr__( 'Remove from Wishlist', 'skillpulse-lms' ) : esc_attr__( 'Add to Wishlist', 'skillpulse-lms' ); ?>">
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="<?php echo esc_attr( $splms_in_wishlist ? 'currentColor' : 'none' ); ?>" xmlns="http://www.w3.org/2000/svg">
 						<path d="M20.84 4.61A5.5 5.5 0 0 0 16.5 2.5A5.5 5.5 0 0 0 12 5.5A5.5 5.5 0 0 0 7.5 2.5A5.5 5.5 0 0 0 3.16 4.61A5.5 5.5 0 0 0 2 8.89A5.5 5.5 0 0 0 3.16 13.17L12 22L20.84 13.17A5.5 5.5 0 0 0 22 8.89A5.5 5.5 0 0 0 20.84 4.61Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 					</svg>
 				</button>
@@ -93,34 +95,34 @@ do_action( 'splms_before_single_course_card', $course_id );
 
 		<h3 class="course-title">
 			<a href="<?php the_permalink(); ?>" class="course-title-link">
-				<?php echo esc_html( get_the_title( $course_post ) ); ?>
+				<?php echo esc_html( get_the_title( $splms_course_post ) ); ?>
 			</a>
 		</h3>
 
 		<div class="course-excerpt">
 			<?php
 			// Debug: Check if excerpt contains access restriction message.
-			$excerpt = get_the_excerpt( $course_post );
-			if ( false !== strpos( $excerpt, 'Access Restricted' ) || false !== strpos( $excerpt, 'Access Denied' ) ) {
+			$splms_excerpt = get_the_excerpt( $splms_course_post );
+			if ( false !== strpos( $splms_excerpt, 'Access Restricted' ) || false !== strpos( $splms_excerpt, 'Access Denied' ) ) {
 				// Show course description from content instead.
-				$content = get_the_content( null, false, $course_post );
-				if ( ! empty( $content ) ) {
+				$splms_content = get_the_content( null, false, $splms_course_post );
+				if ( ! empty( $splms_content ) ) {
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_trim_words output is safe.
-					echo wp_trim_words( wp_strip_all_tags( $content ), 15, '...' );
+					echo wp_trim_words( wp_strip_all_tags( $splms_content ), 15, '...' );
 				} else {
 					// Use manual excerpt.
 					echo esc_html__( 'Learn new skills with this comprehensive course designed to help you advance your knowledge and career.', 'skillpulse-lms' );
 				}
 			} else {
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_trim_words output is safe.
-				echo wp_trim_words( $excerpt, 15, '...' );
+				echo wp_trim_words( $splms_excerpt, 15, '...' );
 			}
 			?>
 		</div>
 
 		<div class="course-meta">
 
-			<?php if ( $duration ) { ?>
+			<?php if ( $splms_duration ) { ?>
 				<div class="course-meta-item">
 					<span class="icon">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -136,7 +138,7 @@ do_action( 'splms_before_single_course_card', $course_id );
 							</defs>
 						</svg>
 					</span>
-					<span class="text"><?php echo esc_html( $duration ); ?></span>
+					<span class="text"><?php echo esc_html( $splms_duration ); ?></span>
 				</div>
 			<?php } ?>
 
@@ -157,7 +159,7 @@ do_action( 'splms_before_single_course_card', $course_id );
 				<span class="text">
 					<?php
 					/* translators: %d: Number of students. */
-					echo esc_html( sprintf( _n( '%d student', '%d students', $students_count, 'skillpulse-lms' ), (int) $students_count ) );
+					echo esc_html( sprintf( _n( '%d student', '%d students', $splms_students_count, 'skillpulse-lms' ), (int) $splms_students_count ) );
 					?>
 				</span>
 			</div>
@@ -179,19 +181,19 @@ do_action( 'splms_before_single_course_card', $course_id );
 				<span class="text">
 					<?php
 					// Display price based on course_mode.
-					if ( ! empty( $access_info['course_mode'] ) ) {
-						switch ( $access_info['course_mode'] ) {
+					if ( ! empty( $splms_access_info['course_mode'] ) ) {
+						switch ( $splms_access_info['course_mode'] ) {
 							case 'free':
 								echo '<span class="price-free">' . esc_html__( 'Free', 'skillpulse-lms' ) . '</span>';
 								break;
 							case 'paid':
 								// Only show paid prices if paid courses are enabled.
 								if ( splms_is_paid_courses_enabled() ) {
-									if ( $access_info['final_price'] && $access_info['final_price'] < $access_info['price'] ) {
-										echo '<span class="price-sale">' . esc_html( get_splms_price_format( $access_info['final_price'] ) ) . '</span>';
-										echo '<span class="price-regular">' . esc_html( get_splms_price_format( $access_info['price'] ) ) . '</span>';
+									if ( $splms_access_info['final_price'] && $splms_access_info['final_price'] < $splms_access_info['price'] ) {
+										echo '<span class="price-sale">' . esc_html( get_splms_price_format( $splms_access_info['final_price'] ) ) . '</span>';
+										echo '<span class="price-regular">' . esc_html( get_splms_price_format( $splms_access_info['price'] ) ) . '</span>';
 									} else {
-										echo '<span class="price-current">' . esc_html( get_splms_price_format( $access_info['price'] ) ) . '</span>';
+										echo '<span class="price-current">' . esc_html( get_splms_price_format( $splms_access_info['price'] ) ) . '</span>';
 									}
 								} else {
 									echo '<span class="price-free">' . esc_html__( 'Free', 'skillpulse-lms' ) . '</span>';
@@ -208,22 +210,22 @@ do_action( 'splms_before_single_course_card', $course_id );
 					?>
 				</span>
 			</div>
-			<?php if ( $rating_summary['average_rating'] > 0 && $is_enable_rating ) { ?>
+			<?php if ( $splms_rating_summary['average_rating'] > 0 && $splms_is_enable_rating ) { ?>
 				<?php
 				// Format review count for display.
-				$review_count           = $rating_summary['total_reviews'];
-				$average_rating         = $rating_summary['average_rating'];
-				$review_count_formatted = $review_count;
-				if ( $review_count >= 1000 ) {
-					$review_count_formatted = number_format_i18n( $review_count / 1000, 2 );
+				$splms_review_count           = $splms_rating_summary['total_reviews'];
+				$splms_average_rating         = $splms_rating_summary['average_rating'];
+				$splms_review_count_formatted = $splms_review_count;
+				if ( $splms_review_count >= 1000 ) {
+					$splms_review_count_formatted = number_format_i18n( $splms_review_count / 1000, 2 );
 					// Remove trailing zeros after decimal point.
-					$review_count_formatted = rtrim( rtrim( $review_count_formatted, '0' ), '.' ) . 'k';
+					$splms_review_count_formatted = rtrim( rtrim( $splms_review_count_formatted, '0' ), '.' ) . 'k';
 				} else {
-					$review_count_formatted = number_format_i18n( $review_count );
+					$splms_review_count_formatted = number_format_i18n( $splms_review_count );
 				}
 				?>
 				<div class="course-rating course-meta-item">
-					<span class="icon" data-rating="<?php echo esc_attr( $average_rating ); ?>">
+					<span class="icon" data-rating="<?php echo esc_attr( $splms_average_rating ); ?>">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 							<g clip-path="url(#clip0_191_22)">
 								<path d="M6.86922 6.11672L1.55255 6.88756L1.45838 6.90672C1.31583 6.94457 1.18588 7.01956 1.08179 7.12406C0.977707 7.22855 0.903219 7.3588 0.865934 7.5015C0.82865 7.64419 0.829905 7.79423 0.869572 7.93628C0.909239 8.07834 0.985896 8.20732 1.09172 8.31006L4.94338 12.0592L4.03505 17.3551L4.02422 17.4467C4.01549 17.5942 4.0461 17.7413 4.11292 17.873C4.17974 18.0047 4.28037 18.1163 4.4045 18.1963C4.52862 18.2764 4.67179 18.322 4.81934 18.3285C4.96689 18.335 5.11352 18.3022 5.24422 18.2334L9.99922 15.7334L14.7434 18.2334L14.8267 18.2717C14.9643 18.3259 15.1138 18.3425 15.2598 18.3199C15.4059 18.2972 15.5434 18.2361 15.658 18.1428C15.7727 18.0495 15.8605 17.9273 15.9124 17.7889C15.9643 17.6505 15.9785 17.5008 15.9534 17.3551L15.0442 12.0592L18.8975 8.30922L18.9625 8.23839C19.0554 8.12403 19.1163 7.9871 19.139 7.84155C19.1617 7.696 19.1454 7.54704 19.0918 7.40983C19.0382 7.27263 18.9492 7.15208 18.8338 7.06049C18.7184 6.96889 18.5808 6.9095 18.435 6.88839L13.1184 6.11672L10.7417 1.30006C10.6729 1.1605 10.5665 1.04299 10.4344 0.960811C10.3023 0.878636 10.1498 0.835083 9.99422 0.835083C9.83864 0.835083 9.68616 0.878636 9.55406 0.960811C9.42195 1.04299 9.31549 1.1605 9.24672 1.30006L6.86922 6.11672Z" fill="#ffc107" />
@@ -236,16 +238,16 @@ do_action( 'splms_before_single_course_card', $course_id );
 						</svg>
 					</span>
 					<div class="rating-count text">
-						<?php echo esc_html( number_format_i18n( $average_rating, 1 ) ); ?>
-						<span>(<?php echo esc_html( $review_count_formatted ); ?>)</span>
+						<?php echo esc_html( number_format_i18n( $splms_average_rating, 1 ) ); ?>
+						<span>(<?php echo esc_html( $splms_review_count_formatted ); ?>)</span>
 					</div>
 				</div>
 			<?php } ?>
 
 		</div>
 		<div class="course-actions">
-			<?php if ( $is_enrolled ) { ?>
-				<?php if ( 'completed' === $enrollment_status ) { ?>
+			<?php if ( $splms_is_enrolled ) { ?>
+				<?php if ( 'completed' === $splms_enrollment_status ) { ?>
 					<a href="<?php the_permalink(); ?>" class="btn btn-primary">
 						<?php esc_html_e( 'Completed', 'skillpulse-lms' ); ?>
 					</a>
@@ -268,7 +270,7 @@ do_action( 'splms_before_single_course_card', $course_id );
 /**
  * Hook: splms_after_single_course_card
  */
-do_action( 'splms_after_single_course_card', $course_id );
+do_action( 'splms_after_single_course_card', $splms_course_id );
 
 // Reset post data.
 wp_reset_postdata();

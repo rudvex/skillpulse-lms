@@ -12,23 +12,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+
+
 // Get maintenance mode settings.
-$site_name   = get_bloginfo( 'name' );
-$admin_email = get_option( 'admin_email' );
+$splms_site_name   = get_bloginfo( 'name' );
+$splms_admin_email = get_option( 'admin_email' );
 
 // Get customizable maintenance settings from maintenance_settings section.
-$all_settings = SkillPulse_LMS_Settings::get_instance()->get_all_settings();
+$splms_all_settings = SkillPulse_LMS_Settings::get_instance()->get_all_settings();
 
-$maintenance_settings = isset( $all_settings['general']['maintenance_settings'] ) ? $all_settings['general']['maintenance_settings'] : array();
+$splms_maintenance_settings = isset( $splms_all_settings['general']['maintenance_settings'] ) ? $splms_all_settings['general']['maintenance_settings'] : array();
 
-$maintenance_title         = isset( $maintenance_settings['maintenance_title'] ) ? $maintenance_settings['maintenance_title'] : __( 'Learning Platform Upgrade in Progress', 'skillpulse-lms' );
-$maintenance_message       = isset( $maintenance_settings['maintenance_message'] ) ? $maintenance_settings['maintenance_message'] : __( 'We\'re enhancing your learning experience! Our platform is temporarily offline while we upgrade our systems to serve you better.', 'skillpulse-lms' );
-$maintenance_features_html = isset( $maintenance_settings['maintenance_features'] ) ? $maintenance_settings['maintenance_features'] : '';
-$show_features_section     = isset( $maintenance_settings['maintenance_show_features'] ) ? $maintenance_settings['maintenance_show_features'] : true;
+$splms_maintenance_title         = isset( $splms_maintenance_settings['maintenance_title'] ) ? $splms_maintenance_settings['maintenance_title'] : __( 'Learning Platform Upgrade in Progress', 'skillpulse-lms' );
+$splms_maintenance_message       = isset( $splms_maintenance_settings['maintenance_message'] ) ? $splms_maintenance_settings['maintenance_message'] : __( 'We\'re enhancing your learning experience! Our platform is temporarily offline while we upgrade our systems to serve you better.', 'skillpulse-lms' );
+$splms_maintenance_features_html = isset( $splms_maintenance_settings['maintenance_features'] ) ? $splms_maintenance_settings['maintenance_features'] : '';
+$splms_show_features_section     = isset( $splms_maintenance_settings['maintenance_show_features'] ) ? $splms_maintenance_settings['maintenance_show_features'] : true;
 
 // Default features HTML if none configured.
-if ( empty( trim( $maintenance_features_html ) ) ) {
-	$maintenance_features_html = '• ' . __( 'Enhanced course performance & loading', 'skillpulse-lms' ) . '<br>' .
+if ( empty( trim( $splms_maintenance_features_html ) ) ) {
+	$splms_maintenance_features_html = '• ' . __( 'Enhanced course performance & loading', 'skillpulse-lms' ) . '<br>' .
 								'• ' . __( 'New interactive learning features', 'skillpulse-lms' ) . '<br>' .
 								'• ' . __( 'Improved mobile learning experience', 'skillpulse-lms' ) . '<br>' .
 								'• ' . __( 'Advanced progress tracking system', 'skillpulse-lms' ) . '<br>' .
@@ -45,9 +47,9 @@ if ( empty( trim( $maintenance_features_html ) ) ) {
 	<meta name="theme-color" content="#7e75ff">
 	<?php
 	// translators: %s: Site name.
-	$maintenance_title = sprintf( __( '%s - Learning Platform Upgrade', 'skillpulse-lms' ), $site_name );
+	$splms_maintenance_title = sprintf( __( '%s - Learning Platform Upgrade', 'skillpulse-lms' ), $splms_site_name );
 	?>
-	<title><?php echo esc_html( $maintenance_title ); ?></title>
+	<title><?php echo esc_html( $splms_maintenance_title ); ?></title>
 	<?php wp_head(); ?>
 </head>
 <body class="splms-lms splms-maintenance">
@@ -65,20 +67,20 @@ if ( empty( trim( $maintenance_features_html ) ) ) {
 			<!-- Main Title -->
 			<h1 class="maintenance-title">
 				<span class="upgrade-icon">🔧</span>
-				<?php echo esc_html( $maintenance_title ); ?>
+				<?php echo esc_html( $splms_maintenance_title ); ?>
 			</h1>
 
 			<!-- Main Message -->
 			<div class="maintenance-message">
 				<p class="lead-text">
-					<?php echo esc_html( $maintenance_message ); ?>
+					<?php echo esc_html( $splms_maintenance_message ); ?>
 				</p>
 				<p class="assurance-text">
 					<strong><?php esc_html_e( 'All your course progress and certificates are safely preserved.', 'skillpulse-lms' ); ?></strong>
 				</p>
 			</div>
 
-			<?php if ( $show_features_section && ! empty( trim( $maintenance_features_html ) ) ) : ?>
+			<?php if ( $splms_show_features_section && ! empty( trim( $splms_maintenance_features_html ) ) ) : ?>
 			<!-- Upgrade Features -->
 			<div class="maintenance-upgrades">
 				<h3 class="upgrades-title">
@@ -86,7 +88,7 @@ if ( empty( trim( $maintenance_features_html ) ) ) {
 					<?php esc_html_e( 'What We\'re Working On:', 'skillpulse-lms' ); ?>
 				</h3>
 				<div class="maintenance-features-content">
-					<?php echo wp_kses_post( $maintenance_features_html ); ?>
+					<?php echo wp_kses_post( $splms_maintenance_features_html ); ?>
 				</div>
 			</div>
 			<?php endif; ?>
@@ -114,8 +116,8 @@ if ( empty( trim( $maintenance_features_html ) ) ) {
 				</p>
 				<p class="contact-details">
 					<strong><?php esc_html_e( 'Contact:', 'skillpulse-lms' ); ?></strong>
-					<a href="mailto:<?php echo esc_attr( $admin_email ); ?>" class="email-link">
-						<?php echo esc_html( $admin_email ); ?>
+					<a href="mailto:<?php echo esc_attr( $splms_admin_email ); ?>" class="email-link">
+						<?php echo esc_html( $splms_admin_email ); ?>
 					</a>
 				</p>
 			</div>
@@ -142,12 +144,12 @@ if ( empty( trim( $maintenance_features_html ) ) ) {
 			<div class="maintenance-footer">
 				<p class="maintenance-timestamp">
 					<?php
-					$timestamp_text = sprintf(
+					$splms_timestamp_text = sprintf(
 						/* translators: %s: Date and time. */
 						esc_html__( 'Last updated: %s', 'skillpulse-lms' ),
 						esc_html( current_time( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) ) )
 					);
-					echo esc_html( $timestamp_text );
+					echo esc_html( $splms_timestamp_text );
 					?>
 				</p>
 

@@ -12,13 +12,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$course_id = get_the_ID();
-$user_id   = get_current_user_id();
+
+
+$splms_course_id = get_the_ID();
+$splms_user_id   = get_current_user_id();
 
 // Check if reviews are enabled.
-$reviews_enabled = splms_get_setting( 'course_reviews_enabled', true );
+$splms_reviews_enabled = splms_get_setting( 'course_reviews_enabled', true );
 
-if ( ! $reviews_enabled ) {
+if ( ! $splms_reviews_enabled ) {
 	return;
 }
 ?>
@@ -41,28 +43,28 @@ if ( ! $reviews_enabled ) {
 			 *
 			 * @param int $course_id Course ID.
 			 */
-			do_action( 'splms_before_reviews', $course_id );
+			do_action( 'splms_before_reviews', $splms_course_id );
 
 			// Get course reviews using the new system with pagination.
-			$reviews_data  = splms_get_course_reviews( $course_id );
-			$reviews       = $reviews_data['reviews'] ?? array();
-			$total_reviews = $reviews_data['total'] ?? 0;
-			$total_pages   = $reviews_data['pages'] ?? 1;
+			$splms_reviews_data  = splms_get_course_reviews( $splms_course_id );
+			$splms_reviews       = $splms_reviews_data['reviews'] ?? array();
+			$splms_total_reviews = $splms_reviews_data['total'] ?? 0;
+			$splms_total_pages   = $splms_reviews_data['pages'] ?? 1;
 
 			// Check if user can review.
-			$permission = array();
-			if ( $user_id ) {
-				$permission = SPLMS_Review_Permissions::can_user_review( $user_id, $course_id );
+			$splms_permission = array();
+			if ( $splms_user_id ) {
+				$splms_permission = SPLMS_Review_Permissions::can_user_review( $splms_user_id, $splms_course_id );
 			}
 			?>
 
-			<?php if ( $total_reviews > 0 ) { ?>
+			<?php if ( $splms_total_reviews > 0 ) { ?>
 				<?php
 				splms_get_template_part(
 					'course/partials/tabs/reviews/summary',
 					'',
 					array(
-						'course_id' => $course_id,
+						'splms_course_id' => $splms_course_id,
 					)
 				);
 				?>
@@ -72,25 +74,25 @@ if ( ! $reviews_enabled ) {
 					'course/partials/tabs/reviews/controls',
 					'',
 					array(
-						'course_id'  => $course_id,
-						'user_id'    => $user_id,
-						'permission' => $permission,
+						'splms_course_id'  => $splms_course_id,
+						'splms_user_id'    => $splms_user_id,
+						'splms_permission' => $splms_permission,
 					)
 				);
 				?>
 			<?php } ?>
 
 			<div class="splms-reviews-content">
-				<?php if ( ! empty( $reviews ) && is_array( $reviews ) ) { ?>
+				<?php if ( ! empty( $splms_reviews ) && is_array( $splms_reviews ) ) { ?>
 					<?php
 					splms_get_template_part(
 						'course/partials/tabs/reviews/list',
 						'',
 						array(
-							'reviews'       => $reviews,
-							'course_id'     => $course_id,
-							'total_reviews' => $total_reviews,
-							'total_pages'   => $total_pages,
+							'splms_reviews'       => $splms_reviews,
+							'splms_course_id'     => $splms_course_id,
+							'splms_total_reviews' => $splms_total_reviews,
+							'splms_total_pages'   => $splms_total_pages,
 						)
 					);
 					?>
@@ -100,7 +102,7 @@ if ( ! $reviews_enabled ) {
 						'course/partials/tabs/reviews/empty-state',
 						'',
 						array(
-							'permission' => $permission,
+							'splms_permission' => $splms_permission,
 						)
 					);
 					?>
@@ -115,17 +117,17 @@ if ( ! $reviews_enabled ) {
 			 *
 			 * @param int $course_id Course ID.
 			 */
-			do_action( 'splms_after_reviews', $course_id );
+			do_action( 'splms_after_reviews', $splms_course_id );
 			?>
 
-			<?php if ( $user_id ) { ?>
+			<?php if ( $splms_user_id ) { ?>
 				<?php
 				splms_get_template_part(
 					'course/partials/tabs/reviews/submission-modal',
 					'',
 					array(
-						'course_id'  => $course_id,
-						'permission' => $permission,
+						'splms_course_id'  => $splms_course_id,
+						'splms_permission' => $splms_permission,
 					)
 				);
 				?>

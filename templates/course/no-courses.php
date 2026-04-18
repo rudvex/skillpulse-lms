@@ -12,10 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+
+
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, nonce verification handled at higher level.
-$is_search = is_search() || ! empty( $_GET['course_search'] );
+$splms_is_search = is_search() || ! empty( $_GET['course_search'] );
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, nonce verification handled at higher level.
-$has_filters = ! empty( array_filter( $_GET ) );
+$splms_has_filters = ! empty( array_filter( $_GET ) );
 ?>
 
 <div class="splms-no-courses">
@@ -35,7 +37,7 @@ $has_filters = ! empty( array_filter( $_GET ) );
 	</div>
 
 	<div class="no-courses-content">
-		<?php if ( $is_search ) { ?>
+		<?php if ( $splms_is_search ) { ?>
 			<h2 class="no-courses-title">
 				<?php esc_html_e( 'Oops! We couldn\'t find any matching courses', 'skillpulse-lms' ); ?>
 			</h2>
@@ -43,19 +45,19 @@ $has_filters = ! empty( array_filter( $_GET ) );
 				<?php
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, nonce verification handled at higher level.
 				if ( ! empty( $_GET['course_search'] ) ) {
-					$search_text = sprintf(
+					$splms_search_text = sprintf(
 						/* translators: %s: Search query. */
 						esc_html__( 'No courses match your search for "%s". Try different keywords, adjust your filters, or browse our course categories below.', 'skillpulse-lms' ),
 						// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, reading URL parameter only.
 						'<strong>' . esc_html( sanitize_text_field( wp_unslash( $_GET['course_search'] ) ) ) . '</strong>'
 					);
-					echo wp_kses_post( $search_text );
+					echo wp_kses_post( $splms_search_text );
 				} else {
 					esc_html_e( 'We couldn\'t find any courses matching your search. Try different keywords, adjust your filters, or browse our course categories below.', 'skillpulse-lms' );
 				}
 				?>
 			</p>
-		<?php } elseif ( $has_filters ) { ?>
+		<?php } elseif ( $splms_has_filters ) { ?>
 			<h2 class="no-courses-title">
 				<?php esc_html_e( 'No matching courses found', 'skillpulse-lms' ); ?>
 			</h2>
@@ -73,7 +75,7 @@ $has_filters = ! empty( array_filter( $_GET ) );
 	</div>
 
 	<div class="no-courses-actions">
-		<?php if ( $is_search || $has_filters ) { ?>
+		<?php if ( $splms_is_search || $splms_has_filters ) { ?>
 			<a href="<?php echo esc_url( get_post_type_archive_link( SPLMS_POST_TYPES['course'] ) ); ?>" class="btn btn-primary">
 				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -81,12 +83,12 @@ $has_filters = ! empty( array_filter( $_GET ) );
 				<span><?php esc_html_e( 'View All Courses', 'skillpulse-lms' ); ?></span>
 			</a>
 			
-			<?php if ( $has_filters ) { ?>
+			<?php if ( $splms_has_filters ) { ?>
 				<?php
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, $_GET used for URL building only.
-				$clear_url = remove_query_arg( array_keys( $_GET ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$splms_clear_url = remove_query_arg( array_keys( $_GET ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				?>
-				<a href="<?php echo esc_url( $clear_url ); ?>" class="btn btn-secondary">
+				<a href="<?php echo esc_url( $splms_clear_url ); ?>" class="btn btn-secondary">
 					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					</svg>
@@ -98,7 +100,7 @@ $has_filters = ! empty( array_filter( $_GET ) );
 
 	<?php
 	// Show course categories if available.
-	$categories = get_terms(
+	$splms_categories = get_terms(
 		array(
 			'taxonomy'   => SPLMS_TAXONOMIES['course_category'],
 			'hide_empty' => true,
@@ -106,21 +108,21 @@ $has_filters = ! empty( array_filter( $_GET ) );
 		)
 	);
 
-	if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) {
+	if ( ! empty( $splms_categories ) && ! is_wp_error( $splms_categories ) ) {
 		?>
 		<div class="browse-categories">
 			<h3 class="browse-categories-title">
 				<?php esc_html_e( 'Or browse by category', 'skillpulse-lms' ); ?>
 			</h3>
 			<div class="category-chips">
-				<?php foreach ( $categories as $category ) { ?>
-					<a href="<?php echo esc_url( get_term_link( $category ) ); ?>" class="category-chip">
+				<?php foreach ( $splms_categories as $splms_category ) { ?>
+					<a href="<?php echo esc_url( get_term_link( $splms_category ) ); ?>" class="category-chip">
 						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 						</svg>
-						<span><?php echo esc_html( $category->name ); ?></span>
-						<?php if ( $category->count > 0 ) { ?>
-							<span class="category-count"><?php echo esc_html( $category->count ); ?></span>
+						<span><?php echo esc_html( $splms_category->name ); ?></span>
+						<?php if ( $splms_category->count > 0 ) { ?>
+							<span class="category-count"><?php echo esc_html( $splms_category->count ); ?></span>
 						<?php } ?>
 					</a>
 				<?php } ?>

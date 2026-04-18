@@ -14,13 +14,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$course_id = isset( $args['course_id'] ) ? $args['course_id'] : get_the_ID();
+
+
+$splms_course_id = isset( $args['splms_course_id'] ) ? $args['splms_course_id'] : get_the_ID();
 
 // Get rating summary using the new Review Manager.
-$rating_summary = SPLMS_Review_Manager::get_rating_summary( $course_id );
+$splms_rating_summary = SPLMS_Review_Manager::get_rating_summary( $splms_course_id );
 
 // Set default values if keys are missing.
-$rating_summary = array_merge(
+$splms_rating_summary = array_merge(
 	array(
 		'average_rating'   => 0,
 		'total_reviews'    => 0,
@@ -32,7 +34,7 @@ $rating_summary = array_merge(
 			'1' => 0,
 		),
 	),
-	$rating_summary
+	$splms_rating_summary
 );
 ?>
 
@@ -40,36 +42,36 @@ $rating_summary = array_merge(
 <div class="reviews-summary">
 	<div class="overall-rating">
 		<div class="rating-score">
-			<span class="score-number"><?php echo number_format( $rating_summary['average_rating'], 1 ); ?></span>
+			<span class="score-number"><?php echo number_format( $splms_rating_summary['average_rating'], 1 ); ?></span>
 			<div class="rating-stars">
-				<?php for ( $i = 1; $i <= 5; $i++ ) { ?>
-					<span class="star <?php echo $i <= $rating_summary['average_rating'] ? 'filled' : ''; ?>">★</span>
+				<?php for ( $splms_i = 1; $splms_i <= 5; $splms_i++ ) { ?>
+					<span class="star <?php echo esc_attr( $splms_i <= $splms_rating_summary['average_rating'] ? 'filled' : '' ); ?>">★</span>
 				<?php } ?>
 			</div>
 			<p class="rating-text">
 				<?php
 				/* translators: %d: Total reviews. */
-				$reviews_text = _n( 'Based on %d review', 'Based on %d reviews', $rating_summary['total_reviews'], 'skillpulse-lms' );
+				$splms_reviews_text = _n( 'Based on %d review', 'Based on %d reviews', $splms_rating_summary['total_reviews'], 'skillpulse-lms' );
 				/* translators: %d: Total reviews. */
-				$reviews_text = sprintf( $reviews_text, (int) $rating_summary['total_reviews'] );
-				echo esc_html( $reviews_text );
+				$splms_reviews_text = sprintf( $splms_reviews_text, (int) $splms_rating_summary['total_reviews'] );
+				echo esc_html( $splms_reviews_text );
 				?>
 			</p>
 		</div>
 	</div>
 
 	<div class="rating-breakdown">
-		<?php foreach ( array( 5, 4, 3, 2, 1 ) as $stars ) { ?>
+		<?php foreach ( array( 5, 4, 3, 2, 1 ) as $splms_stars ) { ?>
 			<?php
-			$count      = $rating_summary['rating_breakdown'][ (string) $stars ];
-			$percentage = $rating_summary['total_reviews'] > 0 ? round( ( $count / $rating_summary['total_reviews'] ) * 100 ) : 0;
+			$splms_count      = $splms_rating_summary['rating_breakdown'][ (string) $splms_stars ];
+			$splms_percentage = $splms_rating_summary['total_reviews'] > 0 ? round( ( $splms_count / $splms_rating_summary['total_reviews'] ) * 100 ) : 0;
 			?>
 			<div class="rating-bar">
-				<span class="rating-label"><?php echo esc_html( $stars ); ?> <?php esc_html_e( 'stars', 'skillpulse-lms' ); ?></span>
+				<span class="rating-label"><?php echo esc_html( $splms_stars ); ?> <?php esc_html_e( 'stars', 'skillpulse-lms' ); ?></span>
 				<div class="progress-bar">
-					<div class="progress-fill" style="width: <?php echo esc_attr( $percentage ); ?>%"></div>
+					<div class="progress-fill" style="width: <?php echo esc_attr( $splms_percentage ); ?>%"></div>
 				</div>
-				<span class="rating-percentage"><?php echo esc_html( $percentage ); ?>%</span>
+				<span class="rating-percentage"><?php echo esc_html( $splms_percentage ); ?>%</span>
 			</div>
 		<?php } ?>
 	</div>

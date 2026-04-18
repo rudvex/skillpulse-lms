@@ -10,14 +10,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+
+
 global $splms_signup;
 
 // Get settings (same as shortcode template).
-$user_type           = splms_get_setting( 'default_user_role', 'student' );
-$user_signup_enabled = splms_get_setting( 'user_signup_enabled', false );
+$splms_user_type           = splms_get_setting( 'default_user_role', 'student' );
+$splms_user_signup_enabled = splms_get_setting( 'user_signup_enabled', false );
 
 // Check if there are any errors.
-$has_errors = ! empty( $splms_signup->errors );
+$splms_has_errors = ! empty( $splms_signup->errors );
 ?>
 
 <div class="splms-signup-container">
@@ -29,7 +31,7 @@ $has_errors = ! empty( $splms_signup->errors );
 
 			<form id="splms-signup-form" class="splms-auth-form splms-signup-form" novalidate>
 				<?php wp_nonce_field( 'splms_auth_nonce', 'nonce' ); ?>
-				<input type="hidden" name="user_type" value="<?php echo esc_attr( $user_type ); ?>">
+				<input type="hidden" name="user_type" value="<?php echo esc_attr( $splms_user_type ); ?>">
 				<!-- Name Fields -->
 				<div class="splms-form-row">
 					<div class="splms-form-group">
@@ -39,10 +41,10 @@ $has_errors = ! empty( $splms_signup->errors );
 						</label>
 						<?php
 						// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Template file, nonce verification handled at higher level.
-						$first_name = isset( $_POST['first_name'] ) ? sanitize_text_field( wp_unslash( $_POST['first_name'] ) ) : '';
+						$splms_first_name = isset( $_POST['first_name'] ) ? sanitize_text_field( wp_unslash( $_POST['first_name'] ) ) : '';
 						?>
 						<input type="text" id="first_name" name="first_name" class="splms-form-control" required
-								value="<?php echo esc_attr( $first_name ); ?>">
+								value="<?php echo esc_attr( $splms_first_name ); ?>">
 						<div class="splms-form-error" id="first_name_error"></div>
 					</div>
 					<div class="splms-form-group">
@@ -52,10 +54,10 @@ $has_errors = ! empty( $splms_signup->errors );
 						</label>
 						<?php
 						// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Template file, nonce verification handled at higher level.
-						$last_name = isset( $_POST['last_name'] ) ? sanitize_text_field( wp_unslash( $_POST['last_name'] ) ) : '';
+						$splms_last_name = isset( $_POST['last_name'] ) ? sanitize_text_field( wp_unslash( $_POST['last_name'] ) ) : '';
 						?>
 						<input type="text" id="last_name" name="last_name" class="splms-form-control" required
-								value="<?php echo esc_attr( $last_name ); ?>">
+								value="<?php echo esc_attr( $splms_last_name ); ?>">
 						<div class="splms-form-error" id="last_name_error"></div>
 					</div>
 				</div>
@@ -68,10 +70,10 @@ $has_errors = ! empty( $splms_signup->errors );
 					</label>
 					<?php
 					// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Template file, nonce verification handled at higher level.
-					$username = isset( $_POST['username'] ) ? sanitize_user( wp_unslash( $_POST['username'] ) ) : '';
+					$splms_username = isset( $_POST['username'] ) ? sanitize_user( wp_unslash( $_POST['username'] ) ) : '';
 					?>
 					<input type="text" id="username" name="username" class="splms-form-control" required
-							value="<?php echo esc_attr( $username ); ?>">
+							value="<?php echo esc_attr( $splms_username ); ?>">
 					<small class="splms-form-help">
 						<?php esc_html_e( 'Only letters, numbers, and underscores allowed', 'skillpulse-lms' ); ?>
 					</small>
@@ -86,10 +88,10 @@ $has_errors = ! empty( $splms_signup->errors );
 					</label>
 					<?php
 					// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Template file, nonce verification handled at higher level.
-					$email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+					$splms_email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
 					?>
 					<input type="email" id="email" name="email" class="splms-form-control" required
-							value="<?php echo esc_attr( $email ); ?>">
+							value="<?php echo esc_attr( $splms_email ); ?>">
 					<small class="splms-form-help">
 						<?php esc_html_e( 'We\'ll send an activation link to this email', 'skillpulse-lms' ); ?>
 					</small>
@@ -149,37 +151,37 @@ $has_errors = ! empty( $splms_signup->errors );
 						<span class="splms-checkbox-text">
 							<?php
 							// Get terms and privacy URLs.
-							$terms_page_id = splms_get_setting( 'terms_conditions_page_id', 0 );
-							$terms_url     = '';
-							if ( $terms_page_id ) {
-								$terms_page = get_post( $terms_page_id );
-								if ( $terms_page && 'publish' === $terms_page->post_status ) {
-									$terms_url = get_permalink( $terms_page_id );
+							$splms_terms_page_id = splms_get_setting( 'terms_conditions_page_id', 0 );
+							$splms_terms_url     = '';
+							if ( $splms_terms_page_id ) {
+								$splms_terms_page = get_post( $splms_terms_page_id );
+								if ( $splms_terms_page && 'publish' === $splms_terms_page->post_status ) {
+									$splms_terms_url = get_permalink( $splms_terms_page_id );
 								}
 							}
 
-							$privacy_page_id = splms_get_setting( 'privacy_policy_page_id', 0 );
-							$privacy_url     = '';
-							if ( $privacy_page_id ) {
-								$privacy_page = get_post( $privacy_page_id );
-								if ( $privacy_page && 'publish' === $privacy_page->post_status ) {
-									$privacy_url = get_permalink( $privacy_page_id );
+							$splms_privacy_page_id = splms_get_setting( 'privacy_policy_page_id', 0 );
+							$splms_privacy_url     = '';
+							if ( $splms_privacy_page_id ) {
+								$splms_privacy_page = get_post( $splms_privacy_page_id );
+								if ( $splms_privacy_page && 'publish' === $splms_privacy_page->post_status ) {
+									$splms_privacy_url = get_permalink( $splms_privacy_page_id );
 								}
 							}
-							if ( empty( $privacy_url ) ) {
-								$privacy_url = get_privacy_policy_url();
+							if ( empty( $splms_privacy_url ) ) {
+								$splms_privacy_url = get_privacy_policy_url();
 							}
 
 							esc_html_e( 'I agree to the', 'skillpulse-lms' );
 							?>
-							<?php if ( $terms_url ) : ?>
-								<a href="<?php echo esc_url( $terms_url ); ?>" class="splms-terms-link" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Terms and Conditions', 'skillpulse-lms' ); ?></a>
+							<?php if ( $splms_terms_url ) : ?>
+								<a href="<?php echo esc_url( $splms_terms_url ); ?>" class="splms-terms-link" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Terms and Conditions', 'skillpulse-lms' ); ?></a>
 							<?php else : ?>
 								<span class="splms-terms-link"><?php esc_html_e( 'Terms and Conditions', 'skillpulse-lms' ); ?></span>
 							<?php endif; ?>
 							<?php esc_html_e( 'and', 'skillpulse-lms' ); ?>
-							<?php if ( $privacy_url ) : ?>
-								<a href="<?php echo esc_url( $privacy_url ); ?>" class="splms-privacy-link" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Privacy Policy', 'skillpulse-lms' ); ?></a>
+							<?php if ( $splms_privacy_url ) : ?>
+								<a href="<?php echo esc_url( $splms_privacy_url ); ?>" class="splms-privacy-link" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Privacy Policy', 'skillpulse-lms' ); ?></a>
 							<?php else : ?>
 								<span class="splms-privacy-link"><?php esc_html_e( 'Privacy Policy', 'skillpulse-lms' ); ?></span>
 							<?php endif; ?>

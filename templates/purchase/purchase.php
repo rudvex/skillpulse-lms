@@ -14,6 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+
+
 if ( ! splms_is_paid_courses_enabled() ) {
 	wp_die(
 		esc_html__( 'Paid courses are currently disabled.', 'skillpulse-lms' ),
@@ -22,9 +24,9 @@ if ( ! splms_is_paid_courses_enabled() ) {
 	);
 }
 
-$payment_system = SkillPulse_LMS_Payment::get_instance();
+$splms_payment_system = SkillPulse_LMS_Payment::get_instance();
 
-if ( $payment_system->handle_payment_success() ) {
+if ( $splms_payment_system->handle_payment_success() ) {
 	return; // Exit if payment was processed.
 }
 
@@ -32,52 +34,52 @@ if ( $payment_system->handle_payment_success() ) {
 // Note: Don't use sanitize_text_field() as it can corrupt Base64 encoding.
 // The token will be validated by the validate_token() function.
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Token validated by splms_validate_purchase_token().
-$token = isset( $_GET['token'] ) ? wp_unslash( $_GET['token'] ) : '';
+$splms_token = isset( $_GET['token'] ) ? wp_unslash( $_GET['token'] ) : '';
 
-$token_data = splms_validate_purchase_token( $token );
+$splms_token_data = splms_validate_purchase_token( $splms_token );
 
-if ( is_wp_error( $token_data ) ) {
+if ( is_wp_error( $splms_token_data ) ) {
 	wp_die(
-		esc_html( $token_data->get_error_message() ),
+		esc_html( $splms_token_data->get_error_message() ),
 		esc_html__( 'Invalid Purchase Link', 'skillpulse-lms' ),
 		array( 'response' => 403 )
 	);
 }
 
 // Extract data from validated token.
-$course_id             = $token_data['course_id'];
-$purchase_type         = $token_data['purchase_type'];
-$requested_section_ids = isset( $token_data['section_ids'] ) ? $token_data['section_ids'] : array();
-$requested_section_id  = ! empty( $requested_section_ids ) ? $requested_section_ids[0] : 0;
+$splms_course_id             = $splms_token_data['course_id'];
+$splms_purchase_type         = $splms_token_data['purchase_type'];
+$splms_requested_section_ids = isset( $splms_token_data['section_ids'] ) ? $splms_token_data['section_ids'] : array();
+$splms_requested_section_id  = ! empty( $splms_requested_section_ids ) ? $splms_requested_section_ids[0] : 0;
 
-$user_id  = get_current_user_id();
-$currency = splms_get_setting( 'currency', 'USD' );
+$splms_user_id  = get_current_user_id();
+$splms_currency = splms_get_setting( 'currency', 'USD' );
 
 // Check if user has membership access (overrides payment requirement).
-if ( splms_user_has_membership_access_for_paid_course( $course_id, $user_id ) ) {
+if ( splms_user_has_membership_access_for_paid_course( $splms_course_id, $splms_user_id ) ) {
 	// User has membership → Redirect to course page (they can enroll directly, no payment needed).
-	wp_safe_redirect( get_permalink( $course_id ) );
+	wp_safe_redirect( get_permalink( $splms_course_id ) );
 	exit;
 }
 
-$course_info = splms_get_course_access_info( $course_id );
+$splms_course_info = splms_get_course_access_info( $splms_course_id );
 
 // Check if course is paid.
-$original_price = isset( $course_info['price'] ) ? $course_info['price'] : 0;
-$price          = isset( $course_info['final_price'] ) ? $course_info['final_price'] : $original_price;
-$has_discount   = $original_price > $price && $price > 0;
+$splms_original_price = isset( $splms_course_info['price'] ) ? $splms_course_info['price'] : 0;
+$splms_price          = isset( $splms_course_info['final_price'] ) ? $splms_course_info['final_price'] : $splms_original_price;
+$splms_has_discount   = $splms_original_price > $splms_price && $splms_price > 0;
 
 // Check if user should see upgrade option.
-$show_upgrade_option = splms_user_should_see_upgrade_option( $course_id, $user_id );
-$upgrade_data        = array();
-if ( $show_upgrade_option ) {
-	$upgrade_data = splms_calculate_upgrade_price( $course_id, $user_id );
+$splms_show_upgrade_option = splms_user_should_see_upgrade_option( $splms_course_id, $splms_user_id );
+$splms_upgrade_data        = array();
+if ( $splms_show_upgrade_option ) {
+	$splms_upgrade_data = splms_calculate_upgrade_price( $splms_course_id, $splms_user_id );
 }
 
 // Determine purchase scenarios.
-$has_purchased_sections = ! empty( splms_get_user_purchased_sections( $course_id, $user_id ) );
-$is_upgrade_purchase    = ( 'full_course' === $purchase_type && $has_purchased_sections );
-$is_section_purchase    = ( 'sections' === $purchase_type || ! empty( $requested_section_ids ) );
+$splms_has_purchased_sections = ! empty( splms_get_user_purchased_sections( $splms_course_id, $splms_user_id ) );
+$splms_is_upgrade_purchase    = ( 'full_course' === $splms_purchase_type && $splms_has_purchased_sections );
+$splms_is_section_purchase    = ( 'sections' === $splms_purchase_type || ! empty( $splms_requested_section_ids ) );
 
 // Only redirect if user has FULL course access AND this is NOT an upgrade or section purchase.
 // Allow:
@@ -85,8 +87,8 @@ $is_section_purchase    = ( 'sections' === $purchase_type || ! empty( $requested
 // 2. Section purchase: User purchased Section A, now buying Section B.
 // Block:
 // 1. User already has full course access trying to buy again.
-if ( ! $is_upgrade_purchase && ! $is_section_purchase && splms_has_user_purchased_course( $course_id, $user_id ) ) {
-	wp_safe_redirect( get_permalink( $course_id ) );
+if ( ! $splms_is_upgrade_purchase && ! $splms_is_section_purchase && splms_has_user_purchased_course( $splms_course_id, $splms_user_id ) ) {
+	wp_safe_redirect( get_permalink( $splms_course_id ) );
 	exit;
 }
 
@@ -94,36 +96,36 @@ wp_enqueue_style( 'splms-frontend-style' );
 wp_enqueue_script( 'splms-frontend-script' );
 
 // Get available payment methods.
-$available_methods = $payment_system->get_available_payment_methods( $course_id );
+$splms_available_methods = $splms_payment_system->get_available_payment_methods( $splms_course_id );
 
 // Enqueue PayPal SDK if PayPal is available.
-if ( isset( $available_methods['paypal'] ) && $available_methods['paypal']['configured'] ) {
-	$sandbox_mode   = splms_get_setting( 'paypal_sandbox_mode', true );
-	$paypal_sdk_url = 'https://www.paypal.com/sdk/js?client-id=' . splms_get_setting( 'paypal_client_id' ) . '&currency=' . splms_get_setting( 'currency', 'USD' );
+if ( isset( $splms_available_methods['paypal'] ) && $splms_available_methods['paypal']['configured'] ) {
+	$splms_sandbox_mode   = splms_get_setting( 'paypal_sandbox_mode', true );
+	$splms_paypal_sdk_url = 'https://www.paypal.com/sdk/js?client-id=' . splms_get_setting( 'paypal_client_id' ) . '&currency=' . splms_get_setting( 'currency', 'USD' );
 
 	// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- External SDK, version managed by provider.
-	wp_enqueue_script( 'paypal-sdk', $paypal_sdk_url, array(), null, true );
+	wp_enqueue_script( 'paypal-sdk', $splms_paypal_sdk_url, array(), null, true );
 }
 
 // Enqueue Stripe SDK if Stripe is available.
-if ( isset( $available_methods['stripe'] ) && $available_methods['stripe']['configured'] ) {
+if ( isset( $splms_available_methods['stripe'] ) && $splms_available_methods['stripe']['configured'] ) {
 	// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- External SDK, version managed by provider.
 	wp_enqueue_script( 'stripe-js', 'https://js.stripe.com/v3/', array(), null, true );
 }
 
 // Check if any payment methods are available.
-if ( empty( $available_methods ) ) {
+if ( empty( $splms_available_methods ) ) {
 	// Check if payment is configured at all.
 	if ( ! splms_is_payment_configured() ) {
 		// Payment not configured, redirect back to course page with message.
-		$course_url = add_query_arg(
+		$splms_course_url = add_query_arg(
 			array(
 				'splms_payment_error' => 'not_configured',
 				'message'             => rawurlencode( __( 'Payment system is not configured. Please contact the administrator.', 'skillpulse-lms' ) ),
 			),
-			get_permalink( $course_id )
+			get_permalink( $splms_course_id )
 		);
-		wp_safe_redirect( $course_url );
+		wp_safe_redirect( $splms_course_url );
 		exit;
 	}
 
@@ -136,80 +138,80 @@ if ( empty( $available_methods ) ) {
 
 
 // Build payment data for template rendering.
-$payment_methods = $available_methods;
-$payment_data    = array();
+$splms_payment_methods = $splms_available_methods;
+$splms_payment_data    = array();
 
-foreach ( $available_methods as $method_id => $method ) {
-	$payment_data[ $method_id ] = array(
-		'id'          => $method_id,
-		'name'        => $method['name'],
-		'icon'        => $method['icon'],
-		'description' => $method['description'],
+foreach ( $splms_available_methods as $splms_method_id => $splms_method ) {
+	$splms_payment_data[ $splms_method_id ] = array(
+		'id'          => $splms_method_id,
+		'name'        => $splms_method['name'],
+		'icon'        => $splms_method['icon'],
+		'description' => $splms_method['description'],
 		/* translators: %s: Payment method name. */
-		'button_text' => sprintf( __( 'Pay with %s', 'skillpulse-lms' ), $method['name'] ),
-		'configured'  => $method['configured'],
+		'button_text' => sprintf( __( 'Pay with %s', 'skillpulse-lms' ), $splms_method['name'] ),
+		'configured'  => $splms_method['configured'],
 	);
 
 	// Add gateway-specific data.
-	if ( 'paypal' === $method_id ) {
-		$payment_data[ $method_id ]['client_id']    = splms_get_setting( 'paypal_client_id' );
-		$payment_data[ $method_id ]['sandbox_mode'] = splms_get_setting( 'paypal_sandbox_mode', true );
-	} elseif ( 'stripe' === $method_id ) {
-		$payment_data[ $method_id ]['publishable_key'] = splms_get_setting( 'stripe_publishable_key' );
-		$payment_data[ $method_id ]['test_mode']       = splms_get_setting( 'stripe_test_mode', true );
+	if ( 'paypal' === $splms_method_id ) {
+		$splms_payment_data[ $splms_method_id ]['client_id']    = splms_get_setting( 'paypal_client_id' );
+		$splms_payment_data[ $splms_method_id ]['sandbox_mode'] = splms_get_setting( 'paypal_sandbox_mode', true );
+	} elseif ( 'stripe' === $splms_method_id ) {
+		$splms_payment_data[ $splms_method_id ]['publishable_key'] = splms_get_setting( 'stripe_publishable_key' );
+		$splms_payment_data[ $splms_method_id ]['test_mode']       = splms_get_setting( 'stripe_test_mode', true );
 	}
 }
 
-$course = get_post( $course_id );
+$splms_course = get_post( $splms_course_id );
 
 // Get sections with pricing if course uses section-based pricing.
-$sections_with_pricing = array();
-$show_section_pricing  = false;
+$splms_sections_with_pricing = array();
+$splms_show_section_pricing  = false;
 
-if ( splms_course_uses_section_pricing( $course_id ) ) {
+if ( splms_course_uses_section_pricing( $splms_course_id ) ) {
 	// Fetch sections with pricing using course items relationship.
-	$course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
-	$course_items       = $course_items_query->get_items( $course_id );
+	$splms_course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+	$splms_course_items       = $splms_course_items_query->get_items( $splms_course_id );
 
-	foreach ( $course_items as $course_item ) {
+	foreach ( $splms_course_items as $splms_course_item ) {
 		// Skip non-section items.
-		if ( SPLMS_POST_TYPES['section'] !== $course_item->item_type ) {
+		if ( SPLMS_POST_TYPES['section'] !== $splms_course_item->item_type ) {
 			continue;
 		}
 
-		$section_id      = $course_item->item_id;
-		$section         = get_post( $section_id );
-		$section_pricing = get_post_meta( $section_id, '_splms_section_pricing', true );
+		$splms_section_id      = $splms_course_item->item_id;
+		$splms_section         = get_post( $splms_section_id );
+		$splms_section_pricing = get_post_meta( $splms_section_id, '_splms_section_pricing', true );
 
 		// Skip free sections and sections without pricing.
-		if ( ! is_array( $section_pricing ) || ( isset( $section_pricing['is_free'] ) && true === $section_pricing['is_free'] ) ) {
+		if ( ! is_array( $splms_section_pricing ) || ( isset( $splms_section_pricing['is_free'] ) && true === $splms_section_pricing['is_free'] ) ) {
 			continue;
 		}
 
-		$section_price = isset( $section_pricing['price'] ) ? floatval( $section_pricing['price'] ) : 0;
-		if ( $section_price <= 0 ) {
+		$splms_section_price = isset( $splms_section_pricing['price'] ) ? floatval( $splms_section_pricing['price'] ) : 0;
+		if ( $splms_section_price <= 0 ) {
 			continue;
 		}
 
 		// Check if user already has access to this section.
-		$has_access = false;
-		if ( $user_id ) {
-			$access_status = SkillPulse_LMS_Order_Access_Control::get_section_access_status( $user_id, $section_id );
-			$has_access    = isset( $access_status['has_access'] ) && $access_status['has_access'];
+		$splms_has_access = false;
+		if ( $splms_user_id ) {
+			$splms_access_status = SkillPulse_LMS_Order_Access_Control::get_section_access_status( $splms_user_id, $splms_section_id );
+			$splms_has_access    = isset( $splms_access_status['has_access'] ) && $splms_access_status['has_access'];
 		}
 
-		$sections_with_pricing[] = array(
-			'id'           => $section_id,
-			'title'        => $section->post_title,
-			'price'        => $section_price,
-			'sale_price'   => isset( $section_pricing['sale_price'] ) ? floatval( $section_pricing['sale_price'] ) : 0,
-			'has_access'   => $has_access,
+		$splms_sections_with_pricing[] = array(
+			'id'           => $splms_section_id,
+			'title'        => $splms_section->post_title,
+			'price'        => $splms_section_price,
+			'sale_price'   => isset( $splms_section_pricing['sale_price'] ) ? floatval( $splms_section_pricing['sale_price'] ) : 0,
+			'has_access'   => $splms_has_access,
 			'items_count'  => 0, // Will be populated if needed.
-			'pricing_data' => $section_pricing,
+			'pricing_data' => $splms_section_pricing,
 		);
 	}
 
-	$show_section_pricing = ! empty( $sections_with_pricing );
+	$splms_show_section_pricing = ! empty( $splms_sections_with_pricing );
 }
 ?>
 
@@ -221,7 +223,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 	<title>
 		<?php
 		/* translators: %s: Course title. */
-		echo esc_html( sprintf( __( 'Checkout - %s', 'skillpulse-lms' ), $course->post_title ) );
+		echo esc_html( sprintf( __( 'Checkout - %s', 'skillpulse-lms' ), $splms_course->post_title ) );
 		?>
 	</title>
 	<?php wp_head(); ?>
@@ -239,7 +241,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 			<p class="splms-checkout-subtitle">
 				<?php
 				/* translators: %s: Course title. */
-				echo esc_html( sprintf( __( 'You are purchasing: %s', 'skillpulse-lms' ), $course->post_title ) );
+				echo esc_html( sprintf( __( 'You are purchasing: %s', 'skillpulse-lms' ), $splms_course->post_title ) );
 				?>
 			</p>
 		</div>
@@ -248,31 +250,31 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 		<div class="splms-course-details">
 			<div class="splms-course-info">
 				<h2 class="splms-course-title">
-					<a href="<?php echo esc_url( get_permalink( $course_id ) ); ?>">
-						<?php echo esc_html( $course->post_title ); ?>
+					<a href="<?php echo esc_url( get_permalink( $splms_course_id ) ); ?>">
+						<?php echo esc_html( $splms_course->post_title ); ?>
 					</a>
 				</h2>
-				<?php if ( $course->post_excerpt ) { ?>
+				<?php if ( $splms_course->post_excerpt ) { ?>
 					<p class="splms-course-excerpt">
-						<?php echo esc_html( $course->post_excerpt ); ?>
+						<?php echo esc_html( $splms_course->post_excerpt ); ?>
 					</p>
 				<?php } ?>
 			</div>
 
-			<?php if ( ! $show_section_pricing ) { ?>
+			<?php if ( ! $splms_show_section_pricing ) { ?>
 				<div class="splms-course-price">
-					<?php if ( $has_discount ) { ?>
+					<?php if ( $splms_has_discount ) { ?>
 						<div class="splms-price-wrapper">
-							<span class="splms-original-price"><?php echo esc_html( $currency . ' ' . number_format( $original_price, 2 ) ); ?></span>
-							<span class="splms-sale-price"><?php echo esc_html( $currency . ' ' . number_format( $price, 2 ) ); ?></span>
+							<span class="splms-original-price"><?php echo esc_html( $splms_currency . ' ' . number_format( $splms_original_price, 2 ) ); ?></span>
+							<span class="splms-sale-price"><?php echo esc_html( $splms_currency . ' ' . number_format( $splms_price, 2 ) ); ?></span>
 							<?php
-							$discount_percentage = round( ( ( $original_price - $price ) / $original_price ) * 100 );
+							$splms_discount_percentage = round( ( ( $splms_original_price - $splms_price ) / $splms_original_price ) * 100 );
 							?>
-							<span class="splms-discount-badge"><?php echo esc_html( $discount_percentage . '% OFF' ); ?></span>
+							<span class="splms-discount-badge"><?php echo esc_html( $splms_discount_percentage . '% OFF' ); ?></span>
 						</div>
 					<?php } else { ?>
 						<span class="splms-price-amount">
-							<?php echo esc_html( $currency . ' ' . number_format( $price, 2 ) ); ?>
+							<?php echo esc_html( $splms_currency . ' ' . number_format( $splms_price, 2 ) ); ?>
 						</span>
 					<?php } ?>
 				</div>
@@ -280,7 +282,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 		</div>
 
 		<!-- Upgrade Pricing Section (if applicable) -->
-		<?php if ( ! $show_section_pricing && $show_upgrade_option && ! empty( $upgrade_data ) ) { ?>
+		<?php if ( ! $splms_show_section_pricing && $splms_show_upgrade_option && ! empty( $splms_upgrade_data ) ) { ?>
 			<div class="splms-upgrade-pricing-section">
 				<div class="splms-upgrade-badge">
 					<?php echo esc_html__( 'Upgrade to Full Course', 'skillpulse-lms' ); ?>
@@ -288,18 +290,18 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 				<div class="splms-upgrade-summary">
 					<div class="splms-upgrade-line">
 						<span class="splms-upgrade-label"><?php echo esc_html__( 'Full Course Price:', 'skillpulse-lms' ); ?></span>
-						<span class="splms-upgrade-value"><?php echo esc_html( $currency . ' ' . number_format( $upgrade_data['full_course_price'], 2 ) ); ?></span>
+						<span class="splms-upgrade-value"><?php echo esc_html( $splms_currency . ' ' . number_format( $splms_upgrade_data['full_course_price'], 2 ) ); ?></span>
 					</div>
 					<div class="splms-upgrade-line splms-credit-line">
 						<span class="splms-upgrade-label"><?php echo esc_html__( 'Already Paid:', 'skillpulse-lms' ); ?></span>
-						<span class="splms-upgrade-value splms-credit-value">- <?php echo esc_html( $currency . ' ' . number_format( $upgrade_data['already_paid'], 2 ) ); ?></span>
+						<span class="splms-upgrade-value splms-credit-value">- <?php echo esc_html( $splms_currency . ' ' . number_format( $splms_upgrade_data['already_paid'], 2 ) ); ?></span>
 					</div>
 					<div class="splms-upgrade-details">
-						<?php foreach ( $upgrade_data['purchased_sections'] as $purchased_section ) { ?>
+						<?php foreach ( $splms_upgrade_data['purchased_sections'] as $splms_purchased_section ) { ?>
 							<div class="splms-purchased-section-item">
 								<span class="splms-section-icon">✓</span>
-								<span class="splms-section-name"><?php echo esc_html( $purchased_section['section_title'] ); ?></span>
-								<span class="splms-section-paid"><?php echo esc_html( $currency . ' ' . number_format( $purchased_section['paid_price'], 2 ) ); ?></span>
+								<span class="splms-section-name"><?php echo esc_html( $splms_purchased_section['section_title'] ); ?></span>
+								<span class="splms-section-paid"><?php echo esc_html( $splms_currency . ' ' . number_format( $splms_purchased_section['paid_price'], 2 ) ); ?></span>
 							</div>
 						<?php } ?>
 					</div>
@@ -307,19 +309,19 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 						<span class="splms-upgrade-label"><?php echo esc_html__( 'Upgrade Price:', 'skillpulse-lms' ); ?></span>
 						<span class="splms-upgrade-value splms-upgrade-final-price">
 							<?php
-							if ( $upgrade_data['paid_more_than_course'] || $upgrade_data['upgrade_price'] <= 0 ) {
+							if ( $splms_upgrade_data['paid_more_than_course'] || $splms_upgrade_data['upgrade_price'] <= 0 ) {
 								echo esc_html__( 'FREE', 'skillpulse-lms' );
 							} else {
-								echo esc_html( $currency . ' ' . number_format( $upgrade_data['upgrade_price'], 2 ) );
+								echo esc_html( $splms_currency . ' ' . number_format( $splms_upgrade_data['upgrade_price'], 2 ) );
 							}
 							?>
 						</span>
 					</div>
-					<?php if ( $upgrade_data['savings'] > 0 ) { ?>
+					<?php if ( $splms_upgrade_data['savings'] > 0 ) { ?>
 						<div class="splms-savings-message">
 							<?php
 							/* translators: %s: Saved amount. */
-							echo esc_html( sprintf( __( 'You have %s in credits from your previous purchases!', 'skillpulse-lms' ), $currency . ' ' . number_format( $upgrade_data['savings'], 2 ) ) );
+							echo esc_html( sprintf( __( 'You have %s in credits from your previous purchases!', 'skillpulse-lms' ), $splms_currency . ' ' . number_format( $splms_upgrade_data['savings'], 2 ) ) );
 							?>
 						</div>
 					<?php } ?>
@@ -327,7 +329,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 			</div>
 		<?php } ?>
 
-		<?php if ( $show_section_pricing ) { ?>
+		<?php if ( $splms_show_section_pricing ) { ?>
 			<!-- Pricing Options -->
 			<div class="splms-pricing-options">
 				<div class="splms-step-header">
@@ -338,9 +340,9 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 				<!-- Full Course Option -->
 				<?php
 				// Show both options when course has section pricing AND full course is also paid.
-				$show_both_options = splms_course_uses_section_pricing( $course_id ) && $price > 0;
+				$splms_show_both_options = splms_course_uses_section_pricing( $splms_course_id ) && $splms_price > 0;
 				?>
-				<?php if ( $show_both_options ) { ?>
+				<?php if ( $splms_show_both_options ) { ?>
 					<div class="splms-pricing-option splms-full-course-option">
 						<input type="radio" id="purchase-full-course" name="purchase_type" value="full_course" checked>
 						<label for="purchase-full-course" class="splms-pricing-label">
@@ -354,13 +356,13 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 								</div>
 							</div>
 							<div class="splms-pricing-amount">
-								<?php if ( $has_discount ) { ?>
+								<?php if ( $splms_has_discount ) { ?>
 									<div class="splms-price-details">
-										<span class="splms-original-price-small"><?php echo esc_html( $currency . ' ' . number_format( $original_price, 2 ) ); ?></span>
-										<span class="splms-sale-price-large"><?php echo esc_html( $currency . ' ' . number_format( $price, 2 ) ); ?></span>
+										<span class="splms-original-price-small"><?php echo esc_html( $splms_currency . ' ' . number_format( $splms_original_price, 2 ) ); ?></span>
+										<span class="splms-sale-price-large"><?php echo esc_html( $splms_currency . ' ' . number_format( $splms_price, 2 ) ); ?></span>
 									</div>
 								<?php } else { ?>
-									<?php echo esc_html( $currency . ' ' . number_format( $price, 2 ) ); ?>
+									<?php echo esc_html( $splms_currency . ' ' . number_format( $splms_price, 2 ) ); ?>
 								<?php } ?>
 							</div>
 						</label>
@@ -369,7 +371,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 
 				<!-- Section-Based Option -->
 				<div class="splms-pricing-option splms-sections-option">
-					<?php if ( $show_both_options ) { ?>
+					<?php if ( $splms_show_both_options ) { ?>
 						<input type="radio" id="purchase-sections" name="purchase_type" value="sections">
 						<label for="purchase-sections" class="splms-pricing-label">
 							<div class="splms-pricing-info">
@@ -391,39 +393,39 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 						</div>
 					<?php } ?>
 
-					<div class="splms-sections-list" <?php echo $show_both_options ? 'style="display:none;"' : ''; ?>>
-						<?php foreach ( $sections_with_pricing as $section ) { ?>
+					<div class="splms-sections-list" <?php echo esc_attr( $splms_show_both_options ? 'style="display:none;"' : '' ); ?>>
+						<?php foreach ( $splms_sections_with_pricing as $splms_section ) { ?>
 							<?php
-							$final_section_price = $section['sale_price'] > 0 ? $section['sale_price'] : $section['price'];
-							$disabled            = $section['has_access'] ? 'disabled' : '';
+							$splms_final_section_price = $splms_section['sale_price'] > 0 ? $splms_section['sale_price'] : $splms_section['price'];
+							$splms_disabled            = $splms_section['has_access'] ? 'disabled' : '';
 							?>
 							<?php
 							// Pre-select section if it was requested in the token.
-							$is_requested = ! empty( $requested_section_ids ) && in_array( (int) $section['id'], $requested_section_ids, true );
+							$splms_is_requested = ! empty( $splms_requested_section_ids ) && in_array( (int) $splms_section['id'], $splms_requested_section_ids, true );
 							?>
-							<div class="splms-section-item <?php echo esc_attr( $disabled ); ?> <?php echo $is_requested ? 'splms-requested-section' : ''; ?>">
+							<div class="splms-section-item <?php echo esc_attr( $splms_disabled ); ?> <?php echo $splms_is_requested ? 'splms-requested-section' : ''; ?>">
 								<input type="checkbox"
-									id="section-<?php echo esc_attr( $section['id'] ); ?>"
+									id="section-<?php echo esc_attr( $splms_section['id'] ); ?>"
 									name="selected_sections[]"
-									value="<?php echo esc_attr( $section['id'] ); ?>"
-									data-price="<?php echo esc_attr( $final_section_price ); ?>"
-									data-section-id="<?php echo esc_attr( $section['id'] ); ?>"
+									value="<?php echo esc_attr( $splms_section['id'] ); ?>"
+									data-price="<?php echo esc_attr( $splms_final_section_price ); ?>"
+									data-section-id="<?php echo esc_attr( $splms_section['id'] ); ?>"
 									class="splms-section-checkbox"
-									<?php echo $is_requested && ! $disabled ? 'checked' : ''; ?>
-									<?php echo esc_attr( $disabled ); ?>>
-								<label for="section-<?php echo esc_attr( $section['id'] ); ?>">
+									<?php echo esc_attr( $splms_is_requested && ! $splms_disabled ? 'checked' : '' ); ?>
+									<?php echo esc_attr( $splms_disabled ); ?>>
+								<label for="section-<?php echo esc_attr( $splms_section['id'] ); ?>">
 									<div class="splms-section-info">
-										<span class="splms-section-title"><?php echo esc_html( $section['title'] ); ?></span>
-										<?php if ( $section['has_access'] ) { ?>
+										<span class="splms-section-title"><?php echo esc_html( $splms_section['title'] ); ?></span>
+										<?php if ( $splms_section['has_access'] ) { ?>
 											<span class="splms-section-owned"><?php echo esc_html__( 'Already Purchased', 'skillpulse-lms' ); ?></span>
 										<?php } ?>
 									</div>
 									<div class="splms-section-price">
-										<?php if ( $section['sale_price'] > 0 ) { ?>
-											<span class="splms-original-price"><?php echo esc_html( $currency . ' ' . number_format( $section['price'], 2 ) ); ?></span>
-											<span class="splms-sale-price"><?php echo esc_html( $currency . ' ' . number_format( $section['sale_price'], 2 ) ); ?></span>
+										<?php if ( $splms_section['sale_price'] > 0 ) { ?>
+											<span class="splms-original-price"><?php echo esc_html( $splms_currency . ' ' . number_format( $splms_section['price'], 2 ) ); ?></span>
+											<span class="splms-sale-price"><?php echo esc_html( $splms_currency . ' ' . number_format( $splms_section['sale_price'], 2 ) ); ?></span>
 										<?php } else { ?>
-											<span class="splms-section-price-amount"><?php echo esc_html( $currency . ' ' . number_format( $section['price'], 2 ) ); ?></span>
+											<span class="splms-section-price-amount"><?php echo esc_html( $splms_currency . ' ' . number_format( $splms_section['price'], 2 ) ); ?></span>
 										<?php } ?>
 									</div>
 								</label>
@@ -464,28 +466,28 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 				<!-- Billing Information -->
 				<div class="splms-billing-info">
 					<div class="splms-step-header">
-						<span class="splms-step-number"><?php echo $show_section_pricing ? '2' : '1'; ?></span>
+						<span class="splms-step-number"><?php echo esc_attr( $splms_show_section_pricing ? '2' : '1' ); ?></span>
 						<h3><?php echo esc_html__( 'Billing Information', 'skillpulse-lms' ); ?></h3>
 					</div>
 
 					<?php
 					// Get user billing info if exists.
-					$billing_info = array(
-						'first_name' => get_user_meta( $user_id, 'first_name', true ),
-						'last_name'  => get_user_meta( $user_id, 'last_name', true ),
+					$splms_billing_info = array(
+						'first_name' => get_user_meta( $splms_user_id, 'first_name', true ),
+						'last_name'  => get_user_meta( $splms_user_id, 'last_name', true ),
 						'email'      => wp_get_current_user()->user_email,
-						'phone'      => get_user_meta( $user_id, 'billing_phone', true ),
-						'address_1'  => get_user_meta( $user_id, 'billing_address_1', true ),
-						'address_2'  => get_user_meta( $user_id, 'billing_address_2', true ),
-						'city'       => get_user_meta( $user_id, 'billing_city', true ),
-						'state'      => get_user_meta( $user_id, 'billing_state', true ),
-						'postcode'   => get_user_meta( $user_id, 'billing_postcode', true ),
-						'country'    => get_user_meta( $user_id, 'billing_country', true ),
+						'phone'      => get_user_meta( $splms_user_id, 'billing_phone', true ),
+						'address_1'  => get_user_meta( $splms_user_id, 'billing_address_1', true ),
+						'address_2'  => get_user_meta( $splms_user_id, 'billing_address_2', true ),
+						'city'       => get_user_meta( $splms_user_id, 'billing_city', true ),
+						'state'      => get_user_meta( $splms_user_id, 'billing_state', true ),
+						'postcode'   => get_user_meta( $splms_user_id, 'billing_postcode', true ),
+						'country'    => get_user_meta( $splms_user_id, 'billing_country', true ),
 					);
 
 					// Default country if not set.
-					if ( empty( $billing_info['country'] ) ) {
-						$billing_info['country'] = 'US';
+					if ( empty( $splms_billing_info['country'] ) ) {
+						$splms_billing_info['country'] = 'US';
 					}
 					?>
 
@@ -499,7 +501,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 								<input type="text"
 									id="billing_first_name"
 									name="billing_first_name"
-									value="<?php echo esc_attr( $billing_info['first_name'] ); ?>"
+									value="<?php echo esc_attr( $splms_billing_info['first_name'] ); ?>"
 									required>
 							</div>
 
@@ -511,7 +513,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 								<input type="text"
 									id="billing_last_name"
 									name="billing_last_name"
-									value="<?php echo esc_attr( $billing_info['last_name'] ); ?>"
+									value="<?php echo esc_attr( $splms_billing_info['last_name'] ); ?>"
 									required>
 							</div>
 						</div>
@@ -525,7 +527,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 								<input type="email"
 									id="billing_email"
 									name="billing_email"
-									value="<?php echo esc_attr( $billing_info['email'] ); ?>"
+									value="<?php echo esc_attr( $splms_billing_info['email'] ); ?>"
 									required>
 							</div>
 
@@ -538,7 +540,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 									id="billing_phone"
 									name="billing_phone"
 									placeholder="<?php echo esc_attr__( '+1234567890', 'skillpulse-lms' ); ?>"
-									value="<?php echo esc_attr( $billing_info['phone'] ); ?>"
+									value="<?php echo esc_attr( $splms_billing_info['phone'] ); ?>"
 									required>
 							</div>
 						</div>
@@ -552,7 +554,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 								id="billing_address_1"
 								name="billing_address_1"
 								placeholder="<?php echo esc_attr__( 'House number and street name', 'skillpulse-lms' ); ?>"
-								value="<?php echo esc_attr( $billing_info['address_1'] ); ?>"
+								value="<?php echo esc_attr( $splms_billing_info['address_1'] ); ?>"
 								required>
 						</div>
 
@@ -564,7 +566,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 							<input type="text"
 								id="billing_address_2"
 								name="billing_address_2"
-								value="<?php echo esc_attr( $billing_info['address_2'] ); ?>">
+								value="<?php echo esc_attr( $splms_billing_info['address_2'] ); ?>">
 						</div>
 
 						<div class="splms-field-row">
@@ -576,7 +578,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 								<input type="text"
 									id="billing_city"
 									name="billing_city"
-									value="<?php echo esc_attr( $billing_info['city'] ); ?>"
+									value="<?php echo esc_attr( $splms_billing_info['city'] ); ?>"
 									required>
 							</div>
 
@@ -588,7 +590,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 								<input type="text"
 									id="billing_state"
 									name="billing_state"
-									value="<?php echo esc_attr( $billing_info['state'] ); ?>"
+									value="<?php echo esc_attr( $splms_billing_info['state'] ); ?>"
 									required>
 							</div>
 						</div>
@@ -602,7 +604,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 								<input type="text"
 									id="billing_postcode"
 									name="billing_postcode"
-									value="<?php echo esc_attr( $billing_info['postcode'] ); ?>"
+									value="<?php echo esc_attr( $splms_billing_info['postcode'] ); ?>"
 									required>
 							</div>
 
@@ -614,7 +616,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 								<select id="billing_country" name="billing_country" required>
 									<option value=""><?php echo esc_html__( 'Select a country...', 'skillpulse-lms' ); ?></option>
 									<?php
-									$countries = array(
+									$splms_countries = array(
 										'US' => __( 'United States', 'skillpulse-lms' ),
 										'CA' => __( 'Canada', 'skillpulse-lms' ),
 										'GB' => __( 'United Kingdom', 'skillpulse-lms' ),
@@ -633,12 +635,12 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 										'AE' => __( 'United Arab Emirates', 'skillpulse-lms' ),
 									);
 
-									foreach ( $countries as $code => $name ) {
+									foreach ( $splms_countries as $splms_code => $splms_name ) {
 										printf(
 											'<option value="%s"%s>%s</option>',
-											esc_attr( $code ),
-											selected( $billing_info['country'], $code, false ),
-											esc_html( $name )
+											esc_attr( $splms_code ),
+											selected( $splms_billing_info['country'], $splms_code, false ),
+											esc_html( $splms_name )
 										);
 									}
 									?>
@@ -652,34 +654,34 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 				<div class="splms-payment-methods">
 					<h3 class="splms-section-title"><?php echo esc_html( __( 'Select Payment Method', 'skillpulse-lms' ) ); ?></h3>
 
-					<?php if ( ! empty( $payment_methods ) ) { ?>
-						<?php $first_method = true; ?>
-						<?php foreach ( $payment_methods as $method_id => $method ) { ?>
+					<?php if ( ! empty( $splms_payment_methods ) ) { ?>
+						<?php $splms_first_method = true; ?>
+						<?php foreach ( $splms_payment_methods as $splms_method_id => $splms_method ) { ?>
 							<div class="splms-payment-option">
 								<?php
 								// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Form display only, nonce verified on form submission.
 								?>
-								<input type="radio" id="<?php echo esc_attr( $method_id ); ?>-payment" name="payment_method"
-										value="<?php echo esc_attr( $method_id ); ?>" <?php echo $first_method ? 'checked' : ''; ?>>
-								<label for="<?php echo esc_attr( $method_id ); ?>-payment" class="splms-payment-label">
+								<input type="radio" id="<?php echo esc_attr( $splms_method_id ); ?>-payment" name="payment_method"
+										value="<?php echo esc_attr( $splms_method_id ); ?>" <?php echo esc_attr( $splms_first_method ? 'checked' : '' ); ?>>
+								<label for="<?php echo esc_attr( $splms_method_id ); ?>-payment" class="splms-payment-label">
 									<div class="splms-payment-icon">
-										<?php if ( 'paypal' === $method_id ) { ?>
+										<?php if ( 'paypal' === $splms_method_id ) { ?>
 											<img src="<?php echo esc_url( SKILLPULSE_LMS_ASSETS_URL . 'images/paypal-logo.svg' ); ?>" alt="PayPal" width="80" height="20">
-										<?php } elseif ( 'stripe' === $method_id ) { ?>
+										<?php } elseif ( 'stripe' === $splms_method_id ) { ?>
 											<img src="<?php echo esc_url( SKILLPULSE_LMS_ASSETS_URL . 'images/stripe-logo.svg' ); ?>" alt="Stripe" width="60" height="20">
 										<?php } else { ?>
-											<span class="splms-payment-icon-text"><?php echo esc_html( strtoupper( $method_id ) ); ?></span>
+											<span class="splms-payment-icon-text"><?php echo esc_html( strtoupper( $splms_method_id ) ); ?></span>
 										<?php } ?>
 									</div>
 									<div class="splms-payment-info">
-										<span class="splms-payment-name"><?php echo esc_html( $method['name'] ); ?></span>
+										<span class="splms-payment-name"><?php echo esc_html( $splms_method['name'] ); ?></span>
 										<span class="splms-payment-description">
-											<?php echo esc_html( $method['description'] ); ?>
+											<?php echo esc_html( $splms_method['description'] ); ?>
 										</span>
 									</div>
 								</label>
 							</div>
-							<?php $first_method = false; ?>
+							<?php $splms_first_method = false; ?>
 						<?php } ?>
 					<?php } else { ?>
 						<div class="splms-no-payment-methods">
@@ -691,33 +693,33 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 				<!-- Order Summary -->
 				<div class="splms-order-summary">
 					<div class="splms-step-header">
-						<span class="splms-step-number"><?php echo $show_section_pricing ? '3' : '2'; ?></span>
+						<span class="splms-step-number"><?php echo esc_attr( $splms_show_section_pricing ? '3' : '2' ); ?></span>
 						<h3><?php echo esc_html( __( 'Order Summary', 'skillpulse-lms' ) ); ?></h3>
 					</div>
 					<div id="splms-summary-items">
-						<?php if ( ! $show_section_pricing ) { ?>
-							<?php if ( $show_upgrade_option && ! empty( $upgrade_data ) ) { ?>
+						<?php if ( ! $splms_show_section_pricing ) { ?>
+							<?php if ( $splms_show_upgrade_option && ! empty( $splms_upgrade_data ) ) { ?>
 								<!-- Upgrade Order Summary -->
 								<div class="splms-summary-line">
 									<span class="splms-summary-label">
 										<?php
 										/* translators: %s: Course title. */
-										echo esc_html( sprintf( __( '%s Course (Full Access)', 'skillpulse-lms' ), $course->post_title ) );
+										echo esc_html( sprintf( __( '%s Course (Full Access)', 'skillpulse-lms' ), $splms_course->post_title ) );
 										?>
 									</span>
 									<span class="splms-summary-value">
-										<?php echo esc_html( $currency . ' ' . number_format( $upgrade_data['full_course_price'], 2 ) ); ?>
+										<?php echo esc_html( $splms_currency . ' ' . number_format( $splms_upgrade_data['full_course_price'], 2 ) ); ?>
 									</span>
 								</div>
 								<div class="splms-summary-line splms-credit-summary">
 									<span class="splms-summary-label">
 										<?php
 										/* translators: %d: Number of sections. */
-										echo esc_html( sprintf( _n( 'Credit from %d section', 'Credit from %d sections', $upgrade_data['section_count'], 'skillpulse-lms' ), $upgrade_data['section_count'] ) );
+										echo esc_html( sprintf( _n( 'Credit from %d section', 'Credit from %d sections', $splms_upgrade_data['section_count'], 'skillpulse-lms' ), $splms_upgrade_data['section_count'] ) );
 										?>
 									</span>
 									<span class="splms-summary-value splms-credit-amount">
-										- <?php echo esc_html( $currency . ' ' . number_format( $upgrade_data['already_paid'], 2 ) ); ?>
+										- <?php echo esc_html( $splms_currency . ' ' . number_format( $splms_upgrade_data['already_paid'], 2 ) ); ?>
 									</span>
 								</div>
 							<?php } else { ?>
@@ -726,27 +728,27 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 									<span class="splms-summary-label">
 										<?php
 										/* translators: %s: Course title. */
-										echo esc_html( sprintf( __( '%s Course', 'skillpulse-lms' ), $course->post_title ) );
+										echo esc_html( sprintf( __( '%s Course', 'skillpulse-lms' ), $splms_course->post_title ) );
 										?>
 									</span>
 									<span class="splms-summary-value">
-										<?php echo esc_html( $currency . ' ' . number_format( $price, 2 ) ); ?>
+										<?php echo esc_html( $splms_currency . ' ' . number_format( $splms_price, 2 ) ); ?>
 									</span>
 								</div>
 							<?php } ?>
 						<?php } else { ?>
-							<div class="splms-summary-line splms-full-course-summary" style="<?php echo $show_both_options ? '' : 'display:none;'; ?>">
+							<div class="splms-summary-line splms-full-course-summary" style="<?php echo esc_attr( $splms_show_both_options ? '' : 'display:none;' ); ?>">
 								<span class="splms-summary-label">
 									<?php
 									/* translators: %s: Course title. */
-									echo esc_html( sprintf( __( '%s Course (Full Access)', 'skillpulse-lms' ), $course->post_title ) );
+									echo esc_html( sprintf( __( '%s Course (Full Access)', 'skillpulse-lms' ), $splms_course->post_title ) );
 									?>
 								</span>
 								<span class="splms-summary-value">
-									<?php echo esc_html( $currency . ' ' . number_format( $price, 2 ) ); ?>
+									<?php echo esc_html( $splms_currency . ' ' . number_format( $splms_price, 2 ) ); ?>
 								</span>
 							</div>
-							<div class="splms-sections-summary" style="<?php echo $show_both_options ? 'display:none;' : ''; ?>">
+							<div class="splms-sections-summary" style="<?php echo esc_attr( $splms_show_both_options ? 'display:none;' : '' ); ?>">
 								<!-- Section items will be added dynamically by JavaScript -->
 							</div>
 						<?php } ?>
@@ -755,16 +757,16 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 						<span class="splms-total-label">
 							<?php echo esc_html( __( 'Total', 'skillpulse-lms' ) ); ?>
 						</span>
-						<span class="splms-total-value" data-full-course-price="<?php echo esc_attr( $price ); ?>">
+						<span class="splms-total-value" data-full-course-price="<?php echo esc_attr( $splms_price ); ?>">
 							<?php
-							if ( $show_upgrade_option && ! empty( $upgrade_data ) ) {
-								if ( $upgrade_data['paid_more_than_course'] || $upgrade_data['upgrade_price'] <= 0 ) {
+							if ( $splms_show_upgrade_option && ! empty( $splms_upgrade_data ) ) {
+								if ( $splms_upgrade_data['paid_more_than_course'] || $splms_upgrade_data['upgrade_price'] <= 0 ) {
 									echo esc_html__( 'FREE', 'skillpulse-lms' );
 								} else {
-									echo esc_html( $currency . ' ' . number_format( $upgrade_data['upgrade_price'], 2 ) );
+									echo esc_html( $splms_currency . ' ' . number_format( $splms_upgrade_data['upgrade_price'], 2 ) );
 								}
 							} else {
-								echo esc_html( $currency . ' ' . number_format( $price, 2 ) );
+								echo esc_html( $splms_currency . ' ' . number_format( $splms_price, 2 ) );
 							}
 							?>
 						</span>
@@ -773,11 +775,11 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 
 				<!-- Payment Button Container -->
 				<div id="splms-payment-button-container" class="splms-payment-container">
-					<?php if ( ! empty( $payment_methods ) ) { ?>
-						<?php foreach ( $payment_methods as $method_id => $method ) { ?>
-							<div id="splms-<?php echo esc_attr( $method_id ); ?>-button-container" class="splms-<?php echo esc_attr( $method_id ); ?>-container"
+					<?php if ( ! empty( $splms_payment_methods ) ) { ?>
+						<?php foreach ( $splms_payment_methods as $splms_method_id => $splms_method ) { ?>
+							<div id="splms-<?php echo esc_attr( $splms_method_id ); ?>-button-container" class="splms-<?php echo esc_attr( $splms_method_id ); ?>-container"
 								style="display: none;">
-								<!-- <?php echo esc_html( $method['name'] ); ?> button will be rendered here -->
+								<!-- <?php echo esc_html( $splms_method['name'] ); ?> button will be rendered here -->
 							</div>
 						<?php } ?>
 					<?php } ?>
@@ -788,33 +790,33 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 					<p class="splms-terms-text">
 						<?php
 						// Get terms and privacy URLs.
-						$terms_page_id = splms_get_setting( 'terms_conditions_page_id', 0 );
-						$terms_url     = '';
-						if ( $terms_page_id ) {
-							$terms_page = get_post( $terms_page_id );
-							if ( $terms_page && 'publish' === $terms_page->post_status ) {
-								$terms_url = get_permalink( $terms_page_id );
+						$splms_terms_page_id = splms_get_setting( 'terms_conditions_page_id', 0 );
+						$splms_terms_url     = '';
+						if ( $splms_terms_page_id ) {
+							$splms_terms_page = get_post( $splms_terms_page_id );
+							if ( $splms_terms_page && 'publish' === $splms_terms_page->post_status ) {
+								$splms_terms_url = get_permalink( $splms_terms_page_id );
 							}
 						}
 
-						$privacy_page_id = splms_get_setting( 'privacy_policy_page_id', 0 );
-						$privacy_url     = '';
-						if ( $privacy_page_id ) {
-							$privacy_page = get_post( $privacy_page_id );
-							if ( $privacy_page && 'publish' === $privacy_page->post_status ) {
-								$privacy_url = get_permalink( $privacy_page_id );
+						$splms_privacy_page_id = splms_get_setting( 'privacy_policy_page_id', 0 );
+						$splms_privacy_url     = '';
+						if ( $splms_privacy_page_id ) {
+							$splms_privacy_page = get_post( $splms_privacy_page_id );
+							if ( $splms_privacy_page && 'publish' === $splms_privacy_page->post_status ) {
+								$splms_privacy_url = get_permalink( $splms_privacy_page_id );
 							}
 						}
-						if ( empty( $privacy_url ) ) {
-							$privacy_url = get_privacy_policy_url();
+						if ( empty( $splms_privacy_url ) ) {
+							$splms_privacy_url = get_privacy_policy_url();
 						}
 
 						// Build the message with links.
-						$terms_link   = $terms_url ? '<a href="' . esc_url( $terms_url ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__(
+						$splms_terms_link   = $splms_terms_url ? '<a href="' . esc_url( $splms_terms_url ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__(
 							'Terms of Service',
 							'skillpulse-lms'
 						) . '</a>' : esc_html__( 'Terms of Service', 'skillpulse-lms' );
-						$privacy_link = $privacy_url ? '<a href="' . esc_url( $privacy_url ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__(
+						$splms_privacy_link = $splms_privacy_url ? '<a href="' . esc_url( $splms_privacy_url ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__(
 							'Privacy Policy',
 							'skillpulse-lms'
 						) . '</a>' : esc_html__( 'Privacy Policy', 'skillpulse-lms' );
@@ -824,8 +826,8 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 							sprintf(
 							/* translators: %1$s: Terms of Service link, %2$s: Privacy Policy link */
 								__( 'By completing this purchase, you agree to our %1$s and %2$s.', 'skillpulse-lms' ),
-								$terms_link,
-								$privacy_link
+								$splms_terms_link,
+								$splms_privacy_link
 							)
 						);
 						?>
@@ -847,14 +849,14 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 	// This must run for ALL courses, not just those with section pricing.
 	window.splmsPurchaseData = {
 		type: 'full_course',
-		courseId: <?php echo esc_js( $course_id ); ?>,
-		fullCoursePrice: parseFloat('<?php echo esc_js( $price ); ?>'),
+		courseId: <?php echo esc_js( $splms_course_id ); ?>,
+		fullCoursePrice: parseFloat('<?php echo esc_js( $splms_price ); ?>'),
 		selectedSections: [],
-		<?php if ( $show_upgrade_option && ! empty( $upgrade_data ) ) { ?>
+		<?php if ( $splms_show_upgrade_option && ! empty( $splms_upgrade_data ) ) { ?>
 		isUpgrade: true,
-		upgradePrice: parseFloat('<?php echo esc_js( $upgrade_data['upgrade_price'] ); ?>'),
-		alreadyPaid: parseFloat('<?php echo esc_js( $upgrade_data['already_paid'] ); ?>'),
-		purchasedSections: <?php echo wp_json_encode( $upgrade_data['purchased_sections'] ); ?>,
+		upgradePrice: parseFloat('<?php echo esc_js( $splms_upgrade_data['upgrade_price'] ); ?>'),
+		alreadyPaid: parseFloat('<?php echo esc_js( $splms_upgrade_data['already_paid'] ); ?>'),
+		purchasedSections: <?php echo wp_json_encode( $splms_upgrade_data['purchased_sections'] ); ?>,
 		<?php } else { ?>
 		isUpgrade: false,
 		<?php } ?>
@@ -862,15 +864,15 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 })();
 </script>
 
-<?php if ( $show_section_pricing ) { ?>
+<?php if ( $splms_show_section_pricing ) { ?>
 <script>
 (function() {
 	'use strict';
 
-	const currency = '<?php echo esc_js( $currency ); ?>';
-	const fullCoursePrice = parseFloat('<?php echo esc_js( $price ); ?>');
-	const sectionsData = <?php echo wp_json_encode( $sections_with_pricing ); ?>;
-	const showBothOptions = <?php echo $show_both_options ? 'true' : 'false'; ?>;
+	const currency = '<?php echo esc_js( $splms_currency ); ?>';
+	const fullCoursePrice = parseFloat('<?php echo esc_js( $splms_price ); ?>');
+	const sectionsData = <?php echo wp_json_encode( $splms_sections_with_pricing ); ?>;
+	const showBothOptions = <?php echo esc_attr( $splms_show_both_options ? 'true' : 'false' ); ?>;
 
 	// DOM Elements.
 	const purchaseTypeRadios = document.querySelectorAll('input[name="purchase_type"]');
@@ -960,7 +962,7 @@ if ( splms_course_uses_section_pricing( $course_id ) ) {
 	function storePurchaseData(purchaseType) {
 		const purchaseData = {
 			type: purchaseType,
-			courseId: <?php echo esc_js( $course_id ); ?>,
+			courseId: <?php echo esc_js( $splms_course_id ); ?>,
 			fullCoursePrice: fullCoursePrice,
 			selectedSections: []
 		};

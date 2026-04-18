@@ -13,15 +13,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+
+
 // Extract variables from args.
 // phpcs:ignore WordPress.PHP.DontExtract.extract_extract -- Template file uses extract for convenience.
 extract( $args );
 
 // Get user orders.
-$user_orders = array();
+$splms_user_orders = array();
 if ( class_exists( 'SkillPulse_LMS_Orders_Query' ) ) {
-	$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
-	$user_orders  = $orders_query->get_user_orders( $user_id );
+	$splms_orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+	$splms_user_orders  = $splms_orders_query->get_user_orders( $splms_user_id );
 }
 ?>
 <div class="splms-dashboard-tab splms-orders-tab">
@@ -34,7 +36,7 @@ if ( class_exists( 'SkillPulse_LMS_Orders_Query' ) ) {
 
 	<!-- Orders Content -->
 	<div class="splms-orders-content">
-		<?php if ( ! empty( $user_orders ) ) : ?>
+		<?php if ( ! empty( $splms_user_orders ) ) : ?>
 			<!-- Simple summary -->
 			<div class="splms-courses-summary">
 				<p class="splms-summary-text">
@@ -42,7 +44,7 @@ if ( class_exists( 'SkillPulse_LMS_Orders_Query' ) ) {
 					printf(
 						/* translators: %d: number of orders */
 						esc_html__( 'You have placed %d orders', 'skillpulse-lms' ),
-						count( $user_orders )
+						count( $splms_user_orders )
 					);
 					?>
 				</p>
@@ -50,7 +52,7 @@ if ( class_exists( 'SkillPulse_LMS_Orders_Query' ) ) {
 
 			<div class="splms-course-list">
 				<?php
-				$status_colors = array(
+				$splms_status_colors = array(
 					'pending'   => '#F59E0B',
 					'completed' => '#10B981',
 					'cancelled' => '#EF4444',
@@ -58,47 +60,47 @@ if ( class_exists( 'SkillPulse_LMS_Orders_Query' ) ) {
 				);
 				?>
 				<?php
-				foreach ( $user_orders as $order_data ) :
+				foreach ( $splms_user_orders as $splms_order_data ) :
 					// Handle both object and array format.
-					if ( is_object( $order_data ) ) {
-						$order_id     = isset( $order_data->id ) ? $order_data->id : 0;
-						$order_status = isset( $order_data->status ) ? $order_data->status : 'pending';
-						$course_id    = isset( $order_data->course_id ) ? $order_data->course_id : 0;
-						$amount       = isset( $order_data->amount ) ? $order_data->amount : 0;
-						$created_at   = isset( $order_data->created_at ) ? $order_data->created_at : '';
+					if ( is_object( $splms_order_data ) ) {
+						$splms_order_id     = isset( $splms_order_data->id ) ? $splms_order_data->id : 0;
+						$splms_order_status = isset( $splms_order_data->status ) ? $splms_order_data->status : 'pending';
+						$splms_course_id    = isset( $splms_order_data->course_id ) ? $splms_order_data->course_id : 0;
+						$splms_amount       = isset( $splms_order_data->amount ) ? $splms_order_data->amount : 0;
+						$splms_created_at   = isset( $splms_order_data->created_at ) ? $splms_order_data->created_at : '';
 					} else {
-						$order_id     = isset( $order_data['id'] ) ? $order_data['id'] : ( isset( $order_data['order_id'] ) ? $order_data['order_id'] : 0 );
-						$order_status = isset( $order_data['status'] ) ? $order_data['status'] : 'pending';
-						$course_id    = isset( $order_data['course_id'] ) ? $order_data['course_id'] : 0;
-						$amount       = isset( $order_data['amount'] ) ? $order_data['amount'] : 0;
-						$created_at   = isset( $order_data['created_at'] ) ? $order_data['created_at'] : '';
+						$splms_order_id     = isset( $splms_order_data['id'] ) ? $splms_order_data['id'] : ( isset( $splms_order_data['order_id'] ) ? $splms_order_data['order_id'] : 0 );
+						$splms_order_status = isset( $splms_order_data['status'] ) ? $splms_order_data['status'] : 'pending';
+						$splms_course_id    = isset( $splms_order_data['course_id'] ) ? $splms_order_data['course_id'] : 0;
+						$splms_amount       = isset( $splms_order_data['amount'] ) ? $splms_order_data['amount'] : 0;
+						$splms_created_at   = isset( $splms_order_data['created_at'] ) ? $splms_order_data['created_at'] : '';
 					}
 
-					$order_status = str_replace( 'sp_order_', '', $order_status );
-					$color        = isset( $status_colors[ $order_status ] ) ? $status_colors[ $order_status ] : '#6B7280';
+					$splms_order_status = str_replace( 'sp_order_', '', $splms_order_status );
+					$splms_color        = isset( $splms_status_colors[ $splms_order_status ] ) ? $splms_status_colors[ $splms_order_status ] : '#6B7280';
 
 					// Get payment method from order meta if available.
-					$payment_method = 'Unknown';
-					if ( is_object( $order_data ) && isset( $order_data->meta['payment_method'] ) ) {
-						$payment_method = $order_data->meta['payment_method'];
+					$splms_payment_method = 'Unknown';
+					if ( is_object( $splms_order_data ) && isset( $splms_order_data->meta['payment_method'] ) ) {
+						$splms_payment_method = $splms_order_data->meta['payment_method'];
 					}
 
 					// Get course title - try multiple approaches.
-					$course_title = __( 'Unknown Course', 'skillpulse-lms' );
-					if ( $course_id > 0 ) {
-						$course_post = get_post( $course_id );
-						if ( $course_post && 'publish' === $course_post->post_status ) {
-							$course_title = $course_post->post_title;
-						} elseif ( isset( $order_data->meta['course_snapshot'] ) ) {
-							$course_title = $order_data->meta['course_snapshot']['course_title'];
+					$splms_course_title = __( 'Unknown Course', 'skillpulse-lms' );
+					if ( $splms_course_id > 0 ) {
+						$splms_course_post = get_post( $splms_course_id );
+						if ( $splms_course_post && 'publish' === $splms_course_post->post_status ) {
+							$splms_course_title = $splms_course_post->post_title;
+						} elseif ( isset( $splms_order_data->meta['course_snapshot'] ) ) {
+							$splms_course_title = $splms_order_data->meta['course_snapshot']['course_title'];
 						}
 					}
 
 					// Format date.
-					$order_date = $created_at ? gmdate( 'M j, Y', strtotime( $created_at ) ) : gmdate( 'M j, Y' );
+					$splms_order_date = $splms_created_at ? gmdate( 'M j, Y', strtotime( $splms_created_at ) ) : gmdate( 'M j, Y' );
 
 					// Beautify payment method names.
-					$payment_method_labels  = array(
+					$splms_payment_method_labels  = array(
 						'stripe'        => 'Stripe',
 						'paypal'        => 'PayPal',
 						'razorpay'      => 'Razorpay',
@@ -106,24 +108,24 @@ if ( class_exists( 'SkillPulse_LMS_Orders_Query' ) ) {
 						'bank_transfer' => 'Bank Transfer',
 						'free'          => 'Free',
 					);
-					$payment_method_display = isset( $payment_method_labels[ $payment_method ] )
-						? $payment_method_labels[ $payment_method ]
-						: ucfirst( str_replace( '_', ' ', $payment_method ) );
+					$splms_payment_method_display = isset( $splms_payment_method_labels[ $splms_payment_method ] )
+						? $splms_payment_method_labels[ $splms_payment_method ]
+						: ucfirst( str_replace( '_', ' ', $splms_payment_method ) );
 
-					$status_labels = array(
+					$splms_status_labels = array(
 						'pending'   => __( 'Pending', 'skillpulse-lms' ),
 						'completed' => __( 'Completed', 'skillpulse-lms' ),
 						'cancelled' => __( 'Cancelled', 'skillpulse-lms' ),
 						'refunded'  => __( 'Refunded', 'skillpulse-lms' ),
 					);
-					$status_label  = isset( $status_labels[ $order_status ] ) ? $status_labels[ $order_status ] : ucfirst( $order_status );
+					$splms_status_label  = isset( $splms_status_labels[ $splms_order_status ] ) ? $splms_status_labels[ $splms_order_status ] : ucfirst( $splms_order_status );
 					?>
 					<div class="splms-course-card splms-order-card">
 						<div class="splms-course-info splms-order-info-full">
 							<div class="splms-course-header">
-								<h3 class="splms-course-title"><?php echo esc_html( $course_title ); ?></h3>
-								<span class="splms-enrollment-status-badge" style="background: <?php echo esc_attr( $color ); ?>20; color: <?php echo esc_attr( $color ); ?>;">
-									<?php echo esc_html( $status_label ); ?>
+								<h3 class="splms-course-title"><?php echo esc_html( $splms_course_title ); ?></h3>
+								<span class="splms-enrollment-status-badge" style="background: <?php echo esc_attr( $splms_color ); ?>20; color: <?php echo esc_attr( $splms_color ); ?>;">
+									<?php echo esc_html( $splms_status_label ); ?>
 								</span>
 							</div>
 							<div class="splms-order-meta">
@@ -132,24 +134,24 @@ if ( class_exists( 'SkillPulse_LMS_Orders_Query' ) ) {
 										<strong>
 											<?php
 											/* translators: %s: Order ID number */
-											printf( esc_html__( 'Order #%s', 'skillpulse-lms' ), esc_html( $order_id ) );
+											printf( esc_html__( 'Order #%s', 'skillpulse-lms' ), esc_html( $splms_order_id ) );
 											?>
 										</strong>
 									</span>
 									<span class="splms-order-amount">
-										<?php echo esc_html( '$' . number_format( (float) $amount, 2 ) ); ?>
+										<?php echo esc_html( '$' . number_format( (float) $splms_amount, 2 ) ); ?>
 									</span>
 									<span class="splms-order-payment">
-										<?php echo esc_html( $payment_method_display ); ?>
+										<?php echo esc_html( $splms_payment_method_display ); ?>
 									</span>
 									<span class="splms-order-date">
-										<?php echo esc_html( $order_date ); ?>
+										<?php echo esc_html( $splms_order_date ); ?>
 									</span>
 								</div>
 							</div>
 						</div>
 						<div class="splms-course-actions">
-							<a href="<?php echo esc_url( home_url( '/dashboard/orders/view/' . $order_id ) ); ?>"
+							<a href="<?php echo esc_url( home_url( '/dashboard/orders/view/' . $splms_order_id ) ); ?>"
 								class="splms-btn splms-btn-primary"
 								title="<?php esc_attr_e( 'View Order Details', 'skillpulse-lms' ); ?>">
 								<?php esc_html_e( 'View Details', 'skillpulse-lms' ); ?>
@@ -294,9 +296,9 @@ if ( class_exists( 'SkillPulse_LMS_Orders_Query' ) ) {
 					<strong><?php esc_html_e( 'Support Email:', 'skillpulse-lms' ); ?></strong> 
 					<?php
 					/* translators: %s: Order ID */
-					$refund_subject = sprintf( __( 'Refund Request - Order #%s', 'skillpulse-lms' ), '{{{ data.order_id }}}' );
+					$splms_refund_subject = sprintf( __( 'Refund Request - Order #%s', 'skillpulse-lms' ), '{{{ data.order_id }}}' );
 					?>
-					<a href="mailto:{{{ data.support_email }}}?subject=<?php echo esc_attr( $refund_subject ); ?>">{{{ data.support_email }}}</a>
+					<a href="mailto:{{{ data.support_email }}}?subject=<?php echo esc_attr( $splms_refund_subject ); ?>">{{{ data.support_email }}}</a>
 				</p>
 			<# } #>
 		</div>

@@ -30,20 +30,20 @@ get_header(); ?>
 
 	while ( have_posts() ) {
 		the_post();
-		$section_id = get_the_ID();
-		$course_id  = SkillPulse_LMS_Course_Items_Query::get_instance()->get_item_course_id( $section_id );
+		$splms_section_id = get_the_ID();
+		$splms_course_id  = SkillPulse_LMS_Course_Items_Query::get_instance()->get_item_course_id( $splms_section_id );
 
 		// Cache frequently used values to avoid repeated function calls.
-		$user_id                 = get_current_user_id();
-		$section_pricing_enabled = splms_get_setting( 'enable_section_based_pricing', false );
-		$course_title            = $course_id ? get_the_title( $course_id ) : '';
-		$course_permalink        = $course_id ? get_permalink( $course_id ) : '';
-		$current_permalink       = get_permalink();
-		$is_enrolled             = $user_id && $course_id ? splms_is_user_enrolled( $course_id, $user_id ) : false;
-		$section_pricing         = $section_pricing_enabled ? splms_get_section_pricing_with_access( $section_id, $user_id ) : null;
+		$splms_user_id                 = get_current_user_id();
+		$splms_section_pricing_enabled = splms_get_setting( 'enable_section_based_pricing', false );
+		$splms_course_title            = $splms_course_id ? get_the_title( $splms_course_id ) : '';
+		$splms_course_permalink        = $splms_course_id ? get_permalink( $splms_course_id ) : '';
+		$splms_current_permalink       = get_permalink();
+		$splms_is_enrolled             = $splms_user_id && $splms_course_id ? splms_is_user_enrolled( $splms_course_id, $splms_user_id ) : false;
+		$splms_section_pricing         = $splms_section_pricing_enabled ? splms_get_section_pricing_with_access( $splms_section_id, $splms_user_id ) : null;
 
 		// If no course found, show error.
-		if ( ! $course_id ) {
+		if ( ! $splms_course_id ) {
 			?>
 			<div class="splms-error-message">
 				<div class="error-content">
@@ -61,7 +61,7 @@ get_header(); ?>
 			continue;
 		}
 
-		$course = get_post( $course_id );
+		$splms_course = get_post( $splms_course_id );
 		?>
 
 		<article id="section-<?php the_ID(); ?>" <?php post_class( 'splms-section-single' ); ?>>
@@ -81,8 +81,8 @@ get_header(); ?>
 							<?php esc_html_e( 'Courses', 'skillpulse-lms' ); ?>
 						</a>
 						<span class="splms-breadcrumb__separator">/</span>
-						<a href="<?php echo esc_url( $course_permalink ); ?>" class="splms-breadcrumb__link">
-							<?php echo esc_html( $course_title ); ?>
+						<a href="<?php echo esc_url( $splms_course_permalink ); ?>" class="splms-breadcrumb__link">
+							<?php echo esc_html( $splms_course_title ); ?>
 						</a>
 						<span class="splms-breadcrumb__separator">/</span>
 						<span class="splms-breadcrumb__current"><?php the_title(); ?></span>
@@ -102,8 +102,8 @@ get_header(); ?>
 									<path d="M22 3H16C14.9391 3 13.9217 3.42143 13.1716 4.17157C12.4214 4.92172 12 5.93913 12 7V21C12 20.2044 12.3161 19.4413 12.8787 18.8787C13.4413 18.3161 14.2044 18 15 18H22V3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 								</svg>
 								<span class="course-label"><?php esc_html_e( 'Part of Course:', 'skillpulse-lms' ); ?></span>
-								<a href="<?php echo esc_url( $course_permalink ); ?>" class="course-link">
-									<?php echo esc_html( $course_title ); ?>
+								<a href="<?php echo esc_url( $splms_course_permalink ); ?>" class="course-link">
+									<?php echo esc_html( $splms_course_title ); ?>
 								</a>
 							</div>
 
@@ -118,28 +118,28 @@ get_header(); ?>
 
 						<?php
 						// Get section statistics.
-						$lessons_query   = SkillPulse_LMS_Relationships_Query::get_instance();
-						$section_lessons = $lessons_query->get_children( $section_id, SPLMS_POST_TYPES['lesson'] );
-						$section_quizzes = $lessons_query->get_children( $section_id, SPLMS_POST_TYPES['quiz'] );
-						$lessons_count   = count( $section_lessons );
-						$quizzes_count   = count( $section_quizzes );
+						$splms_lessons_query   = SkillPulse_LMS_Relationships_Query::get_instance();
+						$splms_section_lessons = $splms_lessons_query->get_children( $splms_section_id, SPLMS_POST_TYPES['lesson'] );
+						$splms_section_quizzes = $splms_lessons_query->get_children( $splms_section_id, SPLMS_POST_TYPES['quiz'] );
+						$splms_lessons_count   = count( $splms_section_lessons );
+						$splms_quizzes_count   = count( $splms_section_quizzes );
 
 						// Calculate total duration from lessons.
-						$total_duration = 0;
-						foreach ( $section_lessons as $lesson ) {
-							$lesson_duration = SkillPulse_LMS_Lessons::get_instance()->get_lesson_duration( $lesson->child_id );
-							if ( $lesson_duration ) {
-								$total_duration += intval( $lesson_duration );
+						$splms_total_duration = 0;
+						foreach ( $splms_section_lessons as $splms_lesson ) {
+							$splms_lesson_duration = SkillPulse_LMS_Lessons::get_instance()->get_lesson_duration( $splms_lesson->child_id );
+							if ( $splms_lesson_duration ) {
+								$splms_total_duration += intval( $splms_lesson_duration );
 							}
 						}
 
 						// Get instructor information.
-						$instructor_id = get_post_field( 'post_author', $course_id );
+						$splms_instructor_id = get_post_field( 'post_author', $splms_course_id );
 						?>
 
 						<!-- Enhanced Stats Bar -->
 						<div class="section-hero__stats">
-							<?php if ( $total_duration > 0 ) : ?>
+							<?php if ( $splms_total_duration > 0 ) : ?>
 								<div class="stat-item stat-item--duration">
 									<div class="stat-icon">
 										<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -150,14 +150,14 @@ get_header(); ?>
 									<div class="stat-content">
 										<span class="stat-value">
 											<?php
-											$hours   = floor( $total_duration / 60 );
-											$minutes = $total_duration % 60;
-											if ( $hours > 0 ) {
+											$splms_hours   = floor( $splms_total_duration / 60 );
+											$splms_minutes = $splms_total_duration % 60;
+											if ( $splms_hours > 0 ) {
 												/* translators: 1: Hours, 2: Minutes. */
-												printf( esc_html__( '%1$dh %2$dm', 'skillpulse-lms' ), (int) $hours, (int) $minutes );
+												printf( esc_html__( '%1$dh %2$dm', 'skillpulse-lms' ), (int) $splms_hours, (int) $splms_minutes );
 											} else {
 												/* translators: %d: Minutes. */
-												printf( esc_html__( '%dm', 'skillpulse-lms' ), (int) $minutes );
+												printf( esc_html__( '%dm', 'skillpulse-lms' ), (int) $splms_minutes );
 											}
 											?>
 										</span>
@@ -166,7 +166,7 @@ get_header(); ?>
 								</div>
 							<?php endif; ?>
 
-							<?php if ( $lessons_count > 0 ) : ?>
+							<?php if ( $splms_lessons_count > 0 ) : ?>
 								<div class="stat-item stat-item--lessons">
 									<div class="stat-icon">
 										<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -174,15 +174,15 @@ get_header(); ?>
 										</svg>
 									</div>
 									<div class="stat-content">
-										<span class="stat-value"><?php echo esc_html( number_format_i18n( $lessons_count ) ); ?></span>
+										<span class="stat-value"><?php echo esc_html( number_format_i18n( $splms_lessons_count ) ); ?></span>
 										<span class="stat-label">
-											<?php echo esc_html( _n( 'Lesson', 'Lessons', $lessons_count, 'skillpulse-lms' ) ); ?>
+											<?php echo esc_html( _n( 'Lesson', 'Lessons', $splms_lessons_count, 'skillpulse-lms' ) ); ?>
 										</span>
 									</div>
 								</div>
 							<?php endif; ?>
 
-							<?php if ( $quizzes_count > 0 ) : ?>
+							<?php if ( $splms_quizzes_count > 0 ) : ?>
 								<div class="stat-item stat-item--quizzes">
 									<div class="stat-icon">
 										<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -190,22 +190,22 @@ get_header(); ?>
 										</svg>
 									</div>
 									<div class="stat-content">
-										<span class="stat-value"><?php echo esc_html( number_format_i18n( $quizzes_count ) ); ?></span>
+										<span class="stat-value"><?php echo esc_html( number_format_i18n( $splms_quizzes_count ) ); ?></span>
 										<span class="stat-label">
-											<?php echo esc_html( _n( 'Quiz', 'Quizzes', $quizzes_count, 'skillpulse-lms' ) ); ?>
+											<?php echo esc_html( _n( 'Quiz', 'Quizzes', $splms_quizzes_count, 'skillpulse-lms' ) ); ?>
 										</span>
 									</div>
 								</div>
 							<?php endif; ?>
 
-							<?php if ( $instructor_id ) : ?>
+							<?php if ( $splms_instructor_id ) : ?>
 								<div class="stat-item stat-item--instructor">
 									<div class="stat-icon">
-										<?php echo get_avatar( $instructor_id, 20 ); ?>
+										<?php echo get_avatar( $splms_instructor_id, 20 ); ?>
 									</div>
 									<div class="stat-content">
 										<span class="stat-value">
-											<?php echo esc_html( get_the_author_meta( 'display_name', $instructor_id ) ); ?>
+											<?php echo esc_html( get_the_author_meta( 'display_name', $splms_instructor_id ) ); ?>
 										</span>
 										<span class="stat-label"><?php esc_html_e( 'Instructor', 'skillpulse-lms' ); ?></span>
 									</div>
@@ -234,16 +234,16 @@ get_header(); ?>
 							</h2>
 							<p class="curriculum-subtitle">
 								<?php
-								$total_items = $lessons_count + $quizzes_count;
-								if ( $total_items > 0 ) {
+								$splms_total_items = $splms_lessons_count + $splms_quizzes_count;
+								if ( $splms_total_items > 0 ) {
 									printf(
 										/* translators: 1: Number of items, 2: Duration */
 										esc_html__( '%1$d learning activities • %2$s total length', 'skillpulse-lms' ),
-										(int) $total_items,
-										$total_duration > 0 ? sprintf(
+										(int) $splms_total_items,
+										$splms_total_duration > 0 ? sprintf(
 											/* translators: Duration in minutes */
-											esc_html( _n( '%d minute', '%d minutes', $total_duration, 'skillpulse-lms' ) ),
-											(int) $total_duration
+											esc_html( _n( '%d minute', '%d minutes', $splms_total_duration, 'skillpulse-lms' ) ),
+											(int) $splms_total_duration
 										) : esc_html__( 'Self-paced', 'skillpulse-lms' )
 									);
 								} else {
@@ -255,67 +255,67 @@ get_header(); ?>
 
 						<?php
 						// Get specific section curriculum efficiently.
-						$section_curriculum = splms_get_section_curriculum( $section_id, $user_id );
+						$splms_section_curriculum = splms_get_section_curriculum( $splms_section_id, $splms_user_id );
 
-						$section_data = isset( $section_curriculum['section'] ) ? $section_curriculum['section'] : null;
-						$all_items    = isset( $section_curriculum['items'] ) ? $section_curriculum['items'] : array();
+						$splms_section_data = isset( $splms_section_curriculum['section'] ) ? $splms_section_curriculum['section'] : null;
+						$splms_all_items    = isset( $splms_section_curriculum['items'] ) ? $splms_section_curriculum['items'] : array();
 						?>
 
-						<?php if ( ! empty( $all_items ) ) : ?>
+						<?php if ( ! empty( $splms_all_items ) ) : ?>
 							<div class="curriculum-content">
-								<div class="curriculum-list" data-section-id="<?php echo esc_attr( $section_id ); ?>">
+								<div class="curriculum-list" data-section-id="<?php echo esc_attr( $splms_section_id ); ?>">
 									<?php
-									foreach ( $all_items as $index => $item ) :
-										$item_id      = $item['id'];
-										$item_title   = $item['title'];
-										$item_type    = $item['type'];
-										$item_url     = isset( $item['permalink'] ) ? $item['permalink'] : get_permalink( $item_id ); // Use cached permalink if available.
-										$is_completed = isset( $item['completed'] ) && $item['completed'];
-										$item_excerpt = isset( $item['description'] ) ? $item['description'] : ''; // Use cached description instead of excerpt.
+									foreach ( $splms_all_items as $splms_index => $splms_item ) :
+										$splms_item_id      = $splms_item['id'];
+										$splms_item_title   = $splms_item['title'];
+										$splms_item_type    = $splms_item['type'];
+										$splms_item_url     = isset( $splms_item['permalink'] ) ? $splms_item['permalink'] : get_permalink( $splms_item_id ); // Use cached permalink if available.
+										$splms_is_completed = isset( $splms_item['completed'] ) && $splms_item['completed'];
+										$splms_item_excerpt = isset( $splms_item['description'] ) ? $splms_item['description'] : ''; // Use cached description instead of excerpt.
 
 										// Get access data from build_child_data method.
-										$has_access  = isset( $item['has_access'] ) ? $item['has_access'] : false;
-										$access_meta = isset( $item['access_meta'] ) ? $item['access_meta'] : array();
+										$splms_has_access  = isset( $splms_item['has_access'] ) ? $splms_item['has_access'] : false;
+										$splms_access_meta = isset( $splms_item['access_meta'] ) ? $splms_item['access_meta'] : array();
 
 										// Extract access metadata for template logic.
-										$is_enrolled                = isset( $access_meta['is_enrolled'] ) ? $access_meta['is_enrolled'] : false;
-										$has_section_access         = isset( $access_meta['has_section_access'] ) ? $access_meta['has_section_access'] : false;
-										$is_guest_preview_available = isset( $access_meta['is_guest_preview_available'] ) ? $access_meta['is_guest_preview_available'] : false;
-										$is_section_preview_item    = isset( $access_meta['is_section_preview_item'] ) ? $access_meta['is_section_preview_item'] : false;
-										$uses_section_pricing       = isset( $access_meta['uses_section_pricing'] ) ? $access_meta['uses_section_pricing'] : false;
+										$splms_is_enrolled                = isset( $splms_access_meta['is_enrolled'] ) ? $splms_access_meta['is_enrolled'] : false;
+										$splms_has_section_access         = isset( $splms_access_meta['has_section_access'] ) ? $splms_access_meta['has_section_access'] : false;
+										$splms_is_guest_preview_available = isset( $splms_access_meta['is_guest_preview_available'] ) ? $splms_access_meta['is_guest_preview_available'] : false;
+										$splms_is_section_preview_item    = isset( $splms_access_meta['is_section_preview_item'] ) ? $splms_access_meta['is_section_preview_item'] : false;
+										$splms_uses_section_pricing       = isset( $splms_access_meta['uses_section_pricing'] ) ? $splms_access_meta['uses_section_pricing'] : false;
 
 										// Get lesson duration for lessons.
-										$item_duration = '';
-										if ( SPLMS_POST_TYPES['lesson'] === $item_type ) {
-											$lesson_duration_meta = SkillPulse_LMS_Lessons::get_instance()->get_lesson_duration( $item_id );
-											if ( $lesson_duration_meta ) {
-												$item_duration = sprintf(
+										$splms_item_duration = '';
+										if ( SPLMS_POST_TYPES['lesson'] === $splms_item_type ) {
+											$splms_lesson_duration_meta = SkillPulse_LMS_Lessons::get_instance()->get_lesson_duration( $splms_item_id );
+											if ( $splms_lesson_duration_meta ) {
+												$splms_item_duration = sprintf(
 													/* translators: %d: Duration in minutes */
 													esc_html__( '%d min', 'skillpulse-lms' ),
-													(int) $lesson_duration_meta
+													(int) $splms_lesson_duration_meta
 												);
 											}
 										}
-										$is_current = false; // For now, we'll set this to false, but you can add logic to determine current lesson.
+										$splms_is_current = false; // For now, we'll set this to false, but you can add logic to determine current lesson.
 										?>
-										<div class="curriculum-item curriculum-item--<?php echo esc_attr( $item_type ); ?> <?php echo $is_completed ? 'is-completed' : ''; ?> <?php echo $is_current ? 'is-current' : ''; ?> <?php echo ! $has_access ? 'is-locked' : ''; ?>"
-											data-item-id="<?php echo esc_attr( $item_id ); ?>">
+										<div class="curriculum-item curriculum-item--<?php echo esc_attr( $splms_item_type ); ?> <?php echo $splms_is_completed ? 'is-completed' : ''; ?> <?php echo $splms_is_current ? 'is-current' : ''; ?> <?php echo ! $splms_has_access ? 'is-locked' : ''; ?>"
+											data-item-id="<?php echo esc_attr( $splms_item_id ); ?>">
 
 											<div class="item-main">
 												<div class="item-status-border"></div>
 												<div class="item-status">
-													<?php if ( $is_completed ) : ?>
+													<?php if ( $splms_is_completed ) : ?>
 														<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 															<path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 														</svg>
-													<?php elseif ( ! $has_access ) : ?>
+													<?php elseif ( ! $splms_has_access ) : ?>
 														<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 															<rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
 															<circle cx="12" cy="16" r="1" fill="currentColor"/>
 															<path d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11" stroke="currentColor" stroke-width="2"/>
 														</svg>
 													<?php else : ?>
-														<?php if ( SPLMS_POST_TYPES['lesson'] === $item_type ) : ?>
+														<?php if ( SPLMS_POST_TYPES['lesson'] === $splms_item_type ) : ?>
 															<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 																<polygon points="5,3 19,12 5,21" fill="currentColor"/>
 															</svg>
@@ -329,47 +329,47 @@ get_header(); ?>
 
 												<div class="item-content">
 													<div class="item-header">
-														<h4 class="item-title"><?php echo esc_html( $item_title ); ?></h4>
+														<h4 class="item-title"><?php echo esc_html( $splms_item_title ); ?></h4>
 														<div class="item-meta">
 															<span class="item-type">
 																<?php
-																if ( SPLMS_POST_TYPES['lesson'] === $item_type ) {
+																if ( SPLMS_POST_TYPES['lesson'] === $splms_item_type ) {
 																	esc_html_e( 'Lesson', 'skillpulse-lms' );
 																} else {
 																	esc_html_e( 'Quiz', 'skillpulse-lms' );
 																}
 																?>
 															</span>
-															<?php if ( $item_duration ) : ?>
-																<span class="item-duration"><?php echo esc_html( $item_duration ); ?></span>
+															<?php if ( $splms_item_duration ) : ?>
+																<span class="item-duration"><?php echo esc_html( $splms_item_duration ); ?></span>
 															<?php endif; ?>
 														</div>
 													</div>
 												</div>
 
 												<div class="item-action">
-													<?php if ( $is_enrolled || $has_section_access ) : ?>
-														<?php if ( $has_access ) : ?>
-															<?php if ( $is_completed ) : ?>
+													<?php if ( $splms_is_enrolled || $splms_has_section_access ) : ?>
+														<?php if ( $splms_has_access ) : ?>
+															<?php if ( $splms_is_completed ) : ?>
 																<span class="action-text completed"><?php esc_html_e( 'Completed', 'skillpulse-lms' ); ?></span>
 															<?php else : ?>
 																<?php
 																/* translators: %s: Item title */
-																$item_title_label = sprintf( __( 'Start %s', 'skillpulse-lms' ), $item_title );
+																$splms_item_title_label = sprintf( __( 'Start %s', 'skillpulse-lms' ), $splms_item_title );
 																?>
-																<a href="<?php echo esc_url( $item_url ); ?>" class="action-button" aria-label="<?php echo esc_attr( $item_title_label ); ?>">
+																<a href="<?php echo esc_url( $splms_item_url ); ?>" class="action-button" aria-label="<?php echo esc_attr( $splms_item_title_label ); ?>">
 																	<?php esc_html_e( 'Start', 'skillpulse-lms' ); ?>
 																</a>
 															<?php endif; ?>
 														<?php else : ?>
 															<span class="action-text"><?php esc_html_e( 'Locked', 'skillpulse-lms' ); ?></span>
 														<?php endif; ?>
-													<?php elseif ( $has_access && ( $is_guest_preview_available || $is_section_preview_item ) ) : ?>
+													<?php elseif ( $splms_has_access && ( $splms_is_guest_preview_available || $splms_is_section_preview_item ) ) : ?>
 														<?php
 														/* translators: %s: Item title */
-														$item_title_label = sprintf( __( 'Preview %s', 'skillpulse-lms' ), $item_title );
+														$splms_item_title_label = sprintf( __( 'Preview %s', 'skillpulse-lms' ), $splms_item_title );
 														?>
-														<a href="<?php echo esc_url( $item_url ); ?>" class="action-button preview" aria-label="<?php echo esc_attr( $item_title_label ); ?>">
+														<a href="<?php echo esc_url( $splms_item_url ); ?>" class="action-button preview" aria-label="<?php echo esc_attr( $splms_item_title_label ); ?>">
 															<?php esc_html_e( 'Preview', 'skillpulse-lms' ); ?>
 														</a>
 													<?php else : ?>
@@ -401,7 +401,7 @@ get_header(); ?>
 				<div class="splms-section-sidebar">
 					<!-- Enhanced Purchase Card -->
 					<div class="splms-section-purchase-card">
-						<?php if ( $is_enrolled ) : ?>
+						<?php if ( $splms_is_enrolled ) : ?>
 							<!-- Enrolled State -->
 							<div class="purchase-card-enrolled">
 								<div class="enrolled-badge">
@@ -413,7 +413,7 @@ get_header(); ?>
 								<p class="enrolled-message">
 									<?php esc_html_e( 'You have complete access to this course and all its sections.', 'skillpulse-lms' ); ?>
 								</p>
-								<a href="<?php echo esc_url( $course_permalink ); ?>" class="btn btn-primary">
+								<a href="<?php echo esc_url( $splms_course_permalink ); ?>" class="btn btn-primary">
 									<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path d="M2 3H8C9.06087 3 10.0783 3.42143 10.8284 4.17157C11.5786 4.92172 12 5.93913 12 7V21C12 20.2044 11.6839 19.4413 11.1213 18.8787C10.5587 18.3161 9.79565 18 9 18H2V3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 										<path d="M22 3H16C14.9391 3 13.9217 3.42143 13.1716 4.17157C12.4214 4.92172 12 5.93913 12 7V21C12 20.2044 12.3161 19.4413 12.8787 18.8787C13.4413 18.3161 14.2044 18 15 18H22V3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -422,7 +422,7 @@ get_header(); ?>
 								</a>
 							</div>
 
-						<?php elseif ( $section_pricing && $section_pricing['user_has_access'] ) : ?>
+						<?php elseif ( $splms_section_pricing && $splms_section_pricing['user_has_access'] ) : ?>
 							<!-- Section Owned State -->
 							<div class="purchase-card-owned">
 								<div class="owned-badge">
@@ -436,11 +436,11 @@ get_header(); ?>
 								</p>
 								<?php
 								// Get first lesson to start learning.
-								if ( ! empty( $section_lessons ) ) {
-									$first_lesson = reset( $section_lessons );
-									$lesson_url   = get_permalink( $first_lesson->child_id );
+								if ( ! empty( $splms_section_lessons ) ) {
+									$splms_first_lesson = reset( $splms_section_lessons );
+									$splms_lesson_url   = get_permalink( $splms_first_lesson->child_id );
 									?>
-									<a href="<?php echo esc_url( $lesson_url ); ?>" class="btn btn-primary">
+									<a href="<?php echo esc_url( $splms_lesson_url ); ?>" class="btn btn-primary">
 										<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<polygon points="5,3 19,12 5,21" fill="currentColor"/>
 										</svg>
@@ -456,23 +456,23 @@ get_header(); ?>
 								<p class="purchase-subtitle"><?php esc_html_e( 'Unlock all lessons and quizzes in this section', 'skillpulse-lms' ); ?></p>
 							</div>
 
-							<?php if ( $section_pricing_enabled ) : ?>
+							<?php if ( $splms_section_pricing_enabled ) : ?>
 								<!-- Section Pricing -->
 								<div class="purchase-pricing">
-									<?php if ( $section_pricing && 0 === (int) $section_pricing['effective_price'] ) : ?>
+									<?php if ( $splms_section_pricing && 0 === (int) $splms_section_pricing['effective_price'] ) : ?>
 										<div class="price-display price-display--free">
 											<span class="price-free"><?php esc_html_e( 'Free', 'skillpulse-lms' ); ?></span>
 											<span class="price-subtitle"><?php esc_html_e( 'No payment required', 'skillpulse-lms' ); ?></span>
 										</div>
-									<?php elseif ( $section_pricing ) : ?>
+									<?php elseif ( $splms_section_pricing ) : ?>
 										<div class="price-display price-display--paid">
 											<div class="price-current">
 												<span class="currency-symbol">$</span>
-												<span class="price-amount"><?php echo esc_html( number_format( $section_pricing['effective_price'], 2 ) ); ?></span>
+												<span class="price-amount"><?php echo esc_html( number_format( $splms_section_pricing['effective_price'], 2 ) ); ?></span>
 											</div>
-											<?php if ( $section_pricing['is_on_sale'] ) : ?>
+											<?php if ( $splms_section_pricing['is_on_sale'] ) : ?>
 												<div class="price-original">
-													<span><?php echo esc_html( splms_format_price( $section_pricing['price'] ) ); ?></span>
+													<span><?php echo esc_html( splms_format_price( $splms_section_pricing['price'] ) ); ?></span>
 													<span class="sale-badge"><?php esc_html_e( 'Sale', 'skillpulse-lms' ); ?></span>
 												</div>
 											<?php endif; ?>
@@ -483,15 +483,15 @@ get_header(); ?>
 							<?php endif; ?>
 
 							<!-- Purchase/Access Button -->
-							<?php if ( $section_pricing_enabled && $section_pricing && 0 === (int) $section_pricing['effective_price'] ) : ?>
-								<?php if ( $user_id > 0 ) : ?>
+							<?php if ( $splms_section_pricing_enabled && $splms_section_pricing && 0 === (int) $splms_section_pricing['effective_price'] ) : ?>
+								<?php if ( $splms_user_id > 0 ) : ?>
 									<?php
 									// Get first lesson to start learning.
-									if ( ! empty( $section_lessons ) ) {
-										$first_lesson = reset( $section_lessons );
-										$lesson_url   = get_permalink( $first_lesson->child_id );
+									if ( ! empty( $splms_section_lessons ) ) {
+										$splms_first_lesson = reset( $splms_section_lessons );
+										$splms_lesson_url   = get_permalink( $splms_first_lesson->child_id );
 										?>
-										<a href="<?php echo esc_url( $lesson_url ); ?>" class="btn btn-primary">
+										<a href="<?php echo esc_url( $splms_lesson_url ); ?>" class="btn btn-primary">
 											<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 												<polygon points="5,3 19,12 5,21" fill="currentColor"/>
 											</svg>
@@ -499,7 +499,7 @@ get_header(); ?>
 										</a>
 									<?php } ?>
 								<?php else : ?>
-									<a href="<?php echo esc_url( wp_login_url( $current_permalink ) ); ?>" class="btn btn-primary">
+									<a href="<?php echo esc_url( wp_login_url( $splms_current_permalink ) ); ?>" class="btn btn-primary">
 										<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M15 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H15M10 17L15 12L10 7M15 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 										</svg>
@@ -508,23 +508,23 @@ get_header(); ?>
 								<?php endif; ?>
 							<?php else : ?>
 								<!-- Paid Section - Purchase Button -->
-								<?php if ( $user_id > 0 ) : ?>
+								<?php if ( $splms_user_id > 0 ) : ?>
 									<?php
-									$purchase_url = $section_pricing_enabled ?
-										splms_get_section_purchase_url( $section_id, $course_id ) :
-										$course_permalink;
-									$button_text  = $section_pricing_enabled ?
+									$splms_purchase_url = $splms_section_pricing_enabled ?
+										splms_get_section_purchase_url( $splms_section_id, $splms_course_id ) :
+										$splms_course_permalink;
+									$splms_button_text  = $splms_section_pricing_enabled ?
 										__( 'Purchase Section', 'skillpulse-lms' ) :
 										__( 'Course Detail', 'skillpulse-lms' );
 									?>
-									<a href="<?php echo esc_url( $purchase_url ); ?>" class="btn btn-primary">
+									<a href="<?php echo esc_url( $splms_purchase_url ); ?>" class="btn btn-primary">
 										<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 										</svg>
-										<?php echo esc_html( $button_text ); ?>
+										<?php echo esc_html( $splms_button_text ); ?>
 									</a>
 								<?php else : ?>
-									<a href="<?php echo esc_url( wp_login_url( $current_permalink ) ); ?>" class="btn btn-primary">
+									<a href="<?php echo esc_url( wp_login_url( $splms_current_permalink ) ); ?>" class="btn btn-primary">
 										<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M15 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H15M10 17L15 12L10 7M15 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 										</svg>
@@ -549,27 +549,27 @@ get_header(); ?>
 
 						<?php
 						// Get sections for navigation sidebar (lightweight).
-						$course_sections = splms_get_course_sections_for_navigation( $course_id );
+						$splms_course_sections = splms_get_course_sections_for_navigation( $splms_course_id );
 						?>
 
-						<?php if ( ! empty( $course_sections ) ) : ?>
+						<?php if ( ! empty( $splms_course_sections ) ) : ?>
 							<div class="navigation-list">
-								<?php foreach ( $course_sections as $nav_section ) : ?>
+								<?php foreach ( $splms_course_sections as $splms_nav_section ) : ?>
 									<?php
-									$nav_section_id    = $nav_section['id'];
-									$nav_section_title = $nav_section['title'];
-									$nav_section_url   = $nav_section['permalink'];
-									$nav_section_count = $nav_section['item_count'];
-									$is_current        = intval( $nav_section_id ) === intval( $section_id );
+									$splms_nav_section_id    = $splms_nav_section['id'];
+									$splms_nav_section_title = $splms_nav_section['title'];
+									$splms_nav_section_url   = $splms_nav_section['permalink'];
+									$splms_nav_section_count = $splms_nav_section['item_count'];
+									$splms_is_current        = intval( $splms_nav_section_id ) === intval( $splms_section_id );
 									?>
-									<div class="navigation-item <?php echo $is_current ? 'is-current' : ''; ?>">
+									<div class="navigation-item <?php echo esc_attr( $splms_is_current ? 'is-current' : '' ); ?>">
 										<div class="navigation-item-content">
-											<a href="<?php echo esc_url( $nav_section_url ); ?>" class="navigation-item-link">
-												<span class="navigation-item-title"><?php echo esc_html( $nav_section_title ); ?></span>
+											<a href="<?php echo esc_url( $splms_nav_section_url ); ?>" class="navigation-item-link">
+												<span class="navigation-item-title"><?php echo esc_html( $splms_nav_section_title ); ?></span>
 												<span class="navigation-item-meta">
 													<?php
 													/* translators: %d: Number of items. */
-													printf( esc_html( _n( '%d item', '%d items', $nav_section_count, 'skillpulse-lms' ) ), (int) $nav_section_count );
+													printf( esc_html( _n( '%d item', '%d items', $splms_nav_section_count, 'skillpulse-lms' ) ), (int) $splms_nav_section_count );
 													?>
 												</span>
 											</a>
@@ -606,42 +606,42 @@ get_header(); ?>
 <div class="splms-mobile-purchase-bar" style="display:none">
 	<div class="mobile-purchase-content">
 		<div class="mobile-purchase-info">
-			<?php if ( $section_pricing_enabled && $section_pricing && ! $section_pricing['is_free'] && $section_pricing['effective_price'] > 0 ) : ?>
+			<?php if ( $splms_section_pricing_enabled && $splms_section_pricing && ! $splms_section_pricing['is_free'] && $splms_section_pricing['effective_price'] > 0 ) : ?>
 				<div class="mobile-price">
-					<span class="mobile-price-current">$<?php echo esc_html( number_format( $section_pricing['effective_price'], 2 ) ); ?></span>
-					<?php if ( $section_pricing['is_on_sale'] ) : ?>
-						<span class="mobile-price-original">$<?php echo esc_html( number_format( $section_pricing['price'], 2 ) ); ?></span>
+					<span class="mobile-price-current">$<?php echo esc_html( number_format( $splms_section_pricing['effective_price'], 2 ) ); ?></span>
+					<?php if ( $splms_section_pricing['is_on_sale'] ) : ?>
+						<span class="mobile-price-original">$<?php echo esc_html( number_format( $splms_section_pricing['price'], 2 ) ); ?></span>
 					<?php endif; ?>
 				</div>
 			<?php endif; ?>
 		</div>
 		<div class="mobile-purchase-action">
-			<?php if ( $is_enrolled ) : ?>
-				<a href="<?php echo esc_url( $course_permalink ); ?>" class="btn btn-primary btn-mobile">
+			<?php if ( $splms_is_enrolled ) : ?>
+				<a href="<?php echo esc_url( $splms_course_permalink ); ?>" class="btn btn-primary btn-mobile">
 					<?php esc_html_e( 'Continue Course', 'skillpulse-lms' ); ?>
 				</a>
-			<?php elseif ( $section_pricing && $section_pricing['user_has_access'] && ! empty( $section_lessons ) ) : ?>
+			<?php elseif ( $splms_section_pricing && $splms_section_pricing['user_has_access'] && ! empty( $splms_section_lessons ) ) : ?>
 				<?php
-				$first_lesson = reset( $section_lessons );
-				$lesson_url   = get_permalink( $first_lesson->child_id );
+				$splms_first_lesson = reset( $splms_section_lessons );
+				$splms_lesson_url   = get_permalink( $splms_first_lesson->child_id );
 				?>
-				<a href="<?php echo esc_url( $lesson_url ); ?>" class="btn btn-primary btn-mobile">
+				<a href="<?php echo esc_url( $splms_lesson_url ); ?>" class="btn btn-primary btn-mobile">
 					<?php esc_html_e( 'Start Learning', 'skillpulse-lms' ); ?>
 				</a>
-			<?php elseif ( $user_id > 0 ) : ?>
+			<?php elseif ( $splms_user_id > 0 ) : ?>
 				<?php
-				$purchase_url = $section_pricing_enabled ?
-					splms_get_section_purchase_url( $section_id, $course_id ) :
-					$course_permalink;
-				$button_text  = $section_pricing_enabled ?
+				$splms_purchase_url = $splms_section_pricing_enabled ?
+					splms_get_section_purchase_url( $splms_section_id, $splms_course_id ) :
+					$splms_course_permalink;
+				$splms_button_text  = $splms_section_pricing_enabled ?
 					__( 'Purchase', 'skillpulse-lms' ) :
 					__( 'Enroll', 'skillpulse-lms' );
 				?>
-				<a href="<?php echo esc_url( $purchase_url ); ?>" class="btn btn-primary btn-mobile">
-					<?php echo esc_html( $button_text ); ?>
+				<a href="<?php echo esc_url( $splms_purchase_url ); ?>" class="btn btn-primary btn-mobile">
+					<?php echo esc_html( $splms_button_text ); ?>
 				</a>
 			<?php else : ?>
-				<a href="<?php echo esc_url( wp_login_url( $current_permalink ) ); ?>" class="btn btn-primary btn-mobile">
+				<a href="<?php echo esc_url( wp_login_url( $splms_current_permalink ) ); ?>" class="btn btn-primary btn-mobile">
 					<?php esc_html_e( 'Log In', 'skillpulse-lms' ); ?>
 				</a>
 			<?php endif; ?>

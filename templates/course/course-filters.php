@@ -12,10 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+
+
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, nonce verification handled at higher level.
-$current_difficulty      = isset( $_GET['difficulty'] ) ? sanitize_text_field( wp_unslash( $_GET['difficulty'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-$current_learning_method = isset( $_GET['learning_method'] ) ? sanitize_text_field( wp_unslash( $_GET['learning_method'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-$current_sort            = isset( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+$splms_current_difficulty      = isset( $_GET['difficulty'] ) ? sanitize_text_field( wp_unslash( $_GET['difficulty'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+$splms_current_learning_method = isset( $_GET['learning_method'] ) ? sanitize_text_field( wp_unslash( $_GET['learning_method'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+$splms_current_sort            = isset( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 ?>
 
 <div class="splms-course-filters">
@@ -25,9 +27,9 @@ $current_sort            = isset( $_GET['orderby'] ) ? sanitize_text_field( wp_u
 		<div class="filter-group filter-pill">
 			<select name="difficulty" id="difficulty-filter" class="filter-select">
 				<option value=""><?php esc_html_e( 'Filter by Level', 'skillpulse-lms' ); ?></option>
-				<option value="beginner" <?php selected( $current_difficulty, 'beginner' ); ?>><?php esc_html_e( 'Beginner', 'skillpulse-lms' ); ?></option>
-				<option value="intermediate" <?php selected( $current_difficulty, 'intermediate' ); ?>><?php esc_html_e( 'Intermediate', 'skillpulse-lms' ); ?></option>
-				<option value="advanced" <?php selected( $current_difficulty, 'advanced' ); ?>><?php esc_html_e( 'Advanced', 'skillpulse-lms' ); ?></option>
+				<option value="beginner" <?php selected( $splms_current_difficulty, 'beginner' ); ?>><?php esc_html_e( 'Beginner', 'skillpulse-lms' ); ?></option>
+				<option value="intermediate" <?php selected( $splms_current_difficulty, 'intermediate' ); ?>><?php esc_html_e( 'Intermediate', 'skillpulse-lms' ); ?></option>
+				<option value="advanced" <?php selected( $splms_current_difficulty, 'advanced' ); ?>><?php esc_html_e( 'Advanced', 'skillpulse-lms' ); ?></option>
 			</select>
 		</div>
 
@@ -35,10 +37,10 @@ $current_sort            = isset( $_GET['orderby'] ) ? sanitize_text_field( wp_u
 		<div class="filter-group filter-pill">
 			<select name="learning_method" id="learning-method-filter" class="filter-select">
 				<option value=""><?php esc_html_e( 'Learning Method', 'skillpulse-lms' ); ?></option>
-				<option value="video" <?php selected( $current_learning_method, 'video' ); ?>><?php esc_html_e( 'Video-Based Learning', 'skillpulse-lms' ); ?></option>
-				<option value="text" <?php selected( $current_learning_method, 'text' ); ?>><?php esc_html_e( 'Text & Reading Materials', 'skillpulse-lms' ); ?></option>
-				<option value="interactive" <?php selected( $current_learning_method, 'interactive' ); ?>><?php esc_html_e( 'Interactive Content', 'skillpulse-lms' ); ?></option>
-				<option value="project" <?php selected( $current_learning_method, 'project' ); ?>><?php esc_html_e( 'Project-Based Learning', 'skillpulse-lms' ); ?></option>
+				<option value="video" <?php selected( $splms_current_learning_method, 'video' ); ?>><?php esc_html_e( 'Video-Based Learning', 'skillpulse-lms' ); ?></option>
+				<option value="text" <?php selected( $splms_current_learning_method, 'text' ); ?>><?php esc_html_e( 'Text & Reading Materials', 'skillpulse-lms' ); ?></option>
+				<option value="interactive" <?php selected( $splms_current_learning_method, 'interactive' ); ?>><?php esc_html_e( 'Interactive Content', 'skillpulse-lms' ); ?></option>
+				<option value="project" <?php selected( $splms_current_learning_method, 'project' ); ?>><?php esc_html_e( 'Project-Based Learning', 'skillpulse-lms' ); ?></option>
 			</select>
 		</div>
 
@@ -46,9 +48,9 @@ $current_sort            = isset( $_GET['orderby'] ) ? sanitize_text_field( wp_u
 		<div class="filter-group filter-pill">
 			<select name="orderby" id="sort-filter" class="filter-select">
 				<option value=""><?php esc_html_e( 'Sort by', 'skillpulse-lms' ); ?></option>
-				<option value="title" <?php selected( $current_sort, 'title' ); ?>><?php esc_html_e( 'Title A-Z', 'skillpulse-lms' ); ?></option>
-				<option value="date" <?php selected( $current_sort, 'date' ); ?>><?php esc_html_e( 'Newest First', 'skillpulse-lms' ); ?></option>
-				<option value="menu_order" <?php selected( $current_sort, 'menu_order' ); ?>><?php esc_html_e( 'Featured', 'skillpulse-lms' ); ?></option>
+				<option value="title" <?php selected( $splms_current_sort, 'title' ); ?>><?php esc_html_e( 'Title A-Z', 'skillpulse-lms' ); ?></option>
+				<option value="date" <?php selected( $splms_current_sort, 'date' ); ?>><?php esc_html_e( 'Newest First', 'skillpulse-lms' ); ?></option>
+				<option value="menu_order" <?php selected( $splms_current_sort, 'menu_order' ); ?>><?php esc_html_e( 'Featured', 'skillpulse-lms' ); ?></option>
 			</select>
 		</div>
 
@@ -58,23 +60,23 @@ $current_sort            = isset( $_GET['orderby'] ) ? sanitize_text_field( wp_u
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, nonce verification handled at higher level.
 		if ( ! empty( $_GET ) ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, nonce verification handled at higher level.
-			foreach ( $_GET as $key => $value ) {
-				if ( in_array( $key, array( 'difficulty', 'learning_method', 'orderby', 'post_type' ), true ) ) {
+			foreach ( $_GET as $splms_key => $splms_value ) {
+				if ( in_array( $splms_key, array( 'difficulty', 'learning_method', 'orderby', 'post_type' ), true ) ) {
 					continue;
 				}
-				if ( is_array( $value ) ) {
-					foreach ( $value as $sub_value ) {
-						echo '<input type="hidden" name="' . esc_attr( $key ) . '[]" value="' . esc_attr( wp_unslash( $sub_value ) ) . '" />';
+				if ( is_array( $splms_value ) ) {
+					foreach ( $splms_value as $splms_sub_value ) {
+						echo '<input type="hidden" name="' . esc_attr( $splms_key ) . '[]" value="' . esc_attr( wp_unslash( $splms_sub_value ) ) . '" />';
 					}
 				} else {
-					echo '<input type="hidden" name="' . esc_attr( $key ) . '" value="' . esc_attr( wp_unslash( $value ) ) . '" />';
+					echo '<input type="hidden" name="' . esc_attr( $splms_key ) . '" value="' . esc_attr( wp_unslash( $splms_value ) ) . '" />';
 				}
 			}
 		}
 		?>
 
 		<!-- Auto-submit on change, Apply button hidden unless needed -->
-		<!-- <?php if ( $current_difficulty || $current_learning_method || $current_sort ) { ?>
+		<!-- <?php if ( $splms_current_difficulty || $splms_current_learning_method || $splms_current_sort ) { ?>
 			<a href="<?php echo esc_url( get_post_type_archive_link( SPLMS_POST_TYPES['course'] ) ); ?>" class="filter-clear-btn">
 				<?php esc_html_e( 'Clear', 'skillpulse-lms' ); ?>
 			</a>

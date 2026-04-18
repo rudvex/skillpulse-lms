@@ -12,59 +12,61 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+
+
 // Extract variables from args.
 if ( is_array( $args ) ) {
 	// phpcs:ignore WordPress.PHP.DontExtract.extract_extract -- Template file uses extract for convenience.
 	extract( $args );
 }
 
-$course_id    = isset( $course_id ) ? $course_id : get_the_ID();
-$course       = get_post( $course_id );
-$course_url   = get_permalink( $course_id );
-$course_title = get_the_title( $course_id );
-$share_text   = sprintf(
+$splms_course_id    = isset( $splms_course_id ) ? $splms_course_id : get_the_ID();
+$splms_course       = get_post( $splms_course_id );
+$splms_course_url   = get_permalink( $splms_course_id );
+$splms_course_title = get_the_title( $splms_course_id );
+$splms_share_text   = sprintf(
 	/* translators: %s: Course title */
 	__( 'I just completed the course: %s!', 'skillpulse-lms' ),
-	$course_title
+	$splms_course_title
 );
 
 // Generate shareable link (can be enhanced with tracking parameters).
-$share_url = $course_url;
+$splms_share_url = $splms_course_url;
 
 // Social media share URLs.
-$facebook_url = add_query_arg(
+$splms_facebook_url = add_query_arg(
 	array(
-		'u' => rawurlencode( $share_url ),
+		'u' => rawurlencode( $splms_share_url ),
 	),
 	'https://www.facebook.com/sharer/sharer.php'
 );
 
-$twitter_url = add_query_arg(
+$splms_twitter_url = add_query_arg(
 	array(
-		'url'  => rawurlencode( $share_url ),
-		'text' => rawurlencode( $share_text ),
+		'url'  => rawurlencode( $splms_share_url ),
+		'text' => rawurlencode( $splms_share_text ),
 	),
 	'https://twitter.com/intent/tweet'
 );
 
-$linkedin_url = add_query_arg(
+$splms_linkedin_url = add_query_arg(
 	array(
-		'url'     => rawurlencode( $share_url ),
-		'summary' => rawurlencode( $share_text ),
-		'title'   => rawurlencode( $course_title ),
+		'url'     => rawurlencode( $splms_share_url ),
+		'summary' => rawurlencode( $splms_share_text ),
+		'title'   => rawurlencode( $splms_course_title ),
 	),
 	'https://www.linkedin.com/sharing/share-offsite/'
 );
 
-$whatsapp_url = add_query_arg(
+$splms_whatsapp_url = add_query_arg(
 	array(
-		'text' => rawurlencode( $share_text . ' ' . $share_url ),
+		'text' => rawurlencode( $splms_share_text . ' ' . $splms_share_url ),
 	),
 	'https://wa.me/'
 );
 
 // Copy to clipboard functionality.
-$copy_text = $share_url;
+$splms_copy_text = $splms_share_url;
 ?>
 
 <div class="splms-course-share">
@@ -76,7 +78,7 @@ $copy_text = $share_url;
 	</p>
 	
 	<div class="splms-course-share__buttons">
-		<a href="<?php echo esc_url( $facebook_url ); ?>" 
+		<a href="<?php echo esc_url( $splms_facebook_url ); ?>" 
 			target="_blank" 
 			rel="noopener noreferrer" 
 			class="splms-share-btn splms-share-btn--facebook"
@@ -87,7 +89,7 @@ $copy_text = $share_url;
 			<span><?php esc_html_e( 'Facebook', 'skillpulse-lms' ); ?></span>
 		</a>
 		
-		<a href="<?php echo esc_url( $twitter_url ); ?>" 
+		<a href="<?php echo esc_url( $splms_twitter_url ); ?>" 
 			target="_blank" 
 			rel="noopener noreferrer" 
 			class="splms-share-btn splms-share-btn--twitter"
@@ -98,7 +100,7 @@ $copy_text = $share_url;
 			<span><?php esc_html_e( 'Twitter', 'skillpulse-lms' ); ?></span>
 		</a>
 		
-		<a href="<?php echo esc_url( $linkedin_url ); ?>" 
+		<a href="<?php echo esc_url( $splms_linkedin_url ); ?>" 
 			target="_blank" 
 			rel="noopener noreferrer" 
 			class="splms-share-btn splms-share-btn--linkedin"
@@ -109,7 +111,7 @@ $copy_text = $share_url;
 			<span><?php esc_html_e( 'LinkedIn', 'skillpulse-lms' ); ?></span>
 		</a>
 		
-		<a href="<?php echo esc_url( $whatsapp_url ); ?>" 
+		<a href="<?php echo esc_url( $splms_whatsapp_url ); ?>" 
 			target="_blank" 
 			rel="noopener noreferrer" 
 			class="splms-share-btn splms-share-btn--whatsapp"
@@ -122,7 +124,7 @@ $copy_text = $share_url;
 		
 		<button type="button" 
 				class="splms-share-btn splms-share-btn--copy" 
-				data-copy-text="<?php echo esc_attr( $copy_text ); ?>"
+				data-copy-text="<?php echo esc_attr( $splms_copy_text ); ?>"
 				aria-label="<?php esc_attr_e( 'Copy link', 'skillpulse-lms' ); ?>">
 			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 				<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>

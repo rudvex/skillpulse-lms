@@ -14,13 +14,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$course_id  = isset( $args['course_id'] ) ? $args['course_id'] : get_the_ID();
-$permission = isset( $args['permission'] ) ? $args['permission'] : array();
-$user_id    = get_current_user_id();
+
+
+$splms_course_id  = isset( $args['splms_course_id'] ) ? $args['splms_course_id'] : get_the_ID();
+$splms_permission = isset( $args['splms_permission'] ) ? $args['splms_permission'] : array();
+$splms_user_id    = get_current_user_id();
 
 // Get settings.
-$min_length = splms_get_setting( 'reviews_min_length', 10 );
-$max_length = splms_get_setting( 'reviews_max_length', 500 );
+$splms_min_length = splms_get_setting( 'reviews_min_length', 10 );
+$splms_max_length = splms_get_setting( 'reviews_max_length', 500 );
 ?>
 
 <div class="splms-review-modal" id="review-submission-modal" style="display: none;">
@@ -44,7 +46,7 @@ $max_length = splms_get_setting( 'reviews_max_length', 500 );
 		<div class="modal-body">
 			<p class="modal-description"><?php esc_html_e( 'Share your experience to help other students', 'skillpulse-lms' ); ?></p>
 
-			<form class="review-form course-review-form" method="post" data-course-id="<?php echo esc_attr( $course_id ); ?>">
+			<form class="review-form course-review-form" method="post" data-course-id="<?php echo esc_attr( $splms_course_id ); ?>">
 				<div class="form-group rating-input">
 					<label class="form-label">
 						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,12 +57,12 @@ $max_length = splms_get_setting( 'reviews_max_length', 500 );
 						<span class="required">*</span>
 					</label>
 					<div class="star-rating-input">
-						<?php for ( $i = 1; $i <= 5; $i++ ) { ?>
+						<?php for ( $splms_i = 1; $splms_i <= 5; $splms_i++ ) { ?>
 							<?php
 							/* translators: %d: Number of stars. */
-							$star_title = sprintf( esc_attr__( '%d stars', 'skillpulse-lms' ), $i );
+							$splms_star_title = sprintf( esc_attr__( '%d stars', 'skillpulse-lms' ), $splms_i );
 							?>
-							<button type="button" class="star-btn" data-rating="<?php echo esc_attr( $i ); ?>" title="<?php echo esc_attr( $star_title ); ?>">★</button>
+							<button type="button" class="star-btn" data-rating="<?php echo esc_attr( $splms_i ); ?>" title="<?php echo esc_attr( $splms_star_title ); ?>">★</button>
 						<?php } ?>
 					</div>
 					<input type="hidden" name="rating" required/>
@@ -97,11 +99,11 @@ $max_length = splms_get_setting( 'reviews_max_length', 500 );
 							?>
 							"
 							required
-							minlength="<?php echo esc_attr( $min_length ); ?>"
-							maxlength="<?php echo esc_attr( $max_length ); ?>"
+							minlength="<?php echo esc_attr( $splms_min_length ); ?>"
+							maxlength="<?php echo esc_attr( $splms_max_length ); ?>"
 					></textarea>
 					<div class="character-counter">
-						<span class="current-count">0</span>/<span class="max-count"><?php echo esc_html( $max_length ); ?></span>
+						<span class="current-count">0</span>/<span class="max-count"><?php echo esc_html( $splms_max_length ); ?></span>
 					</div>
 					<div class="form-error" style="display: none;"></div>
 				</div>
@@ -121,8 +123,8 @@ $max_length = splms_get_setting( 'reviews_max_length', 500 );
 					</button>
 				</div>
 
-				<input type="hidden" name="course_id" value="<?php echo esc_attr( $course_id ); ?>"/>
-				<?php wp_nonce_field( 'splms_submit_review_' . $course_id, 'splms_review_nonce' ); ?>
+				<input type="hidden" name="course_id" value="<?php echo esc_attr( $splms_course_id ); ?>"/>
+				<?php wp_nonce_field( 'splms_submit_review_' . $splms_course_id, 'splms_review_nonce' ); ?>
 			</form>
 		</div>
 	</div>

@@ -12,13 +12,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+
+
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, reading URL parameter only.
-$current_layout = isset( $_GET['layout'] ) ? sanitize_text_field( wp_unslash( $_GET['layout'] ) ) : 'grid';
+$splms_current_layout = isset( $_GET['layout'] ) ? sanitize_text_field( wp_unslash( $_GET['layout'] ) ) : 'grid';
 ?>
 
-<div class="splms-layout-switcher" data-current-layout="<?php echo esc_attr( $current_layout ); ?>">
-	<input type="radio" name="layout" value="grid" id="layout-grid" <?php checked( $current_layout, 'grid' ); ?>>
-	<label for="layout-grid" class="layout-switch-btn <?php echo 'grid' === $current_layout ? 'active' : ''; ?>" data-layout="grid" title="<?php esc_attr_e( 'Grid View', 'skillpulse-lms' ); ?>">
+<div class="splms-layout-switcher" data-current-layout="<?php echo esc_attr( $splms_current_layout ); ?>">
+	<input type="radio" name="layout" value="grid" id="layout-grid" <?php checked( $splms_current_layout, 'grid' ); ?>>
+	<label for="layout-grid" class="layout-switch-btn <?php echo 'grid' === $splms_current_layout ? 'active' : ''; ?>" data-layout="grid" title="<?php esc_attr_e( 'Grid View', 'skillpulse-lms' ); ?>">
 		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 			<g clip-path="url(#clip0_180_2)">
 				<path d="M4 5C4 4.73478 4.10536 4.48043 4.29289 4.29289C4.48043 4.10536 4.73478 4 5 4H9C9.26522 4 9.51957 4.10536 9.70711 4.29289C9.89464 4.48043 10 4.73478 10 5V9C10 9.26522 9.89464 9.51957 9.70711 9.70711C9.51957 9.89464 9.26522 10 9 10H5C4.73478 10 4.48043 9.89464 4.29289 9.70711C4.10536 9.51957 4 9.26522 4 9V5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -34,8 +36,8 @@ $current_layout = isset( $_GET['layout'] ) ? sanitize_text_field( wp_unslash( $_
 		</svg>
 	</label>
 
-	<input type="radio" name="layout" value="list" id="layout-list" <?php checked( $current_layout, 'list' ); ?>>
-	<label for="layout-list" class="layout-switch-btn <?php echo 'list' === $current_layout ? 'active' : ''; ?>" data-layout="list" title="<?php esc_attr_e( 'List View', 'skillpulse-lms' ); ?>">
+	<input type="radio" name="layout" value="list" id="layout-list" <?php checked( $splms_current_layout, 'list' ); ?>>
+	<label for="layout-list" class="layout-switch-btn <?php echo 'list' === $splms_current_layout ? 'active' : ''; ?>" data-layout="list" title="<?php esc_attr_e( 'List View', 'skillpulse-lms' ); ?>">
 		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 			<g clip-path="url(#clip0_180_8)">
 				<path d="M4 6H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

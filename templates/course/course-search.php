@@ -12,10 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$search_query = get_search_query();
-if ( ! $search_query ) {
+
+
+$splms_search_query = get_search_query();
+if ( ! $splms_search_query ) {
 	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, reading URL parameter only.
-	$search_query = isset( $_GET['course_search'] ) ? sanitize_text_field( wp_unslash( $_GET['course_search'] ) ) : '';
+	$splms_search_query = isset( $_GET['course_search'] ) ? sanitize_text_field( wp_unslash( $_GET['course_search'] ) ) : '';
 }
 ?>
 
@@ -24,7 +26,7 @@ if ( ! $search_query ) {
 		type="button" 
 		class="splms-search-toggle" 
 		aria-label="<?php esc_attr_e( 'Search Courses', 'skillpulse-lms' ); ?>"
-		aria-expanded="<?php echo ! empty( $search_query ) ? 'true' : 'false'; ?>"
+		aria-expanded="<?php echo ! empty( $splms_search_query ) ? 'true' : 'false'; ?>"
 		title="<?php esc_attr_e( 'Search Courses', 'skillpulse-lms' ); ?>"
 	>
 		<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,16 +35,16 @@ if ( ! $search_query ) {
 		<span class="screen-reader-text"><?php esc_html_e( 'Search Courses', 'skillpulse-lms' ); ?></span>
 	</button> -->
 
-	<div class="splms-search-panel" role="dialog" aria-hidden="<?php echo ! empty( $search_query ) ? 'false' : 'true'; ?>" aria-label="<?php esc_attr_e( 'Search Courses', 'skillpulse-lms' ); ?>">
+	<div class="splms-search-panel" role="dialog" aria-hidden="<?php echo ! empty( $splms_search_query ) ? 'false' : 'true'; ?>" aria-label="<?php esc_attr_e( 'Search Courses', 'skillpulse-lms' ); ?>">
 		<?php
 		// Determine the form action based on context.
-		$form_action = get_post_type_archive_link( SPLMS_POST_TYPES['course'] );
+		$splms_form_action = get_post_type_archive_link( SPLMS_POST_TYPES['course'] );
 		if ( is_tax( SPLMS_TAXONOMIES['course_category'] ) || is_tax( SPLMS_TAXONOMIES['course_tag'] ) ) {
 			// Keep search within current taxonomy context.
-			$form_action = get_term_link( get_queried_object() );
+			$splms_form_action = get_term_link( get_queried_object() );
 		}
 		?>
-		<form class="splms-search-form" method="get" action="<?php echo esc_url( $form_action ); ?>" data-expanded="<?php echo ! empty( $search_query ) ? 'true' : 'false'; ?>">
+		<form class="splms-search-form" method="get" action="<?php echo esc_url( $splms_form_action ); ?>" data-expanded="<?php echo ! empty( $splms_search_query ) ? 'true' : 'false'; ?>">
 			<div class="splms-search-input-wrapper">
 				<input 
 					type="text" 
@@ -50,7 +52,7 @@ if ( ! $search_query ) {
 					id="splms-course-search-input"
 					class="splms-search-input" 
 					placeholder="<?php esc_attr_e( 'Search courses...', 'skillpulse-lms' ); ?>" 
-					value="<?php echo esc_attr( $search_query ); ?>"
+					value="<?php echo esc_attr( $splms_search_query ); ?>"
 					aria-label="<?php esc_attr_e( 'Search courses', 'skillpulse-lms' ); ?>"
 					autocomplete="off"
 				>
@@ -72,16 +74,16 @@ if ( ! $search_query ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, nonce verification handled at higher level.
 			if ( ! empty( $_GET ) ) {
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, nonce verification handled at higher level.
-				foreach ( $_GET as $key => $value ) {
-					if ( in_array( $key, array( 'course_search', 'post_type' ), true ) ) {
+				foreach ( $_GET as $splms_key => $splms_value ) {
+					if ( in_array( $splms_key, array( 'course_search', 'post_type' ), true ) ) {
 						continue;
 					}
-					if ( is_array( $value ) ) {
-						foreach ( $value as $sub_value ) {
-							echo '<input type="hidden" name="' . esc_attr( $key ) . '[]" value="' . esc_attr( $sub_value ) . '" />';
+					if ( is_array( $splms_value ) ) {
+						foreach ( $splms_value as $splms_sub_value ) {
+							echo '<input type="hidden" name="' . esc_attr( $splms_key ) . '[]" value="' . esc_attr( $splms_sub_value ) . '" />';
 						}
 					} else {
-						echo '<input type="hidden" name="' . esc_attr( $key ) . '" value="' . esc_attr( $value ) . '" />';
+						echo '<input type="hidden" name="' . esc_attr( $splms_key ) . '" value="' . esc_attr( $splms_value ) . '" />';
 					}
 				}
 			}
