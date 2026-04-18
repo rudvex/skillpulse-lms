@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkillPulse LMS v1.0.1\n"
 "Report-Msgid-Bugs-To: https://skillpulselms.com/contact\n"
-"POT-Creation-Date: 2026-04-18 05:20:50+00:00\n"
+"POT-Creation-Date: 2026-04-18 08:28:41+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -717,7 +717,6 @@ msgstr ""
 #: includes/admin/wizard/class-wizard-ajax.php:71
 #: includes/admin/wizard/class-wizard-ajax.php:114
 #: includes/admin/wizard/class-wizard-ajax.php:141
-#: includes/modules/core/class-plugin-updater.php:476
 msgid "Insufficient permissions."
 msgstr ""
 
@@ -1792,97 +1791,6 @@ msgstr ""
 
 #: includes/modules/core/class-database.php:844
 msgid "You do not have sufficient permissions."
-msgstr ""
-
-#: includes/modules/core/class-feature-control.php:178
-#: includes/modules/core/class-feature-control.php:238
-msgid "This feature requires an active subscription."
-msgstr ""
-
-#: includes/modules/core/class-feature-control.php:180
-#: includes/modules/core/class-feature-control.php:221
-msgid "Activate License"
-msgstr ""
-
-#: includes/modules/core/class-feature-control.php:186
-msgid "License validation failed"
-msgstr ""
-
-#: includes/modules/core/class-feature-control.php:191
-#: includes/modules/core/class-feature-control.php:231
-msgid "Check License"
-msgstr ""
-
-#: includes/modules/core/class-feature-control.php:199
-msgid "Your subscription has been cancelled."
-msgstr ""
-
-#: includes/modules/core/class-feature-control.php:201
-msgid "Contact Support"
-msgstr ""
-
-#: includes/modules/core/class-feature-control.php:209
-msgid "Your subscription has expired. Renew to continue using this feature."
-msgstr ""
-
-#: includes/modules/core/class-feature-control.php:211
-msgid "Renew Subscription"
-msgstr ""
-
-#: includes/modules/core/class-feature-control.php:219
-msgid "Please activate your license for this domain to use this feature."
-msgstr ""
-
-#: includes/modules/core/class-feature-control.php:229
-msgid "This feature requires a valid subscription."
-msgstr ""
-
-#: includes/modules/core/class-feature-control.php:240
-#: templates/course/partials/course-hero.php:583
-msgid "Upgrade Now"
-msgstr ""
-
-#: includes/modules/core/class-plugin-updater.php:228
-#: includes/modules/core/class-plugin-updater.php:335
-msgid "Failed to connect to update server."
-msgstr ""
-
-#: includes/modules/core/class-plugin-updater.php:238
-#. translators: %d: HTTP status code
-msgid "Update check failed with status code: %d"
-msgstr ""
-
-#: includes/modules/core/class-plugin-updater.php:246
-msgid "Invalid response from update server."
-msgstr ""
-
-#: includes/modules/core/class-plugin-updater.php:343
-msgid "Failed to fetch plugin information."
-msgstr ""
-
-#: includes/modules/core/class-plugin-updater.php:361
-msgid "A comprehensive learning management system for WordPress."
-msgstr ""
-
-#: includes/modules/core/class-plugin-updater.php:406
-msgid "Check for updates"
-msgstr ""
-
-#: includes/modules/core/class-plugin-updater.php:433
-msgid "Checking..."
-msgstr ""
-
-#: includes/modules/core/class-plugin-updater.php:444
-msgid "Update check complete"
-msgstr ""
-
-#: includes/modules/core/class-plugin-updater.php:451
-#: includes/modules/core/class-plugin-updater.php:456
-msgid "Update check failed."
-msgstr ""
-
-#: includes/modules/core/class-plugin-updater.php:489
-msgid "Update check completed successfully."
 msgstr ""
 
 #: includes/modules/core/class-settings.php:324
@@ -9571,6 +9479,10 @@ msgstr ""
 #: templates/course/partials/course-hero.php:572
 #. translators: 1: Discount percentage, 2: Savings amount.
 msgid "(%1$d%% OFF - Save %2$s)"
+msgstr ""
+
+#: templates/course/partials/course-hero.php:583
+msgid "Upgrade Now"
 msgstr ""
 
 #: templates/course/partials/course-hero.php:635
