@@ -182,9 +182,8 @@ class SkillPulse_LMS_Migration {
 		foreach ( $backup_tables as $table ) {
 			$backup_table = "{$table}_backup_v{$version}_{$timestamp}";
 
-			$result = $wpdb->query(
-				$wpdb->prepare( 'CREATE TABLE %i AS SELECT * FROM %i', $backup_table, $table ) // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.SchemaChange, PluginCheck.Security.DirectDB.UnescapedDBParameter
-			);
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table names are from internal config, not user input.
+			$result = $wpdb->query( 'CREATE TABLE `' . esc_sql( $backup_table ) . '` AS SELECT * FROM `' . esc_sql( $table ) . '`' );
 
 			if ( false === $result ) {
 				$this->log_error( "Failed to backup table {$table} to {$backup_table}" );
@@ -415,8 +414,8 @@ class SkillPulse_LMS_Migration {
 				$table_date = $matches[1];
 
 				if ( $table_date < $cutoff_date ) {
-					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.SchemaChange, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Cleanup operation.
-					$wpdb->query( $wpdb->prepare( 'DROP TABLE IF EXISTS %i', $table->table_name ) );
+					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Cleanup operation, table name from SHOW TABLES query.
+					$wpdb->query( 'DROP TABLE IF EXISTS `' . esc_sql( $table->table_name ) . '`' );
 					$this->log_message( "Cleaned up old backup table: {$table->table_name}" );
 				}
 			}
@@ -443,7 +442,7 @@ class SkillPulse_LMS_Migration {
 
 		// Drop old unique constraint if it exists.
 		$existing_indexes = $wpdb->get_results(
-			$wpdb->prepare( 'SHOW INDEX FROM %i WHERE Key_name = %s', $relationships_table, 'parent_child_unique' ),
+			$wpdb->prepare( 'SHOW INDEX FROM `' . esc_sql( $relationships_table ) . '` WHERE Key_name = %s', 'parent_child_unique' ), // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name from esc_sql().
 			ARRAY_A
 		);
 
@@ -454,7 +453,7 @@ class SkillPulse_LMS_Migration {
 
 		// Add new unique constraint that includes child_type.
 		$existing_new_indexes = $wpdb->get_results(
-			$wpdb->prepare( 'SHOW INDEX FROM %i WHERE Key_name = %s', $relationships_table, 'parent_child_type_unique' ),
+			$wpdb->prepare( 'SHOW INDEX FROM `' . esc_sql( $relationships_table ) . '` WHERE Key_name = %s', 'parent_child_type_unique' ), // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name from esc_sql().
 			ARRAY_A
 		);
 
@@ -485,7 +484,7 @@ class SkillPulse_LMS_Migration {
 			foreach ( $table_indexes as $index_name => $index_sql ) {
 				// Check if index already exists.
 				$existing_indexes = $wpdb->get_results(
-					$wpdb->prepare( 'SHOW INDEX FROM %i', $table ),
+					'SHOW INDEX FROM `' . esc_sql( $table ) . '`', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name from internal config via esc_sql().
 					ARRAY_A
 				);
 
