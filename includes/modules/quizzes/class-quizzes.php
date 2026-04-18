@@ -1864,19 +1864,27 @@ class SkillPulse_LMS_Quizzes {
 		$unique_filename = $file_basename . '_' . time() . '_' . wp_generate_password( 8, false ) . '.' . $file_ext;
 		$target_path     = trailingslashit( $full_sub_dir ) . $unique_filename;
 
-		// Move uploaded file to custom quiz uploads directory.
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_move_uploaded_file -- Custom directory structure for quiz file submissions; wp_handle_upload() doesn't support custom target paths.
-		if ( ! move_uploaded_file( $file['tmp_name'], $target_path ) ) {
+		// Move uploaded file to custom quiz uploads directory using WP Filesystem.
+		global $wp_filesystem;
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+		if ( ! WP_Filesystem() ) {
+			return new WP_Error(
+				'filesystem_error',
+				__( 'Could not initialize WordPress filesystem.', 'skillpulse-lms' )
+			);
+		}
+
+		$file_contents = $wp_filesystem->get_contents( $file['tmp_name'] );
+		if ( false === $file_contents || ! $wp_filesystem->put_contents( $target_path, $file_contents, 0644 ) ) {
 			return new WP_Error(
 				'file_upload_failed',
 				__( 'Failed to move uploaded file.', 'skillpulse-lms' ),
 				array( 'file' => $file['name'] )
 			);
 		}
-
-		// Set proper file permissions.
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_chmod -- Setting file permissions for uploaded quiz files.
-		chmod( $target_path, 0644 );
+		wp_delete_file( $file['tmp_name'] );
 
 		// Build file URL.
 		$file_url = trailingslashit( $dir_info['url'] ) . $sub_dir . '/' . $unique_filename;

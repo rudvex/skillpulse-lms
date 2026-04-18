@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkillPulse LMS v1.0.1\n"
 "Report-Msgid-Bugs-To: https://skillpulselms.com/contact\n"
-"POT-Creation-Date: 2026-04-18 04:38:46+00:00\n"
+"POT-Creation-Date: 2026-04-18 05:20:50+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5156,8 +5156,8 @@ msgstr ""
 
 #: includes/modules/quizzes/class-quiz-service.php:386
 #: includes/modules/quizzes/class-quiz-service.php:516
-#: includes/modules/quizzes/class-quizzes.php:1916
-#: includes/modules/quizzes/class-quizzes.php:2720
+#: includes/modules/quizzes/class-quizzes.php:1924
+#: includes/modules/quizzes/class-quizzes.php:2728
 #: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:556
 #: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:928
 msgid "Quiz attempt not found."
@@ -5245,43 +5245,47 @@ msgstr ""
 msgid "This was a preview attempt. Results have been saved as guest attempt."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:1872
+#: includes/modules/quizzes/class-quizzes.php:1875
+msgid "Could not initialize WordPress filesystem."
+msgstr ""
+
+#: includes/modules/quizzes/class-quizzes.php:1883
 msgid "Failed to move uploaded file."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2529
+#: includes/modules/quizzes/class-quizzes.php:2537
 #. translators: %s: File extension
 msgid "File type .%s is not allowed for security reasons."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2542
+#: includes/modules/quizzes/class-quizzes.php:2550
 #. translators: %s: Maximum file size
 msgid "File size exceeds maximum limit of %s."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2556
+#: includes/modules/quizzes/class-quizzes.php:2564
 msgid "Filename contains suspicious content."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2578
+#: includes/modules/quizzes/class-quizzes.php:2586
 msgid "File type does not match file extension."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2680
+#: includes/modules/quizzes/class-quizzes.php:2688
 msgid "Unknown status"
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2702
+#: includes/modules/quizzes/class-quizzes.php:2710
 #. translators: %s: Invalid status value
 msgid "Invalid status: %s"
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2729
+#: includes/modules/quizzes/class-quizzes.php:2737
 #. translators: 1: Current status, 2: New status
 msgid "Cannot transition from %1$s to %2$s."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2775
+#: includes/modules/quizzes/class-quizzes.php:2783
 #: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:875
 msgid "Failed to update quiz attempt status."
 msgstr ""
