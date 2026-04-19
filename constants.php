@@ -18,7 +18,7 @@ if ( ! defined( 'SPLMS_IS_FREE' ) ) {
 	define( 'SPLMS_IS_FREE', true );
 }
 if ( ! defined( 'SKILLPULSE_LMS_VERSION' ) ) {
-	define( 'SKILLPULSE_LMS_VERSION', '1.0.1' );
+	define( 'SKILLPULSE_LMS_VERSION', '1.0.0' );
 }
 
 if ( ! defined( 'SKILLPULSE_LMS_DB_VERSION' ) ) {

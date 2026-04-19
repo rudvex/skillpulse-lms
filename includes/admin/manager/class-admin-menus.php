@@ -173,17 +173,6 @@ class SkillPulse_LMS_Admin_Menus {
 			'splms-separator',
 			'__return_null'
 		);
-
-		// Quiz Attempts submenu.
-		add_submenu_page(
-			'skillpulse-lms',
-			__( 'Quiz Attempts', 'skillpulse-lms' ),
-			__( 'Quiz Attempts', 'skillpulse-lms' ),
-			'manage_options',
-			'splms-quiz-attempts',
-			array( $this, 'quiz_attempts_page' )
-		);
-
 		// Enrollments submenu.
 		add_submenu_page(
 			'skillpulse-lms',
@@ -201,16 +190,6 @@ class SkillPulse_LMS_Admin_Menus {
 			'read',
 			'splms-separator',
 			'__return_null'
-		);
-
-		// Tools submenu.
-		add_submenu_page(
-			'skillpulse-lms',
-			__( 'Tools', 'skillpulse-lms' ),
-			__( 'Tools', 'skillpulse-lms' ),
-			'manage_options',
-			'splms-tools',
-			array( $this, 'tools_page' )
 		);
 		// Settings submenu.
 		add_submenu_page(

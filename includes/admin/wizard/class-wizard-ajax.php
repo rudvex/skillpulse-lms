@@ -6,7 +6,7 @@
  * we reuse existing license and trial AJAX handlers.
  *
  * @package SkillPulse_LMS
- * @since 1.0.1
+ * @since 1.0.0
  */
 
 // Prevent direct access.

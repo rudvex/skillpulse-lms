@@ -68,10 +68,6 @@ class SkillPulse_LMS_Rest_API {
 
 			'includes/rest-api/config/class-rest-config-controller',
 
-			// REST API Authentication.
-			'includes/rest-api/auth/class-jwt-auth-handler',
-			'includes/rest-api/auth/class-rest-auth-controller',
-
 			// REST API Settings.
 			'includes/rest-api/settings/class-rest-settings-controller',
 
@@ -83,7 +79,6 @@ class SkillPulse_LMS_Rest_API {
 
 			// REST API Sections.
 			'includes/rest-api/sections/class-rest-section-controller',
-			'includes/rest-api/sections/class-rest-section-pricing-controller',
 			'includes/rest-api/sections/admin/class-rest-section-settings-controller',
 
 			// REST API Lessons.
@@ -99,29 +94,9 @@ class SkillPulse_LMS_Rest_API {
 			'includes/rest-api/quizzes/admin/class-rest-quiz-questions-controller',
 			'includes/rest-api/quizzes/class-rest-quiz-attempts-controller',
 
-			// REST API Certificates.
-			'includes/rest-api/certificates/class-rest-certificate-controller',
-
 			// REST API Features.
 			'includes/rest-api/features/enrollments/class-rest-enrollments-controller',
 			'includes/rest-api/features/signup/class-rest-signup-controller',
-
-			// REST API Integrations.
-			'includes/rest-api/integrations/class-rest-memberships-controller',
-
-			// REST API Notifications (Frontend).
-			'includes/rest-api/notifications/class-rest-notifications-controller',
-
-			// REST API Admin Dashboard.
-			'includes/rest-api/admin/class-rest-admin-overview-controller',
-			'includes/rest-api/admin/class-rest-admin-report-controller',
-			'includes/rest-api/admin/class-rest-admin-tools-controller',
-			'includes/rest-api/admin/class-rest-admin-email-templates-controller',
-			'includes/rest-api/admin/class-rest-admin-notifications-controller',
-			'includes/rest-api/admin/class-rest-orders-controller',
-
-			// REST API Reviews.
-			'includes/rest-api/reviews/class-rest-reviews-controller',
 
 		);
 
@@ -165,7 +140,7 @@ class SkillPulse_LMS_Rest_API {
 	 * @return void
 	 */
 	protected function setup_filters() {
-		// Setup trial API limits (since 1.0.1).
+		// Setup trial API limits (since 1.0.0).
 		add_filter( 'rest_pre_dispatch', array( $this, 'check_trial_api_limits' ), 10, 3 );
 		add_action( 'rest_after_insert_splms_course', array( $this, 'track_api_usage' ), 10, 3 );
 		add_action( 'rest_after_insert_splms_lesson', array( $this, 'track_api_usage' ), 10, 3 );
@@ -178,7 +153,7 @@ class SkillPulse_LMS_Rest_API {
 	 *
 	 * Prevents API requests when trial limit is exceeded and returns 429 status.
 	 *
-	 * @since 1.0.1
+	 * @since 1.0.0
 	 *
 	 * @param mixed           $result  Response to replace the requested version with.
 	 * @param WP_REST_Server  $server  Server instance.
@@ -215,7 +190,7 @@ class SkillPulse_LMS_Rest_API {
 			/**
 			 * Fire action to track API usage.
 			 *
-			 * @since 1.0.1
+			 * @since 1.0.0
 			 *
 			 * @param string $route   API route being accessed.
 			 * @param array  $args    Request arguments.
@@ -231,7 +206,7 @@ class SkillPulse_LMS_Rest_API {
 	 *
 	 * Tracks usage for data modification endpoints during trial period.
 	 *
-	 * @since 1.0.1
+	 * @since 1.0.0
 	 *
 	 * @param WP_Post         $post     Inserted or updated post object.
 	 * @param WP_REST_Request $request  Request object.
@@ -260,7 +235,7 @@ class SkillPulse_LMS_Rest_API {
 	 *
 	 * Provides clients with information about API limits and remaining calls.
 	 *
-	 * @since 1.0.1
+	 * @since 1.0.0
 	 *
 	 * @param WP_HTTP_Response $response Result to send to the client.
 	 * @param WP_REST_Server   $server   Server instance.
@@ -302,7 +277,7 @@ class SkillPulse_LMS_Rest_API {
 	 *
 	 * Essential endpoints are never blocked during trial period.
 	 *
-	 * @since 1.0.1
+	 * @since 1.0.0
 	 *
 	 * @param string $route API route path.
 	 * @return bool True if essential endpoint.
@@ -318,7 +293,7 @@ class SkillPulse_LMS_Rest_API {
 		/**
 		 * Filter essential API endpoints that bypass trial limits.
 		 *
-		 * @since 1.0.1
+		 * @since 1.0.0
 		 *
 		 * @param array $essential_patterns Array of essential endpoint patterns.
 		 */
@@ -346,10 +321,6 @@ class SkillPulse_LMS_Rest_API {
 		$controller = new SkillPulse_LMS_Rest_Config_Controller();
 		$controller->register_routes();
 
-		// Authentication.
-		$controller = new SkillPulse_LMS_Rest_Auth_Controller();
-		$controller->register_routes();
-
 		// Settings.
 		$controller = new SkillPulse_LMS_Rest_Settings_Controller();
 		$controller->register_routes();
@@ -370,10 +341,6 @@ class SkillPulse_LMS_Rest_API {
 
 		// Sections.
 		$controller = new SkillPulse_LMS_REST_Section_Controller();
-		$controller->register_routes();
-
-		// Section Pricing.
-		$controller = new SkillPulse_LMS_REST_Section_Pricing_Controller();
 		$controller->register_routes();
 
 		// Section Settings.
@@ -411,57 +378,16 @@ class SkillPulse_LMS_Rest_API {
 		$controller->register_routes();
 
 		if ( splms_get_setting( 'enable_certificates', false ) ) {
-			// Certificates.
-			$controller = new SkillPulse_LMS_REST_Certificate_Controller();
-			$controller->register_routes();
-
 		}
 
 		// Enrollments.
 		$controller = new SkillPulse_LMS_Enrollments_REST_Controller();
 		$controller->register_routes();
 
-		// Integrations: Memberships.
-		$controller = new SkillPulse_LMS_REST_Memberships_Controller();
-		$controller->register_routes();
-
 		// Signup.
 		$controller = new SkillPulse_LMS_REST_Signup_Controller();
 		$controller->register_routes();
 
-		// Notifications (Frontend).
-		$controller = new SkillPulse_LMS_REST_Notifications_Controller();
-		$controller->register_routes();
 
-		// Admin Dashboard.
-		$controller = new SkillPulse_LMS_Rest_Admin_Overview_Controller();
-		$controller->register_routes();
-
-		// Tools.
-		$controller = new SkillPulse_LMS_Rest_Admin_Tools_Controller();
-		$controller->register_routes();
-
-		// Reports.
-		$controller = new SkillPulse_LMS_Rest_Admin_Report_Controller();
-		$controller->register_routes();
-
-		// Email Templates.
-		$controller = new SkillPulse_LMS_REST_Admin_Email_Templates_Controller();
-		$controller->register_routes();
-
-		// Notifications.
-		$controller = new SkillPulse_LMS_REST_Admin_Notifications_Controller();
-		$controller->register_routes();
-
-		// Orders.
-		$controller = new SkillPulse_LMS_REST_Orders_Controller();
-		$controller->register_routes();
-
-		// Trial system routes are now handled directly by SkillPulse_LMS_Trial_Manager
-		// via register_rest_routes() method in the trial manager class.
-
-		// Reviews.
-		$controller = new SPLMS_REST_Reviews_Controller();
-		$controller->register_routes();
 	}
 }

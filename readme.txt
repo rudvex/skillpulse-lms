@@ -3,7 +3,7 @@ Contributors: skillpulselms
 Donate link: https://skillpulselms.com/
 Tags: lms, learning management system, courses, lessons, quizzes, education, elearning
 Requires at least: 5.0
-Tested up to: 6.4
+Tested up to: 6.9
 Requires PHP: 7.4
 Stable tag: 1.0.0
 License: GPLv2 or later

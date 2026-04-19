@@ -6,7 +6,7 @@
  * and integration with existing SkillPulse LMS systems.
  *
  * @package SkillPulse_LMS
- * @since 1.0.1
+ * @since 1.0.0
  */
 
 // Prevent direct access.

@@ -68,12 +68,7 @@ class SkillPulse_LMS_Modules {
 			'includes/modules/activity/class-user-activity-query',
 			'includes/modules/enrollment/class-enrollments-query',
 			'includes/modules/enrollment/class-enrollment',
-			'includes/modules/reviews/class-reviews',
-			'includes/modules/notifications/class-notification',
 			'includes/modules/core/class-access-control',
-			'includes/modules/certificates/class-certificate-html-generator',
-			'includes/modules/certificates/class-certificate-verification',
-			'includes/modules/certificates/class-certificates',
 			'includes/modules/integrations/class-membership-integration',
 			'includes/modules/integrations/class-membership-display',
 		);
@@ -102,21 +97,9 @@ class SkillPulse_LMS_Modules {
 		SkillPulse_LMS_Lessons::get_instance();
 		SkillPulse_LMS_Quizzes::get_instance();
 		SkillPulse_LMS_Enrollment::get_instance();
-		SkillPulse_LMS_Reviews::get_instance();
 		SkillPulse_LMS_Orders::get_instance();
 
-		// Initialize notification module (includes email and in-app notifications).
-		SkillPulse_LMS_Notification::get_instance();
 		SkillPulse_LMS_Access_Control::get_instance();
-
-		// Check if certificates are enabled.
-		if ( splms_get_setting( 'enable_certificates', false ) ) {
-			// Initialize certificate verification system.
-			SkillPulse_LMS_Certificate_Verification::get_instance();
-
-			// Initialize certificate system.
-			SkillPulse_LMS_Certificates::get_instance();
-		}
 
 		// Register built-in membership integrations.
 		add_filter( 'splms_register_membership_integrations', array( $this, 'register_membership_integrations' ) );
