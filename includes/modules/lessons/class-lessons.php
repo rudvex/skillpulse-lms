@@ -646,11 +646,6 @@ class SkillPulse_LMS_Lessons {
 		if ( isset( $progress_data['percentage'] ) && $progress_data['percentage'] >= 100 ) {
 			$certificates_instance = SkillPulse_LMS_Certificates::get_instance();
 
-			// Check certificate settings.
-			$certificates_enabled       = splms_get_setting( 'enable_certificates', false );
-			$auto_generate_enabled      = splms_get_setting( 'certificate_auto_generate', true );
-			$course_certificate_enabled = splms_is_certificate_enabled( $course_id );
-
 			// Small delay to ensure certificate generation hooks have completed.
 			// The certificate is generated via 'splms_course_completed' action.
 			usleep( 100000 ); // 0.1 second delay.
