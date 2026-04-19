@@ -99,11 +99,8 @@ class SkillPulse_LMS_Frontend {
 		SkillPulse_LMS_Dashboard_API::get_instance();
 		SkillPulse_LMS_Dashboard_Service::get_instance();
 
-		// Check if certificates are enabled.
-		if ( splms_get_setting( 'enable_certificates', false ) ) {
-			// Initialize certificate system.
-			SkillPulse_LMS_Certificate_Display::get_instance();
-		}
+		// Allow modules to initialize frontend components.
+		do_action( 'splms_frontend_loaded' );
 	}
 
 	/**
@@ -211,11 +208,13 @@ class SkillPulse_LMS_Frontend {
 			'user_logged_in' => $user_logged_in,
 
 			// Nonces for different actions.
-			'nonces'         => array(
-				'splms_nonce'             => wp_create_nonce( 'splms_nonce' ),
-				'splms_frontend_nonce'    => wp_create_nonce( 'splms_frontend_nonce' ),
-				'splms_certificate_nonce' => wp_create_nonce( 'splms_certificate_nonce' ),
-				'splms_reviews_nonce'     => wp_create_nonce( 'splms_reviews_nonce' ),
+			'nonces'         => apply_filters(
+				'splms_frontend_nonces',
+				array(
+					'splms_nonce'          => wp_create_nonce( 'splms_nonce' ),
+					'splms_frontend_nonce' => wp_create_nonce( 'splms_frontend_nonce' ),
+					'splms_reviews_nonce'  => wp_create_nonce( 'splms_reviews_nonce' ),
+				)
 			),
 
 			// Feature settings.

@@ -96,72 +96,10 @@ $splms_rating_summary = array_merge(
 		</div>
 	<?php } ?>
 
-	<!-- Certificate Section -->
 	<?php
-	$splms_user_id             = get_current_user_id();
-	$splms_certificate_enabled = splms_is_certificate_enabled( $splms_course_id );
-	$splms_is_enrolled         = splms_is_user_enrolled( $splms_course_id );
-	$splms_enrollment_status   = splms_get_user_enrollment_status( $splms_course_id );
-	$splms_is_completed        = 'completed' === $splms_enrollment_status;
-
-	if ( $splms_certificate_enabled && $splms_is_enrolled && $splms_is_completed ) {
-		$splms_certificate_manager = SkillPulse_LMS_Certificates::get_instance();
-		$splms_has_certificate     = $splms_certificate_manager->user_has_certificate( $splms_user_id, $splms_course_id );
-		$splms_certificate_link    = $splms_certificate_manager->get_certificate_link( $splms_user_id, $splms_course_id );
-
-		?>
-		<div class="sidebar-widget certificate-widget">
-			<h3 class="widget-title">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
-							stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-				</svg>
-				<?php esc_html_e( 'Certificate', 'skillpulse-lms' ); ?>
-			</h3>
-			<div class="certificate-content">
-				<?php if ( $splms_has_certificate && $splms_certificate_link ) { ?>
-					<div class="certificate-available">
-						<div class="certificate-status">
-							<span class="status-badge status-completed">
-								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
-											stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-								</svg>
-								<?php esc_html_e( 'Certificate Available', 'skillpulse-lms' ); ?>
-							</span>
-						</div>
-						<p class="certificate-description">
-							<?php esc_html_e( 'Congratulations! You have successfully completed this course and earned your certificate.', 'skillpulse-lms' ); ?>
-						</p>
-						<div class="certificate-actions">
-							<a href="<?php echo esc_url( $splms_certificate_link ); ?>" class="btn btn-primary certificate-view" target="_blank">
-								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M1 12S5 4 12 4S23 12 23 12S19 20 12 20S1 12 1 12Z" stroke="currentColor" stroke-width="2"/>
-									<circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
-								</svg>
-								<?php esc_html_e( 'View Certificate', 'skillpulse-lms' ); ?>
-							</a>
-						</div>
-					</div>
-				<?php } else { ?>
-					<div class="certificate-generating">
-						<div class="certificate-status">
-							<span class="status-badge status-processing">
-								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M12 2V6M12 18V22M4.93 4.93L7.76 7.76M16.24 16.24L19.07 19.07M2 12H6M18 12H22M4.93 19.07L7.76 16.24M16.24 7.76L19.07 4.93"
-											stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-								</svg>
-								<?php esc_html_e( 'Generating Certificate', 'skillpulse-lms' ); ?>
-							</span>
-						</div>
-						<p class="certificate-description">
-							<?php esc_html_e( 'Your certificate is being generated. Please check back in a few moments.', 'skillpulse-lms' ); ?>
-						</p>
-					</div>
-				<?php } ?>
-			</div>
-		</div>
-	<?php } ?>
+	// Allow modules to render sidebar widgets (e.g., certificate section).
+	do_action( 'splms_course_sidebar_widgets', $splms_course_id );
+	?>
 
 	<!-- Enhanced Share Course -->
 	<div class="sidebar-widget share-widget">

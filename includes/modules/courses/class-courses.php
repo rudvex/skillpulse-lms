@@ -127,15 +127,8 @@ class SkillPulse_LMS_Courses {
 			}
 		}
 
-		// Auto-select default certificate if certificate is enabled but no template is selected.
-		$completion_settings = isset( $course_settings['course_completion_settings'] ) ? $course_settings['course_completion_settings'] : array();
-		if ( ! empty( $completion_settings['certificate_enabled'] ) && empty( $completion_settings['certificate_template_id'] ) ) {
-			$certificates           = SkillPulse_LMS_Certificates::get_instance();
-			$default_certificate_id = $certificates->get_default_certificate();
-			if ( $default_certificate_id ) {
-				$course_settings['course_completion_settings']['certificate_template_id'] = (string) $default_certificate_id;
-			}
-		}
+		// Allow modules to modify course settings (e.g., auto-assign default certificate).
+		$course_settings = apply_filters( 'splms_course_settings_loaded', $course_settings, $course_id );
 
 		return apply_filters( 'splms_get_course_settings', $course_settings, $course_id );
 	}
@@ -166,15 +159,8 @@ class SkillPulse_LMS_Courses {
 		// Validate and sanitize settings.
 		$sanitized_settings = $this->validate_and_sanitize_settings( $new_settings, $defaults_settings );
 
-		// Auto-select default certificate if certificate is enabled but no template is selected.
-		$completion_settings = isset( $sanitized_settings['course_completion_settings'] ) ? $sanitized_settings['course_completion_settings'] : array();
-		if ( ! empty( $completion_settings['certificate_enabled'] ) && empty( $completion_settings['certificate_template_id'] ) ) {
-			$certificates           = SkillPulse_LMS_Certificates::get_instance();
-			$default_certificate_id = $certificates->get_default_certificate();
-			if ( $default_certificate_id ) {
-				$sanitized_settings['course_completion_settings']['certificate_template_id'] = (string) $default_certificate_id;
-			}
-		}
+		// Allow modules to modify sanitized settings (e.g., auto-assign default certificate).
+		$sanitized_settings = apply_filters( 'splms_course_settings_sanitized', $sanitized_settings, $course_id );
 
 		foreach ( $defaults_settings as $key => $default_value ) {
 			$meta_key = "_splms_{$key}";
