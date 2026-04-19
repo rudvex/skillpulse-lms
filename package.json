@@ -1,6 +1,6 @@
 {
   "name": "skillpulse-lms",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "LMS",
   "main": "index.js",
   "scripts": {
@@ -42,8 +42,8 @@
   "homepage": "https://github.com/xpertiescoder/skillpulse-lms#readme",
   "dependencies": {
     "@wordpress/block-editor": "^12.0.0",
-    "@wordpress/rich-text": "^6.0.0",
     "@wordpress/format-library": "^4.0.0",
+    "@wordpress/rich-text": "^6.0.0",
     "react": "^18.3.1",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
@@ -54,12 +54,12 @@
   "devDependencies": {
     "@babel/core": "^7.26.0",
     "@babel/preset-react": "^7.26.3",
-    "@wordpress/env": "^10.39.0",
-    "@wordpress/scripts": "^30.7.0",
+    "@wordpress/env": "^10.38.0",
+    "@wordpress/scripts": "^19.2.4",
     "babel-loader": "^9.2.1",
     "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
-    "css-minimizer-webpack-plugin": "^7.0.0",
+    "css-minimizer-webpack-plugin": "^8.0.0",
     "gettext-extractor": "^4.0.1",
     "grunt": "^1.6.1",
     "grunt-replace": "^2.0.2",
@@ -72,5 +72,5 @@
     "webpack": "^5.90.0",
     "webpack-merge": "^6.0.1"
   },
-  "SPLMSVersion": "1.0.1"
+  "SPLMSVersion": "1.0.0"
 }

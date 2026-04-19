@@ -115,27 +115,6 @@ do_action( 'splms_before_dashboard_content' );
 						</a>
 					</li>
 					<li class="splms-nav-item">
-						<a href="<?php echo esc_url( $splms_dashboard->get_tab_url( 'certificates' ) ); ?>"
-							class="splms-nav-link<?php echo ( 'certificates' === $splms_current_tab ) ? ' active' : ''; ?>">
-							<i class="hgi-stroke hgi-certificate-01"></i>
-							<?php esc_html_e( 'Certificates', 'skillpulse-lms' ); ?>
-						</a>
-					</li>
-					<li class="splms-nav-item">
-						<a href="<?php echo esc_url( $splms_dashboard->get_tab_url( 'notifications' ) ); ?>"
-							class="splms-nav-link<?php echo ( 'notifications' === $splms_current_tab ) ? ' active' : ''; ?>">
-							<i class="hgi-stroke hgi-notification-03"></i>
-							<?php esc_html_e( 'Notifications', 'skillpulse-lms' ); ?>
-						</a>
-					</li>
-					<li class="splms-nav-item">
-						<a href="<?php echo esc_url( $splms_dashboard->get_tab_url( 'orders' ) ); ?>"
-							class="splms-nav-link<?php echo ( 'orders' === $splms_current_tab ) ? ' active' : ''; ?>">
-							<i class="hgi-stroke hgi-clipboard"></i>
-							<?php esc_html_e( 'Orders', 'skillpulse-lms' ); ?>
-						</a>
-					</li>
-					<li class="splms-nav-item">
 						<a href="<?php echo esc_url( $splms_dashboard->get_tab_url( 'settings' ) ); ?>"
 							class="splms-nav-link<?php echo ( 'settings' === $splms_current_tab ) ? ' active' : ''; ?>">
 							<i class="hgi-stroke hgi-settings-02"></i>

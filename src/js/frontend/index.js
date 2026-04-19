@@ -5,7 +5,6 @@ import { SPLMSUser } from './core/user';
 import { SPLMSCourseActions } from './modules/courses/course-actions';
 import { SPLMSCourseFilters } from './modules/courses/course';
 import { SPLMSSearchFilter } from './modules/search/search-filter';
-import { SPLMSReviews } from './modules/reviews/reviews';
 import { SPLMSUIEnhancements } from './components/ui-enhancements';
 import { SPLMSAvatarUpload } from './components/avatar-upload';
 //import './templates/instructor-template';
@@ -14,13 +13,10 @@ import './modules/quizzes/questions';
 import './modules/quizzes/quiz';
 import './modules/question-matching';
 import './modules/question-ordering';
-import { SPLMSCertificateDisplay } from './modules/certificates/certificate-display';
 import './modules/auth/auth';
 import './modules/auth/signup.validation';
 import './components/notifications'; // Unified notification system
-import './api/notifications'; // REST API helper for notifications (available globally as SPLMSNotificationsAPI)
 import './components/header-interactions'; // Mobile menu and user dropdown only
-import './modules/checkout/checkout'; // Checkout page functionality
 // Removed: notifications-page.js (functionality merged into notifications.js)
 // Removed: nav-menu-profile.js (notification functionality moved to notifications.js)
 
@@ -40,15 +36,11 @@ jQuery(document).ready(function() {
     SPLMSCore.courseFilters = new SPLMSCourseFilters();
 
     SPLMSCore.searchFilter = new SPLMSSearchFilter();
-    SPLMSCore.reviews = new SPLMSReviews();
-
     SPLMSCore.uiEnhancements = new SPLMSUIEnhancements();
     SPLMSCore.avatarUpload = new SPLMSAvatarUpload();
     
     
     // Initialize certificate display
-    SPLMSCore.certificateDisplay = new SPLMSCertificateDisplay();
-        
     // Re-initialize on AJAX content load
     jQuery(document).on('splms_content_loaded', function() {
         // Re-initialize modules that need to bind to new content
@@ -60,9 +52,6 @@ jQuery(document).ready(function() {
         }
         if (SPLMSCore.searchFilter) {
             SPLMSCore.searchFilter.init();
-        }
-        if (SPLMSCore.reviews) {
-            SPLMSCore.reviews.init();
         }
     });
 });

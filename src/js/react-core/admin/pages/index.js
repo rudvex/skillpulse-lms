@@ -3,8 +3,5 @@
 
 import './settings';
 import './enrollments';
-import './overview';
-import './tools';
-import './quiz-attempts';
 import './wizard';
 

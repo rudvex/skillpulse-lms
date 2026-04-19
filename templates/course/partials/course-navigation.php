@@ -59,18 +59,6 @@ $splms_current_tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_
 					</a>
 				</li>
 
-				<?php if ( splms_get_setting( 'enable_course_reviews', true ) ) { ?>
-					<li class="splms-nav-item">
-						<a href="<?php echo esc_url( add_query_arg( 'tab', 'reviews', get_permalink() ) ); ?>"
-							class="splms-nav-link <?php echo 'reviews' === $splms_current_tab ? 'splms-nav-link--active' : ''; ?>">
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M11.049 2.927C11.3483 2.00556 12.6517 2.00556 12.951 2.927L14.4697 7.60081C14.6035 8.01284 14.9875 8.29653 15.4207 8.29653H20.4329C21.4016 8.29653 21.8044 9.54169 21.0207 10.1008L17.0205 12.9894C16.6704 13.244 16.5234 13.6982 16.6572 14.1102L18.1759 18.784C18.4752 19.7054 17.4241 20.4649 16.6405 19.9058L12.6402 17.0172C12.2901 16.7626 11.7099 16.7626 11.3598 17.0172L7.35954 19.9058C6.57589 20.4649 5.52481 19.7054 5.82411 18.784L7.34276 14.1102C7.47659 13.6982 7.32961 13.244 6.97946 12.9894L2.97918 10.1008C2.19553 9.54169 2.59832 8.29653 3.56708 8.29653H8.57929C9.01252 8.29653 9.39647 8.01284 9.53029 7.60081L11.049 2.927Z"
-										stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-							<span class="splms-nav-link__text"><?php esc_html_e( 'Reviews', 'skillpulse-lms' ); ?></span>
-						</a>
-					</li>
-				<?php } ?>
 			</ul>
 		</nav>
 	</div>
