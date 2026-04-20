@@ -339,30 +339,20 @@ function splms_get_course_rating( $course_id = null ) {
 		$course_id = get_the_ID();
 	}
 
-	$rating_summary = SPLMS_Review_Manager::get_rating_summary( $course_id );
-
-	// Ensure we have the proper structure.
-	if ( ! is_array( $rating_summary ) ) {
-		$rating_summary = array();
-	}
-
-	// Set default values if keys are missing.
-	$rating_summary = array_merge(
-		array(
-			'average_rating'   => 0,
-			'total_reviews'    => 0,
-			'rating_breakdown' => array(
-				5 => 0,
-				4 => 0,
-				3 => 0,
-				2 => 0,
-				1 => 0,
-			),
+	// Default empty rating structure. Reviews module populates via splms_course_rating filter.
+	$default_summary = array(
+		'average_rating'   => 0,
+		'total_reviews'    => 0,
+		'rating_breakdown' => array(
+			5 => 0,
+			4 => 0,
+			3 => 0,
+			2 => 0,
+			1 => 0,
 		),
-		$rating_summary
 	);
 
-	return apply_filters( 'splms_course_rating', $rating_summary, $course_id );
+	return apply_filters( 'splms_course_rating', $default_summary, $course_id );
 }
 
 
@@ -379,6 +369,15 @@ function splms_get_course_rating( $course_id = null ) {
 function splms_get_course_reviews( $course_id = null, $args = array() ) {
 	if ( ! $course_id ) {
 		$course_id = get_the_ID();
+	}
+
+	// Return empty result if reviews module is not loaded.
+	if ( ! class_exists( 'SPLMS_Review_Manager' ) ) {
+		return array(
+			'reviews' => array(),
+			'total'   => 0,
+			'pages'   => 0,
+		);
 	}
 
 	return SPLMS_Review_Manager::get_course_reviews( $course_id, $args );
