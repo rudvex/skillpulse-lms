@@ -1721,7 +1721,7 @@ class SkillPulse_LMS_Quizzes {
 		// Get completed lessons from lesson_progress table.
 		$lesson_progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
-		$completed_lessons     = $wpdb->get_var(
+		$completed_lessons = $wpdb->get_var(
 			$wpdb->prepare(
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
 				"SELECT COUNT(*) FROM {$lesson_progress_table} WHERE user_id = %d AND course_id = %d AND is_completed = 1",

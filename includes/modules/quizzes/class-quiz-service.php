@@ -374,7 +374,7 @@ class SkillPulse_LMS_Quiz_Service {
 		// Get attempt data.
 		$table_name = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
-		$attempt    = $wpdb->get_row(
+		$attempt = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT * FROM {$table_name} WHERE id = %d", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter
 				$attempt_id
@@ -506,7 +506,7 @@ class SkillPulse_LMS_Quiz_Service {
 		// Get attempt data.
 		$table_name = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
-		$attempt    = $wpdb->get_row(
+		$attempt = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT * FROM {$table_name} WHERE id = %d", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter
 				$attempt_id

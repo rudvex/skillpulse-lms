@@ -551,8 +551,8 @@ class SkillPulse_LMS_Migration {
 
 		if ( empty( $column_exists ) ) {
 			// Add the 'data' column after 'time_spent'.
-			$result = $wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.SchemaChange
-				"ALTER TABLE `{$lesson_progress_table}` ADD COLUMN `data` longtext NULL AFTER `time_spent`" // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table write operation.
+			$result = $wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+				"ALTER TABLE `{$lesson_progress_table}` ADD COLUMN `data` longtext NULL AFTER `time_spent`" // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.SchemaChange -- Custom table write operation.
 			);
 
 			if ( false === $result ) {

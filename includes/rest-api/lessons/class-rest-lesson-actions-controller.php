@@ -348,7 +348,7 @@ class SkillPulse_LMS_REST_Lesson_Actions_Controller extends WP_REST_Controller {
 		} else {
 			$progress_data['started_at'] = current_time( 'mysql' );
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
-			$result                      = $wpdb->insert( $table_name, $progress_data );
+			$result = $wpdb->insert( $table_name, $progress_data );
 		}
 
 		if ( false === $result ) {
