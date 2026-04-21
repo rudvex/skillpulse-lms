@@ -300,7 +300,7 @@ class SkillPulse_LMS_Lessons {
 	public function get_lesson_attachments( $lesson_id ) {
 		$settings = $this->get_lesson_settings( $lesson_id );
 
-		return $settings['lesson_attachments'];
+		return isset( $settings['lesson_attachments'] ) ? $settings['lesson_attachments'] : array();
 	}
 
 	/**
@@ -315,7 +315,7 @@ class SkillPulse_LMS_Lessons {
 	public function get_lesson_drip_settings( $lesson_id ) {
 		$settings = $this->get_lesson_settings( $lesson_id );
 
-		return $settings['lesson_drip_settings'];
+		return isset( $settings['lesson_drip_settings'] ) ? $settings['lesson_drip_settings'] : array();
 	}
 
 	/**
@@ -642,36 +642,9 @@ class SkillPulse_LMS_Lessons {
 			'progress' => $progress_data,
 		);
 
-		// Check if course is completed and include certificate data.
+		// Allow modules to add data on course completion (e.g., certificate info).
 		if ( isset( $progress_data['percentage'] ) && $progress_data['percentage'] >= 100 ) {
-			$certificates_instance = SkillPulse_LMS_Certificates::get_instance();
-
-			// Check certificate settings.
-			$certificates_enabled       = splms_get_setting( 'enable_certificates', false );
-			$auto_generate_enabled      = splms_get_setting( 'certificate_auto_generate', true );
-			$course_certificate_enabled = splms_is_certificate_enabled( $course_id );
-
-			// Small delay to ensure certificate generation hooks have completed.
-			// The certificate is generated via 'splms_course_completed' action.
-			usleep( 100000 ); // 0.1 second delay.
-
-			// Check if user has certificate for this course.
-			$has_certificate = $certificates_instance->user_has_certificate( $user_id, $course_id );
-
-			if ( $has_certificate ) {
-				$certificate_link = $certificates_instance->get_certificate_link( $user_id, $course_id );
-
-				if ( $certificate_link ) {
-					$response_data['certificate_generated'] = true;
-					$response_data['certificate_id']        = $course_id; // Using course ID as identifier.
-					$response_data['certificate_url']       = $certificate_link;
-				} else {
-					// Certificate exists but link generation failed.
-					$response_data['certificate_generated'] = true;
-					$response_data['certificate_id']        = $course_id;
-					$response_data['certificate_url']       = false;
-				}
-			}
+			$response_data = apply_filters( 'splms_lesson_completion_response', $response_data, $user_id, $course_id );
 		}
 
 		wp_send_json_success( $response_data );

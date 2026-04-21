@@ -137,10 +137,12 @@ class SkillPulse_LMS_Dashboard {
 				'rest_nonce' => wp_create_nonce( 'wp_rest' ),
 				'ajax_url'   => admin_url( 'admin-ajax.php' ),
 				'nonce'      => wp_create_nonce( 'splms_nonce' ),
-				'nonces'     => array(
-					'splms_nonce'             => wp_create_nonce( 'splms_nonce' ),
-					'splms_frontend_nonce'    => wp_create_nonce( 'splms_frontend_nonce' ),
-					'splms_certificate_nonce' => wp_create_nonce( 'splms_certificate_nonce' ),
+				'nonces'     => apply_filters(
+					'splms_frontend_nonces',
+					array(
+						'splms_nonce'          => wp_create_nonce( 'splms_nonce' ),
+						'splms_frontend_nonce' => wp_create_nonce( 'splms_frontend_nonce' ),
+					)
 				),
 				'strings'    => array(
 					'loading'            => __( 'Loading...', 'skillpulse-lms' ),

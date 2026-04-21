@@ -535,6 +535,11 @@ function splms_get_course_max_enrollment_info( $course_id = null ) {
  * @return bool
  */
 function splms_is_certificate_enabled( $course_id = null ) {
+	// Return false if certificates module is not loaded.
+	if ( ! class_exists( 'SkillPulse_LMS_Certificates' ) ) {
+		return false;
+	}
+
 	$content_info = splms_get_course_content_info( $course_id );
 
 	return (bool) $content_info['certificate_enabled'];

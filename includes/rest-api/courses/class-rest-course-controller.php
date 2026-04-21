@@ -959,9 +959,8 @@ class SkillPulse_LMS_REST_Course_Controller extends WP_REST_Controller {
 			$data['learning_outcomes']         = $content_info['learning_outcomes'] ?? array();
 			$data['prerequisites_description'] = $content_info['prerequisites_description'] ?? '';
 
-			// Certificate information.
-			$data['certificate_enabled']     = $content_info['certificate_enabled'] ?? false;
-			$data['certificate_template_id'] = $content_info['certificate_template_id'] ?? '';
+			// Certificate information (populated by certificate module via filter).
+			$data = apply_filters( 'splms_course_rest_response_data', $data, $content_info, $course_id );
 			$data['completion_criteria']     = $content_info['completion_criteria'] ?? 'all_lessons';
 			$data['passing_grade']           = intval( $content_info['passing_grade'] ?? 70 );
 

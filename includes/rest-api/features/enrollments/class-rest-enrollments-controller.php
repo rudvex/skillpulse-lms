@@ -1308,20 +1308,8 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 	 * @return string Certificate URL or empty string.
 	 */
 	private function get_certificate_url( $user_id, $course_id ) {
-		// Check if certificates are enabled.
-		if ( ! splms_get_setting( 'enable_certificates', false ) ) {
-			return '';
-		}
-
-		// Check if certificate class exists.
-		if ( ! class_exists( 'SkillPulse_LMS_Certificates' ) ) {
-			return '';
-		}
-
-		$certificates     = SkillPulse_LMS_Certificates::get_instance();
-		$certificate_link = $certificates->get_certificate_link( $user_id, $course_id );
-
-		return ! empty( $certificate_link ) ? $certificate_link : '';
+		// Allow certificate module to provide the URL via filter.
+		return apply_filters( 'splms_get_certificate_url', '', $user_id, $course_id );
 	}
 
 	/**
@@ -1666,19 +1654,8 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 			);
 		}
 
-		// Certificate earned (if applicable).
-		if ( $enrollment->completed_at ) {
-			$certificates = SkillPulse_LMS_Certificates::get_instance();
-			if ( $certificates->user_has_certificate( $user_id, $course_id ) ) {
-				$activities[] = array(
-					'type'        => 'certificate_earned',
-					'date'        => $enrollment->completed_at,
-					'title'       => __( 'Certificate earned', 'skillpulse-lms' ),
-					'description' => __( 'Student earned a certificate for completing the course', 'skillpulse-lms' ),
-					'icon'        => 'awards',
-				);
-			}
-		}
+		// Allow modules to add timeline activities (e.g., certificate earned).
+		$activities = apply_filters( 'splms_enrollment_timeline_activities', $activities, $enrollment, $user_id, $course_id );
 
 		// Sort activities by date.
 		usort(

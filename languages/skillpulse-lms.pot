@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkillPulse LMS v1.0.0\n"
 "Report-Msgid-Bugs-To: https://skillpulselms.com/contact\n"
-"POT-Creation-Date: 2026-04-19 10:40:57+00:00\n"
+"POT-Creation-Date: 2026-04-21 05:16:43+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,24 +17,24 @@ msgstr ""
 msgid "100"
 msgstr ""
 
-#: includes/admin/class-admin.php:180
+#: includes/admin/class-admin.php:177
 msgid "Back to Courses"
 msgstr ""
 
-#: includes/admin/class-admin.php:359
+#: includes/admin/class-admin.php:355
 msgid "Course Pricing Issue Detected"
 msgstr ""
 
-#: includes/admin/class-admin.php:361
+#: includes/admin/class-admin.php:357
 msgid "Recommended Bundle Price"
 msgstr ""
 
-#: includes/admin/class-admin.php:365
+#: includes/admin/class-admin.php:361
 #. translators: %s: Discount percentage
 msgid "(%s%% discount from sections total)"
 msgstr ""
 
-#: includes/admin/class-admin.php:369
+#: includes/admin/class-admin.php:365
 msgid "Learn more about pricing strategies"
 msgstr ""
 
@@ -95,8 +95,8 @@ msgstr ""
 #: includes/admin/manager/class-admin-columns.php:299
 #: includes/admin/manager/class-admin-columns.php:372
 #: includes/admin/manager/class-admin-columns.php:549
-#: includes/functions.php:1427 includes/functions.php:1445
-#: includes/functions.php:1509 includes/functions.php:1512
+#: includes/functions.php:1432 includes/functions.php:1450
+#: includes/functions.php:1514 includes/functions.php:1517
 #: includes/modules/orders/class-order-invoice.php:335
 #: templates/course/course.php:187 templates/course/course.php:199
 #: templates/course/partials/course-enrollment-card.php:354
@@ -609,7 +609,6 @@ msgid "Edit Certificate"
 msgstr ""
 
 #: includes/admin/manager/class-admin-post-types.php:326
-#: templates/course/partials/course-sidebar.php:142
 msgid "View Certificate"
 msgstr ""
 
@@ -873,7 +872,7 @@ msgstr ""
 #: includes/admin/signup/class-signup-list-table.php:79
 #: includes/admin/signup/class-signup-list-table.php:119
 #: includes/admin/signup/class-signup-list-table.php:262
-#: templates/dashboard/settings.php:118 templates/dashboard/settings.php:356
+#: templates/dashboard/settings.php:107
 msgid "Email"
 msgstr ""
 
@@ -1044,121 +1043,121 @@ msgstr ""
 msgid "Wizard skipped successfully."
 msgstr ""
 
-#: includes/frontend/class-frontend.php:230
-#: includes/frontend/dashboard/class-splms-dashboard.php:146
+#: includes/frontend/class-frontend.php:229
+#: includes/frontend/dashboard/class-splms-dashboard.php:148
 msgid "Loading..."
 msgstr ""
 
-#: includes/frontend/class-frontend.php:231
-#: includes/frontend/dashboard/class-splms-dashboard.php:147
+#: includes/frontend/class-frontend.php:230
+#: includes/frontend/dashboard/class-splms-dashboard.php:149
 msgid "Something went wrong. Please try again."
 msgstr ""
 
-#: includes/frontend/class-frontend.php:232
-#: includes/frontend/dashboard/class-splms-dashboard.php:148
+#: includes/frontend/class-frontend.php:231
+#: includes/frontend/dashboard/class-splms-dashboard.php:150
 msgid "Success!"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:235
+#: includes/frontend/class-frontend.php:234
 #: includes/frontend/dashboard/class-splms-dashboard-service.php:409
-#: templates/dashboard/settings.php:64 templates/shared/header-functions.php:84
+#: templates/shared/header-functions.php:84
 msgid "Notifications"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:236
+#: includes/frontend/class-frontend.php:235
 msgid "Loading notifications..."
 msgstr ""
 
-#: includes/frontend/class-frontend.php:237
+#: includes/frontend/class-frontend.php:236
 #: includes/frontend/core/class-shortcode.php:106
 msgid "Refresh"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:238
+#: includes/frontend/class-frontend.php:237
 msgid "Mark all read"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:239
+#: includes/frontend/class-frontend.php:238
 msgid "No notifications yet"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:240
+#: includes/frontend/class-frontend.php:239
 msgid "We'll notify you when something happens."
 msgstr ""
 
-#: includes/frontend/class-frontend.php:241
+#: includes/frontend/class-frontend.php:240
 msgid "Unread"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:242
+#: includes/frontend/class-frontend.php:241
 msgid "Recent Notifications"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:243
+#: includes/frontend/class-frontend.php:242
 msgid "Just now"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:244
+#: includes/frontend/class-frontend.php:243
 msgid "minute ago"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:245
+#: includes/frontend/class-frontend.php:244
 msgid "minutes ago"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:246
+#: includes/frontend/class-frontend.php:245
 msgid "hour ago"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:247
+#: includes/frontend/class-frontend.php:246
 msgid "hours ago"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:248
+#: includes/frontend/class-frontend.php:247
 msgid "day ago"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:249
+#: includes/frontend/class-frontend.php:248
 msgid "days ago"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:252
+#: includes/frontend/class-frontend.php:251
 msgid "Are you sure you want to delete this review?"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:253
+#: includes/frontend/class-frontend.php:252
 msgid "Review submitted successfully!"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:254
+#: includes/frontend/class-frontend.php:253
 msgid "Review updated successfully!"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:255
+#: includes/frontend/class-frontend.php:254
 msgid "Review deleted successfully!"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:256
+#: includes/frontend/class-frontend.php:255
 msgid "An error occurred. Please try again."
 msgstr ""
 
-#: includes/frontend/class-frontend.php:257
+#: includes/frontend/class-frontend.php:256
 msgid "Please select a rating."
 msgstr ""
 
-#: includes/frontend/class-frontend.php:258
+#: includes/frontend/class-frontend.php:257
 msgid "Please write a review."
 msgstr ""
 
-#: includes/frontend/class-frontend.php:259
+#: includes/frontend/class-frontend.php:258
 msgid "Please log in to submit a review."
 msgstr ""
 
-#: includes/frontend/class-frontend.php:358 templates/global/header.php:41
+#: includes/frontend/class-frontend.php:357 templates/global/header.php:41
 msgid "Primary Menu"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:359
+#: includes/frontend/class-frontend.php:358
 msgid "Footer Menu"
 msgstr ""
 
@@ -1326,21 +1325,21 @@ msgstr ""
 msgid "Just started"
 msgstr ""
 
-#: includes/frontend/dashboard/class-splms-dashboard.php:149
+#: includes/frontend/dashboard/class-splms-dashboard.php:151
 msgid "Saving..."
 msgstr ""
 
-#: includes/frontend/dashboard/class-splms-dashboard.php:150
+#: includes/frontend/dashboard/class-splms-dashboard.php:152
 msgid "Changing..."
 msgstr ""
 
-#: includes/frontend/dashboard/class-splms-dashboard.php:151
+#: includes/frontend/dashboard/class-splms-dashboard.php:153
 #: includes/modules/user-management/login/class-login.php:657
 #: includes/modules/user-management/signup/class-signup.php:340
 msgid "Passwords do not match."
 msgstr ""
 
-#: includes/frontend/dashboard/class-splms-dashboard.php:152
+#: includes/frontend/dashboard/class-splms-dashboard.php:154
 msgid "Create New Course"
 msgstr ""
 
@@ -1404,87 +1403,87 @@ msgstr ""
 msgid "Cohort-Based (Fixed Schedule)"
 msgstr ""
 
-#: includes/functions.php:689 includes/modules/courses/config.php:383
+#: includes/functions.php:694 includes/modules/courses/config.php:383
 msgid "Complete All Lessons"
 msgstr ""
 
-#: includes/functions.php:692
+#: includes/functions.php:697
 #. translators: %d: Passing grade percentage.
 msgid "Complete All Lessons + Pass Quizzes (%d%% minimum)"
 msgstr ""
 
-#: includes/functions.php:1116
+#: includes/functions.php:1121
 #: templates/course/partials/pricing-comparison.php:230
 msgid "Already Enrolled"
 msgstr ""
 
-#: includes/functions.php:1126
+#: includes/functions.php:1131
 msgid "Course Full"
 msgstr ""
 
-#: includes/functions.php:1154 templates/course/partials/course-hero.php:884
+#: includes/functions.php:1159 templates/course/partials/course-hero.php:884
 msgid "Enrollment Closed"
 msgstr ""
 
-#: includes/functions.php:1159
+#: includes/functions.php:1164
 #. translators: 1: Start date, 2: End date.
 msgid "Enrollment opens %1$s and closes %2$s."
 msgstr ""
 
-#: includes/functions.php:1199 includes/functions.php:1412
+#: includes/functions.php:1204 includes/functions.php:1417
 msgid "Log In to Enroll"
 msgstr ""
 
-#: includes/functions.php:1256
+#: includes/functions.php:1261
 msgid "Enroll Now - Free"
 msgstr ""
 
-#: includes/functions.php:1261
+#: includes/functions.php:1266
 #: includes/modules/orders/class-order-status-manager.php:135
 #: templates/dashboard/courses.php:178 templates/single-section.php:447
 #: templates/single-section.php:498 templates/single-section.php:629
 msgid "Start Learning"
 msgstr ""
 
-#: includes/functions.php:1281 includes/functions.php:1285
+#: includes/functions.php:1286 includes/functions.php:1290
 #: templates/single-section.php:531
 msgid "Log In to Purchase"
 msgstr ""
 
-#: includes/functions.php:1284 includes/functions.php:1305
+#: includes/functions.php:1289 includes/functions.php:1310
 msgid "Payment system not configured"
 msgstr ""
 
-#: includes/functions.php:1292 includes/functions.php:1299
-#: includes/functions.php:1316 includes/functions.php:1347
-#: includes/functions.php:1382 includes/functions.php:1406
+#: includes/functions.php:1297 includes/functions.php:1304
+#: includes/functions.php:1321 includes/functions.php:1352
+#: includes/functions.php:1387 includes/functions.php:1411
 #: templates/course/partials/course-enrollment-card.php:453
 #: templates/course/partials/course-hero-v2.php:453
 msgid "Enroll Now"
 msgstr ""
 
-#: includes/functions.php:1306 includes/functions.php:1321
+#: includes/functions.php:1311 includes/functions.php:1326
 #: templates/shared/fullscreen-header.php:185
 msgid "Buy Now"
 msgstr ""
 
-#: includes/functions.php:1340
+#: includes/functions.php:1345
 msgid "Log In to Check Access"
 msgstr ""
 
-#: includes/functions.php:1351
+#: includes/functions.php:1356
 msgid "You are not invited to this course"
 msgstr ""
 
-#: includes/functions.php:1369
+#: includes/functions.php:1374
 msgid "Log In to Check Prerequisites"
 msgstr ""
 
-#: includes/functions.php:1389
+#: includes/functions.php:1394
 msgid "Complete Prerequisite"
 msgstr ""
 
-#: includes/functions.php:1464 includes/functions.php:1530
+#: includes/functions.php:1469 includes/functions.php:1535
 #: templates/course/course.php:206
 #: templates/course/partials/course-enrollment-card.php:417
 #: templates/course/partials/course-hero-v2.php:417
@@ -1492,46 +1491,46 @@ msgstr ""
 msgid "Invitation Only"
 msgstr ""
 
-#: includes/functions.php:1468 includes/functions.php:1553
+#: includes/functions.php:1473 includes/functions.php:1558
 #: templates/course/partials/course-enrollment-card.php:423
 #: templates/course/partials/course-hero-v2.php:423
 msgid "Prerequisite Required"
 msgstr ""
 
-#: includes/functions.php:1495 includes/functions.php:1570
+#: includes/functions.php:1500 includes/functions.php:1575
 msgid "Unknown"
 msgstr ""
 
-#: includes/functions.php:1496
+#: includes/functions.php:1501
 msgid "Unknown Course Type"
 msgstr ""
 
-#: includes/functions.php:1508
+#: includes/functions.php:1513
 msgid "Free Course"
 msgstr ""
 
-#: includes/functions.php:1519
+#: includes/functions.php:1524
 msgid "Paid Course"
 msgstr ""
 
-#: includes/functions.php:1531
+#: includes/functions.php:1536
 msgid "Invitation Required"
 msgstr ""
 
-#: includes/functions.php:1554
+#: includes/functions.php:1559
 msgid "Prerequisites Met - Ready to Enroll"
 msgstr ""
 
-#: includes/functions.php:1554
+#: includes/functions.php:1559
 msgid "Prerequisites Required"
 msgstr ""
 
-#: includes/functions.php:1626
+#: includes/functions.php:1631
 #. translators: %s: Formatted start date.
 msgid "Course content will be available starting %s."
 msgstr ""
 
-#: includes/functions.php:1779
+#: includes/functions.php:1784
 #: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1292
 #: templates/single-section.php:637
 msgid "Purchase"
@@ -1798,15 +1797,15 @@ msgstr ""
 msgid "Browse all available courses to enhance your skills"
 msgstr ""
 
-#: includes/modules/courses/class-courses.php:154
+#: includes/modules/courses/class-courses.php:147
 msgid "Invalid course ID or settings."
 msgstr ""
 
-#: includes/modules/courses/class-courses.php:163
+#: includes/modules/courses/class-courses.php:156
 msgid "Course configuration not found."
 msgstr ""
 
-#: includes/modules/courses/class-courses.php:361
+#: includes/modules/courses/class-courses.php:347
 #: includes/modules/orders/class-purchase-token.php:90
 #: includes/modules/user-management/class-profile.php:255
 #: includes/modules/user-management/class-profile.php:367
@@ -2038,7 +2037,7 @@ msgid_plural "years"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/modules/courses/general-functions.php:543
+#: includes/modules/courses/general-functions.php:542
 #. translators: 1: Course price, 2: Sections total, 3: Percentage difference
 msgid ""
 "Course price (%1$s) is significantly higher than individual sections total "
@@ -2046,7 +2045,7 @@ msgid ""
 "setting the course price to match or be less than the sections total."
 msgstr ""
 
-#: includes/modules/courses/general-functions.php:680
+#: includes/modules/courses/general-functions.php:679
 #: templates/course/partials/course-enrollment-card.php:116
 #: templates/course/partials/course-hero-v2.php:116
 #. translators: %d: Number of hours.
@@ -2055,37 +2054,37 @@ msgid_plural "%dhr"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/modules/courses/general-functions.php:688
+#: includes/modules/courses/general-functions.php:687
 #: templates/course/partials/course-enrollment-card.php:120
 #: templates/course/partials/course-hero-v2.php:120
 #. translators: %d: Number of minutes.
 msgid "%dmin"
 msgstr ""
 
-#: includes/modules/courses/general-functions.php:989
+#: includes/modules/courses/general-functions.php:988
 #. translators: %1$d: Start number, %2$d: End number, %3$d: Total courses.
 msgid "Showing %1$d-%2$d of %3$d courses"
 msgstr ""
 
-#: includes/modules/courses/general-functions.php:1014 templates/author.php:213
+#: includes/modules/courses/general-functions.php:1013 templates/author.php:213
 #: templates/author.php:259 templates/author.php:363
 msgid "Courses pagination"
 msgstr ""
 
-#: includes/modules/courses/general-functions.php:1020 templates/author.php:219
+#: includes/modules/courses/general-functions.php:1019 templates/author.php:219
 #: templates/author.php:268 templates/author.php:372
 #: templates/quiz/question-templates.php:62
 msgid "Previous"
 msgstr ""
 
-#: includes/modules/courses/general-functions.php:1021 templates/author.php:220
+#: includes/modules/courses/general-functions.php:1020 templates/author.php:220
 #: templates/author.php:287 templates/author.php:391
 #: templates/quiz/question-templates.php:77
 #: templates/quiz/question-templates.php:200
 msgid "Next"
 msgstr ""
 
-#: includes/modules/courses/general-functions.php:1072
+#: includes/modules/courses/general-functions.php:1071
 #. translators: %d: Number of courses.
 msgid "%d course found"
 msgid_plural "%d courses found"
@@ -2502,7 +2501,7 @@ msgid "Payment completed, course access granted"
 msgstr ""
 
 #: includes/modules/orders/class-order-status-manager.php:60
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1636
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1624
 #: templates/quiz/content.php:654
 msgid "Failed"
 msgstr ""
@@ -3147,67 +3146,67 @@ msgid "Select the difficulty level for this section"
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:85
-#: templates/dashboard/settings.php:144
+#: templates/dashboard/settings.php:133
 msgid "Billing Information"
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:86
-#: templates/dashboard/settings.php:146
+#: templates/dashboard/settings.php:135
 msgid "Billing information is used for orders and invoices."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:89
-#: templates/dashboard/settings.php:153
+#: templates/dashboard/settings.php:142
 msgid "Address Line 1"
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:95
-#: templates/dashboard/settings.php:158
+#: templates/dashboard/settings.php:147
 msgid "Address Line 2"
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:98
-#: templates/dashboard/settings.php:159
+#: templates/dashboard/settings.php:148
 msgid "Apartment, suite, etc. (optional)"
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:102
-#: templates/dashboard/settings.php:164
+#: templates/dashboard/settings.php:153
 msgid "City"
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:108
-#: templates/dashboard/settings.php:169
+#: templates/dashboard/settings.php:158
 msgid "State/Province"
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:114
-#: templates/dashboard/settings.php:176
+#: templates/dashboard/settings.php:165
 msgid "Postal Code"
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:120
-#: templates/dashboard/settings.php:181
+#: templates/dashboard/settings.php:170
 msgid "Country"
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:123
-#: templates/dashboard/settings.php:182
+#: templates/dashboard/settings.php:171
 msgid "e.g., US, UK"
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:127
-#: templates/dashboard/settings.php:187
+#: templates/dashboard/settings.php:176
 msgid "Phone"
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:133
-#: templates/dashboard/settings.php:192
+#: templates/dashboard/settings.php:181
 msgid "Company"
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:136
-#: templates/dashboard/settings.php:193
+#: templates/dashboard/settings.php:182
 msgid "Company name (optional)"
 msgstr ""
 
@@ -3630,6 +3629,19 @@ msgid ""
 "email for the activation link."
 msgstr ""
 
+#: includes/rest-api/admin/class-rest-admin-overview-controller.php:105
+msgid "Sorry, you are not allowed to access admin dashboard."
+msgstr ""
+
+#: includes/rest-api/admin/class-rest-admin-overview-controller.php:286
+#. translators: %1$s: User display name, %2$s: Course title.
+msgid "%1$s enrolled in %2$s"
+msgstr ""
+
+#: includes/rest-api/admin/class-rest-admin-overview-controller.php:506
+msgid "Failed to create export file: "
+msgstr ""
+
 #: includes/rest-api/admin/class-rest-trial-controller.php:95
 msgid "Sorry, you are not allowed to access trial information."
 msgstr ""
@@ -3692,7 +3704,7 @@ msgstr ""
 #: includes/rest-api/courses/admin/class-rest-course-curriculum-controller.php:72
 #: includes/rest-api/courses/admin/class-rest-course-settings-controller.php:60
 #: includes/rest-api/courses/admin/class-rest-course-settings-controller.php:74
-#: includes/rest-api/courses/class-rest-course-controller.php:1289
+#: includes/rest-api/courses/class-rest-course-controller.php:1288
 msgid "Unique identifier for the course."
 msgstr ""
 
@@ -3990,19 +4002,19 @@ msgstr ""
 msgid "Failed to delete course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1192
+#: includes/rest-api/courses/class-rest-course-controller.php:1191
 #. translators: %s: Membership names.
 msgid "This course requires one of the following memberships: %s"
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1207
+#: includes/rest-api/courses/class-rest-course-controller.php:1206
 #. translators: %s: Membership names.
 msgid ""
 "This course requires one of the following memberships: %s. Please log in "
 "and purchase a membership to access this course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1226
+#: includes/rest-api/courses/class-rest-course-controller.php:1225
 #: includes/rest-api/lessons/class-rest-lesson-controller.php:862
 #: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:231
 #: includes/rest-api/quizzes/class-rest-quiz-controller.php:565
@@ -4010,7 +4022,7 @@ msgstr ""
 msgid "Current page of the collection."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1232
+#: includes/rest-api/courses/class-rest-course-controller.php:1231
 #: includes/rest-api/lessons/class-rest-lesson-controller.php:868
 #: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:238
 #: includes/rest-api/quizzes/class-rest-quiz-controller.php:571
@@ -4018,382 +4030,382 @@ msgstr ""
 msgid "Maximum number of items to be returned in result set."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1239
+#: includes/rest-api/courses/class-rest-course-controller.php:1238
 #: includes/rest-api/lessons/class-rest-lesson-controller.php:875
 #: includes/rest-api/quizzes/class-rest-quiz-controller.php:578
 #: includes/rest-api/sections/class-rest-section-controller.php:966
 msgid "Limit results to those matching a string."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1243
+#: includes/rest-api/courses/class-rest-course-controller.php:1242
 #: includes/rest-api/lessons/class-rest-lesson-controller.php:883
 #: includes/rest-api/quizzes/class-rest-quiz-controller.php:586
 #: includes/rest-api/sections/class-rest-section-controller.php:974
 msgid "Sort collection by object attribute."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1249
+#: includes/rest-api/courses/class-rest-course-controller.php:1248
 #: includes/rest-api/lessons/class-rest-lesson-controller.php:889
 #: includes/rest-api/quizzes/class-rest-quiz-controller.php:592
 #: includes/rest-api/sections/class-rest-section-controller.php:980
 msgid "Order sort attribute ascending or descending."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1255
+#: includes/rest-api/courses/class-rest-course-controller.php:1254
 msgid "Limit results to courses belonging to specific category IDs."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1295
+#: includes/rest-api/courses/class-rest-course-controller.php:1294
 msgid "The title for the course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1300
+#: includes/rest-api/courses/class-rest-course-controller.php:1299
 msgid "Title for the course, as it exists in the database."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1305
+#: includes/rest-api/courses/class-rest-course-controller.php:1304
 msgid "HTML title for the course, transformed for display."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1313
+#: includes/rest-api/courses/class-rest-course-controller.php:1312
 msgid "An alphanumeric identifier for the course unique to its type."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1319
+#: includes/rest-api/courses/class-rest-course-controller.php:1318
 msgid "URL to the course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1326
+#: includes/rest-api/courses/class-rest-course-controller.php:1325
 msgid "The date the course was published, in the site's timezone."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1332
+#: includes/rest-api/courses/class-rest-course-controller.php:1331
 msgid "The date the course was published, as GMT."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1338
+#: includes/rest-api/courses/class-rest-course-controller.php:1337
 msgid "The date the course was last modified, in the site's timezone."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1345
+#: includes/rest-api/courses/class-rest-course-controller.php:1344
 msgid "The date the course was last modified, as GMT."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1352
+#: includes/rest-api/courses/class-rest-course-controller.php:1351
 msgid "A named status for the course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1358
+#: includes/rest-api/courses/class-rest-course-controller.php:1357
 msgid "Type of post for the course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1364
+#: includes/rest-api/courses/class-rest-course-controller.php:1363
 msgid "The ID of the featured media for the course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1369
+#: includes/rest-api/courses/class-rest-course-controller.php:1368
 msgid "The excerpt for the course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1374
+#: includes/rest-api/courses/class-rest-course-controller.php:1373
 msgid "Excerpt for the course, as it exists in the database."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1379
+#: includes/rest-api/courses/class-rest-course-controller.php:1378
 msgid "HTML excerpt for the course, transformed for display."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1387
+#: includes/rest-api/courses/class-rest-course-controller.php:1386
 msgid "The content for the course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1392
+#: includes/rest-api/courses/class-rest-course-controller.php:1391
 msgid "Content for the course, as it exists in the database."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1397
+#: includes/rest-api/courses/class-rest-course-controller.php:1396
 msgid "HTML content for the course, transformed for display."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1409
+#: includes/rest-api/courses/class-rest-course-controller.php:1408
 msgid "User's enrollment status for this course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1417
+#: includes/rest-api/courses/class-rest-course-controller.php:1416
 msgid "Whether the user has access to this course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1424
+#: includes/rest-api/courses/class-rest-course-controller.php:1423
 msgid "Whether this course requires a membership to access."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1431
+#: includes/rest-api/courses/class-rest-course-controller.php:1430
 msgid "Array of required membership IDs for this course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1441
+#: includes/rest-api/courses/class-rest-course-controller.php:1440
 msgid "Detailed information about required memberships (id, name, purchase_url)."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1448
+#: includes/rest-api/courses/class-rest-course-controller.php:1447
 msgid "Membership ID."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1452
+#: includes/rest-api/courses/class-rest-course-controller.php:1451
 msgid "Membership name."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1456
+#: includes/rest-api/courses/class-rest-course-controller.php:1455
 msgid "Integration ID (e.g., memberpress, woocommerce)."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1461
+#: includes/rest-api/courses/class-rest-course-controller.php:1460
 msgid "URL to purchase this membership."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1470
+#: includes/rest-api/courses/class-rest-course-controller.php:1469
 msgid ""
 "Whether the current user has the required membership access (only for "
 "authenticated users)."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1477
+#: includes/rest-api/courses/class-rest-course-controller.php:1476
 msgid "Message explaining membership restriction if user does not have access."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1484
+#: includes/rest-api/courses/class-rest-course-controller.php:1483
 msgid "Course price information."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1490
+#: includes/rest-api/courses/class-rest-course-controller.php:1489
 msgid "Raw price value."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1494
+#: includes/rest-api/courses/class-rest-course-controller.php:1493
 msgid "Final price after discount."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1498
+#: includes/rest-api/courses/class-rest-course-controller.php:1497
 msgid "Currency symbol."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1502
+#: includes/rest-api/courses/class-rest-course-controller.php:1501
 msgid "Formatted price display."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1509
+#: includes/rest-api/courses/class-rest-course-controller.php:1508
 msgid "Course access type (public_free, public_paid, etc.)."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1516
+#: includes/rest-api/courses/class-rest-course-controller.php:1515
 msgid "Simplified course type (free, paid, etc.)."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1523
+#: includes/rest-api/courses/class-rest-course-controller.php:1522
 msgid "Course difficulty level."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1530
+#: includes/rest-api/courses/class-rest-course-controller.php:1529
 msgid "Course duration information."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1536
+#: includes/rest-api/courses/class-rest-course-controller.php:1535
 msgid "Duration value."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1540
+#: includes/rest-api/courses/class-rest-course-controller.php:1539
 msgid "Duration unit (days, weeks, months)."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1547
+#: includes/rest-api/courses/class-rest-course-controller.php:1546
 msgid "Course content."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1553
+#: includes/rest-api/courses/class-rest-course-controller.php:1552
 msgid "Content for the object, as it exists in the database."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1558
+#: includes/rest-api/courses/class-rest-course-controller.php:1557
 msgid "HTML content for the object, transformed for display."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1566
+#: includes/rest-api/courses/class-rest-course-controller.php:1565
 msgid "Course language code."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1573
+#: includes/rest-api/courses/class-rest-course-controller.php:1572
 msgid "Course learning method."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1580
+#: includes/rest-api/courses/class-rest-course-controller.php:1579
 msgid "Whether certificate is enabled for this course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1587
+#: includes/rest-api/courses/class-rest-course-controller.php:1586
 msgid "Whether the course is in user's wishlist."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1594
+#: includes/rest-api/courses/class-rest-course-controller.php:1593
 msgid "Course category term IDs."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1602
+#: includes/rest-api/courses/class-rest-course-controller.php:1601
 msgid "Course tag term IDs."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1611
+#: includes/rest-api/courses/class-rest-course-controller.php:1610
 msgid "Course level (beginner, intermediate, advanced)."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1618
+#: includes/rest-api/courses/class-rest-course-controller.php:1617
 msgid "Learning outcomes for the course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1626
+#: includes/rest-api/courses/class-rest-course-controller.php:1625
 msgid "Prerequisites description for the course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1633
+#: includes/rest-api/courses/class-rest-course-controller.php:1632
 msgid "Certificate template ID."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1640
+#: includes/rest-api/courses/class-rest-course-controller.php:1639
 msgid "Course completion criteria."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1647
+#: includes/rest-api/courses/class-rest-course-controller.php:1646
 msgid "Passing grade percentage for course completion."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1654
+#: includes/rest-api/courses/class-rest-course-controller.php:1653
 msgid "Course discount information."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1660
+#: includes/rest-api/courses/class-rest-course-controller.php:1659
 msgid "Discount type (percentage or fixed)."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1664
+#: includes/rest-api/courses/class-rest-course-controller.php:1663
 msgid "Discount value."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1671
+#: includes/rest-api/courses/class-rest-course-controller.php:1670
 msgid "Enrollment date information."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1678
+#: includes/rest-api/courses/class-rest-course-controller.php:1677
 msgid "Enrollment start date."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1683
+#: includes/rest-api/courses/class-rest-course-controller.php:1682
 msgid "Enrollment end date."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1690
+#: includes/rest-api/courses/class-rest-course-controller.php:1689
 msgid "Course delivery mode (self_paced, live, etc.)."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1697
+#: includes/rest-api/courses/class-rest-course-controller.php:1696
 msgid "Course start date."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1705
+#: includes/rest-api/courses/class-rest-course-controller.php:1704
 msgid "Live class schedule information."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1712
+#: includes/rest-api/courses/class-rest-course-controller.php:1711
 msgid "Maximum number of students that can enroll."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1719
+#: includes/rest-api/courses/class-rest-course-controller.php:1718
 msgid "Prerequisite course information."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1725
+#: includes/rest-api/courses/class-rest-course-controller.php:1724
 msgid "Prerequisite course ID."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1729
+#: includes/rest-api/courses/class-rest-course-controller.php:1728
 msgid "Prerequisite course title."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1733
+#: includes/rest-api/courses/class-rest-course-controller.php:1732
 msgid "Whether user has completed prerequisite course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1740
+#: includes/rest-api/courses/class-rest-course-controller.php:1739
 msgid "Course author/instructor information."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1746
+#: includes/rest-api/courses/class-rest-course-controller.php:1745
 #: includes/rest-api/lessons/class-rest-lesson-controller.php:828
 #: includes/rest-api/quizzes/class-rest-quiz-controller.php:812
 #: includes/rest-api/sections/class-rest-section-controller.php:1134
 msgid "Author user ID."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1750
+#: includes/rest-api/courses/class-rest-course-controller.php:1749
 #: includes/rest-api/lessons/class-rest-lesson-controller.php:832
 #: includes/rest-api/quizzes/class-rest-quiz-controller.php:816
 #: includes/rest-api/sections/class-rest-section-controller.php:1138
 msgid "Author display name."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1754
+#: includes/rest-api/courses/class-rest-course-controller.php:1753
 #: includes/rest-api/lessons/class-rest-lesson-controller.php:836
 #: includes/rest-api/quizzes/class-rest-quiz-controller.php:820
 #: includes/rest-api/sections/class-rest-section-controller.php:1142
 msgid "Author user slug."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1759
+#: includes/rest-api/courses/class-rest-course-controller.php:1758
 #: includes/rest-api/lessons/class-rest-lesson-controller.php:841
 #: includes/rest-api/quizzes/class-rest-quiz-controller.php:825
 #: includes/rest-api/sections/class-rest-section-controller.php:1147
 msgid "Author avatar URL."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1766
+#: includes/rest-api/courses/class-rest-course-controller.php:1765
 msgid "Course curriculum statistics."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1772
+#: includes/rest-api/courses/class-rest-course-controller.php:1771
 msgid "Number of sections in the course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1776
+#: includes/rest-api/courses/class-rest-course-controller.php:1775
 msgid "Number of lessons in the course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1780
+#: includes/rest-api/courses/class-rest-course-controller.php:1779
 msgid "Number of quizzes in the course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1784
+#: includes/rest-api/courses/class-rest-course-controller.php:1783
 msgid "Total number of curriculum items (lessons + quizzes)."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1791
+#: includes/rest-api/courses/class-rest-course-controller.php:1790
 msgid "Number of enrolled students in the course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1798
+#: includes/rest-api/courses/class-rest-course-controller.php:1797
 msgid "Course settings summary."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1804
+#: includes/rest-api/courses/class-rest-course-controller.php:1803
 msgid "Course access type."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1808
+#: includes/rest-api/courses/class-rest-course-controller.php:1807
 msgid "Course delivery mode."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1812
+#: includes/rest-api/courses/class-rest-course-controller.php:1811
 msgid "Maximum enrollment limit."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-controller.php:1816
+#: includes/rest-api/courses/class-rest-course-controller.php:1815
 msgid "Whether certificate is enabled."
 msgstr ""
 
@@ -4424,8 +4436,8 @@ msgstr ""
 #: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:546
 #: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:647
 #: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:698
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1480
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1573
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1468
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1561
 msgid "Enrollment not found."
 msgstr ""
 
@@ -4552,91 +4564,83 @@ msgstr ""
 msgid "Bulk Import"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1366
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1354
 msgid "Invalid enrollment IDs provided."
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1374
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1362
 msgid "No valid enrollment IDs provided."
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1391
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1379
 #. translators: %d: Enrollment ID
 msgid "Enrollment #%d not found."
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1402
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1390
 #. translators: %d: Enrollment ID
 msgid "User not found for enrollment #%d."
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1413
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1401
 #. translators: %d: Enrollment ID
 msgid "Course not found for enrollment #%d."
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1442
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1430
 #. translators: %1$d: Enrollment ID, %2$s: Error message
 msgid "Failed to send email for enrollment #%1$d: %2$s"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1586
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1574
 msgid "Enrolled in course"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1587
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1575
 msgid "Student enrolled in the course"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1613
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1601
 msgid "Completed lesson"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1615
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1603
 #. translators: %d: Lesson ID.
 msgid "Lesson #%d"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1636
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1624
 #: templates/quiz/content.php:663 templates/shared/fullscreen-header.php:57
 msgid "Passed"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1640
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1628
 msgid "Quiz attempt"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1643
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1631
 #. translators: %1$s: Quiz title, %2$s: Status
 msgid "%1$s - %2$s"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1646
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1634
 #. translators: %d: Quiz ID.
 msgid "Quiz #%d"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1663
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1651
 msgid "Course completed"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1664
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1652
 msgid "Student completed the course"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1676
-msgid "Certificate earned"
-msgstr ""
-
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1677
-msgid "Student earned a certificate for completing the course"
-msgstr ""
-
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1715
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1692
 msgid "Failed to renew enrollment."
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1724
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1701
 msgid "Enrollment renewed successfully."
 msgstr ""
 
@@ -6077,7 +6081,7 @@ msgid "Wishlisted"
 msgstr ""
 
 #: templates/course/partials/course-hero.php:641
-#: templates/course/partials/course-sidebar.php:176
+#: templates/course/partials/course-sidebar.php:114
 msgid "Share Course"
 msgstr ""
 
@@ -6143,7 +6147,6 @@ msgid "Enrollment"
 msgstr ""
 
 #: templates/course/partials/course-hero.php:924
-#: templates/course/partials/course-sidebar.php:119
 msgid "Certificate"
 msgstr ""
 
@@ -6182,38 +6185,20 @@ msgstr ""
 msgid "Related Courses"
 msgstr ""
 
-#: templates/course/partials/course-sidebar.php:130
-msgid "Certificate Available"
-msgstr ""
-
-#: templates/course/partials/course-sidebar.php:134
-msgid ""
-"Congratulations! You have successfully completed this course and earned "
-"your certificate."
-msgstr ""
-
-#: templates/course/partials/course-sidebar.php:154
-msgid "Generating Certificate"
-msgstr ""
-
-#: templates/course/partials/course-sidebar.php:158
-msgid "Your certificate is being generated. Please check back in a few moments."
-msgstr ""
-
-#: templates/course/partials/course-sidebar.php:183
+#: templates/course/partials/course-sidebar.php:121
 msgid "Share on Facebook"
 msgstr ""
 
-#: templates/course/partials/course-sidebar.php:195
+#: templates/course/partials/course-sidebar.php:133
 msgid "Share on Twitter"
 msgstr ""
 
-#: templates/course/partials/course-sidebar.php:206
+#: templates/course/partials/course-sidebar.php:144
 msgid "Share on LinkedIn"
 msgstr ""
 
-#: templates/course/partials/course-sidebar.php:216
-#: templates/course/partials/course-sidebar.php:223
+#: templates/course/partials/course-sidebar.php:154
+#: templates/course/partials/course-sidebar.php:161
 msgid "Copy Link"
 msgstr ""
 
@@ -6476,7 +6461,7 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
-#: templates/dashboard/bookmarks.php:93 templates/dashboard/settings.php:106
+#: templates/dashboard/bookmarks.php:93 templates/dashboard/settings.php:95
 #: templates/dashboard/wishlist.php:90
 msgid "Remove"
 msgstr ""
@@ -6514,125 +6499,77 @@ msgid ""
 "started!"
 msgstr ""
 
-#: templates/dashboard/settings.php:45
+#: templates/dashboard/settings.php:36
 msgid "Account Settings"
 msgstr ""
 
-#: templates/dashboard/settings.php:55
+#: templates/dashboard/settings.php:46
 #: templates/shared/header-functions.php:202
 msgid "Profile"
 msgstr ""
 
-#: templates/dashboard/settings.php:59
+#: templates/dashboard/settings.php:50
 msgid "Password"
 msgstr ""
 
-#: templates/dashboard/settings.php:81
+#: templates/dashboard/settings.php:70
 msgid "Profile Information"
 msgstr ""
 
-#: templates/dashboard/settings.php:90
+#: templates/dashboard/settings.php:79
 msgid "Profile Picture Upload"
 msgstr ""
 
-#: templates/dashboard/settings.php:95
+#: templates/dashboard/settings.php:84
 msgid "Change Avatar"
 msgstr ""
 
-#: templates/dashboard/settings.php:114
+#: templates/dashboard/settings.php:103
 msgid "Display Name"
 msgstr ""
 
-#: templates/dashboard/settings.php:125
+#: templates/dashboard/settings.php:114
 msgid "First Name"
 msgstr ""
 
-#: templates/dashboard/settings.php:129
+#: templates/dashboard/settings.php:118
 msgid "Last Name"
 msgstr ""
 
-#: templates/dashboard/settings.php:137
+#: templates/dashboard/settings.php:126
 msgid "Bio"
 msgstr ""
 
-#: templates/dashboard/settings.php:154
+#: templates/dashboard/settings.php:143
 msgid "Street address"
 msgstr ""
 
-#: templates/dashboard/settings.php:188
+#: templates/dashboard/settings.php:177
 msgid "+1 234 567 8900"
 msgstr ""
 
-#: templates/dashboard/settings.php:200
+#: templates/dashboard/settings.php:189
 msgid "Save Changes"
 msgstr ""
 
-#: templates/dashboard/settings.php:214 templates/dashboard/settings.php:239
+#: templates/dashboard/settings.php:203 templates/dashboard/settings.php:228
 msgid "Change Password"
 msgstr ""
 
-#: templates/dashboard/settings.php:216
+#: templates/dashboard/settings.php:205
 msgid "Update your account password to keep your account secure."
 msgstr ""
 
-#: templates/dashboard/settings.php:222
+#: templates/dashboard/settings.php:211
 msgid "Current Password"
 msgstr ""
 
-#: templates/dashboard/settings.php:227
+#: templates/dashboard/settings.php:216
 msgid "New Password"
 msgstr ""
 
-#: templates/dashboard/settings.php:232
+#: templates/dashboard/settings.php:221
 msgid "Confirm New Password"
-msgstr ""
-
-#: templates/dashboard/settings.php:255
-msgid "Notification Preferences"
-msgstr ""
-
-#: templates/dashboard/settings.php:257
-msgid "Manage how you receive notifications for different events"
-msgstr ""
-
-#: templates/dashboard/settings.php:267
-msgid "Notification Controls"
-msgstr ""
-
-#: templates/dashboard/settings.php:269
-msgid "Master controls for all notification types"
-msgstr ""
-
-#: templates/dashboard/settings.php:280
-msgid "All Email Notifications"
-msgstr ""
-
-#: templates/dashboard/settings.php:281
-msgid "Enable/disable all email notifications at once"
-msgstr ""
-
-#: templates/dashboard/settings.php:296
-msgid "All In-App Notifications"
-msgstr ""
-
-#: templates/dashboard/settings.php:297
-msgid "Enable/disable all in-app notifications at once"
-msgstr ""
-
-#: templates/dashboard/settings.php:310
-msgid "Event Notifications"
-msgstr ""
-
-#: templates/dashboard/settings.php:312
-msgid "Choose which events you want to be notified about"
-msgstr ""
-
-#: templates/dashboard/settings.php:368
-msgid "In-App"
-msgstr ""
-
-#: templates/dashboard/settings.php:382
-msgid "Save Notification Preferences"
 msgstr ""
 
 #: templates/dashboard/wishlist.php:21
