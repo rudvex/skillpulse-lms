@@ -98,6 +98,7 @@ class SkillPulse_LMS_Rest_API {
 			'includes/rest-api/features/enrollments/class-rest-enrollments-controller',
 			'includes/rest-api/features/signup/class-rest-signup-controller',
 
+			'includes/rest-api/admin/class-rest-admin-overview-controller',
 		);
 
 		foreach ( $files as $file ) {
@@ -129,7 +130,6 @@ class SkillPulse_LMS_Rest_API {
 		add_action( 'rest_api_init', array( $this, 'register_routes' ) );
 
 		// Initialize JWT authentication handler.
-		SkillPulse_LMS_JWT_Auth_Handler::init();
 	}
 
 	/**
@@ -386,6 +386,9 @@ class SkillPulse_LMS_Rest_API {
 
 		// Signup.
 		$controller = new SkillPulse_LMS_REST_Signup_Controller();
+		$controller->register_routes();
+
+		$controller = new SkillPulse_LMS_Rest_Admin_Overview_Controller();
 		$controller->register_routes();
 
 

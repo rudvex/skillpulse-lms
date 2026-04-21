@@ -3,5 +3,6 @@
 
 import './settings';
 import './enrollments';
+import './overview';
 import './wizard';
 

@@ -161,9 +161,6 @@ class SkillPulse_LMS_Admin {
 			array( 'in_footer' => true )
 		);
 
-		// Get email templates data.
-		$email_templates = SkillPulse_LMS_Email_Templates::get_instance()->get_all_templates();
-
 		// Get global settings for cross-store conditional logic.
 		$global_settings = SkillPulse_LMS_Settings::get_instance()->get_all_settings();
 
@@ -182,7 +179,6 @@ class SkillPulse_LMS_Admin {
 			'coursesUrl'        => admin_url( 'edit.php?post_type=' . SPLMS_POST_TYPES['course'] ),
 			'posts_url'         => admin_url( 'post.php' ),
 			'all_sp_post_types' => SPLMS_POST_TYPES,
-			'email_templates'   => $email_templates,
 			'global_settings'   => $global_settings,
 			// Configuration loading URLs for on-demand fetching.
 			'config_api_url'    => rest_url( 'splms/v1/config/' ),
