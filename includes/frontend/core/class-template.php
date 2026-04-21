@@ -172,8 +172,6 @@ class SkillPulse_LMS_Template {
 			$default_file = 'author.php';
 		} elseif ( $this->is_signup_page() ) {
 			$default_file = 'signup/signup.php';
-		} elseif ( is_purchase_page() && is_user_logged_in() ) {
-			$default_file = 'purchase/purchase.php';
 		} else {
 			$default_file = '';
 		}

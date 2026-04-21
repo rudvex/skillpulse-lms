@@ -573,11 +573,234 @@ $courses_tab = array(
 );
 
 
+$notifications_tab = array(
+	'id'          => 'notifications',
+	'title'       => 'Notifications',
+	'icon'        => 'email-alt',
+	'description' => 'Configure email and in-app notification settings.',
+	'sections'    => array(
+		array(
+			'id'     => 'email_settings',
+			'title'  => 'Email Settings',
+			'fields' => array(
+				array(
+					'id'          => 'enable_emails',
+					'type'        => 'toggle',
+					'label'       => 'Enable Email Notifications',
+					'description' => 'Enable or disable all email notifications.',
+					'default'     => true,
+					'value'       => isset( $all_settings['notifications']['email_settings']['enable_emails'] ) ? $all_settings['notifications']['email_settings']['enable_emails'] : true,
+				),
+				array(
+					'id'          => 'from_name',
+					'type'        => 'text',
+					'label'       => 'From Name',
+					'description' => 'Name used in outgoing emails.',
+					'placeholder' => 'Site Name',
+					'value'       => isset( $all_settings['notifications']['email_settings']['from_name'] ) ? $all_settings['notifications']['email_settings']['from_name'] : '',
+				),
+				array(
+					'id'          => 'from_email',
+					'type'        => 'email',
+					'label'       => 'From Email',
+					'description' => 'Email address used for outgoing emails.',
+					'placeholder' => 'admin@yoursite.com',
+					'value'       => isset( $all_settings['notifications']['email_settings']['from_email'] ) ? $all_settings['notifications']['email_settings']['from_email'] : '',
+				),
+				array(
+					'id'          => 'email_queue_enabled',
+					'type'        => 'toggle',
+					'label'       => 'Enable Email Queue',
+					'description' => 'Queue emails for better delivery and performance.',
+					'default'     => false,
+					'value'       => isset( $all_settings['notifications']['email_settings']['email_queue_enabled'] ) ? $all_settings['notifications']['email_settings']['email_queue_enabled'] : false,
+				),
+				array(
+					'id'          => 'batch_email_limit',
+					'type'        => 'number',
+					'label'       => 'Batch Email Limit',
+					'description' => 'Number of emails to send per batch.',
+					'default'     => 50,
+					'value'       => isset( $all_settings['notifications']['email_settings']['batch_email_limit'] ) ? $all_settings['notifications']['email_settings']['batch_email_limit'] : 50,
+					'min'         => 10,
+					'max'         => 200,
+				),
+				array(
+					'id'          => 'queue_processing_interval',
+					'type'        => 'number',
+					'label'       => 'Queue Processing Interval (seconds)',
+					'description' => 'How often to process queued emails.',
+					'default'     => 60,
+					'value'       => isset( $all_settings['notifications']['email_settings']['queue_processing_interval'] ) ? $all_settings['notifications']['email_settings']['queue_processing_interval'] : 60,
+					'min'         => 30,
+					'max'         => 300,
+				),
+				array(
+					'id'          => 'use_smtp',
+					'type'        => 'toggle',
+					'label'       => 'Use SMTP',
+					'description' => 'Use SMTP server instead of WordPress default mail.',
+					'default'     => false,
+					'value'       => isset( $all_settings['notifications']['email_settings']['use_smtp'] ) ? $all_settings['notifications']['email_settings']['use_smtp'] : false,
+				),
+				array(
+					'id'          => 'smtp_host',
+					'type'        => 'text',
+					'label'       => 'SMTP Host',
+					'description' => 'SMTP server hostname.',
+					'placeholder' => 'smtp.gmail.com',
+					'value'       => isset( $all_settings['notifications']['email_settings']['smtp_host'] ) ? $all_settings['notifications']['email_settings']['smtp_host'] : '',
+					'conditional' => array(
+						'key'   => 'use_smtp',
+						'value' => true,
+					),
+				),
+				array(
+					'id'          => 'smtp_port',
+					'type'        => 'number',
+					'label'       => 'SMTP Port',
+					'description' => 'SMTP server port.',
+					'default'     => 587,
+					'value'       => isset( $all_settings['notifications']['email_settings']['smtp_port'] ) ? $all_settings['notifications']['email_settings']['smtp_port'] : 587,
+					'min'         => 1,
+					'max'         => 65535,
+					'conditional' => array(
+						'key'   => 'use_smtp',
+						'value' => true,
+					),
+				),
+				array(
+					'id'          => 'smtp_encryption',
+					'type'        => 'select',
+					'label'       => 'Encryption',
+					'description' => 'SMTP encryption method.',
+					'options'     => array(
+						array(
+							'value' => 'none',
+							'label' => 'None',
+						),
+						array(
+							'value' => 'ssl',
+							'label' => 'SSL',
+						),
+						array(
+							'value' => 'tls',
+							'label' => 'TLS',
+						),
+					),
+					'default'     => 'tls',
+					'value'       => isset( $all_settings['notifications']['email_settings']['smtp_encryption'] ) ? $all_settings['notifications']['email_settings']['smtp_encryption'] : 'tls',
+					'conditional' => array(
+						'key'   => 'use_smtp',
+						'value' => true,
+					),
+				),
+				array(
+					'id'          => 'smtp_username',
+					'type'        => 'text',
+					'label'       => 'SMTP Username',
+					'description' => 'SMTP server username.',
+					'placeholder' => 'your-email@gmail.com',
+					'value'       => isset( $all_settings['notifications']['email_settings']['smtp_username'] ) ? $all_settings['notifications']['email_settings']['smtp_username'] : '',
+					'conditional' => array(
+						'key'   => 'use_smtp',
+						'value' => true,
+					),
+				),
+				array(
+					'id'          => 'smtp_password',
+					'type'        => 'password',
+					'label'       => 'SMTP Password',
+					'description' => 'SMTP server password.',
+					'placeholder' => 'Enter your SMTP password',
+					'value'       => isset( $all_settings['notifications']['email_settings']['smtp_password'] ) ? $all_settings['notifications']['email_settings']['smtp_password'] : '',
+					'conditional' => array(
+						'key'   => 'use_smtp',
+						'value' => true,
+					),
+				),
+			),
+		),
+		array(
+			'id'     => 'in_app_settings',
+			'title'  => 'In-App Notification Settings',
+			'fields' => array(
+				array(
+					'id'          => 'enable_in_app_notifications',
+					'type'        => 'toggle',
+					'label'       => 'Enable In-App Notifications',
+					'description' => 'When enabled, users will receive in-app notifications for various events.',
+					'default'     => true,
+					'value'       => isset( $all_settings['notifications']['in_app_settings']['enable_in_app_notifications'] ) ? $all_settings['notifications']['in_app_settings']['enable_in_app_notifications'] : true,
+				),
+				array(
+					'id'          => 'max_notifications_per_user',
+					'type'        => 'number',
+					'label'       => 'Max Notifications Per User',
+					'description' => 'Maximum number of notifications to store per user. Older notifications will be automatically deleted when this limit is reached.',
+					'default'     => 100,
+					'value'       => isset( $all_settings['notifications']['in_app_settings']['max_notifications_per_user'] ) ? $all_settings['notifications']['in_app_settings']['max_notifications_per_user'] : 100,
+					'min'         => 1,
+					'max'         => 10000,
+				),
+				array(
+					'id'          => 'auto_delete_enabled',
+					'type'        => 'toggle',
+					'label'       => 'Auto-Delete Old Notifications',
+					'description' => 'Automatically delete notifications older than the specified number of days.',
+					'default'     => false,
+					'value'       => isset( $all_settings['notifications']['in_app_settings']['auto_delete_enabled'] ) ? $all_settings['notifications']['in_app_settings']['auto_delete_enabled'] : false,
+				),
+				array(
+					'id'          => 'auto_delete_days',
+					'type'        => 'number',
+					'label'       => 'Delete Notifications Older Than (Days)',
+					'description' => 'Notifications older than this many days will be automatically deleted.',
+					'default'     => 90,
+					'value'       => isset( $all_settings['notifications']['in_app_settings']['auto_delete_days'] ) ? $all_settings['notifications']['in_app_settings']['auto_delete_days'] : 90,
+					'min'         => 1,
+					'max'         => 3650,
+					'conditional' => array(
+						'key'   => 'auto_delete_enabled',
+						'value' => true,
+					),
+				),
+				array(
+					'id'          => 'default_notification_type',
+					'type'        => 'select',
+					'label'       => 'Default Notification Type',
+					'description' => 'Default type for notifications when not specified.',
+					'options'     => array(
+						array(
+							'value' => 'info',
+							'label' => 'Info',
+						),
+						array(
+							'value' => 'success',
+							'label' => 'Success',
+						),
+						array(
+							'value' => 'warning',
+							'label' => 'Warning',
+						),
+						array(
+							'value' => 'error',
+							'label' => 'Error',
+						),
+					),
+					'default'     => 'info',
+					'value'       => isset( $all_settings['notifications']['in_app_settings']['default_notification_type'] ) ? $all_settings['notifications']['in_app_settings']['default_notification_type'] : 'info',
+				),
+			),
+		),
+	),
+);
 
 return array(
 	'tabs'     => array(
 		$general_tab,
 		$courses_tab,
+		$notifications_tab,
 	),
 	'metadata' => array(
 		'version'      => '1.0.0',

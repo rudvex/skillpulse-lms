@@ -1,0 +1,112 @@
+/**
+ * Notification History List Styles
+ *
+ * Styles for the standardized notification history table using SPLMS_ListView
+ */
+
+// Status badges
+.splms-status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: var(--splms-border-radius-base);
+    font-size: var(--splms-font-size-xs);
+    font-weight: var(--splms-font-weight-medium);
+    text-transform: uppercase;
+
+    &.splms-status-read {
+        background: #e7f5e7;
+        color: #2d7d2d;
+    }
+
+    &.splms-status-unread {
+        background: #fff3cd;
+        color: #856404;
+    }
+}
+
+// Type badges
+.splms-type-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: var(--splms-border-radius-base);
+    font-size: var(--splms-font-size-xs);
+    font-weight: var(--splms-font-weight-medium);
+    text-transform: capitalize;
+
+    &.splms-type-info {
+        background: #d1ecf1;
+        color: #0c5460;
+    }
+
+    &.splms-type-success {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    &.splms-type-warning {
+        background: #fff3cd;
+        color: #856404;
+    }
+
+    &.splms-type-error {
+        background: #f8d7da;
+        color: #721c24;
+    }
+}
+
+// Event badges
+.splms-event-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: var(--splms-border-radius-base);
+    background: #f8f9fa;
+    color: #495057;
+    font-size: var(--splms-font-size-xs);
+    font-weight: var(--splms-font-weight-medium);
+    border: 1px solid #dee2e6;
+}
+
+// Message preview
+.splms-message-preview {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #6c757d;
+}
+
+// User email styling
+.splms-user-email {
+    color: #6c757d;
+    font-size: var(--splms-font-size-xs);
+}
+
+// Notification table specific styling
+.splms-list-view {
+    .splms-table {
+        // Read notifications have lighter text
+        tr.splms-read {
+            opacity: 0.7;
+        }
+
+        // Unread notifications are highlighted
+        tr.splms-unread {
+            background: #fefefe;
+            border-left: 3px solid #007cba;
+        }
+    }
+}
+
+// Responsive adjustments for notification history
+@media (max-width: 768px) {
+    .splms-message-preview {
+        max-width: 200px;
+    }
+
+    .splms-status-badge,
+    .splms-type-badge,
+    .splms-event-badge {
+        font-size: var(--splms-font-size-xs);
+        padding: 2px 6px;
+    }
+}

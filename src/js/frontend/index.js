@@ -16,6 +16,7 @@ import './modules/question-ordering';
 import './modules/auth/auth';
 import './modules/auth/signup.validation';
 import './components/notifications'; // Unified notification system
+import './api/notifications'; // REST API helper for notifications (available globally as SPLMSNotificationsAPI)
 import './components/header-interactions'; // Mobile menu and user dropdown only
 // Removed: notifications-page.js (functionality merged into notifications.js)
 // Removed: nav-menu-profile.js (notification functionality moved to notifications.js)

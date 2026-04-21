@@ -1,0 +1,50 @@
+/* Email WordPress Editor specific styles */
+.splms-email-wordpress-editor {
+
+    .splms-editor-tabs {
+        background-color: #fff;
+
+        .splms-editor-tab {
+            position: relative;
+            transition: var(--splms-transition-base);
+
+            &:hover {
+                background-color: #f8f9fa;
+            }
+        }
+    }
+}
+
+// Enhanced placeholder styling for email content
+.splms-richtext-editor .splms-rich-text-content {
+    .email-placeholder {
+        background-color: #e7f3ff;
+        color: #0073aa;
+        padding: 2px 4px;
+        border-radius: 2px;
+        font-family: var(--splms-font-family-mono);
+        font-size: var(--splms-font-size-sm);
+        border: 1px solid #b8d7f0;
+        white-space: nowrap;
+    }
+
+    .email-shortcode {
+        background-color: #f0f6fc;
+        color: #24292f;
+        padding: 2px 4px;
+        border-radius: 2px;
+        font-family: var(--splms-font-family-mono);
+        font-size: var(--splms-font-size-sm);
+        border: 1px solid #d0d7de;
+        white-space: nowrap;
+    }
+}
+
+// Email template editor layout adjustments
+.splms-email-templates-layout {
+    .splms-template-main {
+        .splms-email-editor-container {
+            margin-bottom: 20px;
+        }
+    }
+}

@@ -115,6 +115,13 @@ do_action( 'splms_before_dashboard_content' );
 						</a>
 					</li>
 					<li class="splms-nav-item">
+						<a href="<?php echo esc_url( $splms_dashboard->get_tab_url( 'notifications' ) ); ?>"
+							class="splms-nav-link<?php echo ( 'notifications' === $splms_current_tab ) ? ' active' : ''; ?>">
+							<i class="hgi-stroke hgi-notification-03"></i>
+							<?php esc_html_e( 'Notifications', 'skillpulse-lms' ); ?>
+						</a>
+					</li>
+					<li class="splms-nav-item">
 						<a href="<?php echo esc_url( $splms_dashboard->get_tab_url( 'settings' ) ); ?>"
 							class="splms-nav-link<?php echo ( 'settings' === $splms_current_tab ) ? ' active' : ''; ?>">
 							<i class="hgi-stroke hgi-settings-02"></i>

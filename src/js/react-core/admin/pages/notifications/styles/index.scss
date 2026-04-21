@@ -1,0 +1,11 @@
+/**
+ * Notifications Styles Index
+ *
+ * Import all notification-related styles
+ */
+
+// In-app notification templates styles
+@import '../in-app/styles/templates';
+
+// Notification history list styles
+@import './notification-history';

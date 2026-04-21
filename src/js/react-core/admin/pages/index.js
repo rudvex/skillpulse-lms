@@ -4,5 +4,6 @@
 import './settings';
 import './enrollments';
 import './overview';
+import './notifications';
 import './wizard';
 

@@ -68,6 +68,7 @@ class SkillPulse_LMS_Modules {
 			'includes/modules/activity/class-user-activity-query',
 			'includes/modules/enrollment/class-enrollments-query',
 			'includes/modules/enrollment/class-enrollment',
+			'includes/modules/notifications/class-notification',
 			'includes/modules/core/class-access-control',
 			'includes/modules/integrations/class-membership-integration',
 			'includes/modules/integrations/class-membership-display',
@@ -99,6 +100,8 @@ class SkillPulse_LMS_Modules {
 		SkillPulse_LMS_Enrollment::get_instance();
 		SkillPulse_LMS_Orders::get_instance();
 
+		// Initialize notification module (includes email and in-app notifications).
+		SkillPulse_LMS_Notification::get_instance();
 		SkillPulse_LMS_Access_Control::get_instance();
 
 		// Register built-in membership integrations.
