@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkillPulse LMS v1.0.0\n"
 "Report-Msgid-Bugs-To: https://skillpulselms.com/contact\n"
-"POT-Creation-Date: 2026-04-21 10:34:57+00:00\n"
+"POT-Creation-Date: 2026-04-21 11:32:26+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -386,7 +386,7 @@ msgid "Edit Course "
 msgstr ""
 
 #: includes/admin/manager/class-admin-post-types.php:90
-#: includes/modules/core/class-access-control.php:783
+#: includes/modules/core/class-access-control.php:785
 #: templates/course/course.php:261 templates/dashboard/wishlist.php:89
 #: templates/page-dashboard.php:340 templates/quiz/content.php:220
 #: templates/quiz/content.php:238 templates/quiz/content.php:271
@@ -937,9 +937,9 @@ msgid "Select %s"
 msgstr ""
 
 #: includes/admin/signup/class-signup-list-table.php:295
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:105
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:191
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:433
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:106
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:192
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:436
 #: includes/modules/core/class-database.php:838
 #: includes/modules/notifications/in-app/class-in-app-notifications.php:193
 #: includes/modules/notifications/in-app/class-in-app-notifications.php:231
@@ -1243,62 +1243,62 @@ msgstr ""
 msgid "Load More"
 msgstr ""
 
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:109
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:195
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:437
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:110
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:196
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:440
 msgid "You must be logged in."
 msgstr ""
 
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:178
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:179
 msgid "Profile updated successfully."
 msgstr ""
 
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:205
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:206
 msgid "Missing required fields."
 msgstr ""
 
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:212
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:213
 msgid "at least 8 characters long"
 msgstr ""
 
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:216
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:217
 msgid "one lowercase letter"
 msgstr ""
 
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:220
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:221
 msgid "one uppercase letter"
 msgstr ""
 
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:224
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:225
 msgid "one number"
 msgstr ""
 
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:228
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:229
 msgid "one special character"
 msgstr ""
 
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:233
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:234
 #. translators: %s: List of password requirements
 msgid "Password must contain:"
 msgstr ""
 
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:241
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:242
 msgid "User not found."
 msgstr ""
 
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:246
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:247
 msgid "Current password is incorrect."
 msgstr ""
 
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:252
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:253
 msgid "Password changed successfully."
 msgstr ""
 
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:469
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:472
 msgid "Notification preferences saved successfully."
 msgstr ""
 
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:471
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:474
 msgid "Failed to save notification preferences."
 msgstr ""
 
@@ -1550,39 +1550,39 @@ msgstr ""
 msgid "Purchase"
 msgstr ""
 
-#: includes/modules/core/class-access-control.php:771
+#: includes/modules/core/class-access-control.php:773
 msgid ""
 "You are viewing this quiz in preview mode. Enroll in the course to access "
 "all quizzes and features."
 msgstr ""
 
-#: includes/modules/core/class-access-control.php:773
+#: includes/modules/core/class-access-control.php:775
 msgid ""
 "You are viewing this lesson in preview mode. Enroll in the course to access "
 "all lessons and features."
 msgstr ""
 
-#: includes/modules/core/class-access-control.php:780
+#: includes/modules/core/class-access-control.php:782
 msgid "Preview Mode"
 msgstr ""
 
-#: includes/modules/core/class-access-control.php:804
+#: includes/modules/core/class-access-control.php:806
 #. translators: %s: Content type.
 msgid "Access Denied: You do not have permission to view this %s."
 msgstr ""
 
-#: includes/modules/core/class-access-control.php:820
+#: includes/modules/core/class-access-control.php:822
 msgid ""
 "This course requires a membership. Please purchase a membership to access "
 "this course."
 msgstr ""
 
-#: includes/modules/core/class-access-control.php:832
+#: includes/modules/core/class-access-control.php:834
 #: templates/quiz/content.php:252
 msgid "Access Restricted"
 msgstr ""
 
-#: includes/modules/core/class-access-control.php:838
+#: includes/modules/core/class-access-control.php:840
 msgid "Login to Access"
 msgstr ""
 
@@ -1733,7 +1733,7 @@ msgid "Invalid directory name."
 msgstr ""
 
 #: includes/modules/core/helper/class-file-manager.php:179
-#: includes/modules/quizzes/class-quizzes.php:1850
+#: includes/modules/quizzes/class-quizzes.php:1856
 #. translators: %s: Directory path.
 msgid "Failed to create directory: %s"
 msgstr ""
@@ -2125,7 +2125,7 @@ msgid "Invalid setting key: %s"
 msgstr ""
 
 #: includes/modules/lessons/class-lessons.php:616
-#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:425
+#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:427
 #. translators: %1$d: Required completion percentage, %2$.1f: Current progress
 #. percentage.
 msgid ""
@@ -2215,7 +2215,7 @@ msgstr ""
 msgid "Minimum time student must spend on lesson"
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:250
+#: includes/modules/lessons/general-functions.php:251
 #: includes/modules/notifications/in-app/class-in-app-notifications.php:201
 #: includes/modules/notifications/in-app/class-in-app-notifications.php:236
 #: includes/modules/notifications/in-app/class-in-app-notifications.php:312
@@ -2231,81 +2231,81 @@ msgstr ""
 msgid "User not logged in."
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:254
+#: includes/modules/lessons/general-functions.php:255
 msgid "Lesson ID is required."
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:263
+#: includes/modules/lessons/general-functions.php:264
 msgid "Course ID is required."
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:268
+#: includes/modules/lessons/general-functions.php:269
 msgid "Access denied."
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:714
+#: includes/modules/lessons/general-functions.php:716
 msgid "Media URL is required."
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:722
-#: includes/modules/lessons/general-functions.php:1102
+#: includes/modules/lessons/general-functions.php:724
+#: includes/modules/lessons/general-functions.php:1104
 msgid "Invalid URL format."
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:761
+#: includes/modules/lessons/general-functions.php:763
 msgid ""
 "Invalid video URL. Please upload a valid video file (MP4, WebM, OGV) or use "
 "a YouTube/Vimeo link."
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:785
+#: includes/modules/lessons/general-functions.php:787
 msgid ""
 "Invalid audio file. Only MP3, WAV, OGG, or M4A formats are supported, or "
 "use a SoundCloud link."
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:844
+#: includes/modules/lessons/general-functions.php:846
 msgid "Invalid document URL. Please provide a valid file link."
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:919
+#: includes/modules/lessons/general-functions.php:921
 #: templates/lesson/types/document.php:55
 msgid "Document image"
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:956
+#: includes/modules/lessons/general-functions.php:958
 #: templates/lesson/types/document.php:91
 msgid "This document is not previewable. Please download to view."
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:970
+#: includes/modules/lessons/general-functions.php:972
 #: templates/lesson/types/document.php:104
 msgid "Download Document"
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:1168
+#: includes/modules/lessons/general-functions.php:1170
 #. translators: %1$s: File extension, %2$s: Supported formats.
 msgid ""
 "The selected file format (.%1$s) is not supported by your browser. Please "
 "upload a %2$s file."
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:1185
+#: includes/modules/lessons/general-functions.php:1187
 msgid "Your browser does not support the video element."
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:1190
+#: includes/modules/lessons/general-functions.php:1192
 #: templates/lesson/types/audio.php:71
 msgid "Your browser does not support the audio player."
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:1202
+#: includes/modules/lessons/general-functions.php:1204
 msgid ""
 "Media loaded from external source. If playback fails, host file on "
 "WordPress media."
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:1426
+#: includes/modules/lessons/general-functions.php:1428
 #: templates/lesson/types/interactive.php:59
 #. translators: %s: Shortcode tag name.
 msgid ""
@@ -2313,13 +2313,13 @@ msgid ""
 "is active."
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:1462
+#: includes/modules/lessons/general-functions.php:1464
 #: templates/lesson/types/interactive.php:103
 msgid "Invalid embed source URL. Please check the iframe src attribute."
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:1482
-#: includes/modules/lessons/general-functions.php:1507
+#: includes/modules/lessons/general-functions.php:1484
+#: includes/modules/lessons/general-functions.php:1509
 #: templates/lesson/types/interactive.php:122
 #: templates/lesson/types/interactive.php:151
 msgid ""
@@ -2327,7 +2327,7 @@ msgid ""
 "embed source."
 msgstr ""
 
-#: includes/modules/lessons/general-functions.php:1521
+#: includes/modules/lessons/general-functions.php:1523
 #: templates/lesson/types/interactive.php:166
 msgid ""
 "Please use an iframe embed code or shortcode for interactive content. URL "
@@ -4560,11 +4560,11 @@ msgstr ""
 msgid "Your order #{order_id} for the course \"{course_title}\" has been cancelled."
 msgstr ""
 
-#: includes/modules/orders/class-order-manager.php:662
+#: includes/modules/orders/class-order-manager.php:674
 msgid "⚠️ TEST MODE ACTIVE"
 msgstr ""
 
-#: includes/modules/orders/class-order-manager.php:667
+#: includes/modules/orders/class-order-manager.php:679
 #. translators: %s: Comma-separated list of gateway names
 msgid "Payment gateways in test mode: %s. Real payments will not be processed."
 msgstr ""
@@ -4726,7 +4726,7 @@ msgstr ""
 msgid "Order created with status: %s"
 msgstr ""
 
-#: includes/modules/orders/class-orders-query.php:412
+#: includes/modules/orders/class-orders-query.php:414
 #. translators: 1: Old status, 2: New status
 msgid "Order status changed from %1$s to %2$s"
 msgstr ""
@@ -4758,12 +4758,12 @@ msgid "Purchase token is missing."
 msgstr ""
 
 #: includes/modules/orders/class-purchase-token.php:165
-#: includes/modules/orders/class-purchase-token.php:296
+#: includes/modules/orders/class-purchase-token.php:298
 msgid "Invalid token format."
 msgstr ""
 
 #: includes/modules/orders/class-purchase-token.php:170
-#: includes/modules/orders/class-purchase-token.php:301
+#: includes/modules/orders/class-purchase-token.php:303
 msgid "Invalid token data."
 msgstr ""
 
@@ -4924,39 +4924,39 @@ msgstr ""
 msgid "Failed to save quiz progress."
 msgstr ""
 
-#: includes/modules/quizzes/class-quiz-service.php:386
-#: includes/modules/quizzes/class-quiz-service.php:516
-#: includes/modules/quizzes/class-quizzes.php:1924
-#: includes/modules/quizzes/class-quizzes.php:2728
-#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:556
-#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:928
+#: includes/modules/quizzes/class-quiz-service.php:387
+#: includes/modules/quizzes/class-quiz-service.php:519
+#: includes/modules/quizzes/class-quizzes.php:1930
+#: includes/modules/quizzes/class-quizzes.php:2735
+#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:559
+#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:932
 msgid "Quiz attempt not found."
 msgstr ""
 
-#: includes/modules/quizzes/class-quiz-service.php:476
+#: includes/modules/quizzes/class-quiz-service.php:478
 #: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:497
 #: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:679
 msgid "Failed to clear quiz state or no in-progress state found."
 msgstr ""
 
-#: includes/modules/quizzes/class-quiz-service.php:482
+#: includes/modules/quizzes/class-quiz-service.php:484
 #: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:685
 msgid "Quiz state cleared successfully."
 msgstr ""
 
-#: includes/modules/quizzes/class-quiz-service.php:554
+#: includes/modules/quizzes/class-quiz-service.php:557
 msgid "No valid manual review questions found to grade."
 msgstr ""
 
-#: includes/modules/quizzes/class-quiz-service.php:641
+#: includes/modules/quizzes/class-quiz-service.php:645
 msgid "Failed to update attempt data."
 msgstr ""
 
-#: includes/modules/quizzes/class-quiz-service.php:667
+#: includes/modules/quizzes/class-quiz-service.php:671
 msgid "Quiz attempt graded successfully. All questions have been reviewed."
 msgstr ""
 
-#: includes/modules/quizzes/class-quiz-service.php:668
+#: includes/modules/quizzes/class-quiz-service.php:672
 msgid "Questions graded successfully. Some questions still require review."
 msgstr ""
 
@@ -4972,9 +4972,9 @@ msgstr ""
 #: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:552
 #: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:671
 #: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:849
-#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1269
-#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1304
-#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1339
+#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1270
+#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1305
+#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1340
 msgid "Invalid quiz ID."
 msgstr ""
 
@@ -4990,73 +4990,73 @@ msgstr ""
 msgid "Invalid quiz ID or attempt ID. Please start a new attempt."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:1223
-#: includes/modules/quizzes/class-quizzes.php:1518
+#: includes/modules/quizzes/class-quizzes.php:1224
+#: includes/modules/quizzes/class-quizzes.php:1522
 msgid "No questions found for this quiz. Please contact the instructor."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:1292
+#: includes/modules/quizzes/class-quizzes.php:1293
 msgid "Security check failed: Attempt ownership mismatch."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:1332
+#: includes/modules/quizzes/class-quizzes.php:1334
 msgid "Failed to save quiz attempt. Please try again or contact support."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:1353
+#: includes/modules/quizzes/class-quizzes.php:1356
 msgid "Quiz attempt was not saved correctly. Please try again."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:1611
+#: includes/modules/quizzes/class-quizzes.php:1615
 msgid "This was a preview attempt. Results are not saved."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:1666
+#: includes/modules/quizzes/class-quizzes.php:1670
 msgid "This was a preview attempt. Results have been saved as guest attempt."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:1875
+#: includes/modules/quizzes/class-quizzes.php:1881
 msgid "Could not initialize WordPress filesystem."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:1883
+#: includes/modules/quizzes/class-quizzes.php:1889
 msgid "Failed to move uploaded file."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2537
+#: includes/modules/quizzes/class-quizzes.php:2543
 #. translators: %s: File extension
 msgid "File type .%s is not allowed for security reasons."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2550
+#: includes/modules/quizzes/class-quizzes.php:2556
 #. translators: %s: Maximum file size
 msgid "File size exceeds maximum limit of %s."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2564
+#: includes/modules/quizzes/class-quizzes.php:2570
 msgid "Filename contains suspicious content."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2586
+#: includes/modules/quizzes/class-quizzes.php:2592
 msgid "File type does not match file extension."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2688
+#: includes/modules/quizzes/class-quizzes.php:2694
 msgid "Unknown status"
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2710
+#: includes/modules/quizzes/class-quizzes.php:2716
 #. translators: %s: Invalid status value
 msgid "Invalid status: %s"
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2737
+#: includes/modules/quizzes/class-quizzes.php:2744
 #. translators: 1: Current status, 2: New status
 msgid "Cannot transition from %1$s to %2$s."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2783
-#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:875
+#: includes/modules/quizzes/class-quizzes.php:2791
+#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:879
 msgid "Failed to update quiz attempt status."
 msgstr ""
 
@@ -5649,7 +5649,7 @@ msgid ""
 msgstr ""
 
 #: includes/modules/user-management/signup/class-signup.php:196
-#: includes/modules/user-management/signup/class-signup.php:470
+#: includes/modules/user-management/signup/class-signup.php:471
 msgid "Invalid activation key."
 msgstr ""
 
@@ -5686,7 +5686,7 @@ msgid "Username is required."
 msgstr ""
 
 #: includes/modules/user-management/signup/class-signup.php:284
-#: includes/modules/user-management/signup/class-signup.php:479
+#: includes/modules/user-management/signup/class-signup.php:480
 msgid "Username already exists."
 msgstr ""
 
@@ -5707,7 +5707,7 @@ msgid "Invalid email format."
 msgstr ""
 
 #: includes/modules/user-management/signup/class-signup.php:296
-#: includes/modules/user-management/signup/class-signup.php:483
+#: includes/modules/user-management/signup/class-signup.php:484
 msgid "Email already exists."
 msgstr ""
 
@@ -5747,30 +5747,30 @@ msgstr ""
 msgid "You must accept the terms and conditions."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:433
+#: includes/modules/user-management/signup/class-signup.php:434
 msgid "Failed to create signup."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:450
+#: includes/modules/user-management/signup/class-signup.php:451
 msgid "User type is not allowed."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:474
+#: includes/modules/user-management/signup/class-signup.php:475
 msgid "Account is already activated."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:559
+#: includes/modules/user-management/signup/class-signup.php:560
 msgid "Activation Failed"
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:699
+#: includes/modules/user-management/signup/class-signup.php:701
 #. translators: %s: Resend activation URL.
 msgid ""
 "If you have not received an email yet, <a href=\"%s\">click here to resend "
 "it</a>."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:705
+#: includes/modules/user-management/signup/class-signup.php:707
 msgid ""
 "<strong>ERROR</strong>: Your account has not been activated. Check your "
 "email for the activation link."
@@ -5832,12 +5832,12 @@ msgstr ""
 msgid "Sorry, you are not allowed to access admin dashboard."
 msgstr ""
 
-#: includes/rest-api/admin/class-rest-admin-overview-controller.php:286
+#: includes/rest-api/admin/class-rest-admin-overview-controller.php:288
 #. translators: %1$s: User display name, %2$s: Course title.
 msgid "%1$s enrolled in %2$s"
 msgstr ""
 
-#: includes/rest-api/admin/class-rest-admin-overview-controller.php:506
+#: includes/rest-api/admin/class-rest-admin-overview-controller.php:510
 msgid "Failed to create export file: "
 msgstr ""
 
@@ -6995,62 +6995,62 @@ msgstr ""
 #: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:252
 #: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:310
 #: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:911
-#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1012
+#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1013
 msgid "No user specified."
 msgstr ""
 
-#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:353
+#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:355
 msgid "Failed to update lesson progress."
 msgstr ""
 
-#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:397
-#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:645
+#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:399
+#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:647
 msgid "You must be logged in to complete lessons."
 msgstr ""
 
-#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:403
-#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:533
+#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:405
+#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:535
 msgid "Invalid lesson or course ID."
 msgstr ""
 
-#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:409
+#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:411
 msgid "Access denied to this lesson."
 msgstr ""
 
-#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:442
+#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:444
 msgid "Failed to mark lesson as complete. Please try again."
 msgstr ""
 
-#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:462
+#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:464
 msgid "Lesson marked as complete!"
 msgstr ""
 
-#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:484
+#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:486
 msgid "You must be logged in to view video progress."
 msgstr ""
 
-#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:524
+#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:526
 msgid "You must be logged in to save video progress."
 msgstr ""
 
-#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:565
+#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:567
 msgid "Failed to save video progress."
 msgstr ""
 
-#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:578
+#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:580
 msgid "Video progress saved successfully."
 msgstr ""
 
-#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:598
+#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:600
 #: includes/rest-api/lessons/class-rest-lesson-controller.php:972
 msgid "Invalid lesson ID."
 msgstr ""
 
-#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:606
+#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:608
 msgid "Sorry, you are not allowed to view progress for this lesson."
 msgstr ""
 
-#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:613
+#: includes/rest-api/lessons/class-rest-lesson-actions-controller.php:615
 msgid "Sorry, you must be logged in to view lesson progress."
 msgstr ""
 
@@ -7476,8 +7476,8 @@ msgid "Source quiz not found."
 msgstr ""
 
 #: includes/rest-api/quizzes/admin/class-rest-quiz-questions-controller.php:1607
-#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1277
-#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1347
+#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1278
+#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1348
 msgid "Sorry, you are not allowed to access this quiz."
 msgstr ""
 
@@ -7551,23 +7551,23 @@ msgid "Sorry, you are not allowed to clear quiz state."
 msgstr ""
 
 #: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:862
-#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1284
+#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1285
 msgid "Sorry, you must be logged in to view quiz attempts."
 msgstr ""
 
-#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:956
+#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:957
 msgid "Failed to save quiz attempt."
 msgstr ""
 
-#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1312
+#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1313
 msgid "Sorry, you are not allowed to submit this quiz."
 msgstr ""
 
-#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1319
+#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1320
 msgid "Sorry, you must be logged in to submit this quiz."
 msgstr ""
 
-#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1354
+#: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:1355
 msgid "Sorry, you must be logged in to view quiz results."
 msgstr ""
 
@@ -7619,38 +7619,38 @@ msgstr ""
 msgid "Order direction."
 msgstr ""
 
-#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:881
+#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:885
 msgid "Quiz attempt status updated successfully."
 msgstr ""
 
-#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:902
+#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:906
 msgid "Failed to delete quiz attempt."
 msgstr ""
 
-#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:908
+#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:912
 msgid "Quiz attempt deleted successfully."
 msgstr ""
 
-#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1264
-#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1322
-#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1432
-#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1435
-#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1441
-#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1457
-#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1462
+#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1268
+#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1326
+#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1436
+#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1439
+#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1445
+#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1461
 #: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1466
+#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1470
 msgid "No answer provided"
 msgstr ""
 
-#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1541
+#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1546
 msgid "Failed to update feedback."
 msgstr ""
 
-#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1547
+#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1552
 msgid "Feedback updated successfully."
 msgstr ""
 
-#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1602
+#: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:1607
 msgid "Invalid question scores provided."
 msgstr ""
 

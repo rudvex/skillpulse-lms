@@ -270,7 +270,7 @@ class SkillPulse_LMS_In_App_Templates {
 				"SELECT option_name, option_value FROM {$wpdb->options} WHERE option_name IN ($placeholders)",
 				$option_names
 			);
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared above.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared above.
 			$db_results = $wpdb->get_results( $query, OBJECT_K );
 			if ( $db_results ) {
 				$results = $db_results;

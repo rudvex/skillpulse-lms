@@ -255,7 +255,7 @@ class SkillPulse_LMS_REST_Lesson_Actions_Controller extends WP_REST_Controller {
 		global $wpdb;
 		$table_name = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
 		$progress = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table_name} WHERE lesson_id = %d AND user_id = %d", $lesson_id, $user_id ) );
 
 		if ( ! $progress ) {
@@ -332,10 +332,11 @@ class SkillPulse_LMS_REST_Lesson_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Check if progress record exists.
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
 		$existing = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table_name} WHERE lesson_id = %d AND user_id = %d", $lesson_id, $user_id ) );
 
 		if ( $existing ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 			$result = $wpdb->update(
 				$table_name,
 				$progress_data,
@@ -346,6 +347,7 @@ class SkillPulse_LMS_REST_Lesson_Actions_Controller extends WP_REST_Controller {
 			);
 		} else {
 			$progress_data['started_at'] = current_time( 'mysql' );
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 			$result                      = $wpdb->insert( $table_name, $progress_data );
 		}
 

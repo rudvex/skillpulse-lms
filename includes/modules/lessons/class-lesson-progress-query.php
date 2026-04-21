@@ -109,7 +109,7 @@ class SkillPulse_LMS_Lesson_Progress_Query extends SkillPulse_LMS_Base_Query {
 		$sql = "SELECT is_completed FROM {$this->table_name} WHERE lesson_id = %d AND user_id = %d";
 
 		global $wpdb;
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above, $sql variable usage is safe.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above, $sql variable usage is safe.
 		$result = $wpdb->get_var( $wpdb->prepare( $sql, $lesson_id, $user_id ) );
 
 		return intval( $result ) === 1;

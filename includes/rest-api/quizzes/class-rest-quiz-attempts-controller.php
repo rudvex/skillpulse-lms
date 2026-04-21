@@ -346,6 +346,7 @@ class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 			$search_like = '%' . $wpdb->esc_like( $search ) . '%';
 
 			// Get matching user IDs.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 			$user_ids = $wpdb->get_col(
 				$wpdb->prepare(
 					"SELECT ID FROM {$wpdb->users} WHERE display_name LIKE %s OR user_email LIKE %s",
@@ -355,6 +356,7 @@ class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 			);
 
 			// Get matching quiz IDs.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 			$quiz_ids = $wpdb->get_col(
 				$wpdb->prepare(
 					"SELECT ID FROM {$wpdb->posts} WHERE post_type = %s AND post_title LIKE %s",
@@ -364,6 +366,7 @@ class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 			);
 
 			// Get matching course IDs.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 			$course_ids = $wpdb->get_col(
 				$wpdb->prepare(
 					"SELECT ID FROM {$wpdb->posts} WHERE post_type = %s AND post_title LIKE %s",
@@ -452,7 +455,7 @@ class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $count_query is built with proper placeholders and prepared.
 			$count_query = $wpdb->prepare( $count_query, ...$where_values );
 		}
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $count_query is prepared above.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $count_query is prepared above.
 		$total_items = $wpdb->get_var( $count_query );
 
 		// Get items.
@@ -461,12 +464,12 @@ class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 		$query_values = array_merge( $where_values, array( $per_page, $offset ) );
 
 		if ( empty( $query_values ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query has no placeholders when values is empty.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query has no placeholders when values is empty.
 			$attempts = $wpdb->get_results( $query );
 		} else {
 			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $query is built with proper placeholders and prepared.
 			$query = $wpdb->prepare( $query, ...$query_values );
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $query is prepared above.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $query is prepared above.
 			$attempts = $wpdb->get_results( $query );
 		}
 
@@ -860,6 +863,7 @@ class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 
 		global $wpdb;
 		$table_name = $wpdb->prefix . self::TABLE_NAME;
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 		$result     = $wpdb->update(
 			$table_name,
 			array(
@@ -1529,6 +1533,7 @@ class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 
 		global $wpdb;
 		$table_name = $wpdb->prefix . self::TABLE_NAME;
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 		$result     = $wpdb->update(
 			$table_name,
 			array( 'feedback' => $feedback ),

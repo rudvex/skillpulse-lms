@@ -111,7 +111,7 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
 		$sql = "SELECT * FROM {$this->table_name} WHERE id = %d";
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 		$order = $wpdb->get_row( $wpdb->prepare( $sql, $order_id ) );
 
 		if ( $order ) {
@@ -203,14 +203,14 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 			// Get single meta value.
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.SlowDBQuery.slow_db_query_meta_key,WordPress.DB.SlowDBQuery.slow_db_query_meta_value, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, meta queries are necessary.
 			$sql = "SELECT meta_value FROM $meta_table WHERE order_id = %d AND meta_key = %s";
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 			$value = $wpdb->get_var( $wpdb->prepare( $sql, $order_id, $meta_key ) );
 			return maybe_unserialize( $value );
 		} else {
 			// Get all meta data.
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
 			$sql = "SELECT meta_key, meta_value FROM $meta_table WHERE order_id = %d";
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 			$results = $wpdb->get_results( $wpdb->prepare( $sql, $order_id ) );
 
 			$meta = array();
@@ -249,7 +249,7 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 		$meta_table = esc_sql( $wpdb->prefix . 'splms_order_meta' );
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.SlowDBQuery.slow_db_query_meta_key,WordPress.DB.SlowDBQuery.slow_db_query_meta_value, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, meta queries are necessary.
 		$sql = "SELECT order_id FROM $meta_table WHERE meta_key = 'gateway_order_id' AND meta_value = %s LIMIT 1";
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 		$order_id = $wpdb->get_var( $wpdb->prepare( $sql, $gateway_order_id ) );
 
 		if ( $order_id ) {
@@ -279,6 +279,7 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 
 		// Delete order items (for section-based purchases).
 		$order_items_table = esc_sql( $wpdb->prefix . 'splms_order_items' );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 		$wpdb->delete(
 			$order_items_table,
 			array( 'order_id' => $order_id ),
@@ -291,6 +292,7 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 
 		// Delete order meta.
 		$meta_table = esc_sql( $wpdb->prefix . 'splms_order_meta' );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 		$wpdb->delete(
 			$meta_table,
 			array( 'order_id' => $order_id ),
@@ -323,7 +325,7 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
 		$sql = "SELECT * FROM {$items_table} WHERE order_id = %d ORDER BY id ASC";
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 		$items = $wpdb->get_results( $wpdb->prepare( $sql, $order_id ) );
 
 		return $items ? $items : array();
@@ -528,12 +530,12 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 			$values[] = $args['offset'];
 		}
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 		if ( empty( $values ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 			$orders = $wpdb->get_results( $sql );
 		} else {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 			$orders = $wpdb->get_results( $wpdb->prepare( $sql, ...$values ) );
 		}
 
@@ -560,7 +562,7 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 		$sql = "SELECT COUNT(*) FROM {$this->table_name} 
 				WHERE user_id = %d AND course_id = %d AND status = 'completed'";
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 		$count = $wpdb->get_var( $wpdb->prepare( $sql, $user_id, $course_id ) );
 
 		return intval( $count ) > 0;
@@ -681,7 +683,7 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 			$sql = $wpdb->prepare( $sql, ...$values );
 		}
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 		$orders = $wpdb->get_results( $sql );
 
 		// Get meta data for each order (optimized for listing - only load essential fields).
@@ -796,7 +798,7 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 			$sql = $wpdb->prepare( $sql, ...$values );
 		}
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 		$count = $wpdb->get_var( $sql );
 
 		// If payment method filter is specified, we need to filter the results.
@@ -876,12 +878,12 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 			$sql .= ' WHERE ' . implode( ' AND ', $where_conditions );
 		}
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 		if ( empty( $values ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 			$stats = $wpdb->get_row( $sql );
 		} else {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 			$stats = $wpdb->get_row( $wpdb->prepare( $sql, ...$values ) );
 		}
 

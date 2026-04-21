@@ -856,7 +856,7 @@ class SkillPulse_LMS_Quizzes {
 
 		$query .= ' ORDER BY attempt_time DESC';
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with $wpdb->prepare().
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with $wpdb->prepare().
 		return $wpdb->get_results( $wpdb->prepare( $query, $params ) );
 	}
 
@@ -1116,6 +1116,7 @@ class SkillPulse_LMS_Quizzes {
 
 		// Start transaction for atomic quiz submission.
 		global $wpdb;
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 		$wpdb->query( 'START TRANSACTION' );
 
 		// Handle file uploads using File Manager.
@@ -1318,6 +1319,7 @@ class SkillPulse_LMS_Quizzes {
 
 		if ( ! $completed ) {
 			// Rollback transaction on failure.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 			$wpdb->query( 'ROLLBACK' );
 
 			// Clean up uploaded files.
@@ -1339,6 +1341,7 @@ class SkillPulse_LMS_Quizzes {
 		$saved_attempt = $attempts_query->get_attempt_by_id( $attempt_id );
 		if ( ! $saved_attempt || ! in_array( $saved_attempt->status, array( 'graded', 'pending_review' ), true ) ) {
 			// Rollback transaction on verification failure.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 			$wpdb->query( 'ROLLBACK' );
 
 			// Clean up uploaded files.
@@ -1441,6 +1444,7 @@ class SkillPulse_LMS_Quizzes {
 		}
 
 		// Commit transaction on success.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 		$wpdb->query( 'COMMIT' );
 
 		wp_send_json_success( $response );
@@ -1716,6 +1720,7 @@ class SkillPulse_LMS_Quizzes {
 
 		// Get completed lessons from lesson_progress table.
 		$lesson_progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$completed_lessons     = $wpdb->get_var(
 			$wpdb->prepare(
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
@@ -1728,6 +1733,7 @@ class SkillPulse_LMS_Quizzes {
 		// Get passed quizzes from quiz_attempts table (only graded quizzes).
 		$quiz_attempts_table = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 		// Get all passed quiz IDs first.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$passed_quiz_ids = $wpdb->get_col(
 			$wpdb->prepare(
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
@@ -2715,6 +2721,7 @@ class SkillPulse_LMS_Quizzes {
 
 		$table_name = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$attempt = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT * FROM {$table_name} WHERE id = %d", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter
@@ -2769,6 +2776,7 @@ class SkillPulse_LMS_Quizzes {
 			$format[]                = '%s';
 		}
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 		$result = $wpdb->update(
 			$table_name,
 			$update_data,
@@ -2803,6 +2811,7 @@ class SkillPulse_LMS_Quizzes {
 
 		$table_name = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$status = $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT status FROM {$table_name} WHERE id = %d", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter
@@ -2871,11 +2880,11 @@ class SkillPulse_LMS_Quizzes {
 		}
 
 		if ( empty( $query_values ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query has no placeholders when values is empty.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query has no placeholders when values is empty.
 			return $wpdb->get_results( $query );
 		}
 
-		return $wpdb->get_results( $wpdb->prepare( $query, ...$query_values ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $query built incrementally with %d placeholders then prepared.
+		return $wpdb->get_results( $wpdb->prepare( $query, ...$query_values ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $query built incrementally with %d placeholders then prepared.
 	}
 
 	/**

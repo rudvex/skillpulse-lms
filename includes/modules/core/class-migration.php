@@ -127,6 +127,7 @@ class SkillPulse_LMS_Migration {
 		global $wpdb;
 
 		// Start transaction.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 		$wpdb->query( 'START TRANSACTION' );
 
 		try {
@@ -145,6 +146,7 @@ class SkillPulse_LMS_Migration {
 			}
 
 			// Commit transaction.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 			$wpdb->query( 'COMMIT' );
 
 			return array(
@@ -155,6 +157,7 @@ class SkillPulse_LMS_Migration {
 
 		} catch ( Exception $e ) {
 			// Rollback transaction.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 			$wpdb->query( 'ROLLBACK' );
 
 			return array(
@@ -441,24 +444,26 @@ class SkillPulse_LMS_Migration {
 		$relationships_table = esc_sql( $wpdb->prefix . 'splms_relationships' );
 
 		// Drop old unique constraint if it exists.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$existing_indexes = $wpdb->get_results(
 			$wpdb->prepare( 'SHOW INDEX FROM `' . esc_sql( $relationships_table ) . '` WHERE Key_name = %s', 'parent_child_unique' ), // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name from esc_sql().
 			ARRAY_A
 		);
 
 		if ( ! empty( $existing_indexes ) ) {
-			$wpdb->query( "ALTER TABLE `{$relationships_table}` DROP INDEX parent_child_unique" ); // phpcs:ignore
+			$wpdb->query( "ALTER TABLE `{$relationships_table}` DROP INDEX parent_child_unique" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table write operation.
 			$messages[] = 'Dropped old parent_child_unique constraint';
 		}
 
 		// Add new unique constraint that includes child_type.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$existing_new_indexes = $wpdb->get_results(
 			$wpdb->prepare( 'SHOW INDEX FROM `' . esc_sql( $relationships_table ) . '` WHERE Key_name = %s', 'parent_child_type_unique' ), // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name from esc_sql().
 			ARRAY_A
 		);
 
 		if ( empty( $existing_new_indexes ) ) {
-			$result = $wpdb->query( "ALTER TABLE `{$relationships_table}` ADD UNIQUE KEY parent_child_type_unique (parent_id, child_id, child_type)" ); // phpcs:ignore
+			$result = $wpdb->query( "ALTER TABLE `{$relationships_table}` ADD UNIQUE KEY parent_child_type_unique (parent_id, child_id, child_type)" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table write operation.
 			if ( false === $result ) {
 				$success    = false;
 				$messages[] = 'Failed to add parent_child_type_unique constraint';
@@ -483,6 +488,7 @@ class SkillPulse_LMS_Migration {
 		foreach ( $indexes as $table => $table_indexes ) {
 			foreach ( $table_indexes as $index_name => $index_sql ) {
 				// Check if index already exists.
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 				$existing_indexes = $wpdb->get_results(
 					'SHOW INDEX FROM `' . esc_sql( $table ) . '`', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name from internal config via esc_sql().
 					ARRAY_A
@@ -497,7 +503,7 @@ class SkillPulse_LMS_Migration {
 				}
 
 				if ( ! $index_exists ) {
-					$result = $wpdb->query( "ALTER TABLE `{$table}` {$index_sql}" ); // phpcs:ignore
+					$result = $wpdb->query( "ALTER TABLE `{$table}` {$index_sql}" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table write operation.
 					if ( false === $result ) {
 						$success    = false;
 						$messages[] = "Failed to add index {$index_name} to {$table}";
@@ -533,6 +539,7 @@ class SkillPulse_LMS_Migration {
 		$lesson_progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
 
 		// Check if 'data' column already exists.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$column_exists = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS
@@ -544,8 +551,8 @@ class SkillPulse_LMS_Migration {
 
 		if ( empty( $column_exists ) ) {
 			// Add the 'data' column after 'time_spent'.
-			$result = $wpdb->query( // phpcs:ignore
-				"ALTER TABLE `{$lesson_progress_table}` ADD COLUMN `data` longtext NULL AFTER `time_spent`" // phpcs:ignore
+			$result = $wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.SchemaChange
+				"ALTER TABLE `{$lesson_progress_table}` ADD COLUMN `data` longtext NULL AFTER `time_spent`" // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table write operation.
 			);
 
 			if ( false === $result ) {

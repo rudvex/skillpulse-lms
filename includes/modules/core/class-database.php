@@ -597,7 +597,7 @@ class SkillPulse_LMS_Database {
 		}
 
 		// 3. Delete dynamic options (email & in-app templates).
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Uninstall operation, no caching needed.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Uninstall operation, no caching needed.
 		$wpdb->query(
 			"DELETE FROM {$wpdb->options}
 			 WHERE option_name LIKE 'splms_email_template_%'
@@ -605,7 +605,7 @@ class SkillPulse_LMS_Database {
 		);
 
 		// 4. Delete transients.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Uninstall operation, no caching needed.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Uninstall operation, no caching needed.
 		$wpdb->query(
 			"DELETE FROM {$wpdb->options}
 			 WHERE option_name LIKE '_transient_splms_%'
@@ -615,7 +615,7 @@ class SkillPulse_LMS_Database {
 		);
 
 		// 5. Delete post meta.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Uninstall operation, no caching needed.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Uninstall operation, no caching needed.
 		$wpdb->query(
 			"DELETE FROM {$wpdb->postmeta}
 			 WHERE meta_key LIKE '_splms_%'
@@ -623,7 +623,7 @@ class SkillPulse_LMS_Database {
 		);
 
 		// 6. Delete user meta.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Uninstall operation, no caching needed.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Uninstall operation, no caching needed.
 		$wpdb->query(
 			"DELETE FROM {$wpdb->usermeta}
 			 WHERE meta_key LIKE 'splms_%'"

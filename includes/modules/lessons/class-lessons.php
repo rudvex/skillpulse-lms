@@ -665,6 +665,7 @@ class SkillPulse_LMS_Lessons {
 
 		// Get completed lessons from lesson_progress table.
 		$lesson_progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$completed_lessons     = $wpdb->get_var(
 			$wpdb->prepare(
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
@@ -681,6 +682,7 @@ class SkillPulse_LMS_Lessons {
 		// Get passed quizzes from quiz_attempts table (only graded quizzes).
 		$quiz_attempts_table = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 		// Get all passed quiz IDs first.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$passed_quiz_ids = $wpdb->get_col(
 			$wpdb->prepare(
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
@@ -957,6 +959,7 @@ class SkillPulse_LMS_Lessons {
 		// Get enrollment date from database.
 		global $wpdb;
 		$enrollment_table = esc_sql( $wpdb->prefix . 'splms_enrollments' );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$result           = $wpdb->get_var(
 			$wpdb->prepare(
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
@@ -1016,7 +1019,7 @@ class SkillPulse_LMS_Lessons {
 			ORDER BY ci.order_index ASC, r.order_index ASC
 		";
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table names are safe, using wpdb prepare.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table names are safe, using wpdb prepare.
 		$lessons = $wpdb->get_col(
 			$wpdb->prepare(
 				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query variable is properly constructed above.
@@ -1087,7 +1090,7 @@ class SkillPulse_LMS_Lessons {
 			ORDER BY ci.order_index ASC, r.order_index ASC
 		";
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table names are safe, using wpdb prepare.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table names are safe, using wpdb prepare.
 		$lessons = $wpdb->get_results(
 			$wpdb->prepare(
 				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query variable is properly constructed above.
@@ -1362,6 +1365,7 @@ class SkillPulse_LMS_Lessons {
 
 		// Get completed lessons.
 		$lesson_table      = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$completed_lessons = $wpdb->get_col(
 			$wpdb->prepare(
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
@@ -1373,6 +1377,7 @@ class SkillPulse_LMS_Lessons {
 
 		// Get passed quizzes.
 		$quiz_table     = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$passed_quizzes = $wpdb->get_col(
 			$wpdb->prepare(
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.

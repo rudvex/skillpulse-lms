@@ -179,7 +179,7 @@ class SkillPulse_LMS_Enrollment {
 		$current_time = current_time( 'mysql' );
 
 		// Find all active enrollments that have expired.
-		// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, values are prepared.
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, values are prepared.
 		$expired_enrollments = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT * FROM {$table_name} 
@@ -205,7 +205,7 @@ class SkillPulse_LMS_Enrollment {
 
 			if ( $auto_expire ) {
 				// Update enrollment status to expired.
-				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
 				$wpdb->update(
 					$table_name,
 					array( 'status' => 'expired' ),
