@@ -24,8 +24,7 @@
     "e-learning"
   ],
   "require": {
-    "php": ">=7.4",
-    "dompdf/dompdf": "^3.0"
+    "php": ">=7.4"
   },
   "autoload": {
     "psr-4": {
@@ -36,8 +35,7 @@
   "config": {
     "sort-packages": true,
     "audit": {
-      "abandoned": "report",
-      "ignore": ["PKSA-y2cr-5h3j-g3ys"]
+      "abandoned": "report"
     }
   }
 }
