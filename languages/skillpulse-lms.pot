@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkillPulse LMS v1.0.0\n"
 "Report-Msgid-Bugs-To: https://skillpulselms.com/contact\n"
-"POT-Creation-Date: 2026-04-21 08:38:07+00:00\n"
+"POT-Creation-Date: 2026-04-21 09:23:09+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,24 +17,24 @@ msgstr ""
 msgid "100"
 msgstr ""
 
-#: includes/admin/class-admin.php:177
+#: includes/admin/class-admin.php:180
 msgid "Back to Courses"
 msgstr ""
 
-#: includes/admin/class-admin.php:355
+#: includes/admin/class-admin.php:359
 msgid "Course Pricing Issue Detected"
 msgstr ""
 
-#: includes/admin/class-admin.php:357
+#: includes/admin/class-admin.php:361
 msgid "Recommended Bundle Price"
 msgstr ""
 
-#: includes/admin/class-admin.php:361
+#: includes/admin/class-admin.php:365
 #. translators: %s: Discount percentage
 msgid "(%s%% discount from sections total)"
 msgstr ""
 
-#: includes/admin/class-admin.php:365
+#: includes/admin/class-admin.php:369
 msgid "Learn more about pricing strategies"
 msgstr ""
 
@@ -277,7 +277,7 @@ msgstr ""
 
 #: includes/admin/manager/class-admin-menus.php:113
 #: includes/admin/manager/class-admin-menus.php:114
-#: includes/admin/manager/class-admin-menus.php:520
+#: includes/admin/manager/class-admin-menus.php:530
 msgid "Setup Wizard"
 msgstr ""
 
@@ -313,28 +313,38 @@ msgstr ""
 msgid "Enrollments"
 msgstr ""
 
-#: includes/admin/manager/class-admin-menus.php:197
-#: includes/admin/manager/class-admin-menus.php:198
+#: includes/admin/manager/class-admin-menus.php:188
+#: includes/admin/manager/class-admin-menus.php:189
+#: includes/frontend/class-frontend.php:234
+#: includes/frontend/dashboard/class-splms-dashboard-service.php:409
+#: includes/modules/notifications/class-notification.php:112
+#: templates/dashboard/notifications.php:27 templates/page-dashboard.php:121
+#: templates/shared/header-functions.php:84
+msgid "Notifications"
+msgstr ""
+
+#: includes/admin/manager/class-admin-menus.php:207
+#: includes/admin/manager/class-admin-menus.php:208
 #: includes/frontend/dashboard/class-splms-dashboard-service.php:417
-#: templates/page-dashboard.php:121
+#: templates/page-dashboard.php:128
 msgid "Settings"
 msgstr ""
 
-#: includes/admin/manager/class-admin-menus.php:303
-#: includes/admin/manager/class-admin-menus.php:322
-#: includes/admin/manager/class-admin-menus.php:341
-#: includes/admin/manager/class-admin-menus.php:360
-#: includes/admin/manager/class-admin-menus.php:379
-#: includes/admin/manager/class-admin-menus.php:398
-#: includes/admin/manager/class-admin-menus.php:417
-#: includes/admin/manager/class-admin-menus.php:436
-#: includes/admin/manager/class-admin-menus.php:455
-#: includes/admin/manager/class-admin-menus.php:474
-#: includes/admin/manager/class-admin-menus.php:514
+#: includes/admin/manager/class-admin-menus.php:313
+#: includes/admin/manager/class-admin-menus.php:332
+#: includes/admin/manager/class-admin-menus.php:351
+#: includes/admin/manager/class-admin-menus.php:370
+#: includes/admin/manager/class-admin-menus.php:389
+#: includes/admin/manager/class-admin-menus.php:408
+#: includes/admin/manager/class-admin-menus.php:427
+#: includes/admin/manager/class-admin-menus.php:446
+#: includes/admin/manager/class-admin-menus.php:465
+#: includes/admin/manager/class-admin-menus.php:484
+#: includes/admin/manager/class-admin-menus.php:524
 msgid "You don't have permission to access this page."
 msgstr ""
 
-#: includes/admin/manager/class-admin-menus.php:521
+#: includes/admin/manager/class-admin-menus.php:531
 msgid "Setup wizard is loading..."
 msgstr ""
 
@@ -378,7 +388,7 @@ msgstr ""
 #: includes/admin/manager/class-admin-post-types.php:90
 #: includes/modules/core/class-access-control.php:783
 #: templates/course/course.php:261 templates/dashboard/wishlist.php:89
-#: templates/page-dashboard.php:333 templates/quiz/content.php:220
+#: templates/page-dashboard.php:340 templates/quiz/content.php:220
 #: templates/quiz/content.php:238 templates/quiz/content.php:271
 #: templates/quiz/content.php:634 templates/quiz/question-templates.php:209
 msgid "View Course"
@@ -689,6 +699,7 @@ msgid "Failed to delete signup."
 msgstr ""
 
 #: includes/admin/signup/class-signup-admin.php:271
+#: includes/modules/notifications/email/class-email-module.php:125
 #: includes/rest-api/features/signup/class-rest-signup-controller.php:187
 #: includes/rest-api/features/signup/class-rest-signup-controller.php:260
 #: includes/rest-api/features/signup/class-rest-signup-controller.php:286
@@ -860,6 +871,7 @@ msgstr ""
 
 #: includes/admin/signup/class-signup-list-table.php:77
 #: includes/rest-api/features/signup/class-rest-signup-controller.php:345
+#: templates/signup/register-form.php:68
 msgid "Username"
 msgstr ""
 
@@ -870,6 +882,7 @@ msgstr ""
 #: includes/admin/signup/class-signup-list-table.php:79
 #: includes/admin/signup/class-signup-list-table.php:119
 #: includes/admin/signup/class-signup-list-table.php:262
+#: includes/modules/notifications/class-notification.php:243
 #: templates/dashboard/settings.php:107
 msgid "Email"
 msgstr ""
@@ -928,6 +941,11 @@ msgstr ""
 #: includes/frontend/dashboard/class-splms-dashboard-api.php:191
 #: includes/frontend/dashboard/class-splms-dashboard-api.php:433
 #: includes/modules/core/class-database.php:838
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:193
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:231
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:307
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:332
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:377
 #: includes/modules/quizzes/class-quizzes.php:954
 #: includes/modules/user-management/class-profile.php:243
 #: includes/modules/user-management/class-profile.php:350
@@ -1056,13 +1074,8 @@ msgstr ""
 msgid "Success!"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:234
-#: includes/frontend/dashboard/class-splms-dashboard-service.php:409
-#: templates/shared/header-functions.php:84
-msgid "Notifications"
-msgstr ""
-
 #: includes/frontend/class-frontend.php:235
+#: templates/dashboard/notifications.php:57
 msgid "Loading notifications..."
 msgstr ""
 
@@ -1076,14 +1089,17 @@ msgid "Mark all read"
 msgstr ""
 
 #: includes/frontend/class-frontend.php:238
+#: templates/dashboard/notifications.php:120
 msgid "No notifications yet"
 msgstr ""
 
 #: includes/frontend/class-frontend.php:239
+#: templates/dashboard/notifications.php:121
 msgid "We'll notify you when something happens."
 msgstr ""
 
 #: includes/frontend/class-frontend.php:240
+#: templates/dashboard/notifications.php:38
 msgid "Unread"
 msgstr ""
 
@@ -1648,6 +1664,8 @@ msgid "Page users see after logout"
 msgstr ""
 
 #: includes/modules/core/class-database.php:741
+#: templates/signup/register-form.php:178
+#: templates/signup/register-form.php:180
 msgid "Terms and Conditions"
 msgstr ""
 
@@ -1661,6 +1679,8 @@ msgstr ""
 
 #: includes/modules/core/class-database.php:747
 #: templates/shared/footer-functions.php:137
+#: templates/signup/register-form.php:184
+#: templates/signup/register-form.php:186
 msgid "Privacy Policy"
 msgstr ""
 
@@ -2196,6 +2216,11 @@ msgid "Minimum time student must spend on lesson"
 msgstr ""
 
 #: includes/modules/lessons/general-functions.php:250
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:201
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:236
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:312
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:340
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:385
 #: includes/modules/orders/class-orders.php:122
 #: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:293
 #: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:395
@@ -2307,6 +2332,2232 @@ msgstr ""
 msgid ""
 "Please use an iframe embed code or shortcode for interactive content. URL "
 "detected:"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:288
+msgid "Course Enrollment"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:289
+#: templates/page-dashboard.php:230
+msgid "Course Completion"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:290
+msgid "Enrollment Reminder"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:291
+msgid "Lesson Completion"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:292
+msgid "Quiz Completion"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:293
+msgid "Certificate Generated"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:294
+msgid "Certificate Awarded"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:295
+#: includes/modules/notifications/in-app/class-in-app-templates.php:91
+msgid "Account Created"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:296
+#: includes/modules/notifications/in-app/class-in-app-templates.php:96
+msgid "Account Activated"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:297
+msgid "Review Reply"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:298
+msgid "New Review"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:299
+msgid "Review Moderation"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:300
+#: includes/modules/notifications/in-app/class-in-app-templates.php:116
+msgid "Review Moderation Result"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:301
+msgid "Order Completed"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:302
+msgid "Order Refunded"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:303
+#: includes/modules/orders/class-order-status-manager.php:143
+msgid "Order Cancelled"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:319
+msgid "Receive notifications when you enroll in a course"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:320
+msgid "Receive notifications when you complete a course"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:321
+msgid "Receive reminder emails to continue your learning"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:322
+msgid "Receive notifications when you complete a lesson"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:323
+msgid "Receive notifications when you complete a quiz"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:324
+msgid "Receive notifications when a certificate is generated"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:325
+msgid "Receive notifications when you are awarded a certificate"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:326
+msgid "Receive notifications when your account is created"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:327
+msgid "Receive notifications when your account is activated"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:328
+msgid "Receive notifications when someone replies to your review"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:329
+msgid "Receive notifications when a new review is posted on your course"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:330
+msgid "Receive notifications when a review needs moderation (admin only)"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:331
+msgid "Receive notifications about review moderation results"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:332
+msgid "Receive notifications when your course order is completed"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:333
+msgid "Receive notifications when your order is refunded"
+msgstr ""
+
+#: includes/modules/notifications/class-notification-preferences.php:334
+msgid "Receive notifications when your order is cancelled"
+msgstr ""
+
+#: includes/modules/notifications/class-notification.php:143
+msgid "Notification Preferences"
+msgstr ""
+
+#: includes/modules/notifications/class-notification.php:145
+msgid "Manage how you receive notifications for different events"
+msgstr ""
+
+#: includes/modules/notifications/class-notification.php:154
+msgid "Notification Controls"
+msgstr ""
+
+#: includes/modules/notifications/class-notification.php:156
+msgid "Master controls for all notification types"
+msgstr ""
+
+#: includes/modules/notifications/class-notification.php:167
+msgid "All Email Notifications"
+msgstr ""
+
+#: includes/modules/notifications/class-notification.php:168
+msgid "Enable/disable all email notifications at once"
+msgstr ""
+
+#: includes/modules/notifications/class-notification.php:183
+msgid "All In-App Notifications"
+msgstr ""
+
+#: includes/modules/notifications/class-notification.php:184
+msgid "Enable/disable all in-app notifications at once"
+msgstr ""
+
+#: includes/modules/notifications/class-notification.php:197
+msgid "Event Notifications"
+msgstr ""
+
+#: includes/modules/notifications/class-notification.php:199
+msgid "Choose which events you want to be notified about"
+msgstr ""
+
+#: includes/modules/notifications/class-notification.php:255
+msgid "In-App"
+msgstr ""
+
+#: includes/modules/notifications/class-notification.php:269
+msgid "Save Notification Preferences"
+msgstr ""
+
+#: includes/modules/notifications/dispatcher/class-notification-dispatcher.php:177
+msgid "Email notification disabled by user preference."
+msgstr ""
+
+#: includes/modules/notifications/dispatcher/class-notification-dispatcher.php:184
+msgid "In-app notification disabled by user preference."
+msgstr ""
+
+#: includes/modules/notifications/dispatcher/class-notification-dispatcher.php:238
+msgid "Email notifications are disabled globally."
+msgstr ""
+
+#: includes/modules/notifications/dispatcher/class-notification-dispatcher.php:245
+msgid "Email template not found or inactive."
+msgstr ""
+
+#: includes/modules/notifications/dispatcher/class-notification-dispatcher.php:264
+msgid "User ID required for in-app notifications."
+msgstr ""
+
+#: includes/modules/notifications/dispatcher/class-notification-dispatcher.php:272
+msgid "In-app notifications are disabled."
+msgstr ""
+
+#: includes/modules/notifications/dispatcher/class-notification-dispatcher.php:294
+msgid "Template not found."
+msgstr ""
+
+#: includes/modules/notifications/email/class-email-module.php:554
+#: includes/modules/orders/gateways/class-payment.php:87
+msgid "PayPal"
+msgstr ""
+
+#: includes/modules/notifications/email/class-email-module.php:555
+#: includes/modules/orders/gateways/class-payment.php:97
+msgid "Stripe"
+msgstr ""
+
+#: includes/modules/notifications/email/class-email-module.php:556
+#: includes/modules/orders/gateways/class-payment.php:107
+msgid "Razorpay"
+msgstr ""
+
+#: includes/modules/notifications/email/senders/class-email-sender.php:114
+msgid "Trial email limit reached (100 emails). Upgrade to send unlimited emails."
+msgstr ""
+
+#: includes/modules/notifications/email/senders/class-email-sender.php:184
+#. translators: %s: License page URL
+msgid ""
+"Trial email limit reached (100 emails sent). <a href=\"%s\" class=\"button "
+"button-primary\">Upgrade Now</a> for unlimited email notifications."
+msgstr ""
+
+#: includes/modules/notifications/email/senders/class-email-sender.php:239
+msgid "Email notifications are currently disabled."
+msgstr ""
+
+#: includes/modules/notifications/email/senders/class-email-sender.php:268
+#: includes/modules/notifications/email/senders/class-email-sender.php:613
+msgid "Email template has no content."
+msgstr ""
+
+#: includes/modules/notifications/email/senders/class-email-sender.php:297
+msgid "Failed to send email."
+msgstr ""
+
+#: includes/modules/notifications/email/senders/class-email-sender.php:650
+msgid "Failed to send email via WordPress mail."
+msgstr ""
+
+#: includes/modules/notifications/email/senders/class-email-sender.php:678
+#: includes/modules/notifications/email/senders/class-email-sender.php:758
+msgid "SMTP host is required."
+msgstr ""
+
+#: includes/modules/notifications/email/senders/class-email-sender.php:682
+#: includes/modules/notifications/email/senders/class-email-sender.php:762
+msgid "SMTP username is required."
+msgstr ""
+
+#: includes/modules/notifications/email/senders/class-email-sender.php:686
+#: includes/modules/notifications/email/senders/class-email-sender.php:766
+msgid "SMTP password is required."
+msgstr ""
+
+#: includes/modules/notifications/email/senders/class-email-sender.php:729
+msgid "Failed to send email via SMTP."
+msgstr ""
+
+#: includes/modules/notifications/email/senders/class-email-sender.php:746
+#: includes/rest-api/admin/class-rest-admin-email-templates-controller.php:334
+msgid "SMTP is not enabled."
+msgstr ""
+
+#: includes/modules/notifications/email/senders/class-email-sender.php:811
+#. translators: %s: Error message.
+msgid "SMTP connection failed: %s"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/class-email-templates.php:231
+msgid "Missing subject or content in template data."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/activation-email.php:30
+msgid "Account Activation Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/activation-email.php:31
+msgid "Activate your account - {site_name}"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/activation-email.php:33
+msgid ""
+"Email sent to users when they sign up to activate their account. Includes "
+"professional styling and security notice."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/activation-email.php:45
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 "
+"auto; padding: 20px;\">\n"
+"    <div style=\"text-align: center; margin-bottom: 30px;\">\n"
+"        <h2 style=\"color: #333; margin: 0;\">Welcome to {site_name}!</h2>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; "
+"margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Hello <strong>{user_name}</strong>,\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Thank you for signing up with {site_name}. To complete your "
+"account setup and start learning, please click the button below to activate "
+"your account:\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"text-align: center; margin: 25px 0;\">\n"
+"            <a href=\"{activation_link}\" style=\"background: #007cba; "
+"color: white; padding: 12px 25px; text-decoration: none; border-radius: "
+"5px; display: inline-block; font-weight: bold;\">\n"
+"                Activate My Account\n"
+"            </a>\n"
+"        </div>\n"
+"        \n"
+"        <p style=\"margin: 15px 0 0 0; color: #666; font-size: 14px; "
+"line-height: 1.5;\">\n"
+"            If the button doesn't work, you can copy and paste this link "
+"into your browser:<br>\n"
+"            <a href=\"{activation_link}\" style=\"color: "
+"#007cba;\">{activation_link}</a>\n"
+"        </p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #fff3cd; border: 1px solid #ffeaa7; padding: "
+"15px; border-radius: 5px; margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0; color: #856404; font-size: 14px;\">\n"
+"            <strong>Security Notice:</strong> If you did not create this "
+"account, please ignore this email. Your account will not be activated "
+"without clicking the link above.\n"
+"        </p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; "
+"border-top: 1px solid #eee;\">\n"
+"        <p style=\"margin: 0; color: #666; font-size: 14px;\">\n"
+"            Best regards,<br>\n"
+"            <strong>The {site_name} Team</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"</div>"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/activation-email.php:98
+#: includes/modules/notifications/email/templates/templates/certificate-awarded.php:124
+#: includes/modules/notifications/email/templates/templates/certificate-email.php:112
+#: includes/modules/notifications/email/templates/templates/course-completion.php:109
+#: includes/modules/notifications/email/templates/templates/course-enrollment.php:111
+#: includes/modules/notifications/email/templates/templates/enrollment-reminder.php:103
+#: includes/modules/notifications/email/templates/templates/lesson-completion.php:100
+#: includes/modules/notifications/email/templates/templates/order-cancelled.php:116
+#: includes/modules/notifications/email/templates/templates/order-completed.php:126
+#: includes/modules/notifications/email/templates/templates/order-refunded.php:114
+#: includes/modules/notifications/email/templates/templates/password-reset-email.php:103
+#: includes/modules/notifications/email/templates/templates/quiz-completion.php:106
+#: includes/modules/notifications/email/templates/templates/quiz-failed.php:118
+#: includes/modules/notifications/email/templates/templates/quiz-passed.php:111
+#: includes/modules/notifications/email/templates/templates/review-moderation-result.php:93
+#: includes/modules/notifications/email/templates/templates/welcome-email.php:101
+msgid "User Name"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/activation-email.php:99
+#: includes/modules/notifications/email/templates/templates/certificate-awarded.php:125
+#: includes/modules/notifications/email/templates/templates/certificate-email.php:113
+#: includes/modules/notifications/email/templates/templates/course-completion.php:110
+#: includes/modules/notifications/email/templates/templates/course-enrollment.php:112
+#: includes/modules/notifications/email/templates/templates/lesson-completion.php:101
+#: includes/modules/notifications/email/templates/templates/order-cancelled.php:117
+#: includes/modules/notifications/email/templates/templates/order-completed.php:127
+#: includes/modules/notifications/email/templates/templates/order-refunded.php:115
+#: includes/modules/notifications/email/templates/templates/password-reset-email.php:104
+#: includes/modules/notifications/email/templates/templates/quiz-completion.php:107
+#: includes/modules/notifications/email/templates/templates/quiz-failed.php:119
+#: includes/modules/notifications/email/templates/templates/quiz-passed.php:112
+#: includes/modules/notifications/email/templates/templates/review-moderation-result.php:102
+#: includes/modules/notifications/email/templates/templates/review-moderation.php:98
+#: includes/modules/notifications/email/templates/templates/review-new.php:101
+#: includes/modules/notifications/email/templates/templates/review-reply.php:97
+#: includes/modules/notifications/email/templates/templates/welcome-email.php:102
+msgid "Site Name"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/activation-email.php:100
+msgid "Activation Link"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/certificate-awarded.php:29
+msgid "Certificate Awarded Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/certificate-awarded.php:30
+msgid "🎓 Congratulations! You earned a certificate for {course_title}"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/certificate-awarded.php:32
+msgid ""
+"Email sent to users when they are awarded a certificate. Celebrates their "
+"achievement and provides certificate download link."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/certificate-awarded.php:44
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 "
+"auto; padding: 20px;\">\n"
+"    <div style=\"text-align: center; margin-bottom: 30px;\">\n"
+"        <h2 style=\"color: #ffc107; margin: 0;\">🎓 Certificate "
+"Awarded!</h2>\n"
+"        <p style=\"color: #666; margin: 10px 0 0 0;\">Congratulations on "
+"your achievement</p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; "
+"margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Hello <strong>{user_name}</strong>,\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            We are thrilled to inform you that you have successfully "
+"completed <strong>{course_title}</strong> and have been awarded a "
+"certificate of completion!\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"background: linear-gradient(135deg, #667eea 0%, "
+"#764ba2 100%); border-radius: 8px; padding: 30px; margin: 20px 0; "
+"text-align: center; color: white;\">\n"
+"            <h3 style=\"margin: 0 0 10px 0; font-size: 24px; color: "
+"white;\">Certificate of Completion</h3>\n"
+"            <p style=\"margin: 5px 0; font-size: 16px; color: "
+"rgba(255,255,255,0.9);\">\n"
+"                This certifies that<br>\n"
+"                <strong style=\"font-size: 20px;\">{user_name}</strong><br>\n"
+"                has successfully completed<br>\n"
+"                <strong style=\"font-size: 18px;\">{course_title}</strong>\n"
+"            </p>\n"
+"            <p style=\"margin: 15px 0 0 0; font-size: 14px; color: "
+"rgba(255,255,255,0.8);\">\n"
+"                Date: {certificate_date}\n"
+"            </p>\n"
+"        </div>\n"
+"        \n"
+"        <p style=\"margin: 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Your hard work, dedication, and commitment to learning have "
+"paid off. This certificate is a testament to your achievement and the "
+"knowledge you've gained.\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"text-align: center; margin: 25px 0;\">\n"
+"            <a href=\"{certificate_url}\" style=\"background: #ffc107; "
+"color: #000; padding: 15px 30px; text-decoration: none; border-radius: 5px; "
+"display: inline-block; font-weight: bold; font-size: 16px;\">\n"
+"                Download Certificate\n"
+"            </a>\n"
+"        </div>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #e7f3ff; border: 1px solid #b3d9ff; padding: "
+"15px; border-radius: 5px; margin-bottom: 20px;\">\n"
+"        <h3 style=\"margin: 0 0 10px 0; color: #0056b3; font-size: "
+"16px;\">Certificate Details</h3>\n"
+"        <p style=\"margin: 0; color: #555; line-height: 1.6;\">\n"
+"            Course: <strong>{course_title}</strong><br>\n"
+"            Certificate ID: <strong>{certificate_id}</strong><br>\n"
+"            Date Awarded: <strong>{certificate_date}</strong><br>\n"
+"            Issued By: <strong>{site_name}</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #d4edda; border: 1px solid #28a745; padding: "
+"15px; border-radius: 5px; margin-bottom: 20px;\">\n"
+"        <h3 style=\"margin: 0 0 10px 0; color: #155724; font-size: "
+"16px;\">🌟 What's Next?</h3>\n"
+"        <ul style=\"margin: 0; padding-left: 20px; color: #155724;\">\n"
+"            <li>Share your achievement on social media</li>\n"
+"            <li>Add it to your professional profile</li>\n"
+"            <li>Continue learning with more courses</li>\n"
+"            <li>Explore advanced topics in your field</li>\n"
+"        </ul>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; "
+"border-top: 1px solid #eee;\">\n"
+"        <p style=\"margin: 0; color: #666; font-size: 14px;\">\n"
+"            Congratulations on this amazing achievement!<br>\n"
+"            <strong>The {site_name} Team</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"</div>"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/certificate-awarded.php:126
+#: includes/modules/notifications/email/templates/templates/certificate-email.php:114
+#: includes/modules/notifications/email/templates/templates/course-completion.php:111
+#: includes/modules/notifications/email/templates/templates/course-enrollment.php:113
+#: includes/modules/notifications/email/templates/templates/enrollment-reminder.php:104
+#: includes/modules/notifications/email/templates/templates/lesson-completion.php:102
+#: includes/modules/notifications/email/templates/templates/order-cancelled.php:120
+#: includes/modules/notifications/email/templates/templates/order-completed.php:130
+#: includes/modules/notifications/email/templates/templates/order-refunded.php:117
+#: includes/modules/notifications/email/templates/templates/quiz-completion.php:108
+#: includes/modules/notifications/email/templates/templates/quiz-failed.php:120
+#: includes/modules/notifications/email/templates/templates/quiz-passed.php:113
+#: includes/modules/notifications/email/templates/templates/review-moderation-result.php:94
+#: includes/modules/notifications/email/templates/templates/review-moderation.php:93
+#: includes/modules/notifications/email/templates/templates/review-new.php:96
+#: includes/modules/notifications/email/templates/templates/review-reply.php:93
+msgid "Course Title"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/certificate-awarded.php:127
+msgid "Certificate ID"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/certificate-awarded.php:128
+msgid "Certificate Download URL"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/certificate-awarded.php:129
+msgid "Certificate Award Date"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/certificate-email.php:29
+msgid "Certificate Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/certificate-email.php:30
+msgid "📜 Your certificate for {course_title} is ready!"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/certificate-email.php:32
+msgid ""
+"Email sent to users when their certificate is ready. Includes certificate "
+"download link and usage tips."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/certificate-email.php:44
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 "
+"auto; padding: 20px;\">\n"
+"    <div style=\"text-align: center; margin-bottom: 30px;\">\n"
+"        <div style=\"font-size: 48px; margin-bottom: 15px;\">📜</div>\n"
+"        <h2 style=\"color: #333; margin: 0;\">Your Certificate is "
+"Ready!</h2>\n"
+"        <p style=\"color: #666; margin: 10px 0 0 0;\">Download your "
+"certificate for {course_title}</p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; "
+"margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Hello <strong>{user_name}</strong>,\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Great news! Your certificate for "
+"<strong>{course_title}</strong> is now ready for download. This certificate "
+"represents your successful completion of the course and the knowledge "
+"you've gained.\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 20px 0; color: #555; line-height: 1.6;\">\n"
+"            Your certificate is professionally designed and includes all "
+"the necessary details to verify your achievement. You can download it now "
+"and keep it for your records.\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"text-align: center; margin: 25px 0;\">\n"
+"            <a href=\"{certificate_url}\" style=\"background: #007cba; "
+"color: white; padding: 12px 25px; text-decoration: none; border-radius: "
+"5px; display: inline-block; font-weight: bold;\">\n"
+"                Download Certificate\n"
+"            </a>\n"
+"        </div>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #e7f3ff; border: 1px solid #b3d9ff; padding: "
+"15px; border-radius: 5px; margin-bottom: 20px;\">\n"
+"        <h3 style=\"margin: 0 0 10px 0; color: #0056b3; font-size: "
+"16px;\">Certificate Features</h3>\n"
+"        <ul style=\"margin: 0; padding-left: 20px; color: #555;\">\n"
+"            <li>Professional design with your name and course title</li>\n"
+"            <li>Completion date and verification details</li>\n"
+"            <li>High-quality PDF format for printing</li>\n"
+"            <li>Verifiable online through our system</li>\n"
+"        </ul>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #fff3cd; border: 1px solid #ffeaa7; padding: "
+"15px; border-radius: 5px; margin-bottom: 20px;\">\n"
+"        <h3 style=\"margin: 0 0 10px 0; color: #856404; font-size: "
+"16px;\">💡 How to Use Your Certificate</h3>\n"
+"        <ul style=\"margin: 0; padding-left: 20px; color: #856404;\">\n"
+"            <li>Add it to your professional portfolio</li>\n"
+"            <li>Share it on LinkedIn and other professional networks</li>\n"
+"            <li>Include it in your resume or CV</li>\n"
+"            <li>Print it for physical display</li>\n"
+"        </ul>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; "
+"border-top: 1px solid #eee;\">\n"
+"        <p style=\"margin: 0; color: #666; font-size: 14px;\">\n"
+"            Congratulations on your achievement!<br>\n"
+"            <strong>The {site_name} Team</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"</div>"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/certificate-email.php:115
+#: includes/modules/notifications/email/templates/templates/course-completion.php:112
+msgid "Certificate URL"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/course-completion.php:29
+msgid "Course Completion Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/course-completion.php:30
+msgid "🎉 Congratulations! You completed {course_title}"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/course-completion.php:32
+msgid ""
+"Email sent to users when they complete a course. Includes congratulations "
+"message and certificate download link."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/course-completion.php:44
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 "
+"auto; padding: 20px;\">\n"
+"    <div style=\"text-align: center; margin-bottom: 30px;\">\n"
+"        <div style=\"font-size: 48px; margin-bottom: 15px;\">🎉</div>\n"
+"        <h2 style=\"color: #333; margin: 0;\">Congratulations!</h2>\n"
+"        <p style=\"color: #666; margin: 10px 0 0 0;\">You have successfully "
+"completed {course_title}</p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; "
+"margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Hello <strong>{user_name}</strong>,\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            <strong>Fantastic achievement!</strong> You have successfully "
+"completed <strong>{course_title}</strong>. Your dedication and hard work "
+"have paid off!\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 20px 0; color: #555; line-height: 1.6;\">\n"
+"            You've demonstrated excellent commitment to your learning "
+"journey. This accomplishment represents a significant step forward in your "
+"professional development.\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"text-align: center; margin: 25px 0;\">\n"
+"            <a href=\"{certificate_url}\" style=\"background: #28a745; "
+"color: white; padding: 12px 25px; text-decoration: none; border-radius: "
+"5px; display: inline-block; font-weight: bold;\">\n"
+"                Download Your Certificate\n"
+"            </a>\n"
+"        </div>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #e7f3ff; border: 1px solid #b3d9ff; padding: "
+"15px; border-radius: 5px; margin-bottom: 20px;\">\n"
+"        <h3 style=\"margin: 0 0 10px 0; color: #0056b3; font-size: "
+"16px;\">What's Next?</h3>\n"
+"        <ul style=\"margin: 0; padding-left: 20px; color: #555;\">\n"
+"            <li>Share your certificate on LinkedIn</li>\n"
+"            <li>Add this achievement to your resume</li>\n"
+"            <li>Explore more courses to continue learning</li>\n"
+"            <li>Connect with other learners in our community</li>\n"
+"        </ul>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #fff3cd; border: 1px solid #ffeaa7; padding: "
+"15px; border-radius: 5px; margin-bottom: 20px;\">\n"
+"        <h3 style=\"margin: 0 0 10px 0; color: #856404; font-size: "
+"16px;\">Certificate Details</h3>\n"
+"        <p style=\"margin: 0; color: #856404; font-size: 14px;\">\n"
+"            Your certificate is now available for download. It includes "
+"your name, course title, completion date, and can be verified online. Keep "
+"it safe as proof of your achievement!\n"
+"        </p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; "
+"border-top: 1px solid #eee;\">\n"
+"        <p style=\"margin: 0; color: #666; font-size: 14px;\">\n"
+"            Keep up the great work!<br>\n"
+"            <strong>The {site_name} Team</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"</div>"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/course-enrollment.php:29
+msgid "Course Enrollment Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/course-enrollment.php:30
+msgid "Welcome to {course_title} - You're enrolled!"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/course-enrollment.php:32
+msgid ""
+"Email sent to users when they enroll in a course. Includes course access "
+"details and learning tips."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/course-enrollment.php:44
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 "
+"auto; padding: 20px;\">\n"
+"    <div style=\"text-align: center; margin-bottom: 30px;\">\n"
+"        <h2 style=\"color: #333; margin: 0;\">Welcome to "
+"{course_title}!</h2>\n"
+"        <p style=\"color: #666; margin: 10px 0 0 0;\">You're successfully "
+"enrolled and ready to start learning</p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; "
+"margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Hello <strong>{user_name}</strong>,\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Great news! You have successfully enrolled in "
+"<strong>{course_title}</strong>. Your learning journey is about to begin!\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 20px 0; color: #555; line-height: 1.6;\">\n"
+"            You now have full access to all course materials, lessons, and "
+"resources. Take your time to explore the course content at your own pace.\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"text-align: center; margin: 25px 0;\">\n"
+"            <a href=\"{login_url}\" style=\"background: #007cba; color: "
+"white; padding: 12px 25px; text-decoration: none; border-radius: 5px; "
+"display: inline-block; font-weight: bold;\">\n"
+"                Start Learning Now\n"
+"            </a>\n"
+"        </div>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #e7f3ff; border: 1px solid #b3d9ff; padding: "
+"15px; border-radius: 5px; margin-bottom: 20px;\">\n"
+"        <h3 style=\"margin: 0 0 10px 0; color: #0056b3; font-size: "
+"16px;\">Course Access Details</h3>\n"
+"        <ul style=\"margin: 0; padding-left: 20px; color: #555;\">\n"
+"            <li>Access your course anytime, anywhere</li>\n"
+"            <li>Track your progress through lessons</li>\n"
+"            <li>Complete assignments and quizzes</li>\n"
+"            <li>Earn your certificate upon completion</li>\n"
+"        </ul>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #fff3cd; border: 1px solid #ffeaa7; padding: "
+"15px; border-radius: 5px; margin-bottom: 20px;\">\n"
+"        <h3 style=\"margin: 0 0 10px 0; color: #856404; font-size: "
+"16px;\">💡 Learning Tips</h3>\n"
+"        <ul style=\"margin: 0; padding-left: 20px; color: #856404;\">\n"
+"            <li>Set aside dedicated time for learning</li>\n"
+"            <li>Take notes during lessons</li>\n"
+"            <li>Complete all assignments for best results</li>\n"
+"            <li>Don't hesitate to ask questions</li>\n"
+"        </ul>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; "
+"border-top: 1px solid #eee;\">\n"
+"        <p style=\"margin: 0; color: #666; font-size: 14px;\">\n"
+"            Happy learning!<br>\n"
+"            <strong>The {site_name} Team</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"</div>"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/course-enrollment.php:114
+#: includes/modules/notifications/email/templates/templates/welcome-email.php:103
+msgid "Login URL"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/enrollment-reminder.php:29
+msgid "Enrollment Reminder Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/enrollment-reminder.php:30
+msgid "Continue Learning: {course_title}"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/enrollment-reminder.php:32
+msgid ""
+"Email sent to remind enrolled students to continue their learning journey. "
+"Includes course progress and direct link to course."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/enrollment-reminder.php:44
+msgid "Continue Your Learning Journey"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/enrollment-reminder.php:45
+msgid "Don't let your progress slip away"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/enrollment-reminder.php:46
+#: templates/course/course.php:256
+#: templates/course/partials/course-hero.php:417
+#: templates/page-dashboard.php:265
+msgid "Continue Learning"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/enrollment-reminder.php:47
+msgid "Keep Your Momentum Going"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/enrollment-reminder.php:48
+msgid "Resume where you left off"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/enrollment-reminder.php:49
+msgid "Complete lessons and quizzes"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/enrollment-reminder.php:50
+msgid "Track your progress"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/enrollment-reminder.php:51
+msgid "Earn your certificate"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/enrollment-reminder.php:52
+msgid ""
+"This is an automated reminder email. You can manage your email preferences "
+"in your account settings."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/enrollment-reminder.php:105
+#: includes/modules/notifications/email/templates/templates/lesson-completion.php:104
+#: includes/modules/notifications/email/templates/templates/order-completed.php:131
+#: includes/modules/notifications/email/templates/templates/quiz-failed.php:126
+#: includes/modules/notifications/email/templates/templates/quiz-passed.php:119
+#: includes/modules/notifications/email/templates/templates/review-moderation-result.php:101
+#: includes/modules/notifications/email/templates/templates/review-new.php:100
+#: includes/modules/notifications/email/templates/templates/review-reply.php:96
+msgid "Course URL"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/enrollment-reminder.php:106
+msgid "Progress Percentage"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/lesson-completion.php:29
+msgid "Lesson Completion Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/lesson-completion.php:30
+msgid "Great job! You completed {lesson_title}"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/lesson-completion.php:32
+msgid ""
+"Email sent to users when they complete a lesson. Encourages continued "
+"learning and shows progress."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/lesson-completion.php:44
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 "
+"auto; padding: 20px;\">\n"
+"    <div style=\"text-align: center; margin-bottom: 30px;\">\n"
+"        <h2 style=\"color: #28a745; margin: 0;\">🎉 Lesson Completed!</h2>\n"
+"        <p style=\"color: #666; margin: 10px 0 0 0;\">You're making great "
+"progress</p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; "
+"margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Hello <strong>{user_name}</strong>,\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Congratulations! You have successfully completed the lesson: "
+"<strong>{lesson_title}</strong> in the course "
+"<strong>{course_title}</strong>.\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 20px 0; color: #555; line-height: 1.6;\">\n"
+"            Your dedication to learning is paying off. Keep up the "
+"excellent work as you continue your learning journey!\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"text-align: center; margin: 25px 0;\">\n"
+"            <a href=\"{course_url}\" style=\"background: #28a745; color: "
+"white; padding: 12px 25px; text-decoration: none; border-radius: 5px; "
+"display: inline-block; font-weight: bold;\">\n"
+"                Continue Learning\n"
+"            </a>\n"
+"        </div>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #e7f3ff; border: 1px solid #b3d9ff; padding: "
+"15px; border-radius: 5px; margin-bottom: 20px;\">\n"
+"        <h3 style=\"margin: 0 0 10px 0; color: #0056b3; font-size: "
+"16px;\">Your Progress</h3>\n"
+"        <p style=\"margin: 0; color: #555; line-height: 1.6;\">\n"
+"            Course: <strong>{course_title}</strong><br>\n"
+"            Lesson: <strong>{lesson_title}</strong><br>\n"
+"            Course Progress: <strong>{course_progress}%</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; "
+"border-top: 1px solid #eee;\">\n"
+"        <p style=\"margin: 0; color: #666; font-size: 14px;\">\n"
+"            Keep learning and growing!<br>\n"
+"            <strong>The {site_name} Team</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"</div>"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/lesson-completion.php:103
+msgid "Lesson Title"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/lesson-completion.php:105
+msgid "Course Progress Percentage"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-cancelled.php:29
+msgid "Order Cancelled Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-cancelled.php:30
+msgid "Order #{order_id} Cancelled"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-cancelled.php:32
+msgid ""
+"Email sent to customers when their pending order is cancelled. Includes "
+"cancellation reason."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-cancelled.php:44
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 "
+"auto; padding: 20px;\">\n"
+"    <div style=\"text-align: center; margin-bottom: 30px;\">\n"
+"        <h2 style=\"color: #333; margin: 0;\">Order Cancelled</h2>\n"
+"        <p style=\"color: #666; margin: 10px 0 0 0;\">Your order has been "
+"cancelled</p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; "
+"margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Hello <strong>{user_name}</strong>,\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Your order <strong>#{order_id}</strong> for the course "
+"<strong>{course_title}</strong> has been cancelled.\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"background: #fff; border: 1px solid #ddd; padding: "
+"15px; border-radius: 5px; margin: 20px 0;\">\n"
+"            <h3 style=\"margin: 0 0 15px 0; color: #333; font-size: "
+"16px;\">Order Details</h3>\n"
+"            <table style=\"width: 100%; border-collapse: collapse;\">\n"
+"                <tr>\n"
+"                    <td style=\"padding: 8px 0; color: #666; border-bottom: "
+"1px solid #eee;\">Order Number:</td>\n"
+"                    <td style=\"padding: 8px 0; text-align: right; "
+"border-bottom: 1px solid #eee; font-weight: bold;\">#{order_id}</td>\n"
+"                </tr>\n"
+"                <tr>\n"
+"                    <td style=\"padding: 8px 0; color: #666;\">Order "
+"Amount:</td>\n"
+"                    <td style=\"padding: 8px 0; text-align: right; "
+"font-weight: bold;\">{order_amount}</td>\n"
+"                </tr>\n"
+"            </table>\n"
+"        </div>\n"
+"        \n"
+"        <# if ( reason ) { #>\n"
+"        <div style=\"background: #fff3cd; border: 1px solid #ffeaa7; "
+"padding: 15px; border-radius: 5px; margin: 20px 0;\">\n"
+"            <h3 style=\"margin: 0 0 10px 0; color: #856404; font-size: "
+"16px;\">Cancellation Reason</h3>\n"
+"            <p style=\"margin: 0; color: #856404; line-height: "
+"1.6;\">{reason}</p>\n"
+"        </div>\n"
+"        <# } #>\n"
+"        \n"
+"        <p style=\"margin: 20px 0 0 0; color: #555; line-height: 1.6;\">\n"
+"            Since this order was pending and no payment was processed, no "
+"refund is required.\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 15px 0 0 0; color: #555; line-height: 1.6;\">\n"
+"            If you would like to purchase this course in the future, you "
+"can visit our course catalog anytime.\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"text-align: center; margin: 25px 0;\">\n"
+"            <a href=\"{site_url}\" style=\"background: #007cba; color: "
+"white; padding: 12px 25px; text-decoration: none; border-radius: 5px; "
+"display: inline-block; font-weight: bold;\">\n"
+"                Browse Courses\n"
+"            </a>\n"
+"        </div>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; "
+"border-top: 1px solid #eee;\">\n"
+"        <p style=\"margin: 0; color: #666; font-size: 14px;\">\n"
+"            If you have any questions, please contact us.<br>\n"
+"            <strong>The {site_name} Team</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"</div>"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-cancelled.php:118
+msgid "Site URL"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-cancelled.php:119
+#: includes/modules/notifications/email/templates/templates/order-completed.php:128
+#: includes/modules/notifications/email/templates/templates/order-refunded.php:116
+msgid "Order ID"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-cancelled.php:121
+#: includes/modules/notifications/email/templates/templates/order-completed.php:133
+msgid "Order Amount"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-cancelled.php:122
+msgid "Cancellation Reason"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-completed.php:29
+msgid "Order Completed Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-completed.php:30
+#: includes/modules/notifications/in-app/class-in-app-templates.php:121
+msgid "Order Confirmation - Order #{order_id}"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-completed.php:32
+msgid ""
+"Email sent to customers when their order is completed. Includes order "
+"details and invoice download link."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-completed.php:44
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 "
+"auto; padding: 20px;\">\n"
+"    <div style=\"text-align: center; margin-bottom: 30px;\">\n"
+"        <h2 style=\"color: #2c5aa0; margin: 0;\">Thank You for Your "
+"Purchase!</h2>\n"
+"        <p style=\"color: #666; margin: 10px 0 0 0;\">Your order has been "
+"confirmed</p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; "
+"margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Hello <strong>{user_name}</strong>,\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Thank you for your purchase! Your order "
+"<strong>#{order_id}</strong> for the course <strong>{course_title}</strong> "
+"has been confirmed and your payment has been processed successfully.\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"background: #fff; border: 1px solid #ddd; padding: "
+"15px; border-radius: 5px; margin: 20px 0;\">\n"
+"            <h3 style=\"margin: 0 0 15px 0; color: #333; font-size: "
+"16px;\">Order Details</h3>\n"
+"            <table style=\"width: 100%; border-collapse: collapse;\">\n"
+"                <tr>\n"
+"                    <td style=\"padding: 8px 0; color: #666; border-bottom: "
+"1px solid #eee;\">Order Number:</td>\n"
+"                    <td style=\"padding: 8px 0; text-align: right; "
+"border-bottom: 1px solid #eee; font-weight: bold;\">#{order_id}</td>\n"
+"                </tr>\n"
+"                <tr>\n"
+"                    <td style=\"padding: 8px 0; color: #666; border-bottom: "
+"1px solid #eee;\">Order Date:</td>\n"
+"                    <td style=\"padding: 8px 0; text-align: right; "
+"border-bottom: 1px solid #eee;\">{order_date}</td>\n"
+"                </tr>\n"
+"                <tr>\n"
+"                    <td style=\"padding: 8px 0; color: #666; border-bottom: "
+"1px solid #eee;\">Course:</td>\n"
+"                    <td style=\"padding: 8px 0; text-align: right; "
+"border-bottom: 1px solid #eee; font-weight: bold;\">{course_title}</td>\n"
+"                </tr>\n"
+"                <tr>\n"
+"                    <td style=\"padding: 8px 0; color: #666; border-bottom: "
+"1px solid #eee;\">Payment Method:</td>\n"
+"                    <td style=\"padding: 8px 0; text-align: right; "
+"border-bottom: 1px solid #eee;\">{payment_method}</td>\n"
+"                </tr>\n"
+"                <tr>\n"
+"                    <td style=\"padding: 8px 0; color: #666;\">Total "
+"Amount:</td>\n"
+"                    <td style=\"padding: 8px 0; text-align: right; "
+"font-weight: bold; color: #2c5aa0; font-size: 18px;\">{order_amount}</td>\n"
+"                </tr>\n"
+"            </table>\n"
+"        </div>\n"
+"        \n"
+"        <div style=\"background: #e7f3ff; border: 1px solid #2c5aa0; "
+"padding: 15px; border-radius: 5px; margin: 20px 0; text-align: center;\">\n"
+"            <p style=\"margin: 0 0 10px 0; color: #2c5aa0; font-weight: "
+"bold;\">🎉 You now have access to your course!</p>\n"
+"            <a href=\"{course_url}\" style=\"display: inline-block; "
+"background-color: #2c5aa0; color: #fff; padding: 12px 24px; "
+"text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: "
+"10px;\">Access Your Course</a>\n"
+"        </div>\n"
+"        \n"
+"        <div style=\"background: #fff; border: 1px solid #ddd; padding: "
+"15px; border-radius: 5px; margin: 20px 0;\">\n"
+"            <h3 style=\"margin: 0 0 15px 0; color: #333; font-size: "
+"16px;\">Invoice</h3>\n"
+"            <p style=\"margin: 0 0 10px 0; color: #555; line-height: "
+"1.6;\">\n"
+"                Your invoice is attached to this email. You can also "
+"download it anytime from your account dashboard.\n"
+"            </p>\n"
+"            <p style=\"margin: 10px 0 0 0; color: #555; line-height: "
+"1.6;\">\n"
+"                <strong>Note:</strong> If you don't see the invoice "
+"attachment, please check your spam folder or contact us for assistance.\n"
+"            </p>\n"
+"        </div>\n"
+"        \n"
+"        <p style=\"margin: 20px 0 0 0; color: #555; line-height: 1.6;\">\n"
+"            If you have any questions about your order or need assistance, "
+"please don't hesitate to contact us.\n"
+"        </p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; "
+"border-top: 1px solid #eee;\">\n"
+"        <p style=\"margin: 0; color: #666; font-size: 14px;\">\n"
+"            Thank you for choosing {site_name}!<br>\n"
+"            <strong>The {site_name} Team</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"</div>"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-completed.php:129
+msgid "Order Date"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-completed.php:132
+msgid "Payment Method"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-refunded.php:29
+msgid "Order Refunded Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-refunded.php:30
+msgid "Order #{order_id} Refunded"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-refunded.php:32
+msgid ""
+"Email sent to customers when their order is refunded. Includes refund "
+"amount and reason."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-refunded.php:44
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 "
+"auto; padding: 20px;\">\n"
+"    <div style=\"text-align: center; margin-bottom: 30px;\">\n"
+"        <h2 style=\"color: #333; margin: 0;\">Order Refunded</h2>\n"
+"        <p style=\"color: #666; margin: 10px 0 0 0;\">Your refund has been "
+"processed</p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; "
+"margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Hello <strong>{user_name}</strong>,\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            We have processed a refund for your order "
+"<strong>#{order_id}</strong> for the course "
+"<strong>{course_title}</strong>.\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"background: #fff; border: 1px solid #ddd; padding: "
+"15px; border-radius: 5px; margin: 20px 0;\">\n"
+"            <h3 style=\"margin: 0 0 15px 0; color: #333; font-size: "
+"16px;\">Refund Details</h3>\n"
+"            <table style=\"width: 100%; border-collapse: collapse;\">\n"
+"                <tr>\n"
+"                    <td style=\"padding: 8px 0; color: #666; border-bottom: "
+"1px solid #eee;\">Order Number:</td>\n"
+"                    <td style=\"padding: 8px 0; text-align: right; "
+"border-bottom: 1px solid #eee; font-weight: bold;\">#{order_id}</td>\n"
+"                </tr>\n"
+"                <tr>\n"
+"                    <td style=\"padding: 8px 0; color: #666; border-bottom: "
+"1px solid #eee;\">Refund Amount:</td>\n"
+"                    <td style=\"padding: 8px 0; text-align: right; "
+"border-bottom: 1px solid #eee; font-weight: bold; color: "
+"#28a745;\">{refund_amount}</td>\n"
+"                </tr>\n"
+"                <tr>\n"
+"                    <td style=\"padding: 8px 0; color: #666;\">Original "
+"Amount:</td>\n"
+"                    <td style=\"padding: 8px 0; text-align: right; "
+"font-weight: bold;\">{order_amount}</td>\n"
+"                </tr>\n"
+"            </table>\n"
+"        </div>\n"
+"        \n"
+"        <# if ( reason ) { #>\n"
+"        <div style=\"background: #fff3cd; border: 1px solid #ffeaa7; "
+"padding: 15px; border-radius: 5px; margin: 20px 0;\">\n"
+"            <h3 style=\"margin: 0 0 10px 0; color: #856404; font-size: "
+"16px;\">Refund Reason</h3>\n"
+"            <p style=\"margin: 0; color: #856404; line-height: "
+"1.6;\">{reason}</p>\n"
+"        </div>\n"
+"        <# } #>\n"
+"        \n"
+"        <p style=\"margin: 20px 0 0 0; color: #555; line-height: 1.6;\">\n"
+"            The refund will be processed to your original payment method. "
+"Please allow 5-10 business days for the refund to appear in your account.\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 15px 0 0 0; color: #555; line-height: 1.6;\">\n"
+"            <strong>Note:</strong> Your access to the course has been "
+"revoked as part of this refund.\n"
+"        </p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; "
+"border-top: 1px solid #eee;\">\n"
+"        <p style=\"margin: 0; color: #666; font-size: 14px;\">\n"
+"            If you have any questions, please contact us.<br>\n"
+"            <strong>The {site_name} Team</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"</div>"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-refunded.php:118
+msgid "Refund Amount"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-refunded.php:119
+msgid "Original Order Amount"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/order-refunded.php:120
+msgid "Refund Reason"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/password-reset-email.php:29
+msgid "Password Reset Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/password-reset-email.php:30
+msgid "Reset your password - {site_name}"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/password-reset-email.php:32
+msgid ""
+"Email sent to users when they request a password reset. Includes "
+"professional styling and security notice."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/password-reset-email.php:44
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 "
+"auto; padding: 20px;\">\n"
+"    <div style=\"text-align: center; margin-bottom: 30px;\">\n"
+"        <h2 style=\"color: #333; margin: 0;\">Password Reset Request</h2>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; "
+"margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Hello <strong>{user_name}</strong>,\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            We received a request to reset your password for your account "
+"on {site_name}. If you made this request, please click the button below to "
+"reset your password:\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"text-align: center; margin: 25px 0;\">\n"
+"            <a href=\"{reset_link}\" style=\"background: #dc3545; color: "
+"white; padding: 12px 25px; text-decoration: none; border-radius: 5px; "
+"display: inline-block; font-weight: bold;\">\n"
+"                Reset My Password\n"
+"            </a>\n"
+"        </div>\n"
+"        \n"
+"        <p style=\"margin: 15px 0 0 0; color: #666; font-size: 14px; "
+"line-height: 1.5;\">\n"
+"            If the button doesn't work, you can copy and paste this link "
+"into your browser:<br>\n"
+"            <a href=\"{reset_link}\" style=\"color: "
+"#dc3545;\">{reset_link}</a>\n"
+"        </p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #fff3cd; border: 1px solid #ffeaa7; padding: "
+"15px; border-radius: 5px; margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0; color: #856404; font-size: 14px;\">\n"
+"            <strong>Security Notice:</strong> This password reset link will "
+"expire in 24 hours. If you did not request a password reset, please ignore "
+"this email and your password will remain unchanged.\n"
+"        </p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #e7f3ff; border: 1px solid #b3d9ff; padding: "
+"15px; border-radius: 5px; margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0; color: #004085; font-size: 14px;\">\n"
+"            <strong>Need Help?</strong> If you're having trouble resetting "
+"your password, please contact our support team.\n"
+"        </p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; "
+"border-top: 1px solid #eee;\">\n"
+"        <p style=\"margin: 0; color: #666; font-size: 14px;\">\n"
+"            Best regards,<br>\n"
+"            <strong>The {site_name} Team</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"</div>"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/password-reset-email.php:105
+msgid "Password Reset Link"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-completion.php:29
+msgid "Quiz Completion Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-completion.php:30
+msgid "Quiz Completed: {quiz_title}"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-completion.php:32
+msgid "Email sent to users when they complete a quiz. Shows score and results."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-completion.php:44
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 "
+"auto; padding: 20px;\">\n"
+"    <div style=\"text-align: center; margin-bottom: 30px;\">\n"
+"        <h2 style=\"color: #333; margin: 0;\">📝 Quiz Completed</h2>\n"
+"        <p style=\"color: #666; margin: 10px 0 0 0;\">Your quiz results are "
+"ready</p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; "
+"margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Hello <strong>{user_name}</strong>,\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            You have completed the quiz: <strong>{quiz_title}</strong> for "
+"the course <strong>{course_title}</strong>.\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"background: #fff; border: 2px solid #007cba; padding: "
+"20px; border-radius: 8px; margin: 20px 0; text-align: center;\">\n"
+"            <h3 style=\"margin: 0 0 10px 0; color: #007cba; font-size: "
+"18px;\">Your Score</h3>\n"
+"            <div style=\"font-size: 36px; font-weight: bold; color: "
+"#007cba; margin: 10px 0;\">\n"
+"                {quiz_score}%\n"
+"            </div>\n"
+"            <p style=\"margin: 5px 0 0 0; color: #666; font-size: 14px;\">\n"
+"                {correct_answers} out of {total_questions} questions "
+"correct\n"
+"            </p>\n"
+"        </div>\n"
+"        \n"
+"        <div style=\"text-align: center; margin: 25px 0;\">\n"
+"            <a href=\"{quiz_url}\" style=\"background: #007cba; color: "
+"white; padding: 12px 25px; text-decoration: none; border-radius: 5px; "
+"display: inline-block; font-weight: bold;\">\n"
+"                View Quiz Results\n"
+"            </a>\n"
+"        </div>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #e7f3ff; border: 1px solid #b3d9ff; padding: "
+"15px; border-radius: 5px; margin-bottom: 20px;\">\n"
+"        <h3 style=\"margin: 0 0 10px 0; color: #0056b3; font-size: "
+"16px;\">Quiz Details</h3>\n"
+"        <p style=\"margin: 0; color: #555; line-height: 1.6;\">\n"
+"            Course: <strong>{course_title}</strong><br>\n"
+"            Quiz: <strong>{quiz_title}</strong><br>\n"
+"            Time Taken: <strong>{time_taken}</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; "
+"border-top: 1px solid #eee;\">\n"
+"        <p style=\"margin: 0; color: #666; font-size: 14px;\">\n"
+"            Keep up the great work!<br>\n"
+"            <strong>The {site_name} Team</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"</div>"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-completion.php:109
+#: includes/modules/notifications/email/templates/templates/quiz-failed.php:121
+#: includes/modules/notifications/email/templates/templates/quiz-passed.php:114
+msgid "Quiz Title"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-completion.php:110
+#: includes/modules/notifications/email/templates/templates/quiz-failed.php:122
+#: includes/modules/notifications/email/templates/templates/quiz-passed.php:115
+msgid "Quiz Score Percentage"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-completion.php:111
+#: includes/modules/notifications/email/templates/templates/quiz-failed.php:124
+#: includes/modules/notifications/email/templates/templates/quiz-passed.php:117
+msgid "Number of Correct Answers"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-completion.php:112
+#: includes/modules/notifications/email/templates/templates/quiz-failed.php:125
+#: includes/modules/notifications/email/templates/templates/quiz-passed.php:118
+msgid "Total Questions"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-completion.php:113
+#: includes/modules/notifications/email/templates/templates/quiz-failed.php:127
+msgid "Quiz Results URL"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-completion.php:114
+msgid "Time Taken"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-failed.php:29
+msgid "Quiz Failed Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-failed.php:30
+msgid "Quiz Results: {quiz_title}"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-failed.php:32
+msgid ""
+"Email sent to users when they fail a quiz. Provides encouragement and "
+"suggests reviewing the material."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-failed.php:44
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 "
+"auto; padding: 20px;\">\n"
+"    <div style=\"text-align: center; margin-bottom: 30px;\">\n"
+"        <h2 style=\"color: #dc3545; margin: 0;\">📝 Quiz Results</h2>\n"
+"        <p style=\"color: #666; margin: 10px 0 0 0;\">Keep learning and "
+"improving</p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; "
+"margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Hello <strong>{user_name}</strong>,\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            You have completed the quiz: <strong>{quiz_title}</strong> for "
+"the course <strong>{course_title}</strong>.\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"background: #fff; border: 2px solid #dc3545; padding: "
+"20px; border-radius: 8px; margin: 20px 0; text-align: center;\">\n"
+"            <h3 style=\"margin: 0 0 10px 0; color: #dc3545; font-size: "
+"18px;\">Your Score</h3>\n"
+"            <div style=\"font-size: 36px; font-weight: bold; color: "
+"#dc3545; margin: 10px 0;\">\n"
+"                {quiz_score}%\n"
+"            </div>\n"
+"            <p style=\"margin: 5px 0 0 0; color: #666; font-size: 14px;\">\n"
+"                Passing Grade Required: {passing_grade}%<br>\n"
+"                {correct_answers} out of {total_questions} questions "
+"correct\n"
+"            </p>\n"
+"        </div>\n"
+"        \n"
+"        <div style=\"background: #fff3cd; border: 1px solid #ffc107; "
+"padding: 15px; border-radius: 5px; margin: 20px 0;\">\n"
+"            <h3 style=\"margin: 0 0 10px 0; color: #856404; font-size: "
+"16px;\">💡 Don't Give Up!</h3>\n"
+"            <p style=\"margin: 0; color: #856404; line-height: 1.6;\">\n"
+"                Learning is a journey, and every attempt helps you improve. "
+"Review the course materials and try again when you're ready!\n"
+"            </p>\n"
+"        </div>\n"
+"        \n"
+"        <div style=\"text-align: center; margin: 25px 0;\">\n"
+"            <a href=\"{course_url}\" style=\"background: #007cba; color: "
+"white; padding: 12px 25px; text-decoration: none; border-radius: 5px; "
+"display: inline-block; font-weight: bold; margin-right: 10px;\">\n"
+"                Review Course\n"
+"            </a>\n"
+"            <a href=\"{quiz_url}\" style=\"background: #6c757d; color: "
+"white; padding: 12px 25px; text-decoration: none; border-radius: 5px; "
+"display: inline-block; font-weight: bold;\">\n"
+"                View Quiz Details\n"
+"            </a>\n"
+"        </div>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #e7f3ff; border: 1px solid #b3d9ff; padding: "
+"15px; border-radius: 5px; margin-bottom: 20px;\">\n"
+"        <h3 style=\"margin: 0 0 10px 0; color: #0056b3; font-size: "
+"16px;\">Quiz Details</h3>\n"
+"        <p style=\"margin: 0; color: #555; line-height: 1.6;\">\n"
+"            Course: <strong>{course_title}</strong><br>\n"
+"            Quiz: <strong>{quiz_title}</strong><br>\n"
+"            Your Score: <strong>{quiz_score}%</strong><br>\n"
+"            Passing Grade: <strong>{passing_grade}%</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; "
+"border-top: 1px solid #eee;\">\n"
+"        <p style=\"margin: 0; color: #666; font-size: 14px;\">\n"
+"            Keep learning and growing!<br>\n"
+"            <strong>The {site_name} Team</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"</div>"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-failed.php:123
+#: includes/modules/notifications/email/templates/templates/quiz-passed.php:116
+msgid "Passing Grade Percentage"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-passed.php:29
+msgid "Quiz Passed Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-passed.php:30
+msgid "🎉 Congratulations! You passed {quiz_title}"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-passed.php:32
+msgid ""
+"Email sent to users when they pass a quiz. Celebrates their achievement and "
+"encourages continued learning."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/quiz-passed.php:44
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 "
+"auto; padding: 20px;\">\n"
+"    <div style=\"text-align: center; margin-bottom: 30px;\">\n"
+"        <h2 style=\"color: #28a745; margin: 0;\">🎉 Congratulations!</h2>\n"
+"        <p style=\"color: #666; margin: 10px 0 0 0;\">You passed the "
+"quiz!</p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; "
+"margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Hello <strong>{user_name}</strong>,\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Excellent work! You have successfully passed the quiz: "
+"<strong>{quiz_title}</strong> for the course "
+"<strong>{course_title}</strong>.\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"background: #d4edda; border: 2px solid #28a745; "
+"padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center;\">\n"
+"            <h3 style=\"margin: 0 0 10px 0; color: #155724; font-size: "
+"18px;\">Your Score</h3>\n"
+"            <div style=\"font-size: 36px; font-weight: bold; color: "
+"#28a745; margin: 10px 0;\">\n"
+"                {quiz_score}%\n"
+"            </div>\n"
+"            <p style=\"margin: 5px 0 0 0; color: #155724; font-size: "
+"14px;\">\n"
+"                Passing Grade: {passing_grade}% | Your Score: {quiz_score}%\n"
+"            </p>\n"
+"        </div>\n"
+"        \n"
+"        <p style=\"margin: 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Your dedication and hard work have paid off. You're making "
+"excellent progress in your learning journey!\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"text-align: center; margin: 25px 0;\">\n"
+"            <a href=\"{course_url}\" style=\"background: #28a745; color: "
+"white; padding: 12px 25px; text-decoration: none; border-radius: 5px; "
+"display: inline-block; font-weight: bold;\">\n"
+"                Continue Learning\n"
+"            </a>\n"
+"        </div>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #e7f3ff; border: 1px solid #b3d9ff; padding: "
+"15px; border-radius: 5px; margin-bottom: 20px;\">\n"
+"        <h3 style=\"margin: 0 0 10px 0; color: #0056b3; font-size: "
+"16px;\">Quiz Details</h3>\n"
+"        <p style=\"margin: 0; color: #555; line-height: 1.6;\">\n"
+"            Course: <strong>{course_title}</strong><br>\n"
+"            Quiz: <strong>{quiz_title}</strong><br>\n"
+"            Score: <strong>{quiz_score}%</strong><br>\n"
+"            Correct Answers: <strong>{correct_answers} out of "
+"{total_questions}</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; "
+"border-top: 1px solid #eee;\">\n"
+"        <p style=\"margin: 0; color: #666; font-size: 14px;\">\n"
+"            Keep up the excellent work!<br>\n"
+"            <strong>The {site_name} Team</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"</div>"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-moderation-result.php:29
+msgid "Review Moderation Result Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-moderation-result.php:30
+msgid "Review update for: {course_title}"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-moderation-result.php:32
+msgid ""
+"Email sent to review authors when their review moderation status changes "
+"(published, rejected, or flagged)."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-moderation-result.php:44
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 "
+"auto; padding: 20px;\">\n"
+"    <div style=\"text-align: center; margin-bottom: 30px;\">\n"
+"        <h2 style=\"color: #333; margin: 0;\">Review Status Update</h2>\n"
+"        <p style=\"color: #666; margin: 10px 0 0 0;\">{course_title}</p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; "
+"margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Hello <strong>{user_name}</strong>,\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"background: {status_background}; border-left: 4px "
+"solid {status_color}; padding: 15px; margin: 20px 0; border-radius: 4px;\">\n"
+"            <p style=\"margin: 0; color: {status_text_color}; line-height: "
+"1.6; font-weight: bold; font-size: 16px;\">\n"
+"                {status_message}\n"
+"            </p>\n"
+"        </div>\n"
+"        \n"
+"        <p style=\"margin: 15px 0; color: #555; line-height: 1.6;\">\n"
+"            {additional_message}\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"text-align: center; margin: 25px 0;\">\n"
+"            <a href=\"{course_url}\" style=\"background: #007cba; color: "
+"white; padding: 12px 25px; text-decoration: none; border-radius: 5px; "
+"display: inline-block; font-weight: bold;\">\n"
+"                View Course\n"
+"            </a>\n"
+"        </div>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; "
+"border-top: 1px solid #eee;\">\n"
+"        <p style=\"margin: 0; color: #666; font-size: 14px;\">\n"
+"            Best regards,<br>\n"
+"            <strong>The {site_name} Team</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"</div>"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-moderation-result.php:95
+msgid "Status (published/rejected/flagged)"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-moderation-result.php:96
+msgid "Status Message"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-moderation-result.php:97
+msgid "Status Background Color"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-moderation-result.php:98
+msgid "Status Border Color"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-moderation-result.php:99
+msgid "Status Text Color"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-moderation-result.php:100
+msgid "Additional Message"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-moderation.php:29
+msgid "Review Moderation Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-moderation.php:30
+msgid "Review pending moderation: {course_title}"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-moderation.php:32
+msgid "Email sent to administrators when a new review is pending moderation."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-moderation.php:44
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 "
+"auto; padding: 20px;\">\n"
+"    <div style=\"text-align: center; margin-bottom: 30px;\">\n"
+"        <h2 style=\"color: #333; margin: 0;\">Review Pending "
+"Moderation</h2>\n"
+"        <p style=\"color: #666; margin: 10px 0 0 0;\">Action Required</p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #fff3cd; border: 1px solid #ffc107; padding: "
+"20px; border-radius: 8px; margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0 0 15px 0; color: #856404; line-height: 1.6;\">\n"
+"            A new review is pending moderation and requires your attention.\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"background: #fff; border-left: 4px solid #ffc107; "
+"padding: 15px; margin: 20px 0; border-radius: 4px;\">\n"
+"            <p style=\"margin: 0 0 10px 0; color: #333; font-weight: "
+"bold;\">Course: {course_title}</p>\n"
+"            <p style=\"margin: 0 0 10px 0; color: #555;\">Reviewer: "
+"{reviewer_name}</p>\n"
+"            <p style=\"margin: 0 0 10px 0; color: #555;\">Rating: {rating} "
+"stars</p>\n"
+"            <div style=\"margin-top: 15px; padding-top: 15px; border-top: "
+"1px solid #eee;\">\n"
+"                <p style=\"margin: 0 0 5px 0; color: #333; font-weight: "
+"bold;\">Review Content:</p>\n"
+"                <p style=\"margin: 0; color: #555; line-height: 1.6; "
+"white-space: pre-wrap;\">{review_content}</p>\n"
+"            </div>\n"
+"        </div>\n"
+"        \n"
+"        <div style=\"text-align: center; margin: 25px 0;\">\n"
+"            <a href=\"{admin_url}\" style=\"background: #ffc107; color: "
+"#000; padding: 12px 25px; text-decoration: none; border-radius: 5px; "
+"display: inline-block; font-weight: bold;\">\n"
+"                Moderate Review\n"
+"            </a>\n"
+"        </div>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; "
+"border-top: 1px solid #eee;\">\n"
+"        <p style=\"margin: 0; color: #666; font-size: 14px;\">\n"
+"            This is an automated notification from<br>\n"
+"            <strong>{site_name}</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"</div>"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-moderation.php:94
+#: includes/modules/notifications/email/templates/templates/review-new.php:97
+msgid "Reviewer Name"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-moderation.php:95
+#: includes/modules/notifications/email/templates/templates/review-new.php:98
+msgid "Rating (stars)"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-moderation.php:96
+#: includes/modules/notifications/email/templates/templates/review-new.php:99
+msgid "Review Content"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-moderation.php:97
+msgid "Admin Dashboard URL"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-new.php:29
+msgid "New Review Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-new.php:30
+msgid "New review received for {course_title}"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-new.php:32
+msgid ""
+"Email sent to course authors when a new review is submitted for their "
+"course."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-new.php:44
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 "
+"auto; padding: 20px;\">\n"
+"    <div style=\"text-align: center; margin-bottom: 30px;\">\n"
+"        <h2 style=\"color: #333; margin: 0;\">New Review Received</h2>\n"
+"        <p style=\"color: #666; margin: 10px 0 0 0;\">{course_title}</p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; "
+"margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Hello <strong>{author_name}</strong>,\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            You have received a new review for your course "
+"<strong>{course_title}</strong>.\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"background: #fff; border-left: 4px solid #007cba; "
+"padding: 15px; margin: 20px 0; border-radius: 4px;\">\n"
+"            <div style=\"margin-bottom: 15px;\">\n"
+"                <p style=\"margin: 0 0 5px 0; color: #333; font-weight: "
+"bold;\">Reviewer: {reviewer_name}</p>\n"
+"                <p style=\"margin: 0; color: #666;\">Rating: {rating} "
+"stars</p>\n"
+"            </div>\n"
+"            <p style=\"margin: 15px 0 0 0; color: #555; line-height: 1.6; "
+"white-space: pre-wrap;\">{review_content}</p>\n"
+"        </div>\n"
+"        \n"
+"        <div style=\"text-align: center; margin: 25px 0;\">\n"
+"            <a href=\"{course_url}\" style=\"background: #007cba; color: "
+"white; padding: 12px 25px; text-decoration: none; border-radius: 5px; "
+"display: inline-block; font-weight: bold;\">\n"
+"                View Course & Reviews\n"
+"            </a>\n"
+"        </div>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; "
+"border-top: 1px solid #eee;\">\n"
+"        <p style=\"margin: 0; color: #666; font-size: 14px;\">\n"
+"            Best regards,<br>\n"
+"            <strong>The {site_name} Team</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"</div>"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-new.php:95
+msgid "Course Author Name"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-reply.php:29
+msgid "Review Reply Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-reply.php:30
+msgid "New reply to your review for {course_title}"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-reply.php:32
+msgid "Email sent to students when an instructor replies to their course review."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-reply.php:44
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 "
+"auto; padding: 20px;\">\n"
+"    <div style=\"text-align: center; margin-bottom: 30px;\">\n"
+"        <h2 style=\"color: #333; margin: 0;\">New Reply to Your Review</h2>\n"
+"        <p style=\"color: #666; margin: 10px 0 0 0;\">{course_title}</p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; "
+"margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Hello <strong>{student_name}</strong>,\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            You have received a new reply to your review for "
+"<strong>{course_title}</strong>.\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"background: #fff; border-left: 4px solid #007cba; "
+"padding: 15px; margin: 20px 0; border-radius: 4px;\">\n"
+"            <p style=\"margin: 0 0 10px 0; color: #333; font-weight: "
+"bold;\">Reply from {author_name}:</p>\n"
+"            <p style=\"margin: 0; color: #555; line-height: 1.6; "
+"white-space: pre-wrap;\">{reply_content}</p>\n"
+"        </div>\n"
+"        \n"
+"        <div style=\"text-align: center; margin: 25px 0;\">\n"
+"            <a href=\"{course_url}\" style=\"background: #007cba; color: "
+"white; padding: 12px 25px; text-decoration: none; border-radius: 5px; "
+"display: inline-block; font-weight: bold;\">\n"
+"                View Course\n"
+"            </a>\n"
+"        </div>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; "
+"border-top: 1px solid #eee;\">\n"
+"        <p style=\"margin: 0; color: #666; font-size: 14px;\">\n"
+"            Best regards,<br>\n"
+"            <strong>The {site_name} Team</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"</div>"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-reply.php:92
+msgid "Student Name"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-reply.php:94
+msgid "Reply Author Name"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/review-reply.php:95
+msgid "Reply Content"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/welcome-email.php:29
+msgid "Welcome Email"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/welcome-email.php:30
+msgid "Welcome to {site_name} - Your account is ready!"
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/welcome-email.php:32
+msgid ""
+"Email sent to users after their account is activated. Includes welcome "
+"message and next steps guidance."
+msgstr ""
+
+#: includes/modules/notifications/email/templates/templates/welcome-email.php:44
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 "
+"auto; padding: 20px;\">\n"
+"    <div style=\"text-align: center; margin-bottom: 30px;\">\n"
+"        <h2 style=\"color: #333; margin: 0;\">Welcome to {site_name}!</h2>\n"
+"        <p style=\"color: #666; margin: 10px 0 0 0;\">Your account has been "
+"successfully activated</p>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; "
+"margin-bottom: 20px;\">\n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Hello <strong>{user_name}</strong>,\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">\n"
+"            Congratulations! Your account has been successfully activated "
+"and you're now ready to start your learning journey with {site_name}.\n"
+"        </p>\n"
+"        \n"
+"        <p style=\"margin: 0 0 20px 0; color: #555; line-height: 1.6;\">\n"
+"            You can now access all our courses, track your progress, and "
+"earn certificates as you complete your learning goals.\n"
+"        </p>\n"
+"        \n"
+"        <div style=\"text-align: center; margin: 25px 0;\">\n"
+"            <a href=\"{login_url}\" style=\"background: #28a745; color: "
+"white; padding: 12px 25px; text-decoration: none; border-radius: 5px; "
+"display: inline-block; font-weight: bold;\">\n"
+"                Access Your Account\n"
+"            </a>\n"
+"        </div>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"background: #e7f3ff; border: 1px solid #b3d9ff; padding: "
+"15px; border-radius: 5px; margin-bottom: 20px;\">\n"
+"        <h3 style=\"margin: 0 0 10px 0; color: #0056b3; font-size: "
+"16px;\">What's Next?</h3>\n"
+"        <ul style=\"margin: 0; padding-left: 20px; color: #555;\">\n"
+"            <li>Browse our course catalog</li>\n"
+"            <li>Enroll in your first course</li>\n"
+"            <li>Track your learning progress</li>\n"
+"            <li>Connect with other learners</li>\n"
+"        </ul>\n"
+"    </div>\n"
+"    \n"
+"    <div style=\"text-align: center; margin-top: 30px; padding-top: 20px; "
+"border-top: 1px solid #eee;\">\n"
+"        <p style=\"margin: 0; color: #666; font-size: 14px;\">\n"
+"            Happy learning!<br>\n"
+"            <strong>The {site_name} Team</strong>\n"
+"        </p>\n"
+"    </div>\n"
+"</div>"
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:205
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:344
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:389
+msgid "Notification ID required."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:211
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:350
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:395
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:382
+msgid "Notification not found."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:217
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:632
+msgid "Notification marked as read."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:219
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:365
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:617
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:668
+msgid "Failed to update notification."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:318
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:732
+msgid "All notifications marked as read."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:320
+msgid "Failed to update notifications."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:363
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:683
+msgid "Notification marked as unread."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:401
+msgid "Notification deleted."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:403
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:762
+msgid "Failed to delete notification."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:56
+msgid "Welcome to {course_title}!"
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:57
+msgid "You have been enrolled in the course \"{course_title}\". Start learning now!"
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:61
+msgid "Course Completed!"
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:62
+msgid "Congratulations! You have successfully completed \"{course_title}\"."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:66
+msgid "Lesson Completed"
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:67
+msgid "You have completed the lesson \"{lesson_title}\" in \"{course_title}\"."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:71
+msgid "Quiz Completed"
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:72
+msgid "You have completed the quiz \"{quiz_title}\" in \"{course_title}\"."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:76
+msgid "Quiz Passed!"
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:77
+msgid ""
+"Congratulations! You passed the quiz \"{quiz_title}\" with a score of "
+"{score}%."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:81
+msgid "Quiz Not Passed"
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:82
+msgid ""
+"You scored {score}% on the quiz \"{quiz_title}\". The passing score is "
+"{passing_score}%."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:86
+msgid "Certificate Awarded!"
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:87
+msgid ""
+"Congratulations! You have been awarded a certificate for completing "
+"\"{course_title}\"."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:92
+msgid "Welcome to {site_name}! Your account has been created successfully."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:97
+msgid ""
+"Your account has been activated. You can now access all features on "
+"{site_name}."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:101
+msgid "New Reply to Your Review"
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:102
+msgid "{author_name} replied to your review for \"{course_title}\"."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:106
+msgid "New Review on Your Course"
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:107
+msgid "{reviewer_name} left a {rating}-star review on \"{course_title}\"."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:111
+msgid "Review Pending Moderation"
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:112
+msgid "A new review on \"{course_title}\" is pending moderation."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:117
+msgid "Your review for \"{course_title}\" has been {moderation_status}."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:122
+msgid ""
+"Thank you for your purchase! Your order #{order_id} for the course "
+"\"{course_title}\" has been confirmed and your payment has been processed "
+"successfully."
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:126
+msgid "Order Refunded - Order #{order_id}"
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:127
+msgid ""
+"Your order #{order_id} for the course \"{course_title}\" has been refunded. "
+"Refund Amount: {refund_amount}"
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:131
+msgid "Order Cancelled - Order #{order_id}"
+msgstr ""
+
+#: includes/modules/notifications/in-app/class-in-app-templates.php:132
+msgid "Your order #{order_id} for the course \"{course_title}\" has been cancelled."
 msgstr ""
 
 #: includes/modules/orders/class-order-manager.php:662
@@ -2462,10 +4713,6 @@ msgstr ""
 msgid "Try Again"
 msgstr ""
 
-#: includes/modules/orders/class-order-status-manager.php:143
-msgid "Order Cancelled"
-msgstr ""
-
 #: includes/modules/orders/class-order-status-manager.php:144
 msgid "This order has been cancelled."
 msgstr ""
@@ -2546,24 +4793,12 @@ msgstr ""
 msgid "This purchase link is not valid for your account."
 msgstr ""
 
-#: includes/modules/orders/gateways/class-payment.php:87
-msgid "PayPal"
-msgstr ""
-
 #: includes/modules/orders/gateways/class-payment.php:92
 msgid "Pay securely with PayPal"
 msgstr ""
 
-#: includes/modules/orders/gateways/class-payment.php:97
-msgid "Stripe"
-msgstr ""
-
 #: includes/modules/orders/gateways/class-payment.php:102
 msgid "Pay with credit card via Stripe"
-msgstr ""
-
-#: includes/modules/orders/gateways/class-payment.php:107
-msgid "Razorpay"
 msgstr ""
 
 #: includes/modules/orders/gateways/class-payment.php:112
@@ -3361,6 +5596,7 @@ msgid "Confirm admin email"
 msgstr ""
 
 #: includes/modules/user-management/login/class-login.php:481
+#: templates/signup/signup-success.php:43
 #. translators: %s: Site name.
 msgid "Welcome to %s"
 msgstr ""
@@ -3538,6 +5774,58 @@ msgstr ""
 msgid ""
 "<strong>ERROR</strong>: Your account has not been activated. Check your "
 "email for the activation link."
+msgstr ""
+
+#: includes/rest-api/admin/class-rest-admin-email-templates-controller.php:219
+msgid "Failed to save template"
+msgstr ""
+
+#: includes/rest-api/admin/class-rest-admin-email-templates-controller.php:272
+msgid "Test email sent successfully"
+msgstr ""
+
+#: includes/rest-api/admin/class-rest-admin-email-templates-controller.php:293
+msgid "Failed to reset template"
+msgstr ""
+
+#: includes/rest-api/admin/class-rest-admin-email-templates-controller.php:323
+msgid "Sorry, you are not allowed to test SMTP connections."
+msgstr ""
+
+#: includes/rest-api/admin/class-rest-admin-email-templates-controller.php:348
+#. translators: %s: The SMTP field name.
+msgid "SMTP %s is required."
+msgstr ""
+
+#: includes/rest-api/admin/class-rest-admin-email-templates-controller.php:372
+msgid "SMTP connection test successful!"
+msgstr ""
+
+#: includes/rest-api/admin/class-rest-admin-email-templates-controller.php:421
+#. translators: %1$d: Number of emails retried, %2$d: Number of emails
+#. permanently failed.
+msgid "Retried %1$d emails, %2$d permanently failed."
+msgstr ""
+
+#: includes/rest-api/admin/class-rest-admin-email-templates-controller.php:448
+#. translators: %s: The queue status.
+msgid "Email queue cleared (%s)."
+msgstr ""
+
+#: includes/rest-api/admin/class-rest-admin-email-templates-controller.php:456
+msgid "Failed to clear email queue."
+msgstr ""
+
+#: includes/rest-api/admin/class-rest-admin-email-templates-controller.php:479
+msgid "Email queue processing completed."
+msgstr ""
+
+#: includes/rest-api/admin/class-rest-admin-email-templates-controller.php:502
+msgid "Test email address is required."
+msgstr ""
+
+#: includes/rest-api/admin/class-rest-admin-email-templates-controller.php:524
+msgid "Test email added to queue successfully."
 msgstr ""
 
 #: includes/rest-api/admin/class-rest-admin-overview-controller.php:105
@@ -3927,6 +6215,7 @@ msgstr ""
 
 #: includes/rest-api/courses/class-rest-course-controller.php:1225
 #: includes/rest-api/lessons/class-rest-lesson-controller.php:862
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:302
 #: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:231
 #: includes/rest-api/quizzes/class-rest-quiz-controller.php:565
 #: includes/rest-api/sections/class-rest-section-controller.php:953
@@ -3935,6 +6224,7 @@ msgstr ""
 
 #: includes/rest-api/courses/class-rest-course-controller.php:1231
 #: includes/rest-api/lessons/class-rest-lesson-controller.php:868
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:308
 #: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:238
 #: includes/rest-api/quizzes/class-rest-quiz-controller.php:571
 #: includes/rest-api/sections/class-rest-section-controller.php:959
@@ -3950,6 +6240,7 @@ msgstr ""
 
 #: includes/rest-api/courses/class-rest-course-controller.php:1242
 #: includes/rest-api/lessons/class-rest-lesson-controller.php:883
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:329
 #: includes/rest-api/quizzes/class-rest-quiz-controller.php:586
 #: includes/rest-api/sections/class-rest-section-controller.php:974
 msgid "Sort collection by object attribute."
@@ -3957,6 +6248,7 @@ msgstr ""
 
 #: includes/rest-api/courses/class-rest-course-controller.php:1248
 #: includes/rest-api/lessons/class-rest-lesson-controller.php:889
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:335
 #: includes/rest-api/quizzes/class-rest-quiz-controller.php:592
 #: includes/rest-api/sections/class-rest-section-controller.php:980
 msgid "Order sort attribute ascending or descending."
@@ -4568,14 +6860,18 @@ msgid "Choose a username"
 msgstr ""
 
 #: includes/rest-api/features/signup/class-rest-signup-controller.php:352
+#: templates/signup/activation-form.php:153
+#: templates/signup/register-form.php:86
 msgid "Email Address"
 msgstr ""
 
 #: includes/rest-api/features/signup/class-rest-signup-controller.php:355
+#: templates/signup/signup-success.php:91
 msgid "Enter your email address"
 msgstr ""
 
 #: includes/rest-api/features/signup/class-rest-signup-controller.php:358
+#: templates/signup/register-form.php:196
 msgid "Create Account"
 msgstr ""
 
@@ -4926,6 +7222,113 @@ msgstr ""
 
 #: includes/rest-api/lessons/class-rest-lesson-controller.php:985
 msgid "Sorry, you must be logged in to access this lesson."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:88
+msgid "Optional: Filter by event key."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:108
+msgid "Array of notification IDs."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:116
+msgid "Action to perform: mark_read, mark_unread, or delete."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:137
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:149
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:169
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:189
+msgid "Notification ID."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:213
+msgid "Unique identifier for the notification."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:219
+msgid "The ID of the user who owns this notification."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:225
+msgid "The event key that triggered this notification."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:230
+msgid "The notification title."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:235
+msgid "The notification message content."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:240
+msgid "The notification type."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:247
+msgid "Whether the notification has been read."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:253
+msgid "The date and time when the notification was read."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:260
+msgid "The ID of the related course, if applicable."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:265
+msgid "The ID of a related object (e.g., quiz, lesson)."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:270
+msgid "The type of the related object."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:275
+msgid "Additional metadata for the notification."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:280
+msgid "The date and time when the notification was created."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:315
+msgid "Filter by read status (0 or 1)."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:320
+msgid "Filter by event key."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:324
+msgid "Filter by notification type."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:341
+msgid "Search in title and message."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:359
+msgid "You must be logged in to access notifications."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:390
+msgid "You do not have permission to access this notification."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:774
+msgid "Notification deleted successfully."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:800
+msgid "Action and notification_ids are required."
+msgstr ""
+
+#: includes/rest-api/notifications/class-rest-notifications-controller.php:853
+msgid "Bulk action completed successfully."
 msgstr ""
 
 #: includes/rest-api/quizzes/admin/class-rest-quiz-questions-controller.php:64
@@ -5764,12 +8167,6 @@ msgid_plural "%d students"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/course/course.php:256
-#: templates/course/partials/course-hero.php:417
-#: templates/page-dashboard.php:258
-msgid "Continue Learning"
-msgstr ""
-
 #: templates/course/layout-switcher.php:23
 msgid "Grid View"
 msgstr ""
@@ -6368,7 +8765,7 @@ msgid "Bookmark lessons and quizzes to easily find them later."
 msgstr ""
 
 #: templates/dashboard/bookmarks.php:92 templates/dashboard/courses.php:178
-#: templates/page-dashboard.php:290
+#: templates/page-dashboard.php:297
 msgid "Continue"
 msgstr ""
 
@@ -6410,6 +8807,26 @@ msgid ""
 "started!"
 msgstr ""
 
+#: templates/dashboard/notifications.php:42
+msgid "Read"
+msgstr ""
+
+#: templates/dashboard/notifications.php:48
+msgid "Mark All as Read"
+msgstr ""
+
+#: templates/dashboard/notifications.php:93
+msgid "Mark as unread"
+msgstr ""
+
+#: templates/dashboard/notifications.php:98
+msgid "Mark as read"
+msgstr ""
+
+#: templates/dashboard/notifications.php:103
+msgid "Delete notification"
+msgstr ""
+
 #: templates/dashboard/settings.php:36
 msgid "Account Settings"
 msgstr ""
@@ -6419,7 +8836,7 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#: templates/dashboard/settings.php:50
+#: templates/dashboard/settings.php:50 templates/signup/register-form.php:105
 msgid "Password"
 msgstr ""
 
@@ -6439,11 +8856,11 @@ msgstr ""
 msgid "Display Name"
 msgstr ""
 
-#: templates/dashboard/settings.php:114
+#: templates/dashboard/settings.php:114 templates/signup/register-form.php:39
 msgid "First Name"
 msgstr ""
 
-#: templates/dashboard/settings.php:118
+#: templates/dashboard/settings.php:118 templates/signup/register-form.php:52
 msgid "Last Name"
 msgstr ""
 
@@ -6652,6 +9069,7 @@ msgid "Apply your new skills in real projects"
 msgstr ""
 
 #: templates/lesson/completion-modal-templates.php:79
+#: templates/signup/signup-success.php:72
 msgid "What's Next?"
 msgstr ""
 
@@ -6766,60 +9184,56 @@ msgstr ""
 msgid "Personalized recommendations"
 msgstr ""
 
-#: templates/page-dashboard.php:180
+#: templates/page-dashboard.php:187
 #. translators: %s: First name
 msgid "Welcome back, %s! 👋"
 msgstr ""
 
-#: templates/page-dashboard.php:189
+#: templates/page-dashboard.php:196
 #. translators: %d: minutes learned today
 msgid "You've learned for %d minutes today. Keep it up!"
 msgstr ""
 
-#: templates/page-dashboard.php:202
+#: templates/page-dashboard.php:209
 #. translators: %d: number of streak days
 msgid "%d Days"
 msgstr ""
 
-#: templates/page-dashboard.php:207
+#: templates/page-dashboard.php:214
 msgid "Learning Streak"
 msgstr ""
 
-#: templates/page-dashboard.php:216
+#: templates/page-dashboard.php:223
 msgid "Progress Overview"
 msgstr ""
 
-#: templates/page-dashboard.php:223
-msgid "Course Completion"
-msgstr ""
-
-#: templates/page-dashboard.php:228
+#: templates/page-dashboard.php:235
 #. translators: %1$d: completed courses, %2$d: total courses
 msgid "%1$d/%2$d Courses"
 msgstr ""
 
-#: templates/page-dashboard.php:240
+#: templates/page-dashboard.php:247
 msgid "Quiz Performance"
 msgstr ""
 
-#: templates/page-dashboard.php:241
+#: templates/page-dashboard.php:248
 msgid "Average Quiz Score"
 msgstr ""
 
-#: templates/page-dashboard.php:248
+#: templates/page-dashboard.php:255
 msgid "Attendance"
 msgstr ""
 
-#: templates/page-dashboard.php:249
+#: templates/page-dashboard.php:256
 msgid "Last 30 Days"
 msgstr ""
 
-#: templates/page-dashboard.php:282
+#: templates/page-dashboard.php:289
 #. translators: %1$d: progress percentage, %2$s: remaining time
 msgid "%1$d%% Completed • %2$s"
 msgstr ""
 
-#: templates/page-dashboard.php:301
+#: templates/page-dashboard.php:308
 msgid "Recommended For You"
 msgstr ""
 
@@ -7254,6 +9668,199 @@ msgstr ""
 #: templates/shared/progress-bar.php:70
 #. translators: 1: Progress
 msgid "Progress: %s%%"
+msgstr ""
+
+#: templates/signup/activation-form.php:29
+msgid "Account Activation"
+msgstr ""
+
+#: templates/signup/activation-form.php:30
+msgid "Activate your account to start learning"
+msgstr ""
+
+#: templates/signup/activation-form.php:44
+msgid "Account Details"
+msgstr ""
+
+#: templates/signup/activation-form.php:48
+msgid "Name:"
+msgstr ""
+
+#: templates/signup/activation-form.php:53
+msgid "Email:"
+msgstr ""
+
+#: templates/signup/activation-form.php:58
+msgid "User Type:"
+msgstr ""
+
+#: templates/signup/activation-form.php:63
+msgid "Signed up:"
+msgstr ""
+
+#: templates/signup/activation-form.php:83
+msgid "Activate Account"
+msgstr ""
+
+#: templates/signup/activation-form.php:89
+msgid "Activating..."
+msgstr ""
+
+#: templates/signup/activation-form.php:114
+msgid "Invalid Activation"
+msgstr ""
+
+#: templates/signup/activation-form.php:115
+msgid "This activation link is no longer valid."
+msgstr ""
+
+#: templates/signup/activation-form.php:122
+msgid "Invalid Activation Link"
+msgstr ""
+
+#: templates/signup/activation-form.php:123
+msgid "The activation link you provided is invalid or has expired."
+msgstr ""
+
+#: templates/signup/activation-form.php:124
+msgid ""
+"Please check your email for the correct activation link, or contact support "
+"if you need assistance."
+msgstr ""
+
+#: templates/signup/activation-form.php:132
+msgid "Activation Link Required"
+msgstr ""
+
+#: templates/signup/activation-form.php:133
+msgid ""
+"To activate your account, you need to click the activation link that was "
+"sent to your email address."
+msgstr ""
+
+#: templates/signup/activation-form.php:134
+msgid "The activation link should look like this:"
+msgstr ""
+
+#: templates/signup/activation-form.php:138
+msgid ""
+"If you haven't received the activation email, you can request a new one "
+"below."
+msgstr ""
+
+#: templates/signup/activation-form.php:145
+msgid "Need Help?"
+msgstr ""
+
+#: templates/signup/activation-form.php:146
+msgid "If you haven't received your activation email, you can request a new one:"
+msgstr ""
+
+#: templates/signup/activation-form.php:162
+msgid "Resend Activation Email"
+msgstr ""
+
+#: templates/signup/activation-form.php:167
+msgid "Sending..."
+msgstr ""
+
+#: templates/signup/activation-form.php:194
+#: templates/signup/register-form.php:225
+msgid "Already have an account?"
+msgstr ""
+
+#: templates/signup/activation-form.php:196
+#: templates/signup/register-form.php:227
+msgid "Login here"
+msgstr ""
+
+#: templates/signup/register-form.php:28
+msgid "Create Your Account"
+msgstr ""
+
+#: templates/signup/register-form.php:29
+msgid "Join our learning community and start your journey today!"
+msgstr ""
+
+#: templates/signup/register-form.php:78
+msgid "Only letters, numbers, and underscores allowed"
+msgstr ""
+
+#: templates/signup/register-form.php:96
+msgid "We'll send an activation link to this email"
+msgstr ""
+
+#: templates/signup/register-form.php:110
+#: templates/signup/register-form.php:131
+msgid "Toggle password visibility"
+msgstr ""
+
+#: templates/signup/register-form.php:126
+msgid "Confirm Password"
+msgstr ""
+
+#: templates/signup/register-form.php:175
+msgid "I agree to the"
+msgstr ""
+
+#: templates/signup/register-form.php:182
+msgid "and"
+msgstr ""
+
+#: templates/signup/register-form.php:201
+msgid "Creating..."
+msgstr ""
+
+#: templates/signup/register-form.php:234
+msgid "Go to "
+msgstr ""
+
+#: templates/signup/signup-success.php:22 templates/signup/signup.php:33
+msgid "Registration Successful"
+msgstr ""
+
+#: templates/signup/signup-success.php:46
+msgid ""
+"Your account has been created successfully. We're excited to have you join "
+"our learning community!"
+msgstr ""
+
+#: templates/signup/signup-success.php:57
+msgid "Check Your Email"
+msgstr ""
+
+#: templates/signup/signup-success.php:58
+msgid ""
+"We've sent an activation link to your email address. Please check your "
+"inbox (and spam folder) and click the activation link to complete your "
+"signup."
+msgstr ""
+
+#: templates/signup/signup-success.php:73
+msgid ""
+"Once you activate your account, you'll be able to log in and start "
+"exploring our courses, connect with other learners, and begin your learning "
+"journey."
+msgstr ""
+
+#: templates/signup/signup-success.php:85
+msgid "Didn't receive the email?"
+msgstr ""
+
+#: templates/signup/signup-success.php:86
+msgid "No worries! Enter your email below and we'll send you a new activation link."
+msgstr ""
+
+#: templates/signup/signup-success.php:97
+msgid "Resend"
+msgstr ""
+
+#: templates/signup/signup.php:36
+msgid "Activate Your Account"
+msgstr ""
+
+#: templates/signup/signup.php:39
+msgid "Create an Account"
 msgstr ""
 
 #: templates/single-section.php:53

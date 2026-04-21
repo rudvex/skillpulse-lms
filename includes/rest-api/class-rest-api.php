@@ -98,7 +98,11 @@ class SkillPulse_LMS_Rest_API {
 			'includes/rest-api/features/enrollments/class-rest-enrollments-controller',
 			'includes/rest-api/features/signup/class-rest-signup-controller',
 
+			// REST API Notifications (Frontend).
+			'includes/rest-api/notifications/class-rest-notifications-controller',
+
 			'includes/rest-api/admin/class-rest-admin-overview-controller',
+			'includes/rest-api/admin/class-rest-admin-email-templates-controller',
 		);
 
 		foreach ( $files as $file ) {
@@ -388,9 +392,18 @@ class SkillPulse_LMS_Rest_API {
 		$controller = new SkillPulse_LMS_REST_Signup_Controller();
 		$controller->register_routes();
 
+		// Notifications (Frontend).
+		$controller = new SkillPulse_LMS_REST_Notifications_Controller();
+		$controller->register_routes();
+
 		$controller = new SkillPulse_LMS_Rest_Admin_Overview_Controller();
 		$controller->register_routes();
 
+		// Email Templates.
+		$controller = new SkillPulse_LMS_REST_Admin_Email_Templates_Controller();
+		$controller->register_routes();
+
+		// Notifications.
 
 	}
 }

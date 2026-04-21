@@ -182,6 +182,16 @@ class SkillPulse_LMS_Admin_Menus {
 			'splms-enrollments',
 			array( $this, 'enrollments_page' )
 		);
+		// Notification Management submenu.
+		add_submenu_page(
+			'skillpulse-lms',
+			__( 'Notifications', 'skillpulse-lms' ),
+			__( 'Notifications', 'skillpulse-lms' ),
+			'manage_options',
+			'splms-notifications',
+			array( $this, 'notifications_page' )
+		);
+
 		// Management/Settings separator.
 		add_submenu_page(
 			'skillpulse-lms',
