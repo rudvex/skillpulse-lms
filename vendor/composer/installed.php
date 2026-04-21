@@ -3,7 +3,7 @@
         'name' => 'skillpulse/lms',
         'pretty_version' => 'dev-develop',
         'version' => 'dev-develop',
-        'reference' => '3d9ed1e8044f6397a2fb1059456e8650a9ade446',
+        'reference' => 'dec7bc737ded7a0b710e2c779ead5b2756fbb151',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -67,7 +67,7 @@
         'skillpulse/lms' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => '3d9ed1e8044f6397a2fb1059456e8650a9ade446',
+            'reference' => 'dec7bc737ded7a0b710e2c779ead5b2756fbb151',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
