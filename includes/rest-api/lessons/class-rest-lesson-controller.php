@@ -455,7 +455,7 @@ class SkillPulse_LMS_REST_Lesson_Controller extends WP_REST_Controller {
 			'featured_media' => (int) get_post_thumbnail_id( $lesson_id ),
 			'excerpt'        => array(
 				'raw'      => $lesson->post_excerpt,
-				'rendered' => apply_filters( 'the_excerpt', $lesson->post_excerpt ),
+				'rendered' => apply_filters( 'the_excerpt', $lesson->post_excerpt ), // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Core filter.
 			),
 			'course_id'      => (int) $lesson->post_parent,
 		);
@@ -464,7 +464,7 @@ class SkillPulse_LMS_REST_Lesson_Controller extends WP_REST_Controller {
 		if ( $is_single_request ) {
 			$data['content'] = array(
 				'raw'      => $lesson->post_content,
-				'rendered' => apply_filters( 'the_content', $lesson->post_content ),
+				'rendered' => apply_filters( 'the_content', $lesson->post_content ), // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Core filter.
 			);
 			// Add block_version if function exists (WordPress core function).
 			if ( function_exists( 'block_version' ) ) {

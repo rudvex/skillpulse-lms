@@ -373,7 +373,7 @@ class SkillPulse_LMS_Admin_Columns {
 		} elseif ( 'public_paid' === $access_type ) {
 			$price = isset( $access_settings['course_price'] ) ? floatval( $access_settings['course_price'] ) : 0;
 			if ( $price > 0 ) {
-				$price_display = splms_format_price( $price );
+				$price_display = splms_get_price_format( $price );
 				echo '<span class="splms-badge splms-badge-price" aria-label="' . esc_attr( $price_display ) . '">' . esc_html( $price_display ) . '</span>';
 			} else {
 				echo '<span aria-label="' . esc_attr__( 'Price not set', 'skillpulse-lms' ) . '">—</span>';
@@ -548,7 +548,7 @@ class SkillPulse_LMS_Admin_Columns {
 		if ( isset( $pricing_info['is_free'] ) && $pricing_info['is_free'] ) {
 			echo '<span class="splms-badge splms-badge-free" aria-label="' . esc_attr__( 'Free', 'skillpulse-lms' ) . '">' . esc_html__( 'Free', 'skillpulse-lms' ) . '</span>';
 		} elseif ( isset( $pricing_info['price'] ) && $pricing_info['price'] > 0 ) {
-			$price_display = splms_format_price( $pricing_info['price'] );
+			$price_display = splms_get_price_format( $pricing_info['price'] );
 			echo '<span class="splms-badge splms-badge-price" aria-label="' . esc_attr( $price_display ) . '">' . esc_html( $price_display ) . '</span>';
 		} else {
 			echo '<span aria-label="' . esc_attr__( 'No price set', 'skillpulse-lms' ) . '">—</span>';

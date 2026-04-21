@@ -543,8 +543,8 @@ function splms_validate_course_pricing( $course_id ) {
 					'Course price (%1$s) is significantly higher than individual sections total (%2$s). This discourages users from buying the complete course. Consider setting the course price to match or be less than the sections total.',
 					'skillpulse-lms'
 				),
-				get_splms_price_format( $course_price ),
-				get_splms_price_format( $sections_total ),
+				splms_get_price_format( $course_price ),
+				splms_get_price_format( $sections_total ),
 				round( ( ( $course_price - $sections_total ) / $sections_total ) * 100 )
 			)
 		);

@@ -2875,9 +2875,7 @@ class SkillPulse_LMS_Quizzes {
 			return $wpdb->get_results( $query );
 		}
 
-		return $wpdb->get_results(
-			$wpdb->prepare( $query, ...$query_values ) // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter
-		);
+		return $wpdb->get_results( $wpdb->prepare( $query, ...$query_values ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $query built incrementally with %d placeholders then prepared.
 	}
 
 	/**

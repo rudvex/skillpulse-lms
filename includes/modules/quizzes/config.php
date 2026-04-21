@@ -14,26 +14,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Determine quiz ID for configuration loading.
-$quiz_id = 0;
+$splms_quiz_id = 0;
 
 // Method 1: Admin post edit context via GET parameter.
 if ( isset( $_GET['post'] ) && is_numeric( $_GET['post'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Configuration file for admin context, no data processing.
-	$current_post_id = intval( $_GET['post'] );  // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Configuration file for admin context, no data processing.
-	$quiz_post       = get_post( $current_post_id );
-	if ( $quiz_post && SPLMS_POST_TYPES['quiz'] === $quiz_post->post_type ) {
-		$quiz_id = $current_post_id;
+	$splms_current_post_id = intval( $_GET['post'] );  // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Configuration file for admin context, no data processing.
+	$splms_quiz_post       = get_post( $splms_current_post_id );
+	if ( $splms_quiz_post && SPLMS_POST_TYPES['quiz'] === $splms_quiz_post->post_type ) {
+		$splms_quiz_id = $splms_current_post_id;
 	}
 } elseif ( isset( $_REQUEST['item_id'] ) && is_numeric( $_REQUEST['item_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Configuration file for admin context, no data processing.
 	// Method 2: Dynamic config loading via item_id parameter.
 	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Configuration file for admin context, no data processing.
-	$item_id   = intval( $_REQUEST['item_id'] );
-	$quiz_post = get_post( $item_id );
-	if ( $quiz_post && SPLMS_POST_TYPES['quiz'] === $quiz_post->post_type ) {
-		$quiz_id = $item_id;
+	$splms_item_id   = intval( $_REQUEST['item_id'] );
+	$splms_quiz_post = get_post( $splms_item_id );
+	if ( $splms_quiz_post && SPLMS_POST_TYPES['quiz'] === $splms_quiz_post->post_type ) {
+		$splms_quiz_id = $splms_item_id;
 	}
 } elseif ( isset( $GLOBALS['post'] ) && SPLMS_POST_TYPES['quiz'] === $GLOBALS['post']->post_type ) {
 	// Method 3: Global post context.
-	$quiz_id = $GLOBALS['post']->ID;
+	$splms_quiz_id = $GLOBALS['post']->ID;
 }
 
 /**
@@ -41,20 +41,20 @@ if ( isset( $_GET['post'] ) && is_numeric( $_GET['post'] ) ) { // phpcs:ignore W
  * Handles both grouped and individual meta storage patterns.
  * Returns default value for new posts (quiz_id = 0).
  *
- * @param int    $quiz_id     Quiz post ID.
+ * @param int    $splms_quiz_id     Quiz post ID.
  * @param string $field_id    Meta field identifier.
  * @param string $group       Optional group name for grouped meta.
  * @param mixed  $default_val Default value to return if meta not found.
  * @return mixed Meta value or default value.
  */
-function splms_get_quiz_field_value( $quiz_id, $field_id, $group = '', $default_val = '' ) {
+function splms_get_quiz_field_value( $splms_quiz_id, $field_id, $group = '', $default_val = '' ) {
 	// For new posts or invalid quiz ID, return default.
-	if ( ! $quiz_id || $quiz_id <= 0 ) {
+	if ( ! $splms_quiz_id || $splms_quiz_id <= 0 ) {
 		return $default_val;
 	}
 
 	// Verify the post exists and is a quiz.
-	$post = get_post( $quiz_id );
+	$post = get_post( $splms_quiz_id );
 	if ( ! $post || SPLMS_POST_TYPES['quiz'] !== $post->post_type ) {
 		return $default_val;
 	}
@@ -62,7 +62,7 @@ function splms_get_quiz_field_value( $quiz_id, $field_id, $group = '', $default_
 	// Handle grouped meta storage.
 	if ( ! empty( $group ) ) {
 		$meta_key   = '_splms_' . $group;
-		$group_data = get_post_meta( $quiz_id, $meta_key, true );
+		$group_data = get_post_meta( $splms_quiz_id, $meta_key, true );
 
 		if ( is_array( $group_data ) && isset( $group_data[ $field_id ] ) ) {
 			return $group_data[ $field_id ];
@@ -70,7 +70,7 @@ function splms_get_quiz_field_value( $quiz_id, $field_id, $group = '', $default_
 	} else {
 		// Handle individual meta storage.
 		$meta_key = '_splms_' . $field_id;
-		$value    = get_post_meta( $quiz_id, $meta_key, true );
+		$value    = get_post_meta( $splms_quiz_id, $meta_key, true );
 
 		if ( '' !== $value ) {
 			return $value;
@@ -82,7 +82,7 @@ function splms_get_quiz_field_value( $quiz_id, $field_id, $group = '', $default_
 
 
 // FREE: Quiz Basic Settings.
-$quiz_basic_settings = array(
+$splms_quiz_basic_settings = array(
 	'id'     => 'basic_settings',
 	'title'  => __( 'Basic Settings', 'skillpulse-lms' ),
 	'icon'   => 'admin-settings',
@@ -93,7 +93,7 @@ $quiz_basic_settings = array(
 			'label'   => __( 'Quiz Type', 'skillpulse-lms' ),
 			'help'    => __( 'Choose the type of quiz assessment', 'skillpulse-lms' ),
 			'default' => 'graded',
-			'value'   => splms_get_quiz_field_value( $quiz_id, 'quiz_type', 'quiz_basic_settings', 'graded' ),
+			'value'   => splms_get_quiz_field_value( $splms_quiz_id, 'quiz_type', 'quiz_basic_settings', 'graded' ),
 			'column'  => 'half',
 			'icon'    => 'category',
 			'group'   => 'quiz_basic_settings',
@@ -130,7 +130,7 @@ $quiz_basic_settings = array(
 
 
 // FREE: Quiz Display Settings.
-$quiz_display_settings = array(
+$splms_quiz_display_settings = array(
 	'id'     => 'display_behavior',
 	'title'  => __( 'Display & Behavior', 'skillpulse-lms' ),
 	'icon'   => 'visibility',
@@ -202,7 +202,7 @@ $quiz_display_settings = array(
 
 
 // FREE: Quiz Feedback.
-$quiz_feedback_settings = array(
+$splms_quiz_feedback_settings = array(
 	'id'     => 'feedback_results',
 	'title'  => __( 'Feedback & Results', 'skillpulse-lms' ),
 	'icon'   => 'feedback',
@@ -256,8 +256,8 @@ $quiz_feedback_settings = array(
 // Build CLI removes Pro variables from this array for free version.
 return array(
 	'sections' => array(
-		$quiz_basic_settings,
-		$quiz_display_settings,
-		$quiz_feedback_settings,
+		$splms_quiz_basic_settings,
+		$splms_quiz_display_settings,
+		$splms_quiz_feedback_settings,
 	),
 );

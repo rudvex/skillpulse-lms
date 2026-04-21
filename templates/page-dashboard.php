@@ -146,7 +146,7 @@ do_action( 'splms_before_dashboard_content' );
 						$splms_template_name = 'dashboard/order-details';
 
 						// Prepare args for order details template.
-						$args = array(
+						$splms_args = array(
 							'splms_user_id'        => $splms_user->ID,
 							'splms_user_name'      => $splms_user_name,
 							'splms_user_email'     => $splms_email,
@@ -160,7 +160,7 @@ do_action( 'splms_before_dashboard_content' );
 						$splms_template_name = 'dashboard/' . $splms_tab_info[ $splms_current_tab ]['template'];
 
 						// Prepare args for tab template.
-						$args = array(
+						$splms_args = array(
 							'splms_user_id'        => $splms_user->ID,
 							'splms_user_name'      => $splms_user_name,
 							'splms_user_email'     => $splms_email,
@@ -171,7 +171,7 @@ do_action( 'splms_before_dashboard_content' );
 					}
 
 					echo '<div class="splms-dashboard-tab-content">';
-					splms_get_template( $splms_template_name . '.php', $args );
+					splms_get_template( $splms_template_name . '.php', $splms_args );
 					echo '</div>';
 					?>
 				<?php else : ?>

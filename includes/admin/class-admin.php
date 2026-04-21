@@ -360,7 +360,7 @@ class SkillPulse_LMS_Admin {
 				wp_kses_post( $validation->get_error_message() ),
 				esc_html__( 'Recommended Bundle Price', 'skillpulse-lms' ),
 				esc_html(
-					get_splms_price_format( $smart_price ) . ' ' . sprintf(
+					splms_get_price_format( $smart_price ) . ' ' . sprintf(
 					/* translators: %s: Discount percentage */
 						__( '(%s%% discount from sections total)', 'skillpulse-lms' ),
 						'15'

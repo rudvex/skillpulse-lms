@@ -145,10 +145,10 @@ class SkillPulse_LMS_Signup_Admin {
 	 * @since 1.0.0
 	 */
 	public function signups_admin() {
-		global $splms_signup_list_table, $userssearch; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Required for WP_Users_List_Table compatibility.
+		global $splms_signup_list_table, $userssearch; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Required for WP_Users_List_Table compatibility.
 
 		$request_s       = isset( $_REQUEST['s'] ) ? wp_unslash( $_REQUEST['s'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$userssearch     = sanitize_text_field( trim( $request_s ) );
+		$userssearch     = sanitize_text_field( trim( $request_s ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- WordPress core global for WP_Users_List_Table compatibility.
 		$plugin_page     = 'splms-signups';
 		$search_form_url = add_query_arg( 'page', $plugin_page, admin_url( 'users.php' ) );
 		$form_url        = add_query_arg( 'page', $plugin_page, admin_url( 'users.php' ) );

@@ -819,7 +819,7 @@ function splms_get_setting( $setting_name, $default_value = null ) {
  *
  * @return string Formatted price.
  */
-function get_splms_price_format( $price ) {
+function splms_get_price_format( $price ) {
 	$currency_position  = apply_filters( 'splms_currency_position', 'left' );
 	$decimal_separator  = apply_filters( 'splms_price_decimal_separator', '.' );
 	$thousand_separator = apply_filters( 'splms_price_thousand_separator', ',' );
@@ -834,19 +834,6 @@ function get_splms_price_format( $price ) {
 	}
 
 	return apply_filters( 'splms_formatted_price', $formatted_price, $price );
-}
-
-/**
- * Format price with currency symbol (alias for get_splms_price_format).
- *
- * @param float $price Price amount.
- *
- * @since 1.0.0
- *
- * @return string Formatted price.
- */
-function splms_format_price( $price ) {
-	return get_splms_price_format( $price );
 }
 
 /**
@@ -1033,7 +1020,7 @@ function splms_is_payment_configured() {
  *
  * @return bool
  */
-function is_purchase_page() {
+function splms_is_purchase_page() {
 	// Check if it's the purchase page by slug.
 	if ( is_page( 'purchase' ) ) {
 		return true;
@@ -1061,7 +1048,7 @@ function is_purchase_page() {
  *
  * @return bool True if certificate page, false otherwise.
  */
-function is_certificate_page() {
+function splms_is_certificate_page() {
 	$component = get_query_var( 'splms_component' );
 	return 'certificate' === $component;
 }
@@ -1442,10 +1429,10 @@ function splms_render_course_price( $access_info = array() ) {
 	$price_html = '';
 
 	if ( ! empty( $access_info['final_price'] ) && $access_info['final_price'] < $access_info['price'] ) {
-		$price_html  = '<span class="price-current">' . esc_html( get_splms_price_format( $access_info['final_price'] ) ) . '</span>';
-		$price_html .= '<span class="price-regular">' . esc_html( get_splms_price_format( $access_info['price'] ) ) . '</span>';
+		$price_html  = '<span class="price-current">' . esc_html( splms_get_price_format( $access_info['final_price'] ) ) . '</span>';
+		$price_html .= '<span class="price-regular">' . esc_html( splms_get_price_format( $access_info['price'] ) ) . '</span>';
 	} elseif ( $access_info['price'] > 0 ) {
-		$price_html = '<span class="price-current">' . esc_html( get_splms_price_format( $access_info['price'] ) ) . '</span>';
+		$price_html = '<span class="price-current">' . esc_html( splms_get_price_format( $access_info['price'] ) ) . '</span>';
 	} else {
 		$price_html = '<span class="price-free">' . __( 'Free', 'skillpulse-lms' ) . '</span>';
 	}

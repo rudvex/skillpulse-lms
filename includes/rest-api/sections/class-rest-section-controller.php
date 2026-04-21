@@ -633,7 +633,7 @@ class SkillPulse_LMS_REST_Section_Controller extends WP_REST_Controller {
 		if ( $is_single_request ) {
 			$data['content'] = array(
 				'raw'      => $section->post_content,
-				'rendered' => apply_filters( 'the_content', $section->post_content ),
+				'rendered' => apply_filters( 'the_content', $section->post_content ), // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Core filter.
 			);
 		}
 

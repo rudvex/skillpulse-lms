@@ -1,7 +1,7 @@
 === SkillPulse LMS ===
 Contributors: hardipparmar
 Donate link: https://skillpulselms.com/
-Tags: lms, learning management system, courses, lessons, quizzes, education, elearning
+Tags: lms, courses, elearning, education, quizzes
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.4

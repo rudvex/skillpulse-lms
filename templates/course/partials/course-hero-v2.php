@@ -355,7 +355,7 @@ $splms_in_wishlist        = in_array( $splms_course_id, $splms_user_wishlist, tr
 								</span>
 							<?php else : ?>
 								<span class="splms-hero-v2__price-badge splms-hero-v2__price-badge--paid">
-									<?php echo esc_html( get_splms_price_format( $splms_section['pricing']['effective_price'] ) ); ?>
+									<?php echo esc_html( splms_get_price_format( $splms_section['pricing']['effective_price'] ) ); ?>
 								</span>
 							<?php endif; ?>
 							<svg class="splms-hero-v2__arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -403,11 +403,11 @@ $splms_in_wishlist        = in_array( $splms_course_id, $splms_user_wishlist, tr
 				<?php elseif ( 'public_paid' === $splms_course_access_type && splms_is_paid_courses_enabled() ) : ?>
 					<div class="splms-hero-v2__bundle-price">
 						<span class="splms-hero-v2__bundle-price-current">
-							<?php echo esc_html( get_splms_price_format( $splms_full_price ) ); ?>
+							<?php echo esc_html( splms_get_price_format( $splms_full_price ) ); ?>
 						</span>
 						<?php if ( $splms_discount_percent > 0 ) : ?>
 							<span class="splms-hero-v2__bundle-price-original">
-								<?php echo esc_html( get_splms_price_format( $splms_original_price ) ); ?>
+								<?php echo esc_html( splms_get_price_format( $splms_original_price ) ); ?>
 							</span>
 						<?php endif; ?>
 					</div>
