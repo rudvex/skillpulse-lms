@@ -184,7 +184,7 @@ $splms_total_courses = $splms_instructor_courses->found_posts;
 														case 'paid':
 															// Only show paid prices if paid courses are enabled.
 															if ( splms_is_paid_courses_enabled() ) {
-																echo esc_html( get_splms_price_format( $splms_course_price['price'] ) );
+																echo esc_html( splms_get_price_format( $splms_course_price['price'] ) );
 															} else {
 																esc_html_e( 'Free', 'skillpulse-lms' );
 															}

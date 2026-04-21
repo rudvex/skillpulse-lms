@@ -514,7 +514,7 @@ $splms_is_enable_rating = splms_get_setting( 'enable_course_reviews', true );
 																</span>
 															<?php } else { ?>
 																<span class="splms-badge splms-badge--price">
-																	<?php echo esc_html( get_splms_price_format( $splms_section['pricing']['effective_price'] ) ); ?>
+																	<?php echo esc_html( splms_get_price_format( $splms_section['pricing']['effective_price'] ) ); ?>
 																</span>
 															<?php } ?>
 														<?php } ?>
@@ -560,7 +560,7 @@ $splms_is_enable_rating = splms_get_setting( 'enable_course_reviews', true );
 																	printf(
 																	/* translators: %s: Full course price. */
 																		esc_html__( 'Get all sections for %s', 'skillpulse-lms' ),
-																		'<strong>' . esc_html( get_splms_price_format( $splms_full_price ) ) . '</strong>'
+																		'<strong>' . esc_html( splms_get_price_format( $splms_full_price ) ) . '</strong>'
 																	);
 																	?>
 																</p>
@@ -571,7 +571,7 @@ $splms_is_enable_rating = splms_get_setting( 'enable_course_reviews', true );
 																			/* translators: 1: Discount percentage, 2: Savings amount. */
 																				esc_html__( '(%1$d%% OFF - Save %2$s)', 'skillpulse-lms' ),
 																				(int) $splms_discount_percent,
-																				esc_html( get_splms_price_format( $splms_savings ) )
+																				esc_html( splms_get_price_format( $splms_savings ) )
 																			);
 																			?>
 																	</p>

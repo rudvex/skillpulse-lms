@@ -112,7 +112,6 @@ if ( ! class_exists( 'SkillPulse_LMS' ) ) {
 		 * @return void
 		 */
 		protected function setup_actions() {
-			add_action( 'init', array( $this, 'load_textdomain' ) );
 			add_action( 'admin_init', array( $this, 'initialize_admin' ) );
 		}
 
@@ -124,17 +123,6 @@ if ( ! class_exists( 'SkillPulse_LMS' ) ) {
 		 * @return void
 		 */
 		protected function setup_filters() {
-		}
-
-		/**
-		 * Load the plugin text domain.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @return void
-		 */
-		public function load_textdomain() {
-			load_plugin_textdomain( 'skillpulse-lms', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 		}
 
 		/**

@@ -38,21 +38,21 @@ if ( ! defined( 'SKILLPULSE_LMS_ASSETS_URL' ) ) {
 }
 
 if ( ! defined( 'SPLMS_POST_TYPES' ) ) {
-	$sp_post_types = array(
+	$splms_post_types = array(
 		'course'      => 'sp-course',
 		'section'     => 'sp-section',
 		'lesson'      => 'sp-lesson',
 		'quiz'        => 'sp-quiz',
 		'certificate' => 'sp-certificate',
 	);
-	define( 'SPLMS_POST_TYPES', $sp_post_types );
+	define( 'SPLMS_POST_TYPES', $splms_post_types );
 }
 
 if ( ! defined( 'SPLMS_TAXONOMIES' ) ) {
-	$sp_taxonomies = array(
+	$splms_taxonomies = array(
 		'course_category' => 'sp-course-category',
 		'course_tag'      => 'sp-course-tag',
 	);
-	define( 'SPLMS_TAXONOMIES', $sp_taxonomies );
+	define( 'SPLMS_TAXONOMIES', $splms_taxonomies );
 }
 

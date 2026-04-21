@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkillPulse LMS v1.0.0\n"
 "Report-Msgid-Bugs-To: https://skillpulselms.com/contact\n"
-"POT-Creation-Date: 2026-04-21 09:45:01+00:00\n"
+"POT-Creation-Date: 2026-04-21 10:34:57+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -95,8 +95,8 @@ msgstr ""
 #: includes/admin/manager/class-admin-columns.php:299
 #: includes/admin/manager/class-admin-columns.php:372
 #: includes/admin/manager/class-admin-columns.php:549
-#: includes/functions.php:1432 includes/functions.php:1450
-#: includes/functions.php:1514 includes/functions.php:1517
+#: includes/functions.php:1419 includes/functions.php:1437
+#: includes/functions.php:1501 includes/functions.php:1504
 #: templates/course/course.php:187 templates/course/course.php:199
 #: templates/course/partials/course-enrollment-card.php:354
 #: templates/course/partials/course-enrollment-card.php:400
@@ -1426,78 +1426,78 @@ msgstr ""
 msgid "Complete All Lessons + Pass Quizzes (%d%% minimum)"
 msgstr ""
 
-#: includes/functions.php:1121
+#: includes/functions.php:1108
 #: templates/course/partials/pricing-comparison.php:230
 msgid "Already Enrolled"
 msgstr ""
 
-#: includes/functions.php:1131
+#: includes/functions.php:1118
 msgid "Course Full"
 msgstr ""
 
-#: includes/functions.php:1159 templates/course/partials/course-hero.php:884
+#: includes/functions.php:1146 templates/course/partials/course-hero.php:884
 msgid "Enrollment Closed"
 msgstr ""
 
-#: includes/functions.php:1164
+#: includes/functions.php:1151
 #. translators: 1: Start date, 2: End date.
 msgid "Enrollment opens %1$s and closes %2$s."
 msgstr ""
 
-#: includes/functions.php:1204 includes/functions.php:1417
+#: includes/functions.php:1191 includes/functions.php:1404
 msgid "Log In to Enroll"
 msgstr ""
 
-#: includes/functions.php:1261
+#: includes/functions.php:1248
 msgid "Enroll Now - Free"
 msgstr ""
 
-#: includes/functions.php:1266
+#: includes/functions.php:1253
 #: includes/modules/orders/class-order-status-manager.php:135
 #: templates/dashboard/courses.php:178 templates/single-section.php:447
 #: templates/single-section.php:498 templates/single-section.php:629
 msgid "Start Learning"
 msgstr ""
 
-#: includes/functions.php:1286 includes/functions.php:1290
+#: includes/functions.php:1273 includes/functions.php:1277
 #: templates/single-section.php:531
 msgid "Log In to Purchase"
 msgstr ""
 
-#: includes/functions.php:1289 includes/functions.php:1310
+#: includes/functions.php:1276 includes/functions.php:1297
 msgid "Payment system not configured"
 msgstr ""
 
-#: includes/functions.php:1297 includes/functions.php:1304
-#: includes/functions.php:1321 includes/functions.php:1352
-#: includes/functions.php:1387 includes/functions.php:1411
+#: includes/functions.php:1284 includes/functions.php:1291
+#: includes/functions.php:1308 includes/functions.php:1339
+#: includes/functions.php:1374 includes/functions.php:1398
 #: templates/course/partials/course-enrollment-card.php:453
 #: templates/course/partials/course-hero-v2.php:453
 msgid "Enroll Now"
 msgstr ""
 
-#: includes/functions.php:1311 includes/functions.php:1326
+#: includes/functions.php:1298 includes/functions.php:1313
 #: templates/shared/fullscreen-header.php:185
 msgid "Buy Now"
 msgstr ""
 
-#: includes/functions.php:1345
+#: includes/functions.php:1332
 msgid "Log In to Check Access"
 msgstr ""
 
-#: includes/functions.php:1356
+#: includes/functions.php:1343
 msgid "You are not invited to this course"
 msgstr ""
 
-#: includes/functions.php:1374
+#: includes/functions.php:1361
 msgid "Log In to Check Prerequisites"
 msgstr ""
 
-#: includes/functions.php:1394
+#: includes/functions.php:1381
 msgid "Complete Prerequisite"
 msgstr ""
 
-#: includes/functions.php:1469 includes/functions.php:1535
+#: includes/functions.php:1456 includes/functions.php:1522
 #: templates/course/course.php:206
 #: templates/course/partials/course-enrollment-card.php:417
 #: templates/course/partials/course-hero-v2.php:417
@@ -1505,46 +1505,46 @@ msgstr ""
 msgid "Invitation Only"
 msgstr ""
 
-#: includes/functions.php:1473 includes/functions.php:1558
+#: includes/functions.php:1460 includes/functions.php:1545
 #: templates/course/partials/course-enrollment-card.php:423
 #: templates/course/partials/course-hero-v2.php:423
 msgid "Prerequisite Required"
 msgstr ""
 
-#: includes/functions.php:1500 includes/functions.php:1575
+#: includes/functions.php:1487 includes/functions.php:1562
 msgid "Unknown"
 msgstr ""
 
-#: includes/functions.php:1501
+#: includes/functions.php:1488
 msgid "Unknown Course Type"
 msgstr ""
 
-#: includes/functions.php:1513
+#: includes/functions.php:1500
 msgid "Free Course"
 msgstr ""
 
-#: includes/functions.php:1524
+#: includes/functions.php:1511
 msgid "Paid Course"
 msgstr ""
 
-#: includes/functions.php:1536
+#: includes/functions.php:1523
 msgid "Invitation Required"
 msgstr ""
 
-#: includes/functions.php:1559
+#: includes/functions.php:1546
 msgid "Prerequisites Met - Ready to Enroll"
 msgstr ""
 
-#: includes/functions.php:1559
+#: includes/functions.php:1546
 msgid "Prerequisites Required"
 msgstr ""
 
-#: includes/functions.php:1631
+#: includes/functions.php:1618
 #. translators: %s: Formatted start date.
 msgid "Course content will be available starting %s."
 msgstr ""
 
-#: includes/functions.php:1784
+#: includes/functions.php:1771
 #: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1292
 #: templates/single-section.php:637
 msgid "Purchase"
@@ -5857,45 +5857,45 @@ msgstr ""
 msgid "Specific module to clear cache for"
 msgstr ""
 
-#: includes/rest-api/config/class-rest-config-controller.php:178
-#: includes/rest-api/config/class-rest-config-controller.php:224
+#: includes/rest-api/config/class-rest-config-controller.php:172
+#: includes/rest-api/config/class-rest-config-controller.php:215
 #. translators: %s: Module name
 msgid "Configuration module \"%s\" not found"
 msgstr ""
 
-#: includes/rest-api/config/class-rest-config-controller.php:239
+#: includes/rest-api/config/class-rest-config-controller.php:230
 #. translators: %1$s: Section name, %2$s: Module name
 msgid "Configuration section \"%1$s\" not found in module \"%2$s\""
 msgstr ""
 
-#: includes/rest-api/config/class-rest-config-controller.php:274
+#: includes/rest-api/config/class-rest-config-controller.php:265
 #. translators: %s: Module name
 msgid "Configuration cache cleared for module \"%s\""
 msgstr ""
 
-#: includes/rest-api/config/class-rest-config-controller.php:277
+#: includes/rest-api/config/class-rest-config-controller.php:268
 msgid "All configuration cache cleared"
 msgstr ""
 
-#: includes/rest-api/config/class-rest-config-controller.php:317
+#: includes/rest-api/config/class-rest-config-controller.php:308
 msgid "Sorry, you are not allowed to access configurations."
 msgstr ""
 
-#: includes/rest-api/config/class-rest-config-controller.php:361
+#: includes/rest-api/config/class-rest-config-controller.php:352
 msgid "Sorry, you are not allowed to clear configuration cache."
 msgstr ""
 
-#: includes/rest-api/config/class-rest-config-controller.php:379
+#: includes/rest-api/config/class-rest-config-controller.php:370
 msgid "Comma-separated list of modules to retrieve"
 msgstr ""
 
-#: includes/rest-api/config/class-rest-config-controller.php:384
-#: includes/rest-api/config/class-rest-config-controller.php:403
-#: includes/rest-api/config/class-rest-config-controller.php:428
+#: includes/rest-api/config/class-rest-config-controller.php:375
+#: includes/rest-api/config/class-rest-config-controller.php:394
+#: includes/rest-api/config/class-rest-config-controller.php:419
 msgid "Configuration context (admin, editor, frontend, api)"
 msgstr ""
 
-#: includes/rest-api/config/class-rest-config-controller.php:410
+#: includes/rest-api/config/class-rest-config-controller.php:401
 msgid "Post/Item ID for item-specific configuration values"
 msgstr ""
 

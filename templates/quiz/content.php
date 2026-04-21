@@ -376,7 +376,7 @@ if ( $splms_current_user_id ) {
 					<h2 class="splms-quiz-description-title"><?php esc_html_e( 'About This Quiz', 'skillpulse-lms' ); ?></h2>
 					<?php
 					if ( $splms_quiz_content ) {
-						echo apply_filters( 'the_content', $splms_quiz_content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						echo apply_filters( 'the_content', $splms_quiz_content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Core filter.
 					} elseif ( $splms_quiz_description ) {
 						echo wp_kses_post( wpautop( $splms_quiz_description ) );
 					}

@@ -155,7 +155,7 @@ class SkillPulse_LMS_Template {
 			$default_file = 'single-lesson.php';
 		} elseif ( is_singular( SPLMS_POST_TYPES['quiz'] ) ) {
 			$default_file = 'single-quiz.php';
-		} elseif ( is_certificate_page() ) {
+		} elseif ( splms_is_certificate_page() ) {
 			$default_file = 'certificate/preview.php';
 		} elseif ( is_tax( get_object_taxonomies( SPLMS_POST_TYPES['course'] ) ) ) {
 			if ( is_tax( SPLMS_TAXONOMIES['course_category'] ) ) {
@@ -172,6 +172,8 @@ class SkillPulse_LMS_Template {
 			$default_file = 'author.php';
 		} elseif ( $this->is_signup_page() ) {
 			$default_file = 'signup/signup.php';
+		} elseif ( splms_is_purchase_page() && is_user_logged_in() ) {
+			$default_file = 'purchase/purchase.php';
 		} else {
 			$default_file = '';
 		}

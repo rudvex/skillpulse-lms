@@ -119,9 +119,6 @@ class SkillPulse_LMS_Rest_Config_Controller extends WP_REST_Controller {
 	 * @return WP_REST_Response|WP_Error Response object.
 	 */
 	public function get_configs( $request ) {
-		// Ensure textdomain is loaded for REST API context before loading configs with translations.
-		$this->ensure_textdomain_loaded();
-
 		$modules       = $request->get_param( 'modules' );
 		$context_param = $request->get_param( 'context' );
 		$context       = ! empty( $context_param ) ? $context_param : 'admin';
@@ -162,9 +159,6 @@ class SkillPulse_LMS_Rest_Config_Controller extends WP_REST_Controller {
 	 * @return WP_REST_Response|WP_Error Response object.
 	 */
 	public function get_module_config( $request ) {
-		// Ensure textdomain is loaded for REST API context before loading configs with translations.
-		$this->ensure_textdomain_loaded();
-
 		$module        = $request->get_param( 'module' );
 		$context_param = $request->get_param( 'context' );
 		$context       = ! empty( $context_param ) ? $context_param : 'admin';
@@ -208,9 +202,6 @@ class SkillPulse_LMS_Rest_Config_Controller extends WP_REST_Controller {
 	 * @return WP_REST_Response|WP_Error Response object.
 	 */
 	public function get_section_config( $request ) {
-		// Ensure textdomain is loaded for REST API context before loading configs with translations.
-		$this->ensure_textdomain_loaded();
-
 		$module        = $request->get_param( 'module' );
 		$section       = $request->get_param( 'section' );
 		$context_param = $request->get_param( 'context' );
@@ -432,18 +423,5 @@ class SkillPulse_LMS_Rest_Config_Controller extends WP_REST_Controller {
 				'required'    => false,
 			),
 		);
-	}
-
-	/**
-	 * Ensure textdomain is loaded for REST API context.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return void
-	 */
-	private function ensure_textdomain_loaded() {
-		if ( ! is_textdomain_loaded( 'skillpulse-lms' ) ) {
-			load_plugin_textdomain( 'skillpulse-lms', false, dirname( plugin_basename( SKILLPULSE_LMS_DIR_PATH . 'skillpulse-lms.php' ) ) . '/languages' );
-		}
 	}
 }

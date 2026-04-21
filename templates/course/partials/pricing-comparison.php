@@ -122,7 +122,7 @@ if ( $splms_smart_course_price > 0 && $splms_smart_course_price !== $splms_origi
 									<?php esc_html_e( 'Access Free', 'skillpulse-lms' ); ?>
 								</a>
 							<?php else : ?>
-								<span class="price-current"><?php echo esc_html( get_splms_price_format( $splms_section['pricing']['effective_price'] ) ); ?></span>
+								<span class="price-current"><?php echo esc_html( splms_get_price_format( $splms_section['pricing']['effective_price'] ) ); ?></span>
 								<a href="<?php echo esc_url( get_permalink( $splms_section['id'] ) ); ?>" class="btn-section">
 									<?php esc_html_e( 'Buy Section', 'skillpulse-lms' ); ?>
 								</a>
@@ -141,7 +141,7 @@ if ( $splms_smart_course_price > 0 && $splms_smart_course_price !== $splms_origi
 				</div>
 				<div class="summary-row total-row">
 					<strong><?php esc_html_e( 'Total if all bought:', 'skillpulse-lms' ); ?></strong>
-					<strong><?php echo esc_html( get_splms_price_format( $splms_summary['total_price'] ) ); ?></strong>
+					<strong><?php echo esc_html( splms_get_price_format( $splms_summary['total_price'] ) ); ?></strong>
 				</div>
 				<div class="summary-note">
 					<?php esc_html_e( '⚠️ Individual sections do not include certificate', 'skillpulse-lms' ); ?>
@@ -194,12 +194,12 @@ if ( $splms_smart_course_price > 0 && $splms_smart_course_price !== $splms_origi
 				<div class="pricing-comparison-grid">
 					<div class="price-row">
 						<span class="price-label"><?php esc_html_e( 'Sections individually:', 'skillpulse-lms' ); ?></span>
-						<span class="price-value"><?php echo esc_html( get_splms_price_format( $splms_summary['total_price'] ) ); ?></span>
+						<span class="price-value"><?php echo esc_html( splms_get_price_format( $splms_summary['total_price'] ) ); ?></span>
 					</div>
 					<?php if ( $splms_has_course_discount ) : ?>
 						<div class="price-row">
 							<span class="price-label"><?php esc_html_e( 'Regular course:', 'skillpulse-lms' ); ?></span>
-							<span class="price-value strikethrough"><?php echo esc_html( get_splms_price_format( $splms_full_course_regular ) ); ?></span>
+							<span class="price-value strikethrough"><?php echo esc_html( splms_get_price_format( $splms_full_course_regular ) ); ?></span>
 						</div>
 					<?php endif; ?>
 				</div>
@@ -212,7 +212,7 @@ if ( $splms_smart_course_price > 0 && $splms_smart_course_price !== $splms_origi
 
 				<div class="final-price">
 					<span class="price-label"><?php esc_html_e( 'NOW:', 'skillpulse-lms' ); ?></span>
-					<span class="price-big"><?php echo esc_html( get_splms_price_format( $splms_full_course_price ) ); ?></span>
+					<span class="price-big"><?php echo esc_html( splms_get_price_format( $splms_full_course_price ) ); ?></span>
 				</div>
 
 				<?php
@@ -220,7 +220,7 @@ if ( $splms_smart_course_price > 0 && $splms_smart_course_price !== $splms_origi
 				if ( $splms_savings > 0 ) :
 					?>
 					<div class="savings-badge">
-						<?php esc_html_e( 'You save:', 'skillpulse-lms' ); ?> <?php echo esc_html( get_splms_price_format( $splms_savings ) ); ?>
+						<?php esc_html_e( 'You save:', 'skillpulse-lms' ); ?> <?php echo esc_html( splms_get_price_format( $splms_savings ) ); ?>
 					</div>
 				<?php endif; ?>
 			</div>
@@ -233,7 +233,7 @@ if ( $splms_smart_course_price > 0 && $splms_smart_course_price !== $splms_origi
 				<a href="<?php echo esc_url( splms_get_course_purchase_url( $splms_course_id, $splms_user_id, 'full_course' ) ); ?>" class="btn-enroll upgrade">
 					<?php esc_html_e( 'Upgrade to Full Course', 'skillpulse-lms' ); ?>
 					<span class="upgrade-credit">
-						(<?php echo esc_html( get_splms_price_format( $splms_upgrade_info['upgrade_price'] ) ); ?> <?php esc_html_e( 'after credit', 'skillpulse-lms' ); ?>)
+						(<?php echo esc_html( splms_get_price_format( $splms_upgrade_info['upgrade_price'] ) ); ?> <?php esc_html_e( 'after credit', 'skillpulse-lms' ); ?>)
 					</span>
 				</a>
 			<?php else : ?>

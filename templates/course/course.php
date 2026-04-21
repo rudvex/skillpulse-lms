@@ -190,10 +190,10 @@ do_action( 'splms_before_single_course_card', $splms_course_id );
 								// Only show paid prices if paid courses are enabled.
 								if ( splms_is_paid_courses_enabled() ) {
 									if ( $splms_access_info['final_price'] && $splms_access_info['final_price'] < $splms_access_info['price'] ) {
-										echo '<span class="price-sale">' . esc_html( get_splms_price_format( $splms_access_info['final_price'] ) ) . '</span>';
-										echo '<span class="price-regular">' . esc_html( get_splms_price_format( $splms_access_info['price'] ) ) . '</span>';
+										echo '<span class="price-sale">' . esc_html( splms_get_price_format( $splms_access_info['final_price'] ) ) . '</span>';
+										echo '<span class="price-regular">' . esc_html( splms_get_price_format( $splms_access_info['price'] ) ) . '</span>';
 									} else {
-										echo '<span class="price-current">' . esc_html( get_splms_price_format( $splms_access_info['price'] ) ) . '</span>';
+										echo '<span class="price-current">' . esc_html( splms_get_price_format( $splms_access_info['price'] ) ) . '</span>';
 									}
 								} else {
 									echo '<span class="price-free">' . esc_html__( 'Free', 'skillpulse-lms' ) . '</span>';

@@ -16,16 +16,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Include WordPress admin files.
 if ( ! class_exists( 'WP_List_Table' ) ) {
-	$wp_list_table_file = ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
-	if ( file_exists( $wp_list_table_file ) ) {
-		require_once $wp_list_table_file;
+	$splms_wp_list_table_file = ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
+	if ( file_exists( $splms_wp_list_table_file ) ) {
+		require_once $splms_wp_list_table_file;
 	}
 }
 
 if ( ! class_exists( 'WP_Users_List_Table' ) ) {
-	$wp_users_list_table_file = ABSPATH . 'wp-admin/includes/class-wp-users-list-table.php';
-	if ( file_exists( $wp_users_list_table_file ) ) {
-		require_once $wp_users_list_table_file;
+	$splms_wp_users_list_table_file = ABSPATH . 'wp-admin/includes/class-wp-users-list-table.php';
+	if ( file_exists( $splms_wp_users_list_table_file ) ) {
+		require_once $splms_wp_users_list_table_file;
 	}
 }
 
@@ -186,7 +186,7 @@ class SkillPulse_LMS_Signup_List_Table extends WP_Users_List_Table {
 				 * @param string $column_name The name of the column to display.
 				 * @param object $signup_object The signup object.
 				 */
-				do_action( 'manage_splms_signups_custom_column', $column_name, $signup_object );
+				do_action( 'splms_manage_signups_custom_column', $column_name, $signup_object );
 		}
 	}
 
@@ -400,10 +400,10 @@ class SkillPulse_LMS_Signup_List_Table extends WP_Users_List_Table {
 	public function prepare_items() {
 		$this->process_bulk_action();
 
-		global $usersearch;
+		global $usersearch; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- WordPress core global for WP_Users_List_Table compatibility.
 
 		$request_s = isset( $_REQUEST['s'] ) ? wp_unslash( $_REQUEST['s'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		// phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Required for WP_Users_List_Table compatibility.
+		// phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Required for WP_Users_List_Table compatibility.
 		$usersearch       = sanitize_text_field( $request_s );
 		$signups_per_page = $this->get_items_per_page( str_replace( '-', '_', "{$this->screen->id}_per_page" ) );
 		$paged            = $this->get_pagenum();

@@ -14,28 +14,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Get current course ID - Priority: API item_id parameter > $_GET['post'] > $GLOBALS['post'].
-$course_id = 0;
+$splms_course_id = 0;
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Configuration file for admin context, no data processing.
 if ( isset( $_REQUEST['item_id'] ) && is_numeric( $_REQUEST['item_id'] ) ) {
 	// API parameter takes highest priority - verify it's a course.
 	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Configuration file for admin context, no data processing.
-	$item_id     = intval( $_REQUEST['item_id'] );
-	$course_post = get_post( $item_id );
-	if ( $course_post && SPLMS_POST_TYPES['course'] === $course_post->post_type ) {
-		$course_id = $item_id;
+	$splms_item_id     = intval( $_REQUEST['item_id'] );
+	$splms_course_post = get_post( $splms_item_id );
+	if ( $splms_course_post && SPLMS_POST_TYPES['course'] === $splms_course_post->post_type ) {
+		$splms_course_id = $splms_item_id;
 	}
 	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Configuration file for admin context, no data processing.
 } elseif ( isset( $_GET['post'] ) && is_numeric( $_GET['post'] ) ) {
 	// WordPress admin edit post context.
 	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Configuration file for admin context, no data processing.
-	$current_post_id = intval( $_GET['post'] );
-	$course_post     = get_post( $current_post_id );
-	if ( $course_post && SPLMS_POST_TYPES['course'] === $course_post->post_type ) {
-		$course_id = $current_post_id;
+	$splms_current_post_id = intval( $_GET['post'] );
+	$splms_course_post     = get_post( $splms_current_post_id );
+	if ( $splms_course_post && SPLMS_POST_TYPES['course'] === $splms_course_post->post_type ) {
+		$splms_course_id = $splms_current_post_id;
 	}
 } elseif ( isset( $GLOBALS['post'] ) && SPLMS_POST_TYPES['course'] === $GLOBALS['post']->post_type ) {
 	// Global post context.
-	$course_id = $GLOBALS['post']->ID;
+	$splms_course_id = $GLOBALS['post']->ID;
 }
 
 /**
@@ -43,20 +43,20 @@ if ( isset( $_REQUEST['item_id'] ) && is_numeric( $_REQUEST['item_id'] ) ) {
  * Handles both grouped and individual meta storage patterns.
  * Returns default value for new posts (course_id = 0).
  *
- * @param int    $course_id   Course post ID.
+ * @param int    $splms_course_id   Course post ID.
  * @param string $field_id    Meta field identifier.
  * @param string $group       Optional group name for grouped meta.
  * @param mixed  $default_val Default value to return if meta not found.
  * @return mixed Meta value or default value.
  */
-function splms_get_course_field_value( $course_id, $field_id, $group = '', $default_val = '' ) {
+function splms_get_course_field_value( $splms_course_id, $field_id, $group = '', $default_val = '' ) {
 	// For new posts or invalid course ID, return default.
-	if ( ! $course_id || $course_id <= 0 ) {
+	if ( ! $splms_course_id || $splms_course_id <= 0 ) {
 		return $default_val;
 	}
 
 	// Verify the post exists and is a course.
-	$post = get_post( $course_id );
+	$post = get_post( $splms_course_id );
 	if ( ! $post || SPLMS_POST_TYPES['course'] !== $post->post_type ) {
 		return $default_val;
 	}
@@ -64,7 +64,7 @@ function splms_get_course_field_value( $course_id, $field_id, $group = '', $defa
 	// Handle grouped meta storage.
 	if ( ! empty( $group ) ) {
 		$meta_key   = '_splms_' . $group;
-		$group_data = get_post_meta( $course_id, $meta_key, true );
+		$group_data = get_post_meta( $splms_course_id, $meta_key, true );
 
 		if ( is_array( $group_data ) && isset( $group_data[ $field_id ] ) ) {
 			return $group_data[ $field_id ];
@@ -72,7 +72,7 @@ function splms_get_course_field_value( $course_id, $field_id, $group = '', $defa
 	} else {
 		// Handle individual meta storage.
 		$meta_key = '_splms_' . $field_id;
-		$value    = get_post_meta( $course_id, $meta_key, true );
+		$value    = get_post_meta( $splms_course_id, $meta_key, true );
 
 		if ( '' !== $value ) {
 			return $value;
@@ -84,7 +84,7 @@ function splms_get_course_field_value( $course_id, $field_id, $group = '', $defa
 
 
 // FREE: Course Access.
-$course_access = array(
+$splms_course_access = array(
 	'id'          => 'course_access',
 	'title'       => __( 'Course Access', 'skillpulse-lms' ),
 	'icon'        => 'unlock',
@@ -96,7 +96,7 @@ $course_access = array(
 			'label'   => __( 'Course Access Type', 'skillpulse-lms' ),
 			'help'    => __( 'Define how students can discover and enroll in this course.', 'skillpulse-lms' ),
 			'default' => 'public_free',
-			'value'   => splms_get_course_field_value( $course_id, 'course_access_type', 'course_access_settings', 'public_free' ),
+			'value'   => splms_get_course_field_value( $splms_course_id, 'course_access_type', 'course_access_settings', 'public_free' ),
 			'column'  => 'full',
 			'icon'    => 'admin-settings',
 			'group'   => 'course_access_settings',
@@ -114,7 +114,7 @@ $course_access = array(
 
 
 // FREE: Course Details.
-$course_details = array(
+$splms_course_details = array(
 	'id'          => 'course_details',
 	'title'       => __( 'Course Details', 'skillpulse-lms' ),
 	'icon'        => 'book-alt',
@@ -126,7 +126,7 @@ $course_details = array(
 			'label'   => __( 'Primary Learning Method', 'skillpulse-lms' ),
 			'help'    => __( 'Select the main type of learning materials used.', 'skillpulse-lms' ),
 			'default' => 'text',
-			'value'   => splms_get_course_field_value( $course_id, 'learning_method', 'course_content_settings', 'text' ),
+			'value'   => splms_get_course_field_value( $splms_course_id, 'learning_method', 'course_content_settings', 'text' ),
 			'column'  => 'half',
 			'icon'    => 'text-page',
 			'group'   => 'course_content_settings',
@@ -155,7 +155,7 @@ $course_details = array(
 			'label'   => __( 'Difficulty Level', 'skillpulse-lms' ),
 			'help'    => __( 'Set the difficulty level to help students choose appropriately.', 'skillpulse-lms' ),
 			'default' => 'all',
-			'value'   => splms_get_course_field_value( $course_id, 'difficulty_level', 'course_content_settings', 'all' ),
+			'value'   => splms_get_course_field_value( $splms_course_id, 'difficulty_level', 'course_content_settings', 'all' ),
 			'column'  => 'half',
 			'icon'    => 'star-filled',
 			'group'   => 'course_content_settings',
@@ -192,7 +192,7 @@ $course_details = array(
 			'label'   => __( 'Course Duration', 'skillpulse-lms' ),
 			'help'    => __( 'Total time to complete the course.', 'skillpulse-lms' ),
 			'default' => 4,
-			'value'   => splms_get_course_field_value( $course_id, 'course_duration_value', 'course_content_settings', 4 ),
+			'value'   => splms_get_course_field_value( $splms_course_id, 'course_duration_value', 'course_content_settings', 4 ),
 			'column'  => 'half',
 			'group'   => 'course_content_settings',
 		),
@@ -202,7 +202,7 @@ $course_details = array(
 			'label'   => __( 'Duration Unit', 'skillpulse-lms' ),
 			'help'    => __( 'Select the unit of time for the course duration.', 'skillpulse-lms' ),
 			'default' => 'weeks',
-			'value'   => splms_get_course_field_value( $course_id, 'course_duration_unit', 'course_content_settings', 'weeks' ),
+			'value'   => splms_get_course_field_value( $splms_course_id, 'course_duration_unit', 'course_content_settings', 'weeks' ),
 			'column'  => 'half',
 			'group'   => 'course_content_settings',
 			'options' => array(
@@ -230,7 +230,7 @@ $course_details = array(
 			'label'   => __( 'Course Language', 'skillpulse-lms' ),
 			'help'    => __( 'Primary language used in course content.', 'skillpulse-lms' ),
 			'default' => 'en',
-			'value'   => splms_get_course_field_value( $course_id, 'course_language', 'course_content_settings', 'en' ),
+			'value'   => splms_get_course_field_value( $splms_course_id, 'course_language', 'course_content_settings', 'en' ),
 			'column'  => 'half',
 			'icon'    => 'language',
 			'group'   => 'course_content_settings',
@@ -275,7 +275,7 @@ $course_details = array(
 			'label'       => __( 'Certificate of Completion', 'skillpulse-lms' ),
 			'help'        => __( 'Award a certificate when students complete the course.', 'skillpulse-lms' ),
 			'default'     => true,
-			'value'       => splms_get_course_field_value( $course_id, 'certificate_enabled', 'course_completion_settings', true ),
+			'value'       => splms_get_course_field_value( $splms_course_id, 'certificate_enabled', 'course_completion_settings', true ),
 			'column'      => 'half',
 			'icon'        => 'awards',
 			'group'       => 'course_completion_settings',
@@ -295,7 +295,7 @@ $course_details = array(
 			'label'       => __( 'Certificate Template', 'skillpulse-lms' ),
 			'help'        => __( 'Choose which certificate template to award. The default certificate (marked in certificate settings) will be automatically selected if none is chosen.', 'skillpulse-lms' ),
 			'default'     => '',
-			'value'       => splms_get_course_field_value( $course_id, 'certificate_template_id', 'course_completion_settings', '' ),
+			'value'       => splms_get_course_field_value( $splms_course_id, 'certificate_template_id', 'course_completion_settings', '' ),
 			'column'      => 'half',
 			'icon'        => 'admin-customizer',
 			'group'       => 'course_completion_settings',
@@ -332,7 +332,7 @@ $course_details = array(
 );
 
 // FREE: Prerequisites & Learning Outcomes.
-$prerequisites_outcomes = array(
+$splms_prerequisites_outcomes = array(
 	'id'          => 'prerequisites_outcomes',
 	'title'       => __( 'Prerequisites & Learning Outcomes', 'skillpulse-lms' ),
 	'icon'        => 'clipboard',
@@ -344,7 +344,7 @@ $prerequisites_outcomes = array(
 			'label'       => __( 'Prerequisites & Requirements', 'skillpulse-lms' ),
 			'help'        => __( 'Describe general skills or knowledge students need. Note: For course-specific prerequisites, use Course Access Type setting instead.', 'skillpulse-lms' ),
 			'placeholder' => __( 'e.g., Basic computer skills, high school math, familiarity with email, etc.', 'skillpulse-lms' ),
-			'value'       => splms_get_course_field_value( $course_id, 'prerequisites_description', '', '' ),
+			'value'       => splms_get_course_field_value( $splms_course_id, 'prerequisites_description', '', '' ),
 			'column'      => 'full',
 			'icon'        => 'clipboard',
 		),
@@ -354,7 +354,7 @@ $prerequisites_outcomes = array(
 			'label'       => __( 'Learning Outcomes', 'skillpulse-lms' ),
 			'help'        => __( 'List what students will be able to do after completing this course.', 'skillpulse-lms' ),
 			'placeholder' => __( 'After completing this course, students will be able to:\n• Outcome 1\n• Outcome 2\n• Outcome 3', 'skillpulse-lms' ),
-			'value'       => splms_get_course_field_value( $course_id, 'learning_outcomes', '', '' ),
+			'value'       => splms_get_course_field_value( $splms_course_id, 'learning_outcomes', '', '' ),
 			'column'      => 'full',
 			'icon'        => 'clipboard',
 		),
@@ -362,7 +362,7 @@ $prerequisites_outcomes = array(
 );
 
 // FREE: Completion & Assessment.
-$completion_settings = array(
+$splms_completion_settings = array(
 	'id'          => 'completion_settings',
 	'title'       => __( 'Completion & Assessment', 'skillpulse-lms' ),
 	'icon'        => 'awards',
@@ -374,7 +374,7 @@ $completion_settings = array(
 			'label'   => __( 'Course Completion Criteria', 'skillpulse-lms' ),
 			'help'    => __( 'What students must do to complete the course.', 'skillpulse-lms' ),
 			'default' => 'all_lessons',
-			'value'   => splms_get_course_field_value( $course_id, 'completion_criteria', 'course_completion_settings', 'all_lessons' ),
+			'value'   => splms_get_course_field_value( $splms_course_id, 'completion_criteria', 'course_completion_settings', 'all_lessons' ),
 			'column'  => 'full',
 			'icon'    => 'awards',
 			'group'   => 'course_completion_settings',
@@ -395,7 +395,7 @@ $completion_settings = array(
 			'label'       => __( 'Minimum Passing Score (%)', 'skillpulse-lms' ),
 			'help'        => __( 'Minimum percentage score required to pass quizzes.', 'skillpulse-lms' ),
 			'default'     => 70,
-			'value'       => splms_get_course_field_value( $course_id, 'passing_grade', 'course_completion_settings', 70 ),
+			'value'       => splms_get_course_field_value( $splms_course_id, 'passing_grade', 'course_completion_settings', 70 ),
 			'column'      => 'full',
 			'icon'        => 'awards',
 			'group'       => 'course_completion_settings',
@@ -412,10 +412,10 @@ $completion_settings = array(
 // Build CLI removes Pro variables from this array for free version.
 return array(
 	'sections' => array(
-		$course_access,
-		$course_details,
-		$prerequisites_outcomes,
-		$completion_settings,
+		$splms_course_access,
+		$splms_course_details,
+		$splms_prerequisites_outcomes,
+		$splms_completion_settings,
 	),
 	'metadata' => array(
 		'version'      => '1.0.0',

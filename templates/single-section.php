@@ -472,7 +472,7 @@ get_header(); ?>
 											</div>
 											<?php if ( $splms_section_pricing['is_on_sale'] ) : ?>
 												<div class="price-original">
-													<span><?php echo esc_html( splms_format_price( $splms_section_pricing['price'] ) ); ?></span>
+													<span><?php echo esc_html( splms_get_price_format( $splms_section_pricing['price'] ) ); ?></span>
 													<span class="sale-badge"><?php esc_html_e( 'Sale', 'skillpulse-lms' ); ?></span>
 												</div>
 											<?php endif; ?>
