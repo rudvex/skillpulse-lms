@@ -641,9 +641,9 @@ class SkillPulse_LMS_Course_Frontend {
 		$tags_enabled       = splms_get_setting( 'course_tags_enabled', true );
 
 		// Set base archive classes based on context.
-		$archive_classes = array( 'splms-archive' );
+		$splms_archive_classes = array( 'splms-archive' );
 		if ( 'archive' !== $context ) {
-			$archive_classes[] = 'splms-taxonomy-archive';
+			$splms_archive_classes[] = 'splms-taxonomy-archive';
 		}
 
 		// Get categories based on context.
@@ -691,11 +691,11 @@ class SkillPulse_LMS_Course_Frontend {
 		++$control_count; // Layout-switcher always present.
 
 		if ( $control_count <= 1 ) {
-			$archive_classes[] = 'minimal-controls';
+			$splms_archive_classes[] = 'minimal-controls';
 		}
 
 		if ( ! $has_sidebar_filters ) {
-			$archive_classes[] = 'no-sidebar';
+			$splms_archive_classes[] = 'no-sidebar';
 		} else {
 			$filter_count = 0;
 			if ( $categories_enabled && ! empty( $categories ) && ! is_wp_error( $categories ) ) {
@@ -706,20 +706,20 @@ class SkillPulse_LMS_Course_Frontend {
 			}
 
 			if ( 1 === $filter_count ) {
-				$archive_classes[] = 'single-filter-sidebar';
+				$splms_archive_classes[] = 'single-filter-sidebar';
 			} elseif ( $filter_count <= 2 ) {
-				$archive_classes[] = 'minimal-sidebar';
+				$splms_archive_classes[] = 'minimal-sidebar';
 			}
 		}
 
 		return array(
-			'archive_classes'     => $archive_classes,
-			'categories'          => $categories,
-			'tags'                => $tags,
-			'has_sidebar_filters' => $has_sidebar_filters,
-			'search_enabled'      => $search_enabled,
-			'categories_enabled'  => $categories_enabled,
-			'tags_enabled'        => $tags_enabled,
+			'splms_archive_classes'     => $splms_archive_classes,
+			'splms_categories'          => $categories,
+			'splms_tags'                => $tags,
+			'splms_has_sidebar_filters' => $has_sidebar_filters,
+			'splms_search_enabled'      => $search_enabled,
+			'splms_categories_enabled'  => $categories_enabled,
+			'splms_tags_enabled'        => $tags_enabled,
 		);
 	}
 }

@@ -300,7 +300,7 @@ class SkillPulse_LMS_Lessons {
 	public function get_lesson_attachments( $lesson_id ) {
 		$settings = $this->get_lesson_settings( $lesson_id );
 
-		return $settings['lesson_attachments'];
+		return isset( $settings['lesson_attachments'] ) ? $settings['lesson_attachments'] : array();
 	}
 
 	/**
@@ -315,7 +315,7 @@ class SkillPulse_LMS_Lessons {
 	public function get_lesson_drip_settings( $lesson_id ) {
 		$settings = $this->get_lesson_settings( $lesson_id );
 
-		return $settings['lesson_drip_settings'];
+		return isset( $settings['lesson_drip_settings'] ) ? $settings['lesson_drip_settings'] : array();
 	}
 
 	/**

@@ -24,15 +24,6 @@ $splms_current_user_obj  = wp_get_current_user();
 $splms_profile_picture   = SkillPulse_LMS_Profile::get_instance()->get_profile_picture_url( $splms_current_user_obj->ID, 150 );
 $splms_has_custom_avatar = SkillPulse_LMS_Profile::get_instance()->has_profile_picture( $splms_current_user_obj->ID );
 
-// Get notification preferences.
-$splms_notification_prefs = SkillPulse_LMS_Notification_Preferences::get_instance()->get_user_preferences( $splms_current_user_obj->ID );
-$splms_prefs_instance     = SkillPulse_LMS_Notification_Preferences::get_instance();
-
-// Check if notification types are enabled globally.
-$splms_email_enabled          = function_exists( 'splms_is_email_notifications_enabled' ) && splms_is_email_notifications_enabled();
-$splms_in_app_enabled         = function_exists( 'splms_is_in_app_notifications_enabled' ) && splms_is_in_app_notifications_enabled();
-$splms_show_notifications_tab = $splms_email_enabled || $splms_in_app_enabled;
-
 // Get dashboard instance and current settings tab.
 $splms_dashboard    = SkillPulse_LMS_Dashboard::get_instance();
 $splms_settings_tab = $splms_dashboard->get_current_settings_tab();
@@ -58,12 +49,10 @@ $splms_settings_tab = $splms_dashboard->get_current_settings_tab();
 				<i class="hgi-stroke hgi-lock-password"></i>
 				<?php esc_html_e( 'Password', 'skillpulse-lms' ); ?>
 			</a>
-			<?php if ( $splms_show_notifications_tab ) { ?>
-			<a href="<?php echo esc_url( $splms_dashboard->get_settings_tab_url( 'notifications' ) ); ?>" class="splms-settings-tab-btn <?php echo 'notifications' === $splms_settings_tab ? 'is-active' : ''; ?>">
-				<i class="hgi-stroke hgi-notification-03"></i>
-				<?php esc_html_e( 'Notifications', 'skillpulse-lms' ); ?>
-			</a>
-			<?php } ?>
+			<?php
+			// Allow modules to add settings tab navigation items.
+			do_action( 'splms_settings_tabs_nav', $splms_dashboard, $splms_settings_tab );
+			?>
 		</div>
 	</div>
 
@@ -244,149 +233,10 @@ $splms_settings_tab = $splms_dashboard->get_current_settings_tab();
 			</div>
 		</div>
 
-		<!-- Notifications Tab -->
-		<?php if ( $splms_show_notifications_tab ) { ?>
-		<div class="splms-settings-tab-panel <?php echo 'notifications' === $splms_settings_tab ? 'is-active' : ''; ?>" data-settings-tab="notifications">
-
-			<div class="splms-settings-card">
-				<div class="splms-card-header">
-					<h3>
-						<i class="hgi-stroke hgi-notification-03"></i>
-						<?php esc_html_e( 'Notification Preferences', 'skillpulse-lms' ); ?>
-					</h3>
-					<p class="splms-card-description"><?php esc_html_e( 'Manage how you receive notifications for different events', 'skillpulse-lms' ); ?></p>
-				</div>
-				<div class="splms-card-body">
-					<form id="splms-notification-preferences-form" class="splms-settings-form">
-
-
-						<!-- Master Toggles Section -->
-						<div class="splms-form-section">
-							<h4>
-								<i class="hgi-stroke hgi-settings-02"></i>
-								<?php esc_html_e( 'Notification Controls', 'skillpulse-lms' ); ?>
-							</h4>
-							<p class="splms-form-help"><?php esc_html_e( 'Master controls for all notification types', 'skillpulse-lms' ); ?></p>
-
-							<div class="splms-notification-master-toggles">
-								<?php if ( $splms_email_enabled ) { ?>
-								<div class="splms-master-toggle">
-									<label class="splms-checkbox-label" for="all_email_notifications">
-										<input type="checkbox" id="all_email_notifications" name="email_enabled" value="1" <?php checked( $splms_notification_prefs['email_enabled'], true ); ?>>
-										<span class="splms-checkbox-mark"></span>
-										<span class="splms-master-toggle-label">
-											<i class="hgi-stroke hgi-mail-01"></i>
-											<span class="splms-toggle-text">
-												<strong><?php esc_html_e( 'All Email Notifications', 'skillpulse-lms' ); ?></strong>
-												<small><?php esc_html_e( 'Enable/disable all email notifications at once', 'skillpulse-lms' ); ?></small>
-											</span>
-										</span>
-									</label>
-								</div>
-								<?php } ?>
-
-								<?php if ( function_exists( 'splms_is_in_app_notifications_enabled' ) && splms_is_in_app_notifications_enabled() ) { ?>
-								<div class="splms-master-toggle">
-									<label class="splms-checkbox-label" for="all_in_app_notifications">
-										<input type="checkbox" id="all_in_app_notifications" name="in_app_enabled" value="1" <?php checked( $splms_notification_prefs['in_app_enabled'], true ); ?>>
-										<span class="splms-checkbox-mark"></span>
-										<span class="splms-master-toggle-label">
-											<i class="hgi-stroke hgi-notification-03"></i>
-											<span class="splms-toggle-text">
-												<strong><?php esc_html_e( 'All In-App Notifications', 'skillpulse-lms' ); ?></strong>
-												<small><?php esc_html_e( 'Enable/disable all in-app notifications at once', 'skillpulse-lms' ); ?></small>
-											</span>
-										</span>
-									</label>
-								</div>
-								<?php } ?>
-							</div>
-						</div>
-
-						<!-- Event Notifications Section -->
-						<div class="splms-form-section">
-							<h4>
-								<i class="hgi-stroke hgi-bell-01"></i>
-								<?php esc_html_e( 'Event Notifications', 'skillpulse-lms' ); ?>
-							</h4>
-							<p class="splms-form-help"><?php esc_html_e( 'Choose which events you want to be notified about', 'skillpulse-lms' ); ?></p>
-
-							<div class="splms-notification-events-grid">
-								<?php
-								$splms_event_keys = array(
-									'course_enrollment',
-									'enrollment_reminder',
-									'course_completion',
-									'lesson_completion',
-									'quiz_completion',
-									'certificate_generated',
-									'certificate_awarded',
-									'signup_created',
-									'signup_activated',
-									'review_reply',
-									'review_new',
-									'review_moderation',
-									'review_moderation_result',
-									'order_completed',
-									'order_refunded',
-									'order_cancelled',
-								);
-
-								foreach ( $splms_event_keys as $splms_event_key ) :
-									$splms_event_prefs = isset( $splms_notification_prefs[ $splms_event_key ] ) ? $splms_notification_prefs[ $splms_event_key ] : array(
-										'email'  => true,
-										'in_app' => true,
-									);
-									?>
-									<div class="splms-notification-event-card">
-										<div class="splms-event-header">
-											<h5><?php echo esc_html( $splms_prefs_instance->get_event_display_name( $splms_event_key ) ); ?></h5>
-											<?php if ( $splms_prefs_instance->get_event_description( $splms_event_key ) ) : ?>
-												<p class="splms-event-description"><?php echo esc_html( $splms_prefs_instance->get_event_description( $splms_event_key ) ); ?></p>
-											<?php endif; ?>
-										</div>
-										<div class="splms-event-options">
-											<?php if ( $splms_email_enabled ) { ?>
-											<div class="splms-checkbox-option">
-												<label class="splms-checkbox-label" for="event_<?php echo esc_attr( $splms_event_key ); ?>_email">
-													<input type="checkbox" id="event_<?php echo esc_attr( $splms_event_key ); ?>_email" name="events[<?php echo esc_attr( $splms_event_key ); ?>][email]" value="1" <?php checked( $splms_event_prefs['email'], true ); ?>>
-													<span class="splms-checkbox-mark"></span>
-													<span class="splms-option-label">
-														<i class="hgi-stroke hgi-mail-01"></i>
-														<?php esc_html_e( 'Email', 'skillpulse-lms' ); ?>
-													</span>
-												</label>
-											</div>
-											<?php } ?>
-											<?php if ( $splms_in_app_enabled ) { ?>
-											<div class="splms-checkbox-option">
-												<label class="splms-checkbox-label" for="event_<?php echo esc_attr( $splms_event_key ); ?>_in_app">
-													<input type="checkbox" id="event_<?php echo esc_attr( $splms_event_key ); ?>_in_app" name="events[<?php echo esc_attr( $splms_event_key ); ?>][in_app]" value="1" <?php checked( $splms_event_prefs['in_app'], true ); ?>>
-													<span class="splms-checkbox-mark"></span>
-													<span class="splms-option-label">
-														<i class="hgi-stroke hgi-notification-03"></i>
-														<?php esc_html_e( 'In-App', 'skillpulse-lms' ); ?>
-													</span>
-												</label>
-											</div>
-											<?php } ?>
-										</div>
-									</div>
-								<?php endforeach; ?>
-							</div>
-						</div>
-
-						<div class="splms-form-actions">
-							<button type="submit" class="splms-btn splms-btn-primary">
-								<i class="hgi-stroke hgi-checkmark-01"></i>
-								<?php esc_html_e( 'Save Notification Preferences', 'skillpulse-lms' ); ?>
-							</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<?php } ?>
+		<?php
+		// Allow modules to add settings tab panels (e.g., notification preferences).
+		do_action( 'splms_settings_tabs_content', $splms_settings_tab, $splms_current_user_obj );
+		?>
 	</div>
 </div>
 
