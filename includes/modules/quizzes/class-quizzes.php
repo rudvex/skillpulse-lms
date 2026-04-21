@@ -1116,7 +1116,7 @@ class SkillPulse_LMS_Quizzes {
 
 		// Start transaction for atomic quiz submission.
 		global $wpdb;
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 		$wpdb->query( 'START TRANSACTION' );
 
 		// Handle file uploads using File Manager.
@@ -1319,7 +1319,7 @@ class SkillPulse_LMS_Quizzes {
 
 		if ( ! $completed ) {
 			// Rollback transaction on failure.
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 			$wpdb->query( 'ROLLBACK' );
 
 			// Clean up uploaded files.
@@ -1341,7 +1341,7 @@ class SkillPulse_LMS_Quizzes {
 		$saved_attempt = $attempts_query->get_attempt_by_id( $attempt_id );
 		if ( ! $saved_attempt || ! in_array( $saved_attempt->status, array( 'graded', 'pending_review' ), true ) ) {
 			// Rollback transaction on verification failure.
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 			$wpdb->query( 'ROLLBACK' );
 
 			// Clean up uploaded files.
@@ -1444,7 +1444,7 @@ class SkillPulse_LMS_Quizzes {
 		}
 
 		// Commit transaction on success.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 		$wpdb->query( 'COMMIT' );
 
 		wp_send_json_success( $response );
@@ -2776,7 +2776,7 @@ class SkillPulse_LMS_Quizzes {
 			$format[]                = '%s';
 		}
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 		$result = $wpdb->update(
 			$table_name,
 			$update_data,

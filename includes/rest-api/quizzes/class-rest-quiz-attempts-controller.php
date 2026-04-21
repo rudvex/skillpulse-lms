@@ -863,7 +863,7 @@ class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 
 		global $wpdb;
 		$table_name = $wpdb->prefix . self::TABLE_NAME;
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 		$result = $wpdb->update(
 			$table_name,
 			array(
@@ -1533,7 +1533,7 @@ class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 
 		global $wpdb;
 		$table_name = $wpdb->prefix . self::TABLE_NAME;
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 		$result = $wpdb->update(
 			$table_name,
 			array( 'feedback' => $feedback ),

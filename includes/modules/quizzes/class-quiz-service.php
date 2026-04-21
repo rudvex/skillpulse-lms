@@ -420,7 +420,7 @@ class SkillPulse_LMS_Quiz_Service {
 			'passed'     => $passed ? 1 : 0,
 		);
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 		$wpdb->update(
 			$table_name,
 			$update_data,
@@ -630,7 +630,7 @@ class SkillPulse_LMS_Quiz_Service {
 			}
 		}
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 		$result = $wpdb->update(
 			$table_name,
 			$update_data,

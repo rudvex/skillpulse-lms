@@ -438,7 +438,7 @@ class SkillPulse_LMS_Quiz_Attempts_Query extends SkillPulse_LMS_Base_Query {
 				AND (answers = '' OR answers = '[]' OR answers IS NULL)";
 
 		global $wpdb;
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 		$result = $wpdb->query( $wpdb->prepare( $sql, $user_id, $quiz_id ) );
 
 		return false !== $result;
@@ -468,7 +468,7 @@ class SkillPulse_LMS_Quiz_Attempts_Query extends SkillPulse_LMS_Base_Query {
 				AND time_taken = 0
 				AND attempt_time < %s";
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 		$result = $wpdb->query( $wpdb->prepare( $sql, $cutoff_date ) );
 
 		return $result;

@@ -147,6 +147,7 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 			$success   = true;
 
 			foreach ( $meta_data as $key => $value ) {
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 				$result = $wpdb->replace(
 					$meta_table,
 					array(
@@ -168,6 +169,7 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 		}
 
 		// Handle single meta key-value pair.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 		return $wpdb->replace(
 			$meta_table,
 			array(
@@ -279,7 +281,7 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 
 		// Delete order items (for section-based purchases).
 		$order_items_table = esc_sql( $wpdb->prefix . 'splms_order_items' );
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 		$wpdb->delete(
 			$order_items_table,
 			array( 'order_id' => $order_id ),
@@ -292,7 +294,7 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 
 		// Delete order meta.
 		$meta_table = esc_sql( $wpdb->prefix . 'splms_order_meta' );
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 		$wpdb->delete(
 			$meta_table,
 			array( 'order_id' => $order_id ),

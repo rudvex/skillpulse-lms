@@ -336,7 +336,7 @@ class SkillPulse_LMS_REST_Lesson_Actions_Controller extends WP_REST_Controller {
 		$existing = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table_name} WHERE lesson_id = %d AND user_id = %d", $lesson_id, $user_id ) );
 
 		if ( $existing ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 			$result = $wpdb->update(
 				$table_name,
 				$progress_data,
