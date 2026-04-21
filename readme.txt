@@ -1,5 +1,5 @@
 === SkillPulse LMS ===
-Contributors: skillpulselms
+Contributors: hardipparmar
 Donate link: https://skillpulselms.com/
 Tags: lms, learning management system, courses, lessons, quizzes, education, elearning
 Requires at least: 5.0

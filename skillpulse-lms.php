@@ -1,7 +1,6 @@
 <?php
 /**
  * Plugin Name: SkillPulse LMS
- * Plugin URI: https://skillpulselms.com
  * Description: Create and deliver online courses with ease. A powerful WordPress LMS solution for educators and course creators.
  * Version: 1.0.0
  * Author: SkillPulseLMS
