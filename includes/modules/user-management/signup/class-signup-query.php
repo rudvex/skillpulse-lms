@@ -179,10 +179,10 @@ class SkillPulse_LMS_Signup_Query extends SkillPulse_LMS_Base_Query {
 		$sql = "DELETE FROM {$this->table_name} WHERE id IN ($placeholders)";
 
 		if ( empty( $signup_ids ) ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- No parameters needed for this query.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- No parameters needed for this query.
 			$result = $wpdb->query( $sql );
 		} else {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared on next line.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared on next line.
 			$result = $wpdb->query( $wpdb->prepare( $sql, ...$signup_ids ) );
 		}
 

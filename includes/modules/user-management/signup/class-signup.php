@@ -638,7 +638,7 @@ class SkillPulse_LMS_Signup {
 	private function update_signup_status( $signup_id, $status ) {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 		return $wpdb->update(
 			$this->get_signups_table_name(),
 			array( 'status' => $status ),
@@ -804,7 +804,7 @@ class SkillPulse_LMS_Signup {
 	public function delete_signup( $signup_id ) {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 		return $wpdb->delete(
 			$this->get_signups_table_name(),
 			array( 'id' => $signup_id ),

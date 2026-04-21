@@ -127,7 +127,7 @@ class SkillPulse_LMS_Migration {
 		global $wpdb;
 
 		// Start transaction.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 		$wpdb->query( 'START TRANSACTION' );
 
 		try {
@@ -146,7 +146,7 @@ class SkillPulse_LMS_Migration {
 			}
 
 			// Commit transaction.
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 			$wpdb->query( 'COMMIT' );
 
 			return array(
@@ -157,7 +157,7 @@ class SkillPulse_LMS_Migration {
 
 		} catch ( Exception $e ) {
 			// Rollback transaction.
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 			$wpdb->query( 'ROLLBACK' );
 
 			return array(
@@ -185,7 +185,7 @@ class SkillPulse_LMS_Migration {
 		foreach ( $backup_tables as $table ) {
 			$backup_table = "{$table}_backup_v{$version}_{$timestamp}";
 
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table names are from internal config, not user input.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table names are from internal config, not user input.
 			$result = $wpdb->query( 'CREATE TABLE `' . esc_sql( $backup_table ) . '` AS SELECT * FROM `' . esc_sql( $table ) . '`' );
 
 			if ( false === $result ) {
@@ -353,7 +353,7 @@ class SkillPulse_LMS_Migration {
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe.
 		$query = "SELECT * FROM {$this->log_table}{$where_clause} ORDER BY created_at DESC LIMIT %d";
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared.
 		return $wpdb->get_results( $wpdb->prepare( $query, ...$prepare_args ) );
 	}
 
@@ -399,7 +399,7 @@ class SkillPulse_LMS_Migration {
 		global $wpdb;
 
 		// Get all backup tables.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Maintenance operation.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Maintenance operation.
 		$tables = $wpdb->get_results(
 			$wpdb->prepare(
 				'SELECT table_name FROM information_schema.tables
@@ -417,7 +417,7 @@ class SkillPulse_LMS_Migration {
 				$table_date = $matches[1];
 
 				if ( $table_date < $cutoff_date ) {
-					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Cleanup operation, table name from SHOW TABLES query.
+					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Cleanup operation, table name from SHOW TABLES query.
 					$wpdb->query( 'DROP TABLE IF EXISTS `' . esc_sql( $table->table_name ) . '`' );
 					$this->log_message( "Cleaned up old backup table: {$table->table_name}" );
 				}
@@ -451,7 +451,7 @@ class SkillPulse_LMS_Migration {
 		);
 
 		if ( ! empty( $existing_indexes ) ) {
-			$wpdb->query( "ALTER TABLE `{$relationships_table}` DROP INDEX parent_child_unique" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table write operation.
+			$wpdb->query( "ALTER TABLE `{$relationships_table}` DROP INDEX parent_child_unique" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table write operation.
 			$messages[] = 'Dropped old parent_child_unique constraint';
 		}
 
@@ -463,7 +463,7 @@ class SkillPulse_LMS_Migration {
 		);
 
 		if ( empty( $existing_new_indexes ) ) {
-			$result = $wpdb->query( "ALTER TABLE `{$relationships_table}` ADD UNIQUE KEY parent_child_type_unique (parent_id, child_id, child_type)" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table write operation.
+			$result = $wpdb->query( "ALTER TABLE `{$relationships_table}` ADD UNIQUE KEY parent_child_type_unique (parent_id, child_id, child_type)" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table write operation.
 			if ( false === $result ) {
 				$success    = false;
 				$messages[] = 'Failed to add parent_child_type_unique constraint';
@@ -503,7 +503,7 @@ class SkillPulse_LMS_Migration {
 				}
 
 				if ( ! $index_exists ) {
-					$result = $wpdb->query( "ALTER TABLE `{$table}` {$index_sql}" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table write operation.
+					$result = $wpdb->query( "ALTER TABLE `{$table}` {$index_sql}" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Custom table write operation.
 					if ( false === $result ) {
 						$success    = false;
 						$messages[] = "Failed to add index {$index_name} to {$table}";
@@ -551,7 +551,7 @@ class SkillPulse_LMS_Migration {
 
 		if ( empty( $column_exists ) ) {
 			// Add the 'data' column after 'time_spent'.
-			$result = $wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+			$result = $wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				"ALTER TABLE `{$lesson_progress_table}` ADD COLUMN `data` longtext NULL AFTER `time_spent`" // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.SchemaChange -- Custom table write operation.
 			);
 

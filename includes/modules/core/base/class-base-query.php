@@ -163,7 +163,7 @@ class SkillPulse_LMS_Base_Query {
 	protected function update( $data, $where, $format, $where_format ) {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table requires direct DB access.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write; cache invalidated below.
 		$result = $wpdb->update( $this->table_name, $data, $where, $format, $where_format );
 
 		$this->invalidate_cache();
@@ -183,7 +183,7 @@ class SkillPulse_LMS_Base_Query {
 	protected function delete( $where, $where_format ) {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table requires direct DB access.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write; cache invalidated below.
 		$result = $wpdb->delete( $this->table_name, $where, $where_format );
 
 		$this->invalidate_cache();
@@ -211,10 +211,10 @@ class SkillPulse_LMS_Base_Query {
 		}
 
 		if ( empty( $args ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Query has no placeholders; caching handled above.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query has no placeholders; caching handled above.
 			$results = $wpdb->get_results( $query );
 		} else {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Query prepared with $wpdb->prepare(); caching handled above.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query prepared with $wpdb->prepare(); caching handled above.
 			$results = $wpdb->get_results( $wpdb->prepare( $query, ...$args ) );
 		}
 
@@ -243,10 +243,10 @@ class SkillPulse_LMS_Base_Query {
 		}
 
 		if ( empty( $args ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Query has no placeholders; caching handled above.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query has no placeholders; caching handled above.
 			$result = $wpdb->get_row( $query );
 		} else {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Query prepared with $wpdb->prepare(); caching handled above.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query prepared with $wpdb->prepare(); caching handled above.
 			$result = $wpdb->get_row( $wpdb->prepare( $query, ...$args ) );
 		}
 
@@ -276,10 +276,10 @@ class SkillPulse_LMS_Base_Query {
 		}
 
 		if ( empty( $args ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Query has no placeholders; caching handled above.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query has no placeholders; caching handled above.
 			$result = $wpdb->get_var( $query );
 		} else {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Query prepared with $wpdb->prepare(); caching handled above.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query prepared with $wpdb->prepare(); caching handled above.
 			$result = $wpdb->get_var( $wpdb->prepare( $query, ...$args ) );
 		}
 
@@ -308,10 +308,10 @@ class SkillPulse_LMS_Base_Query {
 		}
 
 		if ( empty( $args ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Query has no placeholders; caching handled above.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query has no placeholders; caching handled above.
 			$results = $wpdb->get_col( $query );
 		} else {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Query prepared with $wpdb->prepare(); caching handled above.
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query prepared with $wpdb->prepare(); caching handled above.
 			$results = $wpdb->get_col( $wpdb->prepare( $query, ...$args ) );
 		}
 

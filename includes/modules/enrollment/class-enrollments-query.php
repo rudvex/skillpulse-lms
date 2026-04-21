@@ -150,7 +150,7 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 		}
 		$sql .= implode( ', ', $update_parts );
 
-		$result = $wpdb->query( $wpdb->prepare( $sql, $values ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Custom table write operation.
+		$result = $wpdb->query( $wpdb->prepare( $sql, $values ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Custom table write operation.
 
 		// Return the enrollment ID (for new inserts, use insert_id; for updates, we need to get it).
 		if ( false !== $result ) {
@@ -463,7 +463,7 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 		$result = false;
 		if ( isset( $data['completed_at'] ) && null === $data['completed_at'] ) {
 			// Use direct SQL to set NULL value.
-			// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, custom table write operation.
+			// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, custom table write operation.
 			$result = $wpdb->query(
 				$wpdb->prepare(
 					"UPDATE {$this->table_name} SET completed_at = NULL WHERE id = %d",
@@ -520,13 +520,13 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 		$course_id = $enrollment->course_id;
 
 		// Start transaction for data consistency.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 		$wpdb->query( 'START TRANSACTION' );
 
 		try {
 			// 1. Delete lesson progress data.
 			$lesson_progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 			$wpdb->delete(
 				$lesson_progress_table,
 				array(
@@ -538,7 +538,7 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 
 			// 2. Delete quiz attempts data.
 			$quiz_attempts_table = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 			$wpdb->delete(
 				$quiz_attempts_table,
 				array(
@@ -550,7 +550,7 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 
 			// 3. Delete user activity logs for this course.
 			$user_activity_table = esc_sql( $wpdb->prefix . 'splms_user_activity' );
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 			$wpdb->delete(
 				$user_activity_table,
 				array(
@@ -571,7 +571,7 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 			}
 
 			// Commit transaction.
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 			$wpdb->query( 'COMMIT' );
 
 			// Clear cache.
@@ -581,7 +581,7 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 
 		} catch ( Exception $e ) {
 			// Rollback transaction on error.
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
 			$wpdb->query( 'ROLLBACK' );
 			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Error logging is necessary for debugging enrollment deletion failures.
 			error_log( 'SkillPulse LMS: Failed to delete enrollment - ' . $e->getMessage() );
@@ -638,9 +638,9 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 
 		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared above.
 		if ( empty( $query_values ) ) {
-			$result = $wpdb->query( $query ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders.
+			$result = $wpdb->query( $query ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders.
 		} else {
-			$result = $wpdb->query( $wpdb->prepare( $query, ...$query_values ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders.
+			$result = $wpdb->query( $wpdb->prepare( $query, ...$query_values ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders.
 		}
 
 		// Clear all cache after bulk update.
@@ -673,9 +673,9 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 
 		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared above.
 		if ( empty( $enrollment_ids ) ) {
-			$result = $wpdb->query( $query ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders.
+			$result = $wpdb->query( $query ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders.
 		} else {
-			$result = $wpdb->query( $wpdb->prepare( $query, ...$enrollment_ids ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders.
+			$result = $wpdb->query( $wpdb->prepare( $query, ...$enrollment_ids ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders.
 		}
 
 		// Clear all cache after bulk delete.
