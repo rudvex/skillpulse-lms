@@ -1579,11 +1579,9 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 
 		// Lesson completions.
 		global $wpdb;
-		$progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
-		// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safe, validated constant.
-		$completed_lessons = $wpdb->get_results(
-			$wpdb->prepare(
+		$progress_table    = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
+		$completed_lessons = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
+			$wpdb->prepare( // phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safe, validated constant.
 				"SELECT lp.*, p.post_title as lesson_title FROM {$progress_table} lp 
 				INNER JOIN {$wpdb->posts} p ON lp.lesson_id = p.ID 
 				WHERE lp.user_id = %d AND lp.course_id = %d AND lp.is_completed = 1 
@@ -1592,7 +1590,6 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 				$course_id
 			)
 		);
-		// phpcs:enable
 
 		foreach ( $completed_lessons as $lesson_progress ) {
 			$activities[] = array(
