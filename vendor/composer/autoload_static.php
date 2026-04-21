@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitc8f4b21bf7fdfc78acfa5f8649ac0641
+class ComposerStaticInitaa9f9607becebc00b30ad573276a3719
 {
     public static $files = array (
         '72243e5536b63e298acb6476f01f1aff' => __DIR__ . '/..' . '/thecodingmachine/safe/lib/special_cases.php',
@@ -96,7 +96,6 @@ class ComposerStaticInitc8f4b21bf7fdfc78acfa5f8649ac0641
         array (
             'Svg\\' => 4,
             'SkillPulseLMS\\RestApi\\' => 22,
-            'SkillPulseLMS\\Auth\\' => 19,
             'SkillPulseLMS\\' => 14,
             'Sabberworm\\CSS\\' => 15,
         ),
@@ -107,7 +106,6 @@ class ComposerStaticInitc8f4b21bf7fdfc78acfa5f8649ac0641
         'F' =>
         array (
             'FontLib\\' => 8,
-            'Firebase\\JWT\\' => 13,
         ),
         'D' =>
         array (
@@ -124,10 +122,6 @@ class ComposerStaticInitc8f4b21bf7fdfc78acfa5f8649ac0641
         array (
             0 => __DIR__ . '/../..' . '/includes/rest-api',
         ),
-        'SkillPulseLMS\\Auth\\' =>
-        array (
-            0 => __DIR__ . '/../..' . '/includes/rest-api/auth',
-        ),
         'SkillPulseLMS\\' =>
         array (
             0 => __DIR__ . '/../..' . '/includes',
@@ -143,10 +137,6 @@ class ComposerStaticInitc8f4b21bf7fdfc78acfa5f8649ac0641
         'FontLib\\' =>
         array (
             0 => __DIR__ . '/..' . '/dompdf/php-font-lib/src/FontLib',
-        ),
-        'Firebase\\JWT\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'Dompdf\\' =>
         array (
@@ -236,14 +226,6 @@ class ComposerStaticInitc8f4b21bf7fdfc78acfa5f8649ac0641
         'Dompdf\\Renderer\\TableRow' => __DIR__ . '/..' . '/dompdf/dompdf/src/Renderer/TableRow.php',
         'Dompdf\\Renderer\\TableRowGroup' => __DIR__ . '/..' . '/dompdf/dompdf/src/Renderer/TableRowGroup.php',
         'Dompdf\\Renderer\\Text' => __DIR__ . '/..' . '/dompdf/dompdf/src/Renderer/Text.php',
-        'Firebase\\JWT\\BeforeValidException' => __DIR__ . '/..' . '/firebase/php-jwt/src/BeforeValidException.php',
-        'Firebase\\JWT\\CachedKeySet' => __DIR__ . '/..' . '/firebase/php-jwt/src/CachedKeySet.php',
-        'Firebase\\JWT\\ExpiredException' => __DIR__ . '/..' . '/firebase/php-jwt/src/ExpiredException.php',
-        'Firebase\\JWT\\JWK' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWK.php',
-        'Firebase\\JWT\\JWT' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWT.php',
-        'Firebase\\JWT\\JWTExceptionWithPayloadInterface' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWTExceptionWithPayloadInterface.php',
-        'Firebase\\JWT\\Key' => __DIR__ . '/..' . '/firebase/php-jwt/src/Key.php',
-        'Firebase\\JWT\\SignatureInvalidException' => __DIR__ . '/..' . '/firebase/php-jwt/src/SignatureInvalidException.php',
         'FontLib\\AdobeFontMetrics' => __DIR__ . '/..' . '/dompdf/php-font-lib/src/FontLib/AdobeFontMetrics.php',
         'FontLib\\BinaryStream' => __DIR__ . '/..' . '/dompdf/php-font-lib/src/FontLib/BinaryStream.php',
         'FontLib\\EOT\\File' => __DIR__ . '/..' . '/dompdf/php-font-lib/src/FontLib/EOT/File.php',
@@ -471,9 +453,9 @@ class ComposerStaticInitc8f4b21bf7fdfc78acfa5f8649ac0641
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc8f4b21bf7fdfc78acfa5f8649ac0641::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitc8f4b21bf7fdfc78acfa5f8649ac0641::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitc8f4b21bf7fdfc78acfa5f8649ac0641::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitaa9f9607becebc00b30ad573276a3719::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitaa9f9607becebc00b30ad573276a3719::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitaa9f9607becebc00b30ad573276a3719::$classMap;
 
         }, null, ClassLoader::class);
     }
