@@ -179,10 +179,10 @@ class SkillPulse_LMS_Signup_Query extends SkillPulse_LMS_Base_Query {
 		$sql = "DELETE FROM {$this->table_name} WHERE id IN ($placeholders)";
 
 		if ( empty( $signup_ids ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- No parameters needed for this query.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- No parameters needed for this query.
 			$result = $wpdb->query( $sql );
 		} else {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared on next line.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared on next line.
 			$result = $wpdb->query( $wpdb->prepare( $sql, ...$signup_ids ) );
 		}
 
@@ -389,7 +389,7 @@ class SkillPulse_LMS_Signup_Query extends SkillPulse_LMS_Base_Query {
 			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared with $wpdb->prepare().
 			$count_query = $wpdb->prepare( $count_query, ...$where_values );
 		}
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 		$total = $wpdb->get_var( $count_query );
 
 		// Get signups.
@@ -400,7 +400,7 @@ class SkillPulse_LMS_Signup_Query extends SkillPulse_LMS_Base_Query {
 			$query = $wpdb->prepare( $query, ...$where_values );
 		}
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
 		$signups = $wpdb->get_results( $query );
 
 		// Unserialize meta for each signup.
@@ -468,10 +468,10 @@ class SkillPulse_LMS_Signup_Query extends SkillPulse_LMS_Base_Query {
 		}
 
 		if ( empty( $where_values ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- No parameters needed for this query.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- No parameters needed for this query.
 			return (int) $wpdb->get_var( $sql );
 		} else {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared on next line.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared on next line.
 			return (int) $wpdb->get_var( $wpdb->prepare( $sql, ...$where_values ) );
 		}
 	}

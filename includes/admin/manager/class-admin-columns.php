@@ -881,6 +881,7 @@ class SkillPulse_LMS_Admin_Columns {
 	private function render_quiz_attempts_column( $quiz_id ) {
 		global $wpdb;
 		$table_name = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$count      = $wpdb->get_var(
 			$wpdb->prepare(
 				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.

@@ -251,6 +251,7 @@ class SkillPulse_LMS_Purchase_Token {
 		global $wpdb;
 
 		// Delete expired transients (WordPress handles this automatically, but we can force cleanup).
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 		$wpdb->query(
 			$wpdb->prepare(
 				"DELETE FROM {$wpdb->options}
@@ -262,6 +263,7 @@ class SkillPulse_LMS_Purchase_Token {
 		);
 
 		// Also delete the corresponding transient data.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 		$wpdb->query(
 			"DELETE FROM {$wpdb->options}
 			WHERE option_name LIKE '_transient_splms_token_%'

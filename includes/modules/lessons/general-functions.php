@@ -217,6 +217,7 @@ function splms_is_lesson_completed( $lesson_id, $user_id = null ) {
 	global $wpdb;
 
 	$table_name = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 	$completed  = $wpdb->get_var(
 		$wpdb->prepare(
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
@@ -644,6 +645,7 @@ function splms_get_lesson_completion_rate( $lesson_id = null ) {
 	// Get completed students for this lesson.
 	global $wpdb;
 	$lesson_progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 	$completed_students    = $wpdb->get_var(
 		$wpdb->prepare(
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
@@ -676,7 +678,7 @@ function splms_get_lesson_average_completion_time( $lesson_id = null ) {
 	$lesson_progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
 
 	// Get completion times for this lesson.
-	// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, values are prepared.
+	// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, values are prepared.
 	$completion_times = $wpdb->get_col(
 		$wpdb->prepare(
 			"SELECT TIMESTAMPDIFF(MINUTE, started_at, completed_at) 

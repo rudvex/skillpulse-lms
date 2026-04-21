@@ -64,6 +64,7 @@ class SkillPulse_LMS_Dashboard_API {
 	public function get_student_stats( $user_id ) {
 		global $wpdb;
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$enrollments = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT course_id FROM {$wpdb->prefix}splms_enrollments WHERE user_id = %d",
@@ -349,10 +350,11 @@ class SkillPulse_LMS_Dashboard_API {
 
 		// Get progress from the lesson_progress table.
 		$lesson_progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$completed_lessons     = $wpdb->get_var(
 			$wpdb->prepare(
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
-				"SELECT COUNT(DISTINCT lesson_id) FROM {$lesson_progress_table} 
+				"SELECT COUNT(DISTINCT lesson_id) FROM {$lesson_progress_table}
 			WHERE user_id = %d AND course_id = %d AND is_completed = 1",
 				$user_id,
 				$course_id
@@ -362,10 +364,11 @@ class SkillPulse_LMS_Dashboard_API {
 		// Get passed quizzes from quiz_attempts table (only graded quizzes).
 		$quiz_attempts_table = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 		// Get all passed quiz IDs first.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$passed_quiz_ids = $wpdb->get_col(
 			$wpdb->prepare(
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
-				"SELECT DISTINCT quiz_id FROM {$quiz_attempts_table} 
+				"SELECT DISTINCT quiz_id FROM {$quiz_attempts_table}
 			WHERE user_id = %d AND course_id = %d AND passed = 1",
 				$user_id,
 				$course_id

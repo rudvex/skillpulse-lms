@@ -376,6 +376,7 @@ class SkillPulse_LMS_Access_Control {
 			ORDER BY ci.order_index ASC, r.order_index ASC
 		";
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$all_lessons = $wpdb->get_col(
 			$wpdb->prepare(
 				$query, // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders, table names are safe.
@@ -464,6 +465,7 @@ class SkillPulse_LMS_Access_Control {
 			ORDER BY ci.order_index ASC, r.order_index ASC
 		";
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$all_quizzes = $wpdb->get_col(
 			$wpdb->prepare(
 				$query, // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders, table names are safe.

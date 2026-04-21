@@ -180,6 +180,7 @@ class SkillPulse_LMS_Rest_Admin_Overview_Controller extends WP_REST_Controller {
 		$stats['quizzes'] = $quizzes->publish;
 
 		// Get enrollment count.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$enrollment_count     = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}splms_enrollments WHERE status = 'active'" );
 		$stats['enrollments'] = intval( $enrollment_count );
 
@@ -267,9 +268,10 @@ class SkillPulse_LMS_Rest_Admin_Overview_Controller extends WP_REST_Controller {
 		}
 
 		// Get recent enrollments.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$recent_enrollments = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT e.*, p.post_title, u.display_name 
+				"SELECT e.*, p.post_title, u.display_name
 			FROM {$wpdb->prefix}splms_enrollments e 
 			LEFT JOIN {$wpdb->posts} p ON e.course_id = p.ID 
 			LEFT JOIN {$wpdb->users} u ON e.user_id = u.ID 
@@ -379,9 +381,10 @@ class SkillPulse_LMS_Rest_Admin_Overview_Controller extends WP_REST_Controller {
 		);
 
 		// Get enrollment stats.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$enrollment_stats = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT 
+				"SELECT
 				COUNT(*) as total_enrollments,
 				COUNT(CASE WHEN status = 'completed' THEN 1 END) as completed_enrollments,
 				AVG(progress) as average_progress
@@ -398,9 +401,10 @@ class SkillPulse_LMS_Rest_Admin_Overview_Controller extends WP_REST_Controller {
 		$reports['overview']['averageProgress']  = round( $enrollment_stats->average_progress, 2 );
 
 		// Get course performance data.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$course_performance = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT 
+				"SELECT
 				p.ID,
 				p.post_title,
 				COUNT(e.id) as enrollment_count,
@@ -538,8 +542,9 @@ class SkillPulse_LMS_Rest_Admin_Overview_Controller extends WP_REST_Controller {
 		switch ( $type ) {
 			case 'enrollments':
 				$csv_data[]  = array( 'User', 'Course', 'Enrolled Date', 'Progress', 'Status' );
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 				$enrollments = $wpdb->get_results(
-					"SELECT e.*, p.post_title, u.display_name 
+					"SELECT e.*, p.post_title, u.display_name
 					FROM {$wpdb->prefix}splms_enrollments e 
 					LEFT JOIN {$wpdb->posts} p ON e.course_id = p.ID 
 					LEFT JOIN {$wpdb->users} u ON e.user_id = u.ID 
@@ -558,9 +563,10 @@ class SkillPulse_LMS_Rest_Admin_Overview_Controller extends WP_REST_Controller {
 
 			case 'courses':
 				$csv_data[] = array( 'Course', 'Enrollments', 'Average Progress', 'Completions' );
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 				$courses    = $wpdb->get_results(
 					$wpdb->prepare(
-						"SELECT 
+						"SELECT
 							p.post_title,
 							COUNT(e.id) as enrollment_count,
 							AVG(e.progress) as average_progress,
@@ -627,6 +633,7 @@ class SkillPulse_LMS_Rest_Admin_Overview_Controller extends WP_REST_Controller {
 		$stats['quizzes'] = $quizzes->publish;
 
 		// Get enrollment count.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$enrollment_count     = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}splms_enrollments WHERE status = 'active'" );
 		$stats['enrollments'] = intval( $enrollment_count );
 

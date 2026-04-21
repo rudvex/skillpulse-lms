@@ -87,6 +87,7 @@ class SkillPulse_LMS_Order_Manager {
 
 		// Use database transaction with row locking to prevent race condition.
 		// This ensures only one order is created even if multiple requests come simultaneously.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 		$wpdb->query( 'START TRANSACTION' );
 
 		try {
@@ -99,6 +100,7 @@ class SkillPulse_LMS_Order_Manager {
 				ORDER BY id DESC
 				FOR UPDATE";
 
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 			$existing_id = $wpdb->get_var(
 				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is safely constructed and prepared above.
 				$wpdb->prepare( $sql, $data['user_id'], $data['course_id'] )
@@ -124,6 +126,7 @@ class SkillPulse_LMS_Order_Manager {
 				);
 				$orders_query->add_order_meta( $existing_id, $meta_updates );
 
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 				$wpdb->query( 'COMMIT' );
 
 				return $existing_id;
@@ -157,15 +160,18 @@ class SkillPulse_LMS_Order_Manager {
 			$order_id = $orders_query->create_order( $order_data, $meta_data );
 
 			if ( ! $order_id ) {
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 				$wpdb->query( 'ROLLBACK' );
 
 				return false;
 			}
 
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 			$wpdb->query( 'COMMIT' );
 
 			return $order_id;
 		} catch ( Exception $e ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 			$wpdb->query( 'ROLLBACK' );
 			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 				error_log( 'Order creation transaction failed: ' . $e->getMessage() ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
@@ -208,6 +214,7 @@ class SkillPulse_LMS_Order_Manager {
 		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
 
 		// Use database transaction.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 		$wpdb->query( 'START TRANSACTION' );
 
 		try {
@@ -235,6 +242,7 @@ class SkillPulse_LMS_Order_Manager {
 			$order_id = $orders_query->create_order( $order_data, $meta_data );
 
 			if ( ! $order_id ) {
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 				$wpdb->query( 'ROLLBACK' );
 
 				return false;
@@ -254,6 +262,7 @@ class SkillPulse_LMS_Order_Manager {
 
 				$item = wp_parse_args( $item, $item_defaults );
 
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 				$insert_result = $wpdb->insert(
 					$items_table,
 					array(
@@ -269,16 +278,19 @@ class SkillPulse_LMS_Order_Manager {
 				);
 
 				if ( ! $insert_result ) {
+					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 					$wpdb->query( 'ROLLBACK' );
 
 					return false;
 				}
 			}
 
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 			$wpdb->query( 'COMMIT' );
 
 			return $order_id;
 		} catch ( Exception $e ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table write operation.
 			$wpdb->query( 'ROLLBACK' );
 			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 				error_log( 'Order creation with items transaction failed: ' . $e->getMessage() ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log

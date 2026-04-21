@@ -481,7 +481,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 		}
 
 		// Execute count query with same parameters.
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $count_query is built with proper placeholders and prepared.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $count_query is built with proper placeholders and prepared.
 		$total = $wpdb->get_var( $wpdb->prepare( $count_query, $where_params ) );
 
 		// Add sorting.
@@ -505,7 +505,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 		$where_params[] = (int) $offset;
 
 		// Execute query.
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $query is built with proper placeholders and prepared.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $query is built with proper placeholders and prepared.
 		$enrollments = $wpdb->get_results( $wpdb->prepare( $query, $where_params ) );
 
 		// Process results.
@@ -1216,12 +1216,12 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 
 		// Check lesson progress table (only has completed_at).
 		$lesson_progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
 		$last_lesson_activity = $wpdb->get_var( $wpdb->prepare( "SELECT MAX(completed_at) FROM {$lesson_progress_table} WHERE user_id = %d AND course_id = %d AND completed_at IS NOT NULL", $user_id, $course_id ) );
 
 		// Check quiz attempts table (has attempt_time).
 		$quiz_attempts_table = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
 		$last_quiz_activity = $wpdb->get_var( $wpdb->prepare( "SELECT MAX(attempt_time) FROM {$quiz_attempts_table} WHERE user_id = %d AND course_id = %d", $user_id, $course_id ) );
 
 		// Return the most recent activity.
@@ -1251,12 +1251,12 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 
 		// Get total time from lesson progress.
 		$lesson_progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
 		$lesson_time = $wpdb->get_var( $wpdb->prepare( "SELECT SUM(time_spent) FROM {$lesson_progress_table} WHERE user_id = %d AND course_id = %d", $user_id, $course_id ) );
 
 		// Get total time from quiz attempts.
 		$quiz_attempts_table = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
 		$quiz_time = $wpdb->get_var( $wpdb->prepare( "SELECT SUM(time_taken) FROM {$quiz_attempts_table} WHERE user_id = %d AND course_id = %d", $user_id, $course_id ) );
 
 		$total_seconds = intval( $lesson_time ) + intval( $quiz_time );
@@ -1332,7 +1332,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 		$meta_table = esc_sql( $wpdb->prefix . 'splms_order_meta' );
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
 		$sql = "SELECT order_id FROM $meta_table WHERE meta_key = 'enrollment_id' AND meta_value = %s LIMIT 1";
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $sql is built with table name and proper placeholders.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $sql is built with table name and proper placeholders.
 		$order_id = $wpdb->get_var( $wpdb->prepare( $sql, $enrollment_id ) );
 
 		return $order_id ? $order_id : '';
@@ -1580,7 +1580,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 		// Lesson completions.
 		global $wpdb;
 		$progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is safe, validated constant.
 		// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safe, validated constant.
 		$completed_lessons = $wpdb->get_results(
 			$wpdb->prepare(
@@ -1607,7 +1607,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 
 		// Quiz attempts.
 		$attempts_table = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
-		// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safe, validated constant.
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safe, validated constant.
 		$quiz_attempts = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT qa.*, p.post_title as quiz_title FROM {$attempts_table} qa 
