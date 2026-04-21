@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkillPulse LMS v1.0.0\n"
 "Report-Msgid-Bugs-To: https://skillpulselms.com/contact\n"
-"POT-Creation-Date: 2026-04-21 09:23:09+00:00\n"
+"POT-Creation-Date: 2026-04-21 09:45:01+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10031,10 +10031,6 @@ msgstr ""
 msgid "Discover courses tagged with %s"
 msgstr ""
 
-#. Author URI of the plugin/theme
-msgid "https://skillpulselms.com"
-msgstr ""
-
 #. Description of the plugin/theme
 msgid ""
 "Create and deliver online courses with ease. A powerful WordPress LMS "
@@ -10043,6 +10039,10 @@ msgstr ""
 
 #. Author of the plugin/theme
 msgid "SkillPulseLMS"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://skillpulselms.com"
 msgstr ""
 
 #: includes/admin/manager/class-admin-post-types.php:82
