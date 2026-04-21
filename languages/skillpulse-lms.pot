@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkillPulse LMS v1.0.0\n"
 "Report-Msgid-Bugs-To: https://skillpulselms.com/contact\n"
-"POT-Creation-Date: 2026-04-21 12:30:09+00:00\n"
+"POT-Creation-Date: 2026-04-21 13:29:50+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4651,7 +4651,7 @@ msgid "Payment completed, course access granted"
 msgstr ""
 
 #: includes/modules/orders/class-order-status-manager.php:60
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1624
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1621
 #: templates/quiz/content.php:654
 msgid "Failed"
 msgstr ""
@@ -6803,47 +6803,47 @@ msgstr ""
 msgid "Student enrolled in the course"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1601
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1598
 msgid "Completed lesson"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1603
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1600
 #. translators: %d: Lesson ID.
 msgid "Lesson #%d"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1624
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1621
 #: templates/quiz/content.php:663 templates/shared/fullscreen-header.php:57
 msgid "Passed"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1628
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1625
 msgid "Quiz attempt"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1631
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1628
 #. translators: %1$s: Quiz title, %2$s: Status
 msgid "%1$s - %2$s"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1634
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1631
 #. translators: %d: Quiz ID.
 msgid "Quiz #%d"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1651
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1648
 msgid "Course completed"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1652
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1649
 msgid "Student completed the course"
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1692
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1689
 msgid "Failed to renew enrollment."
 msgstr ""
 
-#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1701
+#: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1698
 msgid "Enrollment renewed successfully."
 msgstr ""
 
