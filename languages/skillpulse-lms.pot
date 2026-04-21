@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkillPulse LMS v1.0.0\n"
 "Report-Msgid-Bugs-To: https://skillpulselms.com/contact\n"
-"POT-Creation-Date: 2026-04-21 08:20:37+00:00\n"
+"POT-Creation-Date: 2026-04-21 08:38:07+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -97,7 +97,6 @@ msgstr ""
 #: includes/admin/manager/class-admin-columns.php:549
 #: includes/functions.php:1432 includes/functions.php:1450
 #: includes/functions.php:1514 includes/functions.php:1517
-#: includes/modules/orders/class-order-invoice.php:335
 #: templates/course/course.php:187 templates/course/course.php:199
 #: templates/course/partials/course-enrollment-card.php:354
 #: templates/course/partials/course-enrollment-card.php:400
@@ -176,7 +175,6 @@ msgstr ""
 #: includes/admin/manager/class-admin-columns.php:400
 #: includes/admin/manager/class-admin-columns.php:667
 #: includes/admin/manager/class-admin-columns.php:780
-#: includes/modules/orders/class-order-invoice.php:213
 #: includes/modules/orders/class-order-refund-manager.php:347
 #: includes/modules/orders/class-order-refund-manager.php:405
 #: templates/author.php:138
@@ -2198,7 +2196,7 @@ msgid "Minimum time student must spend on lesson"
 msgstr ""
 
 #: includes/modules/lessons/general-functions.php:250
-#: includes/modules/orders/class-orders.php:123
+#: includes/modules/orders/class-orders.php:122
 #: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:293
 #: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:395
 #: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:485
@@ -2311,117 +2309,6 @@ msgid ""
 "detected:"
 msgstr ""
 
-#: includes/modules/orders/class-order-invoice.php:63
-#: includes/modules/orders/class-order-invoice.php:146
-#: includes/modules/orders/class-order-invoice.php:251
-#: includes/modules/orders/class-order-refund-manager.php:66
-#: includes/modules/orders/class-order-refund-manager.php:127
-msgid "Invalid order ID."
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:68
-msgid "PDF library (Dompdf) is not available."
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:98
-msgid "PDF generation initialization failed."
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:123
-msgid "Failed to save PDF file."
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:127
-msgid "Failed to generate invoice PDF."
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:165
-msgid "Invoice"
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:182
-msgid "INVOICE"
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:188
-msgid "Invoice Number:"
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:189
-msgid "Invoice Date:"
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:190
-msgid "Payment Method:"
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:192
-msgid "Transaction ID:"
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:196
-msgid "Bill To:"
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:209
-msgid "Items Purchased"
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:214
-msgid "Amount"
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:227
-msgid "Total:"
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:232
-msgid "Thank you for your purchase!"
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:233
-msgid "For support, please contact us at"
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:255
-msgid "Orders query class not found."
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:262
-#: includes/modules/orders/class-order-refund-manager.php:79
-#: includes/modules/orders/class-order-refund-manager.php:172
-#: includes/modules/orders/class-order-refund-manager.php:201
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1254
-msgid "Order not found."
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:329
-#: includes/modules/orders/gateways/class-payment.php:87
-msgid "PayPal"
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:330
-#: includes/modules/orders/gateways/class-payment.php:97
-msgid "Stripe"
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:331
-#: includes/modules/orders/gateways/class-payment.php:107
-msgid "Razorpay"
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:332
-msgid "Credit Card"
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:333
-msgid "Bank Transfer"
-msgstr ""
-
-#: includes/modules/orders/class-order-invoice.php:334
-msgid "Offline Payment"
-msgstr ""
-
 #: includes/modules/orders/class-order-manager.php:662
 msgid "⚠️ TEST MODE ACTIVE"
 msgstr ""
@@ -2429,6 +2316,18 @@ msgstr ""
 #: includes/modules/orders/class-order-manager.php:667
 #. translators: %s: Comma-separated list of gateway names
 msgid "Payment gateways in test mode: %s. Real payments will not be processed."
+msgstr ""
+
+#: includes/modules/orders/class-order-refund-manager.php:66
+#: includes/modules/orders/class-order-refund-manager.php:127
+msgid "Invalid order ID."
+msgstr ""
+
+#: includes/modules/orders/class-order-refund-manager.php:79
+#: includes/modules/orders/class-order-refund-manager.php:172
+#: includes/modules/orders/class-order-refund-manager.php:201
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:1254
+msgid "Order not found."
 msgstr ""
 
 #: includes/modules/orders/class-order-refund-manager.php:87
@@ -2585,15 +2484,15 @@ msgstr ""
 msgid "Order status changed from %1$s to %2$s"
 msgstr ""
 
-#: includes/modules/orders/class-orders.php:117
+#: includes/modules/orders/class-orders.php:116
 msgid "Invalid security token."
 msgstr ""
 
-#: includes/modules/orders/class-orders.php:131
+#: includes/modules/orders/class-orders.php:130
 msgid "No billing data provided."
 msgstr ""
 
-#: includes/modules/orders/class-orders.php:164
+#: includes/modules/orders/class-orders.php:163
 msgid "Billing information saved successfully."
 msgstr ""
 
@@ -2647,12 +2546,24 @@ msgstr ""
 msgid "This purchase link is not valid for your account."
 msgstr ""
 
+#: includes/modules/orders/gateways/class-payment.php:87
+msgid "PayPal"
+msgstr ""
+
 #: includes/modules/orders/gateways/class-payment.php:92
 msgid "Pay securely with PayPal"
 msgstr ""
 
+#: includes/modules/orders/gateways/class-payment.php:97
+msgid "Stripe"
+msgstr ""
+
 #: includes/modules/orders/gateways/class-payment.php:102
 msgid "Pay with credit card via Stripe"
+msgstr ""
+
+#: includes/modules/orders/gateways/class-payment.php:107
+msgid "Razorpay"
 msgstr ""
 
 #: includes/modules/orders/gateways/class-payment.php:112

@@ -67,7 +67,6 @@ class SkillPulse_LMS_Orders {
 			'includes/modules/orders/class-order-status-manager',
 			'includes/modules/orders/class-order-access-control',
 			'includes/modules/orders/class-order-manager',
-			'includes/modules/orders/class-order-invoice',
 			'includes/modules/orders/class-order-refund-manager',
 			'includes/modules/orders/class-purchase-token',
 			'includes/modules/orders/gateways/class-payment',
