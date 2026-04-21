@@ -351,7 +351,7 @@ class SkillPulse_LMS_Dashboard_API {
 		// Get progress from the lesson_progress table.
 		$lesson_progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
-		$completed_lessons     = $wpdb->get_var(
+		$completed_lessons = $wpdb->get_var(
 			$wpdb->prepare(
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
 				"SELECT COUNT(DISTINCT lesson_id) FROM {$lesson_progress_table}

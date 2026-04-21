@@ -541,7 +541,7 @@ class SkillPulse_LMS_Rest_Admin_Overview_Controller extends WP_REST_Controller {
 
 		switch ( $type ) {
 			case 'enrollments':
-				$csv_data[]  = array( 'User', 'Course', 'Enrolled Date', 'Progress', 'Status' );
+				$csv_data[] = array( 'User', 'Course', 'Enrolled Date', 'Progress', 'Status' );
 				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 				$enrollments = $wpdb->get_results(
 					"SELECT e.*, p.post_title, u.display_name
@@ -564,7 +564,7 @@ class SkillPulse_LMS_Rest_Admin_Overview_Controller extends WP_REST_Controller {
 			case 'courses':
 				$csv_data[] = array( 'Course', 'Enrollments', 'Average Progress', 'Completions' );
 				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
-				$courses    = $wpdb->get_results(
+				$courses = $wpdb->get_results(
 					$wpdb->prepare(
 						"SELECT
 							p.post_title,

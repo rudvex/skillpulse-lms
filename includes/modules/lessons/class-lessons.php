@@ -666,7 +666,7 @@ class SkillPulse_LMS_Lessons {
 		// Get completed lessons from lesson_progress table.
 		$lesson_progress_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
-		$completed_lessons     = $wpdb->get_var(
+		$completed_lessons = $wpdb->get_var(
 			$wpdb->prepare(
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
 				"SELECT COUNT(*) FROM {$lesson_progress_table} WHERE user_id = %d AND course_id = %d AND is_completed = 1",
@@ -960,7 +960,7 @@ class SkillPulse_LMS_Lessons {
 		global $wpdb;
 		$enrollment_table = esc_sql( $wpdb->prefix . 'splms_enrollments' );
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
-		$result           = $wpdb->get_var(
+		$result = $wpdb->get_var(
 			$wpdb->prepare(
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared, values are prepared.
 				"SELECT enrolled_at FROM {$enrollment_table} WHERE user_id = %d AND course_id = %d LIMIT 1",
@@ -1364,7 +1364,7 @@ class SkillPulse_LMS_Lessons {
 		global $wpdb;
 
 		// Get completed lessons.
-		$lesson_table      = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
+		$lesson_table = esc_sql( $wpdb->prefix . 'splms_lesson_progress' );
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$completed_lessons = $wpdb->get_col(
 			$wpdb->prepare(
@@ -1376,7 +1376,7 @@ class SkillPulse_LMS_Lessons {
 		);
 
 		// Get passed quizzes.
-		$quiz_table     = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
+		$quiz_table = esc_sql( $wpdb->prefix . 'splms_quiz_attempts' );
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 		$passed_quizzes = $wpdb->get_col(
 			$wpdb->prepare(
