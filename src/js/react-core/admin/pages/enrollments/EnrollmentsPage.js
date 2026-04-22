@@ -14,7 +14,6 @@ import List from './List';
 import { StatusBadge, MethodBadge, ProgressBar } from './components/EnrollmentBadges';
 import Detail from './Detail';
 import Edit from './Edit';
-import TrialEnrollmentLimits from './components/TrialEnrollmentLimits';
 
 class EnrollmentsPage extends Component {
     constructor(props) {
@@ -970,8 +969,6 @@ class EnrollmentsPage extends Component {
                         title={__("Course Enrollments", "skillpulse-lms")}
                         helpType={null}
                     />
-
-                    <TrialEnrollmentLimits />
 
                     <div className="splms-content">
                         <List

@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class SkillPulse_LMS_Setup_Wizard
  *
- * Manages the setup wizard flow and integrates with existing license/trial systems.
+ * Manages the setup wizard flow and integrates with the license system.
  */
 class SkillPulse_LMS_Setup_Wizard {
 
@@ -95,7 +95,7 @@ class SkillPulse_LMS_Setup_Wizard {
 			),
 			'license'     => array(
 				'title'       => __( 'License Setup', 'skillpulse-lms' ),
-				'description' => __( 'Activate your license or start a trial', 'skillpulse-lms' ),
+				'description' => __( 'Activate your license', 'skillpulse-lms' ),
 				'required'    => false,
 			),
 			'basic-setup' => array(
@@ -221,7 +221,6 @@ class SkillPulse_LMS_Setup_Wizard {
 				'timezone'      => get_option( 'timezone_string' ) ? get_option( 'timezone_string' ) : 'UTC',
 				'timezones'     => $this->get_wordpress_timezones(),
 				'mainUrl'       => admin_url( 'admin.php?page=skillpulse-lms' ),
-				'isTrialActive' => $this->is_trial_active(),
 				'licenseStatus' => $this->get_license_status(),
 			)
 		);
@@ -247,19 +246,6 @@ class SkillPulse_LMS_Setup_Wizard {
 	}
 
 	/**
-	 * Check if trial is active.
-	 *
-	 * @return bool True if trial is active.
-	 */
-	private function is_trial_active() {
-		if ( class_exists( 'SkillPulse_LMS_Trial_Manager' ) ) {
-			$trial_manager = SkillPulse_LMS_Trial_Manager::get_instance();
-			return $trial_manager->is_trial_active();
-		}
-		return false;
-	}
-
-	/**
 	 * Get license status.
 	 *
 	 * @return string License status.
@@ -268,7 +254,7 @@ class SkillPulse_LMS_Setup_Wizard {
 		if ( class_exists( 'SkillPulse_LMS_License_Manager' ) ) {
 			$license_manager = SkillPulse_LMS_License_Manager::get_instance();
 			$license_info    = $license_manager->get_license_info();
-			return $license_info['status'] ?? 'inactive';
+			return isset( $license_info['status'] ) ? $license_info['status'] : 'inactive';
 		}
 		return 'inactive';
 	}

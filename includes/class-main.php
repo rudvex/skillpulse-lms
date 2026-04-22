@@ -27,6 +27,7 @@ class SkillPulse_LMS_Main {
 	 * @var SkillPulse_LMS_Main|null $instance
 	 */
 	private static $instance;
+
 	/**
 	 * Get the instance of this class.
 	 *
@@ -86,5 +87,7 @@ class SkillPulse_LMS_Main {
 		SkillPulse_LMS_Admin::get_instance();
 		SkillPulse_LMS_Frontend::get_instance();
 
+		// Initialize license management system.
 	}
+
 }

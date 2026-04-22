@@ -6,7 +6,4 @@
  * @since [SPLMS_VERSION]
  */
 
-// Trial System Components
-export { default as TrialBanner } from './TrialBanner';
-export { default as TrialUsageIndicator } from './TrialUsageIndicator';
 export { default as ContextualUpgradePrompt } from './ContextualUpgradePrompt';

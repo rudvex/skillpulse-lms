@@ -2,8 +2,7 @@
 /**
  * Wizard AJAX Handler
  *
- * Handles AJAX requests for the setup wizard. This is minimal because
- * we reuse existing license and trial AJAX handlers.
+ * Handles AJAX requests for the setup wizard.
  *
  * @package SkillPulse_LMS
  * @since [SPLMS_VERSION]
@@ -17,8 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class SkillPulse_LMS_Wizard_Ajax
  *
- * Minimal AJAX handler for wizard-specific functionality.
- * License and trial operations use existing AJAX handlers.
+ * AJAX handler for wizard-specific functionality.
  */
 class SkillPulse_LMS_Wizard_Ajax {
 
@@ -55,10 +53,6 @@ class SkillPulse_LMS_Wizard_Ajax {
 	/**
 	 * Save wizard step data.
 	 *
-	 * Note: License and trial operations use existing AJAX handlers:
-	 * - splms_activate_license (from License Manager)
-	 * - splms_get_license_info (from License Manager)
-	 * - Trial operations via trial manager
 	 */
 	public function save_step() {
 		// Verify nonce.
@@ -207,7 +201,7 @@ class SkillPulse_LMS_Wizard_Ajax {
 					$sanitized['license_key'] = sanitize_text_field( $data['license_key'] );
 				}
 
-				// Email (if starting trial).
+				// Email (if provided).
 				if ( ! empty( $data['email'] ) ) {
 					$sanitized['email'] = sanitize_email( $data['email'] );
 				}

@@ -2,7 +2,7 @@
  * Main Wizard Page Component
  *
  * Main container for the SkillPulse LMS setup wizard.
- * Manages step navigation and coordinates with existing license/trial systems.
+ * Manages step navigation and coordinates with the license system.
  *
  * @since [SPLMS_VERSION]
  */

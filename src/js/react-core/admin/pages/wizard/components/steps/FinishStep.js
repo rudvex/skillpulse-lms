@@ -17,19 +17,16 @@ import { SplmsIcon } from '../../../../../components/SplmsIcon';
  * Finish Step Component
  */
 const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
-	// Get license info from existing store
-	const { licenseInfo, isTrialActive } = useSelect(select => {
+	// Get license info from existing store.
+	const { licenseInfo } = useSelect(select => {
 		try {
 			const licenseStore = select('splms/license');
-			const trialStore = select('splms/trial');
 			return {
 				licenseInfo: licenseStore ? licenseStore.getLicenseInfo() : {},
-				isTrialActive: trialStore ? trialStore.isTrialActive() : false
 			};
 		} catch (err) {
 			return {
 				licenseInfo: {},
-				isTrialActive: false
 			};
 		}
 	}, []);
@@ -42,9 +39,7 @@ const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
 	 * Get setup status and personalized messaging
 	 */
 	const getSetupStatus = () => {
-		// Determine actual status based on setup method and current state
-		const hasActiveLicense = licenseInfo?.status === 'active';
-		const hasActiveTrial = isTrialActive || setupMethod === 'trial';
+		const hasActiveLicense = 'active' === licenseInfo?.status;
 
 		if (hasActiveLicense) {
 			return {
@@ -54,17 +49,6 @@ const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
 				title: __('Premium Features Unlocked', 'skillpulse-lms'),
 				message: __('Your license gives you access to all SkillPulse LMS features.', 'skillpulse-lms'),
 				nextStep: __('Build advanced courses with unlimited features', 'skillpulse-lms')
-			};
-		}
-
-		if (hasActiveTrial) {
-			return {
-				type: 'trial',
-				icon: 'star-filled',
-				color: 'success',
-				title: __('Free Trial Active', 'skillpulse-lms'),
-				message: __('All features are available for 14 days. No credit card required.', 'skillpulse-lms'),
-				nextStep: __('Start creating courses and explore all features', 'skillpulse-lms')
 			};
 		}
 

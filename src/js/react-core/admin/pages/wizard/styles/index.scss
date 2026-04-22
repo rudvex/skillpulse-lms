@@ -401,12 +401,6 @@
 			box-shadow: var(--splms-shadow-lg);
 		}
 
-		&.splms-license-option-trial {
-			.components-card {
-				border: 2px solid var(--splms-success);
-			}
-		}
-
 		&.splms-license-option-license {
 			.components-card {
 				border: 2px solid var(--splms-primary);
@@ -504,62 +498,6 @@
 
 	.splms-license-step-navigation {
 		margin-top: var(--splms-spacing-4);
-	}
-
-	// Trial Signup Panel (Wizard-specific)
-	.splms-trial-signup-panel {
-		text-align: center;
-
-		.splms-trial-signup-header {
-			margin-bottom: var(--splms-spacing-5);
-
-			h3 {
-				font-size: 20px;
-				font-weight: 600;
-				margin: 0 0 var(--splms-spacing-2) 0;
-				color: var(--splms-gray-900);
-			}
-
-			p {
-				color: var(--splms-gray-600);
-				margin: 0;
-				font-size: 16px;
-			}
-		}
-
-		.splms-trial-benefits {
-			margin-bottom: var(--splms-spacing-6);
-
-			ul {
-				list-style: none;
-				padding: 0;
-				margin: 0;
-				max-width: 300px;
-				margin: 0 auto;
-
-				li {
-					font-size: 16px;
-					color: var(--splms-gray-700);
-					margin-bottom: var(--splms-spacing-2);
-					text-align: left;
-				}
-			}
-		}
-
-		.splms-trial-signup-actions {
-			display: flex;
-			gap: var(--splms-spacing-3);
-			justify-content: center;
-			flex-wrap: wrap;
-
-			.splms-trial-start-button {
-				min-width: 160px;
-			}
-
-			.splms-license-key-button {
-				min-width: 140px;
-			}
-		}
 	}
 
 	// Limited features info panel
@@ -760,10 +698,7 @@
 				border-left: 4px solid var(--splms-primary);
 			}
 
-			&.splms-status-trial {
-				border-left: 4px solid var(--splms-success);
-			}
-
+	
 			&.splms-status-free {
 				border-left: 4px solid var(--splms-warning);
 			}

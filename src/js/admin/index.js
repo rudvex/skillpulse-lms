@@ -6,8 +6,6 @@ import { SPLMSQuizEditor } from "./modules/courses/quiz-editor";
 import { SPLMSSectionEditor } from "./modules/courses/section-editor";
 import { SPLMSHelper } from './core/helper';
 import { SPLMSAdminAjax } from './core/ajax';
-import './trial-upgrade-prompts';
-import './trial-admin-restrictions';
 
 const SPLMSCore = {};
 SPLMSCore.helper = new SPLMSHelper();

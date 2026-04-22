@@ -8,7 +8,6 @@ import { SplmsIcon } from "../../../../components/SplmsIcon";
 import { translateLabel, getConfig, getConfigSync, isVisibleField } from "../../../../utility/helper";
 import { fetchApiData, formatOptions } from '../../../../utility/apiHelper';
 import { AutoSaveManager, AutoSaveIndicator } from '../../../../utility/debounce';
-import TrialLimitsPanel from '../Components/TrialLimitsPanel';
 
 // import '../styles/settings.scss';
 
@@ -813,8 +812,6 @@ class Settings extends Component {
                     </div>
                     {this.renderSaveStatus()}
                 </div>
-
-                <TrialLimitsPanel />
 
                 <div className="settings-sections">
                     {config.sections.map((section) => 

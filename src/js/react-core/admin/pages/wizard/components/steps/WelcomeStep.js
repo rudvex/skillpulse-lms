@@ -54,10 +54,10 @@ const WelcomeStep = ({ onNext, loading }) => {
 						</div>
 						<div className="splms-welcome-feature-content">
 							<h3 className="splms-welcome-feature-title">
-								{__('Create your first course', 'skillpulse-lms')}
+								{__('Set up your license', 'skillpulse-lms')}
 							</h3>
 							<p className="splms-welcome-feature-description">
-								{__('Start building courses with lessons, quizzes, and certificates', 'skillpulse-lms')}
+								{__('Activate your license key to unlock all pro features', 'skillpulse-lms')}
 							</p>
 						</div>
 					</div>
