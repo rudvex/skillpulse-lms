@@ -31,9 +31,7 @@ const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
 		}
 	}, []);
 
-	// Get wizard data and setup information
 	const { splmsWizardData } = window;
-	const setupMethod = wizardData?.steps_data?.license?.method || 'limited';
 
 	/**
 	 * Get setup status and personalized messaging
@@ -56,8 +54,8 @@ const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
 			type: 'free',
 			icon: 'admin-generic',
 			color: 'warning',
-			title: __('Basic Features Available', 'skillpulse-lms'),
-			message: __('Create up to 3 courses with 25 students. Upgrade anytime for unlimited access.', 'skillpulse-lms'),
+			title: __('License Not Activated', 'skillpulse-lms'),
+			message: __('Activate your license anytime to unlock all pro features and receive updates.', 'skillpulse-lms'),
 			nextStep: __('Start with your first course', 'skillpulse-lms')
 		};
 	};

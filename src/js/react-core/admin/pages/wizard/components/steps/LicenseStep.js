@@ -11,9 +11,9 @@
 import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { Button, Card, CardBody, Notice } from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useSelect } from '@wordpress/data';
 
-// Reuse existing license components
+// Reuse existing license components.
 import LicenseStatusCard from '../../../license/components/LicenseStatusCard';
 import { SplmsIcon } from '../../../../../components/SplmsIcon';
 
@@ -21,7 +21,6 @@ import { SplmsIcon } from '../../../../../components/SplmsIcon';
  * License Step Component
  */
 const LicenseStep = ({ onNext, onBack, stepData, loading, error }) => {
-	const [showLicenseInput, setShowLicenseInput] = useState(false);
 	const [localError, setLocalError] = useState(null);
 
 	// Use existing license store.
@@ -46,14 +45,11 @@ const LicenseStep = ({ onNext, onBack, stepData, loading, error }) => {
 		}
 	}, []);
 
-	// Use existing license store actions.
-	const { activateLicense } = useDispatch('splms/license') || {};
-
 	/**
-	 * Check if we should auto-advance based on license status.
+	 * Auto-advance when license becomes active.
 	 */
 	useEffect(() => {
-		if ( 'active' === licenseInfo?.status ) {
+		if ( 'active' === licenseInfo?.status && licenseInfo?.domain_activated ) {
 			setTimeout(() => {
 				onNext({
 					method: 'license',
@@ -63,13 +59,6 @@ const LicenseStep = ({ onNext, onBack, stepData, loading, error }) => {
 			}, 1000);
 		}
 	}, [licenseInfo]);
-
-	/**
-	 * Handle showing license input section.
-	 */
-	const handleShowLicenseSection = () => {
-		setShowLicenseInput(true);
-	};
 
 	/**
 	 * Handle successful license activation.
@@ -83,27 +72,17 @@ const LicenseStep = ({ onNext, onBack, stepData, loading, error }) => {
 	};
 
 	/**
-	 * Handle skip license step.
+	 * Handle continue without license (free mode).
 	 */
-	const handleSkip = () => {
+	const handleContinueFree = () => {
 		onNext({
 			method: 'skip',
 			completed_at: Date.now()
 		});
 	};
 
-	/**
-	 * Handle continue without license (limited mode).
-	 */
-	const handleContinueLimited = () => {
-		onNext({
-			method: 'limited',
-			completed_at: Date.now()
-		});
-	};
-
-	// Show auto-advance message only if license is already active.
-	if ( 'active' === licenseInfo?.status ) {
+	// Show auto-advance message if license is already active.
+	if ( 'active' === licenseInfo?.status && licenseInfo?.domain_activated ) {
 		return (
 			<div className="splms-wizard-step splms-license-step">
 				<div className="splms-license-auto-advance">
@@ -133,74 +112,52 @@ const LicenseStep = ({ onNext, onBack, stepData, loading, error }) => {
 			)}
 
 			<div className="splms-license-step-content">
-				{/* License Key Option */}
-				<div className="splms-license-options-grid">
+				{/* License activation card - shown directly */}
+				<div className="splms-license-step-section">
 					<Card className="splms-license-option splms-license-option-license">
 						<CardBody>
-							<div className="splms-license-option-content">
-								<div className="splms-license-option-header">
-									<SplmsIcon name="admin-network" size={32} className="splms-license-option-icon" />
-									<h3>{__('License Key', 'skillpulse-lms')}</h3>
-									<p className="splms-license-option-subtitle">{__('Activate your license to get started', 'skillpulse-lms')}</p>
-								</div>
-
-								<div className="splms-license-features">
-									<ul>
-										<li>
-											<SplmsIcon name="yes" size={16} />
-											{__('Full premium access', 'skillpulse-lms')}
-										</li>
-										<li>
-											<SplmsIcon name="yes" size={16} />
-											{__('Priority customer support', 'skillpulse-lms')}
-										</li>
-										<li>
-											<SplmsIcon name="yes" size={16} />
-											{__('Regular updates included', 'skillpulse-lms')}
-										</li>
-										<li>
-											<SplmsIcon name="yes" size={16} />
-											{__('Commercial use license', 'skillpulse-lms')}
-										</li>
-									</ul>
-								</div>
-
-								<Button
-									isPrimary
-									size="large"
-									onClick={handleShowLicenseSection}
-									disabled={loading}
-									className="splms-license-option-button"
-								>
-									{__('Enter License Key', 'skillpulse-lms')}
-								</Button>
-
-								<p className="splms-license-option-note">
-									<a href="https://skillpulselms.com/pricing/" target="_blank" rel="noopener noreferrer">
-										{__('Purchase a license', 'skillpulse-lms')}
-									</a>
-								</p>
+							<div className="splms-license-option-header">
+								<SplmsIcon name="admin-network" size={32} className="splms-license-option-icon" />
+								<h3>{__('Activate Your License', 'skillpulse-lms')}</h3>
+								<p className="splms-license-option-subtitle">{__('Enter your license key to unlock all pro features', 'skillpulse-lms')}</p>
 							</div>
+
+							<LicenseStatusCard
+								licenseInfo={licenseInfo}
+								loading={licenseLoading || loading}
+								onActivateLicense={handleLicenseActivated}
+								onLicenseKeyChange={() => {}}
+							/>
+
+							<div className="splms-license-features">
+								<ul>
+									<li>
+										<SplmsIcon name="yes" size={16} />
+										{__('Full premium access', 'skillpulse-lms')}
+									</li>
+									<li>
+										<SplmsIcon name="yes" size={16} />
+										{__('Priority customer support', 'skillpulse-lms')}
+									</li>
+									<li>
+										<SplmsIcon name="yes" size={16} />
+										{__('Regular updates included', 'skillpulse-lms')}
+									</li>
+									<li>
+										<SplmsIcon name="yes" size={16} />
+										{__('Commercial use license', 'skillpulse-lms')}
+									</li>
+								</ul>
+							</div>
+
+							<p className="splms-license-option-note">
+								<a href="https://skillpulselms.com/pricing/" target="_blank" rel="noopener noreferrer">
+									{__('Purchase a license', 'skillpulse-lms')}
+								</a>
+							</p>
 						</CardBody>
 					</Card>
 				</div>
-
-				{/* License Input Section (when requested) */}
-				{showLicenseInput && (
-					<div className="splms-license-step-section">
-						<Card>
-							<CardBody>
-								<h3>{__('Enter License Key', 'skillpulse-lms')}</h3>
-								<LicenseStatusCard
-									licenseInfo={licenseInfo}
-									loading={licenseLoading || loading}
-									onActivateLicense={handleLicenseActivated}
-									onLicenseKeyChange={() => {}}
-								/>
-							</CardBody>
-						</Card>
-					</div>
-				)}
 
 				{/* Skip Section */}
 				<div className="splms-license-skip-section">
@@ -208,7 +165,7 @@ const LicenseStep = ({ onNext, onBack, stepData, loading, error }) => {
 						{__('Want to explore first?', 'skillpulse-lms')}
 						<Button
 							isLink
-							onClick={handleContinueLimited}
+							onClick={handleContinueFree}
 							disabled={loading}
 							className="splms-license-skip-button"
 						>
