@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkillPulse LMS v1.0.0\n"
 "Report-Msgid-Bugs-To: https://skillpulselms.com/contact\n"
-"POT-Creation-Date: 2026-04-21 13:29:50+00:00\n"
+"POT-Creation-Date: 2026-04-23 09:25:15+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -95,8 +95,8 @@ msgstr ""
 #: includes/admin/manager/class-admin-columns.php:299
 #: includes/admin/manager/class-admin-columns.php:372
 #: includes/admin/manager/class-admin-columns.php:549
-#: includes/functions.php:1419 includes/functions.php:1437
-#: includes/functions.php:1501 includes/functions.php:1504
+#: includes/functions.php:1427 includes/functions.php:1445
+#: includes/functions.php:1509 includes/functions.php:1512
 #: templates/course/course.php:187 templates/course/course.php:199
 #: templates/course/partials/course-enrollment-card.php:354
 #: templates/course/partials/course-enrollment-card.php:400
@@ -708,9 +708,9 @@ msgid "Signup not found."
 msgstr ""
 
 #: includes/admin/signup/class-signup-admin.php:272
-#: includes/admin/wizard/class-wizard-ajax.php:71
-#: includes/admin/wizard/class-wizard-ajax.php:114
-#: includes/admin/wizard/class-wizard-ajax.php:141
+#: includes/admin/wizard/class-wizard-ajax.php:65
+#: includes/admin/wizard/class-wizard-ajax.php:108
+#: includes/admin/wizard/class-wizard-ajax.php:135
 msgid "Insufficient permissions."
 msgstr ""
 
@@ -974,7 +974,7 @@ msgid "License Setup"
 msgstr ""
 
 #: includes/admin/wizard/class-setup-wizard.php:98
-msgid "Activate your license or start a trial"
+msgid "Activate your license"
 msgstr ""
 
 #: includes/admin/wizard/class-setup-wizard.php:102
@@ -999,63 +999,63 @@ msgstr ""
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:306
+#: includes/admin/wizard/class-setup-wizard.php:292
 msgid "Step data saved successfully."
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:327
+#: includes/admin/wizard/class-setup-wizard.php:313
 msgid "Wizard completed successfully."
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:363
+#: includes/admin/wizard/class-setup-wizard.php:349
 msgid "UTC"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:367
+#: includes/admin/wizard/class-setup-wizard.php:353
 msgid "Eastern Time (US)"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:371
+#: includes/admin/wizard/class-setup-wizard.php:357
 msgid "Central Time (US)"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:375
+#: includes/admin/wizard/class-setup-wizard.php:361
 msgid "Mountain Time (US)"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:379
+#: includes/admin/wizard/class-setup-wizard.php:365
 msgid "Pacific Time (US)"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:383
+#: includes/admin/wizard/class-setup-wizard.php:369
 msgid "London"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:387
+#: includes/admin/wizard/class-setup-wizard.php:373
 msgid "Paris"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:391
+#: includes/admin/wizard/class-setup-wizard.php:377
 msgid "Berlin"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:395
+#: includes/admin/wizard/class-setup-wizard.php:381
 msgid "Tokyo"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:399
+#: includes/admin/wizard/class-setup-wizard.php:385
 msgid "Shanghai"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:403
+#: includes/admin/wizard/class-setup-wizard.php:389
 msgid "Sydney"
 msgstr ""
 
-#: includes/admin/wizard/class-wizard-ajax.php:84
+#: includes/admin/wizard/class-wizard-ajax.php:78
 msgid "Invalid step."
 msgstr ""
 
-#: includes/admin/wizard/class-wizard-ajax.php:159
+#: includes/admin/wizard/class-wizard-ajax.php:153
 msgid "Wizard skipped successfully."
 msgstr ""
 
@@ -1426,78 +1426,78 @@ msgstr ""
 msgid "Complete All Lessons + Pass Quizzes (%d%% minimum)"
 msgstr ""
 
-#: includes/functions.php:1108
+#: includes/functions.php:1116
 #: templates/course/partials/pricing-comparison.php:230
 msgid "Already Enrolled"
 msgstr ""
 
-#: includes/functions.php:1118
+#: includes/functions.php:1126
 msgid "Course Full"
 msgstr ""
 
-#: includes/functions.php:1146 templates/course/partials/course-hero.php:884
+#: includes/functions.php:1154 templates/course/partials/course-hero.php:884
 msgid "Enrollment Closed"
 msgstr ""
 
-#: includes/functions.php:1151
+#: includes/functions.php:1159
 #. translators: 1: Start date, 2: End date.
 msgid "Enrollment opens %1$s and closes %2$s."
 msgstr ""
 
-#: includes/functions.php:1191 includes/functions.php:1404
+#: includes/functions.php:1199 includes/functions.php:1412
 msgid "Log In to Enroll"
 msgstr ""
 
-#: includes/functions.php:1248
+#: includes/functions.php:1256
 msgid "Enroll Now - Free"
 msgstr ""
 
-#: includes/functions.php:1253
+#: includes/functions.php:1261
 #: includes/modules/orders/class-order-status-manager.php:135
 #: templates/dashboard/courses.php:178 templates/single-section.php:447
 #: templates/single-section.php:498 templates/single-section.php:629
 msgid "Start Learning"
 msgstr ""
 
-#: includes/functions.php:1273 includes/functions.php:1277
+#: includes/functions.php:1281 includes/functions.php:1285
 #: templates/single-section.php:531
 msgid "Log In to Purchase"
 msgstr ""
 
-#: includes/functions.php:1276 includes/functions.php:1297
+#: includes/functions.php:1284 includes/functions.php:1305
 msgid "Payment system not configured"
 msgstr ""
 
-#: includes/functions.php:1284 includes/functions.php:1291
-#: includes/functions.php:1308 includes/functions.php:1339
-#: includes/functions.php:1374 includes/functions.php:1398
+#: includes/functions.php:1292 includes/functions.php:1299
+#: includes/functions.php:1316 includes/functions.php:1347
+#: includes/functions.php:1382 includes/functions.php:1406
 #: templates/course/partials/course-enrollment-card.php:453
 #: templates/course/partials/course-hero-v2.php:453
 msgid "Enroll Now"
 msgstr ""
 
-#: includes/functions.php:1298 includes/functions.php:1313
+#: includes/functions.php:1306 includes/functions.php:1321
 #: templates/shared/fullscreen-header.php:185
 msgid "Buy Now"
 msgstr ""
 
-#: includes/functions.php:1332
+#: includes/functions.php:1340
 msgid "Log In to Check Access"
 msgstr ""
 
-#: includes/functions.php:1343
+#: includes/functions.php:1351
 msgid "You are not invited to this course"
 msgstr ""
 
-#: includes/functions.php:1361
+#: includes/functions.php:1369
 msgid "Log In to Check Prerequisites"
 msgstr ""
 
-#: includes/functions.php:1381
+#: includes/functions.php:1389
 msgid "Complete Prerequisite"
 msgstr ""
 
-#: includes/functions.php:1456 includes/functions.php:1522
+#: includes/functions.php:1464 includes/functions.php:1530
 #: templates/course/course.php:206
 #: templates/course/partials/course-enrollment-card.php:417
 #: templates/course/partials/course-hero-v2.php:417
@@ -1505,46 +1505,46 @@ msgstr ""
 msgid "Invitation Only"
 msgstr ""
 
-#: includes/functions.php:1460 includes/functions.php:1545
+#: includes/functions.php:1468 includes/functions.php:1553
 #: templates/course/partials/course-enrollment-card.php:423
 #: templates/course/partials/course-hero-v2.php:423
 msgid "Prerequisite Required"
 msgstr ""
 
-#: includes/functions.php:1487 includes/functions.php:1562
+#: includes/functions.php:1495 includes/functions.php:1570
 msgid "Unknown"
 msgstr ""
 
-#: includes/functions.php:1488
+#: includes/functions.php:1496
 msgid "Unknown Course Type"
 msgstr ""
 
-#: includes/functions.php:1500
+#: includes/functions.php:1508
 msgid "Free Course"
 msgstr ""
 
-#: includes/functions.php:1511
+#: includes/functions.php:1519
 msgid "Paid Course"
 msgstr ""
 
-#: includes/functions.php:1523
+#: includes/functions.php:1531
 msgid "Invitation Required"
 msgstr ""
 
-#: includes/functions.php:1546
+#: includes/functions.php:1554
 msgid "Prerequisites Met - Ready to Enroll"
 msgstr ""
 
-#: includes/functions.php:1546
+#: includes/functions.php:1554
 msgid "Prerequisites Required"
 msgstr ""
 
-#: includes/functions.php:1618
+#: includes/functions.php:1626
 #. translators: %s: Formatted start date.
 msgid "Course content will be available starting %s."
 msgstr ""
 
-#: includes/functions.php:1771
+#: includes/functions.php:1779
 #: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1292
 #: templates/single-section.php:637
 msgid "Purchase"
@@ -2558,59 +2558,48 @@ msgstr ""
 msgid "Razorpay"
 msgstr ""
 
-#: includes/modules/notifications/email/senders/class-email-sender.php:114
-msgid "Trial email limit reached (100 emails). Upgrade to send unlimited emails."
-msgstr ""
-
-#: includes/modules/notifications/email/senders/class-email-sender.php:184
-#. translators: %s: License page URL
-msgid ""
-"Trial email limit reached (100 emails sent). <a href=\"%s\" class=\"button "
-"button-primary\">Upgrade Now</a> for unlimited email notifications."
-msgstr ""
-
-#: includes/modules/notifications/email/senders/class-email-sender.php:239
+#: includes/modules/notifications/email/senders/class-email-sender.php:84
 msgid "Email notifications are currently disabled."
 msgstr ""
 
-#: includes/modules/notifications/email/senders/class-email-sender.php:268
-#: includes/modules/notifications/email/senders/class-email-sender.php:613
+#: includes/modules/notifications/email/senders/class-email-sender.php:100
+#: includes/modules/notifications/email/senders/class-email-sender.php:445
 msgid "Email template has no content."
 msgstr ""
 
-#: includes/modules/notifications/email/senders/class-email-sender.php:297
+#: includes/modules/notifications/email/senders/class-email-sender.php:129
 msgid "Failed to send email."
 msgstr ""
 
-#: includes/modules/notifications/email/senders/class-email-sender.php:650
+#: includes/modules/notifications/email/senders/class-email-sender.php:482
 msgid "Failed to send email via WordPress mail."
 msgstr ""
 
-#: includes/modules/notifications/email/senders/class-email-sender.php:678
-#: includes/modules/notifications/email/senders/class-email-sender.php:758
+#: includes/modules/notifications/email/senders/class-email-sender.php:510
+#: includes/modules/notifications/email/senders/class-email-sender.php:590
 msgid "SMTP host is required."
 msgstr ""
 
-#: includes/modules/notifications/email/senders/class-email-sender.php:682
-#: includes/modules/notifications/email/senders/class-email-sender.php:762
+#: includes/modules/notifications/email/senders/class-email-sender.php:514
+#: includes/modules/notifications/email/senders/class-email-sender.php:594
 msgid "SMTP username is required."
 msgstr ""
 
-#: includes/modules/notifications/email/senders/class-email-sender.php:686
-#: includes/modules/notifications/email/senders/class-email-sender.php:766
+#: includes/modules/notifications/email/senders/class-email-sender.php:518
+#: includes/modules/notifications/email/senders/class-email-sender.php:598
 msgid "SMTP password is required."
 msgstr ""
 
-#: includes/modules/notifications/email/senders/class-email-sender.php:729
+#: includes/modules/notifications/email/senders/class-email-sender.php:561
 msgid "Failed to send email via SMTP."
 msgstr ""
 
-#: includes/modules/notifications/email/senders/class-email-sender.php:746
+#: includes/modules/notifications/email/senders/class-email-sender.php:578
 #: includes/rest-api/admin/class-rest-admin-email-templates-controller.php:334
 msgid "SMTP is not enabled."
 msgstr ""
 
-#: includes/modules/notifications/email/senders/class-email-sender.php:811
+#: includes/modules/notifications/email/senders/class-email-sender.php:643
 #. translators: %s: Error message.
 msgid "SMTP connection failed: %s"
 msgstr ""
@@ -5839,18 +5828,6 @@ msgstr ""
 
 #: includes/rest-api/admin/class-rest-admin-overview-controller.php:510
 msgid "Failed to create export file: "
-msgstr ""
-
-#: includes/rest-api/admin/class-rest-trial-controller.php:95
-msgid "Sorry, you are not allowed to access trial information."
-msgstr ""
-
-#: includes/rest-api/admin/class-rest-trial-controller.php:174
-msgid "Trial system is not available."
-msgstr ""
-
-#: includes/rest-api/admin/class-rest-trial-controller.php:185
-msgid "Trial manager is not available."
 msgstr ""
 
 #: includes/rest-api/config/class-rest-config-controller.php:103

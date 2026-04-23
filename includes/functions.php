@@ -794,13 +794,21 @@ function splms_get_setting( $setting_name, $default_value = null ) {
 	$setting_value = $default_value;
 
 	// All settings coming in tabs and settings name is the key.
-	foreach ( $all_settings as $settings ) {
+	foreach ( $all_settings as $tab_key => $settings ) {
+		// Top-level scalar values (e.g. enable_certificates => true).
+		if ( ! is_array( $settings ) ) {
+			if ( $tab_key === $setting_name ) {
+				$setting_value = $settings;
+			}
+			continue;
+		}
+
 		if ( isset( $settings[ $setting_name ] ) ) {
 			$setting_value = $settings[ $setting_name ];
 		}
 
 		foreach ( $settings as $key => $value ) {
-			if ( isset( $value[ $setting_name ] ) ) {
+			if ( is_array( $value ) && isset( $value[ $setting_name ] ) ) {
 				$setting_value = $value[ $setting_name ];
 			}
 		}
