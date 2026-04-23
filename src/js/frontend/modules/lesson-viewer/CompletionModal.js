@@ -172,13 +172,6 @@ export class CompletionModal extends SPLMSBaseModal {
     handleCertificateDownload() {
         const certificateUrl = this.getCertificateUrl();
 
-        console.log('Certificate URL Debug:', {
-            certificateUrl: certificateUrl,
-            certificateData: this.certificateData,
-            hasCertificateData: !!this.certificateData,
-            certificateUrlFromData: this.certificateData?.certificate_url
-        });
-
         // Try to open certificate in new tab
         if (certificateUrl) {
             // Check if this is a proper certificate URL (has nonce)

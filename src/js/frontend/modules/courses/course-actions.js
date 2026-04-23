@@ -74,7 +74,6 @@ export class SPLMSCourseActions {
             itemId = parseInt(itemId, 10);
         }
         
-        console.log('Bookmark clicked, itemId:', itemId, 'type:', itemType, 'button:', $button[0]);
         
         if (!itemId || isNaN(itemId)) {
             console.error('Bookmark button missing valid lesson-id or quiz-id attribute. Button classes:', $button.attr('class'), 'Button HTML:', $button[0].outerHTML);
@@ -374,7 +373,6 @@ export class SPLMSCourseActions {
             text: 'Check out this course!',
             url: courseUrl,
             onSuccess: () => {
-                console.log('Course shared successfully!');
             },
             onError: () => {
                 // Share modal is already shown by helper

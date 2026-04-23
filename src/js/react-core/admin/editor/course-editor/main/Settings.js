@@ -243,7 +243,6 @@ class Settings extends Component {
         
         // Double-check visibility before making API call
         if (!this.shouldDisplayField(field, courseSettings)) {
-            console.log(`Skipping API call for ${field.id} - field not visible`);
             return;
         }
         this.setState(prevState => ({

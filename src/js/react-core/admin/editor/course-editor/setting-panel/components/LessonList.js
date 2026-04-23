@@ -29,7 +29,6 @@ class LessonList extends Component {
 
   render() {
       const { searchedLessonsData } = this.props;
-      console.log(this.props);
       return (
           <div className="skillpluse-lms-lesson-panel">
               <PluginDocumentSettingPanel

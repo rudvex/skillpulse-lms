@@ -233,7 +233,6 @@ export const preloadConfigs = async (modules = ['courses', 'lessons', 'quizzes',
 
     try {
         await Promise.all(promises);
-        console.log('Configuration preloading completed');
     } catch (error) {
         console.error('Configuration preloading failed:', error);
     }

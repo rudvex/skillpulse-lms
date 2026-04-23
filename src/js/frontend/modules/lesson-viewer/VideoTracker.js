@@ -419,11 +419,6 @@ class SPLMSVideoTracker {
 			this.isCompleted = true;
 		}
 
-		console.log('🎬 Video progress restored:', {
-			percentage: this.watchPercentage,
-			position: this.lastPosition,
-			segments: this.watchedSegments.size
-		});
 	}
 
 	/**
@@ -520,7 +515,6 @@ class SPLMSVideoTracker {
 					break;
 			}
 
-			console.log(`🎬 Resumed video from ${this.lastPosition}s`);
 		} catch (error) {
 			console.warn('Error resuming from last position:', error);
 		}

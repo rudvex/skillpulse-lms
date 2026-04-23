@@ -106,9 +106,6 @@ export function fetchEnrollments(filters = {}) {
             if (filters.per_page) queryParams.append('per_page', filters.per_page);
             if (filters.page) queryParams.append('page', filters.page);
 
-            // Debug logging
-            console.log('API call:', queryParams.toString());
-            
             const response = await apiFetch({
                 path: `/splms/v1/enrollments?${queryParams.toString()}`,
                 method: 'GET',

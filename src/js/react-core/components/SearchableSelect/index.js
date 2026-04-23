@@ -106,17 +106,7 @@ const SearchableSelect = ({
     const getDisplayValue = () => {
         if (!value || value === '' || value === 0 || value === '0') return '';
 
-        // Debug logging
-        console.log('getDisplayValue - Debug:', {
-            value,
-            valueType: typeof value,
-            allOptionsCount: allOptions.length,
-            allOptions: allOptions
-        });
-
         const selectedOption = allOptions.find(opt => String(opt.value) === String(value));
-
-        console.log('getDisplayValue - Found option:', selectedOption);
 
         return selectedOption ? selectedOption.label : '';
     };

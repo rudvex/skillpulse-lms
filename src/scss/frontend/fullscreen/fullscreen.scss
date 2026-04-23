@@ -1435,6 +1435,8 @@ body.splms-mobile-menu-open {
 .splms-quiz-actions {
 	margin-bottom: var(--splms-spacing-8);
 	text-align: center;
+    display: flex;
+    justify-content: center;
 
 	.splms-quiz-action-buttons {
 		display: flex;

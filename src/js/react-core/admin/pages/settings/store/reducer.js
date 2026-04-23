@@ -12,11 +12,6 @@ const DEFAULT_STATE = {
 export default function reducer(state = DEFAULT_STATE, action) {
     switch (action.type) {
         case SET_SETTINGS:
-            console.log('SET_SETTINGS:', {
-                previousSettings: state.settings,
-                newSettings: action.settings,
-                settingsKeys: Object.keys(action.settings || {})
-            });
             return {
                 ...state,
                 settings: action.settings,
@@ -63,15 +58,6 @@ export default function reducer(state = DEFAULT_STATE, action) {
                     },
                 },
             };
-
-            // Add debugging to track state updates
-            console.log('UPDATE_SETTINGS_STATE:', {
-                tab: action.tab,
-                sectionId: action.sectionId,
-                setting: action.setting,
-                value: action.value,
-                updatedSettings
-            });
 
             return {
                 ...state,

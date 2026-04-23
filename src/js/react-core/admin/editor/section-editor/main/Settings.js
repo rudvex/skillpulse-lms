@@ -57,7 +57,6 @@ class Settings extends Component {
             // Load config with item_id parameter for existing posts
             const configParams = isNewPost ? {} : { item_id: postId };
             const config = await getConfig('section_settings_config', 'admin', configParams);
-console.log("config",config);
             if (!config || !config.sections) {
                 throw new Error('Invalid configuration structure received');
             }

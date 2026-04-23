@@ -979,8 +979,6 @@ class SPLMSQuiz {
                 nonce: frontend.nonces.splms_nonce
             },
             success: (response) => {
-                console.log('Guest attempt response:', response);
-                
                 // Stop auto-saving
                 if (this.autoSaveInterval) {
                     clearInterval(this.autoSaveInterval);
@@ -1570,10 +1568,8 @@ class SPLMSQuiz {
                 const attemptFound = currentAttemptId && attempts && attempts.find(a => a.id == currentAttemptId);
 
                 if (!attemptFound && retryCount < maxRetries && currentAttemptId) {
-                    console.log(`SPLMS: Attempt #${currentAttemptId} not found in history, retrying... (${retryCount + 1}/${maxRetries})`);
                     this.loadAttemptHistoryWithRetry($container, results, retryCount + 1);
                 } else if (retryCount > 0) {
-                    console.log(`SPLMS: Attempt history loaded successfully after ${retryCount} retries`);
                 }
             });
         }, retryDelay);
@@ -1627,8 +1623,6 @@ class SPLMSQuiz {
         if (!quizId && this.quizData) {
             quizId = this.quizData.quiz_id || this.quizData.quizId;
         }
-        
-        console.log('Loading attempt history for quiz ID:', quizId, 'from settings:', this.settings);
         
         if (!quizId) {
             console.warn('No quiz ID available for loading attempt history. Settings:', this.settings, 'Results:', results);
@@ -2113,12 +2107,9 @@ class SPLMSQuiz {
      * Clears all quiz state and prepares for fresh start
      */
     resetQuizForRetake() {
-        console.log('🔄 Starting comprehensive quiz reset for retake...');
-
         // 1. Clear browser storage
         if (this.settings && this.settings.quizId) {
             clearStorage(this.settings.quizId);
-            console.log('✅ Cleared localStorage for quiz:', this.settings.quizId);
         }
 
         // 2. Reset instance properties
@@ -2176,7 +2167,6 @@ class SPLMSQuiz {
                        }
                    });
 
-        console.log('✅ Quiz reset complete - ready for new attempt');
 
         // 8. Verify reset state
         this.verifyResetState();
@@ -2191,7 +2181,6 @@ class SPLMSQuiz {
      * Verify that quiz state has been properly reset
      */
     verifyResetState() {
-        console.log('🔍 Verifying quiz reset state...');
 
         const checks = {
             'Attempt ID cleared': this.attemptId === null,
@@ -2212,12 +2201,10 @@ class SPLMSQuiz {
         let allPassed = true;
         Object.entries(checks).forEach(([checkName, passed]) => {
             const status = passed ? '✅' : '❌';
-            console.log(`${status} ${checkName}: ${passed}`);
             if (!passed) allPassed = false;
         });
 
         if (allPassed) {
-            console.log('✅ All reset state checks passed!');
         } else {
             console.warn('⚠️ Some reset state checks failed - quiz may not be fully reset');
         }
@@ -2245,11 +2232,9 @@ function handleRetakeQuizFromPHPResults() {
     jQuery(document).on('click', '.retake-quiz-btn', function(e) {
         e.preventDefault();
 
-        console.log('🔄 Retake Quiz button clicked');
 
         // Show confirmation dialog
         if (!confirm('Are you sure you want to retake this quiz? Your current results will remain in your history.')) {
-            console.log('❌ Retake cancelled by user');
             return;
         }
 
@@ -2306,7 +2291,6 @@ function handleRetakeQuizFromPHPResults() {
 
             }, 500);
 
-            console.log('✅ Quiz reset successful for Quiz ID:', quizId);
 
         } catch (error) {
             console.error('❌ Error during quiz reset:', error);

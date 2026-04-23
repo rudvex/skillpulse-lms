@@ -21,3 +21,4 @@ teamcity.txt
 # WordPress test environment
 /tmp/
 /wordpress-tests-lib/
+bin/strauss.phar

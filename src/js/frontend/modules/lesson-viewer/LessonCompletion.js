@@ -191,12 +191,6 @@ class SPLMSLessonCompletion {
 	}
 
 	handleSuccess(data) {
-		console.log('🎯 Course Completion Debug: handleSuccess called', {
-			lessonId: this.lessonId,
-			courseId: this.courseId,
-			data: data
-		});
-
 		// Update button state.
 		this.completeButton.classList.add('is-completed');
 		this.completeButton.disabled = true;
@@ -244,18 +238,9 @@ class SPLMSLessonCompletion {
 		const progress = this.calculateCourseProgress(data);
 		const isFinal = this.isFinalCourseItem();
 
-		console.log('🎯 Course Completion Debug: Checking completion conditions', {
-			progress: progress,
-			isFinal: isFinal,
-			progressFromData: data.progress_percentage,
-			condition: progress >= 100 && isFinal
-		});
-
 		if (progress >= 100 && isFinal) {
-			console.log('🎉 Course Completion Debug: TRIGGERING COURSE COMPLETION!');
 			this.handleCourseCompletion(data);
 		} else {
-			console.log('📝 Course Completion Debug: Regular lesson completion');
 			// Show regular lesson completion message.
 			this.showSuccess('Lesson marked as complete!');
 		}
@@ -265,11 +250,8 @@ class SPLMSLessonCompletion {
 	 * Calculate course progress percentage
 	 */
 	calculateCourseProgress(data) {
-		console.log('🎯 Course Completion Debug: calculateCourseProgress() called with data:', data);
-
 		// Priority 1: Use progress from server response
 		if (data.progress_percentage !== undefined && data.progress_percentage !== null) {
-			console.log('🎯 Course Completion Debug: Using server progress:', data.progress_percentage);
 			return parseFloat(data.progress_percentage);
 		}
 
@@ -286,12 +268,6 @@ class SPLMSLessonCompletion {
 			const completedItems = document.querySelectorAll('.splms-curriculum-item.is-completed');
 			const calculatedProgress = (completedItems.length / allItems.length) * 100;
 
-			console.log('🎯 Course Completion Debug: Calculated from DOM', {
-				totalItems: allItems.length,
-				completedItems: completedItems.length,
-				calculatedProgress: calculatedProgress
-			});
-
 			return calculatedProgress;
 		}
 
@@ -302,12 +278,10 @@ class SPLMSLessonCompletion {
 			const progressFromUI = parseFloat(progressText);
 
 			if (!isNaN(progressFromUI)) {
-				console.log('🎯 Course Completion Debug: Using UI progress:', progressFromUI);
 				return progressFromUI;
 			}
 		}
 
-		console.log('🎯 Course Completion Debug: No progress found - defaulting to 0');
 		return 0;
 	}
 
@@ -340,12 +314,6 @@ class SPLMSLessonCompletion {
 
 		const totalCompleted = completedItems.length;
 		const totalItems = allItems.length;
-
-		console.log('🔄 Progress Update Debug:', {
-			totalCompleted: totalCompleted,
-			totalItems: totalItems,
-			percentage: percentage
-		});
 
 		// Update progress count displays (e.g., "1/3 items")
 		const progressCounts = document.querySelectorAll('.splms-progress-count');
@@ -458,14 +426,10 @@ class SPLMSLessonCompletion {
 	 * Check if this is the final lesson/quiz in the course
 	 */
 	isFinalCourseItem() {
-		console.log('🎯 Course Completion Debug: isFinalCourseItem() called');
-
 		// Check if we're on the last item in the curriculum
 		const currentItem = document.querySelector('.splms-curriculum-item.is-current');
-		console.log('🎯 Course Completion Debug: Current item found:', currentItem);
 
 		if (!currentItem) {
-			console.log('🎯 Course Completion Debug: No current item found - returning false');
 			return false;
 		}
 
@@ -473,41 +437,17 @@ class SPLMSLessonCompletion {
 		const allItems = document.querySelectorAll('.splms-curriculum-item');
 		const currentIndex = Array.from(allItems).indexOf(currentItem);
 
-		console.log('🎯 Course Completion Debug: Curriculum analysis', {
-			totalItems: allItems.length,
-			currentIndex: currentIndex,
-			isLastInList: currentIndex === allItems.length - 1
-		});
-
 		// If this is the last item in the list, it's the final item
 		if (currentIndex === allItems.length - 1) {
-			console.log('🎯 Course Completion Debug: This is the last item in curriculum - returning true');
 			return true;
 		}
 
 		// Check if all remaining items are already completed
-		const remainingItems = [];
 		for (let i = currentIndex + 1; i < allItems.length; i++) {
-			const item = allItems[i];
-			const isCompleted = item.classList.contains('is-completed');
-			remainingItems.push({
-				index: i,
-				isCompleted: isCompleted,
-				text: item.textContent?.trim() || 'Unknown'
-			});
-
-			if (!isCompleted) {
-				console.log('🎯 Course Completion Debug: Found incomplete item after current - returning false', {
-					incompleteItem: item.textContent?.trim() || 'Unknown',
-					index: i
-				});
+			if (!allItems[i].classList.contains('is-completed')) {
 				return false;
 			}
 		}
-
-		console.log('🎯 Course Completion Debug: All remaining items are completed', {
-			remainingItems: remainingItems
-		});
 
 		return true;
 	}
@@ -518,7 +458,6 @@ class SPLMSLessonCompletion {
 	handleCourseCompletion(data) {
 		// Prevent duplicate course completion events
 		if (this.courseCompletionTriggered) {
-			console.log('🔄 Course Completion Debug: Completion already triggered, skipping duplicate');
 			return;
 		}
 

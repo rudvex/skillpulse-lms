@@ -99,7 +99,6 @@ export class AutoSaveManager {
 
         // Prevent race condition: if a save is already in progress, queue changes for next batch.
         if (this.isSavingInProgress) {
-            console.log('Save already in progress, changes will be saved in next batch');
             // Re-trigger debounced save to handle queued changes after current save completes.
             this.debouncedSave();
             return;

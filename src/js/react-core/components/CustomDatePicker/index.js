@@ -67,7 +67,6 @@ const CustomDatePicker = (props) => {
             if (!isValid && date) {
                 // Show validation error but don't clear the field immediately
                 // Allow user to see what they entered and the error message
-                console.log('Validation failed for date:', date);
             }
         }, 300);
     }, []);

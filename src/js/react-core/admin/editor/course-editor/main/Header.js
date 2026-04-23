@@ -57,7 +57,6 @@ class Header extends Component {
             activeGeneralSidebarName,
         } = this.props;
         if(isDistractionFreeMode){
-            console.log('You cannot enable "Distraction Free Mode" in courses');
             toggleFeature('distractionFree')
         }
 

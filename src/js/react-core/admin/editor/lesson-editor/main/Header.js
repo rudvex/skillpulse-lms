@@ -69,7 +69,6 @@ class Header extends Component {
         }
 
         if(isDistractionFreeMode){
-            console.log('You cannot enable "Distraction Free Mode" in lessons');
             toggleFeature('distractionFree')
         }
 

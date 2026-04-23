@@ -144,11 +144,9 @@
 					is_read: isReadParam
 				},
 				success: function(response) {
-					console.log('Notifications AJAX response:', response);
 					if (response.success && response.data && response.data.notifications && response.data.notifications.length > 0) {
 						self.renderNotifications(response.data.notifications);
 					} else {
-						console.log('No notifications found or invalid response structure');
 						self.renderEmptyState();
 					}
 				},

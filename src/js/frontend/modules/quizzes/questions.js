@@ -442,7 +442,6 @@ class SPLMSQuestions {
     restoreAnswersInUI() {
         // Ensure we have answers to restore
         if (!this.quiz.answers || Object.keys(this.quiz.answers).length === 0) {
-            console.log('No answers to restore');
             return;
         }
 
@@ -462,7 +461,6 @@ class SPLMSQuestions {
             }
             
             const questionType = $question.data('question-type');
-            console.log(`Restoring answer for question ${questionId}, type: ${questionType}, answer:`, answer);
             
             if (questionType === 'multiple_select') {
                 // Handle multiple select - array of option IDs
@@ -494,7 +492,6 @@ class SPLMSQuestions {
                 // Handle single select - radio buttons
                 const answerValue = Array.isArray(answer) ? answer[0] : answer;
                 if (!answerValue) return;
-                console.log(answerValue);
                 const normalizedAnswer = String(answerValue).trim();
                 
                 // Match by radio value (option ID)
