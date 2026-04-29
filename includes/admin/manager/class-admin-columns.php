@@ -82,96 +82,24 @@ class SkillPulse_LMS_Admin_Columns {
 		if ( ! $screen || ! in_array( $screen->post_type, array( SPLMS_POST_TYPES['course'], SPLMS_POST_TYPES['section'], SPLMS_POST_TYPES['lesson'], SPLMS_POST_TYPES['quiz'] ), true ) ) {
 			return;
 		}
-		?>
-		<style type="text/css">
-			.splms-badge {
-				display: inline-block;
-				padding: 3px 8px;
-				border-radius: 3px;
-				font-size: 11px;
-				font-weight: 600;
-				text-transform: uppercase;
-				letter-spacing: 0.3px;
-				line-height: 1.4;
-			}
-			.splms-badge-free {
-				background-color: #d4edda;
-				color: #155724;
-			}
-			.splms-badge-public-free {
-				background-color: #d4edda;
-				color: #155724;
-			}
-			.splms-badge-public-paid {
-				background-color: #fff3cd;
-				color: #856404;
-			}
-			.splms-badge-invitation-only {
-				background-color: #d1ecf1;
-				color: #0c5460;
-			}
-			.splms-badge-prerequisite-required {
-				background-color: #f8d7da;
-				color: #721c24;
-			}
-			.splms-badge-text {
-				background-color: #e7f3ff;
-				color: #004085;
-			}
-			.splms-badge-video {
-				background-color: #ffe7e7;
-				color: #721c24;
-			}
-			.splms-badge-audio {
-				background-color: #fff4e6;
-				color: #856404;
-			}
-			.splms-badge-interactive {
-				background-color: #e6f3ff;
-				color: #004085;
-			}
-			.splms-badge-document {
-				background-color: #f0f0f0;
-				color: #333;
-			}
-			.splms-badge-graded {
-				background-color: #d4edda;
-				color: #155724;
-			}
-			.splms-badge-practice {
-				background-color: #fff3cd;
-				color: #856404;
-			}
-			.splms-badge-survey {
-				background-color: #d1ecf1;
-				color: #0c5460;
-			}
-			.splms-badge-beginner {
-				background-color: #d4edda;
-				color: #155724;
-			}
-			.splms-badge-intermediate {
-				background-color: #fff3cd;
-				color: #856404;
-			}
-			.splms-badge-advanced {
-				background-color: #f8d7da;
-				color: #721c24;
-			}
-			.splms-badge-expert {
-				background-color: #d1ecf1;
-				color: #0c5460;
-			}
-			.splms-badge-price {
-				background-color: #e7f3ff;
-				color: #004085;
-			}
-			.splms-badge-duration {
-				background-color: #f0f0f0;
-				color: #333;
-			}
-		</style>
-		<?php
+
+		$css = '.splms-badge{display:inline-block;padding:3px 8px;border-radius:3px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.3px;line-height:1.4}'
+			. '.splms-badge-free,.splms-badge-public-free{background-color:#d4edda;color:#155724}'
+			. '.splms-badge-public-paid{background-color:#fff3cd;color:#856404}'
+			. '.splms-badge-invitation-only{background-color:#d1ecf1;color:#0c5460}'
+			. '.splms-badge-prerequisite-required{background-color:#f8d7da;color:#721c24}'
+			. '.splms-badge-text{background-color:#e7f3ff;color:#004085}'
+			. '.splms-badge-video{background-color:#ffe7e7;color:#721c24}'
+			. '.splms-badge-audio{background-color:#fff4e6;color:#856404}'
+			. '.splms-badge-interactive{background-color:#e6f3ff;color:#004085}'
+			. '.splms-badge-document,.splms-badge-duration{background-color:#f0f0f0;color:#333}'
+			. '.splms-badge-graded,.splms-badge-beginner{background-color:#d4edda;color:#155724}'
+			. '.splms-badge-practice,.splms-badge-intermediate{background-color:#fff3cd;color:#856404}'
+			. '.splms-badge-survey,.splms-badge-expert{background-color:#d1ecf1;color:#0c5460}'
+			. '.splms-badge-advanced{background-color:#f8d7da;color:#721c24}'
+			. '.splms-badge-price{background-color:#e7f3ff;color:#004085}';
+
+		wp_add_inline_style( 'wp-admin', $css );
 	}
 
 	/**

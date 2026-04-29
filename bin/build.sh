@@ -87,7 +87,8 @@ rm -f "../$product_name.zip";
 # Note: readme.txt is included for WordPress.org compatibility and changelog display
 # Note: vendor/ is excluded because the plugin uses lib/vendor/ (Strauss-prefixed).
 # Raw vendor/ packages are only needed during development for Strauss to copy from.
-zip "../$product_name.zip" ./ -r -x "Gruntfile.js" "webpack.config.js" "webpack.dev.js" "webpack.prod.js" "workspace.code-workspace" "./node_modules/*" "./src/*" "./bin/*" "./npm*" "*.git*" "*.idea*" "*wpcs*" "*DS_Store*" "./composer.*" "./package*" "./phpcs.*" "./.*" "./README.md" "./api-docs/*" "./docs/*" "./demo/*" "./tests/*" "./vendor/*" "./assets/fonts/**" "assets/css/*.map" "assets/js/*.map" "*claude.md" "*CLAUDE.md" "*RELEASE.md" "*phpunit.xml*"
+# Note: composer.json is included (WordPress.org requires it), but composer.lock is excluded.
+zip "../$product_name.zip" ./ -r -x "Gruntfile.js" "webpack.config.js" "webpack.dev.js" "webpack.prod.js" "workspace.code-workspace" "./node_modules/*" "./src/*" "./bin/*" "./npm*" "*.git*" "*.idea*" "*wpcs*" "*DS_Store*" "./composer.lock" "./package*" "./phpcs.*" "./.*" "./README.md" "./api-docs/*" "./docs/*" "./demo/*" "./tests/*" "./vendor/*" "./assets/fonts/**" "assets/css/*.map" "assets/js/*.map" "*claude.md" "*CLAUDE.md" "*RELEASE.md" "*phpunit.xml*"
 
 mkdir -p "$directory/output/";
 

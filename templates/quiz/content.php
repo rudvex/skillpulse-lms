@@ -56,6 +56,11 @@ $splms_password_verified     = false;
 
 // Check if password was submitted and is correct.
 if ( $splms_is_password_protected ) {
+	// Ensure session is available for password-protected quiz verification.
+	if ( ! session_id() && ! headers_sent() && is_singular( 'sp-quiz' ) ) {
+		session_start();
+	}
+
 	if ( isset( $_POST['quiz_password'] ) && isset( $_POST['quiz_password_nonce'] ) ) {
 		$splms_nonce = isset( $_POST['quiz_password_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['quiz_password_nonce'] ) ) : '';
 		if ( wp_verify_nonce( $splms_nonce, 'quiz_password_' . $splms_quiz_id ) ) {
@@ -63,13 +68,12 @@ if ( $splms_is_password_protected ) {
 			if ( $splms_submitted_password === $splms_quiz_password ) {
 				$splms_password_verified = true;
 				// Store in session to avoid re-asking.
-				if ( ! session_id() ) {
-					session_start();
+				if ( session_id() ) {
+					$_SESSION[ 'quiz_password_verified_' . $splms_quiz_id ] = true;
 				}
-				$_SESSION[ 'quiz_password_verified_' . $splms_quiz_id ] = true;
 			}
 		}
-	} elseif ( isset( $_SESSION[ 'quiz_password_verified_' . $splms_quiz_id ] ) ) {
+	} elseif ( session_id() && isset( $_SESSION[ 'quiz_password_verified_' . $splms_quiz_id ] ) ) {
 		$splms_password_verified = true;
 	}
 } else {

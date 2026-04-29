@@ -177,16 +177,19 @@ class SkillPulse_LMS_Enrollment {
 		$table_name = esc_sql( $wpdb->prefix . 'splms_enrollments' );
 		// phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested -- Need site timezone for expiration comparison.
 		$current_time = current_time( 'mysql' );
+		$batch_size   = 500;
 
-		// Find all active enrollments that have expired.
+		// Process expired enrollments in batches to avoid memory/lock issues.
 		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared, values are prepared.
 		$expired_enrollments = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT * FROM {$table_name} 
-				WHERE status IN ('active', 'in_progress') 
-				AND access_expires IS NOT NULL 
-				AND access_expires <= %s",
-				$current_time
+				"SELECT * FROM {$table_name}
+				WHERE status IN ('active', 'in_progress')
+				AND access_expires IS NOT NULL
+				AND access_expires <= %s
+				LIMIT %d",
+				$current_time,
+				$batch_size
 			)
 		);
 		// phpcs:enable
@@ -223,6 +226,11 @@ class SkillPulse_LMS_Enrollment {
 				 */
 				do_action( 'splms_enrollment_expired', $enrollment );
 			}
+		}
+
+		// If we processed a full batch, schedule another run to handle remaining records.
+		if ( count( $expired_enrollments ) >= $batch_size ) {
+			wp_schedule_single_event( time() + 30, 'splms_daily_enrollment_expiration_check' );
 		}
 	}
 }

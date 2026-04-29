@@ -334,6 +334,44 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 	}
 
 	/**
+	 * Get order items for multiple orders in a single query.
+	 *
+	 * @since 1.0.0
+	 * @param array $order_ids Array of numeric order IDs.
+	 * @return array Associative array keyed by order_id with item arrays as values.
+	 */
+	public function get_order_items_batch( $order_ids ) {
+		global $wpdb;
+
+		$order_ids = array_map( 'absint', $order_ids );
+		$order_ids = array_filter( $order_ids );
+
+		if ( empty( $order_ids ) ) {
+			return array();
+		}
+
+		$items_table  = $wpdb->prefix . 'splms_order_items';
+		$placeholders = implode( ',', array_fill( 0, count( $order_ids ), '%d' ) );
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare -- Table name and placeholders are safely constructed.
+		$sql = "SELECT * FROM {$items_table} WHERE order_id IN ($placeholders) ORDER BY id ASC";
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is prepared above.
+		$items = $wpdb->get_results( $wpdb->prepare( $sql, ...$order_ids ) );
+
+		$grouped = array();
+		foreach ( $order_ids as $oid ) {
+			$grouped[ $oid ] = array();
+		}
+
+		if ( $items ) {
+			foreach ( $items as $item ) {
+				$grouped[ $item->order_id ][] = $item;
+			}
+		}
+
+		return $grouped;
+	}
+
+	/**
 	 * Update order status.
 	 *
 	 * @since 1.0.0

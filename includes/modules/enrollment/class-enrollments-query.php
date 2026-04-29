@@ -713,6 +713,36 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 	}
 
 	/**
+	 * Get the total number of unique students enrolled in courses by a specific author.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $author_id Author user ID.
+	 * @return int Total unique student count.
+	 */
+	public function get_author_student_count( $author_id ) {
+		global $wpdb;
+
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table query with JOIN, table name is safe.
+		$count = (int) $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(DISTINCT e.user_id)
+				FROM {$this->table_name} e
+				INNER JOIN {$wpdb->posts} p ON e.course_id = p.ID
+				WHERE p.post_author = %d
+				AND p.post_type = %s
+				AND p.post_status = %s",
+				$author_id,
+				SPLMS_POST_TYPES['course'],
+				'publish'
+			)
+		);
+		// phpcs:enable
+
+		return $count;
+	}
+
+	/**
 	 * Renew enrollment by extending expiration date.
 	 *
 	 * @since 1.0.0

@@ -189,11 +189,16 @@ if ( ! class_exists( 'SkillPulse_LMS' ) ) {
 				}
 			}
 
+
+
 			/**
 			 * Fires after plugin deactivation tasks are completed.
 			 *
 			 * @since 1.0.0
 			 */
+			// Clear legacy license check cron.
+			wp_clear_scheduled_hook( 'splms_daily_license_check' );
+
 			do_action( 'splms_deactivation_hook' );
 		}
 	}

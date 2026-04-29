@@ -31,7 +31,7 @@ const WelcomeStep = ({ onNext, loading }) => {
 			{/* Hero Section */}
 			<div className="splms-welcome-hero">
 				<div className="splms-welcome-icon">
-					<SplmsIcon name="welcome" size={64} />
+					<SplmsIcon mode="wp" name="welcome-learn-more" size={64} />
 				</div>
 				<h1 className="splms-welcome-title">
 					{__('Welcome to SkillPulse LMS!', 'skillpulse-lms')}
@@ -50,7 +50,7 @@ const WelcomeStep = ({ onNext, loading }) => {
 				<div className="splms-welcome-features-grid">
 					<div className="splms-welcome-feature">
 						<div className="splms-welcome-feature-icon">
-							<SplmsIcon name="admin-network" size={24} />
+							<SplmsIcon mode="wp" name="admin-network" size={24} />
 						</div>
 						<div className="splms-welcome-feature-content">
 							<h3 className="splms-welcome-feature-title">
@@ -64,7 +64,7 @@ const WelcomeStep = ({ onNext, loading }) => {
 
 					<div className="splms-welcome-feature">
 						<div className="splms-welcome-feature-icon">
-							<SplmsIcon name="admin-settings" size={24} />
+							<SplmsIcon name="settings" size={24} />
 						</div>
 						<div className="splms-welcome-feature-content">
 							<h3 className="splms-welcome-feature-title">
@@ -78,7 +78,7 @@ const WelcomeStep = ({ onNext, loading }) => {
 
 					<div className="splms-welcome-feature">
 						<div className="splms-welcome-feature-icon">
-							<SplmsIcon name="admin-tools" size={24} />
+							<SplmsIcon name="adminTools" size={24} />
 						</div>
 						<div className="splms-welcome-feature-content">
 							<h3 className="splms-welcome-feature-title">
@@ -117,8 +117,8 @@ const WelcomeStep = ({ onNext, loading }) => {
 					disabled={loading}
 					className="splms-welcome-get-started-btn"
 				>
-					<SplmsIcon name="arrow-right-alt" size={16} />
 					{__('Get Started', 'skillpulse-lms')}
+					<SplmsIcon name="arrowRight" size={16} />
 				</Button>
 
 				<p className="splms-welcome-skip-note">

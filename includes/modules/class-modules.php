@@ -65,7 +65,6 @@ class SkillPulse_LMS_Modules {
 			'includes/modules/lessons/class-lessons',
 			'includes/modules/quizzes/class-quizzes',
 			'includes/modules/orders/class-orders',
-			'includes/modules/activity/class-user-activity-query',
 			'includes/modules/enrollment/class-enrollments-query',
 			'includes/modules/enrollment/class-enrollment',
 			'includes/modules/notifications/class-notification',

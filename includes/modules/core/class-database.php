@@ -118,7 +118,8 @@ class SkillPulse_LMS_Database {
 			UNIQUE KEY user_course (user_id, course_id),
 			KEY user_id (user_id),
 			KEY course_id (course_id),
-			KEY enrollment_method (enrollment_method)
+			KEY enrollment_method (enrollment_method),
+			KEY idx_status_enrolled_at (status, enrolled_at)
 		) $charset_collate;";
 		dbDelta( $sql );
 
@@ -137,7 +138,8 @@ class SkillPulse_LMS_Database {
 			UNIQUE KEY user_lesson (user_id, lesson_id),
 			KEY user_id (user_id),
 			KEY lesson_id (lesson_id),
-			KEY course_id (course_id)
+			KEY course_id (course_id),
+			KEY idx_completed (is_completed, completed_at)
 		) $charset_collate;";
 		dbDelta( $sql );
 

@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "splms/enroll-button",
+	"title": "Enroll Button",
+	"category": "skillpulse-lms",
+	"description": "Smart enrollment button that adapts based on the user's enrollment state.",
+	"keywords": [ "enroll", "buy", "purchase", "cta", "lms" ],
+	"textdomain": "skillpulse-lms",
+	"icon": "cart",
+	"supports": {
+		"html": false,
+		"align": [ "left", "center", "right" ]
+	},
+	"attributes": {
+		"courseId": { "type": "number", "default": 0 },
+		"showPrice": { "type": "boolean", "default": true }
+	}
+}

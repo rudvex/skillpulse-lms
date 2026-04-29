@@ -52,9 +52,17 @@ export class SPLMSCourseFilters {
      */
     handleHeaderFilterChange(e) {
         const $form = jQuery(e.currentTarget).closest('.course-filters-form');
+        const $select = jQuery(e.currentTarget);
+
         if ($form.length) {
-            // Submit immediately on select change
-            $form[0].submit();
+            // Add loading state.
+            $select.prop('disabled', true);
+            $form.find('.filter-select').addClass('loading');
+
+            // Submit after brief delay to prevent rapid submissions.
+            setTimeout(() => {
+                $form[0].submit();
+            }, 300);
         }
     }
 

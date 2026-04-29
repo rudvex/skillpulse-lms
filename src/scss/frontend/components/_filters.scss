@@ -616,4 +616,10 @@
 //      color: var(--splms-white);
 //     }
 //   }
+
+// Filter loading states.
+.filter-select.loading {
+	opacity: 0.7;
+	cursor: wait;
+}
 // }

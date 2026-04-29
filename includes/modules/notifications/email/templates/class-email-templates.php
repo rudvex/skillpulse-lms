@@ -88,7 +88,7 @@ class SkillPulse_LMS_Email_Templates {
 			'order-completed.php',
 			'order-refunded.php',
 			'order-cancelled.php',
-		);
+								);
 
 		foreach ( $template_files as $file ) {
 			$file_path = SKILLPULSE_LMS_DIR_PATH . 'includes/modules/notifications/email/templates/templates/' . $file;

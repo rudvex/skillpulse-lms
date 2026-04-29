@@ -124,12 +124,30 @@
 		align-items: center;
 		gap: var(--splms-spacing-2);
 		min-width: 80px;
+		position: relative;
+		flex: 1;
+
+		// Connecting line between steps.
+		&:not(:last-child)::after {
+			content: '';
+			position: absolute;
+			top: 16px;
+			left: calc(50% + 20px);
+			width: calc(100% - 40px);
+			height: 2px;
+			background-color: var(--splms-gray-300);
+		}
 
 		&.completed {
 			.splms-wizard-progress-circle {
 				background-color: var(--splms-success);
 				color: white;
 				border-color: var(--splms-success);
+			}
+
+			// Completed steps get a colored connecting line.
+			&:not(:last-child)::after {
+				background-color: var(--splms-success);
 			}
 		}
 
@@ -676,13 +694,13 @@
 		}
 
 		.splms-finish-title {
-			font-size: 2.5rem;
+			font-size: 32px;
 			margin: 0 0 var(--splms-spacing-4);
 			color: var(--splms-text-primary);
 		}
 
 		.splms-finish-subtitle {
-			font-size: 1.125rem;
+			font-size: 18px;
 			color: var(--splms-text-secondary);
 			max-width: 600px;
 			margin: 0 auto;
@@ -721,7 +739,7 @@
 
 			.splms-finish-status-title {
 				margin: 0 0 var(--splms-spacing-2);
-				font-size: 1.25rem;
+				font-size: 20px;
 				color: var(--splms-text-primary);
 			}
 
@@ -743,7 +761,7 @@
 		margin-bottom: var(--splms-spacing-8);
 
 		.splms-finish-primary-button {
-			font-size: 1.125rem;
+			font-size: 18px;
 			padding: 12px 24px;
 			height: auto;
 			display: inline-flex;
@@ -797,7 +815,7 @@
 		margin-bottom: var(--splms-spacing-8);
 
 		.splms-finish-actions-title {
-			font-size: 1.25rem;
+			font-size: 20px;
 			margin-bottom: var(--splms-spacing-6);
 			color: var(--splms-text-primary);
 			font-weight: 600;
@@ -846,14 +864,14 @@
 
 			.splms-finish-action-title {
 				margin: 0 0 var(--splms-spacing-1);
-				font-size: 1rem;
+				font-size: 16px;
 				color: var(--splms-text-primary);
 				font-weight: 600;
 			}
 
 			.splms-finish-action-description {
 				margin: 0;
-				font-size: 0.875rem;
+				font-size: 14px;
 				color: var(--splms-text-secondary);
 				line-height: 1.4;
 			}
@@ -863,7 +881,7 @@
 					display: flex;
 					align-items: center;
 					gap: var(--splms-spacing-1);
-					font-size: 0.875rem;
+					font-size: 14px;
 
 					&.is-link {
 						color: var(--splms-primary);
@@ -896,7 +914,7 @@
 		.splms-finish-help-text {
 			color: var(--splms-text-secondary);
 			margin: 0;
-			font-size: 0.875rem;
+			font-size: 14px;
 
 			a {
 				color: var(--splms-primary);

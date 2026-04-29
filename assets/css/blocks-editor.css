@@ -1,0 +1,143 @@
+/**
+ * SkillPulse LMS Blocks - Styles
+ *
+ * Only block-specific layout styles. Course card, search form,
+ * and grid styles are provided by the plugin's frontend.min.css.
+ *
+ * @since 1.0.0
+ */
+
+/* ========================================
+ * Course Grid Block — wrapper only.
+ * The inner .splms-courses-grid is styled by frontend.min.css.
+ * ======================================== */
+
+.wp-block-splms-course-grid {
+	min-height: 100px;
+}
+
+.wp-block-splms-course-grid .splms-pagination {
+	margin-top: var(--splms-spacing-6, 24px);
+	text-align: center;
+}
+
+/* ========================================
+ * Course Card Block — display toggles.
+ * Uses the exact CSS classes from course/course.php template.
+ * ======================================== */
+
+.wp-block-splms-course-card.splms-hide-thumbnail .course-card-image {
+	display: none;
+}
+
+.wp-block-splms-course-card.splms-hide-excerpt .course-excerpt {
+	display: none;
+}
+
+.wp-block-splms-course-card.splms-hide-price .course-price {
+	display: none;
+}
+
+.wp-block-splms-course-card.splms-hide-rating .course-rating {
+	display: none;
+}
+
+.wp-block-splms-course-card.splms-hide-instructor .course-author {
+	display: none;
+}
+
+.wp-block-splms-course-card.splms-hide-difficulty .course-difficulty {
+	display: none;
+}
+
+.wp-block-splms-course-card.splms-hide-actions .course-actions {
+	display: none;
+}
+
+/* ========================================
+ * Course Categories Block.
+ * Category cards are block-specific (no existing template).
+ * ======================================== */
+
+.splms-course-categories {
+	display: grid;
+	gap: var(--splms-spacing-4, 16px);
+}
+
+.splms-course-categories--cols-1 { grid-template-columns: 1fr; }
+.splms-course-categories--cols-2 { grid-template-columns: repeat(2, 1fr); }
+.splms-course-categories--cols-3 { grid-template-columns: repeat(3, 1fr); }
+.splms-course-categories--cols-4 { grid-template-columns: repeat(4, 1fr); }
+.splms-course-categories--cols-5 { grid-template-columns: repeat(5, 1fr); }
+.splms-course-categories--cols-6 { grid-template-columns: repeat(6, 1fr); }
+
+.splms-course-category-card {
+	display: block;
+	background: var(--splms-white, #fff);
+	border: 1px solid var(--splms-border-primary, #e5e7eb);
+	border-radius: var(--splms-border-radius-xl, 12px);
+	overflow: hidden;
+	text-decoration: none;
+	color: inherit;
+	transition: var(--splms-transition-base, all 0.2s ease);
+}
+
+.splms-course-category-card:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--splms-shadow-md, 0 4px 12px rgba(0, 0, 0, 0.1));
+}
+
+.splms-course-category-card__image img {
+	width: 100%;
+	height: 160px;
+	object-fit: cover;
+}
+
+.splms-course-category-card__content {
+	padding: var(--splms-spacing-4, 16px);
+}
+
+.splms-course-category-card__title {
+	font-size: 16px;
+	font-weight: 600;
+	margin: 0 0 4px;
+	color: var(--splms-gray-900, #111827);
+}
+
+.splms-course-category-card__description {
+	font-size: 14px;
+	color: var(--splms-gray-600, #6b7280);
+	margin: 0 0 8px;
+}
+
+.splms-course-category-card__count {
+	font-size: 13px;
+	color: var(--splms-gray-400, #9ca3af);
+}
+
+@media (max-width: 768px) {
+	.splms-course-categories--cols-4,
+	.splms-course-categories--cols-5,
+	.splms-course-categories--cols-6 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 480px) {
+	.splms-course-categories {
+		grid-template-columns: 1fr !important;
+	}
+}
+
+/* ========================================
+ * Block Placeholder (Editor only).
+ * ======================================== */
+
+.splms-block-placeholder {
+	padding: 40px 20px;
+	text-align: center;
+	background: var(--splms-gray-50, #f9fafb);
+	border: 1px dashed var(--splms-gray-300, #d1d5db);
+	border-radius: var(--splms-border-radius, 8px);
+	color: var(--splms-gray-500, #6b7280);
+}

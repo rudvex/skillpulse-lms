@@ -7,7 +7,7 @@
  * @since [SPLMS_VERSION]
  */
 
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { Button, Card, CardHeader, CardBody } from '@wordpress/components';
 import { SplmsIcon } from '../../../../components/SplmsIcon';
 import BrandLogo from '../../../../components/BrandLogo';
@@ -40,32 +40,51 @@ const WizardContainer = ({
 	 * Render progress indicator
 	 */
 	const renderProgressIndicator = () => {
+		const currentIndex = getCurrentStepIndex();
+		const totalSteps = getTotalSteps();
+
 		return (
 			<div className="splms-wizard-progress">
-				<div className="splms-wizard-progress-bar">
-					{steps.map((step, index) => (
-						<div
-							key={step}
-							className={`splms-wizard-progress-step ${
-								index < getCurrentStepIndex() - 1 ? 'completed' :
-								index === getCurrentStepIndex() - 1 ? 'current' : 'pending'
-							}`}
-						>
-							<div className="splms-wizard-progress-circle">
-								{index < getCurrentStepIndex() - 1 ? (
-									<SplmsIcon mode="wp" name="yes" size={16} />
-								) : (
-									<span>{index + 1}</span>
+				<div className="splms-wizard-progress-bar" role="list">
+					{steps.map((step, index) => {
+						const stepStatus = index < currentIndex - 1 ? 'completed' :
+							index === currentIndex - 1 ? 'current' : 'pending';
+						const stepTitle = stepTitles[step]?.title || step;
+
+						return (
+							<div
+								key={step}
+								className={`splms-wizard-progress-step ${stepStatus}`}
+								role="listitem"
+								aria-current={'current' === stepStatus ? 'step' : undefined}
+								aria-label={sprintf(
+									/* translators: 1: Step title, 2: Step status. */
+									__('%1$s - %2$s', 'skillpulse-lms'),
+									stepTitle,
+									stepStatus
 								)}
+							>
+								<div className="splms-wizard-progress-circle" aria-hidden="true">
+									{'completed' === stepStatus ? (
+										<SplmsIcon mode="wp" name="yes" size={16} />
+									) : (
+										<span>{index + 1}</span>
+									)}
+								</div>
+								<div className="splms-wizard-progress-label">
+									{stepTitle}
+								</div>
 							</div>
-							<div className="splms-wizard-progress-label">
-								{stepTitles[step]?.title || step}
-							</div>
-						</div>
-					))}
+						);
+					})}
 				</div>
-				<div className="splms-wizard-progress-text">
-					{__('Step %d of %d', 'skillpulse-lms').replace('%d', getCurrentStepIndex()).replace('%d', getTotalSteps())}
+				<div className="splms-wizard-progress-text" aria-live="polite">
+					{sprintf(
+						/* translators: 1: Current step number, 2: Total steps. */
+						__('Step %1$d of %2$d', 'skillpulse-lms'),
+						currentIndex,
+						totalSteps
+					)}
 				</div>
 			</div>
 		);
@@ -110,11 +129,11 @@ const WizardContainer = ({
 
 			{/* Main Content */}
 			<main className="splms-content">
-				<div className="splms-card">
-					<div className="components-card__body">
+				<Card>
+					<CardBody>
 						{children}
-					</div>
-				</div>
+					</CardBody>
+				</Card>
 			</main>
 
 			{/* Footer */}

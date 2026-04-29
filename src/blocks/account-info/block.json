@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "splms/account-info",
+	"title": "Account Info",
+	"category": "skillpulse-lms",
+	"description": "Display a user profile field value for the currently logged-in user.",
+	"keywords": [ "user", "account", "profile", "info", "lms" ],
+	"textdomain": "skillpulse-lms",
+	"icon": "admin-users",
+	"supports": {
+		"html": false,
+		"customClassName": false
+	},
+	"attributes": {
+		"field": {
+			"type": "string",
+			"default": "display_name"
+		}
+	}
+}

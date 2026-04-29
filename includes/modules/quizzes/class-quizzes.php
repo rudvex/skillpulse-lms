@@ -1100,10 +1100,14 @@ class SkillPulse_LMS_Quizzes {
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce already verified above.
 		$quiz_id    = isset( $_POST['quiz_id'] ) ? intval( wp_unslash( $_POST['quiz_id'] ) ) : 0; // phpcs:ignore Generic.Formatting.MultipleStatementAlignment.NotSameWarning -- Variable assignments don't need alignment.
 		$attempt_id = isset( $_POST['attempt_id'] ) ? intval( wp_unslash( $_POST['attempt_id'] ) ) : 0; // phpcs:ignore Generic.Formatting.MultipleStatementAlignment.NotSameWarning -- Variable assignments don't need alignment.
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,Generic.Formatting.MultipleStatementAlignment.NotSameWarning -- Nonce verified above, answers will be sanitized during evaluation.
-		$answers = isset( $_POST['answers'] ) ? json_decode( wp_unslash( $_POST['answers'] ), true ) : array();
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nonce verified above, file_uploads will be validated.
-		$file_uploads = isset( $_POST['file_uploads'] ) ? json_decode( wp_unslash( $_POST['file_uploads'] ), true ) : array();
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce already verified above.
+		$answers_raw  = isset( $_POST['answers'] ) ? sanitize_text_field( wp_unslash( $_POST['answers'] ) ) : '';
+		$answers      = ! empty( $answers_raw ) ? json_decode( $answers_raw, true ) : array();
+		$answers      = is_array( $answers ) ? array_map( 'sanitize_text_field', $answers ) : array();
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce already verified above.
+		$uploads_raw  = isset( $_POST['file_uploads'] ) ? sanitize_text_field( wp_unslash( $_POST['file_uploads'] ) ) : '';
+		$file_uploads = ! empty( $uploads_raw ) ? json_decode( $uploads_raw, true ) : array();
+		$file_uploads = is_array( $file_uploads ) ? array_map( 'sanitize_text_field', $file_uploads ) : array();
 		$time_taken   = isset( $_POST['time_taken'] ) ? intval( wp_unslash( $_POST['time_taken'] ) ) : 0; // phpcs:ignore Generic.Formatting.MultipleStatementAlignment.NotSameWarning -- Variable assignments don't need alignment.
 
 		if ( ! $quiz_id || ! $attempt_id ) {
@@ -1227,8 +1231,20 @@ class SkillPulse_LMS_Quizzes {
 		}
 
 		// Calculate server-side time taken (SECURITY: Don't trust client time).
-		$attempts_query    = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
-		$attempt           = $attempts_query->get_attempt_by_id( $attempt_id );
+		$attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+		$attempt        = $attempts_query->get_attempt_by_id( $attempt_id );
+
+		// Prevent resubmission of already-finalized attempts.
+		if ( $attempt && in_array( $attempt->status, array( 'graded', 'pending_review' ), true ) ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Rolling back transaction.
+			$wpdb->query( 'ROLLBACK' );
+			wp_send_json_error(
+				array(
+					'message' => __( 'This quiz attempt has already been submitted and cannot be resubmitted.', 'skillpulse-lms' ),
+				)
+			);
+		}
+
 		$start_time        = isset( $attempt->attempt_time ) ? strtotime( $attempt->attempt_time ) : time();
 		$current_time      = time();
 		$actual_time_taken = $current_time - $start_time;
@@ -1464,14 +1480,15 @@ class SkillPulse_LMS_Quizzes {
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce already verified above.
 		$quiz_id   = isset( $_POST['quiz_id'] ) ? intval( wp_unslash( $_POST['quiz_id'] ) ) : 0; // phpcs:ignore Generic.Formatting.MultipleStatementAlignment.NotSameWarning -- Variable assignments don't need alignment.
 		$course_id = isset( $_POST['course_id'] ) ? intval( wp_unslash( $_POST['course_id'] ) ) : 0; // phpcs:ignore Generic.Formatting.MultipleStatementAlignment.NotSameWarning -- Variable assignments don't need alignment.
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,Generic.Formatting.MultipleStatementAlignment.NotSameWarning -- Nonce verified above, answers will be sanitized during processing.
-		$answers_raw = isset( $_POST['answers'] ) ? wp_unslash( $_POST['answers'] ) : '';
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified above.
+		$answers_raw = isset( $_POST['answers'] ) ? sanitize_text_field( wp_unslash( $_POST['answers'] ) ) : '';
 		// Answers can be sent as JSON string or array - decode if needed.
 		if ( is_string( $answers_raw ) ) {
 			$answers = json_decode( $answers_raw, true );
 			if ( ! is_array( $answers ) ) {
 				$answers = array();
 			}
+			$answers = array_map( 'sanitize_text_field', $answers );
 		} else {
 			$answers = is_array( $answers_raw ) ? $answers_raw : array();
 		}

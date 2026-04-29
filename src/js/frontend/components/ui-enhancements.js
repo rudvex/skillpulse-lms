@@ -17,6 +17,7 @@ export class SPLMSUIEnhancements {
 		this.initSidebarEnhancements();
 		this.initCollapsibleSections();
 		this.addNotificationStyles();
+		this.initMobileStickyBar();
 	}
 
 	bindEvents() {
@@ -206,7 +207,7 @@ export class SPLMSUIEnhancements {
                 }
                 
                 .splms-notification.success {
-                    background: linear-gradient(135deg, var(--splms-success, #10b981), var(--splms-success-dark, #059669));
+                    background: var(--splms-success, #10b981);
                     border-color: var(--splms-success-alpha-3, rgba(16, 185, 129, 0.3));
                 }
                 
@@ -227,7 +228,7 @@ export class SPLMSUIEnhancements {
                 }
                 
                 .splms-notification.error {
-                    background: linear-gradient(135deg, var(--splms-danger, #ef4444), var(--splms-danger-dark, #dc2626));
+                    background: var(--splms-danger, #ef4444);
                     border-color: var(--splms-danger-alpha-3, rgba(239, 68, 68, 0.3));
                 }
                 
@@ -248,7 +249,7 @@ export class SPLMSUIEnhancements {
                 }
                 
                 .splms-notification.info {
-                    background: linear-gradient(135deg, var(--splms-info, #3b82f6), var(--splms-info-dark, #2563eb));
+                    background: var(--splms-info, #3b82f6);
                     border-color: var(--splms-info-alpha-3, rgba(59, 130, 246, 0.3));
                 }
                 
@@ -269,7 +270,7 @@ export class SPLMSUIEnhancements {
                 }
                 
                 .splms-notification.warning {
-                    background: linear-gradient(135deg, var(--splms-warning, #f59e0b), var(--splms-warning-dark, #d97706));
+                    background: var(--splms-warning, #f59e0b);
                     border-color: var(--splms-warning-alpha-3, rgba(245, 158, 11, 0.3));
                 }
                 
@@ -409,6 +410,31 @@ export class SPLMSUIEnhancements {
                 }
             `;
 			document.head.appendChild(style);
+		}
+	}
+
+	/**
+	 * Initialize mobile sticky purchase bar toggle.
+	 * Shows/hides the sticky bar based on whether the purchase card is visible.
+	 */
+	initMobileStickyBar() {
+		const stickyBar = document.querySelector('.splms-mobile-purchase-bar');
+		const purchaseCard = document.querySelector('.splms-section-purchase-card');
+
+		if (stickyBar && purchaseCard && window.innerWidth <= 1024) {
+			const observer = new IntersectionObserver(
+				function(entries) {
+					entries.forEach(function(entry) {
+						if (entry.isIntersecting) {
+							stickyBar.style.display = 'none';
+						} else {
+							stickyBar.style.display = 'block';
+						}
+					});
+				},
+				{ threshold: 0.1 }
+			);
+			observer.observe(purchaseCard);
 		}
 	}
 } 

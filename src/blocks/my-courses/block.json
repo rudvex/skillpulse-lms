@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "splms/my-courses",
+	"title": "My Courses",
+	"category": "skillpulse-lms",
+	"description": "Display the current user's enrolled courses with progress bars.",
+	"keywords": [ "enrolled", "my courses", "dashboard", "progress", "lms" ],
+	"textdomain": "skillpulse-lms",
+	"icon": "book",
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ]
+	},
+	"attributes": {
+		"columns": { "type": "number", "default": 3 },
+		"status": { "type": "string", "default": "all" },
+		"showProgress": { "type": "boolean", "default": true },
+		"emptyMessage": { "type": "string", "default": "" }
+	}
+}

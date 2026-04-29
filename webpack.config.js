@@ -43,6 +43,7 @@ module.exports = {
         wizard: './src/js/react-core/admin/pages/wizard/index.js',
         "lesson-viewer": './src/js/frontend/modules/lesson-viewer/LessonViewer.js',
         "quiz-viewer": './src/js/frontend/modules/quiz-viewer/QuizViewer.js',
+        blocks: './src/blocks/index.js',
     },
     output: {
         filename: '[name].js',

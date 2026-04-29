@@ -119,6 +119,13 @@ class SkillPulse_LMS_REST_Course_Curriculum_Controller extends SkillPulse_LMS_RE
 		$curriculums = array();
 
 		if ( isset( $curriculum_result['sections'] ) ) {
+			// Pre-fetch all post IDs in a single query to avoid N+1 queries.
+			$all_ids = $this->collect_curriculum_ids( $curriculum_result['sections'] );
+			if ( ! empty( $all_ids ) ) {
+				// Prime the post cache for all curriculum items at once.
+				_prime_post_caches( $all_ids );
+			}
+
 			foreach ( $curriculum_result['sections'] as $section ) {
 				if ( ! get_post( $section['id'] ) ) {
 					continue;
@@ -177,6 +184,25 @@ class SkillPulse_LMS_REST_Course_Curriculum_Controller extends SkillPulse_LMS_RE
 		}
 
 		return $formatted_children;
+	}
+
+	/**
+	 * Recursively collect all post IDs from curriculum sections and children.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $items Array of curriculum items (sections or children).
+	 * @return array Flat array of all post IDs.
+	 */
+	private function collect_curriculum_ids( $items ) {
+		$ids = array();
+		foreach ( $items as $item ) {
+			$ids[] = intval( $item['id'] );
+			if ( ! empty( $item['children'] ) ) {
+				$ids = array_merge( $ids, $this->collect_curriculum_ids( $item['children'] ) );
+			}
+		}
+		return $ids;
 	}
 
 	/**

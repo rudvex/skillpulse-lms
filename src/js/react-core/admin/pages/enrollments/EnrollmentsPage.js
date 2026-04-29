@@ -7,7 +7,7 @@ import { Component, Fragment } from '@wordpress/element';
 import AdminHeader from "../../../components/AdminHeader";
 import './styles/index.scss';
 import { SplmsIcon } from "../../../components/SplmsIcon";
-import { formatDate } from '../../../utility/helper';
+import { formatDate, getInitialsAvatar } from '../../../utility/helper';
 
 // Import new components
 import List from './List';
@@ -571,10 +571,10 @@ class EnrollmentsPage extends Component {
                     <h4>{__('Student Information', 'skillpulse-lms')}</h4>
                     <div className="student-summary">
                         <img 
-                            src={enrollment.user_avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(enrollment.user_name || 'Student')}&background=7e75ff&color=fff&size=40`} 
+                            src={enrollment.user_avatar || getInitialsAvatar(enrollment.user_name, 40)} 
                             alt={enrollment.user_name || 'Student'}
                             onError={(e) => {
-                                e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(enrollment.user_name || 'Student')}&background=7e75ff&color=fff&size=40`;
+                                e.target.src = getInitialsAvatar(enrollment.user_name, 40);
                             }}
                         />
                         <div>

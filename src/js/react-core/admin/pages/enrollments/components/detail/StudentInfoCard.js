@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import { getInitialsAvatar } from '../../../../../utility/helper';
 import { __ } from '@wordpress/i18n';
 import { Card, CardBody, CardHeader } from '@wordpress/components';
 import { SplmsIcon } from "../../../../../components/SplmsIcon";
@@ -25,7 +26,7 @@ const StudentInfoCard = ({ enrollment }) => {
                 <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
                     <div style={{ flexShrink: 0 }}>
                         <img
-                            src={enrollment.user_avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(enrollment.user_name || 'Student')}&background=7e75ff&color=fff&size=80`}
+                            src={enrollment.user_avatar || getInitialsAvatar(enrollment.user_name, 80)}
                             alt={enrollment.user_name || 'Student'}
                             style={{
                                 width: '80px',
@@ -34,7 +35,7 @@ const StudentInfoCard = ({ enrollment }) => {
                                 objectFit: 'cover'
                             }}
                             onError={(e) => {
-                                e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(enrollment.user_name || 'Student')}&background=7e75ff&color=fff&size=80`;
+                                e.target.src = getInitialsAvatar(enrollment.user_name, 80);
                             }}
                         />
                     </div>

@@ -139,8 +139,8 @@ const BasicSetupStep = ({ onNext, onBack, stepData, loading, error }) => {
 			)}
 
 			<div className="splms-basic-setup-content">
-				<div className="splms-card">
-					<div className="components-card__body">
+				<Card>
+					<CardBody>
 						<div className="splms-basic-setup-form">
 							{/* Site Name */}
 							<div className="splms-form-field">
@@ -151,6 +151,8 @@ const BasicSetupStep = ({ onNext, onBack, stepData, loading, error }) => {
 									onChange={(value) => handleFieldChange('site_name', value)}
 									placeholder={__('My Learning Academy', 'skillpulse-lms')}
 									className={formErrors.site_name ? 'has-error' : ''}
+									__next40pxDefaultSize
+									__nextHasNoMarginBottom
 								/>
 								{formErrors.site_name && (
 									<div className="splms-form-error">
@@ -169,6 +171,8 @@ const BasicSetupStep = ({ onNext, onBack, stepData, loading, error }) => {
 									onChange={(value) => handleFieldChange('admin_email', value)}
 									placeholder={__('admin@example.com', 'skillpulse-lms')}
 									className={formErrors.admin_email ? 'has-error' : ''}
+									__next40pxDefaultSize
+									__nextHasNoMarginBottom
 								/>
 								{formErrors.admin_email && (
 									<div className="splms-form-error">
@@ -185,15 +189,17 @@ const BasicSetupStep = ({ onNext, onBack, stepData, loading, error }) => {
 									value={formData.timezone}
 									options={timezones}
 									onChange={(value) => handleFieldChange('timezone', value)}
+									__next40pxDefaultSize
+									__nextHasNoMarginBottom
 								/>
 							</div>
 						</div>
-					</div>
-				</div>
+					</CardBody>
+				</Card>
 
 				{/* Info Card */}
-				<div className="splms-card splms-basic-setup-info">
-					<div className="components-card__body">
+				<Card className="splms-basic-setup-info">
+					<CardBody>
 						<div className="splms-basic-setup-info-content">
 							<SplmsIcon name="info" size={20} />
 							<div className="splms-basic-setup-info-text">
@@ -201,8 +207,8 @@ const BasicSetupStep = ({ onNext, onBack, stepData, loading, error }) => {
 								<p>{__('You can change all of these settings later in the admin panel under Settings > General.', 'skillpulse-lms')}</p>
 							</div>
 						</div>
-					</div>
-				</div>
+					</CardBody>
+				</Card>
 
 				{/* Actions */}
 				<div className="splms-wizard-step-actions">
@@ -238,7 +244,7 @@ const BasicSetupStep = ({ onNext, onBack, stepData, loading, error }) => {
 							) : (
 								<>
 									{__('Continue', 'skillpulse-lms')}
-									<SplmsIcon name="arrow-right-alt" size={16} />
+									<SplmsIcon name="arrowRight" size={16} />
 								</>
 							)}
 						</Button>

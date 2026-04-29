@@ -21,7 +21,20 @@
       "Bash(composer update:*)",
       "Bash(vendor/bin/phpunit:*)",
       "Bash(php:*)",
-      "Read(//private/var/folders/hz/dx6s0p4x4kz3vn3tgxnvq2pm0000gn/T/wordpress/wp-includes/PHPMailer/**)"
+      "Read(//private/var/folders/hz/dx6s0p4x4kz3vn3tgxnvq2pm0000gn/T/wordpress/wp-includes/PHPMailer/**)",
+      "Bash(xargs basename:*)",
+      "Bash(read f:*)",
+      "Bash([ ! -f \"/Users/hardip/Workspace/devilbox/data/www/sp-lms/htdocs/wp-content/plugins/skillpulse-lms-pro/$f.php\" ])",
+      "Bash(ls includes/modules/user-management/class-user-activity*)",
+      "Bash(grep -E \"\\\\.js$\")",
+      "Bash(grep -n \"permission_callback.*__return_true\" /Users/hardip/Workspace/devilbox/data/www/sp-lms/htdocs/wp-content/plugins/skillpulse-lms-pro/includes/rest-api/**/*.php)",
+      "Bash(npm run:*)",
+      "Bash(./vendor/bin/phpcbf:*)",
+      "Bash(./vendor/bin/phpcs --standard=phpcs.xml.dist --error-severity=1 --warning-severity=0 includes/modules/integrations/zoom/ includes/rest-api/integrations/class-rest-zoom-controller.php includes/modules/notifications/email/templates/templates/zoom-meeting-reminder.php includes/modules/notifications/email/templates/templates/zoom-recording-available.php templates/lesson/types/live.php templates/course/partials/tabs/curriculum.php includes/modules/class-modules.php includes/rest-api/class-rest-api.php includes/admin/manager/class-admin-menus.php)",
+      "Bash(./vendor/bin/phpcs --standard=phpcs.xml.dist --error-severity=1 --warning-severity=0 templates/course/partials/tabs/curriculum.php)",
+      "Bash(head -485 /Users/hardip/Workspace/devilbox/data/www/sp-lms/htdocs/wp-content/plugins/skillpulse-lms-pro/templates/course/partials/course-hero-v2.php)",
+      "Bash(echo \"\")",
+      "Bash(cp /tmp/splms_hero_v2_clean.php /Users/hardip/Workspace/devilbox/data/www/sp-lms/htdocs/wp-content/plugins/skillpulse-lms-pro/templates/course/partials/course-hero-v2.php)"
     ],
     "deny": [],
     "ask": []

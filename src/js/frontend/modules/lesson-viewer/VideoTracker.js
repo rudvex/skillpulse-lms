@@ -28,10 +28,14 @@ class SPLMSVideoTracker {
 		this.saveInterval = null;
 		this.progressDisplay = container.querySelector('.splms-video-watch-percentage');
 
-		// Cookie and database integration
+		// Cookie and database integration.
 		this.cookieKey = `splms_video_progress_${this.lessonId}`;
 		this.lastSaveTime = 0;
 		this.courseId = this.getCourseId();
+
+		// Use localized REST URL for subdirectory/custom prefix compatibility.
+		const frontendData = window.splms_frontend || {};
+		this.restBase = (frontendData.rest_url || '/wp-json/').replace(/\/$/, '');
 
 		this.init();
 	}
@@ -344,7 +348,7 @@ class SPLMSVideoTracker {
 		if (!this.lessonId) return null;
 
 		try {
-			const response = await fetch(`/wp-json/splms/v1/lessons/${this.lessonId}/video-progress`, {
+			const response = await fetch(`${this.restBase}/splms/v1/lessons/${this.lessonId}/video-progress`, {
 				method: 'GET',
 				credentials: 'same-origin',
 				headers: {
@@ -473,7 +477,7 @@ class SPLMSVideoTracker {
 				duration: this.duration
 			};
 
-			const response = await fetch(`/wp-json/splms/v1/lessons/${this.lessonId}/video-progress`, {
+			const response = await fetch(`${this.restBase}/splms/v1/lessons/${this.lessonId}/video-progress`, {
 				method: 'POST',
 				credentials: 'same-origin',
 				headers: {

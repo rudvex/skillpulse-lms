@@ -184,6 +184,7 @@ class SkillPulse_LMS_Setup_Wizard {
 		wp_enqueue_script( 'wp-data' );
 		wp_enqueue_script( 'wp-i18n' );
 		wp_enqueue_script( 'wp-api-fetch' );
+		wp_enqueue_script( 'wp-util' );
 
 		// Enqueue wizard React app.
 		$wizard_asset_file = SKILLPULSE_LMS_DIR_PATH . 'assets/js/wizard.asset.php';
@@ -221,6 +222,9 @@ class SkillPulse_LMS_Setup_Wizard {
 				'timezone'      => get_option( 'timezone_string' ) ? get_option( 'timezone_string' ) : 'UTC',
 				'timezones'     => $this->get_wordpress_timezones(),
 				'mainUrl'       => admin_url( 'admin.php?page=skillpulse-lms' ),
+				'ajaxUrl'       => admin_url( 'admin-ajax.php' ),
+				'licenseNonce'  => wp_create_nonce( 'splms_license_nonce' ),
+				'licenseInfo'   => $this->get_license_info(),
 				'licenseStatus' => $this->get_license_status(),
 			)
 		);
@@ -251,12 +255,25 @@ class SkillPulse_LMS_Setup_Wizard {
 	 * @return string License status.
 	 */
 	private function get_license_status() {
+		$license_info = $this->get_license_info();
+		return isset( $license_info['status'] ) ? $license_info['status'] : 'inactive';
+	}
+
+	/**
+	 * Get full license info for the wizard.
+	 *
+	 * @return array License info array.
+	 */
+	private function get_license_info() {
 		if ( class_exists( 'SkillPulse_LMS_License_Manager' ) ) {
-			$license_manager = SkillPulse_LMS_License_Manager::get_instance();
-			$license_info    = $license_manager->get_license_info();
-			return isset( $license_info['status'] ) ? $license_info['status'] : 'inactive';
+			return SkillPulse_LMS_License_Manager::get_instance()->get_license_info();
 		}
-		return 'inactive';
+
+		return array(
+			'license_key'      => '',
+			'status'           => 'inactive',
+			'domain_activated' => false,
+		);
 	}
 
 	/**

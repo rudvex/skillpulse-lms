@@ -181,7 +181,12 @@ class SkillPulse_LMS_Rest_Admin_Overview_Controller extends WP_REST_Controller {
 
 		// Get enrollment count.
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
-		$enrollment_count     = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}splms_enrollments WHERE status = 'active'" );
+		$enrollment_count     = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(*) FROM {$wpdb->prefix}splms_enrollments WHERE status = %s",
+				'active'
+			)
+		);
 		$stats['enrollments'] = intval( $enrollment_count );
 
 		return rest_ensure_response( $stats );
@@ -634,7 +639,12 @@ class SkillPulse_LMS_Rest_Admin_Overview_Controller extends WP_REST_Controller {
 
 		// Get enrollment count.
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
-		$enrollment_count     = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}splms_enrollments WHERE status = 'active'" );
+		$enrollment_count     = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(*) FROM {$wpdb->prefix}splms_enrollments WHERE status = %s",
+				'active'
+			)
+		);
 		$stats['enrollments'] = intval( $enrollment_count );
 
 		return $stats;

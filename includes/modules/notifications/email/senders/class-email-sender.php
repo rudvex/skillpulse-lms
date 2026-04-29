@@ -191,7 +191,7 @@ class SkillPulse_LMS_Email_Sender {
 
 		$email_queue   = get_option( 'splms_email_queue', array() );
 		$email_queue[] = $queued_email;
-		update_option( 'splms_email_queue', $email_queue );
+		update_option( 'splms_email_queue', $email_queue, false );
 
 		// Schedule processing if not already scheduled.
 		$interval = splms_get_setting( 'queue_processing_interval', 60 );
@@ -258,10 +258,10 @@ class SkillPulse_LMS_Email_Sender {
 				$failed_queue[] = $email;
 			}
 		}
-		update_option( 'splms_email_failed_queue', $failed_queue );
+		update_option( 'splms_email_failed_queue', $failed_queue, false );
 
 		// Update main queue with remaining emails.
-		update_option( 'splms_email_queue', $remaining );
+		update_option( 'splms_email_queue', $remaining, false );
 
 		// Schedule next batch if there are remaining emails.
 		if ( ! empty( $remaining ) ) {
@@ -302,7 +302,7 @@ class SkillPulse_LMS_Email_Sender {
 		if ( ! empty( $retry_queue ) ) {
 			$email_queue = get_option( 'splms_email_queue', array() );
 			$email_queue = array_merge( $retry_queue, $email_queue );
-			update_option( 'splms_email_queue', $email_queue );
+			update_option( 'splms_email_queue', $email_queue, false );
 
 			// Schedule processing.
 			$interval = splms_get_setting( 'queue_processing_interval', 60 );
@@ -313,7 +313,7 @@ class SkillPulse_LMS_Email_Sender {
 		}
 
 		// Update failed queue with permanently failed emails.
-		update_option( 'splms_email_failed_queue', $permanently_failed );
+		update_option( 'splms_email_failed_queue', $permanently_failed, false );
 
 		return array(
 			'retried'            => count( $retry_queue ),
@@ -394,8 +394,8 @@ class SkillPulse_LMS_Email_Sender {
 			}
 		);
 
-		update_option( 'splms_email_queue', array_values( $email_queue ) );
-		update_option( 'splms_email_failed_queue', array_values( $failed_queue ) );
+		update_option( 'splms_email_queue', array_values( $email_queue ), false );
+		update_option( 'splms_email_failed_queue', array_values( $failed_queue ), false );
 
 		return true;
 	}
@@ -427,7 +427,7 @@ class SkillPulse_LMS_Email_Sender {
 			$queue_logs = array_slice( $queue_logs, - 100 );
 		}
 
-		update_option( 'splms_email_queue_logs', $queue_logs );
+		update_option( 'splms_email_queue_logs', $queue_logs, false );
 	}
 
 	/**

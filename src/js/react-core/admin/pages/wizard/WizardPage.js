@@ -10,8 +10,6 @@
 import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { Spinner, Notice } from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
-
 import WizardContainer from './components/WizardContainer';
 import WelcomeStep from './components/steps/WelcomeStep';
 import BasicSetupStep from './components/steps/BasicSetupStep';

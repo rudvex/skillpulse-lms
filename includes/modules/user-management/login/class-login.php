@@ -57,6 +57,7 @@ class SkillPulse_LMS_Login {
 		add_action( 'wp_ajax_nopriv_splms_reset_password', array( $this, 'handle_reset_password' ) );
 
 		// WordPress login screen customization.
+		add_action( 'login_enqueue_scripts', array( $this, 'enqueue_login_styles' ) );
 		add_action( 'login_head', array( $this, 'customize_login_head' ) );
 		add_filter( 'login_headerurl', array( $this, 'customize_login_header_url' ) );
 		add_filter( 'login_headertext', array( $this, 'customize_login_header_text' ) );
@@ -85,347 +86,33 @@ class SkillPulse_LMS_Login {
 			return;
 		}
 
-		// Debug: Add a comment to verify this is being called.
-		echo '<!-- SkillPulse LMS Login Customization Loaded -->';
-
-		// Add custom CSS for login page.
-		echo '<style>
-			/* Custom SkillPulse LMS Login Styles - Modern Design */
-			/* Reset and Base Styles */
-			html{
-				height: auto;
-			}
-		body.login-action-login,
-		body.login-action-lostpassword,
-		body.login-action-checkemail {
-			background: linear-gradient(90deg, #E8ECF4 100%, #F1F3F9 0%);
-			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-			padding: 0;
-			min-height: calc(100dvh - 48px);
-			height: auto;
-			margin: 0;
-			padding: 24px 16px;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-		}
-
-		#login {
-			max-width: 450px;
-			width: 100%;
-			padding: 34px 24px;
-			background: linear-gradient(135deg, #F8F9FF 70.71%, #F0F2FF 0%);
-			box-shadow: 0px 4px 12px 0px #00000014;
-			border-radius: 12px;
-			margin: auto;
-			border: 1px solid #E1E5F0;
-			animation: fadeIn 0.4s ease-in-out;
-		}
-
-		@keyframes fadeIn {
-			from {
-				opacity: 0;
-				transform: translateY(10px);
-			}
-			to {
-				opacity: 1;
-				transform: translateY(0);
-			}
-		}
-
-		/* Logo Styling */
-		#login h1 {
-			text-align: center;
-			margin: 0;
-			padding: 0;
-		}
-
-		#login h1 a {
-			display: block;
-			background-size: contain;
-			background-repeat: no-repeat;
-			background-position: center;
-			text-indent: -9999px;
-			overflow: hidden;
-			margin: 0 auto;
-			color: #1e3a8a;
-			background-size: contain;
-			background-repeat: no-repeat;
-			background-position: center;
-			width: auto;
-			height: auto;
-			text-indent: 0;
-			font-size: 34px;
-			line-height: 42px;
-			padding: 0 54px;
-			font-weight: 700;
-			text-decoration: none;
-			display: block;
-			text-align: center;
-			margin-bottom: 16px;
-			background: transparent;
-			// background: linear-gradient(135deg, #7e75ff, #1e3a8a);
-			// -webkit-background-clip: text;
-			// -webkit-text-fill-color: transparent;
-			// background-clip: text;
-			word-wrap: break-word;
-			overflow-wrap: break-word;
-		}
-		#login h1 a:focus{
-			outline: unset;
-			border: unset;
-			box-shadow: unset;
-		}
-		/* Card Container - Form */
-		#login form {
-			background: transparent;
-			padding: 0;
-			position: relative;
-			border: none;
-			box-shadow: none;
-		}
-
-
-
-		/* Subtitle (via login_message hook) */
-		#login .login-message{
-			text-align: center;
-			margin: 0 0 24px 0;
-			padding: 0;
-		}
-
-		#login .splms-login-subtitle {
-			text-align: center;
-			margin: 0 0 34px 0;
-			padding: 0;
-		}
-
-		#login .login-message p,
-		#login .splms-login-subtitle p {
-			color: #374151;
-			font-size: 14px;
-			line-height: 20px;
-			margin: 0;
-			font-weight: 400;
-		}
-
-		/* Form Labels */
-		#login form label {
-			  display: block;
-				font-weight: 600;
-				margin-bottom: 4px;
-				font-size: 14px;
-				line-height: 20px;
-				color: #374151;
-		}
-
-		/* Input Fields */
-		#login form .input,
-		#login form input[type="text"],
-		#login form input[type="password"],
-		#login form input[type="email"] {
-			width: 100%;
-			padding: 0 16px;
-			border: 1px solid #c0c0c0;
-			border-radius: 8px;
-			font-size: 16px;
-			line-height: 24px;
-			transition: all 0.2s ease;
-			background-color: transparent;
-			color: #111827;
-			box-sizing: border-box;
-			margin-bottom: 16px;
-			min-height: 44px;
-		}
-
-		#login form .input:focus,
-		#login form input[type="text"]:focus,
-		#login form input[type="password"]:focus,
-		#login form input[type="email"]:focus {
-			outline: none;
-			border: 1px solid #1e3a8a;
-			box-shadow: unset;
-		}
-
-		/* Password Toggle Button */
-		#login form .wp-pwd {
-			position: relative;
-		}
-
-		#login form .wp-pwd input[type="password"] {
-			padding-right: 40px;
-		}
-
-		#login form .wp-pwd .button {
-			position: absolute !important;
-			right: 8px !important;
-			background: none !important;
-			border: none !important;
-			box-shadow: none !important;
-			padding: 4px 8px !important;
-			color: #6B7280 !important;
-			cursor: pointer !important;
-		}
-
-		#login form .wp-pwd .button:hover {
-			color: #1e3a8a !important;
-			background: none !important;
-		}
-
-		/* Remember Me Checkbox */
-		#login form .forgetmenot {
-			display: flex;
-			align-items: center;
-			gap: 8px;
-			margin: 0 0 20px 0;
-		}
-
-		#login form .forgetmenot input[type="checkbox"] {
-			width: 18px;
-			height: 18px;
-			margin: 0;
-			accent-color: #1e3a8a;
-			cursor: pointer;
-		}
-
-		#login form .forgetmenot input[type="checkbox"]:focus {
-			outline: unset;
-			box-shadow: unset;
-			border: 1px solid #1e3a8a;
-		}
-
-		#login form .forgetmenot label {
-			margin: 0;
-			font-weight: 400;
-			cursor: pointer;
-		}
-
-		/* Submit Button */
-		#login form input[type="submit"],
-		#login form #wp-submit {
-			display: flex;
-			width: 100%;
-			background: #1e3a8a;
-			padding: 9px 15px;
-			font-size: 16px;
-			line-height: 24px;
-			font-weight: 500;
-			border-radius: 8px;
-			border: 1px solid #1e3a8a;
-			color: #FFFFFF;
-			transition: all 0.3s ease;
-		}
-
-		#login form input[type="submit"]:hover,
-		#login form #wp-submit:hover {
-  			color: #1e3a8a;
-			background: transparent;
-		}
-
-		#login form input[type="submit"]:focus,
-		#login form #wp-submit:focus {
-			outline: unset;
-			box-shadow: unset;
-
-		}
-
-		/* Button Container */
-		#login form p.submit {
-			margin: 0;
-			padding: 0;
-		}
-
-		/* Navigation Links (Register, Lost Password) */
-		#login #nav,
-		#login #backtoblog {
-			text-align: center;
-			margin-top: 20px;
-			padding-top: 0;
-		}
-
-		#login #nav a,
-		#login #backtoblog a {
-			color: #1e3a8a;
-			text-decoration: none;
-			font-size: 0.875rem;
-			font-weight: 500;
-			transition: all 0.2s ease;
-		}
-
-		#login #nav a:hover,
-		#login #backtoblog a:hover {
-			text-decoration: underline;
-		}
-
-		#login #nav a:focus,
-		#login #backtoblog a:focus{
-			outline: unset;
-			border: unset;
-			box-shadow: unset;
-		}
-
-		/* Error Messages */
-		#login #login_error,
-		#login .message {
-			background: #fef2f2;
-			border: 1px solid #fecaca;
-			color: #dc2626;
-			padding: 12px 16px;
-			border-radius: 8px;
-			margin-bottom: 16px;
-			font-size: 0.875rem;
-			line-height: 1.5;
-		}
-
-		#login .message {
-			background: #f0fdf4;
-			border-color: #bbf7d0;
-			color: #166534;
-		}
-
-		/* Responsive Design */
-		@media (max-width: 767px) {
-			#login h1 a{
-			  	font-size: 28px;
-				line-height: 38px;
-				padding: 0;
-			}
-		}
-		@media (max-width: 580px) {
-			#login{
-			   width: auto;
-			   padding: 24px 16px;
-			}
-		}
-
-		/* Hide default WordPress styling that might interfere */
-		#login #login {
-			padding: 0;
-		}
-		
-		</style>';
-
-		// Get custom logo URL from settings or filter.
+		// Dynamic logo CSS — applied via inline style on the enqueued stylesheet.
 		$logo_url = apply_filters( 'splms_login_logo_url', '' );
 
 		if ( ! empty( $logo_url ) ) {
-			echo '<style>
-				#login h1 a {
-					background-image: url(' . esc_url( $logo_url ) . ') !important;
-					background-size: contain !important;
-					background-repeat: no-repeat !important;
-					background-position: center !important;
-					width: 200px !important;
-					height: 80px !important;
-					text-indent: -9999px !important;
-					overflow: hidden !important;
-					-webkit-background-clip: unset !important;
-					-webkit-text-fill-color: unset !important;
-					background-clip: unset !important;
-				}
-			</style>';
+			$logo_css = '#login h1 a{background-image:url(' . esc_url( $logo_url ) . ') !important;background-size:contain !important;background-repeat:no-repeat !important;background-position:center !important;width:200px !important;height:80px !important;text-indent:-9999px !important;overflow:hidden !important;-webkit-background-clip:unset !important;-webkit-text-fill-color:unset !important;background-clip:unset !important}';
+			wp_add_inline_style( 'splms-login', $logo_css );
 		}
+	}
+
+	/**
+	 * Enqueue login page styles.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	public function enqueue_login_styles() {
+		if ( ! splms_get_setting( 'customize_login_screen', true ) ) {
+			return;
+		}
+
+		wp_enqueue_style(
+			'splms-login',
+			SKILLPULSE_LMS_DIR_URL . 'assets/css/login.css',
+			array(),
+			SKILLPULSE_LMS_VERSION
+		);
 	}
 
 	/**

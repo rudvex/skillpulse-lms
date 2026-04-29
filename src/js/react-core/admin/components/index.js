@@ -6,4 +6,3 @@
  * @since [SPLMS_VERSION]
  */
 
-export { default as ContextualUpgradePrompt } from './ContextualUpgradePrompt';

@@ -308,6 +308,11 @@ class SkillPulse_LMS_Dashboard_API {
 
 		$query = new WP_Query( $args );
 
+		// Prime thumbnail caches to avoid per-post queries.
+		if ( ! empty( $query->posts ) ) {
+			update_post_thumbnail_cache( $query );
+		}
+
 		$courses = array();
 		foreach ( $query->posts as $course ) {
 			$thumbnail_id = get_post_thumbnail_id( $course->ID );

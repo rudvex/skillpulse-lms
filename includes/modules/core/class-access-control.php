@@ -360,31 +360,38 @@ class SkillPulse_LMS_Access_Control {
 	 * @return bool True if lesson is within preview limit.
 	 */
 	private function is_lesson_within_preview_limit( $lesson_id, $course_id, $preview_limit ) {
-		global $wpdb;
+		$cache_key   = 'splms_course_lessons_' . $course_id;
+		$all_lessons = wp_cache_get( $cache_key, 'splms_access_control' );
 
-		$relationships_table = esc_sql( $wpdb->prefix . 'splms_relationships' );
-		$course_items_table  = esc_sql( $wpdb->prefix . 'splms_course_items' );
+		if ( false === $all_lessons ) {
+			global $wpdb;
 
-		// Get all lessons for this course ordered by section and lesson order.
-		$query = "
-			SELECT r.child_id
-			FROM {$relationships_table} r
-			INNER JOIN {$course_items_table} ci ON r.parent_id = ci.item_id
-			WHERE ci.course_id = %d
-			AND r.child_type = %s
-			AND ci.item_type = %s
-			ORDER BY ci.order_index ASC, r.order_index ASC
-		";
+			$relationships_table = esc_sql( $wpdb->prefix . 'splms_relationships' );
+			$course_items_table  = esc_sql( $wpdb->prefix . 'splms_course_items' );
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
-		$all_lessons = $wpdb->get_col(
-			$wpdb->prepare(
-				$query, // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders, table names are safe.
-				$course_id,
-				SPLMS_POST_TYPES['lesson'],
-				SPLMS_POST_TYPES['section']
-			)
-		);
+			// Get all lessons for this course ordered by section and lesson order.
+			$query = "
+				SELECT r.child_id
+				FROM {$relationships_table} r
+				INNER JOIN {$course_items_table} ci ON r.parent_id = ci.item_id
+				WHERE ci.course_id = %d
+				AND r.child_type = %s
+				AND ci.item_type = %s
+				ORDER BY ci.order_index ASC, r.order_index ASC
+			";
+
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query with object cache.
+			$all_lessons = $wpdb->get_col(
+				$wpdb->prepare(
+					$query, // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders, table names are safe.
+					$course_id,
+					SPLMS_POST_TYPES['lesson'],
+					SPLMS_POST_TYPES['section']
+				)
+			);
+
+			wp_cache_set( $cache_key, $all_lessons, 'splms_access_control', HOUR_IN_SECONDS );
+		}
 
 		if ( empty( $all_lessons ) ) {
 			return false;
@@ -449,31 +456,38 @@ class SkillPulse_LMS_Access_Control {
 	 * @return bool True if quiz is within preview limit.
 	 */
 	private function is_quiz_within_preview_limit( $quiz_id, $course_id, $preview_limit ) {
-		global $wpdb;
+		$cache_key   = 'splms_course_quizzes_' . $course_id;
+		$all_quizzes = wp_cache_get( $cache_key, 'splms_access_control' );
 
-		$relationships_table = esc_sql( $wpdb->prefix . 'splms_relationships' );
-		$course_items_table  = esc_sql( $wpdb->prefix . 'splms_course_items' );
+		if ( false === $all_quizzes ) {
+			global $wpdb;
 
-		// Get all quizzes for this course ordered by section and quiz order.
-		$query = "
-			SELECT r.child_id
-			FROM {$relationships_table} r
-			INNER JOIN {$course_items_table} ci ON r.parent_id = ci.item_id
-			WHERE ci.course_id = %d
-			AND r.child_type = %s
-			AND ci.item_type = %s
-			ORDER BY ci.order_index ASC, r.order_index ASC
-		";
+			$relationships_table = esc_sql( $wpdb->prefix . 'splms_relationships' );
+			$course_items_table  = esc_sql( $wpdb->prefix . 'splms_course_items' );
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
-		$all_quizzes = $wpdb->get_col(
-			$wpdb->prepare(
-				$query, // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders, table names are safe.
-				$course_id,
-				SPLMS_POST_TYPES['quiz'],
-				SPLMS_POST_TYPES['section']
-			)
-		);
+			// Get all quizzes for this course ordered by section and quiz order.
+			$query = "
+				SELECT r.child_id
+				FROM {$relationships_table} r
+				INNER JOIN {$course_items_table} ci ON r.parent_id = ci.item_id
+				WHERE ci.course_id = %d
+				AND r.child_type = %s
+				AND ci.item_type = %s
+				ORDER BY ci.order_index ASC, r.order_index ASC
+			";
+
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query with object cache.
+			$all_quizzes = $wpdb->get_col(
+				$wpdb->prepare(
+					$query, // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Query is prepared with placeholders, table names are safe.
+					$course_id,
+					SPLMS_POST_TYPES['quiz'],
+					SPLMS_POST_TYPES['section']
+				)
+			);
+
+			wp_cache_set( $cache_key, $all_quizzes, 'splms_access_control', HOUR_IN_SECONDS );
+		}
 
 		if ( empty( $all_quizzes ) ) {
 			return false;

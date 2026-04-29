@@ -1,11 +1,2 @@
-import './account-info';
-// Certificate blocks removed - using custom builder instead
-// import './certificate';
-// import './certificate-header';
-// import './recipient-name';
-// import './course-details';
-// import './signature-area';
-// import './decorative-element';
-// import './logo';
-// import './decorative-seal';
-// import './description';
+// Blocks are now registered via the dedicated src/blocks/ entry point.
+// This file is kept for backward compatibility but no longer imports any blocks.

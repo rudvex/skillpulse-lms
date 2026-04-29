@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "splms/course-grid",
+	"title": "Course Grid",
+	"category": "skillpulse-lms",
+	"description": "Display a filterable grid or list of courses.",
+	"keywords": [ "courses", "grid", "list", "lms" ],
+	"textdomain": "skillpulse-lms",
+	"icon": "grid-view",
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ]
+	},
+	"attributes": {
+		"columns": { "type": "number", "default": 3 },
+		"perPage": { "type": "number", "default": 9 },
+		"categories": { "type": "array", "default": [] },
+		"tags": { "type": "array", "default": [] },
+		"difficulty": { "type": "string", "default": "all" },
+		"orderBy": { "type": "string", "default": "date" },
+		"order": { "type": "string", "default": "DESC" },
+		"showPagination": { "type": "boolean", "default": true },
+		"layout": { "type": "string", "default": "grid" }
+	}
+}

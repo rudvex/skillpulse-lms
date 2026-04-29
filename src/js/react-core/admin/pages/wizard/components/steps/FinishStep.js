@@ -10,39 +10,24 @@
 
 import { __ } from '@wordpress/i18n';
 import { Button, Card, CardBody } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
 import { SplmsIcon } from '../../../../../components/SplmsIcon';
 
 /**
  * Finish Step Component
  */
 const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
-	// Get license info from existing store.
-	const { licenseInfo } = useSelect(select => {
-		try {
-			const licenseStore = select('splms/license');
-			return {
-				licenseInfo: licenseStore ? licenseStore.getLicenseInfo() : {},
-			};
-		} catch (err) {
-			return {
-				licenseInfo: {},
-			};
-		}
-	}, []);
-
 	const { splmsWizardData } = window;
 
 	/**
 	 * Get setup status and personalized messaging
 	 */
 	const getSetupStatus = () => {
-		const hasActiveLicense = 'active' === licenseInfo?.status;
+		const hasActiveLicense = 'active' === splmsWizardData?.licenseStatus;
 
 		if (hasActiveLicense) {
 			return {
 				type: 'license',
-				icon: 'admin-network',
+				icon: 'premium',
 				color: 'primary',
 				title: __('Premium Features Unlocked', 'skillpulse-lms'),
 				message: __('Your license gives you access to all SkillPulse LMS features.', 'skillpulse-lms'),
@@ -52,7 +37,7 @@ const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
 
 		return {
 			type: 'free',
-			icon: 'admin-generic',
+			icon: 'info',
 			color: 'warning',
 			title: __('License Not Activated', 'skillpulse-lms'),
 			message: __('Activate your license anytime to unlock all pro features and receive updates.', 'skillpulse-lms'),
@@ -97,13 +82,6 @@ const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
 
 		return [
 			{
-				title: __('Create Your First Course', 'skillpulse-lms'),
-				description: __('Start building your learning content', 'skillpulse-lms'),
-				icon: 'book',
-				url: `${baseUrl}/wp-admin/post-new.php?post_type=sp-course`,
-				primary: true
-			},
-			{
 				title: __('Manage Students', 'skillpulse-lms'),
 				description: __('Add students and manage enrollments', 'skillpulse-lms'),
 				icon: 'groups',
@@ -113,7 +91,7 @@ const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
 			{
 				title: __('View Documentation', 'skillpulse-lms'),
 				description: __('Learn more about SkillPulse LMS features', 'skillpulse-lms'),
-				icon: 'book-alt',
+				icon: 'book',
 				url: 'https://skillpulselms.com/docs',
 				external: true,
 				primary: false
@@ -132,7 +110,7 @@ const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
 					<SplmsIcon name="yes-alt" size={64} className="splms-finish-success-icon" />
 				</div>
 				<h1 className="splms-finish-title">
-					{__('🎉 Setup Complete!', 'skillpulse-lms')}
+					{'\ud83c\udf89 '}{__('Setup Complete!', 'skillpulse-lms')}
 				</h1>
 				<p className="splms-finish-subtitle">
 					{__('Your SkillPulse LMS is ready to go. Let\'s start building amazing learning experiences!', 'skillpulse-lms')}
@@ -186,7 +164,7 @@ const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
 					{__('Quick Actions', 'skillpulse-lms')}
 				</h2>
 				<div className="splms-finish-actions-grid">
-					{quickActions.slice(1).map((action, index) => (
+					{quickActions.map((action, index) => (
 						<div key={index} className="splms-finish-action-item">
 							<div className="splms-finish-action-icon">
 								<SplmsIcon name={action.icon} size={20} />
@@ -207,7 +185,7 @@ const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
 									rel={action.external ? 'noopener noreferrer' : undefined}
 								>
 									{action.external ? __('Learn More', 'skillpulse-lms') : __('Go', 'skillpulse-lms')}
-									{action.external && <SplmsIcon name="external" size={16} />}
+									{action.external && <SplmsIcon name="link" size={16} />}
 								</Button>
 							</div>
 						</div>
@@ -224,7 +202,7 @@ const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
 					disabled={loading}
 					className="splms-finish-dashboard-button"
 				>
-					<SplmsIcon name="dashboard" size={16} />
+					<SplmsIcon mode="wp" name="dashboard" size={16} />
 					{__('Go to Dashboard', 'skillpulse-lms')}
 				</Button>
 

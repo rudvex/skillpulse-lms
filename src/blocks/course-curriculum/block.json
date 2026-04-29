@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "splms/course-curriculum",
+	"title": "Course Curriculum",
+	"category": "skillpulse-lms",
+	"description": "Display a course curriculum with expandable sections, lessons, and quizzes.",
+	"keywords": [ "curriculum", "syllabus", "lessons", "sections", "lms" ],
+	"textdomain": "skillpulse-lms",
+	"icon": "list-view",
+	"supports": {
+		"html": false,
+		"align": [ "wide" ]
+	},
+	"attributes": {
+		"courseId": { "type": "number", "default": 0 },
+		"showDuration": { "type": "boolean", "default": true },
+		"showLessonType": { "type": "boolean", "default": true },
+		"expandAll": { "type": "boolean", "default": false }
+	}
+}

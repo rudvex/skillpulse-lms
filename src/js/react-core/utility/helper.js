@@ -2,6 +2,27 @@ import { __ } from '@wordpress/i18n';
 const Url = require('url-parse');
 import { v4 as uuidv4 } from "uuid";
 
+/**
+ * Generate a local SVG data URI for a user's initials avatar.
+ * Replaces the external ui-avatars.com service.
+ *
+ * @param {string} name User display name.
+ * @param {number} size Avatar size in pixels.
+ * @return {string} SVG data URI.
+ */
+export const getInitialsAvatar = ( name, size = 40 ) => {
+	const displayName = name || 'Student';
+	const parts = displayName.trim().split( /\s+/ );
+	const initials = parts.length > 1
+		? ( parts[ 0 ][ 0 ] + parts[ parts.length - 1 ][ 0 ] ).toUpperCase()
+		: displayName.substring( 0, 2 ).toUpperCase();
+
+	const fontSize = Math.round( size * 0.4 );
+	const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${ size }" height="${ size }" viewBox="0 0 ${ size } ${ size }"><rect width="100%" height="100%" fill="#7e75ff"/><text x="50%" y="50%" dy=".1em" fill="#fff" font-family="Arial,sans-serif" font-size="${ fontSize }" font-weight="600" text-anchor="middle" dominant-baseline="central">${ initials }</text></svg>`;
+
+	return 'data:image/svg+xml,' + encodeURIComponent( svg );
+};
+
 
 // Function to extract the text domain and label for translation
 export const translateLabel = (text) => {

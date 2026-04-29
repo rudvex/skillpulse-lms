@@ -80,10 +80,10 @@ if ( ! $splms_search_query ) {
 					}
 					if ( is_array( $splms_value ) ) {
 						foreach ( $splms_value as $splms_sub_value ) {
-							echo '<input type="hidden" name="' . esc_attr( $splms_key ) . '[]" value="' . esc_attr( $splms_sub_value ) . '" />';
+							echo '<input type="hidden" name="' . esc_attr( sanitize_key( $splms_key ) ) . '[]" value="' . esc_attr( sanitize_text_field( wp_unslash( $splms_sub_value ) ) ) . '" />';
 						}
 					} else {
-						echo '<input type="hidden" name="' . esc_attr( $splms_key ) . '" value="' . esc_attr( $splms_value ) . '" />';
+						echo '<input type="hidden" name="' . esc_attr( sanitize_key( $splms_key ) ) . '" value="' . esc_attr( sanitize_text_field( wp_unslash( $splms_value ) ) ) . '" />';
 					}
 				}
 			}

@@ -58,6 +58,7 @@ class SkillPulse_LMS_Frontend {
 		$files = array(
 			'includes/frontend/core/class-template',
 			'includes/frontend/core/class-shortcode',
+			'includes/blocks/class-blocks',
 			'includes/frontend/dashboard/class-splms-dashboard',
 			'includes/frontend/dashboard/class-splms-dashboard-api',
 			'includes/frontend/dashboard/class-splms-dashboard-service',
@@ -93,6 +94,7 @@ class SkillPulse_LMS_Frontend {
 		// Initialize core components.
 		SkillPulse_LMS_Template::get_instance();
 		SkillPulse_LMS_Shortcode::get_instance();
+		SkillPulse_LMS_Blocks::get_instance();
 
 		// Initialize dashboard.
 		SkillPulse_LMS_Dashboard::get_instance();
@@ -137,9 +139,13 @@ class SkillPulse_LMS_Frontend {
 	public function enqueue_styles() {
 		$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-		// Get file modification time to force cache refresh.
+		// Fall back to minified if non-minified file doesn't exist.
 		$css_file_path = SKILLPULSE_LMS_DIR_PATH . "assets/css/frontend{$min}.css";
-		$file_version  = file_exists( $css_file_path ) ? filemtime( $css_file_path ) : SKILLPULSE_LMS_VERSION;
+		if ( ! file_exists( $css_file_path ) ) {
+			$min           = '.min';
+			$css_file_path = SKILLPULSE_LMS_DIR_PATH . 'assets/css/frontend.min.css';
+		}
+		$file_version = file_exists( $css_file_path ) ? filemtime( $css_file_path ) : SKILLPULSE_LMS_VERSION;
 
 		wp_register_style(
 			'splms-frontend-style',
@@ -153,7 +159,10 @@ class SkillPulse_LMS_Frontend {
 		// Enqueue fullscreen lesson/quiz viewer styles on single lesson/quiz pages.
 		if ( is_singular( array( SPLMS_POST_TYPES['lesson'], SPLMS_POST_TYPES['quiz'] ) ) ) {
 			$fullscreen_css_path = SKILLPULSE_LMS_DIR_PATH . "assets/css/fullscreen{$min}.css";
-			$fullscreen_version  = file_exists( $fullscreen_css_path ) ? filemtime( $fullscreen_css_path ) : SKILLPULSE_LMS_VERSION;
+			if ( ! file_exists( $fullscreen_css_path ) ) {
+				$fullscreen_css_path = SKILLPULSE_LMS_DIR_PATH . 'assets/css/fullscreen.min.css';
+			}
+			$fullscreen_version = file_exists( $fullscreen_css_path ) ? filemtime( $fullscreen_css_path ) : SKILLPULSE_LMS_VERSION;
 
 			wp_register_style(
 				'splms-fullscreen-style',
@@ -303,23 +312,25 @@ class SkillPulse_LMS_Frontend {
 				true
 			);
 
-			// Enqueue YouTube API if needed (for video tracking).
-			wp_enqueue_script(
-				'youtube-iframe-api',
-				'https://www.youtube.com/iframe_api',
-				array(),
-				'3.0', // YouTube API version.
-				true
-			);
+			// Only enqueue video APIs when the lesson contains video content.
+			$lesson_type = splms_get_lesson_type( get_the_ID() );
+			if ( 'video' === $lesson_type ) {
+				wp_enqueue_script(
+					'youtube-iframe-api',
+					'https://www.youtube.com/iframe_api',
+					array(),
+					'3.0', // YouTube API version.
+					true
+				);
 
-			// Enqueue Vimeo Player API if needed.
-			wp_enqueue_script(
-				'vimeo-player-api',
-				'https://player.vimeo.com/api/player.js',
-				array(),
-				'2.0', // Vimeo Player API version.
-				true
-			);
+				wp_enqueue_script(
+					'vimeo-player-api',
+					'https://player.vimeo.com/api/player.js',
+					array(),
+					'2.0', // Vimeo Player API version.
+					true
+				);
+			}
 
 			wp_enqueue_script( 'splms-lesson-viewer' );
 		}

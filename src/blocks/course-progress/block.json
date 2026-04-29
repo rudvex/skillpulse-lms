@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "splms/course-progress",
+	"title": "Course Progress",
+	"category": "skillpulse-lms",
+	"description": "Display a progress bar for a course.",
+	"keywords": [ "progress", "bar", "completion", "lms" ],
+	"textdomain": "skillpulse-lms",
+	"icon": "chart-bar",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"courseId": { "type": "number", "default": 0 },
+		"showPercentage": { "type": "boolean", "default": true },
+		"showItemCount": { "type": "boolean", "default": true },
+		"label": { "type": "string", "default": "" }
+	}
+}

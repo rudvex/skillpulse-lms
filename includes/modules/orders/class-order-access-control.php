@@ -565,11 +565,16 @@ class SkillPulse_LMS_Order_Access_Control {
 		);
 		$free_sections = array();
 
-		foreach ( $all_sections as $section_id ) {
-			$section_pricing = get_post_meta( $section_id, '_splms_section_pricing', true );
+		if ( ! empty( $all_sections ) ) {
+			// Prime meta cache for all sections in a single query to avoid N+1.
+			update_meta_cache( 'post', $all_sections );
 
-			if ( is_array( $section_pricing ) && isset( $section_pricing['is_free'] ) && true === $section_pricing['is_free'] ) {
-				$free_sections[] = $section_id;
+			foreach ( $all_sections as $section_id ) {
+				$section_pricing = get_post_meta( $section_id, '_splms_section_pricing', true );
+
+				if ( is_array( $section_pricing ) && isset( $section_pricing['is_free'] ) && true === $section_pricing['is_free'] ) {
+					$free_sections[] = $section_id;
+				}
 			}
 		}
 

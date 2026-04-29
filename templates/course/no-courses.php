@@ -86,7 +86,7 @@ $splms_has_filters = ! empty( array_filter( $_GET ) );
 			<?php if ( $splms_has_filters ) { ?>
 				<?php
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, $_GET used for URL building only.
-				$splms_clear_url = remove_query_arg( array_keys( $_GET ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$splms_clear_url = remove_query_arg( array_map( 'sanitize_key', array_keys( $_GET ) ) );
 				?>
 				<a href="<?php echo esc_url( $splms_clear_url ); ?>" class="btn btn-secondary">
 					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

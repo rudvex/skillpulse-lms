@@ -36,6 +36,11 @@ if ( $splms_current_user_id ) {
 	}
 }
 
+// Check for live class schedule.
+$splms_scheduling_settings = get_post_meta( $splms_course_id, '_splms_course_scheduling_settings', true );
+$splms_delivery_mode       = is_array( $splms_scheduling_settings ) && isset( $splms_scheduling_settings['course_delivery'] ) ? $splms_scheduling_settings['course_delivery'] : 'self_paced';
+$splms_live_schedule       = ( 'live' === $splms_delivery_mode && is_array( $splms_scheduling_settings ) && isset( $splms_scheduling_settings['live_class_schedule'] ) ) ? $splms_scheduling_settings['live_class_schedule'] : array();
+
 // Get course curriculum using centralized function with built-in access control.
 $splms_curriculum_result = splms_get_course_curriculum( $splms_course_id, $splms_current_user_id );
 
@@ -63,6 +68,65 @@ if ( $splms_uses_section_pricing && $splms_current_user_id ) {
 			<?php esc_html_e( 'Course Curriculum', 'skillpulse-lms' ); ?>
 		</h2>
 		<div class="section-content">
+			<?php if ( ! empty( $splms_live_schedule ) ) : ?>
+				<!-- Live Class Schedule -->
+				<div class="splms-live-schedule">
+					<h3 class="splms-live-schedule__title">
+						<span class="dashicons dashicons-video-alt2"></span>
+						<?php esc_html_e( 'Live Class Schedule', 'skillpulse-lms' ); ?>
+					</h3>
+					<div class="splms-live-schedule__sessions">
+						<?php
+						$splms_now = time();
+						foreach ( $splms_live_schedule as $splms_session ) :
+							$splms_s_date     = isset( $splms_session['session_date'] ) ? $splms_session['session_date'] : '';
+							$splms_s_title    = isset( $splms_session['session_title'] ) ? $splms_session['session_title'] : '';
+							$splms_s_duration = isset( $splms_session['session_duration'] ) ? absint( $splms_session['session_duration'] ) : 60;
+							$splms_s_join_url = isset( $splms_session['zoom_join_url'] ) ? $splms_session['zoom_join_url'] : '';
+							$splms_s_rec_url  = isset( $splms_session['zoom_recording_url'] ) ? $splms_session['zoom_recording_url'] : '';
+							$splms_s_ts       = ! empty( $splms_s_date ) ? strtotime( $splms_s_date ) : 0;
+							$splms_s_is_past  = $splms_s_ts > 0 && $splms_s_ts < $splms_now;
+
+							if ( empty( $splms_s_date ) ) {
+								continue;
+							}
+							?>
+							<div class="splms-live-schedule__session <?php echo esc_attr( $splms_s_is_past ? 'is-past' : 'is-upcoming' ); ?>">
+								<div class="splms-live-schedule__session-info">
+									<?php if ( ! empty( $splms_s_title ) ) : ?>
+										<strong><?php echo esc_html( $splms_s_title ); ?></strong>
+									<?php endif; ?>
+									<span class="splms-live-schedule__session-date">
+										<?php echo esc_html( wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $splms_s_ts ) ); ?>
+									</span>
+									<span class="splms-live-schedule__session-duration">
+										<?php
+										/* translators: %d: Session duration in minutes. */
+										printf( esc_html__( '%d min', 'skillpulse-lms' ), absint( $splms_s_duration ) );
+										?>
+									</span>
+								</div>
+								<div class="splms-live-schedule__session-action">
+									<?php if ( ! $splms_s_is_past && ! empty( $splms_s_join_url ) && $splms_is_enrolled ) : ?>
+										<a href="<?php echo esc_url( $splms_s_join_url ); ?>" target="_blank" rel="noopener noreferrer" class="splms-btn splms-btn-sm splms-btn-primary">
+											<?php esc_html_e( 'Join', 'skillpulse-lms' ); ?>
+										</a>
+									<?php elseif ( $splms_s_is_past && ! empty( $splms_s_rec_url ) ) : ?>
+										<a href="<?php echo esc_url( $splms_s_rec_url ); ?>" target="_blank" rel="noopener noreferrer" class="splms-btn splms-btn-sm splms-btn-secondary">
+											<?php esc_html_e( 'Recording', 'skillpulse-lms' ); ?>
+										</a>
+									<?php elseif ( $splms_s_is_past ) : ?>
+										<span class="splms-badge splms-badge--muted"><?php esc_html_e( 'Completed', 'skillpulse-lms' ); ?></span>
+									<?php else : ?>
+										<span class="splms-badge splms-badge--info"><?php esc_html_e( 'Upcoming', 'skillpulse-lms' ); ?></span>
+									<?php endif; ?>
+								</div>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				</div>
+			<?php endif; ?>
+
 			<!-- Curriculum Overview - Minimal -->
 			<div class="curriculum-overview">
 				<div class="curriculum-stats-minimal">

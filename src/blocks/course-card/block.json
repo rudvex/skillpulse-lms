@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "splms/course-card",
+	"title": "Course Card",
+	"category": "skillpulse-lms",
+	"description": "Display a single course card with thumbnail, price, rating, and CTA.",
+	"keywords": [ "course", "card", "lms" ],
+	"textdomain": "skillpulse-lms",
+	"icon": "welcome-learn-more",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"courseId": { "type": "number", "default": 0 },
+		"showThumbnail": { "type": "boolean", "default": true },
+		"showExcerpt": { "type": "boolean", "default": true },
+		"showPrice": { "type": "boolean", "default": true },
+		"showRating": { "type": "boolean", "default": true },
+		"showInstructor": { "type": "boolean", "default": true },
+		"showDifficulty": { "type": "boolean", "default": true },
+		"showActionButton": { "type": "boolean", "default": true }
+	}
+}

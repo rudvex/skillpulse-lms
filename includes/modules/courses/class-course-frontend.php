@@ -501,7 +501,7 @@ class SkillPulse_LMS_Course_Frontend {
 		// Add structured data.
 		$schema = $this->get_archive_schema_data();
 		if ( $schema ) {
-			echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
+			echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG ) . '</script>' . "\n";
 		}
 	}
 

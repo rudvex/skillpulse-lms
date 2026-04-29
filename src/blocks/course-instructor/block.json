@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "splms/course-instructor",
+	"title": "Course Instructor",
+	"category": "skillpulse-lms",
+	"description": "Display an instructor profile card with avatar, bio, and stats.",
+	"keywords": [ "instructor", "teacher", "author", "profile", "lms" ],
+	"textdomain": "skillpulse-lms",
+	"icon": "businessman",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"instructorId": { "type": "number", "default": 0 },
+		"showBio": { "type": "boolean", "default": true },
+		"showCourseCount": { "type": "boolean", "default": true },
+		"showStudentCount": { "type": "boolean", "default": true }
+	}
+}

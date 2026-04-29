@@ -345,31 +345,31 @@ class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 		if ( $search ) {
 			$search_like = '%' . $wpdb->esc_like( $search ) . '%';
 
-			// Get matching user IDs.
+			// Get matching user IDs (limited to prevent full table scans).
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 			$user_ids = $wpdb->get_col(
 				$wpdb->prepare(
-					"SELECT ID FROM {$wpdb->users} WHERE display_name LIKE %s OR user_email LIKE %s",
+					"SELECT ID FROM {$wpdb->users} WHERE display_name LIKE %s OR user_email LIKE %s LIMIT 100",
 					$search_like,
 					$search_like
 				)
 			);
 
-			// Get matching quiz IDs.
+			// Get matching quiz IDs (limited to prevent full table scans).
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 			$quiz_ids = $wpdb->get_col(
 				$wpdb->prepare(
-					"SELECT ID FROM {$wpdb->posts} WHERE post_type = %s AND post_title LIKE %s",
+					"SELECT ID FROM {$wpdb->posts} WHERE post_type = %s AND post_title LIKE %s LIMIT 100",
 					SPLMS_POST_TYPES['quiz'],
 					$search_like
 				)
 			);
 
-			// Get matching course IDs.
+			// Get matching course IDs (limited to prevent full table scans).
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query.
 			$course_ids = $wpdb->get_col(
 				$wpdb->prepare(
-					"SELECT ID FROM {$wpdb->posts} WHERE post_type = %s AND post_title LIKE %s",
+					"SELECT ID FROM {$wpdb->posts} WHERE post_type = %s AND post_title LIKE %s LIMIT 100",
 					SPLMS_POST_TYPES['course'],
 					$search_like
 				)

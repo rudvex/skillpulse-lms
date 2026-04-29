@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "splms/course-search",
+	"title": "Course Search",
+	"category": "skillpulse-lms",
+	"description": "Course search bar using the plugin's standard search template.",
+	"keywords": [ "search", "courses", "find", "lms" ],
+	"textdomain": "skillpulse-lms",
+	"icon": "search",
+	"supports": {
+		"html": false,
+		"align": [ "wide" ]
+	},
+	"attributes": {}
+}
