@@ -88,9 +88,6 @@ class SkillPulse_LMS_Signup {
 	 * @return void
 	 */
 	public function init() {
-		// Add query vars.
-		add_filter( 'query_vars', array( $this, 'add_query_vars' ) );
-
 		// Handle activation URL.
 		$this->handle_activation_url();
 	}
@@ -505,11 +502,8 @@ class SkillPulse_LMS_Signup {
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $wpdb->users is safe.
 			$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->users} SET user_pass = %s WHERE ID = %d", $stored_password, $user_id ) );
 
-			// Clean user cache.
-			$uc = wp_cache_get( $user_id, 'users' );
-			if ( ! empty( $uc->ID ) ) {
-				clean_user_cache( $uc->ID );
-			}
+			// Clean user cache after direct password update.
+			clean_user_cache( $user_id );
 		}
 
 		// Update user meta.
@@ -578,13 +572,7 @@ class SkillPulse_LMS_Signup {
 	 * @return object|null
 	 */
 	public function get_signup( $signup_id ) {
-		global $wpdb;
-
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- table_name is safe, generated from get_signups_table_name().
-		$query = "SELECT * FROM {$this->get_signups_table_name()} WHERE id = %d";
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared with $wpdb->prepare().
-		return $wpdb->get_row( $wpdb->prepare( $query, $signup_id ) );
+		return SkillPulse_LMS_Signup_Query::get_instance()->get_signup( $signup_id );
 	}
 
 	/**
@@ -597,13 +585,7 @@ class SkillPulse_LMS_Signup {
 	 * @return object|null
 	 */
 	public function get_signup_by_key( $activation_key ) {
-		global $wpdb;
-
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- table_name is safe, generated from get_signups_table_name().
-		$query = "SELECT * FROM {$this->get_signups_table_name()} WHERE activation_key = %s";
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared with $wpdb->prepare().
-		return $wpdb->get_row( $wpdb->prepare( $query, $activation_key ) );
+		return SkillPulse_LMS_Signup_Query::get_instance()->get_signup_by_key( $activation_key );
 	}
 
 	/**
@@ -616,13 +598,7 @@ class SkillPulse_LMS_Signup {
 	 * @return object|null
 	 */
 	public function get_signup_by_email( $email ) {
-		global $wpdb;
-
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- table_name is safe, generated from get_signups_table_name().
-		$query = "SELECT * FROM {$this->get_signups_table_name()} WHERE user_email = %s";
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared with $wpdb->prepare().
-		return $wpdb->get_row( $wpdb->prepare( $query, $email ) );
+		return SkillPulse_LMS_Signup_Query::get_instance()->get_signup_by_email( $email );
 	}
 
 	/**
@@ -636,16 +612,7 @@ class SkillPulse_LMS_Signup {
 	 * @return bool
 	 */
 	private function update_signup_status( $signup_id, $status ) {
-		global $wpdb;
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
-		return $wpdb->update(
-			$this->get_signups_table_name(),
-			array( 'status' => $status ),
-			array( 'id' => $signup_id ),
-			array( '%s' ),
-			array( '%d' )
-		);
+		return SkillPulse_LMS_Signup_Query::get_instance()->update_signup_status( $signup_id, $status );
 	}
 
 	/**
@@ -755,16 +722,13 @@ class SkillPulse_LMS_Signup {
 			return;
 		}
 
-		// Bail if there is no current admin screen.
-		if ( ! function_exists( 'get_current_screen' ) || ! get_current_screen() ) {
+		// Bail if not on the users admin screen.
+		if ( ! function_exists( 'get_current_screen' ) ) {
 			return;
 		}
 
-		// Get current screen.
 		$current_screen = get_current_screen();
-
-		// Bail if not on a users page.
-		if ( ! isset( $current_screen->id ) || 'users' !== $current_screen->id ) {
+		if ( ! $current_screen || 'users' !== $current_screen->id ) {
 			return;
 		}
 
@@ -773,11 +737,17 @@ class SkillPulse_LMS_Signup {
 			return;
 		}
 
-		// Exclude users that are still pending activation.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- table_name is safe.
-		$signup_emails = $wpdb->get_col( "SELECT user_email FROM {$this->get_signups_table_name()} WHERE status = 'pending'" );
+		// Exclude users that are still pending activation using the query class.
+		$pending_signups = SkillPulse_LMS_Signup_Query::get_instance()->get_signups(
+			array(
+				'status' => 'pending',
+				'number' => -1,
+			)
+		);
 
-		if ( ! empty( $signup_emails ) ) {
+		if ( ! empty( $pending_signups ) ) {
+			$signup_emails = wp_list_pluck( $pending_signups, 'user_email' );
+
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $wpdb->users is safe.
 			$exclude_ids = $wpdb->get_col(
 				$wpdb->prepare(
@@ -799,17 +769,10 @@ class SkillPulse_LMS_Signup {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return bool
+	 * @return int|false Number of rows deleted on success, false on failure.
 	 */
 	public function delete_signup( $signup_id ) {
-		global $wpdb;
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
-		return $wpdb->delete(
-			$this->get_signups_table_name(),
-			array( 'id' => $signup_id ),
-			array( '%d' )
-		);
+		return SkillPulse_LMS_Signup_Query::get_instance()->delete_signup( $signup_id );
 	}
 
 	/**

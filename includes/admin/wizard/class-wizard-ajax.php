@@ -52,7 +52,6 @@ class SkillPulse_LMS_Wizard_Ajax {
 
 	/**
 	 * Save wizard step data.
-	 *
 	 */
 	public function save_step() {
 		// Verify nonce.

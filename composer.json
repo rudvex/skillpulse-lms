@@ -1,0 +1,41 @@
+{
+  "name": "skillpulse/lms",
+  "description": "Create and deliver online courses with ease. A powerful WordPress LMS solution for educators and course creators.",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "SkillPulseLMS Team",
+      "email": "dev@skillpulselms.com",
+      "homepage": "https://skillpulselms.com"
+    }
+  ],
+  "homepage": "https://skillpulselms.com",
+  "support": {
+    "docs": "https://docs.skillpulselms.com/"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "lms",
+    "learning-management-system",
+    "courses",
+    "education",
+    "e-learning"
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "SkillPulseLMS\\": "includes/",
+      "SkillPulseLMS\\RestApi\\": "includes/rest-api/"
+    }
+  },
+  "config": {
+    "sort-packages": true,
+    "audit": {
+      "abandoned": "report"
+    }
+  }
+}

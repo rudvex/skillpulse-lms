@@ -93,7 +93,7 @@ class SkillPulse_LMS_Admin_Menus {
 			'skillpulse-lms',
 			array( $this, 'overview_page' ),
 			$icon,
-			4
+			30
 		);
 
 		// Overview submenu.
@@ -218,20 +218,8 @@ class SkillPulse_LMS_Admin_Menus {
 	 * @since 1.0.0
 	 */
 	public function admin_menu_separator_css() {
-		?>
-		<style>
-			/* Separators inside SkillPulse LMS submenu */
-			body.skillpulse-lms-user-admin #adminmenumain .toplevel_page_skillpulse-lms .wp-submenu a[href$="page=splms-separator"] {
-				pointer-events: none;
-				cursor: default;
-				padding-bottom: 0;
-				margin-right: 16px;
-				margin-left: 14px;
-				margin-bottom: 5px;
-				border-bottom: 1px solid #555;
-			}
-		</style>
-		<?php
+		$css = 'body.skillpulse-lms-user-admin #adminmenumain .toplevel_page_skillpulse-lms .wp-submenu a[href$="page=splms-separator"]{pointer-events:none;cursor:default;padding-bottom:0;margin-right:16px;margin-left:14px;margin-bottom:5px;border-bottom:1px solid #555}';
+		wp_add_inline_style( 'wp-admin', $css );
 	}
 
 	/**
@@ -492,6 +480,8 @@ class SkillPulse_LMS_Admin_Menus {
 		</div>
 		<?php
 	}
+
+
 
 	/**
 	 * Check if setup wizard is completed.

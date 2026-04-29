@@ -649,29 +649,4 @@ get_header(); ?>
 	</div>
 </div>
 
-<script>
-// Simple mobile sticky bar toggle
-(function() {
-	const stickyBar = document.querySelector('.splms-mobile-purchase-bar');
-	const purchaseCard = document.querySelector('.splms-section-purchase-card');
-
-	if (stickyBar && purchaseCard && window.innerWidth <= 1024) {
-		const observer = new IntersectionObserver(
-			function(entries) {
-				entries.forEach(function(entry) {
-					if (entry.isIntersecting) {
-						stickyBar.style.display = 'none';
-					} else {
-						stickyBar.style.display = 'block';
-					}
-				});
-			},
-			{ threshold: 0.1 }
-		);
-		observer.observe(purchaseCard);
-	}
-})();
-
-</script>
-
 <?php get_footer(); ?>

@@ -81,6 +81,16 @@ class SkillPulse_LMS_REST_Quiz_Settings_Controller extends WP_REST_Controller {
 	 * @return bool|WP_Error True if request has access, WP_Error object otherwise.
 	 */
 	public function get_quiz_settings_permissions_check( $request ) {
+		$quiz_id = $request->get_param( 'id' );
+
+		if ( ! current_user_can( 'edit_post', $quiz_id ) ) {
+			return new WP_Error(
+				'rest_forbidden',
+				__( 'Sorry, you are not allowed to view quiz settings.', 'skillpulse-lms' ),
+				array( 'status' => rest_authorization_required_code() )
+			);
+		}
+
 		$retval = true;
 
 		/**

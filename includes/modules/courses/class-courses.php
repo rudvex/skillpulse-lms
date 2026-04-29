@@ -85,6 +85,14 @@ class SkillPulse_LMS_Courses {
 		add_action( 'save_post_' . SPLMS_POST_TYPES['course'], array( $this, 'clear_related_courses_cache' ), 10, 2 );
 		add_action( 'set_object_terms', array( $this, 'clear_related_courses_cache_on_term_change' ), 10, 6 );
 
+		// Invalidate sidebar filter transients when course taxonomy terms change.
+		add_action( 'created_' . SPLMS_TAXONOMIES['course_category'], array( $this, 'clear_sidebar_filter_cache' ) );
+		add_action( 'edited_' . SPLMS_TAXONOMIES['course_category'], array( $this, 'clear_sidebar_filter_cache' ) );
+		add_action( 'delete_' . SPLMS_TAXONOMIES['course_category'], array( $this, 'clear_sidebar_filter_cache' ) );
+		add_action( 'created_' . SPLMS_TAXONOMIES['course_tag'], array( $this, 'clear_sidebar_filter_cache' ) );
+		add_action( 'edited_' . SPLMS_TAXONOMIES['course_tag'], array( $this, 'clear_sidebar_filter_cache' ) );
+		add_action( 'delete_' . SPLMS_TAXONOMIES['course_tag'], array( $this, 'clear_sidebar_filter_cache' ) );
+
 		// Initialize course frontend functionality.
 		if ( ! is_admin() && class_exists( 'SkillPulse_LMS_Course_Frontend' ) ) {
 			SkillPulse_LMS_Course_Frontend::get_instance();
@@ -505,6 +513,18 @@ class SkillPulse_LMS_Courses {
 		foreach ( $all_courses as $other_course_id ) {
 			delete_transient( 'splms_related_courses_' . $other_course_id );
 		}
+	}
+
+	/**
+	 * Clear sidebar filter transient caches when course taxonomy terms change.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	public function clear_sidebar_filter_cache() {
+		delete_transient( 'splms_sidebar_course_categories' );
+		delete_transient( 'splms_sidebar_course_tags' );
 	}
 
 	/**

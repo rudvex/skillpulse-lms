@@ -15,8 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-
-
 get_header();
 
 // Get the queried author.
@@ -44,19 +42,7 @@ $splms_courses_per_page = 10;
 // For author pages, use a simple GET parameter for pagination.
 $splms_current_page = max( 1, isset( $_GET['course_page'] ) ? intval( $_GET['course_page'] ) : 1 ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Configuration file for admin context, no data processing.
 
-// Get author's total published courses count (for stats and pagination).
-$splms_total_courses_query = new WP_Query(
-	array(
-		'post_type'      => SPLMS_POST_TYPES['course'],
-		'author'         => $splms_author_id,
-		'post_status'    => 'publish',
-		'posts_per_page' => -1,
-		'fields'         => 'ids',
-	)
-);
-$splms_total_courses       = $splms_total_courses_query->found_posts;
-
-// Get paginated author's published courses.
+// Get paginated author's published courses (also retrieves total count via found_posts).
 $splms_author_courses_query = new WP_Query(
 	array(
 		'post_type'      => SPLMS_POST_TYPES['course'],
@@ -66,6 +52,7 @@ $splms_author_courses_query = new WP_Query(
 		'paged'          => $splms_current_page,
 	)
 );
+$splms_total_courses        = $splms_author_courses_query->found_posts;
 
 $splms_author_courses = $splms_author_courses_query->posts;
 $splms_total_pages    = $splms_author_courses_query->max_num_pages;
@@ -140,13 +127,8 @@ if ( ! $splms_is_instructor || empty( $splms_author_courses ) ) {
 						</div>
 
 						<?php
-						// Additional stats for instructors.
-						$splms_total_students = 0;
-
-						foreach ( $splms_author_courses as $splms_course ) {
-							$splms_enrolled_count  = splms_get_course_enrollment_count( $splms_course->ID );
-							$splms_total_students += $splms_enrolled_count;
-						}
+						// Get total students across all author courses using the enrollments query class.
+						$splms_total_students = SkillPulse_LMS_Enrollments_Query::get_instance()->get_author_student_count( $splms_author_id );
 
 						if ( $splms_total_students > 0 ) :
 							?>

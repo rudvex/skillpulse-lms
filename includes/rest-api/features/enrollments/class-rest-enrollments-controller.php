@@ -659,7 +659,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 			}
 		}
 		if ( null !== $progress ) {
-			$update_data['progress'] = $progress;
+			$update_data['progress'] = max( 0, min( 100, floatval( $progress ) ) );
 		}
 
 		// Update enrollment.

@@ -66,10 +66,10 @@ $splms_current_sort            = isset( $_GET['orderby'] ) ? sanitize_text_field
 				}
 				if ( is_array( $splms_value ) ) {
 					foreach ( $splms_value as $splms_sub_value ) {
-						echo '<input type="hidden" name="' . esc_attr( $splms_key ) . '[]" value="' . esc_attr( wp_unslash( $splms_sub_value ) ) . '" />';
+						echo '<input type="hidden" name="' . esc_attr( sanitize_key( $splms_key ) ) . '[]" value="' . esc_attr( sanitize_text_field( wp_unslash( $splms_sub_value ) ) ) . '" />';
 					}
 				} else {
-					echo '<input type="hidden" name="' . esc_attr( $splms_key ) . '" value="' . esc_attr( wp_unslash( $splms_value ) ) . '" />';
+					echo '<input type="hidden" name="' . esc_attr( sanitize_key( $splms_key ) ) . '" value="' . esc_attr( sanitize_text_field( wp_unslash( $splms_value ) ) ) . '" />';
 				}
 			}
 		}
@@ -83,55 +83,4 @@ $splms_current_sort            = isset( $_GET['orderby'] ) ? sanitize_text_field
 		<?php } ?> -->
 	</form>
 </div>
-
-<script>
-jQuery(document).ready(function($) {
-	// Auto-submit course filters when any dropdown changes
-	$('.course-filters-form .filter-select').on('change', function() {
-		var $form = $(this).closest('form');
-		var $select = $(this);
-
-		// Add loading state
-		$select.prop('disabled', true);
-		$form.find('.filter-select').addClass('loading');
-
-		// Show loading indicator (optional visual feedback)
-		if (!$form.find('.filter-loading').length) {
-			$('<div class="filter-loading" style="display: inline-block; margin-left: 10px; font-size: 12px; color: #666;">' +
-				'<?php esc_html_e( 'Applying...', 'skillpulse-lms' ); ?></div>')
-				.insertAfter($select.closest('.filter-group'));
-		}
-
-		// Submit the form after a brief delay to prevent rapid successive submissions
-		setTimeout(function() {
-			$form.submit();
-		}, 300);
-	});
-
-	// Remove loading states if back button is used
-	$(window).on('pageshow', function(event) {
-		if (event.originalEvent.persisted) {
-			$('.course-filters-form .filter-select').prop('disabled', false);
-			$('.course-filters-form .filter-select').removeClass('loading');
-			$('.filter-loading').remove();
-		}
-	});
-});
-</script>
-
-<style>
-.filter-select.loading {
-	opacity: 0.7;
-	cursor: wait;
-}
-
-.filter-loading {
-	animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-	0% { opacity: 1; }
-	50% { opacity: 0.5; }
-	100% { opacity: 1; }
-}
-</style> 
+ 

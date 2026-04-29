@@ -160,17 +160,12 @@ class SkillPulse_LMS_Shortcode {
 			</div>
 		</div>
 
-		<script type="text/javascript">
-			jQuery( document ).ready( function () {
-				if ( typeof SPLMSNotificationsPage !== 'undefined' ) {
-					window.splmsNotificationsPage = new SPLMSNotificationsPage( {
-						perPage: <?php echo intval( $atts['per_page'] ); ?>,
-						showFilter: <?php echo 'true' === $atts['show_filter'] ? 'true' : 'false'; ?>,
-						showMarkAll: <?php echo 'true' === $atts['show_mark_all'] ? 'true' : 'false'; ?>
-					} );
-				}
-			} );
-		</script>
+		<?php
+		wp_add_inline_script(
+			'jquery',
+			'jQuery(document).ready(function(){if(typeof SPLMSNotifications!=="undefined"&&!window.splmsNotifications){window.splmsNotifications=new SPLMSNotifications()}});'
+		);
+		?>
 		<?php
 
 		return ob_get_clean();

@@ -182,19 +182,6 @@ class SkillPulse_LMS_Section_Access_Query extends SkillPulse_LMS_Base_Query {
 	}
 
 	/**
-	 * Get all section access records for a user.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param int $user_id User ID.
-	 * @return array Array of access records.
-	 */
-	public function get_user_access_records( $user_id ) {
-		$query = "SELECT * FROM {$this->table_name} WHERE user_id = %d ORDER BY granted_at DESC";
-		return $this->get_results( $query, array( $user_id ) );
-	}
-
-	/**
 	 * Get section access records by order ID.
 	 *
 	 * @since 1.0.0

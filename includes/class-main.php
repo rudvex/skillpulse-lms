@@ -89,5 +89,4 @@ class SkillPulse_LMS_Main {
 
 		// Initialize license management system.
 	}
-
 }

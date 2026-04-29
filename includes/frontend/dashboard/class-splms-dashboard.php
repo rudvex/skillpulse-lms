@@ -112,12 +112,27 @@ class SkillPulse_LMS_Dashboard {
 			true
 		);
 
-		// Enqueue HugeIcons font.
+		// Enqueue HugeIcons font with preconnect for faster loading.
 		wp_enqueue_style(
 			'hugicons-font',
 			'https://cdn.hugeicons.com/font/hgi-stroke-rounded.css',
 			array(),
 			'1.0.0'
+		);
+
+		add_filter(
+			'wp_resource_hints',
+			function ( $urls, $relation_type ) {
+				if ( 'preconnect' === $relation_type ) {
+					$urls[] = array(
+						'href'        => 'https://cdn.hugeicons.com',
+						'crossorigin' => 'anonymous',
+					);
+				}
+				return $urls;
+			},
+			10,
+			2
 		);
 
 		// Dashboard styles are included in frontend.min.css.

@@ -690,6 +690,15 @@ class SkillPulse_LMS_Course_Items_Query extends SkillPulse_LMS_Base_Query {
 				}
 			}
 
+			// Check drip content for enrolled users with access.
+			$is_drip_locked = false;
+			if ( $item_has_access && $is_enrolled && $user_id && SPLMS_POST_TYPES['lesson'] === $child_type ) {
+				if ( ! splms_is_lesson_drip_available( $child_id, $user_id ) ) {
+					$item_has_access = false;
+					$is_drip_locked  = true;
+				}
+			}
+
 			// Add access data to child data.
 			if ( empty( $fields ) || in_array( 'has_access', $fields, true ) ) {
 				$child_data['has_access'] = $item_has_access;
@@ -700,6 +709,11 @@ class SkillPulse_LMS_Course_Items_Query extends SkillPulse_LMS_Base_Query {
 				$child_data['is_locked'] = ! $item_has_access;
 			}
 
+			// Add drip lock flag so templates can show drip-specific messages.
+			if ( empty( $fields ) || in_array( 'is_drip_locked', $fields, true ) ) {
+				$child_data['is_drip_locked'] = $is_drip_locked;
+			}
+
 			// Add additional access metadata for advanced use cases.
 			if ( empty( $fields ) || in_array( 'access_meta', $fields, true ) ) {
 				$child_data['access_meta'] = array(
@@ -708,6 +722,7 @@ class SkillPulse_LMS_Course_Items_Query extends SkillPulse_LMS_Base_Query {
 					'is_guest_preview_available' => $is_guest_preview_available,
 					'is_section_preview_item'    => $is_section_preview_item,
 					'uses_section_pricing'       => $uses_section_pricing,
+					'is_drip_locked'             => $is_drip_locked,
 				);
 			}
 		}

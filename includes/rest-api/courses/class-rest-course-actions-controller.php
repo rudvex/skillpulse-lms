@@ -1350,8 +1350,16 @@ class SkillPulse_LMS_REST_Course_Actions_Controller extends WP_REST_Controller {
 	 * @return bool|WP_Error True if user is logged in, WP_Error otherwise.
 	 */
 	public function verify_payment_permissions_check( $request ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
-		// Allow logged-in users to verify their own payments.
-		// Webhooks use handle_webhook which has no auth requirement.
+		// Require authentication — only logged-in users can verify their own payments.
+		// Webhooks use a separate handle_webhook endpoint with its own auth.
+		if ( ! is_user_logged_in() ) {
+			return new WP_Error(
+				'rest_not_logged_in',
+				__( 'You must be logged in to verify a payment.', 'skillpulse-lms' ),
+				array( 'status' => 401 )
+			);
+		}
+
 		return true;
 	}
 
@@ -1403,7 +1411,7 @@ class SkillPulse_LMS_REST_Course_Actions_Controller extends WP_REST_Controller {
 			case 'paypal':
 				if ( class_exists( 'SkillPulse_LMS_PayPal' ) ) {
 					$paypal = SkillPulse_LMS_PayPal::get_instance();
-					// PayPal webhook handling would go here.
+					$paypal->handle_webhook();
 					return rest_ensure_response(
 						array(
 							'success' => true,
@@ -1416,7 +1424,7 @@ class SkillPulse_LMS_REST_Course_Actions_Controller extends WP_REST_Controller {
 			case 'stripe':
 				if ( class_exists( 'SkillPulse_LMS_Stripe' ) ) {
 					$stripe = SkillPulse_LMS_Stripe::get_instance();
-					// Stripe webhook handling would go here.
+					$stripe->handle_webhook();
 					return rest_ensure_response(
 						array(
 							'success' => true,

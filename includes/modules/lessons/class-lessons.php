@@ -364,15 +364,21 @@ class SkillPulse_LMS_Lessons {
 			return true; // Let main access control handle guest access.
 		}
 
-		$drip_settings = $this->get_lesson_drip_settings( $lesson_id );
-
-		// If drip is not enabled, lesson is available.
-		if ( empty( $drip_settings['enable_drip'] ) || ! $drip_settings['enable_drip'] ) {
+		$course_id = $this->get_lesson_course( $lesson_id );
+		if ( ! $course_id ) {
 			return true;
 		}
 
-		$course_id = $this->get_lesson_course( $lesson_id );
-		if ( ! $course_id ) {
+		// Check if drip content is enabled at the course level.
+		$content_delivery = get_post_meta( $course_id, '_splms_content_delivery', true );
+		if ( ! is_array( $content_delivery ) || empty( $content_delivery['drip_content'] ) ) {
+			return true;
+		}
+
+		$drip_settings = $this->get_lesson_drip_settings( $lesson_id );
+
+		// If drip is not enabled on this lesson, it is available.
+		if ( empty( $drip_settings['enable_drip'] ) || ! $drip_settings['enable_drip'] ) {
 			return true;
 		}
 
@@ -933,7 +939,7 @@ class SkillPulse_LMS_Lessons {
 	 *
 	 * @return int|null Course ID on success, null on failure.
 	 */
-	private function get_lesson_course( $lesson_id ) {
+	public function get_lesson_course( $lesson_id ) {
 		// Use database relationships to find the course for this lesson.
 		$relationships_query = SkillPulse_LMS_Relationships_Query::get_instance();
 		$parents             = $relationships_query->get_parents( $lesson_id );

@@ -18,26 +18,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 $splms_categories_enabled = splms_get_setting( 'course_categories_enabled', true );
 $splms_tags_enabled       = splms_get_setting( 'course_tags_enabled', true );
 
-// Only fetch categories if enabled.
+// Only fetch categories if enabled (cached for 1 hour).
 $splms_categories = array();
 if ( $splms_categories_enabled ) {
-	$splms_categories = get_terms(
-		array(
-			'taxonomy'   => SPLMS_TAXONOMIES['course_category'],
-			'hide_empty' => true,
-		)
-	);
+	$splms_categories = get_transient( 'splms_sidebar_course_categories' );
+	if ( false === $splms_categories ) {
+		$splms_categories = get_terms(
+			array(
+				'taxonomy'   => SPLMS_TAXONOMIES['course_category'],
+				'hide_empty' => true,
+			)
+		);
+		if ( ! is_wp_error( $splms_categories ) ) {
+			set_transient( 'splms_sidebar_course_categories', $splms_categories, HOUR_IN_SECONDS );
+		}
+	}
 }
 
-// Only fetch tags if enabled.
+// Only fetch tags if enabled (cached for 1 hour).
 $splms_tags = array();
 if ( $splms_tags_enabled ) {
-	$splms_tags = get_terms(
-		array(
-			'taxonomy'   => SPLMS_TAXONOMIES['course_tag'],
-			'hide_empty' => true,
-		)
-	);
+	$splms_tags = get_transient( 'splms_sidebar_course_tags' );
+	if ( false === $splms_tags ) {
+		$splms_tags = get_terms(
+			array(
+				'taxonomy'   => SPLMS_TAXONOMIES['course_tag'],
+				'hide_empty' => true,
+			)
+		);
+		if ( ! is_wp_error( $splms_tags ) ) {
+			set_transient( 'splms_sidebar_course_tags', $splms_tags, HOUR_IN_SECONDS );
+		}
+	}
 }
 
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- Template file, nonce verification handled at higher level. Input is sanitized and unslashed via array_map.

@@ -118,34 +118,69 @@ foreach ( $splms_course_items as $splms_index => $splms_item ) {
 	<!-- Lesson Media/Content -->
 	<div class="splms-lesson-content-main">
 		<?php if ( ! $splms_has_access ) : ?>
+			<?php
+			// Determine lock type — drip lock vs purchase lock.
+			$splms_is_drip_locked = false;
+			$splms_drip_date      = false;
+			$splms_course_id      = splms_get_lesson_course( $splms_lesson_id );
+
+			if ( is_user_logged_in() && $splms_course_id && splms_is_user_enrolled( $splms_course_id ) ) {
+				// User is enrolled — check if this is a drip lock.
+				if ( ! splms_is_lesson_drip_available( $splms_lesson_id ) ) {
+					$splms_is_drip_locked = true;
+					$splms_drip_date      = splms_get_lesson_drip_unlock_date( $splms_lesson_id );
+				}
+			}
+			?>
 			<!-- Locked Content Message -->
-			<div class="splms-locked-content">
+			<div class="splms-locked-content <?php echo $splms_is_drip_locked ? 'splms-drip-locked' : ''; ?>">
 				<div class="splms-locked-icon">
 					<svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/>
-						<path d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-						<circle cx="12" cy="16" r="1" fill="currentColor"/>
+						<?php if ( $splms_is_drip_locked ) : ?>
+							<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+							<path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<?php else : ?>
+							<rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/>
+							<path d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+							<circle cx="12" cy="16" r="1" fill="currentColor"/>
+						<?php endif; ?>
 					</svg>
 				</div>
-				<h3><?php esc_html_e( 'This lesson is locked', 'skillpulse-lms' ); ?></h3>
-				<p><?php esc_html_e( 'You need to purchase this section to access this lesson.', 'skillpulse-lms' ); ?></p>
 
-				<?php
-				$splms_course_id = splms_get_lesson_course( $splms_lesson_id );
-				if ( $splms_course_id ) {
-					$splms_course_url = get_permalink( $splms_course_id );
-					?>
-					<a href="<?php echo esc_url( $splms_course_url ); ?>" class="splms-btn splms-btn-primary">
-						<?php esc_html_e( 'View Course & Purchase', 'skillpulse-lms' ); ?>
-					</a>
-					<?php
-				}
-				?>
+				<?php if ( $splms_is_drip_locked ) : ?>
+					<h3><?php esc_html_e( 'This lesson is not yet available', 'skillpulse-lms' ); ?></h3>
+					<?php if ( $splms_drip_date ) : ?>
+						<p>
+							<?php
+							printf(
+								/* translators: %s: Date when the lesson becomes available. */
+								esc_html__( 'This lesson will be available %s.', 'skillpulse-lms' ),
+								'<strong>' . esc_html( $splms_drip_date ) . '</strong>'
+							);
+							?>
+						</p>
+					<?php else : ?>
+						<p><?php esc_html_e( 'This lesson will become available soon. Please check back later.', 'skillpulse-lms' ); ?></p>
+					<?php endif; ?>
+
+					<?php if ( $splms_course_id ) : ?>
+						<a href="<?php echo esc_url( get_permalink( $splms_course_id ) ); ?>" class="splms-btn splms-btn-secondary">
+							<?php esc_html_e( 'Back to Course', 'skillpulse-lms' ); ?>
+						</a>
+					<?php endif; ?>
+				<?php else : ?>
+					<h3><?php esc_html_e( 'This lesson is locked', 'skillpulse-lms' ); ?></h3>
+					<p><?php esc_html_e( 'You need to purchase this section to access this lesson.', 'skillpulse-lms' ); ?></p>
+
+					<?php if ( $splms_course_id ) : ?>
+						<a href="<?php echo esc_url( get_permalink( $splms_course_id ) ); ?>" class="splms-btn splms-btn-primary">
+							<?php esc_html_e( 'View Course & Purchase', 'skillpulse-lms' ); ?>
+						</a>
+					<?php endif; ?>
+				<?php endif; ?>
 			</div>
 		<?php else : ?>
 			<?php
-			// Load lesson type template.
-			// This allows for theme overrides of specific lesson types.
 			// Users can override by creating: yourtheme/skillpulse-lms/lesson/types/{type}.php.
 			splms_get_template_part(
 				'lesson/types/' . $splms_lesson_type,

@@ -335,6 +335,89 @@ function splms_is_lesson_drip_available( $lesson_id, $user_id = null ) {
 }
 
 /**
+ * Get the drip unlock date for a lesson.
+ *
+ * Returns the date when a drip-locked lesson will become available
+ * for a specific user, or false if the lesson is not drip-locked.
+ *
+ * @since 1.0.0
+ *
+ * @param int $lesson_id Lesson ID.
+ * @param int $user_id   User ID (optional, defaults to current user).
+ * @return string|false Formatted unlock date, or false if not drip-locked.
+ */
+function splms_get_lesson_drip_unlock_date( $lesson_id, $user_id = null ) {
+	if ( ! $user_id ) {
+		$user_id = get_current_user_id();
+	}
+
+	if ( ! $user_id ) {
+		return false;
+	}
+
+	$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+	$drip_settings    = $lessons_instance->get_lesson_drip_settings( $lesson_id );
+
+	if ( empty( $drip_settings['enable_drip'] ) || ! $drip_settings['enable_drip'] ) {
+		return false;
+	}
+
+	$course_id = $lessons_instance->get_lesson_course( $lesson_id );
+	if ( ! $course_id ) {
+		return false;
+	}
+
+	// Check course-level drip toggle.
+	$content_delivery = get_post_meta( $course_id, '_splms_content_delivery', true );
+	if ( ! is_array( $content_delivery ) || empty( $content_delivery['drip_content'] ) ) {
+		return false;
+	}
+
+	$drip_type = isset( $drip_settings['drip_type'] ) ? $drip_settings['drip_type'] : 'days_after_enrollment';
+	$drip_days = isset( $drip_settings['drip_days'] ) ? intval( $drip_settings['drip_days'] ) : 0;
+
+	switch ( $drip_type ) {
+		case 'days_after_enrollment':
+			$enrollment_date = $lessons_instance->get_user_enrollment_date( $user_id, $course_id );
+			if ( ! $enrollment_date || $drip_days <= 0 ) {
+				return false;
+			}
+			$unlock_timestamp = strtotime( $enrollment_date . ' + ' . $drip_days . ' days' );
+			return date_i18n( get_option( 'date_format' ), $unlock_timestamp );
+
+		case 'days_after_previous':
+			$previous_lesson = $lessons_instance->get_previous_lesson( $lesson_id, $course_id );
+			if ( ! $previous_lesson ) {
+				return false;
+			}
+			if ( ! $lessons_instance->is_lesson_completed( $previous_lesson, $user_id ) ) {
+				/* translators: %s: Previous lesson title. */
+				return sprintf( __( 'after completing "%s"', 'skillpulse-lms' ), get_the_title( $previous_lesson ) );
+			}
+			$completion_date = $lessons_instance->get_lesson_completion_date( $previous_lesson, $user_id );
+			if ( ! $completion_date ) {
+				return false;
+			}
+			$unlock_timestamp = strtotime( $completion_date . ' + ' . $drip_days . ' days' );
+			return date_i18n( get_option( 'date_format' ), $unlock_timestamp );
+
+		case 'specific_date':
+			$specific_date = isset( $drip_settings['specific_date'] ) ? $drip_settings['specific_date'] : '';
+			if ( empty( $specific_date ) ) {
+				return false;
+			}
+			$specific_timestamp = strtotime( $specific_date );
+			if ( ! $specific_timestamp ) {
+				return false;
+			}
+			return date_i18n( get_option( 'date_format' ), $specific_timestamp );
+
+		default:
+			return false;
+	}
+}
+
+/**
  * Check if lesson prerequisites are met.
  *
  * @param int $lesson_id Lesson ID.

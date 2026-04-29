@@ -76,6 +76,15 @@ class SkillPulse_LMS_Guest_Quiz_Manager {
 	 * @since 1.0.0
 	 */
 	public function maybe_start_session() {
+		// Only start sessions on quiz pages to avoid breaking server-side caching.
+		if ( is_admin() || wp_doing_ajax() || wp_doing_cron() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+			return;
+		}
+
+		if ( ! is_singular( 'sp-quiz' ) ) {
+			return;
+		}
+
 		if ( ! session_id() && ! headers_sent() ) {
 			session_start();
 		}
@@ -401,7 +410,18 @@ class SkillPulse_LMS_Guest_Quiz_Manager {
 	 */
 	private function get_session_data( $quiz_id ) {
 		$session_key = self::SESSION_PREFIX . $quiz_id;
-		return isset( $_SESSION[ $session_key ] ) ? $_SESSION[ $session_key ] : null; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Session data is application-controlled.
+		if ( ! isset( $_SESSION[ $session_key ] ) ) {
+			return null;
+		}
+
+		$session_data = $_SESSION[ $session_key ];
+
+		// Sanitize session data even though it is application-controlled.
+		if ( is_array( $session_data ) ) {
+			return array_map( 'sanitize_text_field', $session_data );
+		}
+
+		return sanitize_text_field( $session_data );
 	}
 
 	/**

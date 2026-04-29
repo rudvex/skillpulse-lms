@@ -131,6 +131,22 @@ class SkillPulse_LMS_Admin {
 	 * @since 1.0.0
 	 */
 	public function admin_enqueue_scripts() {
+		if ( ! $this->is_splms_admin_screen() ) {
+			return;
+		}
+
+		// Wizard page has its own JS bundle — only load shared styles, skip admin JS.
+		if ( $this->is_wizard_screen() ) {
+			wp_enqueue_style( 'wp-components' );
+			wp_enqueue_style(
+				'splms-admin-style',
+				SKILLPULSE_LMS_URL_PATH . 'assets/css/admin.min.css',
+				array(),
+				SKILLPULSE_LMS_VERSION
+			);
+			return;
+		}
+
 		wp_enqueue_media();
 		wp_enqueue_script( 'wp-util' );
 
@@ -142,7 +158,7 @@ class SkillPulse_LMS_Admin {
 			'splms-admin-style',
 			SKILLPULSE_LMS_URL_PATH . 'assets/css/admin.min.css',
 			array(),
-			SKILLPULSE_LMS_VERSION . time()
+			SKILLPULSE_LMS_VERSION
 		);
 
 		wp_register_script(
@@ -200,6 +216,46 @@ class SkillPulse_LMS_Admin {
 		wp_enqueue_style( 'splms-admin-style' );
 		wp_enqueue_script( 'splms-admin-script' );
 		wp_enqueue_script( 'splms-react-core-script' );
+	}
+
+	/**
+	 * Check if current admin screen is a SkillPulse LMS screen.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool True if on a SkillPulse LMS admin screen.
+	 */
+	private function is_splms_admin_screen() {
+		$screen = get_current_screen();
+
+		if ( ! $screen ) {
+			return false;
+		}
+
+		// Check for SkillPulse LMS post types.
+		$splms_post_types = array_values( SPLMS_POST_TYPES );
+		if ( in_array( $screen->post_type, $splms_post_types, true ) ) {
+			return true;
+		}
+
+		// Check for SkillPulse LMS admin pages.
+		if ( false !== strpos( $screen->id, 'skillpulse-lms' ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Check if current screen is the setup wizard page.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool True if on the setup wizard page.
+	 */
+	private function is_wizard_screen() {
+		$screen = get_current_screen();
+		return $screen && 'skillpulse-lms_page_splms-setup-wizard' === $screen->id;
 	}
 
 

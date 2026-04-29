@@ -179,6 +179,12 @@ class SkillPulse_LMS_Quiz_Attempts_Query extends SkillPulse_LMS_Base_Query {
 			return false;
 		}
 
+		// Prevent resubmission of already-finalized attempts.
+		$finalized_statuses = array( 'graded', 'pending_review' );
+		if ( in_array( $attempt->status, $finalized_statuses, true ) ) {
+			return false;
+		}
+
 		// Ensure score and max_score are valid floats.
 		$score      = floatval( $score );
 		$max_score  = floatval( $max_score );
@@ -460,18 +466,30 @@ class SkillPulse_LMS_Quiz_Attempts_Query extends SkillPulse_LMS_Base_Query {
 		// Calculate cutoff date.
 		$cutoff_date = gmdate( 'Y-m-d H:i:s', strtotime( '-' . intval( $days_old ) . ' days' ) );
 
-		// Delete only truly in-progress attempts (not submitted).
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
-		$sql = "DELETE FROM {$this->table_name}
-				WHERE score = 0.00
-				AND passed = 0
-				AND time_taken = 0
-				AND attempt_time < %s";
+		// Delete in batches to avoid long-running table locks on large datasets.
+		$batch_size    = 1000;
+		$total_deleted = 0;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
-		$result = $wpdb->query( $wpdb->prepare( $sql, $cutoff_date ) );
+		do {
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name cannot be prepared.
+			$sql = "DELETE FROM {$this->table_name}
+					WHERE score = 0.00
+					AND passed = 0
+					AND time_taken = 0
+					AND attempt_time < %s
+					LIMIT %d";
 
-		return $result;
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- SQL is prepared above.
+			$deleted = $wpdb->query( $wpdb->prepare( $sql, $cutoff_date, $batch_size ) );
+
+			if ( false === $deleted ) {
+				break;
+			}
+
+			$total_deleted += $deleted;
+		} while ( $deleted >= $batch_size );
+
+		return $total_deleted;
 	}
 
 	/**

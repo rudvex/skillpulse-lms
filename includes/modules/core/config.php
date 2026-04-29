@@ -796,11 +796,128 @@ $splms_notifications_tab = array(
 	),
 );
 
+// Zoom Integration tab.
+$splms_zoom_tab = array(
+	'id'          => 'zoom',
+	'title'       => 'Zoom Integration',
+	'icon'        => 'video-alt2',
+	'description' => 'Configure Zoom integration for live classes and meetings.',
+	'sections'    => array(
+		array(
+			'id'     => 'zoom_connection',
+			'title'  => 'Connection Settings',
+			'fields' => array(
+				array(
+					'id'          => 'zoom_enabled',
+					'type'        => 'toggle',
+					'label'       => 'Enable Zoom Integration',
+					'description' => 'Enable or disable Zoom integration for live classes.',
+					'default'     => false,
+					'value'       => isset( $splms_all_settings['zoom']['zoom_connection']['zoom_enabled'] ) ? $splms_all_settings['zoom']['zoom_connection']['zoom_enabled'] : false,
+				),
+				array(
+					'id'          => 'zoom_account_id',
+					'type'        => 'text',
+					'label'       => 'Zoom Account ID',
+					'description' => 'Your Zoom Server-to-Server OAuth Account ID.',
+					'placeholder' => 'Enter your Zoom Account ID',
+					'value'       => isset( $splms_all_settings['zoom']['zoom_connection']['zoom_account_id'] ) ? $splms_all_settings['zoom']['zoom_connection']['zoom_account_id'] : '',
+					'conditional' => array(
+						'key'   => 'zoom_enabled',
+						'value' => true,
+					),
+				),
+				array(
+					'id'          => 'zoom_client_id',
+					'type'        => 'text',
+					'label'       => 'Zoom Client ID',
+					'description' => 'Your Zoom Server-to-Server OAuth Client ID.',
+					'placeholder' => 'Enter your Zoom Client ID',
+					'value'       => isset( $splms_all_settings['zoom']['zoom_connection']['zoom_client_id'] ) ? $splms_all_settings['zoom']['zoom_connection']['zoom_client_id'] : '',
+					'conditional' => array(
+						'key'   => 'zoom_enabled',
+						'value' => true,
+					),
+				),
+				array(
+					'id'          => 'zoom_client_secret',
+					'type'        => 'password',
+					'label'       => 'Zoom Client Secret',
+					'description' => 'Your Zoom Server-to-Server OAuth Client Secret.',
+					'placeholder' => 'Enter your Zoom Client Secret',
+					'value'       => isset( $splms_all_settings['zoom']['zoom_connection']['zoom_client_secret'] ) ? $splms_all_settings['zoom']['zoom_connection']['zoom_client_secret'] : '',
+					'conditional' => array(
+						'key'   => 'zoom_enabled',
+						'value' => true,
+					),
+				),
+			),
+		),
+		array(
+			'id'     => 'zoom_defaults',
+			'title'  => 'Meeting Defaults',
+			'fields' => array(
+				array(
+					'id'          => 'zoom_host_email',
+					'type'        => 'email',
+					'label'       => 'Default Host Email',
+					'description' => 'Zoom account email to use as meeting host. Leave empty to use the account owner.',
+					'placeholder' => 'host@example.com',
+					'value'       => isset( $splms_all_settings['zoom']['zoom_defaults']['zoom_host_email'] ) ? $splms_all_settings['zoom']['zoom_defaults']['zoom_host_email'] : '',
+				),
+				array(
+					'id'          => 'zoom_default_duration',
+					'type'        => 'number',
+					'label'       => 'Default Meeting Duration (minutes)',
+					'description' => 'Default duration for new Zoom meetings.',
+					'default'     => 60,
+					'value'       => isset( $splms_all_settings['zoom']['zoom_defaults']['zoom_default_duration'] ) ? $splms_all_settings['zoom']['zoom_defaults']['zoom_default_duration'] : 60,
+					'min'         => 15,
+					'max'         => 480,
+				),
+				array(
+					'id'          => 'zoom_auto_recording',
+					'type'        => 'select',
+					'label'       => 'Auto Recording',
+					'description' => 'Automatically record meetings when they start.',
+					'default'     => 'none',
+					'value'       => isset( $splms_all_settings['zoom']['zoom_defaults']['zoom_auto_recording'] ) ? $splms_all_settings['zoom']['zoom_defaults']['zoom_auto_recording'] : 'none',
+					'options'     => array(
+						array(
+							'value' => 'none',
+							'label' => 'No Recording',
+						),
+						array(
+							'value' => 'local',
+							'label' => 'Record Locally',
+						),
+						array(
+							'value' => 'cloud',
+							'label' => 'Record to Cloud',
+						),
+					),
+				),
+				array(
+					'id'          => 'zoom_reminder_hours',
+					'type'        => 'number',
+					'label'       => 'Reminder Hours Before Class',
+					'description' => 'Send email reminder this many hours before a live class starts.',
+					'default'     => 24,
+					'value'       => isset( $splms_all_settings['zoom']['zoom_defaults']['zoom_reminder_hours'] ) ? $splms_all_settings['zoom']['zoom_defaults']['zoom_reminder_hours'] : 24,
+					'min'         => 1,
+					'max'         => 72,
+				),
+			),
+		),
+	),
+);
+
 return array(
 	'tabs'     => array(
 		$splms_general_tab,
 		$splms_courses_tab,
 		$splms_notifications_tab,
+		$splms_zoom_tab,
 	),
 	'metadata' => array(
 		'version'      => '1.0.0',
