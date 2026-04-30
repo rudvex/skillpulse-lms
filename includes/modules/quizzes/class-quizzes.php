@@ -1101,9 +1101,9 @@ class SkillPulse_LMS_Quizzes {
 		$quiz_id    = isset( $_POST['quiz_id'] ) ? intval( wp_unslash( $_POST['quiz_id'] ) ) : 0; // phpcs:ignore Generic.Formatting.MultipleStatementAlignment.NotSameWarning -- Variable assignments don't need alignment.
 		$attempt_id = isset( $_POST['attempt_id'] ) ? intval( wp_unslash( $_POST['attempt_id'] ) ) : 0; // phpcs:ignore Generic.Formatting.MultipleStatementAlignment.NotSameWarning -- Variable assignments don't need alignment.
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce already verified above.
-		$answers_raw  = isset( $_POST['answers'] ) ? sanitize_text_field( wp_unslash( $_POST['answers'] ) ) : '';
-		$answers      = ! empty( $answers_raw ) ? json_decode( $answers_raw, true ) : array();
-		$answers      = is_array( $answers ) ? array_map( 'sanitize_text_field', $answers ) : array();
+		$answers_raw = isset( $_POST['answers'] ) ? sanitize_text_field( wp_unslash( $_POST['answers'] ) ) : '';
+		$answers     = ! empty( $answers_raw ) ? json_decode( $answers_raw, true ) : array();
+		$answers     = is_array( $answers ) ? array_map( 'sanitize_text_field', $answers ) : array();
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce already verified above.
 		$uploads_raw  = isset( $_POST['file_uploads'] ) ? sanitize_text_field( wp_unslash( $_POST['file_uploads'] ) ) : '';
 		$file_uploads = ! empty( $uploads_raw ) ? json_decode( $uploads_raw, true ) : array();

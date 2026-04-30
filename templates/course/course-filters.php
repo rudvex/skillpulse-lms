@@ -83,4 +83,3 @@ $splms_current_sort            = isset( $_GET['orderby'] ) ? sanitize_text_field
 		<?php } ?> -->
 	</form>
 </div>
- 

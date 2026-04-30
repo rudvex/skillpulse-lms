@@ -74,21 +74,12 @@ class SkillPulse_LMS_Email_Templates {
 			'course-enrollment.php',
 			'course-completion.php',
 			'enrollment-reminder.php',
-			'certificate-email.php',
 			'password-reset-email.php',
-			'review-reply.php',
-			'review-new.php',
-			'review-moderation.php',
-			'review-moderation-result.php',
 			'lesson-completion.php',
 			'quiz-completion.php',
 			'quiz-passed.php',
 			'quiz-failed.php',
-			'certificate-awarded.php',
-			'order-completed.php',
-			'order-refunded.php',
-			'order-cancelled.php',
-								);
+		);
 
 		foreach ( $template_files as $file ) {
 			$file_path = SKILLPULSE_LMS_DIR_PATH . 'includes/modules/notifications/email/templates/templates/' . $file;
@@ -115,16 +106,11 @@ class SkillPulse_LMS_Email_Templates {
 			'SkillPulse_LMS_Course_Enrollment_Email_Template',
 			'SkillPulse_LMS_Course_Completion_Email_Template',
 			'SkillPulse_LMS_Enrollment_Reminder_Email_Template',
-			'SkillPulse_LMS_Certificate_Email_Template',
 			'SkillPulse_LMS_Password_Reset_Email_Template',
 			'SkillPulse_LMS_Lesson_Completion_Email_Template',
 			'SkillPulse_LMS_Quiz_Completion_Email_Template',
 			'SkillPulse_LMS_Quiz_Passed_Email_Template',
 			'SkillPulse_LMS_Quiz_Failed_Email_Template',
-			'SkillPulse_LMS_Certificate_Awarded_Email_Template',
-			'SkillPulse_LMS_Order_Completed_Email_Template',
-			'SkillPulse_LMS_Order_Refunded_Email_Template',
-			'SkillPulse_LMS_Order_Cancelled_Email_Template',
 		);
 
 		foreach ( $template_classes as $class_name ) {
