@@ -189,8 +189,6 @@ if ( ! class_exists( 'SkillPulse_LMS' ) ) {
 				}
 			}
 
-
-
 			/**
 			 * Fires after plugin deactivation tasks are completed.
 			 *

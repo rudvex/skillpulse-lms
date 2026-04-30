@@ -414,7 +414,7 @@ class SkillPulse_LMS_Guest_Quiz_Manager {
 			return null;
 		}
 
-		$session_data = $_SESSION[ $session_key ];
+		$session_data = $_SESSION[ $session_key ]; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized immediately below.
 
 		// Sanitize session data even though it is application-controlled.
 		if ( is_array( $session_data ) ) {

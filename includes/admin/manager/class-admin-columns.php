@@ -821,4 +821,3 @@ class SkillPulse_LMS_Admin_Columns {
 		echo esc_html( intval( $count ) );
 	}
 }
-
