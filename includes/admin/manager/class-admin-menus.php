@@ -367,24 +367,7 @@ class SkillPulse_LMS_Admin_Menus {
 		<?php
 	}
 
-	/**
-	 * Render license page.
-	 *
-	 * @since 1.0.0
-	 */
-	public function license_page() {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			printf( '<p>%1$s</p>', esc_html__( 'You don\'t have permission to access this page.', 'skillpulse-lms' ) );
 
-			return;
-		}
-
-		?>
-		<div class="wrap">
-			<div id="splms-license"></div>
-		</div>
-		<?php
-	}
 
 	/**
 	 * Render settings page.

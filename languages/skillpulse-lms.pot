@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkillPulse LMS v1.0.0\n"
 "Report-Msgid-Bugs-To: https://skillpulselms.com/contact\n"
-"POT-Creation-Date: 2026-04-29 15:33:21+00:00\n"
+"POT-Creation-Date: 2026-04-30 03:28:56+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: SkillPulseLMS <team@skillpulselms.com>\n"
 "X-Generator: grunt-wp-i18n\n"
 
-#: includes/modules/lessons/config.php:225
+#: includes/modules/lessons/config.php:145
 msgid "100"
 msgstr ""
 
@@ -279,7 +279,7 @@ msgstr ""
 
 #: includes/admin/manager/class-admin-menus.php:113
 #: includes/admin/manager/class-admin-menus.php:114
-#: includes/admin/manager/class-admin-menus.php:520
+#: includes/admin/manager/class-admin-menus.php:503
 msgid "Setup Wizard"
 msgstr ""
 
@@ -336,17 +336,16 @@ msgstr ""
 #: includes/admin/manager/class-admin-menus.php:320
 #: includes/admin/manager/class-admin-menus.php:339
 #: includes/admin/manager/class-admin-menus.php:358
-#: includes/admin/manager/class-admin-menus.php:377
-#: includes/admin/manager/class-admin-menus.php:396
-#: includes/admin/manager/class-admin-menus.php:415
-#: includes/admin/manager/class-admin-menus.php:434
-#: includes/admin/manager/class-admin-menus.php:453
-#: includes/admin/manager/class-admin-menus.php:472
-#: includes/admin/manager/class-admin-menus.php:514
+#: includes/admin/manager/class-admin-menus.php:379
+#: includes/admin/manager/class-admin-menus.php:398
+#: includes/admin/manager/class-admin-menus.php:417
+#: includes/admin/manager/class-admin-menus.php:436
+#: includes/admin/manager/class-admin-menus.php:455
+#: includes/admin/manager/class-admin-menus.php:497
 msgid "You don't have permission to access this page."
 msgstr ""
 
-#: includes/admin/manager/class-admin-menus.php:521
+#: includes/admin/manager/class-admin-menus.php:504
 msgid "Setup wizard is loading..."
 msgstr ""
 
@@ -2254,115 +2253,65 @@ msgstr ""
 msgid "Video Lesson"
 msgstr ""
 
-#: includes/modules/lessons/config.php:110
-msgid "Live Class (Zoom)"
-msgstr ""
-
-#: includes/modules/lessons/config.php:118
-msgid "Live Session Date & Time"
-msgstr ""
-
-#: includes/modules/lessons/config.php:119
-msgid ""
-"When this live session is scheduled. A Zoom meeting will be created "
-"automatically when Zoom integration is enabled."
-msgstr ""
-
-#: includes/modules/lessons/config.php:124
-msgid "Select date and time"
-msgstr ""
-
-#: includes/modules/lessons/config.php:133
-msgid "Session Duration (minutes)"
-msgstr ""
-
-#: includes/modules/lessons/config.php:134
-msgid "Duration of the live session in minutes."
-msgstr ""
-
-#: includes/modules/lessons/config.php:149
-msgid "Zoom Meeting ID"
-msgstr ""
-
-#: includes/modules/lessons/config.php:150
-msgid "Auto-populated when the meeting is created via Zoom integration."
-msgstr ""
-
-#: includes/modules/lessons/config.php:164
-msgid "Zoom Join URL"
-msgstr ""
-
-#: includes/modules/lessons/config.php:165
-msgid "Students use this URL to join the live session."
-msgstr ""
-
-#: includes/modules/lessons/config.php:179
-msgid "Zoom Start URL (Instructor)"
-msgstr ""
-
-#: includes/modules/lessons/config.php:180
-msgid "Instructors use this URL to start the meeting as host."
-msgstr ""
-
-#: includes/modules/lessons/config.php:194
+#: includes/modules/lessons/config.php:114
 msgid "Lesson Duration (minutes)"
 msgstr ""
 
-#: includes/modules/lessons/config.php:195
+#: includes/modules/lessons/config.php:115
 msgid "Expected time to complete this lesson"
 msgstr ""
 
-#: includes/modules/lessons/config.php:207
+#: includes/modules/lessons/config.php:127
 msgid "Video URL"
 msgstr ""
 
-#: includes/modules/lessons/config.php:208
+#: includes/modules/lessons/config.php:128
 msgid ""
 "Select a video from Media Library or paste an external URL (YouTube, Vimeo, "
 "MP4)"
 msgstr ""
 
-#: includes/modules/lessons/config.php:212
+#: includes/modules/lessons/config.php:132
 msgid "https://youtube.com/watch?v=..."
 msgstr ""
 
-#: includes/modules/lessons/config.php:222
+#: includes/modules/lessons/config.php:142
 msgid "Completion Requirement (%)"
 msgstr ""
 
-#: includes/modules/lessons/config.php:223
+#: includes/modules/lessons/config.php:143
 msgid "Students must complete this percentage of content before marking as complete"
 msgstr ""
 
-#: includes/modules/lessons/config.php:243
+#: includes/modules/lessons/config.php:163
 msgid "Completion Settings"
 msgstr ""
 
-#: includes/modules/lessons/config.php:249
+#: includes/modules/lessons/config.php:169
 msgid "Completion Type"
 msgstr ""
 
-#: includes/modules/lessons/config.php:250
+#: includes/modules/lessons/config.php:170
 msgid "How should lesson completion be tracked?"
 msgstr ""
 
-#: includes/modules/lessons/config.php:258
+#: includes/modules/lessons/config.php:178
 msgid "Manual Completion"
 msgstr ""
 
-#: includes/modules/lessons/config.php:262
+#: includes/modules/lessons/config.php:182
 msgid "Auto Complete"
 msgstr ""
 
-#: includes/modules/lessons/config.php:266
+#: includes/modules/lessons/config.php:186
 msgid "Time Based"
 msgstr ""
 
-#: includes/modules/lessons/config.php:274
+#: includes/modules/lessons/config.php:194
 msgid "Required Time (seconds)"
 msgstr ""
 
-#: includes/modules/lessons/config.php:275
+#: includes/modules/lessons/config.php:195
 msgid "Minimum time student must spend on lesson"
 msgstr ""
 
