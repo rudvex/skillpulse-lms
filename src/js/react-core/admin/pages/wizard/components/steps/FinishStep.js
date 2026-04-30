@@ -22,26 +22,13 @@ const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
 	 * Get setup status and personalized messaging
 	 */
 	const getSetupStatus = () => {
-		const hasActiveLicense = 'active' === splmsWizardData?.licenseStatus;
-
-		if (hasActiveLicense) {
-			return {
-				type: 'license',
-				icon: 'premium',
-				color: 'primary',
-				title: __('Premium Features Unlocked', 'skillpulse-lms'),
-				message: __('Your license gives you access to all SkillPulse LMS features.', 'skillpulse-lms'),
-				nextStep: __('Build advanced courses with unlimited features', 'skillpulse-lms')
-			};
-		}
-
 		return {
 			type: 'free',
-			icon: 'info',
-			color: 'warning',
-			title: __('License Not Activated', 'skillpulse-lms'),
-			message: __('Activate your license anytime to unlock all pro features and receive updates.', 'skillpulse-lms'),
-			nextStep: __('Start with your first course', 'skillpulse-lms')
+			icon: 'yes-alt',
+			color: 'primary',
+			title: __('Setup Complete!', 'skillpulse-lms'),
+			message: __('Your LMS is ready. Start creating courses and enrolling students.', 'skillpulse-lms'),
+			nextStep: __('Create your first course', 'skillpulse-lms')
 		};
 	};
 
