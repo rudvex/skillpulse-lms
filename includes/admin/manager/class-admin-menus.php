@@ -61,7 +61,7 @@ class SkillPulse_LMS_Admin_Menus {
 	 */
 	protected function setup_actions() {
 		add_action( 'admin_menu', array( $this, 'add_admin_menus' ) );
-		add_action( 'admin_head', array( $this, 'admin_menu_separator_css' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_menu_separator_css' ) );
 	}
 
 	/**
