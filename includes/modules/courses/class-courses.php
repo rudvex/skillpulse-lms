@@ -502,6 +502,7 @@ class SkillPulse_LMS_Courses {
 				'post_type'      => SPLMS_POST_TYPES['course'],
 				'post_status'    => 'publish',
 				'posts_per_page' => -1,
+				// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in -- Single ID exclusion for cache invalidation; no performant alternative.
 				'post__not_in'   => array( $course_id ),
 				'fields'         => 'ids',
 			)

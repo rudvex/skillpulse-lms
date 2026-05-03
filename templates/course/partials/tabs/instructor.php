@@ -130,6 +130,7 @@ $splms_total_courses = $splms_instructor_courses->found_posts;
 								'author'         => get_the_author_meta( 'ID' ),
 								'post_status'    => 'publish',
 								'posts_per_page' => 3,
+								// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in -- Single post exclusion; negligible performance impact.
 								'post__not_in'   => array( $splms_course_id ),
 							)
 						);

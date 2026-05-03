@@ -321,6 +321,7 @@ class SkillPulse_LMS_Dashboard_Service {
 			'post_type'              => defined( 'SPLMS_POST_TYPES' ) ? SPLMS_POST_TYPES['course'] : 'sp-course',
 			'post_status'            => 'publish',
 			'posts_per_page'         => 3,
+			// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in -- Small array of enrolled course IDs; no performant alternative.
 			'post__not_in'           => $enrolled_course_ids,
 			'no_found_rows'          => true,
 			'update_post_meta_cache' => false,

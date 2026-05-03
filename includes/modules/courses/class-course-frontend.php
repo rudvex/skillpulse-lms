@@ -656,6 +656,7 @@ class SkillPulse_LMS_Course_Frontend {
 
 			// Exclude current category for category taxonomy pages.
 			if ( 'category' === $context && $current_term && $current_term->term_id ) {
+				// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Single term exclusion; negligible performance impact.
 				$category_args['exclude'] = array( $current_term->term_id );
 			}
 
@@ -672,6 +673,7 @@ class SkillPulse_LMS_Course_Frontend {
 
 			// Exclude current tag for tag taxonomy pages.
 			if ( 'tag' === $context && $current_term && $current_term->term_id ) {
+				// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Single term exclusion; negligible performance impact.
 				$tag_args['exclude'] = array( $current_term->term_id );
 			}
 
