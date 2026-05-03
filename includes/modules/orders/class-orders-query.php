@@ -350,12 +350,27 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 			return array();
 		}
 
-		$items_table  = $wpdb->prefix . 'splms_order_items';
-		$placeholders = implode( ',', array_fill( 0, count( $order_ids ), '%d' ) );
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare -- Table name and placeholders are safely constructed.
-		$sql = "SELECT * FROM {$items_table} WHERE order_id IN ($placeholders) ORDER BY id ASC";
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is prepared above.
-		$items = $wpdb->get_results( $wpdb->prepare( $sql, ...$order_ids ) );
+		$sorted_ids  = $order_ids;
+		sort( $sorted_ids );
+		$cache_key   = 'splms_order_items_batch_' . md5( implode( ',', $sorted_ids ) );
+		$cache_group = 'skillpulse-lms';
+		$items       = wp_cache_get( $cache_key, $cache_group );
+
+		if ( false === $items ) {
+			$items_table  = $wpdb->prefix . 'splms_order_items';
+			$placeholders = implode( ',', array_fill( 0, count( $order_ids ), '%d' ) );
+
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table query, no WP API available.
+			$items = $wpdb->get_results(
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare -- Table name and placeholders are safely constructed.
+				$wpdb->prepare(
+					"SELECT * FROM {$items_table} WHERE order_id IN ($placeholders) ORDER BY id ASC",
+					...$order_ids
+				)
+			);
+
+			wp_cache_set( $cache_key, $items, $cache_group );
+		}
 
 		$grouped = array();
 		foreach ( $order_ids as $oid ) {

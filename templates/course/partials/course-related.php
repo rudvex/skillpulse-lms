@@ -51,6 +51,7 @@ if ( false !== $splms_cached_post_ids && is_array( $splms_cached_post_ids ) && !
 		'post_type'              => SPLMS_POST_TYPES['course'],
 		'post_status'            => 'publish',
 		'posts_per_page'         => 3,
+		// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in -- Single post exclusion; negligible performance impact.
 		'post__not_in'           => array( $splms_course_id ),
 		'no_found_rows'          => true, // Skip pagination count for better performance.
 		'update_post_meta_cache' => false, // Skip meta cache if not needed.
