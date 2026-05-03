@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkillPulse LMS v1.0.0\n"
 "Report-Msgid-Bugs-To: https://skillpulselms.com/contact\n"
-"POT-Creation-Date: 2026-05-03 11:58:54+00:00\n"
+"POT-Creation-Date: 2026-05-03 13:48:10+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3923,7 +3923,7 @@ msgstr ""
 msgid "Order created with status: %s"
 msgstr ""
 
-#: includes/modules/orders/class-orders-query.php:469
+#: includes/modules/orders/class-orders-query.php:466
 #. translators: 1: Old status, 2: New status
 msgid "Order status changed from %1$s to %2$s"
 msgstr ""
