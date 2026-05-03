@@ -357,14 +357,11 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 		$items       = wp_cache_get( $cache_key, $cache_group );
 
 		if ( false === $items ) {
-			$items_table  = $wpdb->prefix . 'splms_order_items';
-			$placeholders = implode( ',', array_fill( 0, count( $order_ids ), '%d' ) );
-
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table query, no WP API available.
 			$items = $wpdb->get_results(
-				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare -- Table name and placeholders are safely constructed.
 				$wpdb->prepare(
-					"SELECT * FROM {$items_table} WHERE order_id IN ($placeholders) ORDER BY id ASC",
+					// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare -- Table prefix and placeholders are safely concatenated.
+					'SELECT * FROM ' . $wpdb->prefix . 'splms_order_items WHERE order_id IN (' . implode( ',', array_fill( 0, count( $order_ids ), '%d' ) ) . ') ORDER BY id ASC',
 					...$order_ids
 				)
 			);
