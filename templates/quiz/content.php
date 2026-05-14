@@ -56,10 +56,7 @@ $splms_password_verified     = false;
 
 // Check if password was submitted and is correct.
 if ( $splms_is_password_protected ) {
-	// Ensure session is available for password-protected quiz verification.
-	if ( ! session_id() && ! headers_sent() && is_singular( 'sp-quiz' ) ) {
-		session_start();
-	}
+	$splms_cookie_name = 'splms_quiz_pwd_' . $splms_quiz_id;
 
 	if ( isset( $_POST['quiz_password'] ) && isset( $_POST['quiz_password_nonce'] ) ) {
 		$splms_nonce = isset( $_POST['quiz_password_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['quiz_password_nonce'] ) ) : '';
@@ -67,13 +64,16 @@ if ( $splms_is_password_protected ) {
 			$splms_submitted_password = isset( $_POST['quiz_password'] ) ? sanitize_text_field( wp_unslash( $_POST['quiz_password'] ) ) : '';
 			if ( $splms_submitted_password === $splms_quiz_password ) {
 				$splms_password_verified = true;
-				// Store in session to avoid re-asking.
-				if ( session_id() ) {
-					$_SESSION[ 'quiz_password_verified_' . $splms_quiz_id ] = true;
+				// Store in cookie to avoid re-asking.
+				if ( ! headers_sent() ) {
+					setcookie( $splms_cookie_name, '1', time() + 86400, COOKIEPATH, COOKIE_DOMAIN, is_ssl(), true );
+				} else {
+					// Fallback to JS cookie setting if headers already sent.
+					echo '<script>document.cookie = "' . esc_js( $splms_cookie_name ) . '=1; max-age=86400; path=' . esc_js( COOKIEPATH ) . '";</script>';
 				}
 			}
 		}
-	} elseif ( session_id() && isset( $_SESSION[ 'quiz_password_verified_' . $splms_quiz_id ] ) ) {
+	} elseif ( isset( $_COOKIE[ $splms_cookie_name ] ) && '1' === $_COOKIE[ $splms_cookie_name ] ) {
 		$splms_password_verified = true;
 	}
 } else {

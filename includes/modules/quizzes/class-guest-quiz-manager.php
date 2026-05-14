@@ -66,28 +66,42 @@ class SkillPulse_LMS_Guest_Quiz_Manager {
 	 * @since 1.0.0
 	 */
 	private function __construct() {
-		// Ensure session is started for guest state persistence.
-		add_action( 'init', array( $this, 'maybe_start_session' ) );
+		// Initialization.
 	}
 
 	/**
-	 * Start session if not already started.
+	 * Get or generate a guest session ID stored in a cookie.
 	 *
 	 * @since 1.0.0
+	 * @return string Session ID.
 	 */
-	public function maybe_start_session() {
-		// Only start sessions on quiz pages to avoid breaking server-side caching.
-		if ( is_admin() || wp_doing_ajax() || wp_doing_cron() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
-			return;
+	private function get_guest_session_id() {
+		$cookie_name = 'splms_guest_session_id';
+		if ( isset( $_COOKIE[ $cookie_name ] ) ) {
+			return sanitize_text_field( wp_unslash( $_COOKIE[ $cookie_name ] ) );
 		}
 
-		if ( ! is_singular( 'sp-quiz' ) ) {
-			return;
-		}
+		$session_id = wp_generate_password( 32, false );
+		// Set cookie for 24 hours.
+		setcookie( $cookie_name, $session_id, time() + self::SESSION_DURATION, COOKIEPATH, COOKIE_DOMAIN, is_ssl(), true );
+		// Also set it in $_COOKIE immediately for the current request.
+		$_COOKIE[ $cookie_name ] = $session_id;
 
-		if ( ! session_id() && ! headers_sent() ) {
-			session_start();
-		}
+		return $session_id;
+	}
+
+	/**
+	 * Generate unique session key for transient.
+	 *
+	 * @param int $quiz_id Quiz ID.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string Unique session key.
+	 */
+	private function get_session_key( $quiz_id ) {
+		$guest_id = $this->get_guest_session_id();
+		return self::SESSION_PREFIX . $guest_id . '_' . $quiz_id;
 	}
 
 	/**
@@ -124,8 +138,9 @@ class SkillPulse_LMS_Guest_Quiz_Manager {
 			);
 		}
 
-		// Generate unique session ID for this quiz attempt.
-		$session_id = $this->generate_session_id( $quiz_id );
+		// Get guest session ID to ensure cookie is set early.
+		$guest_session_id = $this->get_guest_session_id();
+		$session_id       = 'guest_' . $quiz_id . '_' . time() . '_' . wp_generate_password( 8, false );
 
 		// Initialize guest quiz session.
 		$session_data = array(
@@ -395,8 +410,8 @@ class SkillPulse_LMS_Guest_Quiz_Manager {
 	 * @since 1.0.0
 	 */
 	private function save_session_data( $quiz_id, $session_data ) {
-		$session_key              = self::SESSION_PREFIX . $quiz_id;
-		$_SESSION[ $session_key ] = $session_data;
+		$session_key = $this->get_session_key( $quiz_id );
+		set_transient( $session_key, $session_data, self::SESSION_DURATION );
 	}
 
 	/**
@@ -409,16 +424,16 @@ class SkillPulse_LMS_Guest_Quiz_Manager {
 	 * @return array|null Session data or null if not found.
 	 */
 	private function get_session_data( $quiz_id ) {
-		$session_key = self::SESSION_PREFIX . $quiz_id;
-		if ( ! isset( $_SESSION[ $session_key ] ) ) {
+		$session_key  = $this->get_session_key( $quiz_id );
+		$session_data = get_transient( $session_key );
+
+		if ( false === $session_data ) {
 			return null;
 		}
 
-		$session_data = $_SESSION[ $session_key ]; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized immediately below.
-
 		// Sanitize session data even though it is application-controlled.
 		if ( is_array( $session_data ) ) {
-			return array_map( 'sanitize_text_field', $session_data );
+			return map_deep( $session_data, 'sanitize_text_field' );
 		}
 
 		return sanitize_text_field( $session_data );
@@ -432,28 +447,7 @@ class SkillPulse_LMS_Guest_Quiz_Manager {
 	 * @since 1.0.0
 	 */
 	private function clear_session_data( $quiz_id ) {
-		$session_key = self::SESSION_PREFIX . $quiz_id;
-		unset( $_SESSION[ $session_key ] );
-	}
-
-	/**
-	 * Cleanup expired sessions.
-	 * Should be called periodically to clean up old session data.
-	 *
-	 * @since 1.0.0
-	 */
-	public function cleanup_expired_sessions() {
-		if ( ! isset( $_SESSION ) ) {
-			return;
-		}
-
-		$current_time = time();
-		foreach ( $_SESSION as $key => $data ) {
-			if ( strpos( $key, self::SESSION_PREFIX ) === 0 ) {
-				if ( is_array( $data ) && isset( $data['expires_at'] ) && $current_time > $data['expires_at'] ) {
-					unset( $_SESSION[ $key ] );
-				}
-			}
-		}
+		$session_key = $this->get_session_key( $quiz_id );
+		delete_transient( $session_key );
 	}
 }

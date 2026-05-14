@@ -17,19 +17,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 $splms_quiz_id = 0;
 
 // Method 1: Admin post edit context via GET parameter.
-if ( isset( $_GET['post'] ) && is_numeric( $_GET['post'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Configuration file for admin context, no data processing.
-	$splms_current_post_id = intval( $_GET['post'] );  // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Configuration file for admin context, no data processing.
-	$splms_quiz_post       = get_post( $splms_current_post_id );
-	if ( $splms_quiz_post && SPLMS_POST_TYPES['quiz'] === $splms_quiz_post->post_type ) {
-		$splms_quiz_id = $splms_current_post_id;
+if ( isset( $_GET['post'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$splms_post_id_raw = sanitize_text_field( wp_unslash( $_GET['post'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	if ( is_numeric( $splms_post_id_raw ) ) {
+		$splms_current_post_id = intval( $splms_post_id_raw );
+		$splms_quiz_post       = get_post( $splms_current_post_id );
+		if ( $splms_quiz_post && SPLMS_POST_TYPES['quiz'] === $splms_quiz_post->post_type ) {
+			$splms_quiz_id = $splms_current_post_id;
+		}
 	}
-} elseif ( isset( $_REQUEST['item_id'] ) && is_numeric( $_REQUEST['item_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Configuration file for admin context, no data processing.
+} elseif ( isset( $_REQUEST['item_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	// Method 2: Dynamic config loading via item_id parameter.
-	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Configuration file for admin context, no data processing.
-	$splms_item_id   = intval( $_REQUEST['item_id'] );
-	$splms_quiz_post = get_post( $splms_item_id );
-	if ( $splms_quiz_post && SPLMS_POST_TYPES['quiz'] === $splms_quiz_post->post_type ) {
-		$splms_quiz_id = $splms_item_id;
+	$splms_item_id_raw = sanitize_text_field( wp_unslash( $_REQUEST['item_id'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	if ( is_numeric( $splms_item_id_raw ) ) {
+		$splms_item_id   = intval( $splms_item_id_raw );
+		$splms_quiz_post = get_post( $splms_item_id );
+		if ( $splms_quiz_post && SPLMS_POST_TYPES['quiz'] === $splms_quiz_post->post_type ) {
+			$splms_quiz_id = $splms_item_id;
+		}
 	}
 } elseif ( isset( $GLOBALS['post'] ) && SPLMS_POST_TYPES['quiz'] === $GLOBALS['post']->post_type ) {
 	// Method 3: Global post context.

@@ -57,19 +57,19 @@ $splms_current_sort            = isset( $_GET['orderby'] ) ? sanitize_text_field
 		<!-- Hidden fields to preserve other parameters. -->
 		<input type="hidden" name="post_type" value="<?php echo esc_attr( SPLMS_POST_TYPES['course'] ); ?>" />
 		<?php
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, nonce verification handled at higher level.
 		if ( ! empty( $_GET ) ) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, nonce verification handled at higher level.
-			foreach ( $_GET as $splms_key => $splms_value ) {
+			// Sanitize the entire array to prevent static analysis false positives.
+			$sanitized_get = map_deep( wp_unslash( $_GET ), 'sanitize_text_field' );
+			foreach ( $sanitized_get as $splms_key => $splms_value ) {
 				if ( in_array( $splms_key, array( 'difficulty', 'learning_method', 'orderby', 'post_type' ), true ) ) {
 					continue;
 				}
 				if ( is_array( $splms_value ) ) {
 					foreach ( $splms_value as $splms_sub_value ) {
-						echo '<input type="hidden" name="' . esc_attr( sanitize_key( $splms_key ) ) . '[]" value="' . esc_attr( sanitize_text_field( wp_unslash( $splms_sub_value ) ) ) . '" />';
+						echo '<input type="hidden" name="' . esc_attr( sanitize_key( $splms_key ) ) . '[]" value="' . esc_attr( $splms_sub_value ) . '" />';
 					}
 				} else {
-					echo '<input type="hidden" name="' . esc_attr( sanitize_key( $splms_key ) ) . '" value="' . esc_attr( sanitize_text_field( wp_unslash( $splms_value ) ) ) . '" />';
+					echo '<input type="hidden" name="' . esc_attr( sanitize_key( $splms_key ) ) . '" value="' . esc_attr( $splms_value ) . '" />';
 				}
 			}
 		}

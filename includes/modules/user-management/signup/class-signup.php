@@ -186,7 +186,11 @@ class SkillPulse_LMS_Signup {
 	 * @return void
 	 */
 	public function ajax_activate_signup() {
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verification is done below.
+		// Verify nonce.
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'splms_auth_nonce' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Security check failed.', 'skillpulse-lms' ) ) );
+		}
+
 		$activation_key = isset( $_POST['activation_key'] ) ? sanitize_text_field( wp_unslash( $_POST['activation_key'] ) ) : '';
 
 		if ( empty( $activation_key ) ) {

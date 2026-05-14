@@ -78,6 +78,30 @@ Need advanced features like payment processing, multiple lesson types, advanced 
 2. Activate the plugin through the 'Plugins' screen in WordPress.
 3. Navigate to SkillPulse LMS in your WordPress admin to start creating courses.
 
+== External services ==
+
+This plugin loads icons from Hugeicons CDN.
+- URL: https://cdn.hugeicons.com
+- Purpose: Load icon assets
+- Data sent: Browser request (IP, headers)
+- Terms: https://hugeicons.com/terms
+- Privacy: https://hugeicons.com/privacy
+
+This plugin embeds audio via SoundCloud.
+- URL: https://soundcloud.com
+- Data sent: Embedded player requests
+- Terms: https://soundcloud.com/terms-of-use
+- Privacy: https://soundcloud.com/pages/privacy
+
+== Development ==
+
+Source code for compiled JavaScript assets:
+https://github.com/rudvex/skillpulse-lms/
+
+Build process:
+npm install
+npm run build
+
 == Frequently Asked Questions ==
 
 = Is this plugin really free? =

@@ -52,10 +52,10 @@ if ( $splms_tags_enabled ) {
 	}
 }
 
-// phpcs:ignore WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- Template file, nonce verification handled at higher level. Input is sanitized and unslashed via array_map.
-$splms_selected_categories = isset( $_GET['course_category'] ) ? array_map( 'sanitize_text_field', array_map( 'wp_unslash', (array) $_GET['course_category'] ) ) : array();
-// phpcs:ignore WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- Template file, nonce verification handled at higher level. Input is sanitized and unslashed via array_map.
-$splms_selected_tags = isset( $_GET['course_tag'] ) ? array_map( 'sanitize_text_field', array_map( 'wp_unslash', (array) $_GET['course_tag'] ) ) : array();
+// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, nonce verification handled at higher level.
+$splms_selected_categories = isset( $_GET['course_category'] ) ? (array) map_deep( wp_unslash( $_GET['course_category'] ), 'sanitize_text_field' ) : array();
+// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, nonce verification handled at higher level.
+$splms_selected_tags = isset( $_GET['course_tag'] ) ? (array) map_deep( wp_unslash( $_GET['course_tag'] ), 'sanitize_text_field' ) : array();
 ?>
 
 <?php
