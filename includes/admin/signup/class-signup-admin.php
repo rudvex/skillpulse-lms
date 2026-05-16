@@ -338,7 +338,16 @@ class SkillPulse_LMS_Signup_Admin {
 			return;
 		}
 
-		$signup_ids = isset( $_POST['signup_ids'] ) ? array_map( 'absint', $_POST['signup_ids'] ) : array(); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'You do not have permission to perform this action.', 'skillpulse-lms' ) );
+		}
+
+		$nonce = isset( $_REQUEST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ) : '';
+		if ( ! wp_verify_nonce( $nonce, 'bulk-signups' ) ) {
+			wp_die( esc_html__( 'Security check failed.', 'skillpulse-lms' ) );
+		}
+
+		$signup_ids = isset( $_POST['signup_ids'] ) ? array_map( 'absint', $_POST['signup_ids'] ) : array();
 
 		if ( empty( $signup_ids ) ) {
 			return;

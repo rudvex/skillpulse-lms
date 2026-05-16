@@ -343,7 +343,11 @@ class SkillPulse_LMS_Signup_List_Table extends WP_Users_List_Table {
 		}
 
 		// Handle bulk actions.
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verification handled in process_bulk_action.
+		$nonce = isset( $_REQUEST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ) : '';
+		if ( ! wp_verify_nonce( $nonce, 'bulk-' . $this->_args['plural'] ) ) {
+			wp_die( esc_html__( 'Security check failed.', 'skillpulse-lms' ) );
+		}
+
 		$signup_ids = isset( $_POST['signup_ids'] ) ? array_map( 'absint', $_POST['signup_ids'] ) : array();
 
 		if ( empty( $signup_ids ) ) {

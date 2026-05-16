@@ -882,8 +882,8 @@ class SkillPulse_LMS_Quizzes {
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce already verified above.
 		$quiz_id    = isset( $_POST['quiz_id'] ) ? intval( wp_unslash( $_POST['quiz_id'] ) ) : 0;
 		$attempt_id = isset( $_POST['attempt_id'] ) ? intval( wp_unslash( $_POST['attempt_id'] ) ) : 0;
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nonce verified above, answers will be sanitized during processing.
-		$answers          = isset( $_POST['answers'] ) ? wp_unslash( $_POST['answers'] ) : array();
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified above.
+		$answers          = isset( $_POST['answers'] ) ? map_deep( wp_unslash( $_POST['answers'] ), 'sanitize_text_field' ) : array();
 		$time_taken       = isset( $_POST['time_taken'] ) ? intval( wp_unslash( $_POST['time_taken'] ) ) : 0;
 		$current_question = isset( $_POST['current_question'] ) ? intval( wp_unslash( $_POST['current_question'] ) ) : 0;
 
@@ -1101,13 +1101,13 @@ class SkillPulse_LMS_Quizzes {
 		$quiz_id    = isset( $_POST['quiz_id'] ) ? intval( wp_unslash( $_POST['quiz_id'] ) ) : 0; // phpcs:ignore Generic.Formatting.MultipleStatementAlignment.NotSameWarning -- Variable assignments don't need alignment.
 		$attempt_id = isset( $_POST['attempt_id'] ) ? intval( wp_unslash( $_POST['attempt_id'] ) ) : 0; // phpcs:ignore Generic.Formatting.MultipleStatementAlignment.NotSameWarning -- Variable assignments don't need alignment.
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce already verified above.
-		$answers_raw = isset( $_POST['answers'] ) ? sanitize_text_field( wp_unslash( $_POST['answers'] ) ) : '';
+		$answers_raw = isset( $_POST['answers'] ) ? wp_unslash( $_POST['answers'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized recursively below after json_decode.
 		$answers     = ! empty( $answers_raw ) ? json_decode( $answers_raw, true ) : array();
-		$answers     = is_array( $answers ) ? array_map( 'sanitize_text_field', $answers ) : array();
+		$answers     = is_array( $answers ) ? map_deep( $answers, 'sanitize_text_field' ) : array();
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce already verified above.
-		$uploads_raw  = isset( $_POST['file_uploads'] ) ? sanitize_text_field( wp_unslash( $_POST['file_uploads'] ) ) : '';
+		$uploads_raw  = isset( $_POST['file_uploads'] ) ? wp_unslash( $_POST['file_uploads'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized recursively below after json_decode.
 		$file_uploads = ! empty( $uploads_raw ) ? json_decode( $uploads_raw, true ) : array();
-		$file_uploads = is_array( $file_uploads ) ? array_map( 'sanitize_text_field', $file_uploads ) : array();
+		$file_uploads = is_array( $file_uploads ) ? map_deep( $file_uploads, 'sanitize_text_field' ) : array();
 		$time_taken   = isset( $_POST['time_taken'] ) ? intval( wp_unslash( $_POST['time_taken'] ) ) : 0; // phpcs:ignore Generic.Formatting.MultipleStatementAlignment.NotSameWarning -- Variable assignments don't need alignment.
 
 		if ( ! $quiz_id || ! $attempt_id ) {
@@ -1153,6 +1153,8 @@ class SkillPulse_LMS_Quizzes {
 				if ( isset( $_FILES[ $file_key ] ) && isset( $_FILES[ $file_key ]['error'] ) && UPLOAD_ERR_OK === $_FILES[ $file_key ]['error'] ) {
 					// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- $_FILES is validated and sanitized during file upload processing.
 					$file = $_FILES[ $file_key ];
+					// Sanitize the file name before processing.
+					$file['name'] = sanitize_file_name( wp_unslash( $file['name'] ) );
 
 					// Get question-specific settings.
 					$allowed_types_str = isset( $question_settings[ $question_id ]['allowed_types'] )
@@ -2407,8 +2409,8 @@ class SkillPulse_LMS_Quizzes {
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce already verified above.
 		$quiz_id = isset( $_POST['quiz_id'] ) ? intval( wp_unslash( $_POST['quiz_id'] ) ) : 0;
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nonce verified above, answers will be sanitized during processing.
-		$answers = isset( $_POST['answers'] ) ? wp_unslash( $_POST['answers'] ) : array();
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified above.
+		$answers = isset( $_POST['answers'] ) ? map_deep( wp_unslash( $_POST['answers'] ), 'sanitize_text_field' ) : array();
 
 		if ( ! $quiz_id ) {
 			wp_send_json_error( 'Invalid quiz ID' );
@@ -2440,8 +2442,8 @@ class SkillPulse_LMS_Quizzes {
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce already verified above.
 		$question_id = isset( $_POST['question_id'] ) ? intval( wp_unslash( $_POST['question_id'] ) ) : 0;
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nonce verified above, bookmarks will be processed.
-		$bookmarks = isset( $_POST['bookmarks'] ) ? wp_unslash( $_POST['bookmarks'] ) : array();
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified above.
+		$bookmarks = isset( $_POST['bookmarks'] ) ? map_deep( wp_unslash( $_POST['bookmarks'] ), 'sanitize_text_field' ) : array();
 
 		if ( ! $question_id ) {
 			wp_send_json_error( 'Invalid question ID' );
@@ -2473,8 +2475,8 @@ class SkillPulse_LMS_Quizzes {
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce already verified above.
 		$quiz_id          = isset( $_POST['quiz_id'] ) ? intval( wp_unslash( $_POST['quiz_id'] ) ) : 0;
 		$current_question = isset( $_POST['current_question'] ) ? intval( wp_unslash( $_POST['current_question'] ) ) : 0;
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nonce verified above, bookmarks will be processed.
-		$bookmarks = isset( $_POST['bookmarks'] ) ? wp_unslash( $_POST['bookmarks'] ) : array();
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified above.
+		$bookmarks = isset( $_POST['bookmarks'] ) ? map_deep( wp_unslash( $_POST['bookmarks'] ), 'sanitize_text_field' ) : array();
 
 		if ( ! $quiz_id ) {
 			wp_send_json_error( 'Invalid quiz ID' );
@@ -2511,10 +2513,10 @@ class SkillPulse_LMS_Quizzes {
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce already verified above.
 		$quiz_id = isset( $_POST['quiz_id'] ) ? intval( wp_unslash( $_POST['quiz_id'] ) ) : 0;
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nonce verified above, answers and bookmarks will be processed.
-		$answers = isset( $_POST['answers'] ) ? wp_unslash( $_POST['answers'] ) : array();
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nonce verified above, bookmarks will be processed.
-		$bookmarks = isset( $_POST['bookmarks'] ) ? wp_unslash( $_POST['bookmarks'] ) : array();
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified above.
+		$answers = isset( $_POST['answers'] ) ? map_deep( wp_unslash( $_POST['answers'] ), 'sanitize_text_field' ) : array();
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified above.
+		$bookmarks = isset( $_POST['bookmarks'] ) ? map_deep( wp_unslash( $_POST['bookmarks'] ), 'sanitize_text_field' ) : array();
 
 		if ( ! $quiz_id ) {
 			wp_send_json_error( 'Invalid quiz ID' );
