@@ -708,7 +708,7 @@ class SkillPulse_LMS_Access_Control {
 		add_filter(
 			'the_content',
 			function ( $content ) use ( $item_id, $type ) {
-				return $this->add_guest_preview_notice( $content, $item_id, $type );
+				return wp_kses_post( $this->get_guest_preview_notice_html( $item_id, $type ) . $content );
 			},
 			15
 		);
@@ -755,23 +755,22 @@ class SkillPulse_LMS_Access_Control {
 		add_filter(
 			'the_content',
 			function ( $content ) use ( $content_type, $content_id ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found -- Required by filter signature.
-				return $this->get_access_denied_message( $content_type, $content_id );
+				return wp_kses_post( $this->get_access_denied_message( $content_type, $content_id ) );
 			},
 			10
 		);
 	}
 
 	/**
-	 * Add guest preview notice to lesson content.
+	 * Get guest preview notice HTML.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $content   Original content.
 	 * @param int    $lesson_id Lesson ID.
 	 * @param string $type      Item type ('lesson' or 'quiz').
-	 * @return string Content with notice.
+	 * @return string Notice HTML.
 	 */
-	private function add_guest_preview_notice( $content, $lesson_id, $type = 'lesson' ) {
+	private function get_guest_preview_notice_html( $lesson_id, $type = 'lesson' ) {
 		// Get course ID based on content type.
 		if ( 'quiz' === $type ) {
 			$course_id = splms_get_quiz_course( $lesson_id );
@@ -802,7 +801,7 @@ class SkillPulse_LMS_Access_Control {
 		$notice .= '</div>';
 		$notice .= '</div>';
 
-		return $notice . $content;
+		return $notice;
 	}
 
 	/**
@@ -879,14 +878,14 @@ class SkillPulse_LMS_Access_Control {
 		// Check course content.
 		if ( SPLMS_POST_TYPES['course'] === $post->post_type ) {
 			if ( ! $this->user_can_access_course( $user_id, $post->ID ) ) {
-				return $this->get_access_denied_message( 'course', $post->ID );
+				return wp_kses_post( $this->get_access_denied_message( 'course', $post->ID ) );
 			}
 		}
 
 		// Check lesson content.
 		if ( SPLMS_POST_TYPES['lesson'] === $post->post_type ) {
 			if ( ! $this->user_can_access_lesson( $user_id, $post->ID ) ) {
-				return $this->get_access_denied_message( 'lesson', $post->ID );
+				return wp_kses_post( $this->get_access_denied_message( 'lesson', $post->ID ) );
 			}
 		}
 

@@ -350,7 +350,7 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 			return array();
 		}
 
-		$sorted_ids  = $order_ids;
+		$sorted_ids = $order_ids;
 		sort( $sorted_ids );
 		$cache_key   = 'splms_order_items_batch_' . md5( implode( ',', $sorted_ids ) );
 		$cache_group = 'skillpulse-lms';

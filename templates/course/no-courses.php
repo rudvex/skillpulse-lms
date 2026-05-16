@@ -14,10 +14,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 
-// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, nonce verification handled at higher level.
-$splms_is_search = is_search() || ! empty( $_GET['course_search'] );
-// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, nonce verification handled at higher level.
-$splms_has_filters = ! empty( array_filter( $_GET ) );
+// Sanitize the GET array to prevent static analysis false positives.
+$splms_sanitized_get = map_deep( wp_unslash( $_GET ), 'sanitize_text_field' );
+
+$splms_is_search   = is_search() || ! empty( $splms_sanitized_get['course_search'] );
+$splms_has_filters = ! empty( array_filter( $splms_sanitized_get ) );
 ?>
 
 <div class="splms-no-courses">
@@ -43,13 +44,11 @@ $splms_has_filters = ! empty( array_filter( $_GET ) );
 			</h2>
 			<p class="no-courses-message">
 				<?php
-				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, nonce verification handled at higher level.
-				if ( ! empty( $_GET['course_search'] ) ) {
+				if ( ! empty( $splms_sanitized_get['course_search'] ) ) {
 					$splms_search_text = sprintf(
 						/* translators: %s: Search query. */
 						esc_html__( 'No courses match your search for "%s". Try different keywords, adjust your filters, or browse our course categories below.', 'skillpulse-lms' ),
-						// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, reading URL parameter only.
-						'<strong>' . esc_html( sanitize_text_field( wp_unslash( $_GET['course_search'] ) ) ) . '</strong>'
+						'<strong>' . esc_html( $splms_sanitized_get['course_search'] ) . '</strong>'
 					);
 					echo wp_kses_post( $splms_search_text );
 				} else {
@@ -85,8 +84,7 @@ $splms_has_filters = ! empty( array_filter( $_GET ) );
 			
 			<?php if ( $splms_has_filters ) { ?>
 				<?php
-				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file, $_GET used for URL building only.
-				$splms_clear_url = remove_query_arg( array_map( 'sanitize_key', array_keys( $_GET ) ) );
+				$splms_clear_url = remove_query_arg( array_map( 'sanitize_key', array_keys( $splms_sanitized_get ) ) );
 				?>
 				<a href="<?php echo esc_url( $splms_clear_url ); ?>" class="btn btn-secondary">
 					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -109,7 +109,7 @@ class SkillPulse_LMS_Login {
 
 		wp_enqueue_style(
 			'splms-login',
-			SKILLPULSE_LMS_DIR_URL . 'assets/css/login.css',
+			SKILLPULSE_LMS_URL_PATH . 'assets/css/login.css',
 			array(),
 			SKILLPULSE_LMS_VERSION
 		);
@@ -441,8 +441,7 @@ class SkillPulse_LMS_Login {
 	 * @return bool
 	 */
 	public function is_login_page() {
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- REQUEST_URI is used for comparison only.
-		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '';
+		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
 		$current_url = home_url( $request_uri );
 		if ( strpos( $current_url, wp_login_url() ) !== false ) {
 			return true;

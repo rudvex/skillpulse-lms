@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkillPulse LMS v1.0.0\n"
 "Report-Msgid-Bugs-To: https://skillpulselms.com/contact\n"
-"POT-Creation-Date: 2026-05-03 13:48:10+00:00\n"
+"POT-Creation-Date: 2026-05-16 10:34:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -262,7 +262,7 @@ msgid "Practice"
 msgstr ""
 
 #: includes/admin/manager/class-admin-columns.php:781
-#: includes/modules/quizzes/config.php:110
+#: includes/modules/quizzes/config.php:115
 msgid "Survey"
 msgstr ""
 
@@ -272,7 +272,7 @@ msgstr ""
 
 #: includes/admin/manager/class-admin-menus.php:102
 #: includes/admin/manager/class-admin-menus.php:103
-#: includes/admin/signup/class-signup-admin.php:425
+#: includes/admin/signup/class-signup-admin.php:434
 #: templates/course/partials/course-navigation.php:36
 msgid "Overview"
 msgstr ""
@@ -387,7 +387,7 @@ msgid "Edit Course "
 msgstr ""
 
 #: includes/admin/manager/class-admin-post-types.php:90
-#: includes/modules/core/class-access-control.php:799
+#: includes/modules/core/class-access-control.php:798
 #: templates/course/course.php:261 templates/dashboard/wishlist.php:89
 #: templates/page-dashboard.php:340 templates/quiz/content.php:224
 #: templates/quiz/content.php:242 templates/quiz/content.php:275
@@ -666,7 +666,7 @@ msgid "Search Pending Users"
 msgstr ""
 
 #: includes/admin/signup/class-signup-admin.php:222
-#: includes/admin/signup/class-signup-list-table.php:493
+#: includes/admin/signup/class-signup-list-table.php:497
 #. translators: %s: Number of pending signups.
 msgid "Pending %s"
 msgstr ""
@@ -688,13 +688,13 @@ msgid "Failed to activate signup."
 msgstr ""
 
 #: includes/admin/signup/class-signup-admin.php:269
-#: includes/admin/signup/class-signup-admin.php:720
+#: includes/admin/signup/class-signup-admin.php:729
 #: includes/rest-api/features/signup/class-rest-signup-controller.php:318
 msgid "Failed to send activation email."
 msgstr ""
 
 #: includes/admin/signup/class-signup-admin.php:270
-#: includes/admin/signup/class-signup-admin.php:707
+#: includes/admin/signup/class-signup-admin.php:716
 #: includes/rest-api/features/signup/class-rest-signup-controller.php:266
 msgid "Failed to delete signup."
 msgstr ""
@@ -736,135 +736,167 @@ msgid_plural "%d activation emails sent successfully."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/signup/class-signup-admin.php:426
+#: includes/admin/signup/class-signup-admin.php:342
+msgid "You do not have permission to perform this action."
+msgstr ""
+
+#: includes/admin/signup/class-signup-admin.php:347
+#: includes/admin/signup/class-signup-list-table.php:295
+#: includes/admin/signup/class-signup-list-table.php:348
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:106
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:192
+#: includes/frontend/dashboard/class-splms-dashboard-api.php:441
+#: includes/modules/core/class-database.php:840
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:193
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:231
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:307
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:332
+#: includes/modules/notifications/in-app/class-in-app-notifications.php:377
+#: includes/modules/quizzes/class-quizzes.php:954
+#: includes/modules/user-management/class-profile.php:243
+#: includes/modules/user-management/class-profile.php:350
+#: includes/modules/user-management/class-profile.php:412
+#: includes/modules/user-management/class-profile.php:479
+#: includes/modules/user-management/class-profile.php:571
+#: includes/modules/user-management/class-profile.php:679
+#: includes/modules/user-management/class-profile.php:729
+#: includes/modules/user-management/login/class-login.php:294
+#: includes/modules/user-management/login/class-login.php:325
+#: includes/modules/user-management/signup/class-signup.php:119
+#: includes/modules/user-management/signup/class-signup.php:191
+#: includes/modules/user-management/signup/class-signup.php:226
+msgid "Security check failed."
+msgstr ""
+
+#: includes/admin/signup/class-signup-admin.php:435
 msgid ""
 "This page shows all pending user signups that require email verification "
 "before they can log in."
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:433
+#: includes/admin/signup/class-signup-admin.php:442
 msgid "Actions"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:434
+#: includes/admin/signup/class-signup-admin.php:443
 msgid ""
 "You can activate, delete, or resend activation emails for individual "
 "signups or use bulk actions for multiple signups."
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:442
+#: includes/admin/signup/class-signup-admin.php:451
 msgid "For more information:"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:445
+#: includes/admin/signup/class-signup-admin.php:454
 msgid "Visit the plugin documentation for detailed instructions."
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:471
-#: includes/admin/signup/class-signup-admin.php:482
+#: includes/admin/signup/class-signup-admin.php:480
+#: includes/admin/signup/class-signup-admin.php:491
 msgid "Review Signup"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:472
-#: includes/admin/signup/class-signup-admin.php:483
+#: includes/admin/signup/class-signup-admin.php:481
+#: includes/admin/signup/class-signup-admin.php:492
 msgid "Close"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:477
+#: includes/admin/signup/class-signup-admin.php:486
 msgid "Loading signup details..."
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:497
+#: includes/admin/signup/class-signup-admin.php:506
 msgid "Signup Date"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:503
+#: includes/admin/signup/class-signup-admin.php:512
 msgid "Activation Key"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:510
+#: includes/admin/signup/class-signup-admin.php:519
 msgid "Additional Information"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:528
+#: includes/admin/signup/class-signup-admin.php:537
 msgid "Activate Signup"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:530
+#: includes/admin/signup/class-signup-admin.php:539
 msgid "Convert this signup into an active user account."
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:538
+#: includes/admin/signup/class-signup-admin.php:547
 msgid "Resend Email"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:540
+#: includes/admin/signup/class-signup-admin.php:549
 msgid "Send activation email again"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:546
+#: includes/admin/signup/class-signup-admin.php:555
 msgid "Delete Signup"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:548
+#: includes/admin/signup/class-signup-admin.php:557
 msgid "Remove permanently"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:580
+#: includes/admin/signup/class-signup-admin.php:589
 msgid "Activate signup for"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:581
+#: includes/admin/signup/class-signup-admin.php:590
 msgid "Delete signup for"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:582
+#: includes/admin/signup/class-signup-admin.php:591
 msgid "Resend activation email to"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:600
-#: includes/admin/signup/class-signup-admin.php:663
+#: includes/admin/signup/class-signup-admin.php:609
+#: includes/admin/signup/class-signup-admin.php:672
 msgid "Security check failed"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:605
-#: includes/admin/signup/class-signup-admin.php:668
+#: includes/admin/signup/class-signup-admin.php:614
+#: includes/admin/signup/class-signup-admin.php:677
 msgid "Insufficient permissions"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:610
+#: includes/admin/signup/class-signup-admin.php:619
 msgid "Invalid signup ID"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:616
-#: includes/admin/signup/class-signup-admin.php:682
+#: includes/admin/signup/class-signup-admin.php:625
+#: includes/admin/signup/class-signup-admin.php:691
 msgid "Signup not found"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:675
+#: includes/admin/signup/class-signup-admin.php:684
 msgid "Invalid request parameters"
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:694
+#: includes/admin/signup/class-signup-admin.php:703
 #. translators: %s: User email address.
 msgid "Signup for %s has been activated successfully."
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:705
+#: includes/admin/signup/class-signup-admin.php:714
 #. translators: %s: User email address.
 msgid "Signup for %s has been deleted successfully."
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:718
+#: includes/admin/signup/class-signup-admin.php:727
 #. translators: %s: User email address.
 msgid "Activation email has been sent to %s successfully."
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:723
+#: includes/admin/signup/class-signup-admin.php:732
 msgid "Email functionality not available."
 msgstr ""
 
-#: includes/admin/signup/class-signup-admin.php:728
+#: includes/admin/signup/class-signup-admin.php:737
 #: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:737
 #: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:751
 msgid "Invalid action."
@@ -935,31 +967,6 @@ msgstr ""
 #: includes/admin/signup/class-signup-list-table.php:245
 #. translators: %s: User login name.
 msgid "Select %s"
-msgstr ""
-
-#: includes/admin/signup/class-signup-list-table.php:295
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:106
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:192
-#: includes/frontend/dashboard/class-splms-dashboard-api.php:441
-#: includes/modules/core/class-database.php:840
-#: includes/modules/notifications/in-app/class-in-app-notifications.php:193
-#: includes/modules/notifications/in-app/class-in-app-notifications.php:231
-#: includes/modules/notifications/in-app/class-in-app-notifications.php:307
-#: includes/modules/notifications/in-app/class-in-app-notifications.php:332
-#: includes/modules/notifications/in-app/class-in-app-notifications.php:377
-#: includes/modules/quizzes/class-quizzes.php:954
-#: includes/modules/user-management/class-profile.php:243
-#: includes/modules/user-management/class-profile.php:350
-#: includes/modules/user-management/class-profile.php:412
-#: includes/modules/user-management/class-profile.php:479
-#: includes/modules/user-management/class-profile.php:571
-#: includes/modules/user-management/class-profile.php:679
-#: includes/modules/user-management/class-profile.php:729
-#: includes/modules/user-management/login/class-login.php:294
-#: includes/modules/user-management/login/class-login.php:325
-#: includes/modules/user-management/signup/class-signup.php:119
-#: includes/modules/user-management/signup/class-signup.php:222
-msgid "Security check failed."
 msgstr ""
 
 #: includes/admin/wizard/class-setup-wizard.php:92
@@ -1072,8 +1079,8 @@ msgstr ""
 #: includes/modules/user-management/class-profile.php:373
 #: includes/rest-api/courses/admin/class-rest-course-settings-controller.php:117
 #: includes/rest-api/courses/admin/class-rest-course-settings-controller.php:184
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:517
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:607
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:403
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:493
 msgid "Course not found."
 msgstr ""
 
@@ -1127,7 +1134,7 @@ msgstr ""
 
 #: includes/blocks/class-blocks.php:650
 #: includes/modules/user-management/class-profile.php:381
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:525
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:411
 msgid "You are not enrolled in this course."
 msgstr ""
 
@@ -1449,7 +1456,7 @@ msgstr ""
 
 #: includes/frontend/dashboard/class-splms-dashboard.php:168
 #: includes/modules/user-management/login/class-login.php:344
-#: includes/modules/user-management/signup/class-signup.php:337
+#: includes/modules/user-management/signup/class-signup.php:341
 msgid "Passwords do not match."
 msgstr ""
 
@@ -1650,39 +1657,39 @@ msgstr ""
 msgid "Purchase"
 msgstr ""
 
-#: includes/modules/core/class-access-control.php:787
+#: includes/modules/core/class-access-control.php:786
 msgid ""
 "You are viewing this quiz in preview mode. Enroll in the course to access "
 "all quizzes and features."
 msgstr ""
 
-#: includes/modules/core/class-access-control.php:789
+#: includes/modules/core/class-access-control.php:788
 msgid ""
 "You are viewing this lesson in preview mode. Enroll in the course to access "
 "all lessons and features."
 msgstr ""
 
-#: includes/modules/core/class-access-control.php:796
+#: includes/modules/core/class-access-control.php:795
 msgid "Preview Mode"
 msgstr ""
 
-#: includes/modules/core/class-access-control.php:820
+#: includes/modules/core/class-access-control.php:819
 #. translators: %s: Content type.
 msgid "Access Denied: You do not have permission to view this %s."
 msgstr ""
 
-#: includes/modules/core/class-access-control.php:836
+#: includes/modules/core/class-access-control.php:835
 msgid ""
 "This course requires a membership. Please purchase a membership to access "
 "this course."
 msgstr ""
 
-#: includes/modules/core/class-access-control.php:848
+#: includes/modules/core/class-access-control.php:847
 #: templates/quiz/content.php:256
 msgid "Access Restricted"
 msgstr ""
 
-#: includes/modules/core/class-access-control.php:854
+#: includes/modules/core/class-access-control.php:853
 msgid "Login to Access"
 msgstr ""
 
@@ -1833,7 +1840,7 @@ msgid "Invalid directory name."
 msgstr ""
 
 #: includes/modules/core/helper/class-file-manager.php:179
-#: includes/modules/quizzes/class-quizzes.php:1873
+#: includes/modules/quizzes/class-quizzes.php:1875
 #. translators: %s: Directory path.
 msgid "Failed to create directory: %s"
 msgstr ""
@@ -1929,9 +1936,9 @@ msgstr ""
 #: includes/modules/user-management/class-profile.php:367
 #: includes/modules/user-management/class-profile.php:424
 #: includes/modules/user-management/class-profile.php:736
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:364
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:502
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:713
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:250
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:388
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:599
 #: includes/rest-api/courses/class-rest-course-controller.php:314
 #: includes/rest-api/courses/class-rest-course-controller.php:597
 #: includes/rest-api/courses/class-rest-course-controller.php:688
@@ -3783,7 +3790,6 @@ msgstr ""
 #: includes/modules/orders/class-order-refund-manager.php:79
 #: includes/modules/orders/class-order-refund-manager.php:172
 #: includes/modules/orders/class-order-refund-manager.php:201
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1254
 msgid "Order not found."
 msgstr ""
 
@@ -3996,11 +4002,11 @@ msgstr ""
 msgid "Payment processing failed."
 msgstr ""
 
-#: includes/modules/quizzes/class-guest-quiz-manager.php:111
+#: includes/modules/quizzes/class-guest-quiz-manager.php:125
 msgid "This quiz is not available for preview."
 msgstr ""
 
-#: includes/modules/quizzes/class-guest-quiz-manager.php:123
+#: includes/modules/quizzes/class-guest-quiz-manager.php:137
 #: includes/modules/quizzes/class-quiz-service.php:142
 #: includes/modules/quizzes/class-quiz-service.php:227
 #: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:315
@@ -4009,45 +4015,45 @@ msgstr ""
 msgid "No questions found for this quiz."
 msgstr ""
 
-#: includes/modules/quizzes/class-guest-quiz-manager.php:177
+#: includes/modules/quizzes/class-guest-quiz-manager.php:192
 msgid "Guest quiz session not found or expired."
 msgstr ""
 
-#: includes/modules/quizzes/class-guest-quiz-manager.php:186
+#: includes/modules/quizzes/class-guest-quiz-manager.php:201
 msgid "Guest quiz session has expired. Please start a new quiz."
 msgstr ""
 
-#: includes/modules/quizzes/class-guest-quiz-manager.php:200
+#: includes/modules/quizzes/class-guest-quiz-manager.php:215
 #: includes/modules/quizzes/class-quiz-service.php:338
 #: includes/rest-api/quizzes/class-rest-quiz-actions-controller.php:646
 msgid "Quiz progress saved successfully."
 msgstr ""
 
-#: includes/modules/quizzes/class-guest-quiz-manager.php:220
+#: includes/modules/quizzes/class-guest-quiz-manager.php:235
 msgid "No guest quiz session found."
 msgstr ""
 
-#: includes/modules/quizzes/class-guest-quiz-manager.php:229
+#: includes/modules/quizzes/class-guest-quiz-manager.php:244
 msgid "Guest quiz session has expired."
 msgstr ""
 
-#: includes/modules/quizzes/class-guest-quiz-manager.php:263
+#: includes/modules/quizzes/class-guest-quiz-manager.php:278
 msgid "Guest quiz session not found."
 msgstr ""
 
-#: includes/modules/quizzes/class-guest-quiz-manager.php:320
+#: includes/modules/quizzes/class-guest-quiz-manager.php:335
 msgid "Congratulations! You passed this quiz preview."
 msgstr ""
 
-#: includes/modules/quizzes/class-guest-quiz-manager.php:321
+#: includes/modules/quizzes/class-guest-quiz-manager.php:336
 msgid "Quiz completed. Consider enrolling for full course access and certification."
 msgstr ""
 
-#: includes/modules/quizzes/class-guest-quiz-manager.php:340
+#: includes/modules/quizzes/class-guest-quiz-manager.php:355
 msgid "Guest quiz session cleared."
 msgstr ""
 
-#: includes/modules/quizzes/class-guest-quiz-manager.php:360
+#: includes/modules/quizzes/class-guest-quiz-manager.php:375
 msgid "No completed quiz results found in guest session."
 msgstr ""
 
@@ -4113,8 +4119,8 @@ msgstr ""
 
 #: includes/modules/quizzes/class-quiz-service.php:387
 #: includes/modules/quizzes/class-quiz-service.php:519
-#: includes/modules/quizzes/class-quizzes.php:1947
-#: includes/modules/quizzes/class-quizzes.php:2752
+#: includes/modules/quizzes/class-quizzes.php:1949
+#: includes/modules/quizzes/class-quizzes.php:2754
 #: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:559
 #: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:932
 msgid "Quiz attempt not found."
@@ -4177,197 +4183,197 @@ msgstr ""
 msgid "Invalid quiz ID or attempt ID. Please start a new attempt."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:1228
-#: includes/modules/quizzes/class-quizzes.php:1539
+#: includes/modules/quizzes/class-quizzes.php:1230
+#: includes/modules/quizzes/class-quizzes.php:1541
 msgid "No questions found for this quiz. Please contact the instructor."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:1243
+#: includes/modules/quizzes/class-quizzes.php:1245
 msgid "This quiz attempt has already been submitted and cannot be resubmitted."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:1309
+#: includes/modules/quizzes/class-quizzes.php:1311
 msgid "Security check failed: Attempt ownership mismatch."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:1350
+#: includes/modules/quizzes/class-quizzes.php:1352
 msgid "Failed to save quiz attempt. Please try again or contact support."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:1372
+#: includes/modules/quizzes/class-quizzes.php:1374
 msgid "Quiz attempt was not saved correctly. Please try again."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:1632
+#: includes/modules/quizzes/class-quizzes.php:1634
 msgid "This was a preview attempt. Results are not saved."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:1687
+#: includes/modules/quizzes/class-quizzes.php:1689
 msgid "This was a preview attempt. Results have been saved as guest attempt."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:1898
+#: includes/modules/quizzes/class-quizzes.php:1900
 msgid "Could not initialize WordPress filesystem."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:1906
+#: includes/modules/quizzes/class-quizzes.php:1908
 msgid "Failed to move uploaded file."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2560
+#: includes/modules/quizzes/class-quizzes.php:2562
 #. translators: %s: File extension
 msgid "File type .%s is not allowed for security reasons."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2573
+#: includes/modules/quizzes/class-quizzes.php:2575
 #. translators: %s: Maximum file size
 msgid "File size exceeds maximum limit of %s."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2587
+#: includes/modules/quizzes/class-quizzes.php:2589
 msgid "Filename contains suspicious content."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2609
+#: includes/modules/quizzes/class-quizzes.php:2611
 msgid "File type does not match file extension."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2711
+#: includes/modules/quizzes/class-quizzes.php:2713
 msgid "Unknown status"
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2733
+#: includes/modules/quizzes/class-quizzes.php:2735
 #. translators: %s: Invalid status value
 msgid "Invalid status: %s"
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2761
+#: includes/modules/quizzes/class-quizzes.php:2763
 #. translators: 1: Current status, 2: New status
 msgid "Cannot transition from %1$s to %2$s."
 msgstr ""
 
-#: includes/modules/quizzes/class-quizzes.php:2808
+#: includes/modules/quizzes/class-quizzes.php:2810
 #: includes/rest-api/quizzes/class-rest-quiz-attempts-controller.php:879
 msgid "Failed to update quiz attempt status."
 msgstr ""
 
-#: includes/modules/quizzes/config.php:87
+#: includes/modules/quizzes/config.php:92
 msgid "Basic Settings"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:93
+#: includes/modules/quizzes/config.php:98
 msgid "Quiz Type"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:94
+#: includes/modules/quizzes/config.php:99
 msgid "Choose the type of quiz assessment"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:102
+#: includes/modules/quizzes/config.php:107
 msgid "Graded Quiz"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:106
+#: includes/modules/quizzes/config.php:111
 msgid "Practice Quiz"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:118
+#: includes/modules/quizzes/config.php:123
 msgid "Passing Grade (%)"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:119
+#: includes/modules/quizzes/config.php:124
 msgid "Minimum percentage score required to pass"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:135
+#: includes/modules/quizzes/config.php:140
 msgid "Display & Behavior"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:141
+#: includes/modules/quizzes/config.php:146
 msgid "Show Correct Answers"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:142
+#: includes/modules/quizzes/config.php:147
 msgid "Display correct answers after quiz completion"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:151
+#: includes/modules/quizzes/config.php:156
 msgid "Show Answers Timing"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:152
+#: includes/modules/quizzes/config.php:157
 msgid "When should correct answers be shown?"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:159
+#: includes/modules/quizzes/config.php:164
 msgid "After Completion"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:163
+#: includes/modules/quizzes/config.php:168
 msgid "After Passing"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:167
+#: includes/modules/quizzes/config.php:172
 msgid "After All Attempts"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:179
+#: includes/modules/quizzes/config.php:184
 msgid "Questions Per Page"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:180
+#: includes/modules/quizzes/config.php:185
 msgid "Number of questions to display per page (0 = all on one page)"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:192
+#: includes/modules/quizzes/config.php:197
 msgid "Allow Navigation"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:193
+#: includes/modules/quizzes/config.php:198
 msgid "Allow students to navigate between questions"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:207
+#: includes/modules/quizzes/config.php:212
 msgid "Feedback & Results"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:213
+#: includes/modules/quizzes/config.php:218
 msgid "Enable Feedback"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:214
+#: includes/modules/quizzes/config.php:219
 msgid "Show feedback messages for answers"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:223
+#: includes/modules/quizzes/config.php:228
 msgid "Correct Answer Feedback"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:224
+#: includes/modules/quizzes/config.php:229
 msgid "Message shown for correct answers"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:225
+#: includes/modules/quizzes/config.php:230
 msgid "Correct! Well done."
 msgstr ""
 
-#: includes/modules/quizzes/config.php:228
+#: includes/modules/quizzes/config.php:233
 msgid "Enter feedback for correct answers"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:239
+#: includes/modules/quizzes/config.php:244
 msgid "Incorrect Answer Feedback"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:240
+#: includes/modules/quizzes/config.php:245
 msgid "Message shown for incorrect answers"
 msgstr ""
 
-#: includes/modules/quizzes/config.php:241
+#: includes/modules/quizzes/config.php:246
 msgid "Incorrect. Please review the material and try again."
 msgstr ""
 
-#: includes/modules/quizzes/config.php:244
+#: includes/modules/quizzes/config.php:249
 msgid "Enter feedback for incorrect answers"
 msgstr ""
 
@@ -4548,103 +4554,101 @@ msgid "Company name (optional)"
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:247
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:480
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:366
 msgid "You must be logged in to enroll in courses."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:261
 #: includes/modules/user-management/class-profile.php:742
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:370
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:719
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:932
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1095
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:256
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:605
 msgid "Course not found or not available."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:271
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:380
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:266
 #. translators: %1$s: Start date, %2$s: End date.
 msgid "Enrollment is closed for this course. Enrollment period: %1$s to %2$s"
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:273
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:387
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:273
 msgid "Enrollment is currently closed for this course."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:283
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:395
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:281
 #. translators: %1$d: Enrolled count, %2$d: Max enrollment.
 msgid "This course is full (%1$d/%2$d students). No more enrollments are allowed."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:298
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:411
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:297
 msgid "You must purchase this course before enrolling."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:304
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:425
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:311
 msgid "This course requires a membership. Please purchase a membership to enroll."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:315
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:440
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:326
 msgid "You are already enrolled in this course."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:325
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:451
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:337
 msgid "Failed to enroll in course. Please try again."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:334
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:461
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:347
 msgid "Successfully enrolled in course!"
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:354
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:559
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:445
 msgid "You must be logged in to unenroll from courses."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:359
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:509
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:395
 msgid "Student unenrollment is disabled. Please contact an administrator."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:388
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:532
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:418
 msgid "Failed to unenroll from course. Please try again."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:396
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:541
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:427
 msgid "Successfully unenrolled from course."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:416
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:873
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:759
 msgid "You must be logged in to manage your wishlist."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:430
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:725
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:611
 msgid "Wishlist is disabled by site admin."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:445
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:740
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:626
 msgid "Course removed from wishlist."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:450
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:745
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:631
 msgid "Course added to wishlist."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:483
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:893
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:779
 msgid "You must be logged in to manage your bookmarks."
 msgstr ""
 
@@ -4684,24 +4688,24 @@ msgid "lessons"
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:520
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:823
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:709
 #. translators: %s: Item type.
 #. translators: %s: Item type (lesson or quiz).
 msgid "You must be enrolled in the course to bookmark %s."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:526
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:814
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:700
 msgid "Bookmarks are disabled by site admin."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:539
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:837
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:723
 msgid "Removed from bookmarks."
 msgstr ""
 
 #: includes/modules/user-management/class-profile.php:544
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:842
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:728
 msgid "Added to bookmarks."
 msgstr ""
 
@@ -4834,129 +4838,129 @@ msgid ""
 "instructions."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:193
-#: includes/modules/user-management/signup/class-signup.php:468
+#: includes/modules/user-management/signup/class-signup.php:197
+#: includes/modules/user-management/signup/class-signup.php:472
 msgid "Invalid activation key."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:204
+#: includes/modules/user-management/signup/class-signup.php:208
 msgid "Account activated successfully! You can now log in."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:229
+#: includes/modules/user-management/signup/class-signup.php:233
 msgid "Please provide a valid email address."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:235
+#: includes/modules/user-management/signup/class-signup.php:239
 msgid "No pending signup found for this email address."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:240
+#: includes/modules/user-management/signup/class-signup.php:244
 msgid "This account has already been activated."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:253
+#: includes/modules/user-management/signup/class-signup.php:257
 msgid "Activation email sent successfully! Please check your inbox."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:271
+#: includes/modules/user-management/signup/class-signup.php:275
 msgid "First name is required."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:275
+#: includes/modules/user-management/signup/class-signup.php:279
 msgid "Last name is required."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:279
+#: includes/modules/user-management/signup/class-signup.php:283
 msgid "Username is required."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:281
-#: includes/modules/user-management/signup/class-signup.php:477
+#: includes/modules/user-management/signup/class-signup.php:285
+#: includes/modules/user-management/signup/class-signup.php:481
 msgid "Username already exists."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:283
+#: includes/modules/user-management/signup/class-signup.php:287
 msgid "Username is already registered and pending activation."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:285
+#: includes/modules/user-management/signup/class-signup.php:289
 msgid "Invalid username format."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:289
+#: includes/modules/user-management/signup/class-signup.php:293
 msgid "Email is required."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:291
+#: includes/modules/user-management/signup/class-signup.php:295
 msgid "Invalid email format."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:293
-#: includes/modules/user-management/signup/class-signup.php:481
+#: includes/modules/user-management/signup/class-signup.php:297
+#: includes/modules/user-management/signup/class-signup.php:485
 msgid "Email already exists."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:295
+#: includes/modules/user-management/signup/class-signup.php:299
 msgid "Email is already registered and pending activation."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:299
+#: includes/modules/user-management/signup/class-signup.php:303
 msgid "Password is required."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:307
+#: includes/modules/user-management/signup/class-signup.php:311
 msgid "Password must be at least 8 characters long."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:312
+#: includes/modules/user-management/signup/class-signup.php:316
 msgid "Password must contain at least one uppercase letter."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:317
+#: includes/modules/user-management/signup/class-signup.php:321
 msgid "Password must contain at least one lowercase letter."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:322
+#: includes/modules/user-management/signup/class-signup.php:326
 msgid "Password must contain at least one number."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:327
+#: includes/modules/user-management/signup/class-signup.php:331
 msgid "Password must contain at least one special character."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:341
+#: includes/modules/user-management/signup/class-signup.php:345
 msgid "Invalid user type."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:345
+#: includes/modules/user-management/signup/class-signup.php:349
 msgid "You must accept the terms and conditions."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:431
+#: includes/modules/user-management/signup/class-signup.php:435
 msgid "Failed to create signup."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:448
+#: includes/modules/user-management/signup/class-signup.php:452
 msgid "User type is not allowed."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:472
+#: includes/modules/user-management/signup/class-signup.php:476
 msgid "Account is already activated."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:554
+#: includes/modules/user-management/signup/class-signup.php:558
 msgid "Activation Failed"
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:668
+#: includes/modules/user-management/signup/class-signup.php:672
 #. translators: %s: Resend activation URL.
 msgid ""
 "If you have not received an email yet, <a href=\"%s\">click here to resend "
 "it</a>."
 msgstr ""
 
-#: includes/modules/user-management/signup/class-signup.php:674
+#: includes/modules/user-management/signup/class-signup.php:678
 msgid ""
 "<strong>ERROR</strong>: Your account has not been activated. Check your "
 "email for the activation link."
@@ -5184,128 +5188,30 @@ msgstr ""
 msgid "Type of item: lesson or quiz."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:210
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:238
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:275
-msgid "Payment method: paypal, stripe, or razorpay."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:245
-msgid "Internal order/payment ID returned from initiate_purchase."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:599
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:664
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:485
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:550
 msgid "You must be logged in to view course progress."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:614
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:500
 #: includes/rest-api/courses/class-rest-course-controller.php:328
 msgid "You do not have access to this course."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:676
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:562
 msgid "You must be enrolled in this course to view progress."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:797
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:683
 msgid "Invalid item ID. Please provide item_id and item_type (lesson or quiz)."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:801
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:687
 msgid "Invalid item type. Must be \"lesson\" or \"quiz\"."
 msgstr ""
 
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:808
+#: includes/rest-api/courses/class-rest-course-actions-controller.php:694
 msgid "Item not found or not available."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:937
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1100
-msgid "Paid courses are disabled."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:945
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1108
-msgid "This course is not a paid course."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:953
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1125
-msgid "Invalid course price."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:961
-msgid "No payment methods are currently available. Please contact support."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1033
-msgid "You must be logged in to get purchase information."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1087
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1193
-msgid "You must be logged in to purchase courses."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1113
-msgid "You have already purchased this course."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1118
-msgid "You have membership access to this course. No purchase needed."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1133
-msgid "Invalid or unavailable payment method."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1163
-msgid "Failed to create payment order."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1244
-msgid "You must be logged in to verify payments."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1260
-msgid "Order does not match the current user or course."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1274
-msgid "Missing required Razorpay parameters."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1286
-msgid "Missing required PayPal parameters."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1298
-msgid "Missing required Stripe parameters."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1308
-msgid "Payment verification failed."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1327
-msgid "Payment verification successful. Processing order completion..."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1335
-msgid "Payment verified and enrollment completed."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1358
-msgid "You must be logged in to verify a payment."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1438
-msgid "Invalid payment method."
-msgstr ""
-
-#: includes/rest-api/courses/class-rest-course-actions-controller.php:1441
-msgid "Failed to process webhook."
 msgstr ""
 
 #: includes/rest-api/courses/class-rest-course-controller.php:83
@@ -6667,7 +6573,7 @@ msgstr ""
 msgid "Sorry, you are not allowed to view quiz settings."
 msgstr ""
 
-#: includes/rest-api/quizzes/admin/class-rest-quiz-settings-controller.php:167
+#: includes/rest-api/quizzes/admin/class-rest-quiz-settings-controller.php:165
 msgid "Sorry, you are not allowed to edit settings for this quiz."
 msgstr ""
 
@@ -7342,7 +7248,7 @@ msgstr ""
 msgid "List View"
 msgstr ""
 
-#: templates/course/no-courses.php:42
+#: templates/course/no-courses.php:43
 msgid "Oops! We couldn't find any matching courses"
 msgstr ""
 
@@ -7353,42 +7259,42 @@ msgid ""
 "your filters, or browse our course categories below."
 msgstr ""
 
-#: templates/course/no-courses.php:56
+#: templates/course/no-courses.php:55
 msgid ""
 "We couldn't find any courses matching your search. Try different keywords, "
 "adjust your filters, or browse our course categories below."
 msgstr ""
 
-#: templates/course/no-courses.php:62
+#: templates/course/no-courses.php:61
 msgid "No matching courses found"
 msgstr ""
 
-#: templates/course/no-courses.php:65
+#: templates/course/no-courses.php:64
 msgid ""
 "No courses match your current filter settings. Try adjusting your "
 "selections or clear all filters to browse all available courses."
 msgstr ""
 
-#: templates/course/no-courses.php:69
+#: templates/course/no-courses.php:68
 msgid "No courses available yet"
 msgstr ""
 
-#: templates/course/no-courses.php:72
+#: templates/course/no-courses.php:71
 msgid ""
 "We're working hard to bring you amazing courses. Check back soon for new "
 "learning opportunities!"
 msgstr ""
 
-#: templates/course/no-courses.php:83
+#: templates/course/no-courses.php:82
 #: templates/course/partials/course-related.php:153
 msgid "View All Courses"
 msgstr ""
 
-#: templates/course/no-courses.php:95
+#: templates/course/no-courses.php:93
 msgid "Clear Filters"
 msgstr ""
 
-#: templates/course/no-courses.php:115
+#: templates/course/no-courses.php:113
 msgid "Or browse by category"
 msgstr ""
 

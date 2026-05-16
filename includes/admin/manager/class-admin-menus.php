@@ -93,7 +93,7 @@ class SkillPulse_LMS_Admin_Menus {
 			'skillpulse-lms',
 			array( $this, 'overview_page' ),
 			$icon,
-			30
+			58.9
 		);
 
 		// Overview submenu.
