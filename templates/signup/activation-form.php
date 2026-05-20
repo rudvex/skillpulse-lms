@@ -16,7 +16,7 @@ $splms_activation_key = get_query_var( 'activation_key' );
 $splms_signup         = null;
 
 if ( ! empty( $splms_activation_key ) ) {
-	$splms_signup = SkillPulse_LMS_Signup::get_instance()->get_signup_by_key( $splms_activation_key );
+	$splms_signup = SPLMS_Signup::get_instance()->get_signup_by_key( $splms_activation_key );
 }
 
 // Check if we have an activation key in the URL.

@@ -19,7 +19,7 @@ $splms_site_name   = get_bloginfo( 'name' );
 $splms_admin_email = get_option( 'admin_email' );
 
 // Get customizable maintenance settings from maintenance_settings section.
-$splms_all_settings = SkillPulse_LMS_Settings::get_instance()->get_all_settings();
+$splms_all_settings = SPLMS_Settings::get_instance()->get_all_settings();
 
 $splms_maintenance_settings = isset( $splms_all_settings['general']['maintenance_settings'] ) ? $splms_all_settings['general']['maintenance_settings'] : array();
 

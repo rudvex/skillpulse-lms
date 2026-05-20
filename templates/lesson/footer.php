@@ -20,7 +20,7 @@ $splms_user_id   = get_current_user_id();
 $splms_course_id = splms_get_lesson_course( $splms_lesson_id );
 
 // Get navigation.
-$splms_lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+$splms_lessons_instance = SPLMS_Lessons::get_instance();
 $splms_navigation       = $splms_lessons_instance->get_lesson_navigation( $splms_lesson_id, $splms_user_id );
 
 // Check completion status.

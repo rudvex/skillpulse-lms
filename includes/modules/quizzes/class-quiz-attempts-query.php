@@ -12,18 +12,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die();
 }
 
-if ( ! class_exists( 'SkillPulse_LMS_Base_Query' ) ) {
-	require_once SKILLPULSE_LMS_DIR_PATH . 'includes/modules/core/base/class-base-query.php';
+if ( ! class_exists( 'SPLMS_Base_Query' ) ) {
+	require_once SPLMS_DIR_PATH . 'includes/modules/core/base/class-base-query.php';
 }
 
 /**
- * Class SkillPulse_LMS_Quiz_Attempts_Query
+ * Class SPLMS_Quiz_Attempts_Query
  *
  * Handles quiz attempts database operations
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Quiz_Attempts_Query extends SkillPulse_LMS_Base_Query {
+class SPLMS_Quiz_Attempts_Query extends SPLMS_Base_Query {
 
 	/**
 	 * Constructor.
@@ -41,7 +41,7 @@ class SkillPulse_LMS_Quiz_Attempts_Query extends SkillPulse_LMS_Base_Query {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Quiz_Attempts_Query
+	 * @return SPLMS_Quiz_Attempts_Query
 	 */
 	public static function get_instance() {
 		return parent::get_base_instance( __CLASS__, 'splms_quiz_attempts' );
@@ -191,7 +191,7 @@ class SkillPulse_LMS_Quiz_Attempts_Query extends SkillPulse_LMS_Base_Query {
 		$time_taken = intval( $time_taken );
 
 		// Calculate pass/fail status based on quiz settings.
-		$quizzes_class = SkillPulse_LMS_Quizzes::get_instance();
+		$quizzes_class = SPLMS_Quizzes::get_instance();
 		$quiz_settings = $quizzes_class->get_quiz_settings( $attempt->quiz_id );
 		$passing_grade = isset( $quiz_settings['passing_grade'] ) ? $quiz_settings['passing_grade'] : 70;
 		$percentage    = $max_score > 0 ? round( ( $score / $max_score ) * 100, 2 ) : 0;

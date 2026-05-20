@@ -19,19 +19,19 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Signup_Screen_Handler {
+class SPLMS_Signup_Screen_Handler {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Signup_Screen_Handler|null $instance
+	 * @var SPLMS_Signup_Screen_Handler|null $instance
 	 */
 	private static $instance = null;
 
 	/**
 	 * Get the instance of this class.
 	 *
-	 * @return SkillPulse_LMS_Signup_Screen_Handler
+	 * @return SPLMS_Signup_Screen_Handler
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -293,7 +293,7 @@ class SkillPulse_LMS_Signup_Screen_Handler {
 		// phpcs:enable WordPress.Security.NonceVerification.Missing
 
 		// Validate data using existing signup class.
-		$signup_instance = SkillPulse_LMS_Signup::get_instance();
+		$signup_instance = SPLMS_Signup::get_instance();
 		$validation      = $signup_instance->validate_signup_data(
 			array(
 				'first_name'       => $first_name,
@@ -346,7 +346,7 @@ class SkillPulse_LMS_Signup_Screen_Handler {
 	 * @return void
 	 */
 	private function process_activation( $activation_key ) {
-		$signup_instance = SkillPulse_LMS_Signup::get_instance();
+		$signup_instance = SPLMS_Signup::get_instance();
 		$result          = $signup_instance->activate_signup( $activation_key );
 
 		if ( is_wp_error( $result ) ) {
@@ -365,7 +365,7 @@ class SkillPulse_LMS_Signup_Screen_Handler {
 	/**
 	 * Enqueue signup scripts.
 	 *
-	 * Note: Frontend CSS and JS are already enqueued globally by SkillPulse_LMS_Frontend class.
+	 * Note: Frontend CSS and JS are already enqueued globally by SPLMS_Frontend class.
 	 *
 	 * @since 1.0.0
 	 *

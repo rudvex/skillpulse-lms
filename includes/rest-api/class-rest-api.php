@@ -20,14 +20,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Rest_API {
+class SPLMS_Rest_API {
 
 	/**
 	 * Class instance.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @var SkillPulse_LMS_Rest_API|null $instance
+	 * @var SPLMS_Rest_API|null $instance
 	 */
 	private static $instance;
 
@@ -36,7 +36,7 @@ class SkillPulse_LMS_Rest_API {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Rest_API The class instance.
+	 * @return SPLMS_Rest_API The class instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -107,8 +107,8 @@ class SkillPulse_LMS_Rest_API {
 
 		foreach ( $files as $file ) {
 			// Include functions file.
-			if ( file_exists( SKILLPULSE_LMS_DIR_PATH . $file . '.php' ) ) {
-				require_once SKILLPULSE_LMS_DIR_PATH . $file . '.php';
+			if ( file_exists( SPLMS_DIR_PATH . $file . '.php' ) ) {
+				require_once SPLMS_DIR_PATH . $file . '.php';
 			}
 		}
 	}
@@ -156,85 +156,85 @@ class SkillPulse_LMS_Rest_API {
 	public function register_routes() {
 
 		// Configuration.
-		$controller = new SkillPulse_LMS_Rest_Config_Controller();
+		$controller = new SPLMS_Rest_Config_Controller();
 		$controller->register_routes();
 
 		// Settings.
-		$controller = new SkillPulse_LMS_Rest_Settings_Controller();
+		$controller = new SPLMS_Rest_Settings_Controller();
 		$controller->register_routes();
 
 		// Courses.
-		$controller = new SkillPulse_LMS_REST_Course_Controller();
+		$controller = new SPLMS_REST_Course_Controller();
 		$controller->register_routes();
 
 		// Course Actions (enroll, unenroll, progress, wishlist, bookmark).
-		$controller = new SkillPulse_LMS_REST_Course_Actions_Controller();
+		$controller = new SPLMS_REST_Course_Actions_Controller();
 		$controller->register_routes();
 
-		$controller = new SkillPulse_LMS_REST_Course_Settings_Controller();
+		$controller = new SPLMS_REST_Course_Settings_Controller();
 		$controller->register_routes();
 
-		$controller = new SkillPulse_LMS_REST_Course_Curriculum_Controller();
+		$controller = new SPLMS_REST_Course_Curriculum_Controller();
 		$controller->register_routes();
 
 		// Sections.
-		$controller = new SkillPulse_LMS_REST_Section_Controller();
+		$controller = new SPLMS_REST_Section_Controller();
 		$controller->register_routes();
 
 		// Section Settings.
-		$controller = new SkillPulse_LMS_REST_Section_Settings_Controller();
+		$controller = new SPLMS_REST_Section_Settings_Controller();
 		$controller->register_routes();
 
 		// Lessons.
-		$controller = new SkillPulse_LMS_REST_Lesson_Controller();
+		$controller = new SPLMS_REST_Lesson_Controller();
 		$controller->register_routes();
 
 		// Lesson Actions (progress, complete).
-		$controller = new SkillPulse_LMS_REST_Lesson_Actions_Controller();
+		$controller = new SPLMS_REST_Lesson_Actions_Controller();
 		$controller->register_routes();
 
-		$controller = new SkillPulse_LMS_REST_Lesson_Settings_Controller();
+		$controller = new SPLMS_REST_Lesson_Settings_Controller();
 		$controller->register_routes();
 
 		// Quizzes.
-		$controller = new SkillPulse_LMS_REST_Quiz_Controller();
+		$controller = new SPLMS_REST_Quiz_Controller();
 		$controller->register_routes();
 
 		// Quiz Actions (start, resume, restart, state management).
-		$controller = new SkillPulse_LMS_REST_Quiz_Actions_Controller();
+		$controller = new SPLMS_REST_Quiz_Actions_Controller();
 		$controller->register_routes();
 
 		// Quiz Admin Controllers.
-		$controller = new SkillPulse_LMS_REST_Quiz_Settings_Controller();
+		$controller = new SPLMS_REST_Quiz_Settings_Controller();
 		$controller->register_routes();
 
 		// Admin Quiz Questions (for editing in admin).
-		$controller = new SkillPulse_LMS_REST_Quiz_Questions_Controller();
+		$controller = new SPLMS_REST_Quiz_Questions_Controller();
 		$controller->register_routes();
 
-		$controller = new SkillPulse_LMS_REST_Quiz_Attempts_Controller();
+		$controller = new SPLMS_REST_Quiz_Attempts_Controller();
 		$controller->register_routes();
 
 		if ( splms_get_setting( 'enable_certificates', false ) ) {
 		}
 
 		// Enrollments.
-		$controller = new SkillPulse_LMS_Enrollments_REST_Controller();
+		$controller = new SPLMS_Enrollments_REST_Controller();
 		$controller->register_routes();
 
 		// Signup.
-		$controller = new SkillPulse_LMS_REST_Signup_Controller();
+		$controller = new SPLMS_REST_Signup_Controller();
 		$controller->register_routes();
 
 		// Notifications (Frontend).
-		$controller = new SkillPulse_LMS_REST_Notifications_Controller();
+		$controller = new SPLMS_REST_Notifications_Controller();
 		$controller->register_routes();
 
-		$controller = new SkillPulse_LMS_Rest_Admin_Overview_Controller();
+		$controller = new SPLMS_Rest_Admin_Overview_Controller();
 		$controller->register_routes();
 
 		// Email Templates.
-		$controller = new SkillPulse_LMS_REST_Admin_Email_Templates_Controller();
+		$controller = new SPLMS_REST_Admin_Email_Templates_Controller();
 		$controller->register_routes();
 
 		// Notifications.

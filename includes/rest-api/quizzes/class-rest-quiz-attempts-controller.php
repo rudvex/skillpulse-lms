@@ -21,11 +21,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class SkillPulse_LMS_REST_Quiz_Attempts_Controller
+ * Class SPLMS_REST_Quiz_Attempts_Controller
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
+class SPLMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 
 	/**
 	 * Table name constant.
@@ -427,7 +427,7 @@ class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 		$status = $request->get_param( 'status' );
 		if ( ! empty( $status ) ) {
 			// Support for new status system.
-			$status_manager = SkillPulse_LMS_Quiz_Status_Manager::get_instance();
+			$status_manager = SPLMS_Quiz_Status_Manager::get_instance();
 			if ( $status_manager->is_valid_status( $status ) ) {
 				$where[]        = 'status = %s';
 				$where_values[] = sanitize_text_field( $status );
@@ -552,7 +552,7 @@ class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 	 */
 	public function get_attempt( $request ) {
 		$attempt_id     = $request->get_param( 'id' );
-		$attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+		$attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 		$attempt        = $attempts_query->get_attempt_by_id( $attempt_id );
 
 		if ( ! $attempt ) {
@@ -611,7 +611,7 @@ class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 		// Check if quiz has manual review questions for has_manual_review flag.
 		$has_manual_review = false;
 		if ( $quiz ) {
-			$quizzes_class = SkillPulse_LMS_Quizzes::get_instance();
+			$quizzes_class = SPLMS_Quizzes::get_instance();
 			$questions     = $quizzes_class->get_quiz_questions( $attempt->quiz_id );
 			foreach ( $questions as $question ) {
 				if ( in_array( $question['type'], array( 'essay', 'long_answer', 'file_upload' ), true ) ) {
@@ -735,7 +735,7 @@ class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 			);
 		}
 
-		$quizzes_class                 = SkillPulse_LMS_Quizzes::get_instance();
+		$quizzes_class                 = SPLMS_Quizzes::get_instance();
 		$questions                     = $quizzes_class->get_quiz_questions( $attempt->quiz_id );
 		$essay_question_ids_normalized = array();
 
@@ -898,7 +898,7 @@ class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 	 */
 	public function delete_attempt( $request ) {
 		$attempt_id     = $request->get_param( 'id' );
-		$attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+		$attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 
 		$result = $attempts_query->delete_attempt( $attempt_id );
 
@@ -925,7 +925,7 @@ class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 	 */
 	public function get_attempt_questions( $request ) {
 		$attempt_id     = $request->get_param( 'id' );
-		$attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+		$attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 		$attempt        = $attempts_query->get_attempt_by_id( $attempt_id );
 
 		if ( ! $attempt ) {
@@ -933,7 +933,7 @@ class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 		}
 
 		// Get quiz questions.
-		$questions_query = SkillPulse_LMS_Quiz_Questions_Query::get_instance();
+		$questions_query = SPLMS_Quiz_Questions_Query::get_instance();
 		$questions       = $questions_query->get_quiz_questions( $attempt->quiz_id );
 
 		// Decode user answers.
@@ -1608,7 +1608,7 @@ class SkillPulse_LMS_REST_Quiz_Attempts_Controller extends WP_REST_Controller {
 		}
 
 		// Use Quiz Service for unified grading logic.
-		$quiz_service = SkillPulse_LMS_Quiz_Service::get_instance();
+		$quiz_service = SPLMS_Quiz_Service::get_instance();
 		$graded_by    = get_current_user_id();
 
 		$result = $quiz_service->grade_attempt( $attempt_id, $question_scores, $graded_by, $feedback );

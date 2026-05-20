@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
+class SPLMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 
 	/**
 	 * Constructor.
@@ -294,7 +294,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Check quiz access control.
-		$access_control = SkillPulse_LMS_Access_Control::get_instance();
+		$access_control = SPLMS_Access_Control::get_instance();
 
 		// Check if quiz is available for preview mode.
 		if ( $is_preview_mode ) {
@@ -307,7 +307,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Get quiz data.
-		$quizzes_class = SkillPulse_LMS_Quizzes::get_instance();
+		$quizzes_class = SPLMS_Quizzes::get_instance();
 		$questions     = $quizzes_class->get_quiz_questions( $quiz_id, false );
 		$settings      = $quizzes_class->get_quiz_settings( $quiz_id );
 
@@ -320,7 +320,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 			$max_attempts = $this->get_setting_value( $settings, 'max_attempts', 0 );
 
 			if ( $max_attempts > 0 ) {
-				$attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+				$attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 				$attempts_used  = $attempts_query->count_completed_attempts( $user_id, $quiz_id );
 
 				if ( $attempts_used >= $max_attempts ) {
@@ -341,7 +341,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 		// Only create database attempt for non-preview mode.
 		if ( ! $is_preview_mode ) {
 			// Start a new attempt in the database (or get existing in-progress attempt).
-			$attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+			$attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 			$attempt_id     = $attempts_query->start_attempt( $user_id, $quiz_id, $course_id );
 
 			// Ensure we have a valid attempt_id.
@@ -400,7 +400,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Get in-progress attempt from database.
-		$attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+		$attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 		$attempt        = $attempts_query->get_in_progress_attempt( $user_id, $quiz_id );
 
 		if ( ! $attempt ) {
@@ -408,7 +408,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Get quiz data.
-		$quizzes_class = SkillPulse_LMS_Quizzes::get_instance();
+		$quizzes_class = SPLMS_Quizzes::get_instance();
 		$questions     = $quizzes_class->get_quiz_questions( $quiz_id, false );
 		$settings      = $quizzes_class->get_quiz_settings( $quiz_id );
 
@@ -490,7 +490,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Clear in-progress attempt from database (only truly in-progress ones).
-		$attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+		$attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 		$cleared        = $attempts_query->clear_in_progress_attempt( $user_id, $quiz_id );
 
 		if ( false === $cleared ) {
@@ -505,7 +505,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Get quiz data.
-		$quizzes_class = SkillPulse_LMS_Quizzes::get_instance();
+		$quizzes_class = SPLMS_Quizzes::get_instance();
 		$questions     = $quizzes_class->get_quiz_questions( $quiz_id, false );
 		$settings      = $quizzes_class->get_quiz_settings( $quiz_id );
 
@@ -553,7 +553,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Get in-progress attempt from database.
-		$attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+		$attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 		$attempt        = $attempts_query->get_in_progress_attempt( $user_id, $quiz_id );
 
 		if ( ! $attempt || empty( $attempt->answers ) ) {
@@ -573,7 +573,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 		$current_question = 0;
 		if ( ! empty( $answers ) && is_array( $answers ) ) {
 			// Get questions to determine current question index.
-			$quizzes_class = SkillPulse_LMS_Quizzes::get_instance();
+			$quizzes_class = SPLMS_Quizzes::get_instance();
 			$questions     = $quizzes_class->get_quiz_questions( $quiz_id, false );
 			if ( ! empty( $questions ) ) {
 				// Find the last answered question.
@@ -633,7 +633,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Update attempt progress in database.
-		$attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+		$attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 		$updated        = $attempts_query->update_attempt_progress( $attempt_id, $answers, $time_taken );
 
 		if ( false === $updated ) {
@@ -672,7 +672,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Clear in-progress attempt from database (only truly in-progress ones).
-		$attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+		$attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 		$cleared        = $attempts_query->clear_in_progress_attempt( $user_id, $quiz_id );
 
 		if ( false === $cleared ) {
@@ -850,7 +850,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Check quiz access control.
-		$access_control = SkillPulse_LMS_Access_Control::get_instance();
+		$access_control = SPLMS_Access_Control::get_instance();
 
 		// If user is logged in, check full access control.
 		if ( $user_id ) {
@@ -866,7 +866,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Use consistent formatting method for all quiz attempt responses.
-		$quizzes_instance   = SkillPulse_LMS_Quizzes::get_instance();
+		$quizzes_instance   = SPLMS_Quizzes::get_instance();
 		$formatted_attempts = $quizzes_instance->get_formatted_quiz_attempts( $user_id, $quiz_id, true );
 
 		return rest_ensure_response( $formatted_attempts );
@@ -917,7 +917,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Get quiz questions for scoring using the query class.
-		$quizzes_class = SkillPulse_LMS_Quizzes::get_instance();
+		$quizzes_class = SPLMS_Quizzes::get_instance();
 		$questions     = $quizzes_class->get_quiz_questions( $quiz_id, false );
 		$quiz_settings = $quizzes_class->get_quiz_settings( $quiz_id );
 
@@ -958,7 +958,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Get attempts count and remaining attempts after submission.
-		$attempts_query     = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+		$attempts_query     = SPLMS_Quiz_Attempts_Query::get_instance();
 		$attempts_used      = $attempts_query->count_completed_attempts( $user_id, $quiz_id );
 		$max_attempts       = isset( $quiz_settings['max_attempts'] ) ? intval( $quiz_settings['max_attempts'] ) : 0;
 		$attempts_remaining = $max_attempts > 0 ? max( 0, $max_attempts - $attempts_used ) : 0;
@@ -1270,7 +1270,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 			return new WP_Error( 'invalid_quiz_id', __( 'Invalid quiz ID.', 'skillpulse-lms' ), array( 'status' => 400 ) );
 		}
 
-		$access_control = SkillPulse_LMS_Access_Control::get_instance();
+		$access_control = SPLMS_Access_Control::get_instance();
 
 		// If user is logged in, check full access control.
 		if ( $user_id ) {
@@ -1305,7 +1305,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 			return new WP_Error( 'invalid_quiz_id', __( 'Invalid quiz ID.', 'skillpulse-lms' ), array( 'status' => 400 ) );
 		}
 
-		$access_control = SkillPulse_LMS_Access_Control::get_instance();
+		$access_control = SPLMS_Access_Control::get_instance();
 
 		// If user is logged in, check full access control.
 		if ( $user_id ) {
@@ -1340,7 +1340,7 @@ class SkillPulse_LMS_REST_Quiz_Actions_Controller extends WP_REST_Controller {
 			return new WP_Error( 'invalid_quiz_id', __( 'Invalid quiz ID.', 'skillpulse-lms' ), array( 'status' => 400 ) );
 		}
 
-		$access_control = SkillPulse_LMS_Access_Control::get_instance();
+		$access_control = SPLMS_Access_Control::get_instance();
 
 		// If user is logged in, check full access control.
 		if ( $user_id ) {

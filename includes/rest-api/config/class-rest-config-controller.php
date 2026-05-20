@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Rest_Config_Controller extends WP_REST_Controller {
+class SPLMS_Rest_Config_Controller extends WP_REST_Controller {
 
 	/**
 	 * Constructor.
@@ -124,7 +124,7 @@ class SkillPulse_LMS_Rest_Config_Controller extends WP_REST_Controller {
 		$context       = ! empty( $context_param ) ? $context_param : 'admin';
 
 		if ( empty( $modules ) ) {
-			$modules = SkillPulse_LMS_Config_Loader::get_available_modules();
+			$modules = SPLMS_Config_Loader::get_available_modules();
 		} else {
 			$modules = explode( ',', $modules );
 		}
@@ -134,11 +134,11 @@ class SkillPulse_LMS_Rest_Config_Controller extends WP_REST_Controller {
 		foreach ( $modules as $module ) {
 			$module = trim( $module );
 
-			if ( ! SkillPulse_LMS_Config_Loader::module_exists( $module ) ) {
+			if ( ! SPLMS_Config_Loader::module_exists( $module ) ) {
 				continue;
 			}
 
-			$configs[ $module ] = SkillPulse_LMS_Config_Loader::get_config( $module, $context );
+			$configs[ $module ] = SPLMS_Config_Loader::get_config( $module, $context );
 		}
 
 		$response_data = array(
@@ -164,7 +164,7 @@ class SkillPulse_LMS_Rest_Config_Controller extends WP_REST_Controller {
 		$context       = ! empty( $context_param ) ? $context_param : 'admin';
 		$item_id       = $request->get_param( 'item_id' );
 
-		if ( ! SkillPulse_LMS_Config_Loader::module_exists( $module ) ) {
+		if ( ! SPLMS_Config_Loader::module_exists( $module ) ) {
 			return new WP_Error(
 				'module_not_found',
 				sprintf(
@@ -181,7 +181,7 @@ class SkillPulse_LMS_Rest_Config_Controller extends WP_REST_Controller {
 			$_REQUEST['item_id'] = intval( $item_id );
 		}
 
-		$config = SkillPulse_LMS_Config_Loader::get_config( $module, $context );
+		$config = SPLMS_Config_Loader::get_config( $module, $context );
 
 		$response_data = array(
 			'module'  => $module,
@@ -207,7 +207,7 @@ class SkillPulse_LMS_Rest_Config_Controller extends WP_REST_Controller {
 		$context_param = $request->get_param( 'context' );
 		$context       = ! empty( $context_param ) ? $context_param : 'admin';
 
-		if ( ! SkillPulse_LMS_Config_Loader::module_exists( $module ) ) {
+		if ( ! SPLMS_Config_Loader::module_exists( $module ) ) {
 			return new WP_Error(
 				'module_not_found',
 				sprintf(
@@ -219,7 +219,7 @@ class SkillPulse_LMS_Rest_Config_Controller extends WP_REST_Controller {
 			);
 		}
 
-		$full_config    = SkillPulse_LMS_Config_Loader::get_config( $module, $context );
+		$full_config    = SPLMS_Config_Loader::get_config( $module, $context );
 		$section_config = $this->extract_section_config( $full_config, $section );
 
 		if ( empty( $section_config ) ) {
@@ -256,7 +256,7 @@ class SkillPulse_LMS_Rest_Config_Controller extends WP_REST_Controller {
 	public function clear_config_cache( $request ) {
 		$module = $request->get_param( 'module' );
 
-		SkillPulse_LMS_Config_Loader::clear_cache( $module );
+		SPLMS_Config_Loader::clear_cache( $module );
 
 		$response_data = array(
 			'message' => $module ?

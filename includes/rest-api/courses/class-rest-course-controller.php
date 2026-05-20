@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_REST_Course_Controller extends WP_REST_Controller {
+class SPLMS_REST_Course_Controller extends WP_REST_Controller {
 
 	/**
 	 * Constructor.
@@ -775,8 +775,8 @@ class SkillPulse_LMS_REST_Course_Controller extends WP_REST_Controller {
 		}
 
 		// Check course access control.
-		if ( class_exists( 'SkillPulse_LMS_Access_Control' ) ) {
-			$access_control = SkillPulse_LMS_Access_Control::get_instance();
+		if ( class_exists( 'SPLMS_Access_Control' ) ) {
+			$access_control = SPLMS_Access_Control::get_instance();
 			return $access_control->user_can_access_course( $user_id, $course_id );
 		}
 
@@ -988,7 +988,7 @@ class SkillPulse_LMS_REST_Course_Controller extends WP_REST_Controller {
 					'title' => $prerequisite_course_id > 0 ? get_the_title( $prerequisite_course_id ) : '',
 				);
 				if ( $user_id > 0 ) {
-					$data['prerequisite_course']['completed'] = SkillPulse_LMS_Enrollment::get_instance()->has_user_completed_course( $user_id, $prerequisite_course_id );
+					$data['prerequisite_course']['completed'] = SPLMS_Enrollment::get_instance()->has_user_completed_course( $user_id, $prerequisite_course_id );
 				}
 			} else {
 				$data['prerequisite_course'] = null;

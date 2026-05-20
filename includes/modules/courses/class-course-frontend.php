@@ -19,12 +19,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Course_Frontend {
+class SPLMS_Course_Frontend {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Course_Frontend|null $instance
+	 * @var SPLMS_Course_Frontend|null $instance
 	 */
 	private static $instance = null;
 
@@ -33,7 +33,7 @@ class SkillPulse_LMS_Course_Frontend {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Course_Frontend
+	 * @return SPLMS_Course_Frontend
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {

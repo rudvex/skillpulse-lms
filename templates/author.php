@@ -128,7 +128,7 @@ if ( ! $splms_is_instructor || empty( $splms_author_courses ) ) {
 
 						<?php
 						// Get total students across all author courses using the enrollments query class.
-						$splms_total_students = SkillPulse_LMS_Enrollments_Query::get_instance()->get_author_student_count( $splms_author_id );
+						$splms_total_students = SPLMS_Enrollments_Query::get_instance()->get_author_student_count( $splms_author_id );
 
 						if ( $splms_total_students > 0 ) :
 							?>

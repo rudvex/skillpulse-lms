@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Get lesson attachments.
 $splms_lesson_id        = get_the_ID();
-$splms_lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+$splms_lessons_instance = SPLMS_Lessons::get_instance();
 $splms_attachments      = $splms_lessons_instance->get_formatted_lesson_attachments( $splms_lesson_id );
 
 if ( empty( $splms_attachments ) ) {

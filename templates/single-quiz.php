@@ -22,7 +22,7 @@ $splms_user_id   = get_current_user_id();
 $splms_course_id = splms_get_quiz_course( $splms_quiz_id );
 
 // Get quiz settings.
-$splms_quizzes_instance = SkillPulse_LMS_Quizzes::get_instance();
+$splms_quizzes_instance = SPLMS_Quizzes::get_instance();
 $splms_quiz_settings    = $splms_quizzes_instance->get_quiz_settings( $splms_quiz_id );
 $splms_quiz_type        = isset( $splms_quiz_settings['quiz_type_settings']['quiz_type'] ) ? $splms_quiz_settings['quiz_type_settings']['quiz_type'] : 'graded';
 
@@ -34,7 +34,7 @@ $splms_course_title = $splms_course_id ? get_the_title( $splms_course_id ) : '';
 $splms_course_url   = $splms_course_id ? get_permalink( $splms_course_id ) : '';
 
 // Check if quiz is passed.
-$splms_attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+$splms_attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 $splms_has_passed     = $splms_user_id ? $splms_attempts_query->has_user_passed( $splms_user_id, $splms_quiz_id ) : false;
 
 ?>

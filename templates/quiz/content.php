@@ -21,11 +21,11 @@ $splms_quiz_content     = get_the_content();
 $splms_quiz_description = get_the_excerpt();
 
 // Get actual questions count from database.
-$splms_questions_query      = SkillPulse_LMS_Quiz_Questions_Query::get_instance();
+$splms_questions_query      = SPLMS_Quiz_Questions_Query::get_instance();
 $splms_quiz_questions_count = $splms_questions_query->get_questions_count( $splms_quiz_id );
 
 // Get quiz settings.
-$splms_quizzes_instance = SkillPulse_LMS_Quizzes::get_instance();
+$splms_quizzes_instance = SPLMS_Quizzes::get_instance();
 $splms_quiz_settings    = $splms_quizzes_instance->get_quiz_settings( $splms_quiz_id );
 
 // Helper function to get setting value from grouped or flat structure.
@@ -68,7 +68,7 @@ if ( $splms_is_password_protected ) {
 				if ( ! headers_sent() ) {
 					setcookie( $splms_cookie_name, '1', time() + 86400, COOKIEPATH, COOKIE_DOMAIN, is_ssl(), true );
 				} else {
-					$cookie_script = sprintf(
+					$splms_cookie_script = sprintf(
 						'document.cookie = "%s=1; max-age=%d; path=%s";',
 						esc_js( $splms_cookie_name ),
 						DAY_IN_SECONDS,
@@ -77,7 +77,7 @@ if ( $splms_is_password_protected ) {
 
 					wp_add_inline_script(
 						'splms-frontend',
-						$cookie_script
+						$splms_cookie_script
 					);
 				}
 			}
@@ -146,7 +146,7 @@ $splms_has_incomplete_attempt  = false;
 $splms_incomplete_attempt_data = null;
 
 if ( $splms_current_user_id ) {
-	$splms_attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+	$splms_attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 
 	// Use core functions for cleaner code.
 	$splms_attempts_used  = $splms_attempts_query->count_completed_attempts( $splms_current_user_id, $splms_quiz_id );

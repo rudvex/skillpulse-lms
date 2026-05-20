@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 // Get dashboard instance and data.
-$splms_dashboard = SkillPulse_LMS_Dashboard::get_instance();
+$splms_dashboard = SPLMS_Dashboard::get_instance();
 
 // Check if user is logged in.
 if ( ! is_user_logged_in() ) {

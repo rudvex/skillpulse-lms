@@ -13,18 +13,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class SkillPulse_LMS_Admin_Post_Types
+ * Class SPLMS_Admin_Post_Types
  *
  * Handles registration and management of custom post types and taxonomies.
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Admin_Post_Types {
+class SPLMS_Admin_Post_Types {
 	/**
 	 * Class instance.
 	 *
 	 * @since 1.0.0
-	 * @var SkillPulse_LMS_Admin_Post_Types|null $instance
+	 * @var SPLMS_Admin_Post_Types|null $instance
 	 */
 	private static $instance;
 
@@ -33,7 +33,7 @@ class SkillPulse_LMS_Admin_Post_Types {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Admin_Post_Types The singleton instance.
+	 * @return SPLMS_Admin_Post_Types The singleton instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {

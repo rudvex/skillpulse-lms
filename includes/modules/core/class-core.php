@@ -17,14 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Core {
+class SPLMS_Core {
 
 	/**
 	 * Class instance.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @var SkillPulse_LMS_Core|null $instance
+	 * @var SPLMS_Core|null $instance
 	 */
 	private static $instance;
 
@@ -33,7 +33,7 @@ class SkillPulse_LMS_Core {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Core The class instance.
+	 * @return SPLMS_Core The class instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -63,8 +63,8 @@ class SkillPulse_LMS_Core {
 
 		foreach ( $files as $file ) {
 			// Include functions file.
-			if ( file_exists( SKILLPULSE_LMS_DIR_PATH . $file . '.php' ) ) {
-				require SKILLPULSE_LMS_DIR_PATH . $file . '.php';
+			if ( file_exists( SPLMS_DIR_PATH . $file . '.php' ) ) {
+				require SPLMS_DIR_PATH . $file . '.php';
 			}
 		}
 	}
@@ -77,10 +77,10 @@ class SkillPulse_LMS_Core {
 	 * @return void
 	 */
 	protected function load_classes() {
-		SkillPulse_LMS_Database::get_instance();
-		SkillPulse_LMS_Settings::get_instance();
+		SPLMS_Database::get_instance();
+		SPLMS_Settings::get_instance();
 
 		// Initialize file system.
-		SkillPulse_LMS_File_Manager::init_directories();
+		SPLMS_File_Manager::init_directories();
 	}
 }

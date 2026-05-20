@@ -30,7 +30,7 @@ function splms_get_lesson_settings( $lesson_id = null ) {
 		$lesson_id = get_the_ID();
 	}
 
-	$settings = SkillPulse_LMS_Lessons::get_instance()->get_lesson_settings( $lesson_id );
+	$settings = SPLMS_Lessons::get_instance()->get_lesson_settings( $lesson_id );
 
 	return apply_filters( 'splms_lesson_settings', $settings, $lesson_id );
 }
@@ -136,7 +136,7 @@ function splms_get_formatted_lesson_attachments( $lesson_id = null ) {
 		$lesson_id = get_the_ID();
 	}
 
-	$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+	$lessons_instance = SPLMS_Lessons::get_instance();
 	return $lessons_instance->get_formatted_lesson_attachments( $lesson_id );
 }
 
@@ -208,8 +208,8 @@ function splms_is_lesson_completed( $lesson_id, $user_id = null ) {
 	}
 
 	// Use the centralized method from the lessons class.
-	if ( class_exists( 'SkillPulse_LMS_Lessons' ) ) {
-		$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+	if ( class_exists( 'SPLMS_Lessons' ) ) {
+		$lessons_instance = SPLMS_Lessons::get_instance();
 		return $lessons_instance->is_lesson_completed( $lesson_id, $user_id );
 	}
 
@@ -270,20 +270,20 @@ function splms_mark_lesson_complete( $lesson_id, $user_id = null, $course_id = n
 	}
 
 	// Mark lesson complete in database table.
-	SkillPulse_LMS_Lesson_Progress_Query::get_instance()->complete_lesson( $lesson_id, $user_id, $course_id );
+	SPLMS_Lesson_Progress_Query::get_instance()->complete_lesson( $lesson_id, $user_id, $course_id );
 
 	do_action( 'splms_lesson_completed', $lesson_id, $user_id );
 
 	// Calculate updated course progress.
-	$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+	$lessons_instance = SPLMS_Lessons::get_instance();
 	$progress_data    = $lessons_instance->calculate_course_progress( $user_id, $course_id );
 
 	// Sync progress to enrollment database table.
-	$enrollment = SkillPulse_LMS_Enrollment::get_instance();
+	$enrollment = SPLMS_Enrollment::get_instance();
 	$enrollment->update_enrollment_progress( $user_id, $course_id, $progress_data['percentage'] );
 
 	// Log activity.
-	SkillPulse_LMS_User_Activity_Query::get_instance()->log_activity( $user_id, 'lesson_completed', $course_id, $lesson_id, 'lesson' );
+	SPLMS_User_Activity_Query::get_instance()->log_activity( $user_id, 'lesson_completed', $course_id, $lesson_id, 'lesson' );
 
 	return true;
 }
@@ -310,7 +310,7 @@ function splms_user_can_access_lesson( $lesson_id, $user_id = null ) {
 		return false;
 	}
 
-	$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+	$lessons_instance = SPLMS_Lessons::get_instance();
 	return $lessons_instance->user_can_access_lesson( $lesson_id, $user_id );
 }
 
@@ -330,7 +330,7 @@ function splms_is_lesson_drip_available( $lesson_id, $user_id = null ) {
 		return false;
 	}
 
-	$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+	$lessons_instance = SPLMS_Lessons::get_instance();
 	return $lessons_instance->is_lesson_drip_available( $lesson_id, $user_id );
 }
 
@@ -355,7 +355,7 @@ function splms_get_lesson_drip_unlock_date( $lesson_id, $user_id = null ) {
 		return false;
 	}
 
-	$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+	$lessons_instance = SPLMS_Lessons::get_instance();
 	$drip_settings    = $lessons_instance->get_lesson_drip_settings( $lesson_id );
 
 	if ( empty( $drip_settings['enable_drip'] ) || ! $drip_settings['enable_drip'] ) {
@@ -433,7 +433,7 @@ function splms_are_lesson_prerequisites_met( $lesson_id, $user_id = null ) {
 		return false;
 	}
 
-	$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+	$lessons_instance = SPLMS_Lessons::get_instance();
 	return $lessons_instance->are_prerequisites_met( $lesson_id, $user_id );
 }
 
@@ -453,7 +453,7 @@ function splms_can_skip_lesson( $lesson_id, $user_id = null ) {
 		return false;
 	}
 
-	$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+	$lessons_instance = SPLMS_Lessons::get_instance();
 	return $lessons_instance->can_skip_lesson( $lesson_id, $user_id );
 }
 
@@ -475,11 +475,11 @@ function splms_get_lesson_course( $lesson_id = null ) {
 	}
 
 	// Use database relationships to find the course for this lesson.
-	$relationships_query = SkillPulse_LMS_Relationships_Query::get_instance();
+	$relationships_query = SPLMS_Relationships_Query::get_instance();
 	$parents             = $relationships_query->get_parents( $lesson_id );
 	if ( ! empty( $parents ) ) {
 		foreach ( $parents as $parent ) {
-			return SkillPulse_LMS_Course_Items_Query::get_instance()->get_item_course_id( $parent->parent_id );
+			return SPLMS_Course_Items_Query::get_instance()->get_item_course_id( $parent->parent_id );
 		}
 	}
 
@@ -637,7 +637,7 @@ function splms_get_lesson_navigation( $lesson_id, $user_id = null ) {
 		return null;
 	}
 
-	$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+	$lessons_instance = SPLMS_Lessons::get_instance();
 	return $lessons_instance->get_lesson_navigation( $lesson_id, $user_id );
 }
 
@@ -655,7 +655,7 @@ function splms_get_lesson_navigation( $lesson_id, $user_id = null ) {
  * @return array Lessons.
  */
 function splms_get_course_lessons( $course_id, $args = array() ) {
-	$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+	$lessons_instance = SPLMS_Lessons::get_instance();
 	return $lessons_instance->get_course_lessons( $course_id, $args );
 }
 
@@ -673,7 +673,7 @@ function splms_get_course_lessons( $course_id, $args = array() ) {
  * @return array Completed item IDs.
  */
 function splms_get_completed_item_ids( $user_id, $course_id ) {
-	$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+	$lessons_instance = SPLMS_Lessons::get_instance();
 	return $lessons_instance->get_completed_item_ids( $user_id, $course_id );
 }
 
@@ -723,7 +723,7 @@ function splms_get_lesson_completion_rate( $lesson_id = null ) {
 	}
 
 	// Get total enrolled students.
-	$total_enrolled = SkillPulse_LMS_Enrollments_Query::get_instance()->get_course_enrollment_count( $course_id );
+	$total_enrolled = SPLMS_Enrollments_Query::get_instance()->get_course_enrollment_count( $course_id );
 
 	// Get completed students for this lesson.
 	global $wpdb;

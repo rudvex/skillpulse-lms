@@ -20,19 +20,19 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since   1.0.0
  * @package SkillPulse_LMS
  */
-class SkillPulse_LMS_Shortcode {
+class SPLMS_Shortcode {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Shortcode|null $instance
+	 * @var SPLMS_Shortcode|null $instance
 	 */
 	private static $instance = null;
 
 	/**
 	 * Get the instance of this class.
 	 *
-	 * @return SkillPulse_LMS_Shortcode
+	 * @return SPLMS_Shortcode
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {

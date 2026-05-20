@@ -31,7 +31,7 @@ get_header(); ?>
 	while ( have_posts() ) {
 		the_post();
 		$splms_section_id = get_the_ID();
-		$splms_course_id  = SkillPulse_LMS_Course_Items_Query::get_instance()->get_item_course_id( $splms_section_id );
+		$splms_course_id  = SPLMS_Course_Items_Query::get_instance()->get_item_course_id( $splms_section_id );
 
 		// Cache frequently used values to avoid repeated function calls.
 		$splms_user_id                 = get_current_user_id();
@@ -118,7 +118,7 @@ get_header(); ?>
 
 						<?php
 						// Get section statistics.
-						$splms_lessons_query   = SkillPulse_LMS_Relationships_Query::get_instance();
+						$splms_lessons_query   = SPLMS_Relationships_Query::get_instance();
 						$splms_section_lessons = $splms_lessons_query->get_children( $splms_section_id, SPLMS_POST_TYPES['lesson'] );
 						$splms_section_quizzes = $splms_lessons_query->get_children( $splms_section_id, SPLMS_POST_TYPES['quiz'] );
 						$splms_lessons_count   = count( $splms_section_lessons );
@@ -127,7 +127,7 @@ get_header(); ?>
 						// Calculate total duration from lessons.
 						$splms_total_duration = 0;
 						foreach ( $splms_section_lessons as $splms_lesson ) {
-							$splms_lesson_duration = SkillPulse_LMS_Lessons::get_instance()->get_lesson_duration( $splms_lesson->child_id );
+							$splms_lesson_duration = SPLMS_Lessons::get_instance()->get_lesson_duration( $splms_lesson->child_id );
 							if ( $splms_lesson_duration ) {
 								$splms_total_duration += intval( $splms_lesson_duration );
 							}
@@ -287,7 +287,7 @@ get_header(); ?>
 										// Get lesson duration for lessons.
 										$splms_item_duration = '';
 										if ( SPLMS_POST_TYPES['lesson'] === $splms_item_type ) {
-											$splms_lesson_duration_meta = SkillPulse_LMS_Lessons::get_instance()->get_lesson_duration( $splms_item_id );
+											$splms_lesson_duration_meta = SPLMS_Lessons::get_instance()->get_lesson_duration( $splms_item_id );
 											if ( $splms_lesson_duration_meta ) {
 												$splms_item_duration = sprintf(
 													/* translators: %d: Duration in minutes */

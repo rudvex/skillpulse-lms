@@ -20,19 +20,19 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since   1.0.0
  * @package SkillPulse_LMS
  */
-class SkillPulse_LMS_Dashboard_API {
+class SPLMS_Dashboard_API {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Dashboard_API|null $instance
+	 * @var SPLMS_Dashboard_API|null $instance
 	 */
 	private static $instance = null;
 
 	/**
 	 * Get the instance of this class.
 	 *
-	 * @return SkillPulse_LMS_Dashboard_API
+	 * @return SPLMS_Dashboard_API
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -73,7 +73,7 @@ class SkillPulse_LMS_Dashboard_API {
 		);
 
 		// Get completed courses from enrollment table (not user meta).
-		$enrollments_query     = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollments_query     = SPLMS_Enrollments_Query::get_instance();
 		$completed_enrollments = $enrollments_query->get_user_courses(
 			$user_id,
 			array(
@@ -265,7 +265,7 @@ class SkillPulse_LMS_Dashboard_API {
 	 */
 	public function get_student_courses( $user_id, $status_filter = 'all' ) {
 		// Use enrollment query class to get enrollments with status filter.
-		$enrollments_query = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollments_query = SPLMS_Enrollments_Query::get_instance();
 
 		// Build status filter array.
 		$status_args = array();
@@ -332,7 +332,7 @@ class SkillPulse_LMS_Dashboard_API {
 				'thumbnail'         => $thumbnail,
 				'link'              => get_permalink( $course->ID ),
 				'progress'          => $this->get_course_progress( $course->ID, $user_id ),
-				'completed'         => SkillPulse_LMS_Enrollment::get_instance()->has_user_completed_course( $user_id, $course->ID ),
+				'completed'         => SPLMS_Enrollment::get_instance()->has_user_completed_course( $user_id, $course->ID ),
 				'enrollment_status' => $enrollment_status,
 				'enrolled_at'       => $enrolled_at,
 			);
@@ -470,7 +470,7 @@ class SkillPulse_LMS_Dashboard_API {
 		}
 
 		// Save preferences.
-		$prefs_instance = SkillPulse_LMS_Notification_Preferences::get_instance();
+		$prefs_instance = SPLMS_Notification_Preferences::get_instance();
 		$saved          = $prefs_instance->save_user_preferences( $user_id, $preferences );
 
 		if ( $saved ) {

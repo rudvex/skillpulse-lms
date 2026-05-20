@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Rest_Settings_Controller extends WP_REST_Controller {
+class SPLMS_Rest_Settings_Controller extends WP_REST_Controller {
 	/**
 	 * Constructor.
 	 *
@@ -106,7 +106,7 @@ class SkillPulse_LMS_Rest_Settings_Controller extends WP_REST_Controller {
 	 */
 	public function get_settings( $request ) {
 		// Use centralized settings method.
-		$settings = SkillPulse_LMS_Settings::get_instance()->get_all_settings();
+		$settings = SPLMS_Settings::get_instance()->get_all_settings();
 
 		return rest_ensure_response( $settings );
 	}
@@ -183,7 +183,7 @@ class SkillPulse_LMS_Rest_Settings_Controller extends WP_REST_Controller {
 		$settings_data = $request->get_json_params();
 
 		// Use centralized settings update method.
-		$result = SkillPulse_LMS_Settings::get_instance()->update_tab_settings( $tab, $settings_data );
+		$result = SPLMS_Settings::get_instance()->update_tab_settings( $tab, $settings_data );
 
 		if ( is_wp_error( $result ) ) {
 			return $result;
@@ -295,7 +295,7 @@ class SkillPulse_LMS_Rest_Settings_Controller extends WP_REST_Controller {
 	 */
 	private function generate_schema_from_config() {
 		// Use PHP configuration loader instead of JSON.
-		$config_data = SkillPulse_LMS_Config_Loader::get_config( 'settings', 'api' );
+		$config_data = SPLMS_Config_Loader::get_config( 'settings', 'api' );
 
 		if ( ! is_array( $config_data ) || ! isset( $config_data['tabs'] ) ) {
 			return array();

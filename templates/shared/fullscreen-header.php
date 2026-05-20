@@ -36,7 +36,7 @@ if ( $splms_course_id ) {
 
 // Get item position and totals.
 if ( 'quiz' === $splms_item_type ) {
-	$splms_quizzes_instance = SkillPulse_LMS_Quizzes::get_instance();
+	$splms_quizzes_instance = SPLMS_Quizzes::get_instance();
 	$splms_course_items     = $splms_quizzes_instance->get_course_items_ordered( $splms_course_id );
 	$splms_item_position    = 0;
 	$splms_total_items      = 0;
@@ -51,7 +51,7 @@ if ( 'quiz' === $splms_item_type ) {
 	}
 
 	// Quiz-specific status logic.
-	$splms_attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+	$splms_attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 	$splms_has_passed     = $splms_user_id ? $splms_attempts_query->has_user_passed( $splms_user_id, $splms_item_id ) : false;
 	$splms_status_class   = $splms_has_passed ? 'completed' : 'in-progress';
 	$splms_status_text    = $splms_has_passed ? __( 'Passed', 'skillpulse-lms' ) : __( 'Not Attempted', 'skillpulse-lms' );
@@ -62,7 +62,7 @@ if ( 'quiz' === $splms_item_type ) {
 	$splms_time_limit     = $splms_has_time_limit && isset( $splms_quiz_settings['quiz_time_settings']['time_limit'] ) ? intval( $splms_quiz_settings['quiz_time_settings']['time_limit'] ) : 0;
 } else {
 	// Lesson logic.
-	$splms_lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+	$splms_lessons_instance = SPLMS_Lessons::get_instance();
 	$splms_course_items     = $splms_lessons_instance->get_course_items_ordered( $splms_course_id );
 	$splms_item_position    = 0;
 	$splms_total_items      = 0;

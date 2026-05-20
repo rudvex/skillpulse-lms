@@ -15,16 +15,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class SkillPulse_LMS_Setup_Wizard
+ * Class SPLMS_Setup_Wizard
  *
  * Manages the setup wizard flow and integrates with the license system.
  */
-class SkillPulse_LMS_Setup_Wizard {
+class SPLMS_Setup_Wizard {
 
 	/**
 	 * Single instance of the class.
 	 *
-	 * @var SkillPulse_LMS_Setup_Wizard
+	 * @var SPLMS_Setup_Wizard
 	 */
 	private static $instance;
 
@@ -52,7 +52,7 @@ class SkillPulse_LMS_Setup_Wizard {
 	/**
 	 * Get single instance of the class.
 	 *
-	 * @return SkillPulse_LMS_Setup_Wizard
+	 * @return SPLMS_Setup_Wizard
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -117,7 +117,7 @@ class SkillPulse_LMS_Setup_Wizard {
 	 * @param string $plugin Plugin file path.
 	 */
 	public function activation_redirect( $plugin ) {
-		if ( plugin_basename( SKILLPULSE_LMS_FILE ) === $plugin ) {
+		if ( plugin_basename( SPLMS_FILE ) === $plugin ) {
 			// Only redirect if this is a single plugin activation (not bulk).
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only presence check on standard WP activation parameter.
 			if ( ! isset( $_GET['activate-multi'] ) ) {
@@ -187,12 +187,12 @@ class SkillPulse_LMS_Setup_Wizard {
 		wp_enqueue_script( 'wp-util' );
 
 		// Enqueue wizard React app.
-		$wizard_asset_file = SKILLPULSE_LMS_DIR_PATH . 'assets/js/wizard.asset.php';
+		$wizard_asset_file = SPLMS_DIR_PATH . 'assets/js/wizard.asset.php';
 		if ( file_exists( $wizard_asset_file ) ) {
 			$wizard_asset = include $wizard_asset_file;
 			wp_enqueue_script(
 				'splms-wizard',
-				SKILLPULSE_LMS_URL_PATH . 'assets/js/wizard.js',
+				SPLMS_URL_PATH . 'assets/js/wizard.js',
 				$wizard_asset['dependencies'],
 				$wizard_asset['version'],
 				true
@@ -202,9 +202,9 @@ class SkillPulse_LMS_Setup_Wizard {
 		// Enqueue wizard styles.
 		wp_enqueue_style(
 			'splms-wizard',
-			SKILLPULSE_LMS_URL_PATH . 'assets/css/wizard.css',
+			SPLMS_URL_PATH . 'assets/css/wizard.css',
 			array(),
-			SKILLPULSE_LMS_VERSION
+			SPLMS_VERSION
 		);
 
 		// Localize wizard data.
@@ -265,8 +265,8 @@ class SkillPulse_LMS_Setup_Wizard {
 	 * @return array License info array.
 	 */
 	private function get_license_info() {
-		if ( class_exists( 'SkillPulse_LMS_License_Manager' ) ) {
-			return SkillPulse_LMS_License_Manager::get_instance()->get_license_info();
+		if ( class_exists( 'SPLMS_License_Manager' ) ) {
+			return SPLMS_License_Manager::get_instance()->get_license_info();
 		}
 
 		return array(
@@ -290,7 +290,7 @@ class SkillPulse_LMS_Setup_Wizard {
 		// Initialize if empty.
 		if ( empty( $wizard_data ) ) {
 			$wizard_data = array(
-				'version'    => SKILLPULSE_LMS_VERSION,
+				'version'    => SPLMS_VERSION,
 				'started_at' => time(),
 				'steps_data' => array(),
 			);

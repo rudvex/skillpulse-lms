@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * GET    /splms/v1/courses                     - Helper: list courses for filters
  * GET    /splms/v1/users                       - Helper: list users for filters
  */
-class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
+class SPLMS_Enrollments_REST_Controller extends WP_REST_Controller {
 
 	/**
 	 * Route base.
@@ -540,7 +540,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 	public function get_enrollment( $request ) {
 		$enrollment_id = $request->get_param( 'id' );
 
-		$enrollment = SkillPulse_LMS_Enrollments_Query::get_instance()->get_enrollment_by_id( $enrollment_id );
+		$enrollment = SPLMS_Enrollments_Query::get_instance()->get_enrollment_by_id( $enrollment_id );
 
 		if ( ! $enrollment ) {
 			return new WP_Error( 'enrollment_not_found', __( 'Enrollment not found.', 'skillpulse-lms' ), array( 'status' => 404 ) );
@@ -601,7 +601,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 			return new WP_Error( 'invalid_course', __( 'Invalid course ID.', 'skillpulse-lms' ), array( 'status' => 400 ) );
 		}
 
-		$enrollments_query = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollments_query = SPLMS_Enrollments_Query::get_instance();
 
 		// Check if enrollment already exists.
 		$existing_enrollment = $enrollments_query->get_enrollment( $user_id, $course_id );
@@ -640,7 +640,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 		$status        = $request->get_param( 'status' );
 		$progress      = $request->get_param( 'progress' );
 
-		$enrollment_handler = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollment_handler = SPLMS_Enrollments_Query::get_instance();
 		$enrollment         = $enrollment_handler->get_enrollment_by_id( $enrollment_id );
 
 		if ( ! $enrollment ) {
@@ -691,7 +691,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 	public function delete_enrollment( $request ) {
 		$enrollment_id = $request->get_param( 'id' );
 
-		$enrollment_query = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollment_query = SPLMS_Enrollments_Query::get_instance();
 		$enrollment       = $enrollment_query->get_enrollment_by_id( $enrollment_id );
 
 		if ( ! $enrollment ) {
@@ -765,7 +765,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 	 */
 	public function bulk_activate( $request ) {
 		$enrollment_ids = $request->get_param( 'enrollment_ids' );
-		$result         = SkillPulse_LMS_Enrollments_Query::get_instance()->bulk_update_enrollments( $enrollment_ids, array( 'status' => 'active' ) );
+		$result         = SPLMS_Enrollments_Query::get_instance()->bulk_update_enrollments( $enrollment_ids, array( 'status' => 'active' ) );
 
 		if ( ! $result ) {
 			return new WP_Error( 'bulk_activation_failed', __( 'Failed to activate enrollments.', 'skillpulse-lms' ), array( 'status' => 500 ) );
@@ -794,7 +794,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 	 */
 	public function bulk_deactivate( $request ) {
 		$enrollment_ids = $request->get_param( 'enrollment_ids' );
-		$result         = SkillPulse_LMS_Enrollments_Query::get_instance()->bulk_update_enrollments( $enrollment_ids, array( 'status' => 'inactive' ) );
+		$result         = SPLMS_Enrollments_Query::get_instance()->bulk_update_enrollments( $enrollment_ids, array( 'status' => 'inactive' ) );
 
 		if ( ! $result ) {
 			return new WP_Error( 'bulk_deactivation_failed', __( 'Failed to deactivate enrollments.', 'skillpulse-lms' ), array( 'status' => 500 ) );
@@ -824,7 +824,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 	public function bulk_delete( $request ) {
 		$enrollment_ids = $request->get_param( 'enrollment_ids' );
 
-		$enrollment_handler = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollment_handler = SPLMS_Enrollments_Query::get_instance();
 		$result             = $enrollment_handler->bulk_delete_enrollments( $enrollment_ids );
 
 		if ( ! $result ) {
@@ -926,7 +926,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 		$course = get_post( $enrollment->course_id );
 
 		// Get real-time progress from lessons module (source of truth).
-		$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+		$lessons_instance = SPLMS_Lessons::get_instance();
 		$progress_data    = array();
 		if ( $lessons_instance ) {
 			$progress_data = $lessons_instance->calculate_course_progress( $enrollment->user_id, $enrollment->course_id );
@@ -1161,7 +1161,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 	 * @return int Lesson count.
 	 */
 	private function get_course_lesson_count( $course_id ) {
-		$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+		$lessons_instance = SPLMS_Lessons::get_instance();
 		if ( ! $lessons_instance ) {
 			return 0;
 		}
@@ -1324,7 +1324,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 	private function get_enrollment_order_id( $enrollment_id ) {
 		global $wpdb;
 
-		if ( ! class_exists( 'SkillPulse_LMS_Orders_Query' ) ) {
+		if ( ! class_exists( 'SPLMS_Orders_Query' ) ) {
 			return '';
 		}
 
@@ -1363,7 +1363,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 		}
 
 		// Get enrollment class.
-		$enrollment_class = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollment_class = SPLMS_Enrollments_Query::get_instance();
 
 		$sent_count   = 0;
 		$failed_count = 0;
@@ -1413,7 +1413,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 			);
 
 			// Send email using notification dispatcher with proper template.
-			$notification_results = SkillPulse_LMS_Notification_Dispatcher::get_instance()->send_notification(
+			$notification_results = SPLMS_Notification_Dispatcher::get_instance()->send_notification(
 				$user->user_email,
 				'enrollment_reminder',
 				$replacements,
@@ -1462,7 +1462,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 		$enrollment_id = $request->get_param( 'id' );
 
 		// Get enrollment.
-		$enrollment = SkillPulse_LMS_Enrollments_Query::get_instance()->get_enrollment_by_id( $enrollment_id );
+		$enrollment = SPLMS_Enrollments_Query::get_instance()->get_enrollment_by_id( $enrollment_id );
 
 		if ( ! $enrollment ) {
 			return new WP_Error( 'enrollment_not_found', __( 'Enrollment not found.', 'skillpulse-lms' ), array( 'status' => 404 ) );
@@ -1472,7 +1472,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 		$course_id = $enrollment->course_id;
 
 		// Get course lessons.
-		$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+		$lessons_instance = SPLMS_Lessons::get_instance();
 		$lessons          = $lessons_instance->get_course_lessons( $course_id );
 
 		if ( empty( $lessons ) ) {
@@ -1555,7 +1555,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 		$enrollment_id = $request->get_param( 'id' );
 
 		// Get enrollment.
-		$enrollment = SkillPulse_LMS_Enrollments_Query::get_instance()->get_enrollment_by_id( $enrollment_id );
+		$enrollment = SPLMS_Enrollments_Query::get_instance()->get_enrollment_by_id( $enrollment_id );
 
 		if ( ! $enrollment ) {
 			return new WP_Error( 'enrollment_not_found', __( 'Enrollment not found.', 'skillpulse-lms' ), array( 'status' => 404 ) );
@@ -1682,7 +1682,7 @@ class SkillPulse_LMS_Enrollments_REST_Controller extends WP_REST_Controller {
 		$enrollment_id   = $request->get_param( 'id' );
 		$additional_days = $request->get_param( 'additional_days' );
 
-		$enrollment_handler = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollment_handler = SPLMS_Enrollments_Query::get_instance();
 		$result             = $enrollment_handler->renew_enrollment( $enrollment_id, $additional_days );
 
 		if ( ! $result ) {

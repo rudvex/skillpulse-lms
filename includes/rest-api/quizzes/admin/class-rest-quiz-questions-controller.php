@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_REST_Quiz_Questions_Controller extends WP_REST_Controller {
+class SPLMS_REST_Quiz_Questions_Controller extends WP_REST_Controller {
 
 	/**
 	 * Constructor.
@@ -279,7 +279,7 @@ class SkillPulse_LMS_REST_Quiz_Questions_Controller extends WP_REST_Controller {
 		$is_admin = current_user_can( 'edit_post', $quiz_id );
 
 		// Get questions using centralized method.
-		$quizzes_class = SkillPulse_LMS_Quizzes::get_instance();
+		$quizzes_class = SPLMS_Quizzes::get_instance();
 		$questions     = $quizzes_class->get_quiz_questions( $quiz_id, $is_admin );
 
 		return rest_ensure_response( $questions );
@@ -336,7 +336,7 @@ class SkillPulse_LMS_REST_Quiz_Questions_Controller extends WP_REST_Controller {
 			return $sanitized_questions;
 		}
 
-		$questions_query = SkillPulse_LMS_Quiz_Questions_Query::get_instance();
+		$questions_query = SPLMS_Quiz_Questions_Query::get_instance();
 
 		// 1) Get existing questions and index them by ID.
 		$existing       = $questions_query->get_quiz_questions( $quiz_id );
@@ -805,7 +805,7 @@ class SkillPulse_LMS_REST_Quiz_Questions_Controller extends WP_REST_Controller {
 		}
 
 		// Free version: enforce maximum 5 questions per quiz.
-		$questions_query_limit = SkillPulse_LMS_Quiz_Questions_Query::get_instance();
+		$questions_query_limit = SPLMS_Quiz_Questions_Query::get_instance();
 		$existing_questions    = $questions_query_limit->get_quiz_questions( $quiz_id );
 		if ( is_array( $existing_questions ) && count( $existing_questions ) >= 5 ) {
 			return new WP_Error(
@@ -852,7 +852,7 @@ class SkillPulse_LMS_REST_Quiz_Questions_Controller extends WP_REST_Controller {
 		}
 
 		// Add question to database.
-		$questions_query = SkillPulse_LMS_Quiz_Questions_Query::get_instance();
+		$questions_query = SPLMS_Quiz_Questions_Query::get_instance();
 		$question_id     = $questions_query->add_question( $question_data );
 
 		if ( ! $question_id ) {
@@ -890,7 +890,7 @@ class SkillPulse_LMS_REST_Quiz_Questions_Controller extends WP_REST_Controller {
 			return new WP_Error( 'quiz_not_found', __( 'Quiz not found.', 'skillpulse-lms' ), array( 'status' => 404 ) );
 		}
 
-		$questions_query = SkillPulse_LMS_Quiz_Questions_Query::get_instance();
+		$questions_query = SPLMS_Quiz_Questions_Query::get_instance();
 
 		// Check if question exists.
 		$existing_question = $questions_query->get_question( $question_id );
@@ -968,7 +968,7 @@ class SkillPulse_LMS_REST_Quiz_Questions_Controller extends WP_REST_Controller {
 			return new WP_Error( 'quiz_not_found', __( 'Quiz not found.', 'skillpulse-lms' ), array( 'status' => 404 ) );
 		}
 
-		$questions_query = SkillPulse_LMS_Quiz_Questions_Query::get_instance();
+		$questions_query = SPLMS_Quiz_Questions_Query::get_instance();
 
 		// Check if question exists.
 		$existing_question = $questions_query->get_question( $question_id );
@@ -1009,7 +1009,7 @@ class SkillPulse_LMS_REST_Quiz_Questions_Controller extends WP_REST_Controller {
 			return new WP_Error( 'quiz_not_found', __( 'Quiz not found.', 'skillpulse-lms' ), array( 'status' => 404 ) );
 		}
 
-		$questions_query = SkillPulse_LMS_Quiz_Questions_Query::get_instance();
+		$questions_query = SPLMS_Quiz_Questions_Query::get_instance();
 
 		// Get existing question.
 		$existing_question = $questions_query->get_question( $question_id );
@@ -1080,7 +1080,7 @@ class SkillPulse_LMS_REST_Quiz_Questions_Controller extends WP_REST_Controller {
 			return new WP_Error( 'quiz_not_found', __( 'Quiz not found.', 'skillpulse-lms' ), array( 'status' => 404 ) );
 		}
 
-		$questions_query = SkillPulse_LMS_Quiz_Questions_Query::get_instance();
+		$questions_query = SPLMS_Quiz_Questions_Query::get_instance();
 
 		// Get existing questions.
 		$existing_questions    = $questions_query->get_quiz_questions( $quiz_id );
@@ -1140,7 +1140,7 @@ class SkillPulse_LMS_REST_Quiz_Questions_Controller extends WP_REST_Controller {
 			return new WP_Error( 'quiz_not_found', __( 'Quiz not found.', 'skillpulse-lms' ), array( 'status' => 404 ) );
 		}
 
-		$questions_query = SkillPulse_LMS_Quiz_Questions_Query::get_instance();
+		$questions_query = SPLMS_Quiz_Questions_Query::get_instance();
 
 		// Get existing questions to determine order.
 		$existing_questions = $questions_query->get_quiz_questions( $quiz_id );
@@ -1519,7 +1519,7 @@ class SkillPulse_LMS_REST_Quiz_Questions_Controller extends WP_REST_Controller {
 			return new WP_Error( 'source_quiz_not_found', __( 'Source quiz not found.', 'skillpulse-lms' ), array( 'status' => 404 ) );
 		}
 
-		$questions_query  = SkillPulse_LMS_Quiz_Questions_Query::get_instance();
+		$questions_query  = SPLMS_Quiz_Questions_Query::get_instance();
 		$source_questions = $questions_query->get_quiz_questions( $source_quiz_id );
 
 		$questions = array();
@@ -1599,7 +1599,7 @@ class SkillPulse_LMS_REST_Quiz_Questions_Controller extends WP_REST_Controller {
 		}
 
 		// For other users, check access control (same as public controller).
-		$access_control = SkillPulse_LMS_Access_Control::get_instance();
+		$access_control = SPLMS_Access_Control::get_instance();
 
 		// If user is logged in, check full access control.
 		if ( $user_id ) {

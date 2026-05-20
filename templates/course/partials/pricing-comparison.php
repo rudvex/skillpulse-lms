@@ -28,7 +28,7 @@ $splms_is_enrolled  = splms_is_user_enrolled( $splms_course_id, $splms_user_id )
 $splms_upgrade_info = splms_calculate_upgrade_price( $splms_course_id, $splms_user_id );
 
 // Get course items.
-$splms_course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+$splms_course_items_query = SPLMS_Course_Items_Query::get_instance();
 $splms_course_items       = $splms_course_items_query->get_items( $splms_course_id );
 
 // Calculate stats.
@@ -38,7 +38,7 @@ foreach ( $splms_course_items as $splms_item ) {
 		$splms_section_pricing = splms_get_section_pricing_with_access( $splms_item->item_id, $splms_user_id );
 
 		// Get section stats (lessons, quizzes).
-		$splms_relationships_query = SkillPulse_LMS_Relationships_Query::get_instance();
+		$splms_relationships_query = SPLMS_Relationships_Query::get_instance();
 		$splms_children            = $splms_relationships_query->get_children( $splms_item->item_id );
 
 		$splms_lesson_count = 0;

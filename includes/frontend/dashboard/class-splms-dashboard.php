@@ -20,12 +20,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package SkillPulse_LMS
  * @since   1.0.0
  */
-class SkillPulse_LMS_Dashboard {
+class SPLMS_Dashboard {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Dashboard|null $instance
+	 * @var SPLMS_Dashboard|null $instance
 	 */
 	private static $instance = null;
 
@@ -47,7 +47,7 @@ class SkillPulse_LMS_Dashboard {
 	/**
 	 * Get the instance of this class.
 	 *
-	 * @return SkillPulse_LMS_Dashboard
+	 * @return SPLMS_Dashboard
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -75,10 +75,10 @@ class SkillPulse_LMS_Dashboard {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Dashboard_Service
+	 * @return SPLMS_Dashboard_Service
 	 */
 	public function get_service() {
-		return SkillPulse_LMS_Dashboard_Service::get_instance();
+		return SPLMS_Dashboard_Service::get_instance();
 	}
 
 	/**
@@ -94,10 +94,10 @@ class SkillPulse_LMS_Dashboard {
 		}
 
 		// Enqueue dashboard script.
-		$asset_file = SKILLPULSE_LMS_DIR_PATH . 'assets/js/dashboard.asset.php';
+		$asset_file = SPLMS_DIR_PATH . 'assets/js/dashboard.asset.php';
 		$asset      = file_exists( $asset_file ) ? require $asset_file : array(
 			'dependencies' => array( 'jquery' ),
-			'version'      => SKILLPULSE_LMS_VERSION,
+			'version'      => SPLMS_VERSION,
 		);
 
 		// Ensure frontend script dependency is included.
@@ -106,9 +106,9 @@ class SkillPulse_LMS_Dashboard {
 
 		wp_register_script(
 			'splms-dashboard',
-			SKILLPULSE_LMS_ASSETS_URL . 'js/dashboard.js',
+			SPLMS_ASSETS_URL . 'js/dashboard.js',
 			$dependencies,
-			isset( $asset['version'] ) ? $asset['version'] : SKILLPULSE_LMS_VERSION,
+			isset( $asset['version'] ) ? $asset['version'] : SPLMS_VERSION,
 			true
 		);
 

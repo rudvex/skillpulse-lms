@@ -33,7 +33,7 @@ function splms_get_course_settings( $course_id = null ) {
 		$course_id = get_the_ID();
 	}
 
-	return SkillPulse_LMS_Courses::get_instance()->get_course_settings( $course_id );
+	return SPLMS_Courses::get_instance()->get_course_settings( $course_id );
 }
 
 /**
@@ -56,7 +56,7 @@ function splms_update_course_settings( $course_id, $settings ) {
 		);
 	}
 
-	return SkillPulse_LMS_Courses::get_instance()->update_course_settings( $course_id, $settings );
+	return SPLMS_Courses::get_instance()->update_course_settings( $course_id, $settings );
 }
 
 
@@ -70,7 +70,7 @@ function splms_update_course_settings( $course_id, $settings ) {
  * @return string Course level.
  */
 function splms_get_course_level( $course_id ) {
-	return SkillPulse_LMS_Courses::get_instance()->get_course_level( $course_id );
+	return SPLMS_Courses::get_instance()->get_course_level( $course_id );
 }
 
 /**
@@ -83,7 +83,7 @@ function splms_get_course_level( $course_id ) {
  * @return float Course price.
  */
 function splms_get_course_price( $course_id ) {
-	return SkillPulse_LMS_Courses::get_instance()->get_course_price( $course_id );
+	return SPLMS_Courses::get_instance()->get_course_price( $course_id );
 }
 
 /**
@@ -320,7 +320,7 @@ function splms_get_course_enrollment_count( $course_id = null ) {
 	}
 
 	// Get actual count from enrollments table.
-	$count = SkillPulse_LMS_Enrollments_Query::get_instance()->get_course_enrollment_count( $course_id );
+	$count = SPLMS_Enrollments_Query::get_instance()->get_course_enrollment_count( $course_id );
 
 	return apply_filters( 'splms_course_enrollment_count', (int) $count, $course_id );
 }
@@ -643,7 +643,7 @@ function splms_get_section_duration( $section_id ) {
 
 	foreach ( $children as $child ) {
 		if ( SPLMS_POST_TYPES['lesson'] === $child['type'] ) {
-			$lesson_data = SkillPulse_LMS_Lessons::get_instance()->get_lesson_settings( $child['id'] );
+			$lesson_data = SPLMS_Lessons::get_instance()->get_lesson_settings( $child['id'] );
 
 			// Get lesson duration in minutes.
 			if ( isset( $lesson_data['lesson_duration'] ) && $lesson_data['lesson_duration'] > 0 ) {
@@ -651,7 +651,7 @@ function splms_get_section_duration( $section_id ) {
 			}
 		} elseif ( SPLMS_POST_TYPES['quiz'] === $child['type'] ) {
 			// Estimate quiz duration.
-			$quiz_data = SkillPulse_LMS_Quizzes::get_instance()->get_quiz_settings( $child['id'] );
+			$quiz_data = SPLMS_Quizzes::get_instance()->get_quiz_settings( $child['id'] );
 			if (
 				isset( $quiz_data['quiz_timing_settings']['time_limit_enabled'] ) &&
 				1 === (int) $quiz_data['quiz_timing_settings']['time_limit_enabled'] &&

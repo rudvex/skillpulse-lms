@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Base_Query {
+class SPLMS_Base_Query {
 
 	/**
 	 * Table name.
@@ -68,7 +68,7 @@ class SkillPulse_LMS_Base_Query {
 	 *
 	 * @param string $class_name  Class name.
 	 * @param string $table_name  Table name.
-	 * @return SkillPulse_LMS_Base_Query Instance.
+	 * @return SPLMS_Base_Query Instance.
 	 */
 	public static function get_base_instance( $class_name, $table_name ) {
 		if ( ! isset( self::$instances[ $class_name ] ) ) {

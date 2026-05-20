@@ -18,12 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Orders {
+class SPLMS_Orders {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Orders|null $instance
+	 * @var SPLMS_Orders|null $instance
 	 */
 	private static $instance;
 
@@ -32,7 +32,7 @@ class SkillPulse_LMS_Orders {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Orders Class instance.
+	 * @return SPLMS_Orders Class instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -73,8 +73,8 @@ class SkillPulse_LMS_Orders {
 		);
 
 		foreach ( $files as $file ) {
-			if ( file_exists( SKILLPULSE_LMS_DIR_PATH . $file . '.php' ) ) {
-				require_once SKILLPULSE_LMS_DIR_PATH . $file . '.php';
+			if ( file_exists( SPLMS_DIR_PATH . $file . '.php' ) ) {
+				require_once SPLMS_DIR_PATH . $file . '.php';
 			}
 		}
 	}
@@ -87,8 +87,8 @@ class SkillPulse_LMS_Orders {
 	 * @return void
 	 */
 	protected function load_classes() {
-		SkillPulse_LMS_Purchase_Token::get_instance();
-		SkillPulse_LMS_Payment::get_instance();
+		SPLMS_Purchase_Token::get_instance();
+		SPLMS_Payment::get_instance();
 	}
 
 	/**

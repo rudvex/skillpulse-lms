@@ -20,12 +20,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @subpackage Frontend
  * @since 1.0.0
  */
-class SkillPulse_LMS_Frontend {
+class SPLMS_Frontend {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Frontend|null $instance
+	 * @var SPLMS_Frontend|null $instance
 	 */
 	private static $instance = null;
 
@@ -34,7 +34,7 @@ class SkillPulse_LMS_Frontend {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Frontend
+	 * @return SPLMS_Frontend
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -67,8 +67,8 @@ class SkillPulse_LMS_Frontend {
 
 		foreach ( $files as $file ) {
 			// Include functions file.
-			if ( file_exists( SKILLPULSE_LMS_DIR_PATH . $file . '.php' ) ) {
-				require SKILLPULSE_LMS_DIR_PATH . $file . '.php';
+			if ( file_exists( SPLMS_DIR_PATH . $file . '.php' ) ) {
+				require SPLMS_DIR_PATH . $file . '.php';
 			}
 		}
 
@@ -79,8 +79,8 @@ class SkillPulse_LMS_Frontend {
 		);
 
 		foreach ( $template_functions as $file ) {
-			if ( file_exists( SKILLPULSE_LMS_DIR_PATH . $file . '.php' ) ) {
-				require_once SKILLPULSE_LMS_DIR_PATH . $file . '.php';
+			if ( file_exists( SPLMS_DIR_PATH . $file . '.php' ) ) {
+				require_once SPLMS_DIR_PATH . $file . '.php';
 			}
 		}
 	}
@@ -92,14 +92,14 @@ class SkillPulse_LMS_Frontend {
 	 */
 	protected function load_classes() {
 		// Initialize core components.
-		SkillPulse_LMS_Template::get_instance();
-		SkillPulse_LMS_Shortcode::get_instance();
-		SkillPulse_LMS_Blocks::get_instance();
+		SPLMS_Template::get_instance();
+		SPLMS_Shortcode::get_instance();
+		SPLMS_Blocks::get_instance();
 
 		// Initialize dashboard.
-		SkillPulse_LMS_Dashboard::get_instance();
-		SkillPulse_LMS_Dashboard_API::get_instance();
-		SkillPulse_LMS_Dashboard_Service::get_instance();
+		SPLMS_Dashboard::get_instance();
+		SPLMS_Dashboard_API::get_instance();
+		SPLMS_Dashboard_Service::get_instance();
 
 		// Allow modules to initialize frontend components.
 		do_action( 'splms_frontend_loaded' );
@@ -140,16 +140,16 @@ class SkillPulse_LMS_Frontend {
 		$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 		// Fall back to minified if non-minified file doesn't exist.
-		$css_file_path = SKILLPULSE_LMS_DIR_PATH . "assets/css/frontend{$min}.css";
+		$css_file_path = SPLMS_DIR_PATH . "assets/css/frontend{$min}.css";
 		if ( ! file_exists( $css_file_path ) ) {
 			$min           = '.min';
-			$css_file_path = SKILLPULSE_LMS_DIR_PATH . 'assets/css/frontend.min.css';
+			$css_file_path = SPLMS_DIR_PATH . 'assets/css/frontend.min.css';
 		}
-		$file_version = file_exists( $css_file_path ) ? filemtime( $css_file_path ) : SKILLPULSE_LMS_VERSION;
+		$file_version = file_exists( $css_file_path ) ? filemtime( $css_file_path ) : SPLMS_VERSION;
 
 		wp_register_style(
 			'splms-frontend-style',
-			SKILLPULSE_LMS_ASSETS_URL . "css/frontend{$min}.css",
+			SPLMS_ASSETS_URL . "css/frontend{$min}.css",
 			array(),
 			$file_version
 		);
@@ -158,15 +158,15 @@ class SkillPulse_LMS_Frontend {
 
 		// Enqueue fullscreen lesson/quiz viewer styles on single lesson/quiz pages.
 		if ( is_singular( array( SPLMS_POST_TYPES['lesson'], SPLMS_POST_TYPES['quiz'] ) ) ) {
-			$fullscreen_css_path = SKILLPULSE_LMS_DIR_PATH . "assets/css/fullscreen{$min}.css";
+			$fullscreen_css_path = SPLMS_DIR_PATH . "assets/css/fullscreen{$min}.css";
 			if ( ! file_exists( $fullscreen_css_path ) ) {
-				$fullscreen_css_path = SKILLPULSE_LMS_DIR_PATH . 'assets/css/fullscreen.min.css';
+				$fullscreen_css_path = SPLMS_DIR_PATH . 'assets/css/fullscreen.min.css';
 			}
-			$fullscreen_version = file_exists( $fullscreen_css_path ) ? filemtime( $fullscreen_css_path ) : SKILLPULSE_LMS_VERSION;
+			$fullscreen_version = file_exists( $fullscreen_css_path ) ? filemtime( $fullscreen_css_path ) : SPLMS_VERSION;
 
 			wp_register_style(
 				'splms-fullscreen-style',
-				SKILLPULSE_LMS_ASSETS_URL . "css/fullscreen{$min}.css",
+				SPLMS_ASSETS_URL . "css/fullscreen{$min}.css",
 				array(),
 				$fullscreen_version
 			);
@@ -187,17 +187,17 @@ class SkillPulse_LMS_Frontend {
 		$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 		// Get asset file for dependencies and version.
-		$asset_file = SKILLPULSE_LMS_DIR_PATH . 'assets/js/frontend.asset.php';
+		$asset_file = SPLMS_DIR_PATH . 'assets/js/frontend.asset.php';
 		$asset      = file_exists( $asset_file ) ? require $asset_file : array(
 			'dependencies' => array( 'jquery' ),
-			'version'      => SKILLPULSE_LMS_VERSION,
+			'version'      => SPLMS_VERSION,
 		);
 
 		wp_register_script(
 			'splms-frontend-script',
-			SKILLPULSE_LMS_ASSETS_URL . 'js/frontend.js',
+			SPLMS_ASSETS_URL . 'js/frontend.js',
 			array_merge( array( 'jquery', 'wp-util' ), isset( $asset['dependencies'] ) ? $asset['dependencies'] : array() ),
-			isset( $asset['version'] ) ? $asset['version'] : SKILLPULSE_LMS_VERSION,
+			isset( $asset['version'] ) ? $asset['version'] : SPLMS_VERSION,
 			true
 		);
 
@@ -298,17 +298,17 @@ class SkillPulse_LMS_Frontend {
 
 		// Enqueue fullscreen lesson viewer scripts on single lesson pages.
 		if ( is_singular( SPLMS_POST_TYPES['lesson'] ) ) {
-			$lesson_viewer_asset_file = SKILLPULSE_LMS_DIR_PATH . 'assets/js/lesson-viewer.asset.php';
+			$lesson_viewer_asset_file = SPLMS_DIR_PATH . 'assets/js/lesson-viewer.asset.php';
 			$lesson_viewer_asset      = file_exists( $lesson_viewer_asset_file ) ? require $lesson_viewer_asset_file : array(
 				'dependencies' => array( 'jquery' ),
-				'version'      => SKILLPULSE_LMS_VERSION,
+				'version'      => SPLMS_VERSION,
 			);
 
 			wp_register_script(
 				'splms-lesson-viewer',
-				SKILLPULSE_LMS_ASSETS_URL . 'js/lesson-viewer.js',
+				SPLMS_ASSETS_URL . 'js/lesson-viewer.js',
 				array_merge( array( 'jquery', 'splms-frontend-script' ), isset( $lesson_viewer_asset['dependencies'] ) ? $lesson_viewer_asset['dependencies'] : array() ),
-				isset( $lesson_viewer_asset['version'] ) ? $lesson_viewer_asset['version'] : SKILLPULSE_LMS_VERSION,
+				isset( $lesson_viewer_asset['version'] ) ? $lesson_viewer_asset['version'] : SPLMS_VERSION,
 				true
 			);
 
@@ -337,17 +337,17 @@ class SkillPulse_LMS_Frontend {
 
 		// Enqueue fullscreen quiz viewer scripts on single quiz pages.
 		if ( is_singular( SPLMS_POST_TYPES['quiz'] ) ) {
-			$quiz_viewer_asset_file = SKILLPULSE_LMS_DIR_PATH . 'assets/js/quiz-viewer.asset.php';
+			$quiz_viewer_asset_file = SPLMS_DIR_PATH . 'assets/js/quiz-viewer.asset.php';
 			$quiz_viewer_asset      = file_exists( $quiz_viewer_asset_file ) ? require $quiz_viewer_asset_file : array(
 				'dependencies' => array( 'jquery' ),
-				'version'      => SKILLPULSE_LMS_VERSION,
+				'version'      => SPLMS_VERSION,
 			);
 
 			wp_register_script(
 				'splms-quiz-viewer',
-				SKILLPULSE_LMS_ASSETS_URL . 'js/quiz-viewer.js',
+				SPLMS_ASSETS_URL . 'js/quiz-viewer.js',
 				array_merge( array( 'jquery', 'splms-frontend-script' ), isset( $quiz_viewer_asset['dependencies'] ) ? $quiz_viewer_asset['dependencies'] : array() ),
-				isset( $quiz_viewer_asset['version'] ) ? $quiz_viewer_asset['version'] : SKILLPULSE_LMS_VERSION,
+				isset( $quiz_viewer_asset['version'] ) ? $quiz_viewer_asset['version'] : SPLMS_VERSION,
 				true
 			);
 

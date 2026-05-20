@@ -57,10 +57,10 @@ $splms_current_sort            = isset( $_GET['orderby'] ) ? sanitize_text_field
 		<!-- Hidden fields to preserve other parameters. -->
 		<input type="hidden" name="post_type" value="<?php echo esc_attr( SPLMS_POST_TYPES['course'] ); ?>" />
 		<?php
-		if ( ! empty( $_GET ) ) {
+		if ( ! empty( $_GET ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			// Sanitize the entire array to prevent static analysis false positives.
-			$sanitized_get = map_deep( wp_unslash( $_GET ), 'sanitize_text_field' );
-			foreach ( $sanitized_get as $splms_key => $splms_value ) {
+			$splms_sanitized_get = map_deep( wp_unslash( $_GET ), 'sanitize_text_field' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			foreach ( $splms_sanitized_get as $splms_key => $splms_value ) {
 				if ( in_array( $splms_key, array( 'difficulty', 'learning_method', 'orderby', 'post_type' ), true ) ) {
 					continue;
 				}

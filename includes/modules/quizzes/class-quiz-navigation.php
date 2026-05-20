@@ -21,13 +21,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Quiz_Navigation {
+class SPLMS_Quiz_Navigation {
 
 	/**
 	 * Class instance.
 	 *
 	 * @since 1.0.0
-	 * @var SkillPulse_LMS_Quiz_Navigation|null $instance
+	 * @var SPLMS_Quiz_Navigation|null $instance
 	 */
 	private static $instance = null;
 
@@ -36,7 +36,7 @@ class SkillPulse_LMS_Quiz_Navigation {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Quiz_Navigation The singleton instance.
+	 * @return SPLMS_Quiz_Navigation The singleton instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {

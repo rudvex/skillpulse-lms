@@ -69,7 +69,7 @@ $splms_total_videos       = 0;
 $splms_total_notes        = 0;
 $splms_total_duration_min = 0;
 
-$splms_course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+$splms_course_items_query = SPLMS_Course_Items_Query::get_instance();
 if ( $splms_course_items_query ) {
 	$splms_course_items = $splms_course_items_query->get_items( $splms_course_id );
 

@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Order_Status_Manager {
+class SPLMS_Order_Status_Manager {
 
 	/**
 	 * Order statuses

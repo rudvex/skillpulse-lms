@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Access_Control {
+class SPLMS_Access_Control {
 
 	/**
 	 * Class instance.
@@ -33,7 +33,7 @@ class SkillPulse_LMS_Access_Control {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Access_Control
+	 * @return SPLMS_Access_Control
 	 */
 	public static function get_instance() {
 		if ( null === self::$instance ) {
@@ -168,7 +168,7 @@ class SkillPulse_LMS_Access_Control {
 						$access_type_allowed = false;
 					} else {
 						// Check if user completed prerequisite.
-						$access_type_allowed = SkillPulse_LMS_Enrollment::get_instance()->has_user_completed_course( $user_id, $prerequisite_course );
+						$access_type_allowed = SPLMS_Enrollment::get_instance()->has_user_completed_course( $user_id, $prerequisite_course );
 					}
 				} else {
 					// No prerequisite configured - this shouldn't happen with prerequisite_required type.
@@ -520,7 +520,7 @@ class SkillPulse_LMS_Access_Control {
 	 * @return bool True if lesson access is still valid, false if expired.
 	 */
 	private function check_lesson_access_expiration( $user_id, $lesson_id ) {
-		$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+		$lessons_instance = SPLMS_Lessons::get_instance();
 		$expiration_info  = $lessons_instance->get_lesson_access_expiration_info( $lesson_id, $user_id );
 
 		// If expiration is not set, access is valid.

@@ -19,19 +19,19 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Signup {
+class SPLMS_Signup {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Signup|null $instance
+	 * @var SPLMS_Signup|null $instance
 	 */
 	private static $instance = null;
 
 	/**
 	 * Get the instance of this class.
 	 *
-	 * @return SkillPulse_LMS_Signup
+	 * @return SPLMS_Signup
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -172,7 +172,7 @@ class SkillPulse_LMS_Signup {
 		wp_send_json_success(
 			array(
 				'message'   => __( 'Account created successfully! Please check your email for activation instructions.', 'skillpulse-lms' ),
-				'redirect'  => SkillPulse_LMS_Signup_Screen_Handler::get_instance()->get_signup_url( 'success' ),
+				'redirect'  => SPLMS_Signup_Screen_Handler::get_instance()->get_signup_url( 'success' ),
 				'signup_id' => $signup_id,
 			)
 		);
@@ -207,7 +207,7 @@ class SkillPulse_LMS_Signup {
 			array(
 				'message'  => __( 'Account activated successfully! You can now log in.', 'skillpulse-lms' ),
 				'user_id'  => $result,
-				'redirect' => wp_login_url( SkillPulse_LMS_Signup_Screen_Handler::get_instance()->get_signup_url( 'success' ) ),
+				'redirect' => wp_login_url( SPLMS_Signup_Screen_Handler::get_instance()->get_signup_url( 'success' ) ),
 			)
 		);
 	}
@@ -245,7 +245,7 @@ class SkillPulse_LMS_Signup {
 		}
 
 		// Send activation email.
-		$email_module = SkillPulse_LMS_Email_Module::get_instance();
+		$email_module = SPLMS_Email_Module::get_instance();
 		$result       = $email_module->send_activation_email( $signup->id );
 
 		if ( is_wp_error( $result ) ) {
@@ -283,7 +283,7 @@ class SkillPulse_LMS_Signup {
 			$errors[] = __( 'Username is required.', 'skillpulse-lms' );
 		} elseif ( username_exists( $data['user_name'] ) ) {
 			$errors[] = __( 'Username already exists.', 'skillpulse-lms' );
-		} elseif ( SkillPulse_LMS_Signup_Query::get_instance()->login_exists( $data['user_name'] ) ) {
+		} elseif ( SPLMS_Signup_Query::get_instance()->login_exists( $data['user_name'] ) ) {
 			$errors[] = __( 'Username is already registered and pending activation.', 'skillpulse-lms' );
 		} elseif ( ! validate_username( $data['user_name'] ) ) {
 			$errors[] = __( 'Invalid username format.', 'skillpulse-lms' );
@@ -295,7 +295,7 @@ class SkillPulse_LMS_Signup {
 			$errors[] = __( 'Invalid email format.', 'skillpulse-lms' );
 		} elseif ( email_exists( $data['user_email'] ) ) {
 			$errors[] = __( 'Email already exists.', 'skillpulse-lms' );
-		} elseif ( SkillPulse_LMS_Signup_Query::get_instance()->email_exists( $data['user_email'] ) ) {
+		} elseif ( SPLMS_Signup_Query::get_instance()->email_exists( $data['user_email'] ) ) {
 			$errors[] = __( 'Email is already registered and pending activation.', 'skillpulse-lms' );
 		}
 
@@ -537,7 +537,7 @@ class SkillPulse_LMS_Signup {
 		 */
 		do_action( 'splms_signup_activated', $user_id, $signup );
 
-		SkillPulse_LMS_Signup_Query::get_instance()->delete_signup( $signup->id );
+		SPLMS_Signup_Query::get_instance()->delete_signup( $signup->id );
 
 		return $user_id;
 	}
@@ -576,7 +576,7 @@ class SkillPulse_LMS_Signup {
 	 * @return object|null
 	 */
 	public function get_signup( $signup_id ) {
-		return SkillPulse_LMS_Signup_Query::get_instance()->get_signup( $signup_id );
+		return SPLMS_Signup_Query::get_instance()->get_signup( $signup_id );
 	}
 
 	/**
@@ -589,7 +589,7 @@ class SkillPulse_LMS_Signup {
 	 * @return object|null
 	 */
 	public function get_signup_by_key( $activation_key ) {
-		return SkillPulse_LMS_Signup_Query::get_instance()->get_signup_by_key( $activation_key );
+		return SPLMS_Signup_Query::get_instance()->get_signup_by_key( $activation_key );
 	}
 
 	/**
@@ -602,7 +602,7 @@ class SkillPulse_LMS_Signup {
 	 * @return object|null
 	 */
 	public function get_signup_by_email( $email ) {
-		return SkillPulse_LMS_Signup_Query::get_instance()->get_signup_by_email( $email );
+		return SPLMS_Signup_Query::get_instance()->get_signup_by_email( $email );
 	}
 
 	/**
@@ -616,7 +616,7 @@ class SkillPulse_LMS_Signup {
 	 * @return bool
 	 */
 	private function update_signup_status( $signup_id, $status ) {
-		return SkillPulse_LMS_Signup_Query::get_instance()->update_signup_status( $signup_id, $status );
+		return SPLMS_Signup_Query::get_instance()->update_signup_status( $signup_id, $status );
 	}
 
 	/**
@@ -742,7 +742,7 @@ class SkillPulse_LMS_Signup {
 		}
 
 		// Exclude users that are still pending activation using the query class.
-		$pending_signups = SkillPulse_LMS_Signup_Query::get_instance()->get_signups(
+		$pending_signups = SPLMS_Signup_Query::get_instance()->get_signups(
 			array(
 				'status' => 'pending',
 				'number' => -1,
@@ -776,7 +776,7 @@ class SkillPulse_LMS_Signup {
 	 * @return int|false Number of rows deleted on success, false on failure.
 	 */
 	public function delete_signup( $signup_id ) {
-		return SkillPulse_LMS_Signup_Query::get_instance()->delete_signup( $signup_id );
+		return SPLMS_Signup_Query::get_instance()->delete_signup( $signup_id );
 	}
 
 	/**
@@ -791,7 +791,7 @@ class SkillPulse_LMS_Signup {
 	public function maybe_redirect_to_registration( $url ) {
 		// If this is a wp-login.php?action=register request and our registration is enabled.
 		if ( strpos( $url, 'wp-login.php?action=register' ) !== false && splms_get_setting( 'user_signup_enabled', false ) ) {
-			return SkillPulse_LMS_Signup_Screen_Handler::get_instance()->get_signup_url();
+			return SPLMS_Signup_Screen_Handler::get_instance()->get_signup_url();
 		}
 
 		return $url;
@@ -808,7 +808,7 @@ class SkillPulse_LMS_Signup {
 	 */
 	public function get_activation_link( $signup ) {
 		// Use the new confirmation-based activation flow.
-		$signup_screen_handler = SkillPulse_LMS_Signup_Screen_Handler::get_instance();
+		$signup_screen_handler = SPLMS_Signup_Screen_Handler::get_instance();
 
 		return $signup_screen_handler->get_signup_url( 'activate/' . $signup->activation_key . '/' );
 	}

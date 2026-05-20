@@ -73,7 +73,7 @@ class SPLMS_CLI_Commands extends WP_CLI_Command {
 				'endpoints'    => $endpoints,
 				'count'        => count( $endpoints ),
 				'generated_at' => current_time( 'mysql' ),
-				'version'      => defined( 'SKILLPULSE_LMS_VERSION' ) ? SKILLPULSE_LMS_VERSION : '1.0.0',
+				'version'      => defined( 'SPLMS_VERSION' ) ? SPLMS_VERSION : '1.0.0',
 				'api_version'  => splms_rest_version(),
 			);
 

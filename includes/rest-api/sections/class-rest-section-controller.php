@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_REST_Section_Controller extends WP_REST_Controller {
+class SPLMS_REST_Section_Controller extends WP_REST_Controller {
 
 	/**
 	 * Constructor.
@@ -182,7 +182,7 @@ class SkillPulse_LMS_REST_Section_Controller extends WP_REST_Controller {
 		// Filter by course_id - get sections that belong to a specific course.
 		$course_id = $request->get_param( 'course_id' );
 		if ( $course_id ) {
-			$course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+			$course_items_query = SPLMS_Course_Items_Query::get_instance();
 			$course_items       = $course_items_query->get_items( absint( $course_id ) );
 
 			// Extract section IDs from course items.
@@ -369,7 +369,7 @@ class SkillPulse_LMS_REST_Section_Controller extends WP_REST_Controller {
 		// Link section to course if course_id is provided.
 		$course_id = $request->get_param( 'course_id' );
 		if ( $course_id ) {
-			$course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+			$course_items_query = SPLMS_Course_Items_Query::get_instance();
 			$order_index        = $request->get_param( 'order' ) ? absint( $request->get_param( 'order' ) ) : 0;
 
 			// Get max order index if not provided.
@@ -455,7 +455,7 @@ class SkillPulse_LMS_REST_Section_Controller extends WP_REST_Controller {
 		// Update order if provided.
 		$order = $request->get_param( 'order' );
 		if ( null !== $order ) {
-			$course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+			$course_items_query = SPLMS_Course_Items_Query::get_instance();
 			$course_item        = $course_items_query->get_item( $section_id );
 			if ( $course_item ) {
 				$course_items_query->update_item(
@@ -506,12 +506,12 @@ class SkillPulse_LMS_REST_Section_Controller extends WP_REST_Controller {
 		}
 
 		// Delete relationships first.
-		$relationships_query = SkillPulse_LMS_Relationships_Query::get_instance();
+		$relationships_query = SPLMS_Relationships_Query::get_instance();
 		$relationships_query->delete_children( $section_id );
 		$relationships_query->delete_parents( $section_id );
 
 		// Delete from course items.
-		$course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+		$course_items_query = SPLMS_Course_Items_Query::get_instance();
 		$course_items_query->delete_item( $section_id );
 
 		// Delete the post.
@@ -563,7 +563,7 @@ class SkillPulse_LMS_REST_Section_Controller extends WP_REST_Controller {
 			return new WP_Error( 'section_not_found', __( 'Section not found.', 'skillpulse-lms' ), array( 'status' => 404 ) );
 		}
 
-		$relationships_query = SkillPulse_LMS_Relationships_Query::get_instance();
+		$relationships_query = SPLMS_Relationships_Query::get_instance();
 		$children            = $relationships_query->get_children( $section_id );
 
 		$items = array();
@@ -609,7 +609,7 @@ class SkillPulse_LMS_REST_Section_Controller extends WP_REST_Controller {
 		$section_id        = $section->ID;
 
 		// Get course information if section is linked to a course.
-		$course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+		$course_items_query = SPLMS_Course_Items_Query::get_instance();
 		$course_item        = $course_items_query->get_item( $section_id );
 
 		// Base fields for every section.
@@ -644,7 +644,7 @@ class SkillPulse_LMS_REST_Section_Controller extends WP_REST_Controller {
 		}
 
 		// Get child items count (always include).
-		$relationships_query = SkillPulse_LMS_Relationships_Query::get_instance();
+		$relationships_query = SPLMS_Relationships_Query::get_instance();
 		$children            = $relationships_query->get_children( $section_id );
 		$data['items_count'] = count( $children );
 
@@ -703,7 +703,7 @@ class SkillPulse_LMS_REST_Section_Controller extends WP_REST_Controller {
 		);
 
 		// Add course link if section has a parent course.
-		$course_id = SkillPulse_LMS_Course_Items_Query::get_instance()->get_item_course_id( $section->ID );
+		$course_id = SPLMS_Course_Items_Query::get_instance()->get_item_course_id( $section->ID );
 		if ( ! empty( $course_id ) ) {
 			$links['course'] = array(
 				array(

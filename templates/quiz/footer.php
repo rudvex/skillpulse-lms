@@ -20,20 +20,20 @@ $splms_user_id   = get_current_user_id();
 $splms_course_id = splms_get_quiz_course( $splms_quiz_id );
 
 // Get quiz navigation.
-$splms_quizzes_instance = SkillPulse_LMS_Quizzes::get_instance();
+$splms_quizzes_instance = SPLMS_Quizzes::get_instance();
 $splms_navigation       = $splms_quizzes_instance->get_quiz_navigation( $splms_quiz_id, $splms_user_id );
 
 // Check if quiz is completed/passed.
 $splms_is_completed = false;
 if ( $splms_user_id ) {
-	$splms_attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+	$splms_attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 	$splms_is_completed   = $splms_attempts_query->has_user_passed( $splms_user_id, $splms_quiz_id );
 }
 
 // Get progress data for progress bar.
 $splms_progress_percentage = 0;
 if ( $splms_user_id && $splms_course_id ) {
-	$splms_lessons_instance    = SkillPulse_LMS_Lessons::get_instance();
+	$splms_lessons_instance    = SPLMS_Lessons::get_instance();
 	$splms_progress_data       = $splms_lessons_instance->calculate_course_progress( $splms_user_id, $splms_course_id );
 	$splms_progress_percentage = isset( $splms_progress_data['percentage'] ) ? floatval( $splms_progress_data['percentage'] ) : 0;
 }

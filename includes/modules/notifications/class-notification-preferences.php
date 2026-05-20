@@ -18,12 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Notification_Preferences {
+class SPLMS_Notification_Preferences {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Notification_Preferences|null $instance
+	 * @var SPLMS_Notification_Preferences|null $instance
 	 */
 	private static $instance = null;
 
@@ -32,7 +32,7 @@ class SkillPulse_LMS_Notification_Preferences {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Notification_Preferences The class instance.
+	 * @return SPLMS_Notification_Preferences The class instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {

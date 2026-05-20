@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Activation_Email_Template extends SkillPulse_LMS_Abstract_Email_Template {
+class SPLMS_Activation_Email_Template extends SPLMS_Abstract_Email_Template {
 
 	/**
 	 * Initialize template properties.

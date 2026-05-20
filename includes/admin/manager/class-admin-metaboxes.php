@@ -13,18 +13,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class SkillPulse_LMS_Admin_Metaboxes
+ * Class SPLMS_Admin_Metaboxes
  *
  * Manages metaboxes for custom post types (courses, lessons, quizzes).
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Admin_Metaboxes {
+class SPLMS_Admin_Metaboxes {
 	/**
 	 * Class instance.
 	 *
 	 * @since 1.0.0
-	 * @var SkillPulse_LMS_Admin_Metaboxes|null $instance
+	 * @var SPLMS_Admin_Metaboxes|null $instance
 	 */
 	private static $instance;
 
@@ -33,7 +33,7 @@ class SkillPulse_LMS_Admin_Metaboxes {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Admin_Metaboxes The singleton instance.
+	 * @return SPLMS_Admin_Metaboxes The singleton instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {

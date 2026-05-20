@@ -84,8 +84,8 @@ This plugin loads icons from Hugeicons CDN.
 - URL: https://cdn.hugeicons.com
 - Purpose: Load icon assets
 - Data sent: Browser request (IP, headers)
-- Terms: https://hugeicons.com/terms
-- Privacy: https://hugeicons.com/privacy
+- Terms: https://hugeicons.com/terms-of-service
+- Privacy: https://hugeicons.com/privacy-policy
 
 This plugin embeds audio via SoundCloud.
 - URL: https://soundcloud.com

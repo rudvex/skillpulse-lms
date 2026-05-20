@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-abstract class SkillPulse_LMS_Membership_Integration {
+abstract class SPLMS_Membership_Integration {
 
 	/**
 	 * Integration ID (unique identifier).
@@ -45,7 +45,7 @@ abstract class SkillPulse_LMS_Membership_Integration {
 	/**
 	 * Registered integrations.
 	 *
-	 * @var array<string, SkillPulse_LMS_Membership_Integration>
+	 * @var array<string, SPLMS_Membership_Integration>
 	 */
 	private static $registered = array();
 
@@ -67,7 +67,7 @@ abstract class SkillPulse_LMS_Membership_Integration {
 	/**
 	 * Register an integration.
 	 *
-	 * @param string|SkillPulse_LMS_Membership_Integration $integration Integration class name or instance.
+	 * @param string|SPLMS_Membership_Integration $integration Integration class name or instance.
 	 * @return bool True if registered successfully.
 	 */
 	public static function register( $integration ) {
@@ -102,7 +102,7 @@ abstract class SkillPulse_LMS_Membership_Integration {
 		/**
 		 * Action fired when a membership integration is registered.
 		 *
-		 * @param SkillPulse_LMS_Membership_Integration $integration Integration instance.
+		 * @param SPLMS_Membership_Integration $integration Integration instance.
 		 * @param string                                  $id          Integration ID.
 		 */
 		do_action( 'splms_membership_integration_registered', $integration, $integration_id );
@@ -114,7 +114,7 @@ abstract class SkillPulse_LMS_Membership_Integration {
 	 * Get registered integration by ID.
 	 *
 	 * @param string $integration_id Integration ID.
-	 * @return SkillPulse_LMS_Membership_Integration|null
+	 * @return SPLMS_Membership_Integration|null
 	 */
 	public static function get( $integration_id ) {
 		return isset( self::$registered[ $integration_id ] )
@@ -125,7 +125,7 @@ abstract class SkillPulse_LMS_Membership_Integration {
 	/**
 	 * Get all registered integrations.
 	 *
-	 * @return array<string, SkillPulse_LMS_Membership_Integration>
+	 * @return array<string, SPLMS_Membership_Integration>
 	 */
 	public static function get_all() {
 		return self::$registered;
@@ -134,7 +134,7 @@ abstract class SkillPulse_LMS_Membership_Integration {
 	/**
 	 * Get all active integrations (plugin is active).
 	 *
-	 * @return array<string, SkillPulse_LMS_Membership_Integration>
+	 * @return array<string, SPLMS_Membership_Integration>
 	 */
 	public static function get_active() {
 		$active = array();

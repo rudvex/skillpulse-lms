@@ -17,24 +17,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! defined( 'SPLMS_IS_FREE' ) ) {
 	define( 'SPLMS_IS_FREE', true );
 }
-if ( ! defined( 'SKILLPULSE_LMS_VERSION' ) ) {
-	define( 'SKILLPULSE_LMS_VERSION', '1.0.0' );
+if ( ! defined( 'SPLMS_VERSION' ) ) {
+	define( 'SPLMS_VERSION', '1.0.0' );
 }
 
-if ( ! defined( 'SKILLPULSE_LMS_DB_VERSION' ) ) {
-	define( 'SKILLPULSE_LMS_DB_VERSION', 3 );
+if ( ! defined( 'SPLMS_DB_VERSION' ) ) {
+	define( 'SPLMS_DB_VERSION', 3 );
 }
 
-if ( ! defined( 'SKILLPULSE_LMS_DIR_PATH' ) ) {
-	define( 'SKILLPULSE_LMS_DIR_PATH', plugin_dir_path( __FILE__ ) );
+if ( ! defined( 'SPLMS_DIR_PATH' ) ) {
+	define( 'SPLMS_DIR_PATH', plugin_dir_path( __FILE__ ) );
 }
 
-if ( ! defined( 'SKILLPULSE_LMS_URL_PATH' ) ) {
-	define( 'SKILLPULSE_LMS_URL_PATH', plugin_dir_url( __FILE__ ) );
+if ( ! defined( 'SPLMS_URL_PATH' ) ) {
+	define( 'SPLMS_URL_PATH', plugin_dir_url( __FILE__ ) );
 }
 
-if ( ! defined( 'SKILLPULSE_LMS_ASSETS_URL' ) ) {
-	define( 'SKILLPULSE_LMS_ASSETS_URL', SKILLPULSE_LMS_URL_PATH . 'assets/' );
+if ( ! defined( 'SPLMS_ASSETS_URL' ) ) {
+	define( 'SPLMS_ASSETS_URL', SPLMS_URL_PATH . 'assets/' );
 }
 
 if ( ! defined( 'SPLMS_POST_TYPES' ) ) {

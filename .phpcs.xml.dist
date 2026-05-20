@@ -29,14 +29,17 @@
 	<rule ref="WordPress"/>
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
-			<!-- Value: replace the function, class, and variable prefixes used. Separate multiple prefixes with a comma. -->
-			<property name="prefixes" type="array" value="my-plugin"/>
+			<!-- Canonical prefixes for SkillPulse LMS: functions/options/hooks use splms_, classes/constants use SPLMS_ -->
+			<property name="prefixes" type="array">
+				<element value="splms"/>
+				<element value="SPLMS"/>
+			</property>
 		</properties>
 	</rule>
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<!-- Value: replace the text domain used. -->
-			<property name="text_domain" type="array" value="my-plugin"/>
+			<property name="text_domain" type="array" value="skillpulse-lms"/>
 		</properties>
 	</rule>
 	<rule ref="WordPress.WhiteSpace.ControlStructureSpacing">

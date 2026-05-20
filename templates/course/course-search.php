@@ -73,9 +73,9 @@ if ( ! $splms_search_query ) {
 			// Preserve other query parameters.
 			if ( ! empty( $_GET ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading query args for form state preservation only.
 				// Sanitize the entire array to prevent static analysis false positives.
-				$sanitized_get = map_deep( wp_unslash( $_GET ), 'sanitize_text_field' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading query args for form state preservation only.
+				$splms_sanitized_get = map_deep( wp_unslash( $_GET ), 'sanitize_text_field' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading query args for form state preservation only.
 
-				foreach ( $sanitized_get as $splms_key => $splms_value ) {
+				foreach ( $splms_sanitized_get as $splms_key => $splms_value ) {
 					if ( in_array( $splms_key, array( 'course_search', 'post_type' ), true ) ) {
 						continue;
 					}

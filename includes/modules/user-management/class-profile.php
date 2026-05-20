@@ -19,19 +19,19 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Profile {
+class SPLMS_Profile {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Profile|null $instance
+	 * @var SPLMS_Profile|null $instance
 	 */
 	private static $instance = null;
 
 	/**
 	 * Get the instance of this class.
 	 *
-	 * @return SkillPulse_LMS_Profile
+	 * @return SPLMS_Profile
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -305,7 +305,7 @@ class SkillPulse_LMS_Profile {
 		}
 
 		// Check if already enrolled (active status).
-		$enrollments_query   = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollments_query   = SPLMS_Enrollments_Query::get_instance();
 		$existing_enrollment = $enrollments_query->get_enrollment( $user_id, $course_id );
 
 		// If user is already actively enrolled, return success.
@@ -318,7 +318,7 @@ class SkillPulse_LMS_Profile {
 		}
 
 		// Enroll user in database (will update if inactive, insert if new).
-		$enrollment_class  = SkillPulse_LMS_Enrollment::get_instance();
+		$enrollment_class  = SPLMS_Enrollment::get_instance();
 		$enrollment_result = $enrollment_class->enroll_user_in_course( $user_id, $course_id );
 
 		if ( false === $enrollment_result ) {
@@ -326,7 +326,7 @@ class SkillPulse_LMS_Profile {
 		}
 
 		// Log activity.
-		SkillPulse_LMS_User_Activity_Query::get_instance()->log_activity( $user_id, 'course_enrolled', $course_id );
+		SPLMS_User_Activity_Query::get_instance()->log_activity( $user_id, 'course_enrolled', $course_id );
 
 		// Send success response.
 		wp_send_json_success(
@@ -374,7 +374,7 @@ class SkillPulse_LMS_Profile {
 		}
 
 		// Check if user is enrolled.
-		$enrollments_query = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollments_query = SPLMS_Enrollments_Query::get_instance();
 		$enrollment        = $enrollments_query->get_enrollment( $user_id, $course_id );
 
 		if ( ! $enrollment ) {
@@ -499,12 +499,12 @@ class SkillPulse_LMS_Profile {
 		}
 
 		// Check if user is enrolled in the parent course.
-		$relationships_query  = SkillPulse_LMS_Relationships_Query::get_instance();
+		$relationships_query  = SPLMS_Relationships_Query::get_instance();
 		$parent_relationships = $relationships_query->get_parents( $item_id );
 		$course_id            = null;
 		if ( ! empty( $parent_relationships ) ) {
 			$section_id = $parent_relationships[0]->parent_id;
-			$course_id  = SkillPulse_LMS_Course_Items_Query::get_instance()->get_item_course_id( $section_id );
+			$course_id  = SPLMS_Course_Items_Query::get_instance()->get_item_course_id( $section_id );
 		}
 
 		if ( ! $course_id ) {

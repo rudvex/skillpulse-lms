@@ -19,13 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Purchase_Token {
+class SPLMS_Purchase_Token {
 
 	/**
 	 * Instance of this class.
 	 *
 	 * @since 1.0.0
-	 * @var SkillPulse_LMS_Purchase_Token
+	 * @var SPLMS_Purchase_Token
 	 */
 	private static $instance = null;
 
@@ -41,7 +41,7 @@ class SkillPulse_LMS_Purchase_Token {
 	 * Get instance of this class.
 	 *
 	 * @since 1.0.0
-	 * @return SkillPulse_LMS_Purchase_Token
+	 * @return SPLMS_Purchase_Token
 	 */
 	public static function get_instance() {
 		if ( null === self::$instance ) {

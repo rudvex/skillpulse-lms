@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_REST_Section_Settings_Controller extends WP_REST_Controller {
+class SPLMS_REST_Section_Settings_Controller extends WP_REST_Controller {
 
 	/**
 	 * Constructor.
@@ -128,7 +128,7 @@ class SkillPulse_LMS_REST_Section_Settings_Controller extends WP_REST_Controller
 		}
 
 		// Get section settings using the Config Loader approach like lessons.
-		$sections_instance = SkillPulse_LMS_Sections::get_instance();
+		$sections_instance = SPLMS_Sections::get_instance();
 		$settings          = $sections_instance->get_section_settings( $section_id );
 
 		$settings = apply_filters( 'splms_get_section_settings', $settings, $section_id );
@@ -214,7 +214,7 @@ class SkillPulse_LMS_REST_Section_Settings_Controller extends WP_REST_Controller
 		}
 
 		// Update settings using the Config Loader approach like lessons.
-		$sections_instance = SkillPulse_LMS_Sections::get_instance();
+		$sections_instance = SPLMS_Sections::get_instance();
 		$success           = $sections_instance->update_section_settings( $section_id, $settings );
 
 		if ( ! $success ) {

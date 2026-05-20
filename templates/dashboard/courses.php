@@ -25,8 +25,8 @@ $splms_completed_courses    = 0;
 $splms_in_progress_courses  = 0;
 $splms_course_progress_data = array();
 
-if ( class_exists( 'SkillPulse_LMS_Enrollments_Query' ) ) {
-	$splms_enrollments_query = SkillPulse_LMS_Enrollments_Query::get_instance();
+if ( class_exists( 'SPLMS_Enrollments_Query' ) ) {
+	$splms_enrollments_query = SPLMS_Enrollments_Query::get_instance();
 	$splms_enrolled_courses  = $splms_enrollments_query->get_user_courses( $splms_user_id );
 
 	// Calculate progress statistics.
@@ -39,8 +39,8 @@ if ( class_exists( 'SkillPulse_LMS_Enrollments_Query' ) ) {
 		}
 
 		$splms_progress = 0;
-		if ( class_exists( 'SkillPulse_LMS_Dashboard_API' ) ) {
-			$splms_dashboard_api = SkillPulse_LMS_Dashboard_API::get_instance();
+		if ( class_exists( 'SPLMS_Dashboard_API' ) ) {
+			$splms_dashboard_api = SPLMS_Dashboard_API::get_instance();
 			$splms_progress_data = $splms_dashboard_api->get_course_progress( $splms_course_id, $splms_user_id );
 			$splms_progress      = $splms_progress_data['percentage'] ?? 0;
 		}
@@ -108,8 +108,8 @@ $splms_completion_rate = $splms_total_enrolled > 0 ? round( ( $splms_completed_c
 
 					// Get course progress.
 					$splms_course_progress = 0;
-					if ( class_exists( 'SkillPulse_LMS_Dashboard_API' ) ) {
-						$splms_dashboard_api   = SkillPulse_LMS_Dashboard_API::get_instance();
+					if ( class_exists( 'SPLMS_Dashboard_API' ) ) {
+						$splms_dashboard_api   = SPLMS_Dashboard_API::get_instance();
 						$splms_progress_data   = $splms_dashboard_api->get_course_progress( $splms_course_id, $splms_user_id );
 						$splms_course_progress = $splms_progress_data['percentage'] ?? 0;
 					}

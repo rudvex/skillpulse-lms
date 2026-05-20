@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_REST_Lesson_Actions_Controller extends WP_REST_Controller {
+class SPLMS_REST_Lesson_Actions_Controller extends WP_REST_Controller {
 
 	/**
 	 * Constructor.
@@ -406,7 +406,7 @@ class SkillPulse_LMS_REST_Lesson_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Check if user has access to this lesson.
-		$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+		$lessons_instance = SPLMS_Lessons::get_instance();
 		if ( ! $lessons_instance->user_can_access_lesson( $lesson_id, $user_id ) ) {
 			return new WP_Error( 'access_denied', __( 'Access denied to this lesson.', 'skillpulse-lms' ), array( 'status' => 403 ) );
 		}
@@ -437,7 +437,7 @@ class SkillPulse_LMS_REST_Lesson_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Mark lesson complete in database table.
-		$progress_query = SkillPulse_LMS_Lesson_Progress_Query::get_instance();
+		$progress_query = SPLMS_Lesson_Progress_Query::get_instance();
 		$result         = $progress_query->complete_lesson( $lesson_id, $user_id, $course_id );
 
 		if ( false === $result ) {
@@ -451,11 +451,11 @@ class SkillPulse_LMS_REST_Lesson_Actions_Controller extends WP_REST_Controller {
 		$progress_data = $lessons_instance->calculate_course_progress( $user_id, $course_id );
 
 		// Sync progress to enrollment database table.
-		$enrollment = SkillPulse_LMS_Enrollment::get_instance();
+		$enrollment = SPLMS_Enrollment::get_instance();
 		$enrollment->update_enrollment_progress( $user_id, $course_id, $progress_data['percentage'] );
 
 		// Log activity.
-		SkillPulse_LMS_User_Activity_Query::get_instance()->log_activity( $user_id, 'lesson_completed', $course_id, $lesson_id, 'lesson' );
+		SPLMS_User_Activity_Query::get_instance()->log_activity( $user_id, 'lesson_completed', $course_id, $lesson_id, 'lesson' );
 
 		// Return success response with progress data.
 		return rest_ensure_response(
@@ -489,7 +489,7 @@ class SkillPulse_LMS_REST_Lesson_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Get video progress from database.
-		$progress_query = SkillPulse_LMS_Lesson_Progress_Query::get_instance();
+		$progress_query = SPLMS_Lesson_Progress_Query::get_instance();
 		$video_data     = $progress_query->get_video_progress( $user_id, $lesson_id );
 
 		if ( null === $video_data ) {
@@ -558,7 +558,7 @@ class SkillPulse_LMS_REST_Lesson_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Save to database.
-		$progress_query = SkillPulse_LMS_Lesson_Progress_Query::get_instance();
+		$progress_query = SPLMS_Lesson_Progress_Query::get_instance();
 		$result         = $progress_query->save_video_progress( $user_id, $lesson_id, $course_id, $video_data );
 
 		if ( false === $result ) {
@@ -600,7 +600,7 @@ class SkillPulse_LMS_REST_Lesson_Actions_Controller extends WP_REST_Controller {
 			return new WP_Error( 'invalid_lesson_id', __( 'Invalid lesson ID.', 'skillpulse-lms' ), array( 'status' => 400 ) );
 		}
 
-		$access_control = SkillPulse_LMS_Access_Control::get_instance();
+		$access_control = SPLMS_Access_Control::get_instance();
 
 		// If user is logged in, check full access control.
 		if ( $user_id ) {

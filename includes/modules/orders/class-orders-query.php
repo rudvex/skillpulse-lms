@@ -13,18 +13,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'SkillPulse_LMS_Base_Query' ) ) {
-	require_once SKILLPULSE_LMS_DIR_PATH . 'includes/modules/core/base/class-base-query.php';
+if ( ! class_exists( 'SPLMS_Base_Query' ) ) {
+	require_once SPLMS_DIR_PATH . 'includes/modules/core/base/class-base-query.php';
 }
 
 /**
- * Class SkillPulse_LMS_Orders_Query
+ * Class SPLMS_Orders_Query
  *
  * Handles orders/payments database operations
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
+class SPLMS_Orders_Query extends SPLMS_Base_Query {
 
 	/**
 	 * Constructor.
@@ -40,7 +40,7 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 	 * Get the instance of this class.
 	 *
 	 * @since 1.0.0
-	 * @return SkillPulse_LMS_Orders_Query Instance of the class.
+	 * @return SPLMS_Orders_Query Instance of the class.
 	 */
 	public static function get_instance() {
 		return parent::get_base_instance( __CLASS__, 'splms_orders' );
@@ -289,7 +289,7 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 		);
 
 		// Delete section access grants tied to this order using Section Access Query class.
-		$section_access_query = SkillPulse_LMS_Section_Access_Query::get_instance();
+		$section_access_query = SPLMS_Section_Access_Query::get_instance();
 		$section_access_query->revoke_access_by_order( $order_id );
 
 		// Delete order meta.
@@ -413,8 +413,8 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 		}
 
 		// Validate status transition.
-		if ( class_exists( 'SkillPulse_LMS_Order_Status_Manager' ) ) {
-			if ( ! SkillPulse_LMS_Order_Status_Manager::can_transition_to( $old_status, $new_status ) ) {
+		if ( class_exists( 'SPLMS_Order_Status_Manager' ) ) {
+			if ( ! SPLMS_Order_Status_Manager::can_transition_to( $old_status, $new_status ) ) {
 				return false;
 			}
 		}
@@ -493,8 +493,8 @@ class SkillPulse_LMS_Orders_Query extends SkillPulse_LMS_Base_Query {
 		);
 
 		// Automatically handle access control.
-		if ( class_exists( 'SkillPulse_LMS_Order_Access_Control' ) ) {
-			SkillPulse_LMS_Order_Access_Control::handle_order_status_change(
+		if ( class_exists( 'SPLMS_Order_Access_Control' ) ) {
+			SPLMS_Order_Access_Control::handle_order_status_change(
 				$order_id,
 				$old_status,
 				$new_status

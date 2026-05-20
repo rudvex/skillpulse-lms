@@ -24,16 +24,16 @@ register_activation_hook( __FILE__, array( 'SkillPulse_LMS', 'activation_hook' )
 // Register deactivation hook.
 register_deactivation_hook( __FILE__, array( 'SkillPulse_LMS', 'deactivation_hook' ) );
 
-if ( ! defined( 'SKILLPULSE_LMS_VERSION' ) ) {
+if ( ! defined( 'SPLMS_VERSION' ) ) {
 	return;
 }
 
-if ( ! defined( 'SKILLPULSE_LMS_PLUGIN_BASENAME' ) ) {
-	define( 'SKILLPULSE_LMS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+if ( ! defined( 'SPLMS_PLUGIN_BASENAME' ) ) {
+	define( 'SPLMS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 }
 
-if ( ! defined( 'SKILLPULSE_LMS_FILE' ) ) {
-	define( 'SKILLPULSE_LMS_FILE', __FILE__ );
+if ( ! defined( 'SPLMS_FILE' ) ) {
+	define( 'SPLMS_FILE', __FILE__ );
 }
 
 /**
@@ -49,7 +49,7 @@ if ( ! class_exists( 'SkillPulse_LMS' ) ) {
 	 * @package SkillPulse_LMS
 	 */
 	class SkillPulse_LMS {
-
+ // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound -- Main plugin class name.
 
 		/**
 		 * Class instance.
@@ -88,8 +88,8 @@ if ( ! class_exists( 'SkillPulse_LMS' ) ) {
 		 * @return void
 		 */
 		protected function setup_globals() {
-			require_once SKILLPULSE_LMS_DIR_PATH . 'includes/functions.php';
-			require_once SKILLPULSE_LMS_DIR_PATH . 'includes/class-main.php';
+			require_once SPLMS_DIR_PATH . 'includes/functions.php';
+			require_once SPLMS_DIR_PATH . 'includes/class-main.php';
 		}
 
 		/**
@@ -101,7 +101,7 @@ if ( ! class_exists( 'SkillPulse_LMS' ) ) {
 		 */
 		protected function load_classes() {
 			// Initialize plugin main class.
-			SkillPulse_LMS_Main::get_instance();
+			SPLMS_Main::get_instance();
 		}
 
 		/**
@@ -150,11 +150,11 @@ if ( ! class_exists( 'SkillPulse_LMS' ) ) {
 		 */
 		public static function activation_hook() {
 			// Load constants first.
-			require_once SKILLPULSE_LMS_DIR_PATH . 'constants.php';
+			require_once SPLMS_DIR_PATH . 'constants.php';
 
 			// Load database class and create tables directly.
-			require_once SKILLPULSE_LMS_DIR_PATH . 'includes/modules/core/class-database.php';
-			$database = SkillPulse_LMS_Database::get_instance();
+			require_once SPLMS_DIR_PATH . 'includes/modules/core/class-database.php';
+			$database = SPLMS_Database::get_instance();
 			$database->create_tables();
 
 			add_option( 'splms_activation_hook', 'activated' );
@@ -182,8 +182,8 @@ if ( ! class_exists( 'SkillPulse_LMS' ) ) {
 			flush_rewrite_rules();
 
 			// Unschedule notification auto-delete cron.
-			if ( class_exists( 'SkillPulse_LMS_In_App_Notifications' ) ) {
-				$in_app_notifications = SkillPulse_LMS_In_App_Notifications::get_instance();
+			if ( class_exists( 'SPLMS_In_App_Notifications' ) ) {
+				$in_app_notifications = SPLMS_In_App_Notifications::get_instance();
 				if ( method_exists( $in_app_notifications, 'unschedule_auto_delete_cron' ) ) {
 					$in_app_notifications->unschedule_auto_delete_cron();
 				}

@@ -21,12 +21,12 @@ $splms_is_quiz           = ( SPLMS_POST_TYPES['quiz'] === $splms_current_post_ty
 
 // Get course information.
 $splms_course_id            = null;
-$splms_relationships_query  = SkillPulse_LMS_Relationships_Query::get_instance();
+$splms_relationships_query  = SPLMS_Relationships_Query::get_instance();
 $splms_parent_relationships = $splms_relationships_query->get_parents( $splms_current_post_id );
 
 if ( ! empty( $splms_parent_relationships ) ) {
 	$splms_section_id = $splms_parent_relationships[0]->parent_id;
-	$splms_course_id  = SkillPulse_LMS_Course_Items_Query::get_instance()->get_item_course_id( $splms_section_id );
+	$splms_course_id  = SPLMS_Course_Items_Query::get_instance()->get_item_course_id( $splms_section_id );
 }
 
 $splms_course_title = '';

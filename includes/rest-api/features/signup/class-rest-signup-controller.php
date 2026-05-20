@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * POST   /splms/v1/signup/{id}/resend    - Resend activation email
  * GET    /splms/v1/signup/form           - Get signup form schema
  */
-class SkillPulse_LMS_REST_Signup_Controller extends WP_REST_Controller {
+class SPLMS_REST_Signup_Controller extends WP_REST_Controller {
 
 	/**
 	 * Constructor.
@@ -159,7 +159,7 @@ class SkillPulse_LMS_REST_Signup_Controller extends WP_REST_Controller {
 	 * @return WP_REST_Response Response object.
 	 */
 	public function get_signups( $request ) {
-		$signup_query = SkillPulse_LMS_Signup_Query::get_instance();
+		$signup_query = SPLMS_Signup_Query::get_instance();
 		$signups      = $signup_query->get_signups();
 
 		$data = array();
@@ -181,7 +181,7 @@ class SkillPulse_LMS_REST_Signup_Controller extends WP_REST_Controller {
 	 */
 	public function get_signup( $request ) {
 		$signup_id = $request->get_param( 'id' );
-		$signup    = SkillPulse_LMS_Signup::get_instance()->get_signup( $signup_id );
+		$signup    = SPLMS_Signup::get_instance()->get_signup( $signup_id );
 
 		if ( ! $signup ) {
 			return new WP_Error( 'signup_not_found', __( 'Signup not found.', 'skillpulse-lms' ), array( 'status' => 404 ) );
@@ -228,7 +228,7 @@ class SkillPulse_LMS_REST_Signup_Controller extends WP_REST_Controller {
 			'user_email' => sanitize_email( $params['user_email'] ),
 		);
 
-		$signup = SkillPulse_LMS_Signup::get_instance()->create_signup( $signup_data );
+		$signup = SPLMS_Signup::get_instance()->create_signup( $signup_data );
 
 		if ( is_wp_error( $signup ) ) {
 			return $signup;
@@ -254,13 +254,13 @@ class SkillPulse_LMS_REST_Signup_Controller extends WP_REST_Controller {
 	 */
 	public function delete_signup( $request ) {
 		$signup_id = $request->get_param( 'id' );
-		$signup    = SkillPulse_LMS_Signup::get_instance()->get_signup( $signup_id );
+		$signup    = SPLMS_Signup::get_instance()->get_signup( $signup_id );
 
 		if ( ! $signup ) {
 			return new WP_Error( 'signup_not_found', __( 'Signup not found.', 'skillpulse-lms' ), array( 'status' => 404 ) );
 		}
 
-		$deleted = SkillPulse_LMS_Signup::get_instance()->delete_signup( $signup_id );
+		$deleted = SPLMS_Signup::get_instance()->delete_signup( $signup_id );
 
 		if ( ! $deleted ) {
 			return new WP_Error( 'delete_failed', __( 'Failed to delete signup.', 'skillpulse-lms' ), array( 'status' => 500 ) );
@@ -280,13 +280,13 @@ class SkillPulse_LMS_REST_Signup_Controller extends WP_REST_Controller {
 	 */
 	public function activate_signup( $request ) {
 		$signup_id = $request->get_param( 'id' );
-		$signup    = SkillPulse_LMS_Signup::get_instance()->get_signup( $signup_id );
+		$signup    = SPLMS_Signup::get_instance()->get_signup( $signup_id );
 
 		if ( ! $signup ) {
 			return new WP_Error( 'signup_not_found', __( 'Signup not found.', 'skillpulse-lms' ), array( 'status' => 404 ) );
 		}
 
-		$result = SkillPulse_LMS_Signup::get_instance()->activate_signup( $signup_id );
+		$result = SPLMS_Signup::get_instance()->activate_signup( $signup_id );
 
 		if ( is_wp_error( $result ) ) {
 			return $result;
@@ -306,13 +306,13 @@ class SkillPulse_LMS_REST_Signup_Controller extends WP_REST_Controller {
 	 */
 	public function resend_activation( $request ) {
 		$signup_id = $request->get_param( 'id' );
-		$signup    = SkillPulse_LMS_Signup::get_instance()->get_signup( $signup_id );
+		$signup    = SPLMS_Signup::get_instance()->get_signup( $signup_id );
 
 		if ( ! $signup ) {
 			return new WP_Error( 'signup_not_found', __( 'Signup not found.', 'skillpulse-lms' ), array( 'status' => 404 ) );
 		}
 
-		$sent = SkillPulse_LMS_Email_Module::get_instance()->send_activation_email( $signup_id );
+		$sent = SPLMS_Email_Module::get_instance()->send_activation_email( $signup_id );
 
 		if ( ! $sent ) {
 			return new WP_Error( 'send_failed', __( 'Failed to send activation email.', 'skillpulse-lms' ), array( 'status' => 500 ) );
@@ -388,7 +388,7 @@ class SkillPulse_LMS_REST_Signup_Controller extends WP_REST_Controller {
 		);
 
 		if ( 'edit' === $context ) {
-			$data['activation_link'] = SkillPulse_LMS_Signup::get_instance()->get_activation_link( $signup );
+			$data['activation_link'] = SPLMS_Signup::get_instance()->get_activation_link( $signup );
 		}
 
 		return $data;

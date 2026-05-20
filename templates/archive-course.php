@@ -20,7 +20,7 @@ get_header();
 $splms_courses_page_id = splms_get_course_page_id();
 
 // Get archive setup data from centralized function.
-$splms_setup_data = SkillPulse_LMS_Course_Frontend::get_course_archive_setup( 'archive' );
+$splms_setup_data = SPLMS_Course_Frontend::get_course_archive_setup( 'archive' );
 // phpcs:ignore WordPress.PHP.DontExtract.extract_extract -- Template file requires variable extraction for backwards compatibility.
 extract( $splms_setup_data );
 /**

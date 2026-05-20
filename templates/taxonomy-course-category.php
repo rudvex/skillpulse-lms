@@ -21,7 +21,7 @@ get_header();
 $splms_current_term = get_queried_object();
 
 // Get archive setup data from centralized function.
-$splms_setup_data = SkillPulse_LMS_Course_Frontend::get_course_archive_setup( 'category', $splms_current_term );
+$splms_setup_data = SPLMS_Course_Frontend::get_course_archive_setup( 'category', $splms_current_term );
 // phpcs:ignore WordPress.PHP.DontExtract.extract_extract -- Template file uses extract for convenience with controlled data.
 extract( $splms_setup_data );
 

@@ -33,7 +33,7 @@ function splms_get_quiz_settings( $quiz_id = null ) {
 		$quiz_id = get_the_ID();
 	}
 
-	$settings = SkillPulse_LMS_Quizzes::get_instance()->get_quiz_settings( $quiz_id );
+	$settings = SPLMS_Quizzes::get_instance()->get_quiz_settings( $quiz_id );
 
 	return apply_filters( 'splms_quiz_settings', $settings, $quiz_id );
 }
@@ -74,7 +74,7 @@ function splms_get_quiz_questions( $quiz_id = null ) {
 		$quiz_id = get_the_ID();
 	}
 
-	$quizzes_instance = SkillPulse_LMS_Quizzes::get_instance();
+	$quizzes_instance = SPLMS_Quizzes::get_instance();
 
 	return $quizzes_instance->get_quiz_questions( $quiz_id );
 }
@@ -112,7 +112,7 @@ function splms_get_quiz_questions_count( $quiz_id = null ) {
  * @return array Quiz attempts.
  */
 function splms_get_user_quiz_attempts( $user_id, $quiz_id = null ) {
-	$quizzes_instance = SkillPulse_LMS_Quizzes::get_instance();
+	$quizzes_instance = SPLMS_Quizzes::get_instance();
 
 	return $quizzes_instance->get_user_quiz_attempts( $user_id, $quiz_id );
 }
@@ -165,12 +165,12 @@ function splms_get_quiz_course( $quiz_id = null ) {
 	}
 
 	// Use database relationships to find the course for this quiz.
-	$relationships_query = SkillPulse_LMS_Relationships_Query::get_instance();
+	$relationships_query = SPLMS_Relationships_Query::get_instance();
 	$parents             = $relationships_query->get_parents( $quiz_id );
 
 	if ( ! empty( $parents ) ) {
 		foreach ( $parents as $parent ) {
-			return SkillPulse_LMS_Course_Items_Query::get_instance()->get_item_course_id( $parent->parent_id );
+			return SPLMS_Course_Items_Query::get_instance()->get_item_course_id( $parent->parent_id );
 		}
 	}
 
@@ -200,7 +200,7 @@ function splms_get_quiz_navigation( $quiz_id, $user_id = null ) {
 		return null;
 	}
 
-	$quizzes_instance = SkillPulse_LMS_Quizzes::get_instance();
+	$quizzes_instance = SPLMS_Quizzes::get_instance();
 
 	return $quizzes_instance->get_quiz_navigation( $quiz_id, $user_id );
 }

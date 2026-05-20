@@ -18,12 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Blocks {
+class SPLMS_Blocks {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Blocks|null
+	 * @var SPLMS_Blocks|null
 	 */
 	private static $instance = null;
 
@@ -32,7 +32,7 @@ class SkillPulse_LMS_Blocks {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Blocks
+	 * @return SPLMS_Blocks
 	 */
 	public static function get_instance() {
 		if ( null === self::$instance ) {
@@ -84,9 +84,9 @@ class SkillPulse_LMS_Blocks {
 		// Register shared frontend style for all blocks.
 		wp_register_style(
 			'splms-blocks-style',
-			SKILLPULSE_LMS_URL_PATH . 'assets/css/blocks-editor.css',
+			SPLMS_URL_PATH . 'assets/css/blocks-editor.css',
 			array(),
-			SKILLPULSE_LMS_VERSION
+			SPLMS_VERSION
 		);
 
 		$blocks = array(
@@ -103,7 +103,7 @@ class SkillPulse_LMS_Blocks {
 		);
 
 		foreach ( $blocks as $block_name => $render_callback ) {
-			$block_json = SKILLPULSE_LMS_DIR_PATH . 'src/blocks/' . $block_name . '/block.json';
+			$block_json = SPLMS_DIR_PATH . 'src/blocks/' . $block_name . '/block.json';
 			if ( file_exists( $block_json ) ) {
 				register_block_type(
 					$block_json,
@@ -122,7 +122,7 @@ class SkillPulse_LMS_Blocks {
 	 * @since 1.0.0
 	 */
 	public function enqueue_editor_assets() {
-		$asset_file = SKILLPULSE_LMS_DIR_PATH . 'assets/js/blocks.asset.php';
+		$asset_file = SPLMS_DIR_PATH . 'assets/js/blocks.asset.php';
 		if ( ! file_exists( $asset_file ) ) {
 			return;
 		}
@@ -131,7 +131,7 @@ class SkillPulse_LMS_Blocks {
 
 		wp_enqueue_script(
 			'splms-blocks-editor',
-			SKILLPULSE_LMS_URL_PATH . 'assets/js/blocks.js',
+			SPLMS_URL_PATH . 'assets/js/blocks.js',
 			$asset['dependencies'],
 			$asset['version'],
 			true
@@ -696,7 +696,7 @@ class SkillPulse_LMS_Blocks {
 		$attributes = wp_parse_args( $attributes, $defaults );
 
 		// Get enrollment objects (not just IDs) so we can filter by status.
-		$enrollments_query = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollments_query = SPLMS_Enrollments_Query::get_instance();
 		$query_args        = array( 'status' => array( 'active', 'completed' ) );
 
 		// Filter by specific status if not "all".
@@ -804,7 +804,7 @@ class SkillPulse_LMS_Blocks {
 		// Count total students.
 		$student_count = 0;
 		if ( $attributes['showStudentCount'] ) {
-			$student_count = SkillPulse_LMS_Enrollments_Query::get_instance()->get_author_student_count( $instructor_id );
+			$student_count = SPLMS_Enrollments_Query::get_instance()->get_author_student_count( $instructor_id );
 		}
 
 		ob_start();

@@ -39,7 +39,7 @@ $splms_last_activity_time = null;
 
 if ( $splms_is_enrolled && $splms_user_id ) {
 	// Calculate progress from database tables.
-	$splms_lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+	$splms_lessons_instance = SPLMS_Lessons::get_instance();
 	if ( $splms_lessons_instance ) {
 		$splms_progress_data = $splms_lessons_instance->calculate_course_progress( $splms_user_id, $splms_course_id );
 
