@@ -68,8 +68,17 @@ if ( $splms_is_password_protected ) {
 				if ( ! headers_sent() ) {
 					setcookie( $splms_cookie_name, '1', time() + 86400, COOKIEPATH, COOKIE_DOMAIN, is_ssl(), true );
 				} else {
-					// Fallback to JS cookie setting if headers already sent.
-					echo '<script>document.cookie = "' . esc_js( $splms_cookie_name ) . '=1; max-age=86400; path=' . esc_js( COOKIEPATH ) . '";</script>';
+					$cookie_script = sprintf(
+						'document.cookie = "%s=1; max-age=%d; path=%s";',
+						esc_js( $splms_cookie_name ),
+						DAY_IN_SECONDS,
+						esc_js( COOKIEPATH )
+					);
+
+					wp_add_inline_script(
+						'splms-frontend',
+						$cookie_script
+					);
 				}
 			}
 		}
