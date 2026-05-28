@@ -33,9 +33,7 @@ class SPLMSVideoTracker {
 		this.lastSaveTime = 0;
 		this.courseId = this.getCourseId();
 
-		// Use localized REST URL for subdirectory/custom prefix compatibility.
-		const frontendData = window.splms_frontend || {};
-		this.restBase = (frontendData.rest_url || '/wp-json/').replace(/\/$/, '');
+		this.restBase = window.SPLMSCore.helper.getRestApiUrl().replace(/\/$/, '');
 
 		this.init();
 	}

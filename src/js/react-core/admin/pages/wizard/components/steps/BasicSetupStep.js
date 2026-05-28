@@ -152,7 +152,6 @@ const BasicSetupStep = ({ onNext, onBack, stepData, loading, error }) => {
 									placeholder={__('My Learning Academy', 'skillpulse-lms')}
 									className={formErrors.site_name ? 'has-error' : ''}
 									__next40pxDefaultSize
-									__nextHasNoMarginBottom
 								/>
 								{formErrors.site_name && (
 									<div className="splms-form-error">
@@ -172,7 +171,6 @@ const BasicSetupStep = ({ onNext, onBack, stepData, loading, error }) => {
 									placeholder={__('admin@example.com', 'skillpulse-lms')}
 									className={formErrors.admin_email ? 'has-error' : ''}
 									__next40pxDefaultSize
-									__nextHasNoMarginBottom
 								/>
 								{formErrors.admin_email && (
 									<div className="splms-form-error">
@@ -190,7 +188,6 @@ const BasicSetupStep = ({ onNext, onBack, stepData, loading, error }) => {
 									options={timezones}
 									onChange={(value) => handleFieldChange('timezone', value)}
 									__next40pxDefaultSize
-									__nextHasNoMarginBottom
 								/>
 							</div>
 						</div>

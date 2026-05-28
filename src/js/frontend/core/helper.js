@@ -9,6 +9,18 @@ export class SPLMSHelper {
 	}
 
 	/**
+     * Get dynamic REST API URL with fallback logic
+     * @param {string} endpoint - Optional endpoint path to append
+     * @returns {string} Full REST API URL
+     */
+	getRestApiUrl(endpoint = '') {
+		const apiRoot = window?.wpApiSettings?.root || window?.splms_frontend?.rest_url || window?.SPLMSCore_Data?.rest_url || '/wp-json/';
+		const base = apiRoot.endsWith('/') ? apiRoot : `${apiRoot}/`;
+		const path = endpoint.startsWith('/') ? endpoint.substring(1) : endpoint;
+		return `${base}${path}`;
+	}
+
+	/**
      * Show notification message
      * @param {string} message - The message to display
      * @param {string} type - The type of notification (success, error, info)

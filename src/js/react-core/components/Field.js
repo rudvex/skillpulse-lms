@@ -247,9 +247,11 @@ const Field = React.memo((props) => {
                 );
 
             case 'toggle':
+                const { type: _toggleType, value: _toggleValue, ...restToggleProps } = fieldProps;
                 return (
                     <ToggleControl 
-                        {...fieldProps} 
+                        {...restToggleProps}
+                        __nextHasNoMarginBottom={true}
                         checked={fieldProps.value || false}
                         className="splms-toggle"
                         disabled={fieldProps.disabled}

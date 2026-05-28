@@ -146,6 +146,18 @@ const configModuleMapping = {
 };
 
 /**
+ * Get dynamic REST API URL with fallback logic
+ * @param {string} endpoint - Optional endpoint path to append
+ * @returns {string} Full REST API URL
+ */
+export const getRestApiUrl = (endpoint = '') => {
+    const apiRoot = window?.wpApiSettings?.root || window?.SPLMSCore_Data?.rest_url || window?.splms_frontend?.rest_url || '/wp-json/';
+    const base = apiRoot.endsWith('/') ? apiRoot : `${apiRoot}/`;
+    const path = endpoint.startsWith('/') ? endpoint.substring(1) : endpoint;
+    return `${base}${path}`;
+};
+
+/**
  * Get configuration using new Config Loader REST API with caching
  * @param {string} key - Configuration key (e.g., 'lesson_settings_config')
  * @param {string} context - Context (admin, editor, frontend, api)
@@ -170,7 +182,7 @@ export const getConfig = async (key, context = 'admin', params = {}) => {
     try {
         // Build query parameters
         const queryParams = new URLSearchParams({ context, ...params });
-        const url = `/wp-json/splms/v1/config/${module}?${queryParams.toString()}`;
+        const url = getRestApiUrl(`splms/v1/config/${module}?${queryParams.toString()}`);
 
         // Make REST API call
         const response = await fetch(url, {
