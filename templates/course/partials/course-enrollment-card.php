@@ -454,27 +454,29 @@ $splms_in_wishlist        = in_array( $splms_course_id, $splms_user_wishlist, tr
 					</a>
 				<?php elseif ( 'public_paid' === $splms_course_access_type && splms_is_paid_courses_enabled() && $splms_full_price > 0 ) : ?>
 					<?php
-					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
-					echo splms_render_enrollment_button(
-						$splms_course_id,
-						is_user_logged_in() ? $splms_user_id : 0,
-						$splms_access_info,
-						$splms_enrollment_dates,
-						$splms_capacity_info,
-						$splms_is_enrolled
+					echo wp_kses_post(
+						splms_render_enrollment_button(
+							$splms_course_id,
+							is_user_logged_in() ? $splms_user_id : 0,
+							$splms_access_info,
+							$splms_enrollment_dates,
+							$splms_capacity_info,
+							$splms_is_enrolled
+						)
 					);
 					?>
 				<?php elseif ( 'invitation_only' !== $splms_course_access_type && 'prerequisite_required' !== $splms_course_access_type ) : ?>
 					<?php
 					// For other course types, show generic enrollment button.
-					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
-					echo splms_render_enrollment_button(
-						$splms_course_id,
-						is_user_logged_in() ? $splms_user_id : 0,
-						$splms_access_info,
-						$splms_enrollment_dates,
-						$splms_capacity_info,
-						$splms_is_enrolled
+					echo wp_kses_post(
+						splms_render_enrollment_button(
+							$splms_course_id,
+							is_user_logged_in() ? $splms_user_id : 0,
+							$splms_access_info,
+							$splms_enrollment_dates,
+							$splms_capacity_info,
+							$splms_is_enrolled
+						)
 					);
 					?>
 				<?php endif; ?>

@@ -811,7 +811,7 @@ class SPLMS_Blocks {
 		?>
 		<div class="wp-block-splms-course-instructor splms-instructor-card">
 			<div class="splms-instructor-card__avatar">
-				<?php echo $avatar; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_avatar returns safe HTML. ?>
+				<?php echo wp_kses_post( $avatar ); ?>
 			</div>
 			<div class="splms-instructor-card__content">
 				<h3 class="splms-instructor-card__name"><?php echo esc_html( $display_name ); ?></h3>

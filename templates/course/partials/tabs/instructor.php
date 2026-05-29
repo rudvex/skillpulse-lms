@@ -101,8 +101,7 @@ $splms_total_courses = $splms_instructor_courses->found_posts;
 					<?php
 					$splms_bio = get_the_author_meta( 'description' );
 					if ( $splms_bio ) {
-						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wpautop output is safe when used with esc_html.
-						echo wpautop( esc_html( $splms_bio ) );
+						echo wp_kses_post( wpautop( esc_html( $splms_bio ) ) );
 					} else {
 						echo '<p>' . esc_html__(
 							'This instructor is passionate about sharing knowledge and helping students achieve their learning goals. With extensive experience in their field, they bring practical insights and real-world applications to every course.',

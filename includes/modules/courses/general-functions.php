@@ -1035,16 +1035,17 @@ function splms_output_pagination() {
                 </svg>
             </span>';
 
-	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
-	echo paginate_links(
-		array(
-			'current'   => $current_page,
-			'total'     => $total_pages,
-			'prev_text' => $prev_text,
-			'next_text' => $next_text,
-			'type'      => 'list',
-			'end_size'  => 2,
-			'mid_size'  => 2,
+	echo wp_kses_post(
+		paginate_links(
+			array(
+				'current'   => $current_page,
+				'total'     => $total_pages,
+				'prev_text' => $prev_text,
+				'next_text' => $next_text,
+				'type'      => 'list',
+				'end_size'  => 2,
+				'mid_size'  => 2,
+			)
 		)
 	);
 

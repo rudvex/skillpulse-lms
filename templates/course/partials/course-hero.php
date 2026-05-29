@@ -590,7 +590,6 @@ $splms_is_enable_rating = splms_get_setting( 'enable_course_reviews', true );
 										$splms_course_type_data = splms_get_course_type_data( $splms_access_info );
 										if ( isset( $splms_course_type_data['price_display'] ) ) {
 											echo '<div class="splms-price-container">';
-		                                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
 											echo wp_kses_post( $splms_course_type_data['price_display'] );
 											echo '</div>';
 										}
@@ -598,14 +597,15 @@ $splms_is_enable_rating = splms_get_setting( 'enable_course_reviews', true );
 										<!-- Enrollment Button. -->
 										<div class="splms-enrollment-action">
 											<?php
-		                                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
-											echo splms_render_enrollment_button(
-												$splms_course_id,
-												is_user_logged_in() ? $splms_user_id : 0,
-												$splms_access_info,
-												$splms_enrollment_dates,
-												$splms_capacity_info,
-												$splms_is_enrolled
+											echo wp_kses_post(
+												splms_render_enrollment_button(
+													$splms_course_id,
+													is_user_logged_in() ? $splms_user_id : 0,
+													$splms_access_info,
+													$splms_enrollment_dates,
+													$splms_capacity_info,
+													$splms_is_enrolled
+												)
 											);
 											?>
 										</div>
@@ -698,10 +698,8 @@ $splms_is_enable_rating = splms_get_setting( 'enable_course_reviews', true );
 							<span class="info-value">
 								<?php
 								if ( isset( $splms_course_type_data['price_display'] ) ) {
-									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
 									echo wp_kses_post( $splms_course_type_data['price_display'] );
 								} elseif ( isset( $splms_course_type_data['restriction_display'] ) ) {
-									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
 									echo wp_kses_post( $splms_course_type_data['restriction_display'] );
 								} else {
 									echo esc_html( $splms_course_type_data['display'] );

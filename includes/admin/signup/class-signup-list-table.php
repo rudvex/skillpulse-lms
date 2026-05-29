@@ -123,7 +123,7 @@ class SPLMS_Signup_List_Table extends WP_Users_List_Table {
 		}
 
 		// Output row actions using WordPress built-in method.
-		echo $this->row_actions( $actions ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Method returns escaped HTML.
+		echo wp_kses_post( $this->row_actions( $actions ) );
 	}
 
 	/**
@@ -226,7 +226,7 @@ class SPLMS_Signup_List_Table extends WP_Users_List_Table {
 	 */
 	public function single_row( $signup_object, $style = '', $role = '', $numposts = 0 ) {
 		echo '<tr' . esc_attr( $style ) . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $style is already sanitized.
-		echo $this->single_row_columns( $signup_object ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Method returns escaped HTML.
+		echo wp_kses_post( $this->single_row_columns( $signup_object ) );
 		echo '</tr>';
 	}
 

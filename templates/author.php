@@ -217,16 +217,17 @@ if ( ! $splms_is_instructor || empty( $splms_author_courses ) ) {
                 </svg>
             </span>';
 
-					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
-					echo paginate_links(
-						array(
-							'splms_current'   => $splms_current_page,
-							'splms_total'     => $splms_total_pages,
-							'splms_prev_text' => $splms_prev_text,
-							'splms_next_text' => $splms_next_text,
-							'splms_type'      => 'list',
-							'splms_end_size'  => 2,
-							'splms_mid_size'  => 2,
+					echo wp_kses_post(
+						paginate_links(
+							array(
+								'splms_current'   => $splms_current_page,
+								'splms_total'     => $splms_total_pages,
+								'splms_prev_text' => $splms_prev_text,
+								'splms_next_text' => $splms_next_text,
+								'splms_type'      => 'list',
+								'splms_end_size'  => 2,
+								'splms_mid_size'  => 2,
+							)
 						)
 					);
 

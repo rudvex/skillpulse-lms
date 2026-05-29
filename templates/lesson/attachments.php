@@ -65,7 +65,7 @@ if ( empty( $splms_attachments ) ) {
 
 			<a href="<?php echo esc_url( $splms_file_url ); ?>" class="splms-attachment-card" target="_blank" rel="noopener noreferrer" download>
 				<div class="splms-attachment-icon">
-					<?php echo $splms_file_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php echo wp_kses_post( $splms_file_icon ); ?>
 				</div>
 				<div class="splms-attachment-info">
 					<div class="splms-attachment-title"><?php echo esc_html( $splms_file_title ); ?></div>

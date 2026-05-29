@@ -65,7 +65,6 @@ $splms_has_shortcodes = splms_has_shortcodes( $splms_lesson_embed_code );
 			<?php
 			// Process shortcodes and sanitize output.
 			$splms_processed = do_shortcode( $splms_lesson_embed_code );
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output sanitized with wp_kses_post.
 			echo wp_kses_post( $splms_processed );
 			?>
 		<?php endif; ?>
@@ -124,8 +123,7 @@ $splms_has_shortcodes = splms_has_shortcodes( $splms_lesson_embed_code );
 					</div>
 				<?php else : ?>
 					<?php
-					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output sanitized with wp_kses.
-					echo $splms_sanitized; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Content is sanitized via wp_kses above.
+					echo wp_kses_post( $splms_sanitized );
 					?>
 				<?php endif; ?>
 			<?php endif; ?>
@@ -137,8 +135,7 @@ $splms_has_shortcodes = splms_has_shortcodes( $splms_lesson_embed_code );
 			$splms_sanitized    = wp_kses( $splms_lesson_embed_code, $splms_allowed_html );
 
 			if ( ! empty( $splms_sanitized ) ) :
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output sanitized with wp_kses.
-				echo $splms_sanitized; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Content is sanitized via wp_kses above.
+				echo wp_kses_post( $splms_sanitized );
 			else :
 				?>
 				<div class="splms-notice splms-notice--warning">
@@ -172,7 +169,6 @@ $splms_has_shortcodes = splms_has_shortcodes( $splms_lesson_embed_code );
 		<?php else : ?>
 			<?php
 			// Plain text - treat as regular content.
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output sanitized with wp_kses_post.
 			echo wp_kses_post( $splms_lesson_embed_code );
 			?>
 		<?php endif; ?>

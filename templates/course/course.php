@@ -107,15 +107,13 @@ do_action( 'splms_before_single_course_card', $splms_course_id );
 				// Show course description from content instead.
 				$splms_content = get_the_content( null, false, $splms_course_post );
 				if ( ! empty( $splms_content ) ) {
-					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_trim_words output is safe.
-					echo wp_trim_words( wp_strip_all_tags( $splms_content ), 15, '...' );
+					echo wp_kses_post( wp_trim_words( wp_strip_all_tags( $splms_content ), 15, '...' ) );
 				} else {
 					// Use manual excerpt.
 					echo esc_html__( 'Learn new skills with this comprehensive course designed to help you advance your knowledge and career.', 'skillpulse-lms' );
 				}
 			} else {
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_trim_words output is safe.
-				echo wp_trim_words( $splms_excerpt, 15, '...' );
+				echo esc_html( wp_trim_words( $splms_excerpt, 15, '...' ) );
 			}
 			?>
 		</div>
