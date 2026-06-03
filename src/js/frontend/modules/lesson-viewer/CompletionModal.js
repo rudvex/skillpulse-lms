@@ -9,6 +9,7 @@
  */
 
 import { SPLMSBaseModal } from '../../core/base-modal.js';
+import { getSiteUrl } from '../../../react-core/utility/url';
 
 export class CompletionModal extends SPLMSBaseModal {
     constructor() {
@@ -125,14 +126,14 @@ export class CompletionModal extends SPLMSBaseModal {
             const courseId = lessonContainer.dataset.courseId;
             if (courseId) {
                 // Construct course URL using WordPress structure
-                const baseUrl = window.location.origin;
+                const baseUrl = getSiteUrl();
                 return `${baseUrl}/?p=${courseId}`;
             }
         }
 
         // Fallback: try to find course link in existing navigation
         const backButton = document.querySelector('.splms-back-button[href]');
-        if (backButton && backButton.href && !backButton.href.includes(window.location.origin + '/' + '?')) {
+        if (backButton && backButton.href && !backButton.href.includes(getSiteUrl() + '/' + '?')) {
             return backButton.href;
         }
 

@@ -1,3 +1,5 @@
+import { getSiteUrl } from '../../../react-core/utility/url';
+
 /**
  * Dashboard Notifications Tab
  *
@@ -264,12 +266,12 @@
 		},
 
 		getBaseUrl: function() {
-			// Try to get base URL from localized data or use window.location.origin
+			// Try to get base URL from localized data or use getSiteUrl()
 			const dashboard = window.splms_dashboard;
 			if (dashboard && dashboard.base_url) {
 				return dashboard.base_url;
 			}
-			return window.location.origin;
+			return getSiteUrl();
 		},
 
 		getUserAvatar: function() {

@@ -1,3 +1,5 @@
+import { getSiteUrl } from '../../react-core/utility/url';
+
 /**
  * SkillPulse LMS Unified Notifications System
  * 
@@ -391,7 +393,7 @@ class SPLMSNotifications {
 					courseUrl = notification.meta.course_url;
 				} else if (notification.course_id) {
 					// Try to get URL from window if available, otherwise use simple pattern
-					const baseUrl = window.location.origin || '';
+					const baseUrl = getSiteUrl() || '';
 					courseUrl = `${baseUrl}/course/${notification.course_id}/`;
 				}
                 

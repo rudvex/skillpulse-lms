@@ -4,6 +4,7 @@ import { __ } from '@wordpress/i18n';
 import { SplmsIcon } from '../SplmsIcon';
 import { fetchApiData, formatOptions } from '../../utility/apiHelper';
 import './styles.scss';
+import { getSiteUrl } from '../../utility/url';
 
 /**
  * SearchableSelect Component
@@ -121,7 +122,7 @@ const SearchableSelect = ({
 
         // Default for pages
         if (typeof value === 'number' || /^\d+$/.test(value)) {
-            return `${window.location.origin}/?page_id=${value}`;
+            return `${getSiteUrl()}/?page_id=${value}`;
         }
 
         return null;

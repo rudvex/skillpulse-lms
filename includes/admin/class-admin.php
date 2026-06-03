@@ -194,6 +194,8 @@ class SPLMS_Admin {
 			'admin_nonce'       => wp_create_nonce( 'splms_admin_nonce' ),
 			'image_url'         => SPLMS_URL_PATH . 'assets/images/',
 			'back_cta_label'    => __( 'Back to Courses', 'skillpulse-lms' ),
+			'siteUrl'           => site_url(),
+			'homeUrl'           => home_url(),
 			'adminUrl'          => admin_url(),
 			'coursesUrl'        => admin_url( 'edit.php?post_type=' . SPLMS_POST_TYPES['course'] ),
 			'posts_url'         => admin_url( 'post.php' ),

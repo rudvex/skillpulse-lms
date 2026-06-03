@@ -10,6 +10,7 @@ import { dateI18n } from '@wordpress/date';
 import { SPLMS_ListView } from '../../../components/admin/ListView';
 import { StatusBadge, MethodBadge, ProgressBar } from './components/EnrollmentBadges';
 import { SplmsIcon } from '../../../components/SplmsIcon';
+import { getAdminUrl } from '../../../utility/url';
 
 class List extends Component {
 	constructor( props ) {
@@ -71,7 +72,7 @@ class List extends Component {
 				render: ( enrollment ) => (
 					<>
 						<a
-							href={`${window.SPLMSCore_Data?.adminUrl || '/wp-admin'}/user-edit.php?user_id=${enrollment.user_id}`}
+							href={`${getAdminUrl()}/user-edit.php?user_id=${enrollment.user_id}`}
 							target="_blank"
 							rel="noopener noreferrer"
 							className="splms-user-link"
@@ -95,7 +96,7 @@ class List extends Component {
 				sortable: true,
 				render: ( enrollment ) => (
 					<a
-						href={`${window.SPLMSCore_Data?.adminUrl || '/wp-admin'}/post.php?post=${enrollment.course_id}&action=edit`}
+						href={`${getAdminUrl()}/post.php?post=${enrollment.course_id}&action=edit`}
 						target="_blank"
 						rel="noopener noreferrer"
 						className="splms-course-link"
