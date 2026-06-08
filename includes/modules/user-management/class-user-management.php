@@ -4,7 +4,7 @@
  *
  * Handles user management functionality including roles, profiles, and authentication.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 

@@ -5,7 +5,7 @@
  * Main wizard controller that handles wizard initialization, routing,
  * and integration with existing SkillPulse LMS systems.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since [SPLMS_VERSION]
  */
 

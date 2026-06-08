@@ -5,7 +5,7 @@
  * Handles secure token generation and validation for purchase URLs.
  * Prevents enumeration attacks and ensures URL integrity.
  *
- * @package    SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Modules\Orders
  * @since      1.0.0
  */

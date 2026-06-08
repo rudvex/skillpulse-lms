@@ -2,7 +2,7 @@
 /**
  * Activation Form Template
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 

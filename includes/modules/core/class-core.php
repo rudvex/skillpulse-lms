@@ -4,7 +4,7 @@
  *
  * Handles initialization and loading of core system components.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 

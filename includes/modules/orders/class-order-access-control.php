@@ -2,7 +2,7 @@
 /**
  * Order Access Control System
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Modules
  * @since 1.0.0
  */

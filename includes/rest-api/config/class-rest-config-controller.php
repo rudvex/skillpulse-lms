@@ -5,7 +5,7 @@
  * Handles REST API endpoints for configuration data management.
  * Provides on-demand configuration loading to replace heavy wp_localize_script usage.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  *
  * @api

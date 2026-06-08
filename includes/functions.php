@@ -5,7 +5,7 @@
  * Core utility functions for the SkillPulse LMS plugin.
  * Consolidated from multiple function files for better organization.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 

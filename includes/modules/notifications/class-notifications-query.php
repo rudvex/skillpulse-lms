@@ -4,7 +4,7 @@
  *
  * Handles database operations for in-app notifications.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Notifications
  * @since 1.0.0
  */

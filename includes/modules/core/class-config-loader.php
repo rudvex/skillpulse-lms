@@ -5,7 +5,7 @@
  * Handles loading and caching of PHP configuration files to replace heavy JSON configs
  * and wp_localize_script performance issues.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 

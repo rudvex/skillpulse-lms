@@ -5,7 +5,7 @@
  * Handles REST API endpoints for plugin settings management.
  * Provides endpoints for getting all settings, updating settings by tab, and retrieving user roles.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api

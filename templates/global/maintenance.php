@@ -4,7 +4,7 @@
  *
  * Modern, LMS-focused maintenance page displayed when maintenance mode is enabled.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 

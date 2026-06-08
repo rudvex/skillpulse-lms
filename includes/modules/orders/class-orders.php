@@ -6,7 +6,7 @@
  *
  * @since      1.0.0
  * @subpackage Orders
- * @package    SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

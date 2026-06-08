@@ -6,7 +6,7 @@
  * Extends WP_Users_List_Table to provide a table interface for reviewing,
  * activating, and managing pending user signups.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 

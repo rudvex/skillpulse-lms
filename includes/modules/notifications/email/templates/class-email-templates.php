@@ -4,7 +4,7 @@
  *
  * Handles email template management and sending.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Email
  * @since 1.0.0
  */

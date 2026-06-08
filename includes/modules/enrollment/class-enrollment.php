@@ -5,7 +5,7 @@
  * Helper class for enrollment-related functionality.
  * Note: Main enrollment AJAX handlers are in SPLMS_Student class.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Handles course enrollment functionality.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 class SPLMS_Enrollment {

@@ -5,7 +5,7 @@
  * Handles REST API endpoints for course enrollments management operations.
  * Provides endpoints for viewing, creating, updating, and deleting enrollments.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * creation, update, deletion, and bulk actions. Also exposes helper endpoints
  * to fetch courses and users for filtering.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api

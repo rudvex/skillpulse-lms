@@ -6,7 +6,7 @@
  *
  * @since      1.0.0
  * @subpackage Lessons
- * @package    SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

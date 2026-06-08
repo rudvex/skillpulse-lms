@@ -4,7 +4,7 @@
  *
  * Handles unified notification dispatching (email and in-app).
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Notifications
  * @since 1.0.0
  */

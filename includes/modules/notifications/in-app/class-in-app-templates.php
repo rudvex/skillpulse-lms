@@ -4,7 +4,7 @@
  *
  * Handles in-app notification template management, default templates, and placeholder replacement.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Notifications
  * @since 1.0.0
  */

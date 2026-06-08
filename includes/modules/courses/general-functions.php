@@ -6,7 +6,7 @@
  * across the SkillPulse LMS plugin.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

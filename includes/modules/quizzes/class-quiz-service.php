@@ -5,7 +5,7 @@
  * Provides unified business logic for quiz operations shared by AJAX and REST APIs.
  * Eliminates code duplication and ensures consistent behavior across interfaces.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 

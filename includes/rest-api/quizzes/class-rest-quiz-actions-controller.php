@@ -4,7 +4,7 @@
  *
  * Handles REST API endpoints for quiz actions: start, resume, restart, and state management.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api

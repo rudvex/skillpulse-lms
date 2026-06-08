@@ -5,7 +5,7 @@
  * Main admin class that orchestrates all admin functionality.
  * Handles asset enqueuing, admin menus, and admin interface management.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 

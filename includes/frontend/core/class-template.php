@@ -5,7 +5,7 @@
  * Handles template loading and customization for SkillPulse LMS.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Manages template loading, theme overrides, and body class customization.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 class SPLMS_Template {
 

@@ -5,7 +5,7 @@
  * Handles REST API endpoints for email template management and testing.
  * Provides endpoints for getting/saving templates, testing templates, SMTP testing, and email queue management.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api

@@ -4,7 +4,7 @@
  *
  * Manages metaboxes for custom post types (courses, lessons, quizzes).
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 

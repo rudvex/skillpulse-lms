@@ -4,7 +4,7 @@
  *
  * Handles REST API endpoints for course actions: enroll, unenroll, progress, wishlist, and bookmark.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api

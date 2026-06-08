@@ -7,7 +7,7 @@
  *
  * @since      1.0.0
  * @subpackage Core
- * @package    SkillPulse_LMS
+ * @package SPLMS
  */
 
 defined( 'ABSPATH' ) || exit;

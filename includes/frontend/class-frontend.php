@@ -4,7 +4,7 @@
  *
  * Handles frontend functionality including scripts, styles, and query modifications.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Frontend
  * @since 1.0.0
  */
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Frontend class.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Frontend
  * @since 1.0.0
  */

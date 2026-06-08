@@ -4,7 +4,7 @@
  *
  * Handles course-related operations including CRUD and data management.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Courses
  * @since 1.0.0
  */

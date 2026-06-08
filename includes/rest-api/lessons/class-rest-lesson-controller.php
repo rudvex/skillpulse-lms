@@ -5,7 +5,7 @@
  * Handles REST API endpoints for lesson management.
  * Provides endpoints for CRUD operations and progress tracking on lessons.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api

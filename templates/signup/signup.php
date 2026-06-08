@@ -3,7 +3,7 @@
  * Main Signup Template
  * This is the template that includes the appropriate sub-template
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 

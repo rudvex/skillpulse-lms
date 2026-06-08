@@ -4,7 +4,7 @@
  *
  * Handles section access database operations.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Core
  * @since 1.0.0
  */

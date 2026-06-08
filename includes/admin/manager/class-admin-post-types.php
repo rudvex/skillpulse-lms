@@ -4,7 +4,7 @@
  *
  * Handles registration and management of custom post types and taxonomies.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 

@@ -5,7 +5,7 @@
  * Provides consistent navigation footer UI for lessons, quizzes, and other content types.
  * This template can be overridden by copying it to yourtheme/skillpulse-lms/shared/navigation-footer.php
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 

@@ -4,7 +4,7 @@
  *
  * Handles database table creation and management for the plugin.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 

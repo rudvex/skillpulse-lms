@@ -4,7 +4,7 @@
  *
  * Manages the main SkillPulse LMS admin menu and submenus.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 

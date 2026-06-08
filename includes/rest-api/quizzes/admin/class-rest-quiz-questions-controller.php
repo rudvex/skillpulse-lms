@@ -5,7 +5,7 @@
  * Handles REST API endpoints for quiz question management.
  * Provides endpoints for CRUD operations on questions, reordering, and importing questions.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api

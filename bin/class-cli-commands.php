@@ -2,7 +2,7 @@
 /**
  * WP-CLI Commands for SkillPulse LMS
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {

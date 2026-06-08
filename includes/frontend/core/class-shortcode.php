@@ -5,7 +5,7 @@
  * Handles all shortcode registrations and rendering for SkillPulse LMS.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Manages shortcode registration and rendering for the SkillPulse LMS plugin.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 class SPLMS_Shortcode {
 

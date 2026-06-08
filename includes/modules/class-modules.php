@@ -5,7 +5,7 @@
  * Handles loading and initialization of all plugin modules.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

@@ -4,7 +4,7 @@
  *
  * Handles database queries for course item relationships.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Courses
  * @since 1.0.0
  */

@@ -4,7 +4,7 @@
  *
  * This template can be overridden by copying it to yourtheme/skillpulse-lms/lesson/types/interactive.php
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 

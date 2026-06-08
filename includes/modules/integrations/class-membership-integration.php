@@ -5,7 +5,7 @@
  * Base class for all membership plugin integrations.
  * All membership integrations must extend this class.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Integrations
  * @since 1.0.0
  */

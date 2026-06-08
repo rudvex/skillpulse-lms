@@ -4,7 +4,7 @@
  *
  * Handles in-app notification storage, retrieval, and AJAX operations.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Notifications
  * @since 1.0.0
  */
@@ -22,7 +22,7 @@ if ( ! class_exists( 'SPLMS_Notifications_Query' ) ) {
  *
  * Handles user notifications for in-app display.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 class SPLMS_In_App_Notifications {

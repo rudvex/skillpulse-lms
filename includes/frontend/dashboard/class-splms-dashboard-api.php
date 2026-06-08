@@ -5,7 +5,7 @@
  * Handles AJAX and REST API calls for dashboard
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Handles AJAX and REST API calls for dashboard functionality.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 class SPLMS_Dashboard_API {
 

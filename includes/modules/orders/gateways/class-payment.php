@@ -4,7 +4,7 @@
  *
  * @since      1.0.0
  * @subpackage Modules\Orders\Gateways
- * @package    SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

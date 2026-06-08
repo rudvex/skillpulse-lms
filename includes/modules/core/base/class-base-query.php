@@ -5,7 +5,7 @@
  * Base class for database query operations.
  * Includes object caching for read operations and cache invalidation for writes.
  *
- * @package    SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Core
  * @since      1.0.0
  */

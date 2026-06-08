@@ -3,7 +3,7 @@
  * Gutenberg Blocks registration and rendering.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

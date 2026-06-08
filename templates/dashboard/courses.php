@@ -5,7 +5,7 @@
  * This template can be overridden by copying it to:
  * your-theme/skillpulse-lms/dashboard/courses.php
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 

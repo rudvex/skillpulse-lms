@@ -4,7 +4,7 @@
  *
  * Handles course enrollments database operations.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Enrollment
  * @since 1.0.0
  */

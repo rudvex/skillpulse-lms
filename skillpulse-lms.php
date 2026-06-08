@@ -9,7 +9,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: skillpulse-lms
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -20,9 +20,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once plugin_dir_path( __FILE__ ) . 'constants.php';
 
 // Register activation hook.
-register_activation_hook( __FILE__, array( 'SkillPulse_LMS', 'activation_hook' ) );
+register_activation_hook( __FILE__, array( 'SPLMS', 'activation_hook' ) );
 // Register deactivation hook.
-register_deactivation_hook( __FILE__, array( 'SkillPulse_LMS', 'deactivation_hook' ) );
+register_deactivation_hook( __FILE__, array( 'SPLMS', 'deactivation_hook' ) );
 
 if ( ! defined( 'SPLMS_VERSION' ) ) {
 	return;
@@ -39,24 +39,23 @@ if ( ! defined( 'SPLMS_FILE' ) ) {
 /**
  * Main class of SkillPulse LMS.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
-if ( ! class_exists( 'SkillPulse_LMS' ) ) {
+if ( ! class_exists( 'SPLMS' ) ) {
 	/**
 	 * Main SkillPulse LMS class.
 	 *
 	 * @since   1.0.0
-	 * @package SkillPulse_LMS
+	 * @package SPLMS
 	 */
-	class SkillPulse_LMS {
- // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound -- Main plugin class name.
+	class SPLMS {
 
 		/**
 		 * Class instance.
 		 *
 		 * @since 1.0.0
 		 *
-		 * @var SkillPulse_LMS|null $instance
+		 * @var SPLMS|null $instance
 		 */
 		private static $instance;
 
@@ -65,7 +64,7 @@ if ( ! class_exists( 'SkillPulse_LMS' ) ) {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @return SkillPulse_LMS The class instance.
+		 * @return SPLMS The class instance.
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -209,10 +208,10 @@ if ( ! function_exists( 'splms_load' ) ) {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS The plugin instance.
+	 * @return SPLMS The plugin instance.
 	 */
 	function splms_load() { // phpcs:ignore Universal.Files.SeparateFunctionsFromOO.Mixed -- WordPress pattern: main plugin file contains both class and function.
-		return SkillPulse_LMS::get_instance();
+		return SPLMS::get_instance();
 	}
 }
 

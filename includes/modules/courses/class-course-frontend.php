@@ -5,7 +5,7 @@
  * Handles course-specific frontend functionality including archive pages,
  * pagination, template hooks, and query modifications.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Courses
  * @since 1.0.0
  */

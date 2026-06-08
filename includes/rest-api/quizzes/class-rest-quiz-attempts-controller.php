@@ -7,7 +7,7 @@
  *
  * @since   1.0.0
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @api
  * Available endpoints:
  * GET    /splms/v1/quiz-attempts - Get list of quiz attempts

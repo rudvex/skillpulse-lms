@@ -5,7 +5,7 @@
  * Handles quiz-related functionality and operations.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

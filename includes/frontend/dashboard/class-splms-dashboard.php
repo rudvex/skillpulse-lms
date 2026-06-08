@@ -4,7 +4,7 @@
  *
  * Handles dashboard functionality with template loading
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Handles dashboard functionality with template loading and shortcode rendering.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 class SPLMS_Dashboard {

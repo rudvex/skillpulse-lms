@@ -4,7 +4,7 @@
  *
  * Handles database operations for orders/payments
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Modules
  * @since 1.0.0
  */

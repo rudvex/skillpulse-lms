@@ -5,7 +5,7 @@
  * Handles REST API endpoints for section settings management.
  * Provides endpoints for getting and updating section-specific settings.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api

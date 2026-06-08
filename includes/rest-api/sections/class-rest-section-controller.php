@@ -5,7 +5,7 @@
  * Handles REST API endpoints for course section management.
  * Provides endpoints for CRUD operations on course sections.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api

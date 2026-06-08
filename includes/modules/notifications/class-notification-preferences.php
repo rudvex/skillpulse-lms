@@ -4,7 +4,7 @@
  *
  * Handles user notification preferences management.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Notifications
  * @since 1.0.0
  */

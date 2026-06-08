@@ -5,7 +5,7 @@
  * Main controller for initializing and registering all REST API endpoints.
  * Handles route registration, class loading, and REST API setup.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 

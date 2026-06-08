@@ -4,7 +4,7 @@
  *
  * Displays section-based pricing vs full course pricing.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

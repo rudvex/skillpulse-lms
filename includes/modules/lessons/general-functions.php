@@ -5,7 +5,7 @@
  * This file contains all general lesson-related functions that can be reused
  * across the SkillPulse LMS plugin.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 

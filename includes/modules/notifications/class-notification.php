@@ -4,7 +4,7 @@
  *
  * Centralized notification management system.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Notifications
  * @since 1.0.0
  */

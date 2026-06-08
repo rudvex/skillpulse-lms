@@ -5,7 +5,7 @@
  * This template follows WordPress theme conventions for archive pages.
  * It can be overridden by copying it to yourtheme/archive-course.php.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 

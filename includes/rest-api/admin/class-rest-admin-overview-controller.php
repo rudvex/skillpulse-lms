@@ -5,7 +5,7 @@
  * Handles REST API endpoints for admin dashboard overview and statistics.
  * Provides endpoints for dashboard stats, activity logs, and reports.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api

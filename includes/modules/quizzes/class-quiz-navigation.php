@@ -5,7 +5,7 @@
  * Handles quiz navigation features including progress tracking,
  * question bookmarks, and navigation controls.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 

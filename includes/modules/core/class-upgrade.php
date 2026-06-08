@@ -4,7 +4,7 @@
  *
  * Handle any installation upgrade or install tasks.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Core
  * @since 1.0.0
  */

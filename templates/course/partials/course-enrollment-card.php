@@ -5,7 +5,7 @@
  * This template displays course information with a focus on the instructor
  * and shows individual sections available for purchase.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 2.0
  */
 

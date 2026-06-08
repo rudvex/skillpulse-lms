@@ -8,7 +8,7 @@
  * This template follows WordPress theme conventions for single post pages.
  * It can be overridden by copying it to yourtheme/single-splms_section.php.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 

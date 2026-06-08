@@ -4,7 +4,7 @@
  *
  * Handles course sections functionality.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 

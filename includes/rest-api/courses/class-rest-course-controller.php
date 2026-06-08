@@ -4,7 +4,7 @@
  *
  * Base controller for course REST API endpoints.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api

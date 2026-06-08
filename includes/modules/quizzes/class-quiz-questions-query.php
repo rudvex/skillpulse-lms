@@ -4,7 +4,7 @@
  *
  * Handles quiz questions database operations.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 

@@ -5,7 +5,7 @@
  * Handles REST API endpoints for quiz management and quiz attempts.
  * Provides endpoints for CRUD operations, quiz attempts, submissions, and results.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api

@@ -5,7 +5,7 @@
  * Core signup functionality for user registration and activation.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

@@ -5,7 +5,7 @@
  * Handles quiz functionality for guest (non-logged-in) users
  * providing state persistence and enhanced preview capabilities.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 

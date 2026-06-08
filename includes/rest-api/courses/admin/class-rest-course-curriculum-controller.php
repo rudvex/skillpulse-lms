@@ -5,7 +5,7 @@
  * Handles REST API endpoints for course curriculum management.
  * Provides endpoints for getting and updating course curriculum (sections, lessons, quizzes).
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api

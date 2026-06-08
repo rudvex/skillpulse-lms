@@ -6,7 +6,7 @@
  * Provides endpoints for getting and updating course settings including access control,
  * content settings, delivery settings, and completion criteria.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api

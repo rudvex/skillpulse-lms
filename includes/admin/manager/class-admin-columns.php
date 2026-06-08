@@ -4,7 +4,7 @@
  *
  * Handles custom columns for Courses, Lessons, and Quizzes post type listings.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 

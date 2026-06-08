@@ -5,7 +5,7 @@
  * Handles user profile functionality including statistics, analytics, and profile management.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

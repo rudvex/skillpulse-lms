@@ -5,7 +5,7 @@
  * Handles REST API endpoints for lesson settings management.
  * Provides endpoints for getting and updating lesson-specific settings.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api

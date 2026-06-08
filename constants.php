@@ -2,7 +2,7 @@
 /**
  * The plugin constants.
  *
- * @package    SkillPulse_LMS
+ * @package    SPLMS
  * @subpackage Constants
  */
 

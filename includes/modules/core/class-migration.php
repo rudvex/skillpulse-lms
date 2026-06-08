@@ -5,7 +5,7 @@
  * Handles all database schema migrations for SkillPulse LMS plugin.
  * Provides safe, logged, and reversible database upgrades.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 

@@ -5,7 +5,7 @@
  * Handles REST API endpoints for frontend notification operations.
  * Provides endpoints for authenticated users to manage their own notifications.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api

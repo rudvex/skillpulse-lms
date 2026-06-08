@@ -5,7 +5,7 @@
  * Handles REST API endpoints for signup management operations.
  * Provides endpoints for viewing, creating, activating, and deleting signups.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Exposes endpoints for managing signups: list, retrieve, create, delete,
  * activate, resend activation, and fetching the signup form schema.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api

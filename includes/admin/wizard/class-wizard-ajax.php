@@ -4,7 +4,7 @@
  *
  * Handles AJAX requests for the setup wizard.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since [SPLMS_VERSION]
  */
 

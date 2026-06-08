@@ -4,7 +4,7 @@
  *
  * Handles REST API endpoints for lesson actions: progress and complete.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api

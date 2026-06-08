@@ -6,7 +6,7 @@
  * Handles signup approval, activation emails, and signup management.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

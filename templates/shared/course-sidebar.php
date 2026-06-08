@@ -3,7 +3,7 @@
  * Course Curriculum Sidebar (Shared Template)
  * Used for both Lesson and Quiz pages
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 
