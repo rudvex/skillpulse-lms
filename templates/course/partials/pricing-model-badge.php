@@ -4,7 +4,7 @@
  *
  * Displays a badge when the course has section-based pricing enabled.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 

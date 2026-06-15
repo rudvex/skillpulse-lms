@@ -5,7 +5,7 @@
  * Handles REST API endpoints for email template management and testing.
  * Provides endpoints for getting/saving templates, testing templates, SMTP testing, and email queue management.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api
@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_REST_Admin_Email_Templates_Controller extends WP_REST_Controller {
+class SPLMS_REST_Admin_Email_Templates_Controller extends WP_REST_Controller {
 
 	/**
 	 * Constructor.
@@ -185,7 +185,7 @@ class SkillPulse_LMS_REST_Admin_Email_Templates_Controller extends WP_REST_Contr
 	 * @return WP_REST_Response Response object.
 	 */
 	public function get_templates( $request ) {
-		$email_templates = SkillPulse_LMS_Email_Templates::get_instance();
+		$email_templates = SPLMS_Email_Templates::get_instance();
 		$templates       = $email_templates->get_all_templates();
 
 		return rest_ensure_response(
@@ -212,7 +212,7 @@ class SkillPulse_LMS_REST_Admin_Email_Templates_Controller extends WP_REST_Contr
 			$template_data = $request->get_params();
 		}
 
-		$email_templates = SkillPulse_LMS_Email_Templates::get_instance();
+		$email_templates = SPLMS_Email_Templates::get_instance();
 		$result          = $email_templates->save_template( $template_data );
 
 		if ( false === $result ) {
@@ -259,7 +259,7 @@ class SkillPulse_LMS_REST_Admin_Email_Templates_Controller extends WP_REST_Contr
 	public function test_template( $request ) {
 		$template_data = $request->get_params();
 
-		$email_templates = SkillPulse_LMS_Email_Templates::get_instance();
+		$email_templates = SPLMS_Email_Templates::get_instance();
 		$result          = $email_templates->test_template( $template_data );
 
 		if ( is_wp_error( $result ) ) {
@@ -286,7 +286,7 @@ class SkillPulse_LMS_REST_Admin_Email_Templates_Controller extends WP_REST_Contr
 	public function reset_template( $request ) {
 		$template_key = $request->get_param( 'template_key' );
 
-		$email_templates = SkillPulse_LMS_Email_Templates::get_instance();
+		$email_templates = SPLMS_Email_Templates::get_instance();
 		$result          = $email_templates->reset_template( $template_key );
 
 		if ( false === $result ) {
@@ -353,7 +353,7 @@ class SkillPulse_LMS_REST_Admin_Email_Templates_Controller extends WP_REST_Contr
 		}
 
 		// Test SMTP connection.
-		$email_sender = SkillPulse_LMS_Email_Sender::get_instance();
+		$email_sender = SPLMS_Email_Sender::get_instance();
 		$result       = $email_sender->test_smtp_connection();
 
 		if ( is_wp_error( $result ) ) {
@@ -385,7 +385,7 @@ class SkillPulse_LMS_REST_Admin_Email_Templates_Controller extends WP_REST_Contr
 	 * @return WP_REST_Response Response object.
 	 */
 	public function get_queue_stats( $request ) {
-		$email_sender = SkillPulse_LMS_Email_Sender::get_instance();
+		$email_sender = SPLMS_Email_Sender::get_instance();
 		$stats        = $email_sender->get_queue_stats();
 
 		return new WP_REST_Response(
@@ -410,7 +410,7 @@ class SkillPulse_LMS_REST_Admin_Email_Templates_Controller extends WP_REST_Contr
 		$data        = $request->get_json_params();
 		$max_retries = isset( $data['max_retries'] ) ? intval( $data['max_retries'] ) : 3;
 
-		$email_sender = SkillPulse_LMS_Email_Sender::get_instance();
+		$email_sender = SPLMS_Email_Sender::get_instance();
 		$result       = $email_sender->retry_failed_emails( $max_retries );
 
 		return new WP_REST_Response(
@@ -437,7 +437,7 @@ class SkillPulse_LMS_REST_Admin_Email_Templates_Controller extends WP_REST_Contr
 		$data   = $request->get_json_params();
 		$status = isset( $data['status'] ) ? sanitize_text_field( $data['status'] ) : 'all';
 
-		$email_sender = SkillPulse_LMS_Email_Sender::get_instance();
+		$email_sender = SPLMS_Email_Sender::get_instance();
 		$result       = $email_sender->clear_email_queue( $status );
 
 		if ( $result ) {
@@ -470,7 +470,7 @@ class SkillPulse_LMS_REST_Admin_Email_Templates_Controller extends WP_REST_Contr
 	 * @return WP_REST_Response Response object.
 	 */
 	public function process_email_queue( $request ) {
-		$email_sender = SkillPulse_LMS_Email_Sender::get_instance();
+		$email_sender = SPLMS_Email_Sender::get_instance();
 		$email_sender->process_email_queue();
 
 		return new WP_REST_Response(
@@ -505,7 +505,7 @@ class SkillPulse_LMS_REST_Admin_Email_Templates_Controller extends WP_REST_Contr
 			);
 		}
 
-		$email_sender = SkillPulse_LMS_Email_Sender::get_instance();
+		$email_sender = SPLMS_Email_Sender::get_instance();
 		$result       = $email_sender->test_queue_system( $test_email );
 
 		if ( is_wp_error( $result ) ) {

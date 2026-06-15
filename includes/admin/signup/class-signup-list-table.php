@@ -6,7 +6,7 @@
  * Extends WP_Users_List_Table to provide a table interface for reviewing,
  * activating, and managing pending user signups.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 
@@ -38,7 +38,7 @@ if ( ! class_exists( 'WP_Users_List_Table' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Signup_List_Table extends WP_Users_List_Table {
+class SPLMS_Signup_List_Table extends WP_Users_List_Table {
 
 	/**
 	 * Signup counts.
@@ -123,7 +123,7 @@ class SkillPulse_LMS_Signup_List_Table extends WP_Users_List_Table {
 		}
 
 		// Output row actions using WordPress built-in method.
-		echo $this->row_actions( $actions ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Method returns escaped HTML.
+		echo wp_kses_post( $this->row_actions( $actions ) );
 	}
 
 	/**
@@ -226,7 +226,7 @@ class SkillPulse_LMS_Signup_List_Table extends WP_Users_List_Table {
 	 */
 	public function single_row( $signup_object, $style = '', $role = '', $numposts = 0 ) {
 		echo '<tr' . esc_attr( $style ) . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $style is already sanitized.
-		echo $this->single_row_columns( $signup_object ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Method returns escaped HTML.
+		echo wp_kses_post( $this->single_row_columns( $signup_object ) );
 		echo '</tr>';
 	}
 
@@ -281,8 +281,8 @@ class SkillPulse_LMS_Signup_List_Table extends WP_Users_List_Table {
 			return;
 		}
 
-		$signup       = SkillPulse_LMS_Signup::get_instance();
-		$signup_query = SkillPulse_LMS_Signup_Query::get_instance();
+		$signup       = SPLMS_Signup::get_instance();
+		$signup_query = SPLMS_Signup_Query::get_instance();
 
 		// Handle individual signup actions.
 		if ( isset( $_GET['signup_id'] ) && in_array( $action, array( 'activate', 'resend', 'delete' ), true ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -313,7 +313,7 @@ class SkillPulse_LMS_Signup_List_Table extends WP_Users_List_Table {
 				case 'resend':
 					$signup_item = $signup_query->get_signup( $signup_id );
 					if ( $signup_item ) {
-						$result = SkillPulse_LMS_Email_Module::get_instance()->send_activation_email( $signup_id );
+						$result = SPLMS_Email_Module::get_instance()->send_activation_email( $signup_id );
 						if ( $result ) {
 							$redirect_url = add_query_arg( 'resent', '1', remove_query_arg( array( 'action', 'signup_id', '_wpnonce' ) ) );
 						} else {
@@ -385,7 +385,7 @@ class SkillPulse_LMS_Signup_List_Table extends WP_Users_List_Table {
 				foreach ( $signup_ids as $signup_id ) {
 					$signup_item = $signup_query->get_signup( $signup_id );
 					if ( $signup_item ) {
-						$result = SkillPulse_LMS_Email_Module::get_instance()->send_activation_email( $signup_id );
+						$result = SPLMS_Email_Module::get_instance()->send_activation_email( $signup_id );
 						if ( $result ) {
 							++$resent;
 						}
@@ -439,7 +439,7 @@ class SkillPulse_LMS_Signup_List_Table extends WP_Users_List_Table {
 			$args['status'] = sanitize_text_field( wp_unslash( $_GET['status'] ) );
 		}
 
-		$signup_query = SkillPulse_LMS_Signup_Query::get_instance();
+		$signup_query = SPLMS_Signup_Query::get_instance();
 		$signups      = $signup_query->get_signups( $args );
 
 		$this->items         = $signups['signups'];
@@ -489,7 +489,7 @@ class SkillPulse_LMS_Signup_List_Table extends WP_Users_List_Table {
 		$users_url = admin_url( 'users.php' );
 
 		// Add pending signups view.
-		$signup_query  = SkillPulse_LMS_Signup_Query::get_instance();
+		$signup_query  = SPLMS_Signup_Query::get_instance();
 		$signup_count  = $signup_query->count_signups( array( 'status' => 'pending' ) );
 		$pending_url   = add_query_arg( 'page', 'splms-signups', $users_url );
 		$pending_class = ( 'registered' === $role ) ? ' class="current"' : '';

@@ -4,7 +4,7 @@
  *
  * Manages the main SkillPulse LMS admin menu and submenus.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 
@@ -13,18 +13,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class SkillPulse_LMS_Admin_Menus
+ * Class SPLMS_Admin_Menus
  *
  * Manages the main SkillPulse LMS admin menu and submenus.
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Admin_Menus {
+class SPLMS_Admin_Menus {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Admin_Menus|null $instance
+	 * @var SPLMS_Admin_Menus|null $instance
 	 */
 	private static $instance;
 
@@ -33,7 +33,7 @@ class SkillPulse_LMS_Admin_Menus {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Admin_Menus
+	 * @return SPLMS_Admin_Menus
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -82,7 +82,7 @@ class SkillPulse_LMS_Admin_Menus {
 	 * @since 1.0.0
 	 */
 	public function add_admin_menus() {
-		$admin_instance = class_exists( 'SkillPulse_LMS_Admin' ) ? SkillPulse_LMS_Admin::get_instance() : null;
+		$admin_instance = class_exists( 'SPLMS_Admin' ) ? SPLMS_Admin::get_instance() : null;
 		$icon           = $admin_instance ? $admin_instance->get_plugin_icon() : 'dashicons-graduation-cap';
 
 		// Main menu.
@@ -484,8 +484,8 @@ class SkillPulse_LMS_Admin_Menus {
 	 */
 	public function setup_wizard_page() {
 		// Delegate to the wizard class if it exists.
-		if ( class_exists( 'SkillPulse_LMS_Setup_Wizard' ) ) {
-			$wizard = SkillPulse_LMS_Setup_Wizard::get_instance();
+		if ( class_exists( 'SPLMS_Setup_Wizard' ) ) {
+			$wizard = SPLMS_Setup_Wizard::get_instance();
 			if ( method_exists( $wizard, 'render_wizard_page' ) ) {
 				$wizard->render_wizard_page();
 				return;

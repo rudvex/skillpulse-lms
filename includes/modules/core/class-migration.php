@@ -5,7 +5,7 @@
  * Handles all database schema migrations for SkillPulse LMS plugin.
  * Provides safe, logged, and reversible database upgrades.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 
@@ -18,14 +18,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Migration {
+class SPLMS_Migration {
 
 	/**
 	 * Class instance.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @var SkillPulse_LMS_Migration|null $instance
+	 * @var SPLMS_Migration|null $instance
 	 */
 	private static $instance;
 
@@ -43,7 +43,7 @@ class SkillPulse_LMS_Migration {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Migration The class instance.
+	 * @return SPLMS_Migration The class instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -73,7 +73,7 @@ class SkillPulse_LMS_Migration {
 	 */
 	public function run_migrations() {
 		$current_version = get_option( 'splms_db_version', 0 );
-		$target_version  = SKILLPULSE_LMS_DB_VERSION;
+		$target_version  = SPLMS_DB_VERSION;
 		$results         = array();
 
 		$this->log_migration_start( $current_version, $target_version );
@@ -366,7 +366,7 @@ class SkillPulse_LMS_Migration {
 	 */
 	public function is_migration_needed() {
 		$current_version = get_option( 'splms_db_version', 0 );
-		return $current_version < SKILLPULSE_LMS_DB_VERSION;
+		return $current_version < SPLMS_DB_VERSION;
 	}
 
 	/**
@@ -378,7 +378,7 @@ class SkillPulse_LMS_Migration {
 	 */
 	public function get_migration_status() {
 		$current_version = get_option( 'splms_db_version', 0 );
-		$target_version  = SKILLPULSE_LMS_DB_VERSION;
+		$target_version  = SPLMS_DB_VERSION;
 
 		return array(
 			'current_version' => $current_version,

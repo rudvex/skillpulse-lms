@@ -4,7 +4,7 @@
  *
  * This template can be overridden by copying it to yourtheme/skillpulse-lms/course/partials/tabs/curriculum.php.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 
@@ -25,7 +25,7 @@ if ( $splms_current_user_id ) {
 
 	if ( $splms_is_enrolled ) {
 		// Calculate progress from database tables.
-		$splms_lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+		$splms_lessons_instance = SPLMS_Lessons::get_instance();
 		$splms_progress_data    = $splms_lessons_instance ? $splms_lessons_instance->calculate_course_progress( $splms_current_user_id, $splms_course_id ) : array();
 
 		$splms_user_progress = array(

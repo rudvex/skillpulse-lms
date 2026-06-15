@@ -6,7 +6,7 @@
  *
  * @since      1.0.0
  * @subpackage Modules
- * @package    SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,13 +18,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Order_Refund_Manager {
+class SPLMS_Order_Refund_Manager {
 
 	/**
 	 * Class instance.
 	 *
 	 * @since 1.0.0
-	 * @var SkillPulse_LMS_Order_Refund_Manager|null
+	 * @var SPLMS_Order_Refund_Manager|null
 	 */
 	private static $instance = null;
 
@@ -32,7 +32,7 @@ class SkillPulse_LMS_Order_Refund_Manager {
 	 * Get the instance of this class.
 	 *
 	 * @since 1.0.0
-	 * @return SkillPulse_LMS_Order_Refund_Manager
+	 * @return SPLMS_Order_Refund_Manager
 	 */
 	public static function get_instance() {
 		if ( null === self::$instance ) {
@@ -72,7 +72,7 @@ class SkillPulse_LMS_Order_Refund_Manager {
 			return $can_refund;
 		}
 
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 		$order        = $orders_query->get_order_by_id( $order_id );
 
 		if ( ! $order ) {
@@ -133,7 +133,7 @@ class SkillPulse_LMS_Order_Refund_Manager {
 			return $can_cancel;
 		}
 
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 
 		// Update order status to cancelled (no gateway interaction needed for pending orders).
 		$update_result = $orders_query->update_order_status( $order_id, 'cancelled', array() );
@@ -165,7 +165,7 @@ class SkillPulse_LMS_Order_Refund_Manager {
 	 * @return bool|WP_Error True if refundable, WP_Error otherwise.
 	 */
 	private function can_refund_order( $order_id ) {
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 		$order        = $orders_query->get_order_by_id( $order_id );
 
 		if ( ! $order ) {
@@ -194,7 +194,7 @@ class SkillPulse_LMS_Order_Refund_Manager {
 	 * @return bool|WP_Error True if cancellable, WP_Error otherwise.
 	 */
 	private function can_cancel_order( $order_id ) {
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 		$order        = $orders_query->get_order_by_id( $order_id );
 
 		if ( ! $order ) {
@@ -219,7 +219,7 @@ class SkillPulse_LMS_Order_Refund_Manager {
 	 * @return array|WP_Error Gateway response or WP_Error.
 	 */
 	private function process_gateway_refund( $order, $amount ) {
-		$orders_query   = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query   = SPLMS_Orders_Query::get_instance();
 		$payment_method = $orders_query->get_order_meta( $order->id, 'payment_method' );
 
 		if ( ! $payment_method ) {
@@ -230,18 +230,18 @@ class SkillPulse_LMS_Order_Refund_Manager {
 		$gateway = null;
 		switch ( $payment_method ) {
 			case 'stripe':
-				if ( class_exists( 'SkillPulse_LMS_Stripe' ) ) {
-					$gateway = SkillPulse_LMS_Stripe::get_instance();
+				if ( class_exists( 'SPLMS_Stripe' ) ) {
+					$gateway = SPLMS_Stripe::get_instance();
 				}
 				break;
 			case 'paypal':
-				if ( class_exists( 'SkillPulse_LMS_PayPal' ) ) {
-					$gateway = SkillPulse_LMS_PayPal::get_instance();
+				if ( class_exists( 'SPLMS_PayPal' ) ) {
+					$gateway = SPLMS_PayPal::get_instance();
 				}
 				break;
 			case 'razorpay':
-				if ( class_exists( 'SkillPulse_LMS_Razorpay' ) ) {
-					$gateway = SkillPulse_LMS_Razorpay::get_instance();
+				if ( class_exists( 'SPLMS_Razorpay' ) ) {
+					$gateway = SPLMS_Razorpay::get_instance();
 				}
 				break;
 		}
@@ -282,7 +282,7 @@ class SkillPulse_LMS_Order_Refund_Manager {
 	 * @return bool Success status.
 	 */
 	private function revoke_access_and_update_status( $order_id, $status, $reason, $refund_amount = null ) {
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 
 		// Save refund/cancellation reason and timestamp before status update.
 		if ( 'refunded' === $status ) {
@@ -322,7 +322,7 @@ class SkillPulse_LMS_Order_Refund_Manager {
 	 * @return bool Success status.
 	 */
 	private function send_refund_notification( $order_id, $amount, $reason ) {
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 		$order        = $orders_query->get_order_by_id( $order_id );
 
 		if ( ! $order ) {
@@ -330,11 +330,11 @@ class SkillPulse_LMS_Order_Refund_Manager {
 		}
 
 		// Check if notification dispatcher is available.
-		if ( ! class_exists( 'SkillPulse_LMS_Notification_Dispatcher' ) ) {
+		if ( ! class_exists( 'SPLMS_Notification_Dispatcher' ) ) {
 			return false;
 		}
 
-		$dispatcher = SkillPulse_LMS_Notification_Dispatcher::get_instance();
+		$dispatcher = SPLMS_Notification_Dispatcher::get_instance();
 
 		// Get user email.
 		$user = get_userdata( $order->user_id );
@@ -380,7 +380,7 @@ class SkillPulse_LMS_Order_Refund_Manager {
 	 * @return bool Success status.
 	 */
 	private function send_cancellation_notification( $order_id, $reason ) {
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 		$order        = $orders_query->get_order_by_id( $order_id );
 
 		if ( ! $order ) {
@@ -388,11 +388,11 @@ class SkillPulse_LMS_Order_Refund_Manager {
 		}
 
 		// Check if notification dispatcher is available.
-		if ( ! class_exists( 'SkillPulse_LMS_Notification_Dispatcher' ) ) {
+		if ( ! class_exists( 'SPLMS_Notification_Dispatcher' ) ) {
 			return false;
 		}
 
-		$dispatcher = SkillPulse_LMS_Notification_Dispatcher::get_instance();
+		$dispatcher = SPLMS_Notification_Dispatcher::get_instance();
 
 		// Get user email.
 		$user = get_userdata( $order->user_id );

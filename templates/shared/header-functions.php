@@ -2,7 +2,7 @@
 /**
  * Header Template Functions
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 
@@ -68,8 +68,8 @@ function splms_render_notifications_bell() {
 	if ( is_user_logged_in() ) {
 		$splms_user_id = get_current_user_id();
 		// Use the notifications query class to get unread count from database table.
-		if ( class_exists( 'SkillPulse_LMS_Notifications_Query' ) ) {
-			$splms_query                = SkillPulse_LMS_Notifications_Query::get_instance();
+		if ( class_exists( 'SPLMS_Notifications_Query' ) ) {
+			$splms_query                = SPLMS_Notifications_Query::get_instance();
 			$splms_unread_notifications = $splms_query->get_notifications(
 				array(
 					'user_id' => $splms_user_id,

@@ -4,7 +4,7 @@
  *
  * Centralized email management system.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Email
  * @since 1.0.0
  */
@@ -18,12 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Email_Module {
+class SPLMS_Email_Module {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Email_Module|null $instance
+	 * @var SPLMS_Email_Module|null $instance
 	 */
 	private static $instance = null;
 
@@ -32,7 +32,7 @@ class SkillPulse_LMS_Email_Module {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Email_Module The class instance.
+	 * @return SPLMS_Email_Module The class instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -60,8 +60,8 @@ class SkillPulse_LMS_Email_Module {
 		);
 
 		foreach ( $files as $file ) {
-			if ( file_exists( SKILLPULSE_LMS_DIR_PATH . $file . '.php' ) ) {
-				require SKILLPULSE_LMS_DIR_PATH . $file . '.php';
+			if ( file_exists( SPLMS_DIR_PATH . $file . '.php' ) ) {
+				require SPLMS_DIR_PATH . $file . '.php';
 			}
 		}
 	}
@@ -75,10 +75,10 @@ class SkillPulse_LMS_Email_Module {
 	 */
 	private function load_classes() {
 		// Initialize email templates.
-		SkillPulse_LMS_Email_Templates::get_instance();
+		SPLMS_Email_Templates::get_instance();
 
 		// Initialize email sender.
-		SkillPulse_LMS_Email_Sender::get_instance();
+		SPLMS_Email_Sender::get_instance();
 	}
 
 	/**
@@ -119,7 +119,7 @@ class SkillPulse_LMS_Email_Module {
 	 * @return array|WP_Error Email send result.
 	 */
 	public function send_activation_email( $signup_id ) {
-		$signup = SkillPulse_LMS_Signup::get_instance()->get_signup( $signup_id );
+		$signup = SPLMS_Signup::get_instance()->get_signup( $signup_id );
 
 		if ( ! $signup ) {
 			return new WP_Error( 'signup_not_found', __( 'Signup not found.', 'skillpulse-lms' ) );
@@ -135,7 +135,7 @@ class SkillPulse_LMS_Email_Module {
 			'site_url'        => home_url(),
 		);
 
-		$result = SkillPulse_LMS_Notification_Dispatcher::get_instance()->send_notification( $signup->user_email, 'activation_email', $replacements );
+		$result = SPLMS_Notification_Dispatcher::get_instance()->send_notification( $signup->user_email, 'activation_email', $replacements );
 
 		if ( is_wp_error( $result['email'] ) ) {
 			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
@@ -171,7 +171,7 @@ class SkillPulse_LMS_Email_Module {
 			'login_url'  => wp_login_url(),
 		);
 
-		SkillPulse_LMS_Notification_Dispatcher::get_instance()->send_notification( $user->user_email, 'welcome_email', $replacements, $user_id );
+		SPLMS_Notification_Dispatcher::get_instance()->send_notification( $user->user_email, 'welcome_email', $replacements, $user_id );
 	}
 
 	/**
@@ -198,7 +198,7 @@ class SkillPulse_LMS_Email_Module {
 			'login_url'    => wp_login_url(),
 		);
 
-		SkillPulse_LMS_Notification_Dispatcher::get_instance()->send_notification( $user->user_email, 'course_enrollment', $replacements, $user_id );
+		SPLMS_Notification_Dispatcher::get_instance()->send_notification( $user->user_email, 'course_enrollment', $replacements, $user_id );
 	}
 
 	/**
@@ -225,7 +225,7 @@ class SkillPulse_LMS_Email_Module {
 			'certificate_url' => $this->get_certificate_url( $user_id, $course_id ),
 		);
 
-		SkillPulse_LMS_Notification_Dispatcher::get_instance()->send_notification( $user->user_email, 'course_completion', $replacements, $user_id );
+		SPLMS_Notification_Dispatcher::get_instance()->send_notification( $user->user_email, 'course_completion', $replacements, $user_id );
 	}
 
 	/**
@@ -252,7 +252,7 @@ class SkillPulse_LMS_Email_Module {
 			'site_name'       => get_bloginfo( 'name' ),
 		);
 
-		SkillPulse_LMS_Notification_Dispatcher::get_instance()->send_notification( $user->user_email, 'certificate_email', $replacements, $user_id );
+		SPLMS_Notification_Dispatcher::get_instance()->send_notification( $user->user_email, 'certificate_email', $replacements, $user_id );
 	}
 
 	/**
@@ -284,7 +284,7 @@ class SkillPulse_LMS_Email_Module {
 		}
 
 		// Calculate course progress.
-		$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+		$lessons_instance = SPLMS_Lessons::get_instance();
 		$progress_data    = $lessons_instance->calculate_course_progress( $user_id, $course_id );
 
 		$replacements = array(
@@ -296,7 +296,7 @@ class SkillPulse_LMS_Email_Module {
 			'site_name'       => get_bloginfo( 'name' ),
 		);
 
-		SkillPulse_LMS_Notification_Dispatcher::get_instance()->send_notification( $user->user_email, 'lesson_completion', $replacements, $user_id );
+		SPLMS_Notification_Dispatcher::get_instance()->send_notification( $user->user_email, 'lesson_completion', $replacements, $user_id );
 	}
 
 	/**
@@ -322,12 +322,12 @@ class SkillPulse_LMS_Email_Module {
 		$course    = $course_id ? get_post( $course_id ) : null;
 
 		// Get quiz attempt data.
-		$attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+		$attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 		$attempts       = $attempts_query->get_completed_attempts( $user_id, $quiz_id );
 		$latest_attempt = ! empty( $attempts ) ? $attempts[0] : null;
 
 		// Get quiz settings for passing grade.
-		$quizzes_instance = SkillPulse_LMS_Quizzes::get_instance();
+		$quizzes_instance = SPLMS_Quizzes::get_instance();
 		$settings         = $quizzes_instance->get_quiz_settings( $quiz_id );
 		$passing_grade    = isset( $settings['passing_grade'] ) ? floatval( $settings['passing_grade'] ) : 70.0;
 
@@ -389,7 +389,7 @@ class SkillPulse_LMS_Email_Module {
 		$template_key = $passed ? 'quiz_passed' : 'quiz_failed';
 
 		// Send only the specific notification (passed or failed) to avoid duplicate emails.
-		SkillPulse_LMS_Notification_Dispatcher::get_instance()->send_notification( $user->user_email, $template_key, $replacements, $user_id );
+		SPLMS_Notification_Dispatcher::get_instance()->send_notification( $user->user_email, $template_key, $replacements, $user_id );
 	}
 
 	/**
@@ -425,7 +425,7 @@ class SkillPulse_LMS_Email_Module {
 			'certificate_date' => $formatted_date,
 		);
 
-		SkillPulse_LMS_Notification_Dispatcher::get_instance()->send_notification( $user->user_email, 'certificate_awarded', $replacements, $user_id );
+		SPLMS_Notification_Dispatcher::get_instance()->send_notification( $user->user_email, 'certificate_awarded', $replacements, $user_id );
 	}
 
 	/**
@@ -438,7 +438,7 @@ class SkillPulse_LMS_Email_Module {
 	 */
 	private function get_activation_link( $signup ) {
 		// Use the new confirmation-based activation flow.
-		$signup_screen_handler = SkillPulse_LMS_Signup_Screen_Handler::get_instance();
+		$signup_screen_handler = SPLMS_Signup_Screen_Handler::get_instance();
 		$activation_link       = $signup_screen_handler->get_signup_url( 'activate/' . $signup->activation_key . '/' );
 
 		return $activation_link;
@@ -477,7 +477,7 @@ class SkillPulse_LMS_Email_Module {
 	 * @return array Modified email data.
 	 */
 	public function customize_password_reset_email( $email, $key, $user_login, $user_data ) {
-		$email_templates = SkillPulse_LMS_Email_Templates::get_instance();
+		$email_templates = SPLMS_Email_Templates::get_instance();
 		$template        = $email_templates->get_template( 'password_reset' );
 
 		if ( empty( $template ) || ! $template['is_active'] ) {
@@ -502,7 +502,7 @@ class SkillPulse_LMS_Email_Module {
 			'reset_link' => $reset_link,
 		);
 
-		$email_sender = SkillPulse_LMS_Email_Sender::get_instance();
+		$email_sender = SPLMS_Email_Sender::get_instance();
 
 		// Customize both subject and message.
 		$custom_subject = $email_sender->replace_placeholders( $template['subject'], $replacements );
@@ -539,7 +539,7 @@ class SkillPulse_LMS_Email_Module {
 		}
 
 		// Get order details for email.
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 		$order_meta   = $orders_query->get_order_meta( $order_id );
 
 		// Get course data.
@@ -579,8 +579,8 @@ class SkillPulse_LMS_Email_Module {
 
 		// Generate invoice PDF for attachment.
 		$attachments = array();
-		if ( class_exists( 'SkillPulse_LMS_Order_Invoice' ) ) {
-			$invoice_generator = SkillPulse_LMS_Order_Invoice::get_instance();
+		if ( class_exists( 'SPLMS_Order_Invoice' ) ) {
+			$invoice_generator = SPLMS_Order_Invoice::get_instance();
 			$invoice_result    = $invoice_generator->generate_pdf( $order_id );
 
 			if ( ! is_wp_error( $invoice_result ) ) {
@@ -605,7 +605,7 @@ class SkillPulse_LMS_Email_Module {
 		$replacements['_attachments'] = $attachments;
 
 		// Send email using notification dispatcher.
-		$dispatcher = SkillPulse_LMS_Notification_Dispatcher::get_instance();
+		$dispatcher = SPLMS_Notification_Dispatcher::get_instance();
 		$results    = $dispatcher->send_notification( $user->user_email, 'order_completed', $replacements, $user->ID );
 
 		// Log result for debugging.

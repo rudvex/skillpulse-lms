@@ -8,7 +8,7 @@
  * This template can be overridden by copying it to:
  * your-theme/page-dashboard.php
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 // Get dashboard instance and data.
-$splms_dashboard = SkillPulse_LMS_Dashboard::get_instance();
+$splms_dashboard = SPLMS_Dashboard::get_instance();
 
 // Check if user is logged in.
 if ( ! is_user_logged_in() ) {

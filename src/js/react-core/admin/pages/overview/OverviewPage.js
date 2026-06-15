@@ -8,6 +8,7 @@ import { SplmsIcon } from "../../../components/SplmsIcon";
 import AdminHeader from "../../../components/AdminHeader";
 
 import './styles/index.scss';
+import { getAdminUrl } from '../../../utility/url';
 
 
 class OverviewPage extends Component {
@@ -68,7 +69,9 @@ class OverviewPage extends Component {
         </div>
     );
 
-    renderQuickActions = () => (
+    renderQuickActions = () => {
+        const adminUrl = getAdminUrl();
+        return (
         <Card className="quick-actions-card">
             <CardHeader>
                 <h3>{__('Quick Actions', 'skillpulse-lms')}</h3>
@@ -77,7 +80,7 @@ class OverviewPage extends Component {
                 <div className="quick-actions-grid">
                     <Button 
                         isPrimary 
-                        href={`${window.location.origin}/wp-admin/post-new.php?post_type=splms_course`}
+                        href={`${adminUrl}/post-new.php?post_type=splms_course`}
                         className="quick-action-button"
                     >
                         <SplmsIcon mode="wp" icon="plus" />
@@ -85,7 +88,7 @@ class OverviewPage extends Component {
                     </Button>
                     <Button 
                         isSecondary 
-                        href={`${window.location.origin}/wp-admin/post-new.php?post_type=splms_lesson`}
+                        href={`${adminUrl}/post-new.php?post_type=splms_lesson`}
                         className="quick-action-button"
                     >
                         <SplmsIcon mode="wp" icon="plus" />
@@ -93,7 +96,7 @@ class OverviewPage extends Component {
                     </Button>
                     <Button 
                         isSecondary 
-                        href={`${window.location.origin}/wp-admin/post-new.php?post_type=splms_quiz`}
+                        href={`${adminUrl}/post-new.php?post_type=splms_quiz`}
                         className="quick-action-button"
                     >
                         <SplmsIcon mode="wp" icon="plus" />
@@ -101,7 +104,7 @@ class OverviewPage extends Component {
                     </Button>
                     <Button 
                         isSecondary 
-                        href={`${window.location.origin}/wp-admin/admin.php?page=splms-settings`}
+                        href={`${adminUrl}/admin.php?page=splms-settings`}
                         className="quick-action-button"
                     >
                         <SplmsIcon mode="wp" icon="admin-settings" />
@@ -110,7 +113,8 @@ class OverviewPage extends Component {
                 </div>
             </CardBody>
         </Card>
-    );
+        );
+    };
 
     renderRecentActivity = () => (
         <Card className="recent-activity-card">

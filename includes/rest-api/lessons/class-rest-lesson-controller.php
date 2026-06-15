@@ -5,7 +5,7 @@
  * Handles REST API endpoints for lesson management.
  * Provides endpoints for CRUD operations and progress tracking on lessons.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api
@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_REST_Lesson_Controller extends WP_REST_Controller {
+class SPLMS_REST_Lesson_Controller extends WP_REST_Controller {
 
 	/**
 	 * Constructor.
@@ -974,7 +974,7 @@ class SkillPulse_LMS_REST_Lesson_Controller extends WP_REST_Controller {
 
 		if ( ! empty( $user_id ) ) {
 			// Check access control for logged-in users.
-			$access_control = SkillPulse_LMS_Access_Control::get_instance();
+			$access_control = SPLMS_Access_Control::get_instance();
 			if ( ! $access_control->user_can_access_lesson( $user_id, $lesson_id ) ) {
 				$has_access = new WP_Error( 'rest_forbidden', __( 'Sorry, you are not allowed to access this lesson.', 'skillpulse-lms' ), array( 'status' => rest_authorization_required_code() ) );
 			}

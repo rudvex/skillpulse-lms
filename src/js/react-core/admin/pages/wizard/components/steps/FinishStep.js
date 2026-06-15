@@ -9,6 +9,7 @@
  */
 
 import { __ } from '@wordpress/i18n';
+import { getSiteUrl } from '../../../../../utility/url';
 import { Button, Card, CardBody } from '@wordpress/components';
 import { SplmsIcon } from '../../../../../components/SplmsIcon';
 
@@ -65,7 +66,7 @@ const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
 	 */
 	const getQuickActions = () => {
 		const { siteUrl } = splmsWizardData || {};
-		const baseUrl = siteUrl || window.location.origin;
+		const baseUrl = siteUrl || getSiteUrl();
 
 		return [
 			{
@@ -135,7 +136,7 @@ const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
 					size="large"
 					href={(() => {
 						const { siteUrl } = splmsWizardData || {};
-						const baseUrl = siteUrl || window.location.origin;
+						const baseUrl = siteUrl || getSiteUrl();
 						return `${baseUrl}/wp-admin/post-new.php?post_type=sp-course`;
 					})()}
 					className="splms-finish-primary-button"

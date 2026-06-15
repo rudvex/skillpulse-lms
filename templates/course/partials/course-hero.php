@@ -4,7 +4,7 @@
  *
  * This template can be overridden by copying it to yourtheme/skillpulse-lms/single-course-hero.php.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 
@@ -39,7 +39,7 @@ $splms_last_activity_time = null;
 
 if ( $splms_is_enrolled && $splms_user_id ) {
 	// Calculate progress from database tables.
-	$splms_lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+	$splms_lessons_instance = SPLMS_Lessons::get_instance();
 	if ( $splms_lessons_instance ) {
 		$splms_progress_data = $splms_lessons_instance->calculate_course_progress( $splms_user_id, $splms_course_id );
 
@@ -590,7 +590,6 @@ $splms_is_enable_rating = splms_get_setting( 'enable_course_reviews', true );
 										$splms_course_type_data = splms_get_course_type_data( $splms_access_info );
 										if ( isset( $splms_course_type_data['price_display'] ) ) {
 											echo '<div class="splms-price-container">';
-		                                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
 											echo wp_kses_post( $splms_course_type_data['price_display'] );
 											echo '</div>';
 										}
@@ -598,14 +597,15 @@ $splms_is_enable_rating = splms_get_setting( 'enable_course_reviews', true );
 										<!-- Enrollment Button. -->
 										<div class="splms-enrollment-action">
 											<?php
-		                                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
-											echo splms_render_enrollment_button(
-												$splms_course_id,
-												is_user_logged_in() ? $splms_user_id : 0,
-												$splms_access_info,
-												$splms_enrollment_dates,
-												$splms_capacity_info,
-												$splms_is_enrolled
+											echo wp_kses_post(
+												splms_render_enrollment_button(
+													$splms_course_id,
+													is_user_logged_in() ? $splms_user_id : 0,
+													$splms_access_info,
+													$splms_enrollment_dates,
+													$splms_capacity_info,
+													$splms_is_enrolled
+												)
 											);
 											?>
 										</div>
@@ -698,10 +698,8 @@ $splms_is_enable_rating = splms_get_setting( 'enable_course_reviews', true );
 							<span class="info-value">
 								<?php
 								if ( isset( $splms_course_type_data['price_display'] ) ) {
-									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
 									echo wp_kses_post( $splms_course_type_data['price_display'] );
 								} elseif ( isset( $splms_course_type_data['restriction_display'] ) ) {
-									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
 									echo wp_kses_post( $splms_course_type_data['restriction_display'] );
 								} else {
 									echo esc_html( $splms_course_type_data['display'] );

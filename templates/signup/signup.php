@@ -3,7 +3,7 @@
  * Main Signup Template
  * This is the template that includes the appropriate sub-template
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $splms_signup;
 
-$splms_step = SkillPulse_LMS_Signup_Screen_Handler::get_current_signup_step();
+$splms_step = SPLMS_Signup_Screen_Handler::get_current_signup_step();
 
 wp_enqueue_style( 'splms-frontend-style' );
 wp_enqueue_script( 'splms-frontend-script' );

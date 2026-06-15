@@ -6,7 +6,7 @@
  *
  * @since      1.0.0
  * @subpackage Modules
- * @package    SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -20,13 +20,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Order_Manager {
+class SPLMS_Order_Manager {
 
 	/**
 	 * Class instance.
 	 *
 	 * @since 1.0.0
-	 * @var SkillPulse_LMS_Order_Manager|null
+	 * @var SPLMS_Order_Manager|null
 	 */
 	private static $instance = null;
 
@@ -34,7 +34,7 @@ class SkillPulse_LMS_Order_Manager {
 	 * Get the instance of this class.
 	 *
 	 * @since 1.0.0
-	 * @return SkillPulse_LMS_Order_Manager
+	 * @return SPLMS_Order_Manager
 	 */
 	public static function get_instance() {
 		if ( null === self::$instance ) {
@@ -83,7 +83,7 @@ class SkillPulse_LMS_Order_Manager {
 		}
 
 		global $wpdb;
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 
 		// Use database transaction with row locking to prevent race condition.
 		// This ensures only one order is created even if multiple requests come simultaneously.
@@ -211,7 +211,7 @@ class SkillPulse_LMS_Order_Manager {
 		}
 
 		global $wpdb;
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 
 		// Use database transaction.
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table write operation.
@@ -311,7 +311,7 @@ class SkillPulse_LMS_Order_Manager {
 	 * @return bool Success status.
 	 */
 	public function update_order_status( $order_id, $status, $gateway_data = array() ) {
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 
 		// Update order status (this will fire hooks automatically).
 		$result = $orders_query->update_order_status( $order_id, $status, array() );
@@ -336,7 +336,7 @@ class SkillPulse_LMS_Order_Manager {
 	 * @return bool Success status.
 	 */
 	public function complete_order( $order_id, $gateway_data = array() ) {
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 
 		// Update order status to completed (this will fire hooks and grant access automatically).
 		$result = $orders_query->update_order_status( $order_id, 'completed', array() );
@@ -385,7 +385,7 @@ class SkillPulse_LMS_Order_Manager {
 	 * @return bool Success status.
 	 */
 	public function fail_order( $order_id, $reason = '' ) {
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 
 		// Update order status to failed.
 		$result = $orders_query->update_order_status( $order_id, 'failed', array() );

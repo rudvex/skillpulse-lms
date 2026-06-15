@@ -5,7 +5,7 @@
  * Handles loading and caching of PHP configuration files to replace heavy JSON configs
  * and wp_localize_script performance issues.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 
@@ -14,13 +14,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class SkillPulse_LMS_Config_Loader
+ * Class SPLMS_Config_Loader
  *
  * Provides smart configuration loading with caching and on-demand loading capabilities.
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Config_Loader {
+class SPLMS_Config_Loader {
 
 	/**
 	 * Configuration cache array.
@@ -134,14 +134,14 @@ class SkillPulse_LMS_Config_Loader {
 
 		// Map questions/question-builder to quizzes module's question-builder-config.php.
 		if ( 'questions' === $module || 'question-builder' === $module ) {
-			$question_config = SKILLPULSE_LMS_DIR_PATH . 'includes/modules/quizzes/question-builder-config.php';
+			$question_config = SPLMS_DIR_PATH . 'includes/modules/quizzes/question-builder-config.php';
 			if ( file_exists( $question_config ) ) {
 				return $question_config;
 			}
 		}
 
 		// Check for module-specific config first.
-		$module_config = SKILLPULSE_LMS_DIR_PATH . 'includes/modules/' . $actual_module . '/config.php';
+		$module_config = SPLMS_DIR_PATH . 'includes/modules/' . $actual_module . '/config.php';
 		if ( file_exists( $module_config ) ) {
 			return $module_config;
 		}

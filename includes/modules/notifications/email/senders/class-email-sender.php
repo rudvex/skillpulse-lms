@@ -4,7 +4,7 @@
  *
  * Handles email sending functionality.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Email
  * @since 1.0.0
  */
@@ -18,12 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Email_Sender {
+class SPLMS_Email_Sender {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Email_Sender|null $instance
+	 * @var SPLMS_Email_Sender|null $instance
 	 */
 	private static $instance = null;
 
@@ -32,7 +32,7 @@ class SkillPulse_LMS_Email_Sender {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Email_Sender The class instance.
+	 * @return SPLMS_Email_Sender The class instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -85,7 +85,7 @@ class SkillPulse_LMS_Email_Sender {
 		}
 
 		// Check if email queue is enabled.
-		$settings            = SkillPulse_LMS_Settings::get_instance()->get_all_settings();
+		$settings            = SPLMS_Settings::get_instance()->get_all_settings();
 		$email_queue_enabled = isset( $settings['notifications']['email_settings']['email_queue_enabled'] )
 			? $settings['notifications']['email_settings']['email_queue_enabled']
 			: false;

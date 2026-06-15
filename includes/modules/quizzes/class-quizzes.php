@@ -5,7 +5,7 @@
  * Handles quiz-related functionality and operations.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,16 +13,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class SkillPulse_LMS_Quizzes
+ * Class SPLMS_Quizzes
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Quizzes {
+class SPLMS_Quizzes {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Quizzes|null $instance
+	 * @var SPLMS_Quizzes|null $instance
 	 */
 	private static $instance;
 
@@ -31,7 +31,7 @@ class SkillPulse_LMS_Quizzes {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Quizzes
+	 * @return SPLMS_Quizzes
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -73,8 +73,8 @@ class SkillPulse_LMS_Quizzes {
 		);
 
 		foreach ( $files as $file ) {
-			if ( file_exists( SKILLPULSE_LMS_DIR_PATH . $file . '.php' ) ) {
-				require_once SKILLPULSE_LMS_DIR_PATH . $file . '.php';
+			if ( file_exists( SPLMS_DIR_PATH . $file . '.php' ) ) {
+				require_once SPLMS_DIR_PATH . $file . '.php';
 			}
 		}
 	}
@@ -229,7 +229,7 @@ class SkillPulse_LMS_Quizzes {
 				$prevent_skip  = $this->get_setting_value( $quiz_settings, 'prevent_skip', false );
 
 				if ( $prevent_skip ) {
-					$attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+					$attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 					$has_passed     = $attempts_query->has_user_passed( $user_id, $quiz_id );
 					if ( ! $has_passed ) {
 						$navigation['can_navigate_next'] = false;
@@ -345,7 +345,7 @@ class SkillPulse_LMS_Quizzes {
 		$all_meta = get_post_meta( $quiz_id );
 
 		// Get configuration data and extract defaults.
-		$config_data       = SkillPulse_LMS_Config_Loader::get_config( 'quizzes', 'admin' );
+		$config_data       = SPLMS_Config_Loader::get_config( 'quizzes', 'admin' );
 		$defaults_settings = $this->extract_defaults_from_config( $config_data );
 		$quiz_settings     = array();
 
@@ -381,7 +381,7 @@ class SkillPulse_LMS_Quizzes {
 		}
 
 		// Get defaults from configuration.
-		$config_data       = SkillPulse_LMS_Config_Loader::get_config( 'quizzes', 'admin' );
+		$config_data       = SPLMS_Config_Loader::get_config( 'quizzes', 'admin' );
 		$defaults_settings = $this->extract_defaults_from_config( $config_data );
 
 		foreach ( $defaults_settings as $key => $default_value ) {
@@ -418,7 +418,7 @@ class SkillPulse_LMS_Quizzes {
 	 * @return array Quiz questions.
 	 */
 	public function get_quiz_questions( $quiz_id, $is_admin = false ) {
-		$questions_query = SkillPulse_LMS_Quiz_Questions_Query::get_instance();
+		$questions_query = SPLMS_Quiz_Questions_Query::get_instance();
 		$questions       = $questions_query->get_quiz_questions( $quiz_id );
 
 		// Get quiz settings for randomization.
@@ -897,7 +897,7 @@ class SkillPulse_LMS_Quizzes {
 		}
 
 		// Use Quiz Service for unified state management.
-		$quiz_service = SkillPulse_LMS_Quiz_Service::get_instance();
+		$quiz_service = SPLMS_Quiz_Service::get_instance();
 		$identifier   = $is_guest ? $quiz_id : $attempt_id;
 		$result       = $quiz_service->save_quiz_state( $identifier, $answers, $time_taken, $current_question, $is_guest );
 
@@ -928,7 +928,7 @@ class SkillPulse_LMS_Quizzes {
 		}
 
 		// Use Quiz Service for unified state management.
-		$quiz_service = SkillPulse_LMS_Quiz_Service::get_instance();
+		$quiz_service = SPLMS_Quiz_Service::get_instance();
 		$identifier   = $is_guest ? $quiz_id : $user_id;
 		$result       = $quiz_service->get_quiz_state( $identifier, $quiz_id, $is_guest );
 
@@ -970,11 +970,11 @@ class SkillPulse_LMS_Quizzes {
 
 		if ( $is_guest ) {
 			// For guest users, use Guest Quiz Manager.
-			$guest_manager = SkillPulse_LMS_Guest_Quiz_Manager::get_instance();
+			$guest_manager = SPLMS_Guest_Quiz_Manager::get_instance();
 			$result        = $guest_manager->clear_guest_quiz_state( $quiz_id );
 		} else {
 			// For logged-in users, use Quiz Service.
-			$quiz_service = SkillPulse_LMS_Quiz_Service::get_instance();
+			$quiz_service = SPLMS_Quiz_Service::get_instance();
 			$result       = $quiz_service->clear_quiz_state( $quiz_id, $user_id );
 		}
 
@@ -1009,7 +1009,7 @@ class SkillPulse_LMS_Quizzes {
 		$is_preview_mode    = ( 'true' === $preview_mode_value || true === $preview_mode_value || '1' === $preview_mode_value || 1 === $preview_mode_value );
 
 		// Use Quiz Service for unified business logic.
-		$quiz_service = SkillPulse_LMS_Quiz_Service::get_instance();
+		$quiz_service = SPLMS_Quiz_Service::get_instance();
 		$result       = $quiz_service->start_quiz(
 			$quiz_id,
 			$user_id,
@@ -1233,7 +1233,7 @@ class SkillPulse_LMS_Quizzes {
 		}
 
 		// Calculate server-side time taken (SECURITY: Don't trust client time).
-		$attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+		$attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 		$attempt        = $attempts_query->get_attempt_by_id( $attempt_id );
 
 		// Prevent resubmission of already-finalized attempts.
@@ -1272,7 +1272,7 @@ class SkillPulse_LMS_Quizzes {
 
 		// Use centralized evaluation function.
 		$passing_grade = $this->get_setting_value( $settings, 'passing_grade', 70 );
-		$evaluation    = SkillPulse_LMS_Quiz_Evaluator::evaluate_attempt( $quiz_id, $questions, $answers, $passing_grade );
+		$evaluation    = SPLMS_Quiz_Evaluator::evaluate_attempt( $quiz_id, $questions, $answers, $passing_grade );
 
 		$correct_answers = $evaluation['correct_answers'];
 		$total_questions = $evaluation['total_questions'];
@@ -1391,18 +1391,18 @@ class SkillPulse_LMS_Quizzes {
 				$progress_data = $this->calculate_course_progress( $user_id, $course_id );
 
 				// Sync progress to enrollment database table.
-				$database   = SkillPulse_LMS_Database::get_instance();
-				$enrollment = SkillPulse_LMS_Enrollment::get_instance();
+				$database   = SPLMS_Database::get_instance();
+				$enrollment = SPLMS_Enrollment::get_instance();
 				$enrollment->update_enrollment_progress( $user_id, $course_id, $progress_data['percentage'] );
 
 				// Log activity.
-				SkillPulse_LMS_User_Activity_Query::get_instance()->log_activity( $user_id, 'quiz_completed', $course_id, $quiz_id, 'quiz' );
+				SPLMS_User_Activity_Query::get_instance()->log_activity( $user_id, 'quiz_completed', $course_id, $quiz_id, 'quiz' );
 			}
 		} elseif ( 'practice' === $quiz_type || 'survey' === $quiz_type ) {
 			// Log activity for practice/survey quizzes (for tracking, but doesn't affect progress).
 			$course_id = splms_get_quiz_course( $quiz_id );
 			if ( $course_id ) {
-				SkillPulse_LMS_User_Activity_Query::get_instance()->log_activity( $user_id, 'quiz_completed', $course_id, $quiz_id, 'quiz' );
+				SPLMS_User_Activity_Query::get_instance()->log_activity( $user_id, 'quiz_completed', $course_id, $quiz_id, 'quiz' );
 			}
 		}
 
@@ -1501,7 +1501,7 @@ class SkillPulse_LMS_Quizzes {
 		}
 
 		// Check if quiz is available for preview mode.
-		$access_control = SkillPulse_LMS_Access_Control::get_instance();
+		$access_control = SPLMS_Access_Control::get_instance();
 		if ( ! $access_control->is_guest_preview_quiz( $quiz_id ) ) {
 			wp_send_json_error( 'Quiz not available for preview' );
 		}
@@ -1546,7 +1546,7 @@ class SkillPulse_LMS_Quizzes {
 		// Evaluate answers server-side using the same evaluator as logged-in users.
 		$passing_grade = $this->get_setting_value( $settings, 'passing_grade', 70 );
 
-		$evaluation = SkillPulse_LMS_Quiz_Evaluator::evaluate_attempt( $quiz_id, $questions, $answers, $passing_grade );
+		$evaluation = SPLMS_Quiz_Evaluator::evaluate_attempt( $quiz_id, $questions, $answers, $passing_grade );
 
 		$correct_answers      = $evaluation['correct_answers'];
 		$total_questions      = $evaluation['total_questions'];
@@ -1639,7 +1639,7 @@ class SkillPulse_LMS_Quizzes {
 
 		// Storage mode is 'save_as_guest' - save to database.
 		// Create guest attempt record.
-		$attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+		$attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 		$attempt_id     = $attempts_query->start_attempt( 0, $quiz_id, $course_id ); // User ID 0 for guest.
 
 		if ( ! $attempt_id ) {
@@ -1710,7 +1710,7 @@ class SkillPulse_LMS_Quizzes {
 		}
 
 		// Check if quiz is available for preview mode (for guest users).
-		$access_control = SkillPulse_LMS_Access_Control::get_instance();
+		$access_control = SPLMS_Access_Control::get_instance();
 		if ( ! $user_id ) {
 			// Guest user - check if quiz is available for preview.
 			if ( ! $access_control->is_guest_preview_quiz( $quiz_id ) ) {
@@ -1797,8 +1797,8 @@ class SkillPulse_LMS_Quizzes {
 	private function get_course_total_items( $course_id ) {
 		// Use direct database queries to avoid recursive calls to get_course_curriculum.
 		// This prevents infinite loops when called during access control checks.
-		$course_items_query  = SkillPulse_LMS_Course_Items_Query::get_instance();
-		$relationships_query = SkillPulse_LMS_Relationships_Query::get_instance();
+		$course_items_query  = SPLMS_Course_Items_Query::get_instance();
+		$relationships_query = SPLMS_Relationships_Query::get_instance();
 
 		// Get all sections for this course.
 		$course_items = $course_items_query->get_items( $course_id );
@@ -1860,7 +1860,7 @@ class SkillPulse_LMS_Quizzes {
 		$sub_dir      = sanitize_file_name( $quiz_id ) . '/' . sanitize_file_name( $attempt_id ) . '/' . sanitize_file_name( $question_id );
 
 		// Get feature directory.
-		$dir_info = SkillPulse_LMS_File_Manager::get_feature_dir( $feature_name, true );
+		$dir_info = SPLMS_File_Manager::get_feature_dir( $feature_name, true );
 		if ( is_wp_error( $dir_info ) ) {
 			return $dir_info;
 		}
@@ -1942,7 +1942,7 @@ class SkillPulse_LMS_Quizzes {
 	 * @return array|WP_Error Score calculation result or error.
 	 */
 	public function recalculate_attempt_score( $attempt_id, $updated_answers = null ) {
-		$attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+		$attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 		$attempt        = $attempts_query->get_attempt_by_id( $attempt_id );
 
 		if ( ! $attempt ) {
@@ -2005,7 +2005,7 @@ class SkillPulse_LMS_Quizzes {
 			} else {
 				// Auto-graded question - re-evaluate it.
 				$user_answer = isset( $user_answers[ $question_id ] ) ? $user_answers[ $question_id ] : '';
-				$result      = SkillPulse_LMS_Quiz_Evaluator::evaluate_question( $question, $user_answer );
+				$result      = SPLMS_Quiz_Evaluator::evaluate_question( $question, $user_answer );
 
 				if ( isset( $result['score'] ) ) {
 					$total_score += floatval( $result['score'] );
@@ -2077,7 +2077,7 @@ class SkillPulse_LMS_Quizzes {
 	 * @return void
 	 */
 	public function run_cleanup_abandoned_attempts() {
-		$attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+		$attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 		$attempts_query->cleanup_abandoned_attempts( 7 );
 	}
 
@@ -2222,7 +2222,7 @@ class SkillPulse_LMS_Quizzes {
 	 */
 	public function get_formatted_quiz_attempts( $user_id, $quiz_id, $include_answers = false ) {
 		// Get completed attempts from query class.
-		$attempts_query     = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+		$attempts_query     = SPLMS_Quiz_Attempts_Query::get_instance();
 		$completed_attempts = $attempts_query->get_completed_attempts( $user_id, $quiz_id );
 
 		if ( empty( $completed_attempts ) ) {
@@ -2423,7 +2423,7 @@ class SkillPulse_LMS_Quizzes {
 		}
 
 		// Calculate progress.
-		$navigation = SkillPulse_LMS_Quiz_Navigation::get_instance();
+		$navigation = SPLMS_Quiz_Navigation::get_instance();
 		$progress   = $navigation->calculate_progress( $questions, $answers );
 
 		wp_send_json_success( $progress );
@@ -2455,7 +2455,7 @@ class SkillPulse_LMS_Quizzes {
 		}
 
 		// Toggle bookmark.
-		$navigation = SkillPulse_LMS_Quiz_Navigation::get_instance();
+		$navigation = SPLMS_Quiz_Navigation::get_instance();
 		$result     = $navigation->toggle_bookmark( $question_id, $bookmarks );
 
 		wp_send_json_success( $result );
@@ -2494,7 +2494,7 @@ class SkillPulse_LMS_Quizzes {
 		}
 
 		// Get navigation data.
-		$navigation      = SkillPulse_LMS_Quiz_Navigation::get_instance();
+		$navigation      = SPLMS_Quiz_Navigation::get_instance();
 		$navigation_data = $navigation->get_navigation_data( $questions, $current_question, $bookmarks );
 
 		wp_send_json_success( $navigation_data );
@@ -2537,7 +2537,7 @@ class SkillPulse_LMS_Quizzes {
 		}
 
 		// Get review summary.
-		$navigation = SkillPulse_LMS_Quiz_Navigation::get_instance();
+		$navigation = SPLMS_Quiz_Navigation::get_instance();
 		$summary    = $navigation->get_review_summary( $questions, $answers, $bookmarks );
 
 		wp_send_json_success( $summary );

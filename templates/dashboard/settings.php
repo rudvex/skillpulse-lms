@@ -5,7 +5,7 @@
  * This template can be overridden by copying it to:
  * your-theme/skillpulse-lms/dashboard/settings.php
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 
@@ -21,11 +21,11 @@ if ( is_array( $args ) ) {
 	extract( $args );
 }
 $splms_current_user_obj  = wp_get_current_user();
-$splms_profile_picture   = SkillPulse_LMS_Profile::get_instance()->get_profile_picture_url( $splms_current_user_obj->ID, 150 );
-$splms_has_custom_avatar = SkillPulse_LMS_Profile::get_instance()->has_profile_picture( $splms_current_user_obj->ID );
+$splms_profile_picture   = SPLMS_Profile::get_instance()->get_profile_picture_url( $splms_current_user_obj->ID, 150 );
+$splms_has_custom_avatar = SPLMS_Profile::get_instance()->has_profile_picture( $splms_current_user_obj->ID );
 
 // Get dashboard instance and current settings tab.
-$splms_dashboard    = SkillPulse_LMS_Dashboard::get_instance();
+$splms_dashboard    = SPLMS_Dashboard::get_instance();
 $splms_settings_tab = $splms_dashboard->get_current_settings_tab();
 ?>
 <div class="splms-dashboard-tab splms-settings-tab">

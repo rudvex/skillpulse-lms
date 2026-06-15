@@ -6,15 +6,15 @@
  *
  * @since      1.0.0
  * @subpackage Lessons
- * @package    SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die();
 }
 
-if ( ! class_exists( 'SkillPulse_LMS_Base_Query' ) ) {
-	require_once SKILLPULSE_LMS_DIR_PATH . 'includes/modules/core/base/class-base-query.php';
+if ( ! class_exists( 'SPLMS_Base_Query' ) ) {
+	require_once SPLMS_DIR_PATH . 'includes/modules/core/base/class-base-query.php';
 }
 
 /**
@@ -22,7 +22,7 @@ if ( ! class_exists( 'SkillPulse_LMS_Base_Query' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Lesson_Progress_Query extends SkillPulse_LMS_Base_Query {
+class SPLMS_Lesson_Progress_Query extends SPLMS_Base_Query {
 
 	/**
 	 * Constructor.
@@ -42,7 +42,7 @@ class SkillPulse_LMS_Lesson_Progress_Query extends SkillPulse_LMS_Base_Query {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Lesson_Progress_Query Class instance.
+	 * @return SPLMS_Lesson_Progress_Query Class instance.
 	 */
 	public static function get_instance() {
 		return parent::get_base_instance( __CLASS__, 'splms_lesson_progress' );

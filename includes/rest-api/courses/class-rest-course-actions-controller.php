@@ -4,7 +4,7 @@
  *
  * Handles REST API endpoints for course actions: enroll, unenroll, progress, wishlist, and bookmark.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_REST_Course_Actions_Controller extends WP_REST_Controller {
+class SPLMS_REST_Course_Actions_Controller extends WP_REST_Controller {
 
 	/**
 	 * Constructor.
@@ -186,8 +186,8 @@ class SkillPulse_LMS_REST_Course_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Check course access control.
-		if ( class_exists( 'SkillPulse_LMS_Access_Control' ) ) {
-			$access_control = SkillPulse_LMS_Access_Control::get_instance();
+		if ( class_exists( 'SPLMS_Access_Control' ) ) {
+			$access_control = SPLMS_Access_Control::get_instance();
 			return $access_control->user_can_access_course( $user_id, $course_id );
 		}
 
@@ -315,7 +315,7 @@ class SkillPulse_LMS_REST_Course_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Check if already enrolled (active status).
-		$enrollments_query   = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollments_query   = SPLMS_Enrollments_Query::get_instance();
 		$existing_enrollment = $enrollments_query->get_enrollment( $user_id, $course_id );
 
 		// If user is already actively enrolled, return success.
@@ -330,7 +330,7 @@ class SkillPulse_LMS_REST_Course_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Enroll user in database (will update if inactive, insert if new).
-		$enrollment_class  = SkillPulse_LMS_Enrollment::get_instance();
+		$enrollment_class  = SPLMS_Enrollment::get_instance();
 		$enrollment_result = $enrollment_class->enroll_user_in_course( $user_id, $course_id );
 
 		if ( false === $enrollment_result ) {
@@ -338,7 +338,7 @@ class SkillPulse_LMS_REST_Course_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Log activity (already done in enroll_user_in_course, but keeping for consistency).
-		SkillPulse_LMS_User_Activity_Query::get_instance()->log_activity( $user_id, 'course_enrolled', $course_id );
+		SPLMS_User_Activity_Query::get_instance()->log_activity( $user_id, 'course_enrolled', $course_id );
 
 		// Send success response.
 		return rest_ensure_response(
@@ -404,7 +404,7 @@ class SkillPulse_LMS_REST_Course_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Check if user is enrolled.
-		$enrollments_query = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollments_query = SPLMS_Enrollments_Query::get_instance();
 		$enrollment        = $enrollments_query->get_enrollment( $user_id, $course_id );
 
 		if ( ! $enrollment ) {
@@ -503,14 +503,14 @@ class SkillPulse_LMS_REST_Course_Actions_Controller extends WP_REST_Controller {
 		}
 
 		// Calculate course progress.
-		$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+		$lessons_instance = SPLMS_Lessons::get_instance();
 		$progress_data    = $lessons_instance->calculate_course_progress( $user_id, $course_id );
 
 		// Get enrollment status.
 		$enrollment_status = $this->get_user_enrollment_status( $user_id, $course_id );
 
 		// Get enrollment record for additional info.
-		$enrollments_query = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollments_query = SPLMS_Enrollments_Query::get_instance();
 		$enrollment        = $enrollments_query->get_enrollment( $user_id, $course_id );
 
 		$response_data = array(
@@ -702,7 +702,7 @@ class SkillPulse_LMS_REST_Course_Actions_Controller extends WP_REST_Controller {
 
 		// Check if user is enrolled in the parent course (if course_id provided).
 		if ( $course_id ) {
-			$enrollments_query = SkillPulse_LMS_Enrollments_Query::get_instance();
+			$enrollments_query = SPLMS_Enrollments_Query::get_instance();
 			$enrollment        = $enrollments_query->get_enrollment( $user_id, $course_id );
 			if ( ! $enrollment ) {
 				/* translators: %s: Item type (lesson or quiz). */

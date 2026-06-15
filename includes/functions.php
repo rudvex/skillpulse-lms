@@ -5,7 +5,7 @@
  * Core utility functions for the SkillPulse LMS plugin.
  * Consolidated from multiple function files for better organization.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 
@@ -41,12 +41,12 @@ if ( ! function_exists( 'splms_get_template_part' ) ) {
 		}
 
 		// Get default template.
-		if ( ! $template && $name && file_exists( SKILLPULSE_LMS_DIR_PATH . "templates/{$slug}-{$name}.php" ) ) {
-			$template = SKILLPULSE_LMS_DIR_PATH . "templates/{$slug}-{$name}.php";
+		if ( ! $template && $name && file_exists( SPLMS_DIR_PATH . "templates/{$slug}-{$name}.php" ) ) {
+			$template = SPLMS_DIR_PATH . "templates/{$slug}-{$name}.php";
 		}
 
 		if ( ! $template ) {
-			$template = SKILLPULSE_LMS_DIR_PATH . "templates/{$slug}.php";
+			$template = SPLMS_DIR_PATH . "templates/{$slug}.php";
 		}
 
 		// Allow 3rd party plugins to filter template file from their plugin.
@@ -109,7 +109,7 @@ function splms_locate_template( $template_name, $template_path = '', $default_pa
 	}
 
 	if ( ! $default_path ) {
-		$default_path = SKILLPULSE_LMS_DIR_PATH . 'templates/';
+		$default_path = SPLMS_DIR_PATH . 'templates/';
 	}
 
 	// Look within passed path within the theme - this is priority.
@@ -207,7 +207,7 @@ function splms_get_course_thumbnail_url( $course_id = null, $size = 'medium' ) {
 	if ( ! $thumbnail_url ) {
 		// Use the existing placeholder image.
 		$number        = wp_rand( 1, 3 );
-		$thumbnail_url = SKILLPULSE_LMS_URL_PATH . 'assets/images/placeholder/course-placeholder-1.png';
+		$thumbnail_url = SPLMS_URL_PATH . 'assets/images/placeholder/course-placeholder-1.png';
 	}
 
 	return $thumbnail_url;
@@ -223,7 +223,7 @@ function splms_get_course_thumbnail_url( $course_id = null, $size = 'medium' ) {
  * @return array Array of course IDs.
  */
 function splms_get_user_enrolled_courses( $user_id ) {
-	$enrollments_query = SkillPulse_LMS_Enrollments_Query::get_instance();
+	$enrollments_query = SPLMS_Enrollments_Query::get_instance();
 	$db_enrollments    = $enrollments_query->get_user_courses( $user_id, array( 'status' => array( 'active', 'completed' ) ) );
 
 	if ( ! empty( $db_enrollments ) ) {
@@ -249,7 +249,7 @@ function splms_is_user_enrolled( $course_id, $user_id = null, $args = array() ) 
 		$user_id = get_current_user_id();
 	}
 
-	$enrollments_query = SkillPulse_LMS_Enrollments_Query::get_instance();
+	$enrollments_query = SPLMS_Enrollments_Query::get_instance();
 
 	return $enrollments_query->is_user_enrolled( $course_id, $user_id, $args );
 }
@@ -269,7 +269,7 @@ function splms_get_user_enrollment_status( $course_id, $user_id = null ) {
 		$user_id = get_current_user_id();
 	}
 
-	$enrollments_query = SkillPulse_LMS_Enrollments_Query::get_instance();
+	$enrollments_query = SPLMS_Enrollments_Query::get_instance();
 
 	return $enrollments_query->get_user_enrollment_status( $course_id, $user_id );
 }
@@ -296,7 +296,7 @@ function splms_is_student_unenrollment_allowed() {
  * @return string|null Expiration date in MySQL format, or null if no expiration.
  */
 function splms_get_enrollment_expiration_date( $user_id, $course_id ) {
-	$enrollments_query = SkillPulse_LMS_Enrollments_Query::get_instance();
+	$enrollments_query = SPLMS_Enrollments_Query::get_instance();
 	$enrollment        = $enrollments_query->get_enrollment( $user_id, $course_id );
 
 	if ( ! $enrollment ) {
@@ -536,7 +536,7 @@ function splms_get_course_max_enrollment_info( $course_id = null ) {
  */
 function splms_is_certificate_enabled( $course_id = null ) {
 	// Return false if certificates module is not loaded.
-	if ( ! class_exists( 'SkillPulse_LMS_Certificates' ) ) {
+	if ( ! class_exists( 'SPLMS_Certificates' ) ) {
 		return false;
 	}
 
@@ -574,7 +574,7 @@ function splms_is_lesson_guest_preview_available( $lesson_id = null ) {
 		$lesson_id = get_the_ID();
 	}
 
-	$access_control = SkillPulse_LMS_Access_Control::get_instance();
+	$access_control = SPLMS_Access_Control::get_instance();
 
 	return $access_control->user_can_access_lesson( 0, $lesson_id );
 }
@@ -653,7 +653,7 @@ function splms_is_quiz_guest_preview_available( $quiz_id = null ) {
 		$quiz_id = get_the_ID();
 	}
 
-	$access_control = SkillPulse_LMS_Access_Control::get_instance();
+	$access_control = SPLMS_Access_Control::get_instance();
 
 	return $access_control->user_can_access_quiz( 0, $quiz_id );
 }
@@ -721,7 +721,7 @@ function splms_get_formatted_completion_criteria( $course_id = null ) {
  * @return bool True if in-app notifications are enabled, false otherwise.
  */
 function splms_is_in_app_notifications_enabled() {
-	$settings = SkillPulse_LMS_Settings::get_instance()->get_all_settings();
+	$settings = SPLMS_Settings::get_instance()->get_all_settings();
 	$enabled  = isset( $settings['notifications']['in_app_settings']['enable_in_app_notifications'] )
 		? $settings['notifications']['in_app_settings']['enable_in_app_notifications']
 		: true;
@@ -737,7 +737,7 @@ function splms_is_in_app_notifications_enabled() {
  * @return bool True if email notifications are enabled, false otherwise.
  */
 function splms_is_email_notifications_enabled() {
-	$settings = SkillPulse_LMS_Settings::get_instance()->get_all_settings();
+	$settings = SPLMS_Settings::get_instance()->get_all_settings();
 	$enabled  = isset( $settings['notifications']['email_settings']['enable_emails'] )
 		? $settings['notifications']['email_settings']['enable_emails']
 		: true;
@@ -756,7 +756,7 @@ function splms_is_email_notifications_enabled() {
  * @return mixed Setting value.
  */
 function splms_get_in_app_notification_setting( $setting_key, $default_val = null ) {
-	$settings = SkillPulse_LMS_Settings::get_instance()->get_all_settings();
+	$settings = SPLMS_Settings::get_instance()->get_all_settings();
 
 	return isset( $settings['notifications']['in_app_settings'][ $setting_key ] )
 		? $settings['notifications']['in_app_settings'][ $setting_key ]
@@ -771,7 +771,7 @@ function splms_get_in_app_notification_setting( $setting_key, $default_val = nul
  * @return array Mapping of field_id => ['tab' => 'tab_id', 'section' => 'section_id'].
  */
 function splms_build_field_to_tab_mapping() {
-	return SkillPulse_LMS_Settings::get_instance()->get_field_to_tab_mapping();
+	return SPLMS_Settings::get_instance()->get_field_to_tab_mapping();
 }
 
 /**
@@ -788,7 +788,7 @@ function splms_get_setting( $setting_name, $default_value = null ) {
 	static $all_settings = null;
 
 	if ( null === $all_settings ) {
-		$all_settings = SkillPulse_LMS_Settings::get_instance()->get_all_settings();
+		$all_settings = SPLMS_Settings::get_instance()->get_all_settings();
 	}
 
 	$setting_value = $default_value;
@@ -900,14 +900,14 @@ function splms_has_user_purchased_course( $course_id, $user_id = null ) {
 	}
 
 	// Use the new order access control system.
-	if ( class_exists( 'SkillPulse_LMS_Order_Access_Control' ) ) {
-		$access_status = SkillPulse_LMS_Order_Access_Control::get_course_access_status( $user_id, $course_id );
+	if ( class_exists( 'SPLMS_Order_Access_Control' ) ) {
+		$access_status = SPLMS_Order_Access_Control::get_course_access_status( $user_id, $course_id );
 
 		return $access_status['has_access'] && 'paid' === $access_status['access_type'];
 	}
 
 	// Check if user is enrolled (which means they have access).
-	$enrollment  = SkillPulse_LMS_Enrollment::get_instance();
+	$enrollment  = SPLMS_Enrollment::get_instance();
 	$is_enrolled = $enrollment->is_user_enrolled( $user_id, $course_id );
 
 	if ( $is_enrolled ) {
@@ -915,7 +915,7 @@ function splms_has_user_purchased_course( $course_id, $user_id = null ) {
 	}
 
 	// Check order records for completed orders.
-	$orders_query  = SkillPulse_LMS_Orders_Query::get_instance();
+	$orders_query  = SPLMS_Orders_Query::get_instance();
 	$has_purchased = $orders_query->has_user_purchased_course( $user_id, $course_id );
 
 	return $has_purchased;
@@ -950,7 +950,7 @@ function splms_get_course_purchase_url( $course_id, $user_id = null, $purchase_t
 	}
 
 	// Generate secure purchase token.
-	$token_manager = SkillPulse_LMS_Purchase_Token::get_instance();
+	$token_manager = SPLMS_Purchase_Token::get_instance();
 	$token         = $token_manager->generate_token( $course_id, $purchase_type, $section_ids );
 
 	if ( is_wp_error( $token ) ) {
@@ -975,7 +975,7 @@ function splms_get_course_purchase_url( $course_id, $user_id = null, $purchase_t
  * @return array|WP_Error Token data array or WP_Error on failure.
  */
 function splms_validate_purchase_token( $token ) {
-	$token_manager = SkillPulse_LMS_Purchase_Token::get_instance();
+	$token_manager = SPLMS_Purchase_Token::get_instance();
 
 	return $token_manager->validate_token( $token );
 }
@@ -1004,7 +1004,7 @@ function splms_is_payment_configured() {
 		return false;
 	}
 
-	$payment  = SkillPulse_LMS_Payment::get_instance();
+	$payment  = SPLMS_Payment::get_instance();
 	$gateways = $payment->get_gateways();
 
 	// Check if any gateway is enabled and configured.
@@ -1375,7 +1375,7 @@ function splms_render_prerequisite_button( $course_id, $user_id, $access_info ) 
 		return splms_render_default_enroll_button( $course_id, $user_id );
 	}
 
-	$enrollment_instance = SkillPulse_LMS_Enrollment::get_instance();
+	$enrollment_instance = SPLMS_Enrollment::get_instance();
 
 	if ( $enrollment_instance->has_user_completed_course( $user_id, $prerequisite_course ) ) {
 		return '<button class="btn btn-primary enroll-btn" data-course-id="' . esc_attr( $course_id ) . '">' .
@@ -1544,7 +1544,7 @@ function splms_get_course_type_data( $access_info = array() ) {
 			if ( $prerequisite_course ) {
 				$prerequisite_title = get_the_title( $prerequisite_course );
 				if ( $user_id > 0 ) {
-					$prerequisite_completed = SkillPulse_LMS_Enrollment::get_instance()->has_user_completed_course( $user_id, $prerequisite_course );
+					$prerequisite_completed = SPLMS_Enrollment::get_instance()->has_user_completed_course( $user_id, $prerequisite_course );
 				}
 			}
 
@@ -1698,7 +1698,7 @@ function splms_generate_social_share_url( $course_id, $platform ) {
  * @return bool
  */
 function splms_user_has_required_membership( $user_id, $course_id ) {
-	return SkillPulse_LMS_Membership_Integration::check_user_course_access( $user_id, $course_id );
+	return SPLMS_Membership_Integration::check_user_course_access( $user_id, $course_id );
 }
 
 /**
@@ -1709,7 +1709,7 @@ function splms_user_has_required_membership( $user_id, $course_id ) {
  * @return array
  */
 function splms_get_available_memberships() {
-	return SkillPulse_LMS_Membership_Integration::get_all_membership_options();
+	return SPLMS_Membership_Integration::get_all_membership_options();
 }
 
 /**
@@ -1720,7 +1720,7 @@ function splms_get_available_memberships() {
  * @return bool
  */
 function splms_has_membership_integration() {
-	return SkillPulse_LMS_Membership_Integration::has_active();
+	return SPLMS_Membership_Integration::has_active();
 }
 
 /**
@@ -1852,7 +1852,7 @@ function splms_get_membership_purchase_url( $membership_id ) {
 	$membership_internal_id = $parts[1];
 
 	// Get integration.
-	$integration = SkillPulse_LMS_Membership_Integration::get( $integration_id );
+	$integration = SPLMS_Membership_Integration::get( $integration_id );
 	if ( ! $integration || ! $integration->is_plugin_active() ) {
 		return false;
 	}
@@ -1951,7 +1951,7 @@ function splms_get_item_section( $item_id ) {
 	}
 
 	// Use relationships query to get parent.
-	$relationships_query = SkillPulse_LMS_Relationships_Query::get_instance();
+	$relationships_query = SPLMS_Relationships_Query::get_instance();
 	$parents             = $relationships_query->get_parents( $item_id );
 
 	if ( empty( $parents ) ) {
@@ -2041,7 +2041,7 @@ function splms_user_has_section_access( $section_id, $user_id = null ) {
 	}
 
 	// Use Section Access Query class for database operations.
-	$section_access_query = SkillPulse_LMS_Section_Access_Query::get_instance();
+	$section_access_query = SPLMS_Section_Access_Query::get_instance();
 	return $section_access_query->user_has_access( $user_id, $section_id );
 }
 
@@ -2065,7 +2065,7 @@ function splms_get_user_purchased_sections( $course_id, $user_id = null ) {
 	}
 
 	// Use Section Access Query class for database operations.
-	$section_access_query = SkillPulse_LMS_Section_Access_Query::get_instance();
+	$section_access_query = SPLMS_Section_Access_Query::get_instance();
 	return $section_access_query->get_user_course_sections( $user_id, $course_id );
 }
 
@@ -2105,7 +2105,7 @@ function splms_course_uses_section_pricing( $course_id = null ) {
 	}
 
 	// Check if course has sections with pricing configured.
-	$course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+	$course_items_query = SPLMS_Course_Items_Query::get_instance();
 	$course_items       = $course_items_query->get_items( $course_id );
 
 	foreach ( $course_items as $course_item ) {
@@ -2144,7 +2144,7 @@ function splms_get_course_section_pricing_summary( $course_id, $user_id = null )
 	}
 
 	// Get all sections for this course.
-	$course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+	$course_items_query = SPLMS_Course_Items_Query::get_instance();
 	$course_items       = $course_items_query->get_items( $course_id );
 
 	$summary = array(
@@ -2358,7 +2358,7 @@ function splms_get_course_curriculum( $course_id, $user_id = null, $options = ar
 	);
 	$options  = wp_parse_args( $options, $defaults );
 
-	$course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+	$course_items_query = SPLMS_Course_Items_Query::get_instance();
 
 	$curriculum_data = $course_items_query->get_course_curriculum(
 		$course_id,
@@ -2407,7 +2407,7 @@ function splms_get_section_curriculum( $section_id, $user_id = null, $options = 
 	$options  = wp_parse_args( $options, $defaults );
 
 	// Use course items query to get section data directly.
-	$course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+	$course_items_query = SPLMS_Course_Items_Query::get_instance();
 
 	// Get course ID from section using existing method.
 	$course_id = $course_items_query->get_item_course_id( $section_id, SPLMS_POST_TYPES['section'] );
@@ -2509,7 +2509,7 @@ function splms_get_course_sections_for_navigation( $course_id ) {
 		return array();
 	}
 
-	$course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+	$course_items_query = SPLMS_Course_Items_Query::get_instance();
 
 	// Get sections with minimal data - no access checks, no item details.
 	$sections = $course_items_query->get_course_curriculum(
@@ -2582,7 +2582,7 @@ if ( ! function_exists( 'splms_get_course_progress_data' ) ) {
 
 		if ( empty( $curriculum_result ) || ! isset( $curriculum_result['stats'] ) ) {
 			// Fallback to lessons instance method.
-			$lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+			$lessons_instance = SPLMS_Lessons::get_instance();
 			$progress_data    = $lessons_instance->calculate_course_progress( $user_id, $course_id );
 
 			return array(

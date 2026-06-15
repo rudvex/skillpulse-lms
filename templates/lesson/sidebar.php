@@ -4,7 +4,7 @@
  *
  * This template can be overridden by copying it to yourtheme/skillpulse-lms/lesson/sidebar.php
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 
@@ -155,7 +155,7 @@ $splms_course_sections = isset( $splms_curriculum_result['sections'] ) ? $splms_
 
 									<a href="<?php echo esc_url( $splms_item_url ); ?>" class="<?php echo esc_attr( $splms_item_classes ); ?>" <?php echo ! $splms_can_access ? 'aria-disabled="true"' : ''; ?>>
 										<span class="splms-item-icon">
-											<?php echo $splms_item_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+											<?php echo wp_kses_post( $splms_item_icon ); ?>
 										</span>
 										<span class="splms-item-title"><?php echo esc_html( $splms_item_title ); ?></span>
 										<span class="splms-item-status">

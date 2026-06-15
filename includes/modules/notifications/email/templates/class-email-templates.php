@@ -4,7 +4,7 @@
  *
  * Handles email template management and sending.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Email
  * @since 1.0.0
  */
@@ -18,12 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Email_Templates {
+class SPLMS_Email_Templates {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Email_Templates|null $instance
+	 * @var SPLMS_Email_Templates|null $instance
 	 */
 	private static $instance = null;
 
@@ -32,7 +32,7 @@ class SkillPulse_LMS_Email_Templates {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Email_Templates The class instance.
+	 * @return SPLMS_Email_Templates The class instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -65,7 +65,7 @@ class SkillPulse_LMS_Email_Templates {
 	 */
 	public function load_template_classes() {
 		// Load abstract class first.
-		require_once SKILLPULSE_LMS_DIR_PATH . 'includes/modules/notifications/email/templates/abstract-email-template.php';
+		require_once SPLMS_DIR_PATH . 'includes/modules/notifications/email/templates/abstract-email-template.php';
 
 		// Load individual template classes.
 		$template_files = array(
@@ -82,7 +82,7 @@ class SkillPulse_LMS_Email_Templates {
 		);
 
 		foreach ( $template_files as $file ) {
-			$file_path = SKILLPULSE_LMS_DIR_PATH . 'includes/modules/notifications/email/templates/templates/' . $file;
+			$file_path = SPLMS_DIR_PATH . 'includes/modules/notifications/email/templates/templates/' . $file;
 			if ( file_exists( $file_path ) ) {
 				require_once $file_path;
 			}
@@ -101,16 +101,16 @@ class SkillPulse_LMS_Email_Templates {
 	 */
 	private function init_template_instances() {
 		$template_classes = array(
-			'SkillPulse_LMS_Activation_Email_Template',
-			'SkillPulse_LMS_Welcome_Email_Template',
-			'SkillPulse_LMS_Course_Enrollment_Email_Template',
-			'SkillPulse_LMS_Course_Completion_Email_Template',
-			'SkillPulse_LMS_Enrollment_Reminder_Email_Template',
-			'SkillPulse_LMS_Password_Reset_Email_Template',
-			'SkillPulse_LMS_Lesson_Completion_Email_Template',
-			'SkillPulse_LMS_Quiz_Completion_Email_Template',
-			'SkillPulse_LMS_Quiz_Passed_Email_Template',
-			'SkillPulse_LMS_Quiz_Failed_Email_Template',
+			'SPLMS_Activation_Email_Template',
+			'SPLMS_Welcome_Email_Template',
+			'SPLMS_Course_Enrollment_Email_Template',
+			'SPLMS_Course_Completion_Email_Template',
+			'SPLMS_Enrollment_Reminder_Email_Template',
+			'SPLMS_Password_Reset_Email_Template',
+			'SPLMS_Lesson_Completion_Email_Template',
+			'SPLMS_Quiz_Completion_Email_Template',
+			'SPLMS_Quiz_Passed_Email_Template',
+			'SPLMS_Quiz_Failed_Email_Template',
 		);
 
 		foreach ( $template_classes as $class_name ) {
@@ -238,7 +238,7 @@ class SkillPulse_LMS_Email_Templates {
 		);
 
 		// Use the email sender class for consistency.
-		$email_sender = SkillPulse_LMS_Email_Sender::get_instance();
+		$email_sender = SPLMS_Email_Sender::get_instance();
 		$result       = $email_sender->send_email( $admin_email, $test_template, $replacements );
 
 		if ( is_wp_error( $result ) ) {

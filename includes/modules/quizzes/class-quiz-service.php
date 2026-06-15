@@ -5,7 +5,7 @@
  * Provides unified business logic for quiz operations shared by AJAX and REST APIs.
  * Eliminates code duplication and ensures consistent behavior across interfaces.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 
@@ -21,13 +21,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Quiz_Service {
+class SPLMS_Quiz_Service {
 
 	/**
 	 * Class instance.
 	 *
 	 * @since 1.0.0
-	 * @var SkillPulse_LMS_Quiz_Service|null $instance
+	 * @var SPLMS_Quiz_Service|null $instance
 	 */
 	private static $instance = null;
 
@@ -35,7 +35,7 @@ class SkillPulse_LMS_Quiz_Service {
 	 * Quiz instance for status management.
 	 *
 	 * @since 1.0.0
-	 * @var SkillPulse_LMS_Quizzes $quiz
+	 * @var SPLMS_Quizzes $quiz
 	 */
 	private $quiz;
 
@@ -43,7 +43,7 @@ class SkillPulse_LMS_Quiz_Service {
 	 * Quiz attempts query instance.
 	 *
 	 * @since 1.0.0
-	 * @var SkillPulse_LMS_Quiz_Attempts_Query $attempts_query
+	 * @var SPLMS_Quiz_Attempts_Query $attempts_query
 	 */
 	private $attempts_query;
 
@@ -51,7 +51,7 @@ class SkillPulse_LMS_Quiz_Service {
 	 * Quiz evaluator instance.
 	 *
 	 * @since 1.0.0
-	 * @var SkillPulse_LMS_Quiz_Evaluator $evaluator
+	 * @var SPLMS_Quiz_Evaluator $evaluator
 	 */
 	private $evaluator;
 
@@ -59,7 +59,7 @@ class SkillPulse_LMS_Quiz_Service {
 	 * Guest quiz manager instance.
 	 *
 	 * @since 1.0.0
-	 * @var SkillPulse_LMS_Guest_Quiz_Manager $guest_manager
+	 * @var SPLMS_Guest_Quiz_Manager $guest_manager
 	 */
 	private $guest_manager;
 
@@ -68,7 +68,7 @@ class SkillPulse_LMS_Quiz_Service {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Quiz_Service The singleton instance.
+	 * @return SPLMS_Quiz_Service The singleton instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -83,10 +83,10 @@ class SkillPulse_LMS_Quiz_Service {
 	 * @since 1.0.0
 	 */
 	private function __construct() {
-		$this->quiz           = SkillPulse_LMS_Quizzes::get_instance();
-		$this->attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
-		$this->evaluator      = SkillPulse_LMS_Quiz_Evaluator::get_instance();
-		$this->guest_manager  = SkillPulse_LMS_Guest_Quiz_Manager::get_instance();
+		$this->quiz           = SPLMS_Quizzes::get_instance();
+		$this->attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
+		$this->evaluator      = SPLMS_Quiz_Evaluator::get_instance();
+		$this->guest_manager  = SPLMS_Guest_Quiz_Manager::get_instance();
 	}
 
 	/**
@@ -122,7 +122,7 @@ class SkillPulse_LMS_Quiz_Service {
 
 		// Check access control for logged-in users.
 		if ( ! $is_preview_mode && $user_id ) {
-			$access_control = SkillPulse_LMS_Access_Control::get_instance();
+			$access_control = SPLMS_Access_Control::get_instance();
 			if ( ! $access_control->user_can_access_quiz( $user_id, $quiz_id ) ) {
 				return new WP_Error(
 					'access_denied',
@@ -132,7 +132,7 @@ class SkillPulse_LMS_Quiz_Service {
 		}
 
 		// Get quiz data.
-		$quizzes_class = SkillPulse_LMS_Quizzes::get_instance();
+		$quizzes_class = SPLMS_Quizzes::get_instance();
 		$questions     = $quizzes_class->get_quiz_questions( $quiz_id, false );
 		$settings      = $quizzes_class->get_quiz_settings( $quiz_id );
 
@@ -217,7 +217,7 @@ class SkillPulse_LMS_Quiz_Service {
 		}
 
 		// Get quiz data.
-		$quizzes_class = SkillPulse_LMS_Quizzes::get_instance();
+		$quizzes_class = SPLMS_Quizzes::get_instance();
 		$questions     = $quizzes_class->get_quiz_questions( $quiz_id, false );
 		$settings      = $quizzes_class->get_quiz_settings( $quiz_id );
 
@@ -389,7 +389,7 @@ class SkillPulse_LMS_Quiz_Service {
 		}
 
 		// Get quiz questions and settings.
-		$quizzes_class = SkillPulse_LMS_Quizzes::get_instance();
+		$quizzes_class = SPLMS_Quizzes::get_instance();
 		$questions     = $quizzes_class->get_quiz_questions( $attempt->quiz_id, false );
 		$settings      = $quizzes_class->get_quiz_settings( $attempt->quiz_id );
 

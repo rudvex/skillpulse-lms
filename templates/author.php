@@ -7,7 +7,7 @@
  *
  * This template can be overridden by copying it to yourtheme/skillpulse-lms/author.php
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 
@@ -128,7 +128,7 @@ if ( ! $splms_is_instructor || empty( $splms_author_courses ) ) {
 
 						<?php
 						// Get total students across all author courses using the enrollments query class.
-						$splms_total_students = SkillPulse_LMS_Enrollments_Query::get_instance()->get_author_student_count( $splms_author_id );
+						$splms_total_students = SPLMS_Enrollments_Query::get_instance()->get_author_student_count( $splms_author_id );
 
 						if ( $splms_total_students > 0 ) :
 							?>
@@ -217,16 +217,17 @@ if ( ! $splms_is_instructor || empty( $splms_author_courses ) ) {
                 </svg>
             </span>';
 
-					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
-					echo paginate_links(
-						array(
-							'splms_current'   => $splms_current_page,
-							'splms_total'     => $splms_total_pages,
-							'splms_prev_text' => $splms_prev_text,
-							'splms_next_text' => $splms_next_text,
-							'splms_type'      => 'list',
-							'splms_end_size'  => 2,
-							'splms_mid_size'  => 2,
+					echo wp_kses_post(
+						paginate_links(
+							array(
+								'splms_current'   => $splms_current_page,
+								'splms_total'     => $splms_total_pages,
+								'splms_prev_text' => $splms_prev_text,
+								'splms_next_text' => $splms_next_text,
+								'splms_type'      => 'list',
+								'splms_end_size'  => 2,
+								'splms_mid_size'  => 2,
+							)
 						)
 					);
 

@@ -5,7 +5,7 @@
  * Provides consistent navigation footer UI for lessons, quizzes, and other content types.
  * This template can be overridden by copying it to yourtheme/skillpulse-lms/shared/navigation-footer.php
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 
@@ -78,7 +78,6 @@ $splms_next_label = 'quiz' === $splms_next_type ? __( 'Next Quiz', 'skillpulse-l
 			<!-- Center Content (Dynamic) -->
 			<div class="splms-footer-center">
 				<?php
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Content is expected to be pre-escaped HTML from calling template
 				echo wp_kses_post( $splms_center_content );
 				?>
 			</div>

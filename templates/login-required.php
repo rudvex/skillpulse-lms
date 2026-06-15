@@ -8,7 +8,7 @@
  * This template can be overridden by copying it to:
  * your-theme/skillpulse-lms/login-required.php
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 

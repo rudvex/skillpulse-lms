@@ -4,7 +4,7 @@
  *
  * Handles course sections functionality.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Sections {
+class SPLMS_Sections {
 
 	/**
 	 * Class instance.
@@ -57,7 +57,7 @@ class SkillPulse_LMS_Sections {
 	 */
 	protected function load_classes() {
 		// Load section access query class.
-		SkillPulse_LMS_Section_Access_Query::get_instance();
+		SPLMS_Section_Access_Query::get_instance();
 	}
 
 	/**
@@ -94,7 +94,7 @@ class SkillPulse_LMS_Sections {
 		$all_meta = get_post_meta( $section_id );
 
 		// Get configuration data and extract defaults.
-		$config_data       = SkillPulse_LMS_Config_Loader::get_config( 'sections', 'admin' );
+		$config_data       = SPLMS_Config_Loader::get_config( 'sections', 'admin' );
 		$defaults_settings = $this->extract_defaults_from_config( $config_data );
 		$section_settings  = array();
 
@@ -146,7 +146,7 @@ class SkillPulse_LMS_Sections {
 	 */
 	public function update_section_settings( $section_id, $settings ) {
 		// Get configuration to determine field groups.
-		$config_data       = SkillPulse_LMS_Config_Loader::get_config( 'sections', 'admin' );
+		$config_data       = SPLMS_Config_Loader::get_config( 'sections', 'admin' );
 		$defaults_settings = $this->extract_defaults_from_config( $config_data );
 
 		foreach ( $settings as $key => $value ) {

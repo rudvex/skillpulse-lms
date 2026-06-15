@@ -5,7 +5,7 @@
  * Handles REST API endpoints for frontend notification operations.
  * Provides endpoints for authenticated users to manage their own notifications.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api
@@ -28,14 +28,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_REST_Notifications_Controller extends WP_REST_Controller {
+class SPLMS_REST_Notifications_Controller extends WP_REST_Controller {
 
 	/**
 	 * Notifications query instance.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @var SkillPulse_LMS_Notifications_Query
+	 * @var SPLMS_Notifications_Query
 	 */
 	protected $query;
 
@@ -49,7 +49,7 @@ class SkillPulse_LMS_REST_Notifications_Controller extends WP_REST_Controller {
 	public function __construct() {
 		$this->namespace = splms_rest_namespace() . '/' . splms_rest_version();
 		$this->rest_base = 'notifications';
-		$this->query     = SkillPulse_LMS_Notifications_Query::get_instance();
+		$this->query     = SPLMS_Notifications_Query::get_instance();
 	}
 
 	/**

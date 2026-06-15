@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-abstract class SkillPulse_LMS_Abstract_Email_Template {
+abstract class SPLMS_Abstract_Email_Template {
 
 	/**
 	 * Template key (unique identifier)

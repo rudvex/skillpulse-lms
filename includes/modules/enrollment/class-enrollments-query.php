@@ -4,7 +4,7 @@
  *
  * Handles course enrollments database operations.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Enrollment
  * @since 1.0.0
  */
@@ -13,16 +13,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die();
 }
 
-if ( ! class_exists( 'SkillPulse_LMS_Base_Query' ) ) {
-	require_once SKILLPULSE_LMS_DIR_PATH . 'includes/modules/core/base/class-base-query.php';
+if ( ! class_exists( 'SPLMS_Base_Query' ) ) {
+	require_once SPLMS_DIR_PATH . 'includes/modules/core/base/class-base-query.php';
 }
 
 /**
- * Class SkillPulse_LMS_Enrollments_Query
+ * Class SPLMS_Enrollments_Query
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
+class SPLMS_Enrollments_Query extends SPLMS_Base_Query {
 
 	/**
 	 * Request-level cache for enrollment queries.
@@ -50,7 +50,7 @@ class SkillPulse_LMS_Enrollments_Query extends SkillPulse_LMS_Base_Query {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Enrollments_Query The class instance.
+	 * @return SPLMS_Enrollments_Query The class instance.
 	 */
 	public static function get_instance() {
 		return parent::get_base_instance( __CLASS__, 'splms_enrollments' );

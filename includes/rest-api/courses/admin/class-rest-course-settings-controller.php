@@ -6,7 +6,7 @@
  * Provides endpoints for getting and updating course settings including access control,
  * content settings, delivery settings, and completion criteria.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_REST_Course_Settings_Controller extends SkillPulse_LMS_REST_Course_Controller {
+class SPLMS_REST_Course_Settings_Controller extends SPLMS_REST_Course_Controller {
 
 	/**
 	 * Constructor.

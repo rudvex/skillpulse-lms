@@ -4,7 +4,7 @@
  *
  * This template can be overridden by copying it to yourtheme/skillpulse-lms/course/partials/tabs/overview.php.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 
@@ -31,9 +31,7 @@ $splms_course_id = get_the_ID();
 				<div class="course-requirements">
 					<h3><?php esc_html_e( 'Prerequisites & Requirements', 'skillpulse-lms' ); ?></h3>
 					<div class="requirements-content">
-						<?php
-						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wpautop output is safe when used with wp_kses_post.
-						echo wpautop( wp_kses_post( $splms_prerequisites ) );
+						echo wp_kses_post( wpautop( wp_kses_post( $splms_prerequisites ) ) );
 						?>
 					</div>
 				</div>
@@ -48,9 +46,7 @@ $splms_course_id = get_the_ID();
 				<div class="course-learning-outcomes">
 					<h3><?php esc_html_e( 'What You\'ll Learn', 'skillpulse-lms' ); ?></h3>
 					<div class="learning-outcomes-content">
-						<?php
-						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wpautop output is safe when used with wp_kses_post.
-						echo wpautop( wp_kses_post( $splms_learning_outcomes ) );
+						echo wp_kses_post( wpautop( wp_kses_post( $splms_learning_outcomes ) ) );
 						?>
 					</div>
 				</div>

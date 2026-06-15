@@ -4,7 +4,7 @@
  *
  * Handles in-app notification template management, default templates, and placeholder replacement.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Notifications
  * @since 1.0.0
  */
@@ -18,12 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_In_App_Templates {
+class SPLMS_In_App_Templates {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_In_App_Templates|null $instance
+	 * @var SPLMS_In_App_Templates|null $instance
 	 */
 	private static $instance = null;
 
@@ -32,7 +32,7 @@ class SkillPulse_LMS_In_App_Templates {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_In_App_Templates The class instance.
+	 * @return SPLMS_In_App_Templates The class instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {

@@ -5,7 +5,7 @@
  * This template can be overridden by copying it to yourtheme/skillpulse-lms/global/footer.php.
  * This won't conflict with WordPress theme hierarchy or block themes.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 

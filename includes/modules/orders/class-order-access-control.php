@@ -2,7 +2,7 @@
 /**
  * Order Access Control System
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Modules
  * @since 1.0.0
  */
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Order_Access_Control {
+class SPLMS_Order_Access_Control {
 
 	/**
 	 * Grant course access to user based on completed order.
@@ -28,7 +28,7 @@ class SkillPulse_LMS_Order_Access_Control {
 	 * @return bool True on success, false on failure.
 	 */
 	public static function grant_course_access( $order_id ) {
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 		$order        = $orders_query->get_order_by_id( $order_id );
 
 		if ( ! $order || 'completed' !== $order->status ) {
@@ -44,7 +44,7 @@ class SkillPulse_LMS_Order_Access_Control {
 		}
 
 		// This is a full course purchase - enroll user in course.
-		$enrollment_result = SkillPulse_LMS_Enrollment::get_instance()->enroll_user_in_course( $order->user_id, $order->course_id );
+		$enrollment_result = SPLMS_Enrollment::get_instance()->enroll_user_in_course( $order->user_id, $order->course_id );
 
 		// enrollment_result can be enrollment ID (int) or false, so check for truthy value.
 		if ( $enrollment_result ) {
@@ -93,7 +93,7 @@ class SkillPulse_LMS_Order_Access_Control {
 	 * @return bool True on success, false on failure.
 	 */
 	public static function grant_section_access_from_order( $order_id ) {
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 		$order        = $orders_query->get_order_by_id( $order_id );
 
 		if ( ! $order ) {
@@ -104,7 +104,7 @@ class SkillPulse_LMS_Order_Access_Control {
 		$granted_sections = array();
 
 		// Use Section Access Query class for database operations.
-		$section_access_query = SkillPulse_LMS_Section_Access_Query::get_instance();
+		$section_access_query = SPLMS_Section_Access_Query::get_instance();
 
 		foreach ( $order_items as $item ) {
 			if ( 'section' === $item->item_type ) {
@@ -180,7 +180,7 @@ class SkillPulse_LMS_Order_Access_Control {
 	 * @return bool True on success, false on failure.
 	 */
 	public static function revoke_course_access( $order_id ) {
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 		$order        = $orders_query->get_order_by_id( $order_id );
 
 		if ( ! $order ) {
@@ -200,8 +200,8 @@ class SkillPulse_LMS_Order_Access_Control {
 		$enrollment_id = $orders_query->get_order_meta( $order_id, 'enrollment_id' );
 
 		// Unenroll user from course using Enrollments Query.
-		if ( class_exists( 'SkillPulse_LMS_Enrollments_Query' ) ) {
-			$enrollments_query   = SkillPulse_LMS_Enrollments_Query::get_instance();
+		if ( class_exists( 'SPLMS_Enrollments_Query' ) ) {
+			$enrollments_query   = SPLMS_Enrollments_Query::get_instance();
 			$unenrollment_result = $enrollments_query->unenroll_user( $order->user_id, $order->course_id );
 
 			if ( $unenrollment_result ) {
@@ -238,7 +238,7 @@ class SkillPulse_LMS_Order_Access_Control {
 	 * @return bool True on success, false on failure.
 	 */
 	public static function revoke_section_access_from_order( $order_id ) {
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 		$order        = $orders_query->get_order_by_id( $order_id );
 
 		if ( ! $order ) {
@@ -246,7 +246,7 @@ class SkillPulse_LMS_Order_Access_Control {
 		}
 
 		// Use Section Access Query class for database operations.
-		$section_access_query = SkillPulse_LMS_Section_Access_Query::get_instance();
+		$section_access_query = SPLMS_Section_Access_Query::get_instance();
 		$revoke_result        = $section_access_query->revoke_access_by_order( $order_id );
 
 		if ( $revoke_result ) {
@@ -285,7 +285,7 @@ class SkillPulse_LMS_Order_Access_Control {
 	 * @return bool True on success, false on failure.
 	 */
 	public static function handle_order_status_change( $order_id, $old_status, $new_status ) {
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 		$order        = $orders_query->get_order_by_id( $order_id );
 
 		if ( ! $order ) {
@@ -336,7 +336,7 @@ class SkillPulse_LMS_Order_Access_Control {
 		}
 
 		// Check for completed orders.
-		$orders_query = SkillPulse_LMS_Orders_Query::get_instance();
+		$orders_query = SPLMS_Orders_Query::get_instance();
 		$orders       = $orders_query->get_orders(
 			array(
 				'user_id'   => $user_id,
@@ -399,7 +399,7 @@ class SkillPulse_LMS_Order_Access_Control {
 		}
 
 		// Level 1: Check full course enrollment.
-		$enrollment_manager = SkillPulse_LMS_Enrollment::get_instance();
+		$enrollment_manager = SPLMS_Enrollment::get_instance();
 		$is_enrolled        = $enrollment_manager->is_user_enrolled( $user_id, $course_id );
 
 		if ( $is_enrolled ) {
@@ -452,7 +452,7 @@ class SkillPulse_LMS_Order_Access_Control {
 	 */
 	public static function get_user_section_access( $user_id, $section_id ) {
 		// Use Section Access Query class for database operations.
-		$section_access_query = SkillPulse_LMS_Section_Access_Query::get_instance();
+		$section_access_query = SPLMS_Section_Access_Query::get_instance();
 		return $section_access_query->get_user_section_access( $user_id, $section_id );
 	}
 
@@ -531,7 +531,7 @@ class SkillPulse_LMS_Order_Access_Control {
 		global $wpdb;
 
 		// Check if user has full course enrollment.
-		$enrollment_manager = SkillPulse_LMS_Enrollment::get_instance();
+		$enrollment_manager = SPLMS_Enrollment::get_instance();
 		$is_enrolled        = $enrollment_manager->is_user_enrolled( $user_id, $course_id );
 
 		if ( $is_enrolled ) {
@@ -551,7 +551,7 @@ class SkillPulse_LMS_Order_Access_Control {
 		}
 
 		// Get purchased sections using Section Access Query class.
-		$section_access_query = SkillPulse_LMS_Section_Access_Query::get_instance();
+		$section_access_query = SPLMS_Section_Access_Query::get_instance();
 		$purchased_sections   = $section_access_query->get_user_course_sections( $user_id, $course_id );
 
 		// Get free sections.

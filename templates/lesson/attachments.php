@@ -4,7 +4,7 @@
  *
  * This template can be overridden by copying it to yourtheme/skillpulse-lms/lesson/attachments.php
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Get lesson attachments.
 $splms_lesson_id        = get_the_ID();
-$splms_lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+$splms_lessons_instance = SPLMS_Lessons::get_instance();
 $splms_attachments      = $splms_lessons_instance->get_formatted_lesson_attachments( $splms_lesson_id );
 
 if ( empty( $splms_attachments ) ) {
@@ -65,7 +65,7 @@ if ( empty( $splms_attachments ) ) {
 
 			<a href="<?php echo esc_url( $splms_file_url ); ?>" class="splms-attachment-card" target="_blank" rel="noopener noreferrer" download>
 				<div class="splms-attachment-icon">
-					<?php echo $splms_file_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php echo wp_kses_post( $splms_file_icon ); ?>
 				</div>
 				<div class="splms-attachment-info">
 					<div class="splms-attachment-title"><?php echo esc_html( $splms_file_title ); ?></div>

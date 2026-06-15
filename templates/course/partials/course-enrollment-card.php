@@ -5,7 +5,7 @@
  * This template displays course information with a focus on the instructor
  * and shows individual sections available for purchase.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 2.0
  */
 
@@ -69,7 +69,7 @@ $splms_total_videos       = 0;
 $splms_total_notes        = 0;
 $splms_total_duration_min = 0;
 
-$splms_course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+$splms_course_items_query = SPLMS_Course_Items_Query::get_instance();
 if ( $splms_course_items_query ) {
 	$splms_course_items = $splms_course_items_query->get_items( $splms_course_id );
 
@@ -454,27 +454,29 @@ $splms_in_wishlist        = in_array( $splms_course_id, $splms_user_wishlist, tr
 					</a>
 				<?php elseif ( 'public_paid' === $splms_course_access_type && splms_is_paid_courses_enabled() && $splms_full_price > 0 ) : ?>
 					<?php
-					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
-					echo splms_render_enrollment_button(
-						$splms_course_id,
-						is_user_logged_in() ? $splms_user_id : 0,
-						$splms_access_info,
-						$splms_enrollment_dates,
-						$splms_capacity_info,
-						$splms_is_enrolled
+					echo wp_kses_post(
+						splms_render_enrollment_button(
+							$splms_course_id,
+							is_user_logged_in() ? $splms_user_id : 0,
+							$splms_access_info,
+							$splms_enrollment_dates,
+							$splms_capacity_info,
+							$splms_is_enrolled
+						)
 					);
 					?>
 				<?php elseif ( 'invitation_only' !== $splms_course_access_type && 'prerequisite_required' !== $splms_course_access_type ) : ?>
 					<?php
 					// For other course types, show generic enrollment button.
-					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
-					echo splms_render_enrollment_button(
-						$splms_course_id,
-						is_user_logged_in() ? $splms_user_id : 0,
-						$splms_access_info,
-						$splms_enrollment_dates,
-						$splms_capacity_info,
-						$splms_is_enrolled
+					echo wp_kses_post(
+						splms_render_enrollment_button(
+							$splms_course_id,
+							is_user_logged_in() ? $splms_user_id : 0,
+							$splms_access_info,
+							$splms_enrollment_dates,
+							$splms_capacity_info,
+							$splms_is_enrolled
+						)
 					);
 					?>
 				<?php endif; ?>

@@ -12,7 +12,7 @@ class SPLMSNotificationsAPI {
 	constructor() {
 		this.namespace = 'splms/v1';
 		this.restBase = 'notifications';
-		this.baseURL = `${window.wpApiSettings?.root || '/wp-json/'}${this.namespace}/${this.restBase}`;
+		this.baseURL = window.SPLMSCore.helper.getRestApiUrl(`${this.namespace}/${this.restBase}`);
 	}
 
 	/**

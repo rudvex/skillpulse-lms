@@ -1060,3 +1060,13 @@
 		}
 	}
 }
+
+/* Fix Gutenberg inline height issue for custom meta box region */
+.skillpulse-lms-screen {
+  .edit-post-meta-boxes-main {
+    height: auto !important;
+  }
+  .edit-post-meta-boxes-main__presenter {
+    display: none;
+  }
+}

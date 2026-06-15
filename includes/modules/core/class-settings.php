@@ -5,7 +5,7 @@
  * Handles plugin settings, configuration, and validation.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -17,14 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Settings {
+class SPLMS_Settings {
 
 	/**
 	 * Class instance.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @var SkillPulse_LMS_Settings|null $instance
+	 * @var SPLMS_Settings|null $instance
 	 */
 	private static $instance;
 
@@ -42,7 +42,7 @@ class SkillPulse_LMS_Settings {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Settings The class instance.
+	 * @return SPLMS_Settings The class instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -121,7 +121,7 @@ class SkillPulse_LMS_Settings {
 	 * @return array Array of valid tab names.
 	 */
 	public function get_valid_tabs_from_config() {
-		$config = SkillPulse_LMS_Config_Loader::get_config( 'settings', 'admin' );
+		$config = SPLMS_Config_Loader::get_config( 'settings', 'admin' );
 		$tabs   = array();
 
 		if ( isset( $config['tabs'] ) && is_array( $config['tabs'] ) ) {
@@ -459,8 +459,8 @@ class SkillPulse_LMS_Settings {
 		$this->update_all_settings( $settings );
 
 		// Clear config cache to ensure fresh data on next request.
-		if ( class_exists( 'SkillPulse_LMS_Config_Loader' ) ) {
-			SkillPulse_LMS_Config_Loader::clear_cache( 'settings' );
+		if ( class_exists( 'SPLMS_Config_Loader' ) ) {
+			SPLMS_Config_Loader::clear_cache( 'settings' );
 		}
 
 		/**

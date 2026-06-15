@@ -4,7 +4,7 @@
  *
  * This template can be overridden by copying it to yourtheme/skillpulse-lms/content-no-courses.php.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 // Sanitize the GET array to prevent static analysis false positives.
-$splms_sanitized_get = map_deep( wp_unslash( $_GET ), 'sanitize_text_field' );
+$splms_sanitized_get = map_deep( wp_unslash( $_GET ), 'sanitize_text_field' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Template file reading URL parameter only.
 
 $splms_is_search   = is_search() || ! empty( $splms_sanitized_get['course_search'] );
 $splms_has_filters = ! empty( array_filter( $splms_sanitized_get ) );
