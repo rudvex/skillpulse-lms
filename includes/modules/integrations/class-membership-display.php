@@ -5,7 +5,7 @@
  * Handles membership-related display logic for course type data.
  * This keeps all membership display logic within the integrations module.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Integrations
  * @since 1.0.0
  */

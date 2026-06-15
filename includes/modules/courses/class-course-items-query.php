@@ -6,15 +6,15 @@
  *
  * @since      1.0.0
  * @subpackage Courses
- * @package    SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die();
 }
 
-if ( ! class_exists( 'SkillPulse_LMS_Base_Query' ) ) {
-	require_once SKILLPULSE_LMS_DIR_PATH . 'includes/modules/core/base/class-base-query.php';
+if ( ! class_exists( 'SPLMS_Base_Query' ) ) {
+	require_once SPLMS_DIR_PATH . 'includes/modules/core/base/class-base-query.php';
 }
 
 /**
@@ -22,7 +22,7 @@ if ( ! class_exists( 'SkillPulse_LMS_Base_Query' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Course_Items_Query extends SkillPulse_LMS_Base_Query {
+class SPLMS_Course_Items_Query extends SPLMS_Base_Query {
 	/**
 	 * Constructor.
 	 *
@@ -39,7 +39,7 @@ class SkillPulse_LMS_Course_Items_Query extends SkillPulse_LMS_Base_Query {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Course_Items_Query The class instance.
+	 * @return SPLMS_Course_Items_Query The class instance.
 	 */
 	public static function get_instance() {
 		return parent::get_base_instance( __CLASS__, 'splms_course_items' );
@@ -292,13 +292,13 @@ class SkillPulse_LMS_Course_Items_Query extends SkillPulse_LMS_Base_Query {
 		$user_id = isset( $args['user_id'] ) ? absint( $args['user_id'] ) : 0;
 
 		// Initialize instances we might need.
-		$relationships_query = SkillPulse_LMS_Relationships_Query::get_instance();
+		$relationships_query = SPLMS_Relationships_Query::get_instance();
 		$lessons_instance    = null;
 		$quiz_attempts_query = null;
 
 		if ( $args['check_completion'] && $user_id ) {
-			$lessons_instance    = SkillPulse_LMS_Lessons::get_instance();
-			$quiz_attempts_query = SkillPulse_LMS_Quiz_Attempts_Query::get_instance();
+			$lessons_instance    = SPLMS_Lessons::get_instance();
+			$quiz_attempts_query = SPLMS_Quiz_Attempts_Query::get_instance();
 		}
 
 		// Get course items (sections).

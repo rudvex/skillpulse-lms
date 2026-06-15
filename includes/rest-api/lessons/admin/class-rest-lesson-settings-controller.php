@@ -5,7 +5,7 @@
  * Handles REST API endpoints for lesson settings management.
  * Provides endpoints for getting and updating lesson-specific settings.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_REST_Lesson_Settings_Controller extends WP_REST_Controller {
+class SPLMS_REST_Lesson_Settings_Controller extends WP_REST_Controller {
 
 	/**
 	 * Constructor.
@@ -127,7 +127,7 @@ class SkillPulse_LMS_REST_Lesson_Settings_Controller extends WP_REST_Controller 
 			return new WP_Error( 'lesson_not_found', __( 'Lesson not found.', 'skillpulse-lms' ), array( 'status' => 404 ) );
 		}
 
-		$settings = SkillPulse_LMS_Lessons::get_instance()->get_lesson_settings( $lesson_id );
+		$settings = SPLMS_Lessons::get_instance()->get_lesson_settings( $lesson_id );
 
 		$settings = apply_filters( 'splms_get_lesson_settings', $settings, $lesson_id );
 
@@ -211,7 +211,7 @@ class SkillPulse_LMS_REST_Lesson_Settings_Controller extends WP_REST_Controller 
 			);
 		}
 
-		$updated_settings = SkillPulse_LMS_Lessons::get_instance()->update_lesson_settings( $lesson_id, $settings );
+		$updated_settings = SPLMS_Lessons::get_instance()->update_lesson_settings( $lesson_id, $settings );
 
 		return rest_ensure_response(
 			array(

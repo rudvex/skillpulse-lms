@@ -5,7 +5,7 @@
  * Replaces quiz-settings-config.json with PHP configuration for better performance,
  * translation support, and dynamic capabilities.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 

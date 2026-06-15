@@ -5,7 +5,7 @@
  * Handles REST API endpoints for quiz management and quiz attempts.
  * Provides endpoints for CRUD operations, quiz attempts, submissions, and results.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api
@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_REST_Quiz_Controller extends WP_REST_Controller {
+class SPLMS_REST_Quiz_Controller extends WP_REST_Controller {
 
 	/**
 	 * Constructor.
@@ -445,7 +445,7 @@ class SkillPulse_LMS_REST_Quiz_Controller extends WP_REST_Controller {
 		$data['max_attempts']       = isset( $quiz_settings['max_attempts'] ) ? $quiz_settings['max_attempts'] : 0;
 
 		// Question count (always include).
-		$questions_query        = SkillPulse_LMS_Quiz_Questions_Query::get_instance();
+		$questions_query        = SPLMS_Quiz_Questions_Query::get_instance();
 		$question_count         = $questions_query->get_questions_count( $quiz_id );
 		$data['question_count'] = false !== $question_count ? $question_count : 0;
 

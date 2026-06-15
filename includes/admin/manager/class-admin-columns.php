@@ -4,7 +4,7 @@
  *
  * Handles custom columns for Courses, Lessons, and Quizzes post type listings.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 
@@ -13,19 +13,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class SkillPulse_LMS_Admin_Columns
+ * Class SPLMS_Admin_Columns
  *
  * Handles custom columns for post type listings.
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Admin_Columns {
+class SPLMS_Admin_Columns {
 
 	/**
 	 * Class instance.
 	 *
 	 * @since 1.0.0
-	 * @var SkillPulse_LMS_Admin_Columns|null $instance
+	 * @var SPLMS_Admin_Columns|null $instance
 	 */
 	private static $instance;
 
@@ -34,7 +34,7 @@ class SkillPulse_LMS_Admin_Columns {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Admin_Columns The singleton instance.
+	 * @return SPLMS_Admin_Columns The singleton instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -492,7 +492,7 @@ class SkillPulse_LMS_Admin_Columns {
 	 * @return int|null Course ID or null if not found.
 	 */
 	private function get_section_course_id( $section_id ) {
-		$course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+		$course_items_query = SPLMS_Course_Items_Query::get_instance();
 		$course_id          = $course_items_query->get_item_course_id( $section_id, SPLMS_POST_TYPES['section'] );
 		return $course_id ? intval( $course_id ) : null;
 	}

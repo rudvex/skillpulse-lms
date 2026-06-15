@@ -5,7 +5,7 @@
  * Handles user login functionality and login page customization.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Login {
+class SPLMS_Login {
 
 
 	/**
@@ -32,7 +32,7 @@ class SkillPulse_LMS_Login {
 	/**
 	 * Get the instance of this class.
 	 *
-	 * @return SkillPulse_LMS_Login
+	 * @return SPLMS_Login
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -109,9 +109,9 @@ class SkillPulse_LMS_Login {
 
 		wp_enqueue_style(
 			'splms-login',
-			SKILLPULSE_LMS_URL_PATH . 'assets/css/login.css',
+			SPLMS_URL_PATH . 'assets/css/login.css',
 			array(),
-			SKILLPULSE_LMS_VERSION
+			SPLMS_VERSION
 		);
 	}
 

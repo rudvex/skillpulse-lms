@@ -6,7 +6,7 @@
  * Handles signup approval, activation emails, and signup management.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,13 +21,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Signup_Admin {
+class SPLMS_Signup_Admin {
 
 	/**
 	 * Class instance.
 	 *
 	 * @since 1.0.0
-	 * @var SkillPulse_LMS_Signup_Admin|null $instance
+	 * @var SPLMS_Signup_Admin|null $instance
 	 */
 	private static $instance;
 
@@ -36,7 +36,7 @@ class SkillPulse_LMS_Signup_Admin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Signup_Admin The singleton instance.
+	 * @return SPLMS_Signup_Admin The singleton instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -123,9 +123,9 @@ class SkillPulse_LMS_Signup_Admin {
 
 		// Load the list table.
 		require_once ABSPATH . 'wp-admin/includes/class-wp-users-list-table.php';
-		require_once SKILLPULSE_LMS_DIR_PATH . 'includes/admin/signup/class-signup-list-table.php';
+		require_once SPLMS_DIR_PATH . 'includes/admin/signup/class-signup-list-table.php';
 
-		$splms_signup_list_table = new SkillPulse_LMS_Signup_List_Table();
+		$splms_signup_list_table = new SPLMS_Signup_List_Table();
 
 		// Prepare the list table.
 		$splms_signup_list_table->prepare_items();
@@ -145,30 +145,30 @@ class SkillPulse_LMS_Signup_Admin {
 	 * @since 1.0.0
 	 */
 	public function signups_admin() {
-		global $splms_signup_list_table, $userssearch; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Required for WP_Users_List_Table compatibility.
+		global $splms_signup_list_table, $splms_usersearch; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Required for WP_Users_List_Table compatibility.
 
-		$request_s       = isset( $_REQUEST['s'] ) ? wp_unslash( $_REQUEST['s'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$userssearch     = sanitize_text_field( trim( $request_s ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- WordPress core global for WP_Users_List_Table compatibility.
-		$plugin_page     = 'splms-signups';
-		$search_form_url = add_query_arg( 'page', $plugin_page, admin_url( 'users.php' ) );
-		$form_url        = add_query_arg( 'page', $plugin_page, admin_url( 'users.php' ) );
+		$request_s        = isset( $_REQUEST['s'] ) ? wp_unslash( $_REQUEST['s'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$splms_usersearch = sanitize_text_field( trim( $request_s ) );
+		$plugin_page      = 'splms-signups';
+		$search_form_url  = add_query_arg( 'page', $plugin_page, admin_url( 'users.php' ) );
+		$form_url         = add_query_arg( 'page', $plugin_page, admin_url( 'users.php' ) );
 		?>
 		<div class="wrap">
 			<?php if ( version_compare( $GLOBALS['wp_version'], '4.8', '>=' ) ) { ?>
 				<h1 class="wp-heading-inline"><?php esc_html_e( 'Users', 'skillpulse-lms' ); ?></h1>
 				<?php
-				if ( $userssearch ) {
+				if ( $splms_usersearch ) {
 					/* translators: %s: Search query. */
-					printf( '<span class="subtitle">' . esc_html__( 'Search results for "%s"', 'skillpulse-lms' ) . '</span>', esc_html( $userssearch ) );
+					printf( '<span class="subtitle">' . esc_html__( 'Search results for "%s"', 'skillpulse-lms' ) . '</span>', esc_html( $splms_usersearch ) );
 				}
 				?>
 				<hr class="wp-header-end">
 			<?php } else { ?>
 				<h1><?php esc_html_e( 'Users', 'skillpulse-lms' ); ?>
 					<?php
-					if ( $userssearch ) {
+					if ( $splms_usersearch ) {
 						/* translators: %s: Search query. */
-						printf( '<span class="subtitle">' . esc_html__( 'Search results for "%s"', 'skillpulse-lms' ) . '</span>', esc_html( $userssearch ) );
+						printf( '<span class="subtitle">' . esc_html__( 'Search results for "%s"', 'skillpulse-lms' ) . '</span>', esc_html( $splms_usersearch ) );
 					}
 					?>
 				</h1>
@@ -204,7 +204,7 @@ class SkillPulse_LMS_Signup_Admin {
 		global $role;
 
 		// Get pending signups count.
-		$signup_count = SkillPulse_LMS_Signup_Query::get_instance()->get_pending_signups_count();
+		$signup_count = SPLMS_Signup_Query::get_instance()->get_pending_signups_count();
 
 		// Remove 'current' class from All if we're on pending signups.
 		if ( 'registered' === $role ) {
@@ -353,7 +353,7 @@ class SkillPulse_LMS_Signup_Admin {
 			return;
 		}
 
-		$signup = SkillPulse_LMS_Signup::get_instance();
+		$signup = SPLMS_Signup::get_instance();
 
 		switch ( $action ) {
 			case 'activate':
@@ -386,7 +386,7 @@ class SkillPulse_LMS_Signup_Admin {
 				foreach ( $signup_ids as $signup_id ) {
 					$signup_item = $signup->get_signup( $signup_id );
 					if ( $signup_item ) {
-						$result = SkillPulse_LMS_Email_Module::get_instance()->send_activation_email( $signup_item->id );
+						$result = SPLMS_Email_Module::get_instance()->send_activation_email( $signup_item->id );
 						if ( $result ) {
 							++$resent;
 						}
@@ -620,7 +620,7 @@ class SkillPulse_LMS_Signup_Admin {
 		}
 
 		// Get signup data.
-		$signup = SkillPulse_LMS_Signup::get_instance()->get_signup( $signup_id );
+		$signup = SPLMS_Signup::get_instance()->get_signup( $signup_id );
 		if ( ! $signup ) {
 			wp_send_json_error( esc_html__( 'Signup not found', 'skillpulse-lms' ) );
 		}
@@ -684,7 +684,7 @@ class SkillPulse_LMS_Signup_Admin {
 			wp_send_json_error( esc_html__( 'Invalid request parameters', 'skillpulse-lms' ) );
 		}
 
-		$signup_instance = SkillPulse_LMS_Signup::get_instance();
+		$signup_instance = SPLMS_Signup::get_instance();
 		$signup          = $signup_instance->get_signup( $signup_id );
 
 		if ( ! $signup ) {
@@ -719,8 +719,8 @@ class SkillPulse_LMS_Signup_Admin {
 
 			case 'resend':
 				// Assuming you have an email module for sending activation emails.
-				if ( class_exists( 'SkillPulse_LMS_Email_Module' ) ) {
-					$result = SkillPulse_LMS_Email_Module::get_instance()->send_activation_email( $signup_id );
+				if ( class_exists( 'SPLMS_Email_Module' ) ) {
+					$result = SPLMS_Email_Module::get_instance()->send_activation_email( $signup_id );
 					if ( $result ) {
 						$success = true;
 						/* translators: %s: User email address. */

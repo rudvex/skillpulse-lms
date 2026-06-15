@@ -4,7 +4,7 @@
  *
  * @since      1.0.0
  * @subpackage Modules\Orders\Gateways
- * @package    SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,13 +18,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Payment {
+class SPLMS_Payment {
 
 	/**
 	 * Instance of this class.
 	 *
 	 * @since 1.0.0
-	 * @var SkillPulse_LMS_Payment
+	 * @var SPLMS_Payment
 	 */
 	private static $instance = null;
 
@@ -40,7 +40,7 @@ class SkillPulse_LMS_Payment {
 	 * Get instance of this class.
 	 *
 	 * @since 1.0.0
-	 * @return SkillPulse_LMS_Payment
+	 * @return SPLMS_Payment
 	 */
 	public static function get_instance() {
 		if ( null === self::$instance ) {
@@ -85,7 +85,7 @@ class SkillPulse_LMS_Payment {
 		// Register PayPal gateway.
 		$this->gateways['paypal'] = array(
 			'name'        => __( 'PayPal', 'skillpulse-lms' ),
-			'class'       => 'SkillPulse_LMS_PayPal',
+			'class'       => 'SPLMS_PayPal',
 			'enabled'     => splms_get_setting( 'enable_paypal', false ),
 			'configured'  => $this->is_paypal_configured(),
 			'icon'        => 'paypal',
@@ -95,7 +95,7 @@ class SkillPulse_LMS_Payment {
 		// Register Stripe gateway.
 		$this->gateways['stripe'] = array(
 			'name'        => __( 'Stripe', 'skillpulse-lms' ),
-			'class'       => 'SkillPulse_LMS_Stripe',
+			'class'       => 'SPLMS_Stripe',
 			'enabled'     => splms_get_setting( 'enable_stripe', false ),
 			'configured'  => $this->is_stripe_configured(),
 			'icon'        => 'stripe',
@@ -105,7 +105,7 @@ class SkillPulse_LMS_Payment {
 		// Register Razorpay gateway.
 		$this->gateways['razorpay'] = array(
 			'name'        => __( 'Razorpay', 'skillpulse-lms' ),
-			'class'       => 'SkillPulse_LMS_Razorpay',
+			'class'       => 'SPLMS_Razorpay',
 			'enabled'     => splms_get_setting( 'enable_razorpay', false ),
 			'configured'  => $this->is_razorpay_configured(),
 			'icon'        => 'razorpay',
@@ -227,8 +227,8 @@ class SkillPulse_LMS_Payment {
 		if ( 'success' === $splms_payment && ! empty( $payment_id ) && ! empty( $payment_intent ) && 'succeeded' === $redirect_status ) {
 
 			// Process Stripe payment success.
-			if ( class_exists( 'SkillPulse_LMS_Stripe' ) ) {
-				$stripe = SkillPulse_LMS_Stripe::get_instance();
+			if ( class_exists( 'SPLMS_Stripe' ) ) {
+				$stripe = SPLMS_Stripe::get_instance();
 				$result = $stripe->process_successful_payment_from_callback( $payment_intent, $course_id );
 
 				if ( $result['success'] ) {

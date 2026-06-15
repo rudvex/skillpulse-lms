@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkillPulse LMS v1.0.0\n"
 "Report-Msgid-Bugs-To: https://skillpulselms.com/contact\n"
-"POT-Creation-Date: 2026-05-16 10:34:24+00:00\n"
+"POT-Creation-Date: 2026-06-15 11:37:15+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,20 +21,20 @@ msgstr ""
 msgid "Back to Courses"
 msgstr ""
 
-#: includes/admin/class-admin.php:415
+#: includes/admin/class-admin.php:417
 msgid "Course Pricing Issue Detected"
 msgstr ""
 
-#: includes/admin/class-admin.php:417
+#: includes/admin/class-admin.php:419
 msgid "Recommended Bundle Price"
 msgstr ""
 
-#: includes/admin/class-admin.php:421
+#: includes/admin/class-admin.php:423
 #. translators: %s: Discount percentage
 msgid "(%s%% discount from sections total)"
 msgstr ""
 
-#: includes/admin/class-admin.php:425
+#: includes/admin/class-admin.php:427
 msgid "Learn more about pricing strategies"
 msgstr ""
 
@@ -97,14 +97,14 @@ msgstr ""
 #: includes/admin/manager/class-admin-columns.php:477
 #: includes/functions.php:1427 includes/functions.php:1445
 #: includes/functions.php:1509 includes/functions.php:1512
-#: templates/course/course.php:187 templates/course/course.php:199
+#: templates/course/course.php:185 templates/course/course.php:197
 #: templates/course/partials/course-enrollment-card.php:354
 #: templates/course/partials/course-enrollment-card.php:400
 #: templates/course/partials/course-hero-v2.php:354
 #: templates/course/partials/course-hero-v2.php:400
 #: templates/course/partials/course-hero.php:513
-#: templates/course/partials/tabs/instructor.php:183
-#: templates/course/partials/tabs/instructor.php:190
+#: templates/course/partials/tabs/instructor.php:182
+#: templates/course/partials/tabs/instructor.php:189
 #: templates/single-section.php:464
 msgid "Free"
 msgstr ""
@@ -118,8 +118,8 @@ msgid "Invitation"
 msgstr ""
 
 #: includes/admin/manager/class-admin-columns.php:230
-#: templates/course/course.php:203
-#: templates/course/partials/tabs/instructor.php:194
+#: templates/course/course.php:201
+#: templates/course/partials/tabs/instructor.php:193
 msgid "Prerequisite"
 msgstr ""
 
@@ -245,7 +245,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: includes/admin/manager/class-admin-columns.php:710
-#: templates/quiz/content.php:329
+#: templates/quiz/content.php:338
 msgid "Questions"
 msgstr ""
 
@@ -317,7 +317,7 @@ msgstr ""
 
 #: includes/admin/manager/class-admin-menus.php:188
 #: includes/admin/manager/class-admin-menus.php:189
-#: includes/frontend/class-frontend.php:243
+#: includes/frontend/class-frontend.php:247
 #: includes/frontend/dashboard/class-splms-dashboard-service.php:410
 #: includes/modules/notifications/class-notification.php:112
 #: templates/dashboard/notifications.php:27 templates/page-dashboard.php:121
@@ -388,10 +388,10 @@ msgstr ""
 
 #: includes/admin/manager/class-admin-post-types.php:90
 #: includes/modules/core/class-access-control.php:798
-#: templates/course/course.php:261 templates/dashboard/wishlist.php:89
-#: templates/page-dashboard.php:340 templates/quiz/content.php:224
-#: templates/quiz/content.php:242 templates/quiz/content.php:275
-#: templates/quiz/content.php:638 templates/quiz/question-templates.php:209
+#: templates/course/course.php:259 templates/dashboard/wishlist.php:89
+#: templates/page-dashboard.php:340 templates/quiz/content.php:233
+#: templates/quiz/content.php:251 templates/quiz/content.php:284
+#: templates/quiz/content.php:648 templates/quiz/question-templates.php:209
 msgid "View Course"
 msgstr ""
 
@@ -1111,7 +1111,7 @@ msgstr ""
 
 #: includes/blocks/class-blocks.php:575
 #: includes/modules/orders/class-order-status-manager.php:54
-#: templates/course/course.php:252
+#: templates/course/course.php:250
 #: templates/course/partials/tabs/curriculum.php:119
 #: templates/course/partials/tabs/curriculum.php:449
 #: templates/dashboard/courses.php:77 templates/dashboard/courses.php:128
@@ -1122,7 +1122,7 @@ msgstr ""
 
 #: includes/blocks/class-blocks.php:577
 #: includes/modules/notifications/email/templates/templates/enrollment-reminder.php:46
-#: templates/course/course.php:256
+#: templates/course/course.php:254
 #: templates/course/partials/course-hero.php:417
 #: templates/page-dashboard.php:265
 msgid "Continue Learning"
@@ -1166,119 +1166,119 @@ msgid_plural "%d Students"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/frontend/class-frontend.php:238
+#: includes/frontend/class-frontend.php:242
 #: includes/frontend/dashboard/class-splms-dashboard.php:163
 msgid "Loading..."
 msgstr ""
 
-#: includes/frontend/class-frontend.php:239
+#: includes/frontend/class-frontend.php:243
 #: includes/frontend/dashboard/class-splms-dashboard.php:164
 msgid "Something went wrong. Please try again."
 msgstr ""
 
-#: includes/frontend/class-frontend.php:240
+#: includes/frontend/class-frontend.php:244
 #: includes/frontend/dashboard/class-splms-dashboard.php:165
 msgid "Success!"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:244
+#: includes/frontend/class-frontend.php:248
 #: templates/dashboard/notifications.php:57
 msgid "Loading notifications..."
 msgstr ""
 
-#: includes/frontend/class-frontend.php:245
+#: includes/frontend/class-frontend.php:249
 #: includes/frontend/core/class-shortcode.php:106
 msgid "Refresh"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:246
+#: includes/frontend/class-frontend.php:250
 msgid "Mark all read"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:247
+#: includes/frontend/class-frontend.php:251
 #: templates/dashboard/notifications.php:120
 msgid "No notifications yet"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:248
+#: includes/frontend/class-frontend.php:252
 #: templates/dashboard/notifications.php:121
 msgid "We'll notify you when something happens."
 msgstr ""
 
-#: includes/frontend/class-frontend.php:249
+#: includes/frontend/class-frontend.php:253
 #: templates/dashboard/notifications.php:38
 msgid "Unread"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:250
+#: includes/frontend/class-frontend.php:254
 msgid "Recent Notifications"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:251
+#: includes/frontend/class-frontend.php:255
 msgid "Just now"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:252
+#: includes/frontend/class-frontend.php:256
 msgid "minute ago"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:253
+#: includes/frontend/class-frontend.php:257
 msgid "minutes ago"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:254
+#: includes/frontend/class-frontend.php:258
 msgid "hour ago"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:255
+#: includes/frontend/class-frontend.php:259
 msgid "hours ago"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:256
+#: includes/frontend/class-frontend.php:260
 msgid "day ago"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:257
+#: includes/frontend/class-frontend.php:261
 msgid "days ago"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:260
+#: includes/frontend/class-frontend.php:264
 msgid "Are you sure you want to delete this review?"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:261
+#: includes/frontend/class-frontend.php:265
 msgid "Review submitted successfully!"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:262
+#: includes/frontend/class-frontend.php:266
 msgid "Review updated successfully!"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:263
+#: includes/frontend/class-frontend.php:267
 msgid "Review deleted successfully!"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:264
+#: includes/frontend/class-frontend.php:268
 msgid "An error occurred. Please try again."
 msgstr ""
 
-#: includes/frontend/class-frontend.php:265
+#: includes/frontend/class-frontend.php:269
 msgid "Please select a rating."
 msgstr ""
 
-#: includes/frontend/class-frontend.php:266
+#: includes/frontend/class-frontend.php:270
 msgid "Please write a review."
 msgstr ""
 
-#: includes/frontend/class-frontend.php:267
+#: includes/frontend/class-frontend.php:271
 msgid "Please log in to submit a review."
 msgstr ""
 
-#: includes/frontend/class-frontend.php:368 templates/global/header.php:41
+#: includes/frontend/class-frontend.php:372 templates/global/header.php:41
 msgid "Primary Menu"
 msgstr ""
 
-#: includes/frontend/class-frontend.php:369
+#: includes/frontend/class-frontend.php:373
 msgid "Footer Menu"
 msgstr ""
 
@@ -1542,7 +1542,7 @@ msgstr ""
 msgid "Course Full"
 msgstr ""
 
-#: includes/functions.php:1154 templates/course/partials/course-hero.php:884
+#: includes/functions.php:1154 templates/course/partials/course-hero.php:882
 msgid "Enrollment Closed"
 msgstr ""
 
@@ -1605,10 +1605,10 @@ msgid "Complete Prerequisite"
 msgstr ""
 
 #: includes/functions.php:1464 includes/functions.php:1530
-#: templates/course/course.php:206
+#: templates/course/course.php:204
 #: templates/course/partials/course-enrollment-card.php:417
 #: templates/course/partials/course-hero-v2.php:417
-#: templates/course/partials/tabs/instructor.php:201
+#: templates/course/partials/tabs/instructor.php:200
 msgid "Invitation Only"
 msgstr ""
 
@@ -1685,7 +1685,7 @@ msgid ""
 msgstr ""
 
 #: includes/modules/core/class-access-control.php:847
-#: templates/quiz/content.php:256
+#: templates/quiz/content.php:265
 msgid "Access Restricted"
 msgstr ""
 
@@ -2192,24 +2192,24 @@ msgid "Showing %1$d-%2$d of %3$d courses"
 msgstr ""
 
 #: includes/modules/courses/general-functions.php:1013 templates/author.php:195
-#: templates/author.php:241 templates/author.php:345
+#: templates/author.php:242 templates/author.php:346
 msgid "Courses pagination"
 msgstr ""
 
 #: includes/modules/courses/general-functions.php:1019 templates/author.php:201
-#: templates/author.php:250 templates/author.php:354
+#: templates/author.php:251 templates/author.php:355
 #: templates/quiz/question-templates.php:62
 msgid "Previous"
 msgstr ""
 
 #: includes/modules/courses/general-functions.php:1020 templates/author.php:202
-#: templates/author.php:269 templates/author.php:373
+#: templates/author.php:270 templates/author.php:374
 #: templates/quiz/question-templates.php:77
 #: templates/quiz/question-templates.php:200
 msgid "Next"
 msgstr ""
 
-#: includes/modules/courses/general-functions.php:1071
+#: includes/modules/courses/general-functions.php:1072
 #. translators: %d: Number of courses.
 msgid "%d course found"
 msgid_plural "%d courses found"
@@ -2426,21 +2426,21 @@ msgid ""
 msgstr ""
 
 #: includes/modules/lessons/general-functions.php:1547
-#: templates/lesson/types/interactive.php:103
+#: templates/lesson/types/interactive.php:102
 msgid "Invalid embed source URL. Please check the iframe src attribute."
 msgstr ""
 
 #: includes/modules/lessons/general-functions.php:1567
 #: includes/modules/lessons/general-functions.php:1592
-#: templates/lesson/types/interactive.php:122
-#: templates/lesson/types/interactive.php:151
+#: templates/lesson/types/interactive.php:121
+#: templates/lesson/types/interactive.php:148
 msgid ""
 "The provided embed code could not be displayed. Please check the iframe or "
 "embed source."
 msgstr ""
 
 #: includes/modules/lessons/general-functions.php:1606
-#: templates/lesson/types/interactive.php:166
+#: templates/lesson/types/interactive.php:163
 msgid ""
 "Please use an iframe embed code or shortcode for interactive content. URL "
 "detected:"
@@ -3855,7 +3855,7 @@ msgstr ""
 
 #: includes/modules/orders/class-order-status-manager.php:60
 #: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1621
-#: templates/quiz/content.php:658
+#: templates/quiz/content.php:668
 msgid "Failed"
 msgstr ""
 
@@ -5897,7 +5897,7 @@ msgid "Lesson #%d"
 msgstr ""
 
 #: includes/rest-api/features/enrollments/class-rest-enrollments-controller.php:1621
-#: templates/quiz/content.php:667 templates/shared/fullscreen-header.php:57
+#: templates/quiz/content.php:677 templates/shared/fullscreen-header.php:57
 msgid "Passed"
 msgstr ""
 
@@ -7100,43 +7100,43 @@ msgstr ""
 msgid "Courses created by this instructor"
 msgstr ""
 
-#: templates/author.php:290 templates/dashboard/courses.php:191
+#: templates/author.php:291 templates/dashboard/courses.php:191
 msgid "No Courses Yet"
 msgstr ""
 
-#: templates/author.php:292
+#: templates/author.php:293
 msgid ""
 "This instructor hasn't created any courses yet. Check back later for new "
 "content!"
 msgstr ""
 
-#: templates/author.php:301
+#: templates/author.php:302
 msgid "Student Profile"
 msgstr ""
 
-#: templates/author.php:303
+#: templates/author.php:304
 msgid "Learning journey and course enrollments"
 msgstr ""
 
-#: templates/author.php:317
+#: templates/author.php:318
 msgid "Enrolled Course"
 msgid_plural "Enrolled Courses"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/author.php:325
+#: templates/author.php:326
 msgid "Enrolled Courses"
 msgstr ""
 
-#: templates/author.php:391
+#: templates/author.php:392
 msgid "No Enrollments Yet"
 msgstr ""
 
-#: templates/author.php:393
+#: templates/author.php:394
 msgid "This student hasn't enrolled in any courses yet."
 msgstr ""
 
-#: templates/author.php:399 templates/dashboard/courses.php:194
+#: templates/author.php:400 templates/dashboard/courses.php:194
 #: templates/single-section.php:56
 msgid "Browse Courses"
 msgstr ""
@@ -7146,7 +7146,7 @@ msgid "Filter by Level"
 msgstr ""
 
 #: templates/course/course-filters.php:39
-#: templates/course/partials/course-hero.php:760
+#: templates/course/partials/course-hero.php:758
 msgid "Learning Method"
 msgstr ""
 
@@ -7226,14 +7226,14 @@ msgstr ""
 msgid "Add to Wishlist"
 msgstr ""
 
-#: templates/course/course.php:114
+#: templates/course/course.php:113
 msgid ""
 "Learn new skills with this comprehensive course designed to help you "
 "advance your knowledge and career."
 msgstr ""
 
-#: templates/course/course.php:162
-#: templates/course/partials/tabs/instructor.php:172
+#: templates/course/course.php:160
+#: templates/course/partials/tabs/instructor.php:171
 #. translators: %d: Number of students.
 msgid "%d student"
 msgid_plural "%d students"
@@ -7479,78 +7479,78 @@ msgstr ""
 msgid "Close modal"
 msgstr ""
 
-#: templates/course/partials/course-hero.php:743
+#: templates/course/partials/course-hero.php:741
 msgid "Membership"
 msgstr ""
 
-#: templates/course/partials/course-hero.php:775
+#: templates/course/partials/course-hero.php:773
 msgid "Delivery Mode"
 msgstr ""
 
-#: templates/course/partials/course-hero.php:797
+#: templates/course/partials/course-hero.php:795
 msgid "Start Date"
 msgstr ""
 
-#: templates/course/partials/course-hero.php:815
+#: templates/course/partials/course-hero.php:813
 msgid "Completion"
 msgstr ""
 
-#: templates/course/partials/course-hero.php:832
+#: templates/course/partials/course-hero.php:830
 msgid "Capacity"
 msgstr ""
 
-#: templates/course/partials/course-hero.php:838
+#: templates/course/partials/course-hero.php:836
 #. translators: %1$d: Enrolled count, %2$d: Max enrollment.
 msgid "Full (%1$d/%2$d)"
 msgstr ""
 
-#: templates/course/partials/course-hero.php:845
+#: templates/course/partials/course-hero.php:843
 #. translators: %1$d: Enrolled count, %2$d: Max enrollment.
 msgid "%1$d of %2$d spots"
 msgstr ""
 
-#: templates/course/partials/course-hero.php:864
+#: templates/course/partials/course-hero.php:862
 msgid "Open Enrollment"
 msgstr ""
 
-#: templates/course/partials/course-hero.php:873
+#: templates/course/partials/course-hero.php:871
 #. translators: %s: Start date.
 msgid "Starts %s"
 msgstr ""
 
-#: templates/course/partials/course-hero.php:888
+#: templates/course/partials/course-hero.php:886
 #. translators: %s: End date.
 msgid "Open until %s"
 msgstr ""
 
-#: templates/course/partials/course-hero.php:904
+#: templates/course/partials/course-hero.php:902
 msgid "Enrollment"
 msgstr ""
 
-#: templates/course/partials/course-hero.php:924
+#: templates/course/partials/course-hero.php:922
 msgid "Certificate"
 msgstr ""
 
-#: templates/course/partials/course-hero.php:926
+#: templates/course/partials/course-hero.php:924
 msgid "Yes"
 msgstr ""
 
-#: templates/course/partials/course-hero.php:939
+#: templates/course/partials/course-hero.php:937
 #. translators: %d: Number of days.
 msgid "%d day"
 msgid_plural "%d days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/course/partials/course-hero.php:943
+#: templates/course/partials/course-hero.php:941
 msgid "Lifetime"
 msgstr ""
 
-#: templates/course/partials/course-hero.php:954
+#: templates/course/partials/course-hero.php:952
 msgid "Access"
 msgstr ""
 
-#: templates/course/partials/course-hero.php:967
+#: templates/course/partials/course-hero.php:965
 msgid "Language"
 msgstr ""
 
@@ -7769,7 +7769,7 @@ msgid "Preview"
 msgstr ""
 
 #: templates/course/partials/tabs/curriculum.php:479
-#: templates/shared/navigation-footer.php:92 templates/single-section.php:365
+#: templates/shared/navigation-footer.php:91 templates/single-section.php:365
 #: templates/single-section.php:376
 msgid "Locked"
 msgstr ""
@@ -7800,19 +7800,19 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: templates/course/partials/tabs/instructor.php:107
+#: templates/course/partials/tabs/instructor.php:106
 msgid ""
 "This instructor is passionate about sharing knowledge and helping students "
 "achieve their learning goals. With extensive experience in their field, "
 "they bring practical insights and real-world applications to every course."
 msgstr ""
 
-#: templates/course/partials/tabs/instructor.php:122
+#: templates/course/partials/tabs/instructor.php:121
 #. translators: %s: Instructor name.
 msgid "Other Courses by %s"
 msgstr ""
 
-#: templates/course/partials/tabs/instructor.php:224
+#: templates/course/partials/tabs/instructor.php:223
 #. translators: %d: Total number of courses.
 msgid "View All %d Courses"
 msgstr ""
@@ -7821,7 +7821,7 @@ msgstr ""
 msgid "Course Overview"
 msgstr ""
 
-#: templates/course/partials/tabs/overview.php:49
+#: templates/course/partials/tabs/overview.php:47
 msgid "What You'll Learn"
 msgstr ""
 
@@ -8333,201 +8333,201 @@ msgstr ""
 msgid "Recommended For You"
 msgstr ""
 
-#: templates/quiz/content.php:220
+#: templates/quiz/content.php:229
 msgid "Quiz Access Restricted"
 msgstr ""
 
-#: templates/quiz/content.php:221
+#: templates/quiz/content.php:230
 msgid "You need to enroll in this course to access this quiz."
 msgstr ""
 
-#: templates/quiz/content.php:238
+#: templates/quiz/content.php:247
 msgid "Enrollment Required"
 msgstr ""
 
-#: templates/quiz/content.php:239
+#: templates/quiz/content.php:248
 msgid "You need to be enrolled in this course to access this quiz."
 msgstr ""
 
-#: templates/quiz/content.php:271
+#: templates/quiz/content.php:280
 msgid "Quiz Preview Mode"
 msgstr ""
 
-#: templates/quiz/content.php:272
+#: templates/quiz/content.php:281
 msgid ""
 "You are viewing this quiz in preview mode. Results will not be saved. "
 "Enroll to track your progress."
 msgstr ""
 
-#: templates/quiz/content.php:291
+#: templates/quiz/content.php:300
 msgid "Password Required"
 msgstr ""
 
-#: templates/quiz/content.php:292
+#: templates/quiz/content.php:301
 msgid "This quiz is password protected. Please enter the password to access it."
 msgstr ""
 
-#: templates/quiz/content.php:296
+#: templates/quiz/content.php:305
 msgid "Incorrect password. Please try again."
 msgstr ""
 
-#: templates/quiz/content.php:303
+#: templates/quiz/content.php:312
 msgid "Password:"
 msgstr ""
 
-#: templates/quiz/content.php:311
+#: templates/quiz/content.php:320
 msgid "Access Quiz"
 msgstr ""
 
-#: templates/quiz/content.php:340
+#: templates/quiz/content.php:349
 msgid "Passing Score"
 msgstr ""
 
-#: templates/quiz/content.php:354
+#: templates/quiz/content.php:363
 msgid "Unlimited"
 msgstr ""
 
-#: templates/quiz/content.php:360
+#: templates/quiz/content.php:369
 msgid "Attempts Left"
 msgstr ""
 
-#: templates/quiz/content.php:372
+#: templates/quiz/content.php:381
 msgid "Best Score"
 msgstr ""
 
-#: templates/quiz/content.php:380
+#: templates/quiz/content.php:389
 msgid "About This Quiz"
 msgstr ""
 
-#: templates/quiz/content.php:399
+#: templates/quiz/content.php:409
 msgid "Quiz access is not available until course content is accessible."
 msgstr ""
 
-#: templates/quiz/content.php:407
+#: templates/quiz/content.php:417
 msgid "Resume Your Quiz"
 msgstr ""
 
-#: templates/quiz/content.php:408
+#: templates/quiz/content.php:418
 msgid "You have an incomplete quiz attempt. You can resume where you left off."
 msgstr ""
 
-#: templates/quiz/content.php:414
+#: templates/quiz/content.php:424
 msgid "Resume Quiz"
 msgstr ""
 
-#: templates/quiz/content.php:422
+#: templates/quiz/content.php:432
 msgid "Start New Attempt"
 msgstr ""
 
-#: templates/quiz/content.php:441
+#: templates/quiz/content.php:451
 msgid "Quiz Completed Successfully!"
 msgstr ""
 
-#: templates/quiz/content.php:446
+#: templates/quiz/content.php:456
 #. translators: %s: Best score
 msgid "Best Score: %s%%"
 msgstr ""
 
-#: templates/quiz/content.php:459 templates/quiz/question-templates.php:180
+#: templates/quiz/content.php:469 templates/quiz/question-templates.php:180
 msgid "Retake Quiz"
 msgstr ""
 
-#: templates/quiz/content.php:472
+#: templates/quiz/content.php:482
 msgid "Start Quiz Preview"
 msgstr ""
 
-#: templates/quiz/content.php:472
+#: templates/quiz/content.php:482
 msgid "Start Quiz"
 msgstr ""
 
-#: templates/quiz/content.php:486
+#: templates/quiz/content.php:496
 msgid "No Attempts Remaining"
 msgstr ""
 
-#: templates/quiz/content.php:487
+#: templates/quiz/content.php:497
 msgid "You have used all available attempts for this quiz."
 msgstr ""
 
-#: templates/quiz/content.php:493
+#: templates/quiz/content.php:503
 #. translators: Score
 msgid "Final Score: %s%%"
 msgstr ""
 
-#: templates/quiz/content.php:523
+#: templates/quiz/content.php:533
 msgid "Quiz Results"
 msgstr ""
 
-#: templates/quiz/content.php:529
+#: templates/quiz/content.php:539
 msgid "Quiz Submitted"
 msgstr ""
 
-#: templates/quiz/content.php:530
+#: templates/quiz/content.php:540
 msgid "Your answers are being reviewed"
 msgstr ""
 
-#: templates/quiz/content.php:534
+#: templates/quiz/content.php:544
 msgid "Congratulations!"
 msgstr ""
 
-#: templates/quiz/content.php:535
+#: templates/quiz/content.php:545
 msgid "You have passed this quiz"
 msgstr ""
 
-#: templates/quiz/content.php:537
+#: templates/quiz/content.php:547
 msgid "You did not pass this quiz"
 msgstr ""
 
-#: templates/quiz/content.php:564
+#: templates/quiz/content.php:574
 msgid "Your quiz is being reviewed by the instructor."
 msgstr ""
 
-#: templates/quiz/content.php:566
+#: templates/quiz/content.php:576
 msgid "You have successfully passed this quiz!"
 msgstr ""
 
-#: templates/quiz/content.php:570
+#: templates/quiz/content.php:580
 #. translators: 1: User's score percentage, 2: Required passing grade
 #. percentage
 msgid "You scored %1$s%%, but need %2$s%% to pass."
 msgstr ""
 
-#: templates/quiz/content.php:593 templates/quiz/question-templates.php:133
+#: templates/quiz/content.php:603 templates/quiz/question-templates.php:133
 msgid "Score"
 msgstr ""
 
-#: templates/quiz/content.php:597 templates/quiz/question-templates.php:137
+#: templates/quiz/content.php:607 templates/quiz/question-templates.php:137
 msgid "Correct"
 msgstr ""
 
-#: templates/quiz/content.php:601 templates/quiz/question-templates.php:141
+#: templates/quiz/content.php:611 templates/quiz/question-templates.php:141
 msgid "Total"
 msgstr ""
 
-#: templates/quiz/content.php:605 templates/quiz/question-templates.php:145
+#: templates/quiz/content.php:615 templates/quiz/question-templates.php:145
 msgid "Time"
 msgstr ""
 
-#: templates/quiz/content.php:614 templates/quiz/question-templates.php:155
+#: templates/quiz/content.php:624 templates/quiz/question-templates.php:155
 msgid "Passing grade:"
 msgstr ""
 
-#: templates/quiz/content.php:628 templates/quiz/question-templates.php:191
+#: templates/quiz/content.php:638 templates/quiz/question-templates.php:191
 msgid "View Answers"
 msgstr ""
 
-#: templates/quiz/content.php:651 templates/quiz/question-templates.php:216
+#: templates/quiz/content.php:661 templates/quiz/question-templates.php:216
 msgid "Attempt History"
 msgstr ""
 
-#: templates/quiz/content.php:663 templates/quiz/question-templates.php:370
+#: templates/quiz/content.php:673 templates/quiz/question-templates.php:370
 msgid "Pending Review"
 msgstr ""
 
-#: templates/quiz/content.php:680 templates/shared/course-sidebar.php:186
+#: templates/quiz/content.php:690 templates/shared/course-sidebar.php:186
 msgid "Current"
 msgstr ""
 
-#: templates/quiz/content.php:721
+#: templates/quiz/content.php:731
 msgid "No previous attempts found."
 msgstr ""
 

@@ -6,7 +6,7 @@
  *
  * @since      1.0.0
  * @subpackage Lessons
- * @package    SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,12 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Lessons {
+class SPLMS_Lessons {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Lessons|null $instance
+	 * @var SPLMS_Lessons|null $instance
 	 */
 	private static $instance;
 
@@ -32,7 +32,7 @@ class SkillPulse_LMS_Lessons {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Lessons Class instance.
+	 * @return SPLMS_Lessons Class instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -69,8 +69,8 @@ class SkillPulse_LMS_Lessons {
 		);
 
 		foreach ( $files as $file ) {
-			if ( file_exists( SKILLPULSE_LMS_DIR_PATH . $file . '.php' ) ) {
-				require_once SKILLPULSE_LMS_DIR_PATH . $file . '.php';
+			if ( file_exists( SPLMS_DIR_PATH . $file . '.php' ) ) {
+				require_once SPLMS_DIR_PATH . $file . '.php';
 			}
 		}
 	}
@@ -154,7 +154,7 @@ class SkillPulse_LMS_Lessons {
 		$all_meta = get_post_meta( $lesson_id );
 
 		// Get configuration data and extract defaults.
-		$config_data       = SkillPulse_LMS_Config_Loader::get_config( 'lessons', 'admin' );
+		$config_data       = SPLMS_Config_Loader::get_config( 'lessons', 'admin' );
 		$defaults_settings = $this->extract_defaults_from_config( $config_data );
 		$lesson_settings   = array();
 
@@ -242,7 +242,7 @@ class SkillPulse_LMS_Lessons {
 		}
 
 		// Get configuration to determine field groups.
-		$config_data       = SkillPulse_LMS_Config_Loader::get_config( 'lessons', 'admin' );
+		$config_data       = SPLMS_Config_Loader::get_config( 'lessons', 'admin' );
 		$defaults_settings = $this->extract_defaults_from_config( $config_data );
 
 		// Validate that only known settings keys are being updated.
@@ -568,7 +568,7 @@ class SkillPulse_LMS_Lessons {
 	 * @return bool True if completed, false otherwise.
 	 */
 	public function is_lesson_completed( $lesson_id, $user_id ) {
-		$result = SkillPulse_LMS_Lesson_Progress_Query::get_instance()->is_lesson_completed( $lesson_id, $user_id );
+		$result = SPLMS_Lesson_Progress_Query::get_instance()->is_lesson_completed( $lesson_id, $user_id );
 
 		return (bool) $result;
 	}
@@ -636,11 +636,11 @@ class SkillPulse_LMS_Lessons {
 		$progress_data = $this->calculate_course_progress( $user_id, $course_id );
 
 		// Sync progress to enrollment database table.
-		$enrollment = SkillPulse_LMS_Enrollment::get_instance();
+		$enrollment = SPLMS_Enrollment::get_instance();
 		$enrollment->update_enrollment_progress( $user_id, $course_id, $progress_data['percentage'] );
 
 		// Log activity.
-		SkillPulse_LMS_User_Activity_Query::get_instance()->log_activity( $user_id, 'lesson_completed', $course_id, $lesson_id, 'lesson' );
+		SPLMS_User_Activity_Query::get_instance()->log_activity( $user_id, 'lesson_completed', $course_id, $lesson_id, 'lesson' );
 
 		// Prepare response data.
 		$response_data = array(
@@ -739,8 +739,8 @@ class SkillPulse_LMS_Lessons {
 	private function get_course_total_items( $course_id ) {
 		// Use direct database queries to avoid recursive calls to get_course_curriculum.
 		// This prevents infinite loops when called during access control checks.
-		$course_items_query  = SkillPulse_LMS_Course_Items_Query::get_instance();
-		$relationships_query = SkillPulse_LMS_Relationships_Query::get_instance();
+		$course_items_query  = SPLMS_Course_Items_Query::get_instance();
+		$relationships_query = SPLMS_Relationships_Query::get_instance();
 
 		// Get all sections for this course.
 		$course_items = $course_items_query->get_items( $course_id );
@@ -782,7 +782,7 @@ class SkillPulse_LMS_Lessons {
 	/**
 	 * Check if user can access lesson.
 	 * Includes prerequisites, drip, access expiration, and enrollment checks.
-	 * Note: This is for enrolled users. For general access control, use SkillPulse_LMS_Access_Control.
+	 * Note: This is for enrolled users. For general access control, use SPLMS_Access_Control.
 	 *
 	 * @param int $lesson_id Lesson ID.
 	 * @param int $user_id   User ID.
@@ -799,7 +799,7 @@ class SkillPulse_LMS_Lessons {
 
 		// If user is not logged in, defer to main access control system.
 		if ( ! $user_id ) {
-			$access_control = SkillPulse_LMS_Access_Control::get_instance();
+			$access_control = SPLMS_Access_Control::get_instance();
 
 			return $access_control->user_can_access_lesson( 0, $lesson_id );
 		}
@@ -824,7 +824,7 @@ class SkillPulse_LMS_Lessons {
 		// Check course enrollment (reuse $course_id from above).
 		if ( $course_id && ! $this->is_user_enrolled( $course_id, $user_id ) ) {
 			// If not enrolled, check if guest preview is available.
-			$access_control = SkillPulse_LMS_Access_Control::get_instance();
+			$access_control = SPLMS_Access_Control::get_instance();
 
 			return $access_control->user_can_access_lesson( $user_id, $lesson_id );
 		}
@@ -941,11 +941,11 @@ class SkillPulse_LMS_Lessons {
 	 */
 	public function get_lesson_course( $lesson_id ) {
 		// Use database relationships to find the course for this lesson.
-		$relationships_query = SkillPulse_LMS_Relationships_Query::get_instance();
+		$relationships_query = SPLMS_Relationships_Query::get_instance();
 		$parents             = $relationships_query->get_parents( $lesson_id );
 		if ( ! empty( $parents ) ) {
 			foreach ( $parents as $parent ) {
-				return SkillPulse_LMS_Course_Items_Query::get_instance()->get_item_course_id( $parent->parent_id );
+				return SPLMS_Course_Items_Query::get_instance()->get_item_course_id( $parent->parent_id );
 			}
 		}
 		return null;
@@ -993,7 +993,7 @@ class SkillPulse_LMS_Lessons {
 	 * @return string|null Completion date on success, null on failure.
 	 */
 	public function get_lesson_completion_date( $lesson_id, $user_id ) {
-		$progress = SkillPulse_LMS_Lesson_Progress_Query::get_instance()->get_lesson_progress( $user_id, $lesson_id );
+		$progress = SPLMS_Lesson_Progress_Query::get_instance()->get_lesson_progress( $user_id, $lesson_id );
 
 		return $progress ? $progress->completed_at : null;
 	}

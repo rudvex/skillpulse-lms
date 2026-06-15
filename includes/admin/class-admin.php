@@ -5,7 +5,7 @@
  * Main admin class that orchestrates all admin functionality.
  * Handles asset enqueuing, admin menus, and admin interface management.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 
@@ -14,20 +14,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class SkillPulse_LMS_Admin
+ * Class SPLMS_Admin
  *
  * Main admin class that orchestrates all admin functionality.
  * Handles asset enqueuing, admin menus, and admin interface management.
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Admin {
+class SPLMS_Admin {
 
 	/**
 	 * Class instance.
 	 *
 	 * @since 1.0.0
-	 * @var SkillPulse_LMS_Admin|null $instance
+	 * @var SPLMS_Admin|null $instance
 	 */
 	private static $instance;
 
@@ -36,7 +36,7 @@ class SkillPulse_LMS_Admin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Admin The singleton instance.
+	 * @return SPLMS_Admin The singleton instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -76,8 +76,8 @@ class SkillPulse_LMS_Admin {
 
 		foreach ( $files as $file ) {
 			// Include functions file.
-			if ( file_exists( SKILLPULSE_LMS_DIR_PATH . $file . '.php' ) ) {
-				require SKILLPULSE_LMS_DIR_PATH . $file . '.php';
+			if ( file_exists( SPLMS_DIR_PATH . $file . '.php' ) ) {
+				require SPLMS_DIR_PATH . $file . '.php';
 			}
 		}
 	}
@@ -88,13 +88,13 @@ class SkillPulse_LMS_Admin {
 	 * @since 1.0.0
 	 */
 	protected function load_classes() {
-		SkillPulse_LMS_Admin_Menus::get_instance();
-		SkillPulse_LMS_Admin_Post_Types::get_instance();
-		SkillPulse_LMS_Admin_Metaboxes::get_instance();
-		SkillPulse_LMS_Admin_Columns::get_instance();
+		SPLMS_Admin_Menus::get_instance();
+		SPLMS_Admin_Post_Types::get_instance();
+		SPLMS_Admin_Metaboxes::get_instance();
+		SPLMS_Admin_Columns::get_instance();
 
 		if ( splms_get_setting( 'user_signup_enabled', false ) ) {
-			SkillPulse_LMS_Signup_Admin::get_instance();
+			SPLMS_Signup_Admin::get_instance();
 		}
 	}
 
@@ -119,8 +119,8 @@ class SkillPulse_LMS_Admin {
 	public function init_wizard_classes() {
 		// Initialize wizard classes only if wizard is not completed.
 		if ( ! get_option( 'splms_wizard_completed', false ) ) {
-			SkillPulse_LMS_Setup_Wizard::get_instance();
-			SkillPulse_LMS_Wizard_Ajax::get_instance();
+			SPLMS_Setup_Wizard::get_instance();
+			SPLMS_Wizard_Ajax::get_instance();
 		}
 	}
 
@@ -140,9 +140,9 @@ class SkillPulse_LMS_Admin {
 			wp_enqueue_style( 'wp-components' );
 			wp_enqueue_style(
 				'splms-admin-style',
-				SKILLPULSE_LMS_URL_PATH . 'assets/css/admin.min.css',
+				SPLMS_URL_PATH . 'assets/css/admin.min.css',
 				array(),
-				SKILLPULSE_LMS_VERSION
+				SPLMS_VERSION
 			);
 			return;
 		}
@@ -150,20 +150,20 @@ class SkillPulse_LMS_Admin {
 		wp_enqueue_media();
 		wp_enqueue_script( 'wp-util' );
 
-		$admin_asset_file      = include SKILLPULSE_LMS_DIR_PATH . 'assets/js/admin.asset.php';
-		$react_core_asset_file = include SKILLPULSE_LMS_DIR_PATH . 'assets/js/react-core.asset.php';
+		$admin_asset_file      = include SPLMS_DIR_PATH . 'assets/js/admin.asset.php';
+		$react_core_asset_file = include SPLMS_DIR_PATH . 'assets/js/react-core.asset.php';
 
 		// Register the admin style and script.
 		wp_register_style(
 			'splms-admin-style',
-			SKILLPULSE_LMS_URL_PATH . 'assets/css/admin.min.css',
+			SPLMS_URL_PATH . 'assets/css/admin.min.css',
 			array(),
-			SKILLPULSE_LMS_VERSION
+			SPLMS_VERSION
 		);
 
 		wp_register_script(
 			'splms-admin-script',
-			SKILLPULSE_LMS_URL_PATH . 'assets/js/admin.js',
+			SPLMS_URL_PATH . 'assets/js/admin.js',
 			$admin_asset_file['dependencies'],
 			$admin_asset_file['version'],
 			array( 'in_footer' => true )
@@ -171,17 +171,17 @@ class SkillPulse_LMS_Admin {
 
 		wp_register_script(
 			'splms-react-core-script',
-			SKILLPULSE_LMS_URL_PATH . 'assets/js/react-core.js',
+			SPLMS_URL_PATH . 'assets/js/react-core.js',
 			$react_core_asset_file['dependencies'],
 			$react_core_asset_file['version'],
 			array( 'in_footer' => true )
 		);
 
 		// Get email templates data.
-		$email_templates = SkillPulse_LMS_Email_Templates::get_instance()->get_all_templates();
+		$email_templates = SPLMS_Email_Templates::get_instance()->get_all_templates();
 
 		// Get global settings for cross-store conditional logic.
-		$global_settings = SkillPulse_LMS_Settings::get_instance()->get_all_settings();
+		$global_settings = SPLMS_Settings::get_instance()->get_all_settings();
 
 		// Add membership integration status to global settings.
 		$global_settings['has_membership_integration'] = splms_has_membership_integration();
@@ -192,8 +192,10 @@ class SkillPulse_LMS_Admin {
 			'restNonce'         => wp_create_nonce( 'skillpulse-lms' ),
 			'license_nonce'     => wp_create_nonce( 'splms_license_nonce' ),
 			'admin_nonce'       => wp_create_nonce( 'splms_admin_nonce' ),
-			'image_url'         => SKILLPULSE_LMS_URL_PATH . 'assets/images/',
+			'image_url'         => SPLMS_URL_PATH . 'assets/images/',
 			'back_cta_label'    => __( 'Back to Courses', 'skillpulse-lms' ),
+			'siteUrl'           => site_url(),
+			'homeUrl'           => home_url(),
 			'adminUrl'          => admin_url(),
 			'coursesUrl'        => admin_url( 'edit.php?post_type=' . SPLMS_POST_TYPES['course'] ),
 			'posts_url'         => admin_url( 'post.php' ),
@@ -346,7 +348,7 @@ class SkillPulse_LMS_Admin {
 	 */
 	public function get_plugin_icon() {
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Local file, not remote URL.
-		$icon = file_get_contents( SKILLPULSE_LMS_DIR_PATH . '/assets/images/logo-icon.svg' );
+		$icon = file_get_contents( SPLMS_DIR_PATH . '/assets/images/logo-icon.svg' );
 
 		return 'data:image/svg+xml;base64,' . base64_encode( $icon ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
 	}

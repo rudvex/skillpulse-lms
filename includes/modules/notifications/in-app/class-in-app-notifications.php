@@ -4,7 +4,7 @@
  *
  * Handles in-app notification storage, retrieval, and AJAX operations.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Notifications
  * @since 1.0.0
  */
@@ -13,8 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'SkillPulse_LMS_Notifications_Query' ) ) {
-	require_once SKILLPULSE_LMS_DIR_PATH . 'includes/modules/notifications/class-notifications-query.php';
+if ( ! class_exists( 'SPLMS_Notifications_Query' ) ) {
+	require_once SPLMS_DIR_PATH . 'includes/modules/notifications/class-notifications-query.php';
 }
 
 /**
@@ -22,29 +22,29 @@ if ( ! class_exists( 'SkillPulse_LMS_Notifications_Query' ) ) {
  *
  * Handles user notifications for in-app display.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
-class SkillPulse_LMS_In_App_Notifications {
+class SPLMS_In_App_Notifications {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_In_App_Notifications|null
+	 * @var SPLMS_In_App_Notifications|null
 	 */
 	private static $instance = null;
 
 	/**
 	 * Notifications query instance.
 	 *
-	 * @var SkillPulse_LMS_Notifications_Query|null
+	 * @var SPLMS_Notifications_Query|null
 	 */
 	private $query = null;
 
 	/**
 	 * Get the instance of this class.
 	 *
-	 * @return SkillPulse_LMS_In_App_Notifications
+	 * @return SPLMS_In_App_Notifications
 	 */
 	public static function get_instance() {
 		if ( null === self::$instance ) {
@@ -58,7 +58,7 @@ class SkillPulse_LMS_In_App_Notifications {
 	 * Constructor.
 	 */
 	private function __construct() {
-		$this->query = SkillPulse_LMS_Notifications_Query::get_instance();
+		$this->query = SPLMS_Notifications_Query::get_instance();
 		$this->setup_hooks();
 	}
 

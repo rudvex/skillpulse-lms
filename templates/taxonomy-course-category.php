@@ -5,7 +5,7 @@
  * This template follows WordPress theme conventions for taxonomy archives.
  * It can be overridden by copying it to yourtheme/taxonomy-course-category.php.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 
@@ -21,7 +21,7 @@ get_header();
 $splms_current_term = get_queried_object();
 
 // Get archive setup data from centralized function.
-$splms_setup_data = SkillPulse_LMS_Course_Frontend::get_course_archive_setup( 'category', $splms_current_term );
+$splms_setup_data = SPLMS_Course_Frontend::get_course_archive_setup( 'category', $splms_current_term );
 // phpcs:ignore WordPress.PHP.DontExtract.extract_extract -- Template file uses extract for convenience with controlled data.
 extract( $splms_setup_data );
 

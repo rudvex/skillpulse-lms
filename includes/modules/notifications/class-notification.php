@@ -4,7 +4,7 @@
  *
  * Centralized notification management system.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Notifications
  * @since 1.0.0
  */
@@ -18,12 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Notification {
+class SPLMS_Notification {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Notification|null $instance
+	 * @var SPLMS_Notification|null $instance
 	 */
 	private static $instance = null;
 
@@ -32,7 +32,7 @@ class SkillPulse_LMS_Notification {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Notification The class instance.
+	 * @return SPLMS_Notification The class instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -62,8 +62,8 @@ class SkillPulse_LMS_Notification {
 		);
 
 		foreach ( $files as $file ) {
-			if ( file_exists( SKILLPULSE_LMS_DIR_PATH . $file . '.php' ) ) {
-				require_once SKILLPULSE_LMS_DIR_PATH . $file . '.php';
+			if ( file_exists( SPLMS_DIR_PATH . $file . '.php' ) ) {
+				require_once SPLMS_DIR_PATH . $file . '.php';
 			}
 		}
 	}
@@ -77,13 +77,13 @@ class SkillPulse_LMS_Notification {
 	 */
 	private function load_classes() {
 		// Initialize email module (now under notifications).
-		SkillPulse_LMS_Email_Module::get_instance();
+		SPLMS_Email_Module::get_instance();
 
 		// Initialize in-app notifications.
-		SkillPulse_LMS_In_App_Notifications::get_instance();
+		SPLMS_In_App_Notifications::get_instance();
 
 		// Initialize notification dispatcher.
-		SkillPulse_LMS_Notification_Dispatcher::get_instance();
+		SPLMS_Notification_Dispatcher::get_instance();
 
 		// Register dashboard settings hooks.
 		add_action( 'splms_settings_tabs_nav', array( $this, 'render_settings_tab_nav' ), 10, 2 );
@@ -131,7 +131,7 @@ class SkillPulse_LMS_Notification {
 			return;
 		}
 
-		$prefs_instance     = SkillPulse_LMS_Notification_Preferences::get_instance();
+		$prefs_instance     = SPLMS_Notification_Preferences::get_instance();
 		$notification_prefs = $prefs_instance->get_user_preferences( $current_user->ID );
 		?>
 		<div class="splms-settings-tab-panel <?php echo 'notifications' === $settings_tab ? 'is-active' : ''; ?>" data-settings-tab="notifications">

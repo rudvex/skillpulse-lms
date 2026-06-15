@@ -4,7 +4,7 @@
  *
  * Handles user management functionality including roles, profiles, and authentication.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 
@@ -19,19 +19,19 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_User_Management {
+class SPLMS_User_Management {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_User_Management|null $instance
+	 * @var SPLMS_User_Management|null $instance
 	 */
 	private static $instance;
 
 	/**
 	 * Get the instance of this class.
 	 *
-	 * @return SkillPulse_LMS_User_Management
+	 * @return SPLMS_User_Management
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -66,8 +66,8 @@ class SkillPulse_LMS_User_Management {
 
 		foreach ( $files as $file ) {
 			// Include functions file.
-			if ( file_exists( SKILLPULSE_LMS_DIR_PATH . $file . '.php' ) ) {
-				require SKILLPULSE_LMS_DIR_PATH . $file . '.php';
+			if ( file_exists( SPLMS_DIR_PATH . $file . '.php' ) ) {
+				require SPLMS_DIR_PATH . $file . '.php';
 			}
 		}
 	}
@@ -78,17 +78,17 @@ class SkillPulse_LMS_User_Management {
 	 * @since 1.0.0
 	 */
 	protected function load_classes() {
-		SkillPulse_LMS_Profile::get_instance();
+		SPLMS_Profile::get_instance();
 		// Initialize user management.
-		SkillPulse_LMS_User_Activity_Query::get_instance();
+		SPLMS_User_Activity_Query::get_instance();
 
 		// Initialize login manager.
-		SkillPulse_LMS_Login::get_instance();
+		SPLMS_Login::get_instance();
 
 		if ( splms_get_setting( 'user_signup_enabled', false ) ) {
 			// Initialize signup management.
-			SkillPulse_LMS_Signup::get_instance();
-			SkillPulse_LMS_Signup_Screen_Handler::get_instance();
+			SPLMS_Signup::get_instance();
+			SPLMS_Signup_Screen_Handler::get_instance();
 		}
 	}
 

@@ -4,7 +4,7 @@
  *
  * Handles database table creation and management for the plugin.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 
@@ -17,14 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Database {
+class SPLMS_Database {
 
 	/**
 	 * Class instance.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @var SkillPulse_LMS_Database|null $instance
+	 * @var SPLMS_Database|null $instance
 	 */
 	private static $instance;
 
@@ -33,7 +33,7 @@ class SkillPulse_LMS_Database {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Database The class instance.
+	 * @return SPLMS_Database The class instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -92,7 +92,7 @@ class SkillPulse_LMS_Database {
 		$current_db_version = get_option( 'splms_db_version', 0 );
 
 		// Only run if database needs to be created or upgraded.
-		if ( $current_db_version >= SKILLPULSE_LMS_DB_VERSION ) {
+		if ( $current_db_version >= SPLMS_DB_VERSION ) {
 			return;
 		}
 
@@ -375,7 +375,7 @@ class SkillPulse_LMS_Database {
 		dbDelta( $sql );
 
 		// Update database version.
-		update_option( 'splms_db_version', SKILLPULSE_LMS_DB_VERSION );
+		update_option( 'splms_db_version', SPLMS_DB_VERSION );
 
 		// Run database migrations if needed.
 		$this->run_database_migrations();
@@ -400,8 +400,8 @@ class SkillPulse_LMS_Database {
 		}
 
 		// Load and run migrations.
-		require_once SKILLPULSE_LMS_DIR_PATH . 'includes/modules/core/class-migration.php';
-		$migration = SkillPulse_LMS_Migration::get_instance();
+		require_once SPLMS_DIR_PATH . 'includes/modules/core/class-migration.php';
+		$migration = SPLMS_Migration::get_instance();
 
 		if ( $migration->is_migration_needed() ) {
 			$results = $migration->run_migrations();
@@ -501,7 +501,7 @@ class SkillPulse_LMS_Database {
 	 */
 	public function create_all_missing_pages() {
 		$page_configs      = $this->get_page_configurations();
-		$settings_instance = SkillPulse_LMS_Settings::get_instance();
+		$settings_instance = SPLMS_Settings::get_instance();
 		$general_settings  = $this->ensure_pages_settings_exist( $settings_instance );
 		$results           = array();
 		$updated_settings  = false;
@@ -645,7 +645,7 @@ class SkillPulse_LMS_Database {
 	 * @return array Modified post states.
 	 */
 	public function display_post_states( $post_states, $post ) {
-		$general_tab = SkillPulse_LMS_Settings::get_instance()->get_tab_setting( 'general', '' );
+		$general_tab = SPLMS_Settings::get_instance()->get_tab_setting( 'general', '' );
 
 		// Define page states configuration.
 		$page_states = array(
@@ -762,7 +762,7 @@ class SkillPulse_LMS_Database {
 	 * @return bool True if any pages were created.
 	 */
 	private function create_pages_from_configs( $page_configs ) {
-		$settings_instance = SkillPulse_LMS_Settings::get_instance();
+		$settings_instance = SPLMS_Settings::get_instance();
 		$general_settings  = $this->ensure_pages_settings_exist( $settings_instance );
 		$updated_settings  = false;
 
@@ -855,7 +855,7 @@ class SkillPulse_LMS_Database {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param SkillPulse_LMS_Settings $settings_instance Settings instance.
+	 * @param SPLMS_Settings $settings_instance Settings instance.
 	 * @return array General settings array.
 	 */
 	private function ensure_pages_settings_exist( $settings_instance ) {
@@ -897,7 +897,7 @@ class SkillPulse_LMS_Database {
 	 * @param int    $page_id   Page ID.
 	 */
 	private function update_page_setting( $page_type, $page_id ) {
-		$settings_instance = SkillPulse_LMS_Settings::get_instance();
+		$settings_instance = SPLMS_Settings::get_instance();
 		$general_settings  = $this->ensure_pages_settings_exist( $settings_instance );
 
 		$general_settings['pages_settings'][ $page_type ] = $page_id;

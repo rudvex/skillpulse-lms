@@ -7,7 +7,7 @@
  * and determining pass/fail status. Used by both AJAX handlers and REST API.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,21 +15,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class SkillPulse_LMS_Quiz_Evaluator
+ * Class SPLMS_Quiz_Evaluator
  */
-class SkillPulse_LMS_Quiz_Evaluator {
+class SPLMS_Quiz_Evaluator {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Quiz_Evaluator|null $instance
+	 * @var SPLMS_Quiz_Evaluator|null $instance
 	 */
 	private static $instance = null;
 
 	/**
 	 * Get the instance of this class.
 	 *
-	 * @return SkillPulse_LMS_Quiz_Evaluator
+	 * @return SPLMS_Quiz_Evaluator
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {

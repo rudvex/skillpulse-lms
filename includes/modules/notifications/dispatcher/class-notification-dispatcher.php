@@ -4,7 +4,7 @@
  *
  * Handles unified notification dispatching (email and in-app).
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Notifications
  * @since 1.0.0
  */
@@ -18,12 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Notification_Dispatcher {
+class SPLMS_Notification_Dispatcher {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Notification_Dispatcher|null $instance
+	 * @var SPLMS_Notification_Dispatcher|null $instance
 	 */
 	private static $instance = null;
 
@@ -32,7 +32,7 @@ class SkillPulse_LMS_Notification_Dispatcher {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Notification_Dispatcher The class instance.
+	 * @return SPLMS_Notification_Dispatcher The class instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -82,14 +82,14 @@ class SkillPulse_LMS_Notification_Dispatcher {
 	 * @return void
 	 */
 	public function send_scheduled_notification( $notification_data ) {
-		$email_templates = SkillPulse_LMS_Email_Templates::get_instance();
+		$email_templates = SPLMS_Email_Templates::get_instance();
 		$template        = $email_templates->get_template( $notification_data['template_key'] );
 
 		if ( empty( $template ) || ! $template['is_active'] ) {
 			return;
 		}
 
-		$email_sender = SkillPulse_LMS_Email_Sender::get_instance();
+		$email_sender = SPLMS_Email_Sender::get_instance();
 		$result       = $email_sender->send_email( $notification_data['to_email'], $template, $notification_data['replacements'] );
 
 		// Log the result.
@@ -104,7 +104,7 @@ class SkillPulse_LMS_Notification_Dispatcher {
 	 * @return void
 	 */
 	public function process_scheduled_emails() {
-		$settings    = SkillPulse_LMS_Settings::get_instance()->get_all_settings();
+		$settings    = SPLMS_Settings::get_instance()->get_all_settings();
 		$batch_limit = isset( $settings['notifications']['email_settings']['batch_email_limit'] )
 			? absint( $settings['notifications']['email_settings']['batch_email_limit'] )
 			: 50;
@@ -156,7 +156,7 @@ class SkillPulse_LMS_Notification_Dispatcher {
 		$event_key = $this->get_event_key_from_template( $template_key );
 
 		// Check user preferences if user_id is provided.
-		$prefs_instance = SkillPulse_LMS_Notification_Preferences::get_instance();
+		$prefs_instance = SPLMS_Notification_Preferences::get_instance();
 		$send_email     = true;
 		$send_in_app    = true; // Default to true, will be checked against user preferences.
 
@@ -238,14 +238,14 @@ class SkillPulse_LMS_Notification_Dispatcher {
 			return new WP_Error( 'emails_disabled', __( 'Email notifications are disabled globally.', 'skillpulse-lms' ) );
 		}
 
-		$email_templates = SkillPulse_LMS_Email_Templates::get_instance();
+		$email_templates = SPLMS_Email_Templates::get_instance();
 		$template        = $email_templates->get_template( $template_key );
 
 		if ( empty( $template ) || ! $template['is_active'] ) {
 			return new WP_Error( 'template_not_found', __( 'Email template not found or inactive.', 'skillpulse-lms' ) );
 		}
 
-		$email_sender = SkillPulse_LMS_Email_Sender::get_instance();
+		$email_sender = SPLMS_Email_Sender::get_instance();
 		return $email_sender->send_email( $to_email, $template, $replacements, $attachments );
 	}
 
@@ -281,13 +281,13 @@ class SkillPulse_LMS_Notification_Dispatcher {
 		}
 
 		// Get in-app notification template.
-		$in_app_templates = SkillPulse_LMS_In_App_Templates::get_instance();
+		$in_app_templates = SPLMS_In_App_Templates::get_instance();
 		$template         = $in_app_templates->get_template_with_replacements( $event_key, $replacements );
 
 		// If in-app template not found or disabled, fallback to email template.
 		if ( ! $template ) {
 			// Fallback to email template for backward compatibility.
-			$email_templates = SkillPulse_LMS_Email_Templates::get_instance();
+			$email_templates = SPLMS_Email_Templates::get_instance();
 			$email_template  = $email_templates->get_template( $template_key );
 
 			if ( empty( $email_template ) ) {
@@ -329,7 +329,7 @@ class SkillPulse_LMS_Notification_Dispatcher {
 		}
 
 		// Use the unified in-app notification class to create notifications.
-		$in_app_notifications = SkillPulse_LMS_In_App_Notifications::get_instance();
+		$in_app_notifications = SPLMS_In_App_Notifications::get_instance();
 
 		// Extract course_id from replacements if available.
 		$course_id    = null;

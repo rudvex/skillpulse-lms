@@ -5,7 +5,7 @@
  * Handles REST API endpoints for course curriculum management.
  * Provides endpoints for getting and updating course curriculum (sections, lessons, quizzes).
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_REST_Course_Curriculum_Controller extends SkillPulse_LMS_REST_Course_Controller {
+class SPLMS_REST_Course_Curriculum_Controller extends SPLMS_REST_Course_Controller {
 	/**
 	 * Constructor.
 	 *
@@ -248,10 +248,10 @@ class SkillPulse_LMS_REST_Course_Curriculum_Controller extends SkillPulse_LMS_RE
 			$curriculums = $request->get_json_params();
 		}
 
-		$course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+		$course_items_query = SPLMS_Course_Items_Query::get_instance();
 		$course_items_query->delete_items( $course_id );
 
-		$relationships_query = SkillPulse_LMS_Relationships_Query::get_instance();
+		$relationships_query = SPLMS_Relationships_Query::get_instance();
 		$relationships_query->delete_children( $course_id );
 
 		$order = 1;
@@ -292,7 +292,7 @@ class SkillPulse_LMS_REST_Course_Curriculum_Controller extends SkillPulse_LMS_RE
 	 * @return void
 	 */
 	public function update_children( $course_id, $parent_id, $children, &$order ) {
-		$relationships_query = SkillPulse_LMS_Relationships_Query::get_instance();
+		$relationships_query = SPLMS_Relationships_Query::get_instance();
 
 		// Get all existing children for the parent.
 		$existing_children = $relationships_query->get_children( $parent_id );

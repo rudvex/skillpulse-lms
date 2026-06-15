@@ -5,7 +5,7 @@
  * Handles REST API endpoints for quiz settings management.
  * Provides endpoints for getting and updating quiz-specific settings.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_REST_Quiz_Settings_Controller extends WP_REST_Controller {
+class SPLMS_REST_Quiz_Settings_Controller extends WP_REST_Controller {
 
 	/**
 	 * Constructor.
@@ -137,7 +137,7 @@ class SkillPulse_LMS_REST_Quiz_Settings_Controller extends WP_REST_Controller {
 			return new WP_Error( 'quiz_not_found', __( 'Quiz not found.', 'skillpulse-lms' ), array( 'status' => 404 ) );
 		}
 
-		$quizzes_instance = SkillPulse_LMS_Quizzes::get_instance();
+		$quizzes_instance = SPLMS_Quizzes::get_instance();
 		$settings         = $quizzes_instance->get_quiz_settings( $quiz_id );
 
 		// Return grouped structure (same as course and lesson settings).
@@ -225,7 +225,7 @@ class SkillPulse_LMS_REST_Quiz_Settings_Controller extends WP_REST_Controller {
 			);
 		}
 
-		$updated_settings = SkillPulse_LMS_Quizzes::get_instance()->update_quiz_settings( $quiz_id, $settings );
+		$updated_settings = SPLMS_Quizzes::get_instance()->update_quiz_settings( $quiz_id, $settings );
 
 		return rest_ensure_response(
 			array(

@@ -3,7 +3,7 @@
  * Main plugin class loader.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -17,14 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Main {
+class SPLMS_Main {
 
 	/**
 	 * Class instance.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @var SkillPulse_LMS_Main|null $instance
+	 * @var SPLMS_Main|null $instance
 	 */
 	private static $instance;
 
@@ -33,7 +33,7 @@ class SkillPulse_LMS_Main {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Main The class instance.
+	 * @return SPLMS_Main The class instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -63,7 +63,7 @@ class SkillPulse_LMS_Main {
 		);
 
 		foreach ( $files as $file ) {
-			$path = SKILLPULSE_LMS_DIR_PATH . $file . '.php';
+			$path = SPLMS_DIR_PATH . $file . '.php';
 			if ( file_exists( $path ) ) {
 				require_once $path;
 			}
@@ -79,13 +79,13 @@ class SkillPulse_LMS_Main {
 	 */
 	protected function load_classes() {
 		// Load modules.
-		SkillPulse_LMS_Modules::get_instance();
+		SPLMS_Modules::get_instance();
 		// Then load REST API.
-		SkillPulse_LMS_Rest_API::get_instance();
+		SPLMS_Rest_API::get_instance();
 
 		// Then load other components.
-		SkillPulse_LMS_Admin::get_instance();
-		SkillPulse_LMS_Frontend::get_instance();
+		SPLMS_Admin::get_instance();
+		SPLMS_Frontend::get_instance();
 
 	}
 }

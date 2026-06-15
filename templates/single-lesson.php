@@ -4,7 +4,7 @@
  *
  * This template can be overridden by copying it to yourtheme/skillpulse-lms/single-lesson.php
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  * @since 2.0.0
  */
@@ -26,7 +26,7 @@ $splms_lesson_settings = splms_get_lesson_settings( $splms_lesson_id );
 $splms_lesson_type     = isset( $splms_lesson_settings['lesson_type'] ) ? $splms_lesson_settings['lesson_type'] : 'text';
 
 // Get navigation.
-$splms_lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+$splms_lessons_instance = SPLMS_Lessons::get_instance();
 $splms_navigation       = $splms_lessons_instance->get_lesson_navigation( $splms_lesson_id, $splms_user_id );
 
 // Get course info.

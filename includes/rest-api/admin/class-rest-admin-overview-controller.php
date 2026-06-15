@@ -5,7 +5,7 @@
  * Handles REST API endpoints for admin dashboard overview and statistics.
  * Provides endpoints for dashboard stats, activity logs, and reports.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  *
  * @api
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Rest_Admin_Overview_Controller extends WP_REST_Controller {
+class SPLMS_Rest_Admin_Overview_Controller extends WP_REST_Controller {
 	/**
 	 * Constructor.
 	 *
@@ -507,7 +507,7 @@ class SkillPulse_LMS_Rest_Admin_Overview_Controller extends WP_REST_Controller {
 			) . "\n";
 		}
 
-		$file_result = SkillPulse_LMS_File_Manager::write_file( 'exports', $filename, $csv_content );
+		$file_result = SPLMS_File_Manager::write_file( 'exports', $filename, $csv_content );
 
 		if ( is_wp_error( $file_result ) ) {
 			return new WP_Error(

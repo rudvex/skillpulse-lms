@@ -4,7 +4,7 @@
  *
  * Handles course-related operations including CRUD and data management.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @subpackage Courses
  * @since 1.0.0
  */
@@ -18,12 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Courses {
+class SPLMS_Courses {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Courses|null $instance
+	 * @var SPLMS_Courses|null $instance
 	 */
 	private static $instance;
 
@@ -32,7 +32,7 @@ class SkillPulse_LMS_Courses {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Courses The class instance.
+	 * @return SPLMS_Courses The class instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -67,8 +67,8 @@ class SkillPulse_LMS_Courses {
 		);
 
 		foreach ( $files as $file ) {
-			if ( file_exists( SKILLPULSE_LMS_DIR_PATH . $file . '.php' ) ) {
-				require_once SKILLPULSE_LMS_DIR_PATH . $file . '.php';
+			if ( file_exists( SPLMS_DIR_PATH . $file . '.php' ) ) {
+				require_once SPLMS_DIR_PATH . $file . '.php';
 			}
 		}
 	}
@@ -94,8 +94,8 @@ class SkillPulse_LMS_Courses {
 		add_action( 'delete_' . SPLMS_TAXONOMIES['course_tag'], array( $this, 'clear_sidebar_filter_cache' ) );
 
 		// Initialize course frontend functionality.
-		if ( ! is_admin() && class_exists( 'SkillPulse_LMS_Course_Frontend' ) ) {
-			SkillPulse_LMS_Course_Frontend::get_instance();
+		if ( ! is_admin() && class_exists( 'SPLMS_Course_Frontend' ) ) {
+			SPLMS_Course_Frontend::get_instance();
 		}
 	}
 
@@ -111,7 +111,7 @@ class SkillPulse_LMS_Courses {
 		$all_meta = get_post_meta( $course_id );
 
 		// Get configuration data and extract defaults.
-		$config_data       = SkillPulse_LMS_Config_Loader::get_config( 'courses', 'admin' );
+		$config_data       = SPLMS_Config_Loader::get_config( 'courses', 'admin' );
 		$defaults_settings = $this->extract_defaults_from_config( $config_data );
 
 		// If config is empty, return empty array (graceful degradation for get method).
@@ -156,7 +156,7 @@ class SkillPulse_LMS_Courses {
 		}
 
 		// Get defaults from configuration.
-		$config_data       = SkillPulse_LMS_Config_Loader::get_config( 'courses', 'admin' );
+		$config_data       = SPLMS_Config_Loader::get_config( 'courses', 'admin' );
 		$defaults_settings = $this->extract_defaults_from_config( $config_data );
 
 		// If config is empty, that's a configuration error that should be fixed.
@@ -408,8 +408,8 @@ class SkillPulse_LMS_Courses {
 		}
 
 		// Run full cleanup for permanent deletion.
-		SkillPulse_LMS_Relationships_Query::get_instance();
-		$course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+		SPLMS_Relationships_Query::get_instance();
+		$course_items_query = SPLMS_Course_Items_Query::get_instance();
 		$course_items_query->delete_items( $course_id );
 
 		// Clear related courses cache for this course.

@@ -5,7 +5,7 @@
  * Handles template loading and customization for SkillPulse LMS.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,14 +18,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Manages template loading, theme overrides, and body class customization.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
-class SkillPulse_LMS_Template {
+class SPLMS_Template {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Template|null $instance
+	 * @var SPLMS_Template|null $instance
 	 */
 	private static $instance;
 
@@ -85,7 +85,7 @@ class SkillPulse_LMS_Template {
 			$template     = locate_template( $search_files );
 
 			if ( ! $template ) {
-				$template = SKILLPULSE_LMS_DIR_PATH . 'templates/' . $default_file;
+				$template = SPLMS_DIR_PATH . 'templates/' . $default_file;
 			}
 		}
 
@@ -267,7 +267,7 @@ class SkillPulse_LMS_Template {
 		$template = locate_template( $template_files );
 
 		if ( ! $template ) {
-			$template = SKILLPULSE_LMS_DIR_PATH . 'templates/global/maintenance.php';
+			$template = SPLMS_DIR_PATH . 'templates/global/maintenance.php';
 		}
 
 		// Set appropriate HTTP status.
@@ -288,7 +288,7 @@ class SkillPulse_LMS_Template {
 	private function is_exclude_pages_from_maintenance_mode() {
 		$exclude_pages = false;
 
-		if ( SkillPulse_LMS_Login::get_instance()->is_login_page() ) {
+		if ( SPLMS_Login::get_instance()->is_login_page() ) {
 			$exclude_pages = true;
 		}
 
@@ -324,7 +324,7 @@ class SkillPulse_LMS_Template {
 			}
 
 			// Use plugin template.
-			$plugin_template = SKILLPULSE_LMS_DIR_PATH . 'templates/page-dashboard.php';
+			$plugin_template = SPLMS_DIR_PATH . 'templates/page-dashboard.php';
 			if ( file_exists( $plugin_template ) ) {
 				return $plugin_template;
 			}

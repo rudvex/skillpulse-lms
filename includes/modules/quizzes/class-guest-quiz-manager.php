@@ -5,7 +5,7 @@
  * Handles quiz functionality for guest (non-logged-in) users
  * providing state persistence and enhanced preview capabilities.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 
@@ -22,13 +22,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_Guest_Quiz_Manager {
+class SPLMS_Guest_Quiz_Manager {
 
 	/**
 	 * Class instance.
 	 *
 	 * @since 1.0.0
-	 * @var SkillPulse_LMS_Guest_Quiz_Manager|null $instance
+	 * @var SPLMS_Guest_Quiz_Manager|null $instance
 	 */
 	private static $instance = null;
 
@@ -51,7 +51,7 @@ class SkillPulse_LMS_Guest_Quiz_Manager {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return SkillPulse_LMS_Guest_Quiz_Manager The singleton instance.
+	 * @return SPLMS_Guest_Quiz_Manager The singleton instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -118,7 +118,7 @@ class SkillPulse_LMS_Guest_Quiz_Manager {
 		$quiz_id = absint( $quiz_id );
 
 		// Validate quiz exists and is available for preview.
-		$access_control = SkillPulse_LMS_Access_Control::get_instance();
+		$access_control = SPLMS_Access_Control::get_instance();
 		if ( ! $access_control->is_guest_preview_quiz( $quiz_id ) ) {
 			return new WP_Error(
 				'quiz_not_available',
@@ -127,7 +127,7 @@ class SkillPulse_LMS_Guest_Quiz_Manager {
 		}
 
 		// Get quiz data.
-		$quizzes_class = SkillPulse_LMS_Quizzes::get_instance();
+		$quizzes_class = SPLMS_Quizzes::get_instance();
 		$questions     = $quizzes_class->get_quiz_questions( $quiz_id, false );
 		$settings      = $quizzes_class->get_quiz_settings( $quiz_id );
 
@@ -280,12 +280,12 @@ class SkillPulse_LMS_Guest_Quiz_Manager {
 		}
 
 		// Get quiz questions and settings for evaluation.
-		$quizzes_class = SkillPulse_LMS_Quizzes::get_instance();
+		$quizzes_class = SPLMS_Quizzes::get_instance();
 		$questions     = $quizzes_class->get_quiz_questions( $quiz_id, false );
 		$settings      = $quizzes_class->get_quiz_settings( $quiz_id );
 
 		// Evaluate quiz using the quiz evaluator.
-		$evaluator         = SkillPulse_LMS_Quiz_Evaluator::get_instance();
+		$evaluator         = SPLMS_Quiz_Evaluator::get_instance();
 		$evaluation_result = $evaluator->evaluate_quiz_attempt( $questions, $answers );
 
 		if ( is_wp_error( $evaluation_result ) ) {

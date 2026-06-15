@@ -5,7 +5,7 @@
  * Core utility functions for the REST API module.
  * Contains only functions that are actively used by REST API controllers.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 

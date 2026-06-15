@@ -5,7 +5,7 @@
  * Handles dashboard data processing and business logic
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,21 +18,21 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Centralizes dashboard data processing, calculations, and caching.
  *
  * @since   1.0.0
- * @package SkillPulse_LMS
+ * @package SPLMS
  */
-class SkillPulse_LMS_Dashboard_Service {
+class SPLMS_Dashboard_Service {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Dashboard_Service|null $instance
+	 * @var SPLMS_Dashboard_Service|null $instance
 	 */
 	private static $instance = null;
 
 	/**
 	 * Get the instance of this class.
 	 *
-	 * @return SkillPulse_LMS_Dashboard_Service
+	 * @return SPLMS_Dashboard_Service
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -85,11 +85,11 @@ class SkillPulse_LMS_Dashboard_Service {
 			'active_courses'    => array(),
 		);
 
-		if ( ! class_exists( 'SkillPulse_LMS_Dashboard_API' ) ) {
+		if ( ! class_exists( 'SPLMS_Dashboard_API' ) ) {
 			return $stats;
 		}
 
-		$dashboard_api = SkillPulse_LMS_Dashboard_API::get_instance();
+		$dashboard_api = SPLMS_Dashboard_API::get_instance();
 		$user_stats    = $dashboard_api->get_student_stats( $user_id );
 
 		return array(
@@ -109,11 +109,11 @@ class SkillPulse_LMS_Dashboard_Service {
 	 * @return array Enrolled courses.
 	 */
 	private function get_enrolled_courses( $user_id ) {
-		if ( ! class_exists( 'SkillPulse_LMS_Enrollments_Query' ) ) {
+		if ( ! class_exists( 'SPLMS_Enrollments_Query' ) ) {
 			return array();
 		}
 
-		$enrollments_query = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollments_query = SPLMS_Enrollments_Query::get_instance();
 
 		return $enrollments_query->get_user_courses(
 			$user_id,
@@ -159,7 +159,7 @@ class SkillPulse_LMS_Dashboard_Service {
 
 		$average_score = 0;
 
-		if ( ! class_exists( 'SkillPulse_LMS_Quizzes' ) ) {
+		if ( ! class_exists( 'SPLMS_Quizzes' ) ) {
 			set_transient( $cache_key, $average_score, HOUR_IN_SECONDS );
 
 			return $average_score;
@@ -177,8 +177,8 @@ class SkillPulse_LMS_Dashboard_Service {
 		foreach ( $enrolled_courses as $enrollment ) {
 			$course_id = isset( $enrollment->course_id ) ? $enrollment->course_id : $enrollment['course_id'];
 
-			if ( class_exists( 'SkillPulse_LMS_Course_Items_Query' ) ) {
-				$course_items_query = SkillPulse_LMS_Course_Items_Query::get_instance();
+			if ( class_exists( 'SPLMS_Course_Items_Query' ) ) {
+				$course_items_query = SPLMS_Course_Items_Query::get_instance();
 				$course_quizzes     = $course_items_query->get_course_items( $course_id, 'quiz' );
 
 				if ( ! empty( $course_quizzes ) ) {
@@ -221,13 +221,13 @@ class SkillPulse_LMS_Dashboard_Service {
 
 		$attendance_rate = 0;
 
-		if ( ! class_exists( 'SkillPulse_LMS_User_Activity_Query' ) ) {
+		if ( ! class_exists( 'SPLMS_User_Activity_Query' ) ) {
 			set_transient( $cache_key, $attendance_rate, HOUR_IN_SECONDS );
 
 			return $attendance_rate;
 		}
 
-		$activity_query = SkillPulse_LMS_User_Activity_Query::get_instance();
+		$activity_query = SPLMS_User_Activity_Query::get_instance();
 		$active_days    = $activity_query->get_user_active_days( $user_id, '30 days' );
 
 		if ( $active_days > 0 ) {
@@ -257,13 +257,13 @@ class SkillPulse_LMS_Dashboard_Service {
 
 		$learning_streak = 0;
 
-		if ( ! class_exists( 'SkillPulse_LMS_User_Activity_Query' ) ) {
+		if ( ! class_exists( 'SPLMS_User_Activity_Query' ) ) {
 			set_transient( $cache_key, $learning_streak, HOUR_IN_SECONDS );
 
 			return $learning_streak;
 		}
 
-		$activity_query  = SkillPulse_LMS_User_Activity_Query::get_instance();
+		$activity_query  = SPLMS_User_Activity_Query::get_instance();
 		$learning_streak = $activity_query->get_user_learning_streak( $user_id );
 
 		set_transient( $cache_key, $learning_streak, HOUR_IN_SECONDS );
@@ -280,11 +280,11 @@ class SkillPulse_LMS_Dashboard_Service {
 	 * @return int Learning minutes today.
 	 */
 	private function get_today_minutes( $user_id ) {
-		if ( ! class_exists( 'SkillPulse_LMS_User_Activity_Query' ) ) {
+		if ( ! class_exists( 'SPLMS_User_Activity_Query' ) ) {
 			return 0; // Default.
 		}
 
-		$activity_query   = SkillPulse_LMS_User_Activity_Query::get_instance();
+		$activity_query   = SPLMS_User_Activity_Query::get_instance();
 		$today_activities = $activity_query->get_user_daily_activity_count( $user_id );
 
 		if ( $today_activities > 0 ) {
@@ -440,8 +440,8 @@ class SkillPulse_LMS_Dashboard_Service {
 
 			if ( $course_post ) {
 				$course_progress = 0;
-				if ( class_exists( 'SkillPulse_LMS_Dashboard_API' ) ) {
-					$dashboard_api   = SkillPulse_LMS_Dashboard_API::get_instance();
+				if ( class_exists( 'SPLMS_Dashboard_API' ) ) {
+					$dashboard_api   = SPLMS_Dashboard_API::get_instance();
 					$progress_data   = $dashboard_api->get_course_progress( $course_id, $user_id );
 					$course_progress = isset( $progress_data['percentage'] ) ? $progress_data['percentage'] : 0;
 				}

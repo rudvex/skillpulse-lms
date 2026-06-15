@@ -4,7 +4,7 @@
  *
  * Handles AJAX requests for the setup wizard.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since 1.0.0
  */
 
@@ -14,23 +14,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class SkillPulse_LMS_Wizard_Ajax
+ * Class SPLMS_Wizard_Ajax
  *
  * AJAX handler for wizard-specific functionality.
  */
-class SkillPulse_LMS_Wizard_Ajax {
+class SPLMS_Wizard_Ajax {
 
 	/**
 	 * Single instance of the class.
 	 *
-	 * @var SkillPulse_LMS_Wizard_Ajax
+	 * @var SPLMS_Wizard_Ajax
 	 */
 	private static $instance;
 
 	/**
 	 * Get single instance of the class.
 	 *
-	 * @return SkillPulse_LMS_Wizard_Ajax
+	 * @return SPLMS_Wizard_Ajax
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -83,7 +83,7 @@ class SkillPulse_LMS_Wizard_Ajax {
 		$sanitized_data = $this->sanitize_step_data( $step, $data );
 
 		// Get wizard instance and save data.
-		$wizard = SkillPulse_LMS_Setup_Wizard::get_instance();
+		$wizard = SPLMS_Setup_Wizard::get_instance();
 		$result = $wizard->save_step_data( $step, $sanitized_data );
 
 		if ( $result['success'] ) {
@@ -110,7 +110,7 @@ class SkillPulse_LMS_Wizard_Ajax {
 		}
 
 		// Get wizard instance and complete.
-		$wizard = SkillPulse_LMS_Setup_Wizard::get_instance();
+		$wizard = SPLMS_Setup_Wizard::get_instance();
 		$result = $wizard->complete_wizard();
 
 		if ( $result['success'] ) {

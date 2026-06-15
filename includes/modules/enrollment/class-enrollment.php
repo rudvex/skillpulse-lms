@@ -3,9 +3,9 @@
  * Course Enrollment Feature
  *
  * Helper class for enrollment-related functionality.
- * Note: Main enrollment AJAX handlers are in SkillPulse_LMS_Student class.
+ * Note: Main enrollment AJAX handlers are in SPLMS_Student class.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
 
@@ -18,22 +18,22 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Handles course enrollment functionality.
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @since   1.0.0
  */
-class SkillPulse_LMS_Enrollment {
+class SPLMS_Enrollment {
 
 	/**
 	 * Class instance.
 	 *
-	 * @var SkillPulse_LMS_Enrollment|null
+	 * @var SPLMS_Enrollment|null
 	 */
 	private static $instance = null;
 
 	/**
 	 * Get the instance of this class.
 	 *
-	 * @return SkillPulse_LMS_Enrollment
+	 * @return SPLMS_Enrollment
 	 */
 	public static function get_instance() {
 		if ( null === self::$instance ) {
@@ -74,7 +74,7 @@ class SkillPulse_LMS_Enrollment {
 	 * @return bool True on success, false on failure.
 	 */
 	public function update_enrollment_progress( $user_id, $course_id, $progress ) {
-		$enrollments_query = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollments_query = SPLMS_Enrollments_Query::get_instance();
 
 		// If progress is 100%, check if we need to fire completion action.
 		if ( $progress >= 100 ) {
@@ -97,7 +97,7 @@ class SkillPulse_LMS_Enrollment {
 	 */
 	public function enroll_user_in_course( $user_id, $course_id ) {
 		// Check if already enrolled (active status).
-		$enrollments_query   = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollments_query   = SPLMS_Enrollments_Query::get_instance();
 		$existing_enrollment = $enrollments_query->get_enrollment( $user_id, $course_id );
 		$was_already_active  = $existing_enrollment && 'active' === $existing_enrollment->status;
 
@@ -128,7 +128,7 @@ class SkillPulse_LMS_Enrollment {
 
 		// Log activity only for new enrollments (not reactivations).
 		if ( ! $is_reactivation ) {
-			SkillPulse_LMS_User_Activity_Query::get_instance()->log_activity( $user_id, 'course_enrolled', $course_id );
+			SPLMS_User_Activity_Query::get_instance()->log_activity( $user_id, 'course_enrolled', $course_id );
 		}
 
 		// Fire enrollment action for hooks (both new and reactivated).
@@ -146,7 +146,7 @@ class SkillPulse_LMS_Enrollment {
 	 */
 	public function is_user_enrolled( $user_id, $course_id ) {
 		// Check database table.
-		$enrollments_query = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollments_query = SPLMS_Enrollments_Query::get_instance();
 		$db_enrollment     = $enrollments_query->get_enrollment( $user_id, $course_id );
 
 		return $db_enrollment && 'active' === $db_enrollment->status;
@@ -159,7 +159,7 @@ class SkillPulse_LMS_Enrollment {
 	 * @return bool True if completed, false otherwise.
 	 */
 	public function has_user_completed_course( $user_id, $course_id ) {
-		$enrollments_query = SkillPulse_LMS_Enrollments_Query::get_instance();
+		$enrollments_query = SPLMS_Enrollments_Query::get_instance();
 		$enrollment        = $enrollments_query->get_enrollment( $user_id, $course_id );
 		return $enrollment && 'completed' === $enrollment->status;
 	}

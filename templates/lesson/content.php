@@ -4,7 +4,7 @@
  *
  * This template can be overridden by copying it to yourtheme/skillpulse-lms/lesson/content.php
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 
@@ -57,7 +57,7 @@ $splms_author_name  = get_the_author_meta( 'display_name', $splms_author_id );
 $splms_publish_date = get_the_date( '', $splms_lesson_id );
 
 // Get attachments and progress data.
-$splms_lessons_instance = SkillPulse_LMS_Lessons::get_instance();
+$splms_lessons_instance = SPLMS_Lessons::get_instance();
 $splms_attachments      = $splms_lessons_instance->get_formatted_lesson_attachments( $splms_lesson_id );
 
 // Get lesson position and progress data.

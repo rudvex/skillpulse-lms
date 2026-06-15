@@ -2,7 +2,7 @@
 /**
  * Signup Form Template (Page-based, not shortcode)
  *
- * @package SkillPulse_LMS
+ * @package SPLMS
  * @version 1.0.0
  */
 

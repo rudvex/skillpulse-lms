@@ -7,7 +7,7 @@
  *
  * @since      1.0.0
  * @subpackage Core
- * @package    SkillPulse_LMS
+ * @package SPLMS
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class SkillPulse_LMS_File_Manager {
+class SPLMS_File_Manager {
 
 	/**
 	 * Base directory name for SkillPulse LMS files
