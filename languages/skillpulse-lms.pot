@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkillPulse LMS v1.0.0\n"
 "Report-Msgid-Bugs-To: https://skillpulselms.com/contact\n"
-"POT-Creation-Date: 2026-06-16 09:51:41+00:00\n"
+"POT-Creation-Date: 2026-06-16 10:22:04+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1524,7 +1524,7 @@ msgstr ""
 msgid "Cohort-Based (Fixed Schedule)"
 msgstr ""
 
-#: includes/functions.php:694 includes/modules/courses/config.php:383
+#: includes/functions.php:694 includes/modules/courses/config.php:324
 msgid "Complete All Lessons"
 msgstr ""
 
@@ -2039,60 +2039,38 @@ msgstr ""
 msgid "Primary language used in course content."
 msgstr ""
 
-#: includes/modules/courses/config.php:275
-msgid "Certificate of Completion"
-msgstr ""
-
-#: includes/modules/courses/config.php:276
-msgid "Award a certificate when students complete the course."
-msgstr ""
-
-#: includes/modules/courses/config.php:295
-msgid "Certificate Template"
-msgstr ""
-
-#: includes/modules/courses/config.php:296
-msgid ""
-"Choose which certificate template to award. The default certificate (marked "
-"in certificate settings) will be automatically selected if none is chosen."
-msgstr ""
-
-#: includes/modules/courses/config.php:313
-msgid "Select a Certificate Template"
-msgstr ""
-
-#: includes/modules/courses/config.php:337
+#: includes/modules/courses/config.php:278
 msgid "Prerequisites & Learning Outcomes"
 msgstr ""
 
-#: includes/modules/courses/config.php:339
+#: includes/modules/courses/config.php:280
 msgid "Define course prerequisites and learning outcomes."
 msgstr ""
 
-#: includes/modules/courses/config.php:344
+#: includes/modules/courses/config.php:285
 #: templates/course/partials/tabs/overview.php:32
 msgid "Prerequisites & Requirements"
 msgstr ""
 
-#: includes/modules/courses/config.php:345
+#: includes/modules/courses/config.php:286
 msgid ""
 "Describe general skills or knowledge students need. Note: For "
 "course-specific prerequisites, use Course Access Type setting instead."
 msgstr ""
 
-#: includes/modules/courses/config.php:346
+#: includes/modules/courses/config.php:287
 msgid "e.g., Basic computer skills, high school math, familiarity with email, etc."
 msgstr ""
 
-#: includes/modules/courses/config.php:354
+#: includes/modules/courses/config.php:295
 msgid "Learning Outcomes"
 msgstr ""
 
-#: includes/modules/courses/config.php:355
+#: includes/modules/courses/config.php:296
 msgid "List what students will be able to do after completing this course."
 msgstr ""
 
-#: includes/modules/courses/config.php:356
+#: includes/modules/courses/config.php:297
 msgid ""
 "After completing this course, students will be able to:\\n"
 "• Outcome 1\\n"
@@ -2100,31 +2078,31 @@ msgid ""
 "• Outcome 3"
 msgstr ""
 
-#: includes/modules/courses/config.php:367
+#: includes/modules/courses/config.php:308
 msgid "Completion & Assessment"
 msgstr ""
 
-#: includes/modules/courses/config.php:369
+#: includes/modules/courses/config.php:310
 msgid "Configure course completion criteria and assessment settings."
 msgstr ""
 
-#: includes/modules/courses/config.php:374
+#: includes/modules/courses/config.php:315
 msgid "Course Completion Criteria"
 msgstr ""
 
-#: includes/modules/courses/config.php:375
+#: includes/modules/courses/config.php:316
 msgid "What students must do to complete the course."
 msgstr ""
 
-#: includes/modules/courses/config.php:387
+#: includes/modules/courses/config.php:328
 msgid "Complete All Lessons + Pass Quizzes"
 msgstr ""
 
-#: includes/modules/courses/config.php:395
+#: includes/modules/courses/config.php:336
 msgid "Minimum Passing Score (%)"
 msgstr ""
 
-#: includes/modules/courses/config.php:396
+#: includes/modules/courses/config.php:337
 msgid "Minimum percentage score required to pass quizzes."
 msgstr ""
 

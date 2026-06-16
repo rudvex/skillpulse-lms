@@ -269,65 +269,6 @@ $splms_course_details = array(
 				),
 			),
 		),
-		array(
-			'id'          => 'certificate_enabled',
-			'type'        => 'toggle',
-			'label'       => __( 'Certificate of Completion', 'skillpulse-lms' ),
-			'help'        => __( 'Award a certificate when students complete the course.', 'skillpulse-lms' ),
-			'default'     => true,
-			'value'       => splms_get_course_field_value( $splms_course_id, 'certificate_enabled', 'course_completion_settings', true ),
-			'column'      => 'half',
-			'icon'        => 'awards',
-			'group'       => 'course_completion_settings',
-			'conditional' => array(
-				'operator'   => 'AND',
-				'conditions' => array(
-					array(
-						'key'   => 'global:certificates.certificate_settings.enable_certificates',
-						'value' => true,
-					),
-				),
-			),
-		),
-		array(
-			'id'          => 'certificate_template_id',
-			'type'        => 'select',
-			'label'       => __( 'Certificate Template', 'skillpulse-lms' ),
-			'help'        => __( 'Choose which certificate template to award. The default certificate (marked in certificate settings) will be automatically selected if none is chosen.', 'skillpulse-lms' ),
-			'default'     => '',
-			'value'       => splms_get_course_field_value( $splms_course_id, 'certificate_template_id', 'course_completion_settings', '' ),
-			'column'      => 'half',
-			'icon'        => 'admin-customizer',
-			'group'       => 'course_completion_settings',
-			'api'         => array(
-				'endpoint'      => '/splms/v1/certificate',
-				'method'        => 'GET',
-				'params'        => array(
-					'per_page' => 100,
-					'status'   => 'publish',
-				),
-				'useProperties' => array( 'id', 'title' ),
-			),
-			'options'     => array(
-				array(
-					'label' => __( 'Select a Certificate Template', 'skillpulse-lms' ),
-					'value' => '',
-				),
-			),
-			'conditional' => array(
-				'operator'   => 'AND',
-				'conditions' => array(
-					array(
-						'key'   => 'certificate_enabled',
-						'value' => true,
-					),
-					array(
-						'key'   => 'global:certificates.certificate_settings.enable_certificates',
-						'value' => true,
-					),
-				),
-			),
-		),
 	),
 );
 
