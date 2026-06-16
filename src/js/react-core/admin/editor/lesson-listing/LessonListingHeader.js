@@ -1,12 +1,12 @@
 import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
 import AdminHeader from "../../../components/AdminHeader";
-import { getAdminUrl } from '../../../utility/url';
+import { getPostTypeCreateUrl } from '../../../utility/url';
 
 class LessonListingHeader extends Component {
     getPrimaryAction = () => ({
         text: __('Add New Lesson', 'skillpulse-lms'),
-        href: `${getAdminUrl()}/post-new.php?post_type=sp-lesson`,
+        href: getPostTypeCreateUrl('sp-lesson'),
         icon: 'plus',
         className: 'splms-add-lesson-button'
     });

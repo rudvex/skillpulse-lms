@@ -3,7 +3,7 @@ import { Component } from '@wordpress/element';
 import { withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import AdminHeader from "../../../components/AdminHeader";
-import { getAdminUrl } from '../../../utility/url';
+import { getTaxonomyEditUrl, getPostTypeCreateUrl } from '../../../utility/url';
 
 /**
  * CourseListingHeader Component
@@ -37,7 +37,7 @@ import { getAdminUrl } from '../../../utility/url';
 class CourseListingHeader extends Component {
     handleCreateTaxonomy = (taxonomyType) => {
         const taxonomySlug = taxonomyType === 'category' ? 'sp-course-category' : 'sp-course-tag';
-        const createUrl = `${getAdminUrl()}/edit-tags.php?taxonomy=${taxonomySlug}&post_type=sp-course`;
+        const createUrl = getTaxonomyEditUrl(taxonomySlug, 'sp-course');
         window.open(createUrl, '_blank');
     };
 
@@ -77,7 +77,7 @@ class CourseListingHeader extends Component {
                 text: item.text,
                 icon: item.icon,
                 onClick: () => window.open(
-                    `${getAdminUrl()}/edit-tags.php?taxonomy=${item.taxonomy}&post_type=sp-course`,
+                    getTaxonomyEditUrl(item.taxonomy, 'sp-course'),
                     '_blank'
                 )
             }));
@@ -115,7 +115,7 @@ class CourseListingHeader extends Component {
 
     getPrimaryAction = () => ({
         text: __('Add New Course', 'skillpulse-lms'),
-        href: `${getAdminUrl()}/post-new.php?post_type=sp-course`,
+        href: getPostTypeCreateUrl('sp-course'),
         icon: 'plus',
         className: 'splms-add-course-button'
     });

@@ -1,12 +1,12 @@
 import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
 import AdminHeader from "../../../components/AdminHeader";
-import { getAdminUrl } from '../../../utility/url';
+import { getPostTypeCreateUrl } from '../../../utility/url';
 
 class SectionListingHeader extends Component {
     getPrimaryAction = () => ({
         text: __('Add New Section', 'skillpulse-lms'),
-        href: `${getAdminUrl()}/post-new.php?post_type=sp-section`,
+        href: getPostTypeCreateUrl('sp-section'),
         icon: 'plus',
         className: 'splms-add-section-button'
     });

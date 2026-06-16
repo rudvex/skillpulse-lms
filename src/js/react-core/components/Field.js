@@ -48,14 +48,17 @@ const Field = React.memo((props) => {
         return null;
     }
 
-    const fieldProps = useMemo(() => ({
-        ...props,
-        label: translateLabel(props.label),
-        className: `splms-field splms-field-${props.type} ${props.className || ''}`,
-        help: translateLabel(props.help),
-        description: translateLabel(props.description),
-        placeholder: translateLabel(props.placeholder),        
-    }), [props]);
+    const fieldProps = useMemo(() => {
+        const { onInputChange, ...safeProps } = props;
+        return {
+            ...safeProps,
+            label: translateLabel(props.label),
+            className: `splms-field splms-field-${props.type} ${props.className || ''}`,
+            help: translateLabel(props.help),
+            description: translateLabel(props.description),
+            placeholder: translateLabel(props.placeholder),        
+        };
+    }, [props]);
 
     const renderFieldWithTooltip = useCallback((fieldComponent) => {
         if (fieldProps.tooltip) {
@@ -217,6 +220,7 @@ const Field = React.memo((props) => {
                 return (
                     <SearchableSelect
                         {...fieldProps}
+                        onInputChange={props.onInputChange}
                         options={options}
                         loading={loading}
                         api={fieldProps.api}
@@ -232,6 +236,7 @@ const Field = React.memo((props) => {
                     return (
                         <LazyMultiSelect
                             {...fieldProps}
+                            onInputChange={props.onInputChange}
                             api={fieldProps.api}
                             loading={loading}
                         />
@@ -393,7 +398,7 @@ const Field = React.memo((props) => {
 
             case 'custom':
                 const CustomComponent = fieldProps.component;
-                return CustomComponent ? <CustomComponent {...fieldProps} /> : null;
+                return CustomComponent ? <CustomComponent {...fieldProps} onInputChange={props.onInputChange} /> : null;
 
             default:
                 console.warn(`${fieldProps.type} is not a valid field type`);
