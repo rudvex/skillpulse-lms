@@ -22,3 +22,4 @@ teamcity.txt
 /tmp/
 /wordpress-tests-lib/
 bin/strauss.phar
+/bin/wp-org-assets/*
