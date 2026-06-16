@@ -18,7 +18,7 @@ if ( ! defined( 'SPLMS_IS_FREE' ) ) {
 	define( 'SPLMS_IS_FREE', true );
 }
 if ( ! defined( 'SPLMS_VERSION' ) ) {
-	define( 'SPLMS_VERSION', '1.0.0' );
+	define( 'SPLMS_VERSION', '1.0.1' );
 }
 
 if ( ! defined( 'SPLMS_DB_VERSION' ) ) {

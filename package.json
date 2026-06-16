@@ -1,6 +1,6 @@
 {
   "name": "skillpulse-lms",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "LMS",
   "main": "index.js",
   "scripts": {
@@ -72,5 +72,5 @@
     "webpack": "^5.90.0",
     "webpack-merge": "^6.0.1"
   },
-  "SPLMSVersion": "1.0.0"
+  "SPLMSVersion": "1.0.1"
 }

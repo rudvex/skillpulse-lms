@@ -2,7 +2,7 @@
 /**
  * Plugin Name: SkillPulse LMS
  * Description: Create and deliver online courses with ease. A powerful WordPress LMS solution for educators and course creators.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: SkillPulseLMS
  * Author URI: https://skillpulselms.com
  * License: GPL-2.0+
