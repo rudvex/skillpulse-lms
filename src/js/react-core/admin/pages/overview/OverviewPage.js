@@ -8,7 +8,7 @@ import { SplmsIcon } from "../../../components/SplmsIcon";
 import AdminHeader from "../../../components/AdminHeader";
 
 import './styles/index.scss';
-import { getAdminUrl } from '../../../utility/url';
+import { getAdminUrl, getPostTypeCreateUrl } from '../../../utility/url';
 
 
 class OverviewPage extends Component {
@@ -69,9 +69,7 @@ class OverviewPage extends Component {
         </div>
     );
 
-    renderQuickActions = () => {
-        const adminUrl = getAdminUrl();
-        return (
+    renderQuickActions = () => {        const adminUrl = getAdminUrl();        return (
         <Card className="quick-actions-card">
             <CardHeader>
                 <h3>{__('Quick Actions', 'skillpulse-lms')}</h3>
@@ -80,7 +78,7 @@ class OverviewPage extends Component {
                 <div className="quick-actions-grid">
                     <Button 
                         isPrimary 
-                        href={`${adminUrl}/post-new.php?post_type=splms_course`}
+                        href={getPostTypeCreateUrl('sp-course')} 
                         className="quick-action-button"
                     >
                         <SplmsIcon mode="wp" icon="plus" />
@@ -88,7 +86,7 @@ class OverviewPage extends Component {
                     </Button>
                     <Button 
                         isSecondary 
-                        href={`${adminUrl}/post-new.php?post_type=splms_lesson`}
+                        href={getPostTypeCreateUrl('sp-lesson')} 
                         className="quick-action-button"
                     >
                         <SplmsIcon mode="wp" icon="plus" />
@@ -96,7 +94,7 @@ class OverviewPage extends Component {
                     </Button>
                     <Button 
                         isSecondary 
-                        href={`${adminUrl}/post-new.php?post_type=splms_quiz`}
+                        href={getPostTypeCreateUrl('sp-quiz')} 
                         className="quick-action-button"
                     >
                         <SplmsIcon mode="wp" icon="plus" />
