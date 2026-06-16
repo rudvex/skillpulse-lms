@@ -3,7 +3,7 @@ Contributors: hardipparmar
 Donate link: https://skillpulselms.com/
 Tags: lms, courses, elearning, education, quizzes
 Requires at least: 5.0
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.4
 Stable tag: 1.0.0
 License: GPLv2 or later
@@ -92,15 +92,6 @@ This plugin embeds audio via SoundCloud.
 - Data sent: Embedded player requests
 - Terms: https://soundcloud.com/terms-of-use
 - Privacy: https://soundcloud.com/pages/privacy
-
-== Development ==
-
-Source code for compiled JavaScript assets:
-https://github.com/rudvex/skillpulse-lms/
-
-Build process:
-npm install
-npm run build
 
 == Frequently Asked Questions ==
 
