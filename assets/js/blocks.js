@@ -1,1 +1,1832 @@
-(()=>{"use strict";var e={n:t=>{var l=t&&t.__esModule?()=>t.default:()=>t;return e.d(l,{a:l}),l},d:(t,l)=>{for(var n in l)e.o(l,n)&&!e.o(t,n)&&Object.defineProperty(t,n,{enumerable:!0,get:l[n]})},o:(e,t)=>Object.prototype.hasOwnProperty.call(e,t)};const t=window.wp.blocks,l=window.wp.i18n,n=window.wp.blockEditor,r=window.wp.components,o=window.wp.element,a=window.wp.serverSideRender;var s=e.n(a);const i=window.wp.apiFetch;var u=e.n(i);function c(e,t){return function(e){if(Array.isArray(e))return e}(e)||function(e,t){var l=null==e?null:"undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(null!=l){var n,r,o,a,s=[],i=!0,u=!1;try{if(o=(l=l.call(e)).next,0===t){if(Object(l)!==l)return;i=!1}else for(;!(i=(n=o.call(l)).done)&&(s.push(n.value),s.length!==t);i=!0);}catch(e){u=!0,r=e}finally{try{if(!i&&null!=l.return&&(a=l.return(),Object(a)!==a))return}finally{if(u)throw r}}return s}}(e,t)||function(e,t){if(e){if("string"==typeof e)return m(e,t);var l={}.toString.call(e).slice(8,-1);return"Object"===l&&e.constructor&&(l=e.constructor.name),"Map"===l||"Set"===l?Array.from(e):"Arguments"===l||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(l)?m(e,t):void 0}}(e,t)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function m(e,t){(null==t||t>e.length)&&(t=e.length);for(var l=0,n=Array(t);l<t;l++)n[l]=e[l];return n}const p=JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/course-grid","title":"Course Grid","category":"skillpulse-lms","description":"Display a filterable grid or list of courses.","keywords":["courses","grid","list","lms"],"textdomain":"skillpulse-lms","icon":"grid-view","supports":{"html":false,"align":["wide","full"]},"attributes":{"columns":{"type":"number","default":3},"perPage":{"type":"number","default":9},"categories":{"type":"array","default":[]},"tags":{"type":"array","default":[]},"difficulty":{"type":"string","default":"all"},"orderBy":{"type":"string","default":"date"},"order":{"type":"string","default":"DESC"},"showPagination":{"type":"boolean","default":true},"layout":{"type":"string","default":"grid"}}}');function f(e,t){return function(e){if(Array.isArray(e))return e}(e)||function(e,t){var l=null==e?null:"undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(null!=l){var n,r,o,a,s=[],i=!0,u=!1;try{if(o=(l=l.call(e)).next,0===t){if(Object(l)!==l)return;i=!1}else for(;!(i=(n=o.call(l)).done)&&(s.push(n.value),s.length!==t);i=!0);}catch(e){u=!0,r=e}finally{try{if(!i&&null!=l.return&&(a=l.return(),Object(a)!==a))return}finally{if(u)throw r}}return s}}(e,t)||function(e,t){if(e){if("string"==typeof e)return d(e,t);var l={}.toString.call(e).slice(8,-1);return"Object"===l&&e.constructor&&(l=e.constructor.name),"Map"===l||"Set"===l?Array.from(e):"Arguments"===l||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(l)?d(e,t):void 0}}(e,t)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function d(e,t){(null==t||t>e.length)&&(t=e.length);for(var l=0,n=Array(t);l<t;l++)n[l]=e[l];return n}(0,t.registerBlockType)(p,{edit:function(e){var t=e.attributes,a=e.setAttributes,i=(0,n.useBlockProps)(),m=c((0,o.useState)([]),2),p=m[0],f=m[1],d=c((0,o.useState)([]),2),_=d[0],h=d[1],g=c((0,o.useState)(!0),2),b=g[0],y=g[1];(0,o.useEffect)((function(){Promise.all([u()({path:"/wp/v2/sp-course-category?per_page=100&_fields=id,name"}).catch((function(){return[]})),u()({path:"/wp/v2/sp-course-tag?per_page=100&_fields=id,name"}).catch((function(){return[]}))]).then((function(e){var t=c(e,2),l=t[0],n=t[1];f(l.map((function(e){return{id:e.id,name:e.name}}))),h(n.map((function(e){return{id:e.id,name:e.name}}))),y(!1)}))}),[]);var k=t.categories.map((function(e){var t;return null===(t=p.find((function(t){return t.id===e})))||void 0===t?void 0:t.name})).filter(Boolean),v=t.tags.map((function(e){var t;return null===(t=_.find((function(t){return t.id===e})))||void 0===t?void 0:t.name})).filter(Boolean);return React.createElement("div",i,React.createElement(n.InspectorControls,null,React.createElement(r.PanelBody,{title:(0,l.__)("Layout","skillpulse-lms")},React.createElement(r.SelectControl,{label:(0,l.__)("Display Layout","skillpulse-lms"),value:t.layout,options:[{value:"grid",label:(0,l.__)("Grid","skillpulse-lms")},{value:"list",label:(0,l.__)("List","skillpulse-lms")}],onChange:function(e){return a({layout:e})},__next40pxDefaultSize:!0,__nextHasNoMarginBottom:!0}),React.createElement(r.RangeControl,{label:(0,l.__)("Columns","skillpulse-lms"),value:t.columns,onChange:function(e){return a({columns:e})},min:1,max:4,__next40pxDefaultSize:!0,__nextHasNoMarginBottom:!0}),React.createElement(r.RangeControl,{label:(0,l.__)("Courses Per Page","skillpulse-lms"),value:t.perPage,onChange:function(e){return a({perPage:e})},min:1,max:24,__next40pxDefaultSize:!0,__nextHasNoMarginBottom:!0})),React.createElement(r.PanelBody,{title:(0,l.__)("Filters","skillpulse-lms"),initialOpen:!1},b?React.createElement(r.Spinner,null):React.createElement(React.Fragment,null,React.createElement(r.FormTokenField,{label:(0,l.__)("Categories","skillpulse-lms"),value:k,suggestions:p.map((function(e){return e.name})),onChange:function(e){var t=e.map((function(e){var t;return null===(t=p.find((function(t){return t.name===e})))||void 0===t?void 0:t.id})).filter(Boolean);a({categories:t})},__experimentalExpandOnFocus:!0,__nextHasNoMarginBottom:!0}),React.createElement(r.FormTokenField,{label:(0,l.__)("Tags","skillpulse-lms"),value:v,suggestions:_.map((function(e){return e.name})),onChange:function(e){var t=e.map((function(e){var t;return null===(t=_.find((function(t){return t.name===e})))||void 0===t?void 0:t.id})).filter(Boolean);a({tags:t})},__experimentalExpandOnFocus:!0,__nextHasNoMarginBottom:!0})),React.createElement(r.SelectControl,{label:(0,l.__)("Difficulty","skillpulse-lms"),value:t.difficulty,options:[{value:"all",label:(0,l.__)("All Levels","skillpulse-lms")},{value:"beginner",label:(0,l.__)("Beginner","skillpulse-lms")},{value:"intermediate",label:(0,l.__)("Intermediate","skillpulse-lms")},{value:"advanced",label:(0,l.__)("Advanced","skillpulse-lms")}],onChange:function(e){return a({difficulty:e})},__next40pxDefaultSize:!0,__nextHasNoMarginBottom:!0}),React.createElement(r.SelectControl,{label:(0,l.__)("Order By","skillpulse-lms"),value:t.orderBy,options:[{value:"date",label:(0,l.__)("Date","skillpulse-lms")},{value:"title",label:(0,l.__)("Title","skillpulse-lms")},{value:"menu_order",label:(0,l.__)("Menu Order","skillpulse-lms")}],onChange:function(e){return a({orderBy:e})},__next40pxDefaultSize:!0,__nextHasNoMarginBottom:!0}),React.createElement(r.SelectControl,{label:(0,l.__)("Order","skillpulse-lms"),value:t.order,options:[{value:"DESC",label:(0,l.__)("Newest First","skillpulse-lms")},{value:"ASC",label:(0,l.__)("Oldest First","skillpulse-lms")}],onChange:function(e){return a({order:e})},__next40pxDefaultSize:!0,__nextHasNoMarginBottom:!0})),React.createElement(r.PanelBody,{title:(0,l.__)("Display Options","skillpulse-lms"),initialOpen:!1},React.createElement(r.ToggleControl,{label:(0,l.__)("Show Pagination","skillpulse-lms"),checked:t.showPagination,onChange:function(e){return a({showPagination:e})},__nextHasNoMarginBottom:!0}))),React.createElement(s(),{block:"splms/course-grid",attributes:t}))}});const _=JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/course-card","title":"Course Card","category":"skillpulse-lms","description":"Display a single course card with thumbnail, price, rating, and CTA.","keywords":["course","card","lms"],"textdomain":"skillpulse-lms","icon":"welcome-learn-more","supports":{"html":false},"attributes":{"courseId":{"type":"number","default":0},"showThumbnail":{"type":"boolean","default":true},"showExcerpt":{"type":"boolean","default":true},"showPrice":{"type":"boolean","default":true},"showRating":{"type":"boolean","default":true},"showInstructor":{"type":"boolean","default":true},"showDifficulty":{"type":"boolean","default":true},"showActionButton":{"type":"boolean","default":true}}}');function h(e,t){return function(e){if(Array.isArray(e))return e}(e)||function(e,t){var l=null==e?null:"undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(null!=l){var n,r,o,a,s=[],i=!0,u=!1;try{if(o=(l=l.call(e)).next,0===t){if(Object(l)!==l)return;i=!1}else for(;!(i=(n=o.call(l)).done)&&(s.push(n.value),s.length!==t);i=!0);}catch(e){u=!0,r=e}finally{try{if(!i&&null!=l.return&&(a=l.return(),Object(a)!==a))return}finally{if(u)throw r}}return s}}(e,t)||function(e,t){if(e){if("string"==typeof e)return g(e,t);var l={}.toString.call(e).slice(8,-1);return"Object"===l&&e.constructor&&(l=e.constructor.name),"Map"===l||"Set"===l?Array.from(e):"Arguments"===l||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(l)?g(e,t):void 0}}(e,t)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function g(e,t){(null==t||t>e.length)&&(t=e.length);for(var l=0,n=Array(t);l<t;l++)n[l]=e[l];return n}(0,t.registerBlockType)(_,{edit:function(e){var t=e.attributes,a=e.setAttributes,i=(0,n.useBlockProps)(),c=f((0,o.useState)([]),2),m=c[0],p=c[1],d=f((0,o.useState)(!0),2),_=d[0],h=d[1];(0,o.useEffect)((function(){u()({path:"/wp/v2/sp-course?per_page=100&status=publish&_fields=id,title"}).then((function(e){p(e.map((function(e){return{value:e.id,label:e.title.rendered}})))})).catch((function(){return p([])})).finally((function(){return h(!1)}))}),[]);var g=_?React.createElement(r.Spinner,null):React.createElement(r.ComboboxControl,{label:(0,l.__)("Select Course","skillpulse-lms"),value:t.courseId||"",options:m,onChange:function(e){return a({courseId:e?parseInt(e,10):0})},__next40pxDefaultSize:!0,__nextHasNoMarginBottom:!0});return t.courseId?React.createElement("div",i,React.createElement(n.InspectorControls,null,React.createElement(r.PanelBody,{title:(0,l.__)("Course","skillpulse-lms")},g),React.createElement(r.PanelBody,{title:(0,l.__)("Display Options","skillpulse-lms"),initialOpen:!1},React.createElement(r.ToggleControl,{label:(0,l.__)("Show Thumbnail","skillpulse-lms"),checked:t.showThumbnail,onChange:function(e){return a({showThumbnail:e})},__nextHasNoMarginBottom:!0}),React.createElement(r.ToggleControl,{label:(0,l.__)("Show Excerpt","skillpulse-lms"),checked:t.showExcerpt,onChange:function(e){return a({showExcerpt:e})},__nextHasNoMarginBottom:!0}),React.createElement(r.ToggleControl,{label:(0,l.__)("Show Price","skillpulse-lms"),checked:t.showPrice,onChange:function(e){return a({showPrice:e})},__nextHasNoMarginBottom:!0}),React.createElement(r.ToggleControl,{label:(0,l.__)("Show Rating","skillpulse-lms"),checked:t.showRating,onChange:function(e){return a({showRating:e})},__nextHasNoMarginBottom:!0}),React.createElement(r.ToggleControl,{label:(0,l.__)("Show Instructor","skillpulse-lms"),checked:t.showInstructor,onChange:function(e){return a({showInstructor:e})},__nextHasNoMarginBottom:!0}),React.createElement(r.ToggleControl,{label:(0,l.__)("Show Difficulty","skillpulse-lms"),checked:t.showDifficulty,onChange:function(e){return a({showDifficulty:e})},__nextHasNoMarginBottom:!0}),React.createElement(r.ToggleControl,{label:(0,l.__)("Show Action Button","skillpulse-lms"),checked:t.showActionButton,onChange:function(e){return a({showActionButton:e})},__nextHasNoMarginBottom:!0}))),React.createElement(s(),{block:"splms/course-card",attributes:t})):React.createElement("div",i,React.createElement(r.Placeholder,{icon:"welcome-learn-more",label:(0,l.__)("Course Card","skillpulse-lms"),instructions:(0,l.__)("Select a course to display.","skillpulse-lms")},g))}});const b=JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/course-categories","title":"Course Categories","category":"skillpulse-lms","description":"Display course categories as a grid of cards with course counts.","keywords":["categories","courses","taxonomy","lms"],"textdomain":"skillpulse-lms","icon":"category","supports":{"html":false,"align":["wide","full"]},"attributes":{"columns":{"type":"number","default":4},"showCount":{"type":"boolean","default":true},"showDescription":{"type":"boolean","default":false},"hideEmpty":{"type":"boolean","default":true},"categories":{"type":"array","default":[]}}}');(0,t.registerBlockType)(b,{edit:function(e){var t=e.attributes,a=e.setAttributes,i=(0,n.useBlockProps)(),c=h((0,o.useState)([]),2),m=c[0],p=c[1],f=h((0,o.useState)(!0),2),d=f[0],_=f[1];(0,o.useEffect)((function(){u()({path:"/wp/v2/sp-course-category?per_page=100&_fields=id,name"}).then((function(e){p(e.map((function(e){return{id:e.id,name:e.name}})))})).catch((function(){return p([])})).finally((function(){return _(!1)}))}),[]);var g=t.categories.map((function(e){var t;return null===(t=m.find((function(t){return t.id===e})))||void 0===t?void 0:t.name})).filter(Boolean);return React.createElement("div",i,React.createElement(n.InspectorControls,null,React.createElement(r.PanelBody,{title:(0,l.__)("Layout","skillpulse-lms")},React.createElement(r.RangeControl,{label:(0,l.__)("Columns","skillpulse-lms"),value:t.columns,onChange:function(e){return a({columns:e})},min:1,max:6,__next40pxDefaultSize:!0,__nextHasNoMarginBottom:!0})),React.createElement(r.PanelBody,{title:(0,l.__)("Categories","skillpulse-lms"),initialOpen:!1},d?React.createElement(r.Spinner,null):React.createElement(r.FormTokenField,{label:(0,l.__)("Specific Categories","skillpulse-lms"),value:g,suggestions:m.map((function(e){return e.name})),onChange:function(e){var t=e.map((function(e){var t;return null===(t=m.find((function(t){return t.name===e})))||void 0===t?void 0:t.id})).filter(Boolean);a({categories:t})},__experimentalExpandOnFocus:!0,__nextHasNoMarginBottom:!0}),React.createElement("p",{style:{fontSize:"12px",color:"#757575",marginTop:"4px"}},(0,l.__)("Leave empty to show all categories.","skillpulse-lms"))),React.createElement(r.PanelBody,{title:(0,l.__)("Display Options","skillpulse-lms"),initialOpen:!1},React.createElement(r.ToggleControl,{label:(0,l.__)("Show Course Count","skillpulse-lms"),checked:t.showCount,onChange:function(e){return a({showCount:e})},__nextHasNoMarginBottom:!0}),React.createElement(r.ToggleControl,{label:(0,l.__)("Show Description","skillpulse-lms"),checked:t.showDescription,onChange:function(e){return a({showDescription:e})},__nextHasNoMarginBottom:!0}),React.createElement(r.ToggleControl,{label:(0,l.__)("Hide Empty Categories","skillpulse-lms"),checked:t.hideEmpty,onChange:function(e){return a({hideEmpty:e})},__nextHasNoMarginBottom:!0}))),React.createElement(s(),{block:"splms/course-categories",attributes:t}))}});const y=JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/course-search","title":"Course Search","category":"skillpulse-lms","description":"Course search bar using the plugin\'s standard search template.","keywords":["search","courses","find","lms"],"textdomain":"skillpulse-lms","icon":"search","supports":{"html":false,"align":["wide"]},"attributes":{}}');(0,t.registerBlockType)(y,{edit:function(e){var t=e.attributes,l=(0,n.useBlockProps)();return React.createElement("div",l,React.createElement(s(),{block:"splms/course-search",attributes:t}))}});var k=[{label:(0,l.__)("--- User Info ---","skillpulse-lms"),value:"",disabled:!0},{label:(0,l.__)("Display Name","skillpulse-lms"),value:"display_name"},{label:(0,l.__)("First Name","skillpulse-lms"),value:"first_name"},{label:(0,l.__)("Last Name","skillpulse-lms"),value:"last_name"},{label:(0,l.__)("Full Name","skillpulse-lms"),value:"full_name"},{label:(0,l.__)("Username","skillpulse-lms"),value:"user_login"},{label:(0,l.__)("Email","skillpulse-lms"),value:"user_email"},{label:(0,l.__)("Nickname","skillpulse-lms"),value:"nickname"},{label:(0,l.__)("Bio / Description","skillpulse-lms"),value:"description"},{label:(0,l.__)("Profile Picture","skillpulse-lms"),value:"avatar"},{label:(0,l.__)("Registration Date","skillpulse-lms"),value:"user_registered"},{label:(0,l.__)("User ID","skillpulse-lms"),value:"ID"},{label:(0,l.__)("User Role","skillpulse-lms"),value:"user_role"},{label:(0,l.__)("--- LMS Stats ---","skillpulse-lms"),value:"",disabled:!0},{label:(0,l.__)("Enrolled Courses Count","skillpulse-lms"),value:"enrolled_courses_count"},{label:(0,l.__)("Completed Courses Count","skillpulse-lms"),value:"completed_courses_count"},{label:(0,l.__)("Certificates Count","skillpulse-lms"),value:"certificates_count"}];const v=JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/account-info","title":"Account Info","category":"skillpulse-lms","description":"Display a user profile field value for the currently logged-in user.","keywords":["user","account","profile","info","lms"],"textdomain":"skillpulse-lms","icon":"admin-users","supports":{"html":false,"customClassName":false},"attributes":{"field":{"type":"string","default":"display_name"}}}');function C(e,t){return function(e){if(Array.isArray(e))return e}(e)||function(e,t){var l=null==e?null:"undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(null!=l){var n,r,o,a,s=[],i=!0,u=!1;try{if(o=(l=l.call(e)).next,0===t){if(Object(l)!==l)return;i=!1}else for(;!(i=(n=o.call(l)).done)&&(s.push(n.value),s.length!==t);i=!0);}catch(e){u=!0,r=e}finally{try{if(!i&&null!=l.return&&(a=l.return(),Object(a)!==a))return}finally{if(u)throw r}}return s}}(e,t)||function(e,t){if(e){if("string"==typeof e)return w(e,t);var l={}.toString.call(e).slice(8,-1);return"Object"===l&&e.constructor&&(l=e.constructor.name),"Map"===l||"Set"===l?Array.from(e):"Arguments"===l||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(l)?w(e,t):void 0}}(e,t)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function w(e,t){(null==t||t>e.length)&&(t=e.length);for(var l=0,n=Array(t);l<t;l++)n[l]=e[l];return n}(0,t.registerBlockType)(v,{edit:function(e){var t=e.attributes,o=e.setAttributes,a=(0,n.useBlockProps)();return React.createElement("div",a,React.createElement(n.InspectorControls,null,React.createElement(r.PanelBody,{title:(0,l.__)("Field Settings","skillpulse-lms")},React.createElement(r.SelectControl,{label:(0,l.__)("User Field","skillpulse-lms"),value:t.field,options:k,onChange:function(e){return o({field:e})},help:(0,l.__)("Select which user field to display.","skillpulse-lms"),__next40pxDefaultSize:!0,__nextHasNoMarginBottom:!0}))),React.createElement(r.Disabled,null,React.createElement(s(),{block:"splms/account-info",attributes:t})))}});const E=JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/enroll-button","title":"Enroll Button","category":"skillpulse-lms","description":"Smart enrollment button that adapts based on the user\'s enrollment state.","keywords":["enroll","buy","purchase","cta","lms"],"textdomain":"skillpulse-lms","icon":"cart","supports":{"html":false,"align":["left","center","right"]},"attributes":{"courseId":{"type":"number","default":0},"showPrice":{"type":"boolean","default":true}}}');function S(e,t){return function(e){if(Array.isArray(e))return e}(e)||function(e,t){var l=null==e?null:"undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(null!=l){var n,r,o,a,s=[],i=!0,u=!1;try{if(o=(l=l.call(e)).next,0===t){if(Object(l)!==l)return;i=!1}else for(;!(i=(n=o.call(l)).done)&&(s.push(n.value),s.length!==t);i=!0);}catch(e){u=!0,r=e}finally{try{if(!i&&null!=l.return&&(a=l.return(),Object(a)!==a))return}finally{if(u)throw r}}return s}}(e,t)||function(e,t){if(e){if("string"==typeof e)return R(e,t);var l={}.toString.call(e).slice(8,-1);return"Object"===l&&e.constructor&&(l=e.constructor.name),"Map"===l||"Set"===l?Array.from(e):"Arguments"===l||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(l)?R(e,t):void 0}}(e,t)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function R(e,t){(null==t||t>e.length)&&(t=e.length);for(var l=0,n=Array(t);l<t;l++)n[l]=e[l];return n}(0,t.registerBlockType)(E,{edit:function(e){var t=e.attributes,a=e.setAttributes,i=(0,n.useBlockProps)(),c=C((0,o.useState)([]),2),m=c[0],p=c[1],f=C((0,o.useState)(!0),2),d=f[0],_=f[1];(0,o.useEffect)((function(){u()({path:"/wp/v2/sp-course?per_page=100&status=publish&_fields=id,title"}).then((function(e){return p(e.map((function(e){return{value:e.id,label:e.title.rendered}})))})).catch((function(){return p([])})).finally((function(){return _(!1)}))}),[]);var h=d?React.createElement(r.Spinner,null):React.createElement(r.ComboboxControl,{label:(0,l.__)("Select Course","skillpulse-lms"),value:t.courseId||"",options:m,onChange:function(e){return a({courseId:e?parseInt(e,10):0})},__next40pxDefaultSize:!0,__nextHasNoMarginBottom:!0});return t.courseId?React.createElement("div",i,React.createElement(n.InspectorControls,null,React.createElement(r.PanelBody,{title:(0,l.__)("Course","skillpulse-lms")},h),React.createElement(r.PanelBody,{title:(0,l.__)("Display","skillpulse-lms"),initialOpen:!1},React.createElement(r.ToggleControl,{label:(0,l.__)("Show Price","skillpulse-lms"),checked:t.showPrice,onChange:function(e){return a({showPrice:e})},__nextHasNoMarginBottom:!0}))),React.createElement(r.Disabled,null,React.createElement(s(),{block:"splms/enroll-button",attributes:t}))):React.createElement("div",i,React.createElement(r.Placeholder,{icon:"cart",label:(0,l.__)("Enroll Button","skillpulse-lms"),instructions:(0,l.__)("Select a course for the enrollment button.","skillpulse-lms")},h))}});const x=JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/course-curriculum","title":"Course Curriculum","category":"skillpulse-lms","description":"Display a course curriculum with expandable sections, lessons, and quizzes.","keywords":["curriculum","syllabus","lessons","sections","lms"],"textdomain":"skillpulse-lms","icon":"list-view","supports":{"html":false,"align":["wide"]},"attributes":{"courseId":{"type":"number","default":0},"showDuration":{"type":"boolean","default":true},"showLessonType":{"type":"boolean","default":true},"expandAll":{"type":"boolean","default":false}}}');function B(e,t){return function(e){if(Array.isArray(e))return e}(e)||function(e,t){var l=null==e?null:"undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(null!=l){var n,r,o,a,s=[],i=!0,u=!1;try{if(o=(l=l.call(e)).next,0===t){if(Object(l)!==l)return;i=!1}else for(;!(i=(n=o.call(l)).done)&&(s.push(n.value),s.length!==t);i=!0);}catch(e){u=!0,r=e}finally{try{if(!i&&null!=l.return&&(a=l.return(),Object(a)!==a))return}finally{if(u)throw r}}return s}}(e,t)||function(e,t){if(e){if("string"==typeof e)return I(e,t);var l={}.toString.call(e).slice(8,-1);return"Object"===l&&e.constructor&&(l=e.constructor.name),"Map"===l||"Set"===l?Array.from(e):"Arguments"===l||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(l)?I(e,t):void 0}}(e,t)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function I(e,t){(null==t||t>e.length)&&(t=e.length);for(var l=0,n=Array(t);l<t;l++)n[l]=e[l];return n}(0,t.registerBlockType)(x,{edit:function(e){var t=e.attributes,a=e.setAttributes,i=(0,n.useBlockProps)(),c=S((0,o.useState)([]),2),m=c[0],p=c[1],f=S((0,o.useState)(!0),2),d=f[0],_=f[1];(0,o.useEffect)((function(){u()({path:"/wp/v2/sp-course?per_page=100&status=publish&_fields=id,title"}).then((function(e){return p(e.map((function(e){return{value:e.id,label:e.title.rendered}})))})).catch((function(){return p([])})).finally((function(){return _(!1)}))}),[]);var h=d?React.createElement(r.Spinner,null):React.createElement(r.ComboboxControl,{label:(0,l.__)("Select Course","skillpulse-lms"),value:t.courseId||"",options:m,onChange:function(e){return a({courseId:e?parseInt(e,10):0})},__next40pxDefaultSize:!0,__nextHasNoMarginBottom:!0});return t.courseId?React.createElement("div",i,React.createElement(n.InspectorControls,null,React.createElement(r.PanelBody,{title:(0,l.__)("Course","skillpulse-lms")},h),React.createElement(r.PanelBody,{title:(0,l.__)("Display Options","skillpulse-lms"),initialOpen:!1},React.createElement(r.ToggleControl,{label:(0,l.__)("Show Duration","skillpulse-lms"),checked:t.showDuration,onChange:function(e){return a({showDuration:e})},__nextHasNoMarginBottom:!0}),React.createElement(r.ToggleControl,{label:(0,l.__)("Show Lesson Type","skillpulse-lms"),checked:t.showLessonType,onChange:function(e){return a({showLessonType:e})},__nextHasNoMarginBottom:!0}),React.createElement(r.ToggleControl,{label:(0,l.__)("Expand All Sections","skillpulse-lms"),checked:t.expandAll,onChange:function(e){return a({expandAll:e})},__nextHasNoMarginBottom:!0}))),React.createElement(r.Disabled,null,React.createElement(s(),{block:"splms/course-curriculum",attributes:t}))):React.createElement("div",i,React.createElement(r.Placeholder,{icon:"list-view",label:(0,l.__)("Course Curriculum","skillpulse-lms"),instructions:(0,l.__)("Select a course to display its curriculum.","skillpulse-lms")},h))}});const P=JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/course-progress","title":"Course Progress","category":"skillpulse-lms","description":"Display a progress bar for a course.","keywords":["progress","bar","completion","lms"],"textdomain":"skillpulse-lms","icon":"chart-bar","supports":{"html":false},"attributes":{"courseId":{"type":"number","default":0},"showPercentage":{"type":"boolean","default":true},"showItemCount":{"type":"boolean","default":true},"label":{"type":"string","default":""}}}');(0,t.registerBlockType)(P,{edit:function(e){var t=e.attributes,a=e.setAttributes,i=(0,n.useBlockProps)(),c=B((0,o.useState)([]),2),m=c[0],p=c[1],f=B((0,o.useState)(!0),2),d=f[0],_=f[1];(0,o.useEffect)((function(){u()({path:"/wp/v2/sp-course?per_page=100&status=publish&_fields=id,title"}).then((function(e){return p(e.map((function(e){return{value:e.id,label:e.title.rendered}})))})).catch((function(){return p([])})).finally((function(){return _(!1)}))}),[]);var h=d?React.createElement(r.Spinner,null):React.createElement(r.ComboboxControl,{label:(0,l.__)("Select Course","skillpulse-lms"),value:t.courseId||"",options:m,onChange:function(e){return a({courseId:e?parseInt(e,10):0})},__next40pxDefaultSize:!0,__nextHasNoMarginBottom:!0});return t.courseId?React.createElement("div",i,React.createElement(n.InspectorControls,null,React.createElement(r.PanelBody,{title:(0,l.__)("Course","skillpulse-lms")},h),React.createElement(r.PanelBody,{title:(0,l.__)("Display Options","skillpulse-lms"),initialOpen:!1},React.createElement(r.ToggleControl,{label:(0,l.__)("Show Percentage","skillpulse-lms"),checked:t.showPercentage,onChange:function(e){return a({showPercentage:e})},__nextHasNoMarginBottom:!0}),React.createElement(r.ToggleControl,{label:(0,l.__)("Show Item Count","skillpulse-lms"),checked:t.showItemCount,onChange:function(e){return a({showItemCount:e})},__nextHasNoMarginBottom:!0}),React.createElement(r.TextControl,{label:(0,l.__)("Custom Label","skillpulse-lms"),value:t.label,onChange:function(e){return a({label:e})},placeholder:(0,l.__)("Progress","skillpulse-lms"),__next40pxDefaultSize:!0,__nextHasNoMarginBottom:!0}))),React.createElement(r.Disabled,null,React.createElement(s(),{block:"splms/course-progress",attributes:t}))):React.createElement("div",i,React.createElement(r.Placeholder,{icon:"chart-bar",label:(0,l.__)("Course Progress","skillpulse-lms"),instructions:(0,l.__)("Select a course to display progress.","skillpulse-lms")},h))}});const A=JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/my-courses","title":"My Courses","category":"skillpulse-lms","description":"Display the current user\'s enrolled courses with progress bars.","keywords":["enrolled","my courses","dashboard","progress","lms"],"textdomain":"skillpulse-lms","icon":"book","supports":{"html":false,"align":["wide","full"]},"attributes":{"columns":{"type":"number","default":3},"status":{"type":"string","default":"all"},"showProgress":{"type":"boolean","default":true},"emptyMessage":{"type":"string","default":""}}}');function D(e,t){return function(e){if(Array.isArray(e))return e}(e)||function(e,t){var l=null==e?null:"undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(null!=l){var n,r,o,a,s=[],i=!0,u=!1;try{if(o=(l=l.call(e)).next,0===t){if(Object(l)!==l)return;i=!1}else for(;!(i=(n=o.call(l)).done)&&(s.push(n.value),s.length!==t);i=!0);}catch(e){u=!0,r=e}finally{try{if(!i&&null!=l.return&&(a=l.return(),Object(a)!==a))return}finally{if(u)throw r}}return s}}(e,t)||function(e,t){if(e){if("string"==typeof e)return O(e,t);var l={}.toString.call(e).slice(8,-1);return"Object"===l&&e.constructor&&(l=e.constructor.name),"Map"===l||"Set"===l?Array.from(e):"Arguments"===l||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(l)?O(e,t):void 0}}(e,t)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function O(e,t){(null==t||t>e.length)&&(t=e.length);for(var l=0,n=Array(t);l<t;l++)n[l]=e[l];return n}(0,t.registerBlockType)(A,{edit:function(e){var t=e.attributes,o=e.setAttributes,a=(0,n.useBlockProps)();return React.createElement("div",a,React.createElement(n.InspectorControls,null,React.createElement(r.PanelBody,{title:(0,l.__)("Layout","skillpulse-lms")},React.createElement(r.RangeControl,{label:(0,l.__)("Columns","skillpulse-lms"),value:t.columns,onChange:function(e){return o({columns:e})},min:1,max:4,__next40pxDefaultSize:!0,__nextHasNoMarginBottom:!0})),React.createElement(r.PanelBody,{title:(0,l.__)("Filters","skillpulse-lms"),initialOpen:!1},React.createElement(r.SelectControl,{label:(0,l.__)("Status","skillpulse-lms"),value:t.status,options:[{value:"all",label:(0,l.__)("All Courses","skillpulse-lms")},{value:"active",label:(0,l.__)("In Progress","skillpulse-lms")},{value:"completed",label:(0,l.__)("Completed","skillpulse-lms")}],onChange:function(e){return o({status:e})},__next40pxDefaultSize:!0,__nextHasNoMarginBottom:!0})),React.createElement(r.PanelBody,{title:(0,l.__)("Display Options","skillpulse-lms"),initialOpen:!1},React.createElement(r.ToggleControl,{label:(0,l.__)("Show Progress Bar","skillpulse-lms"),checked:t.showProgress,onChange:function(e){return o({showProgress:e})},__nextHasNoMarginBottom:!0}),React.createElement(r.TextControl,{label:(0,l.__)("Empty Message","skillpulse-lms"),value:t.emptyMessage,onChange:function(e){return o({emptyMessage:e})},placeholder:(0,l.__)("You are not enrolled in any courses yet.","skillpulse-lms"),__next40pxDefaultSize:!0,__nextHasNoMarginBottom:!0}))),React.createElement(r.Disabled,null,React.createElement(s(),{block:"splms/my-courses",attributes:t})))}});const N=JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/course-instructor","title":"Course Instructor","category":"skillpulse-lms","description":"Display an instructor profile card with avatar, bio, and stats.","keywords":["instructor","teacher","author","profile","lms"],"textdomain":"skillpulse-lms","icon":"businessman","supports":{"html":false},"attributes":{"instructorId":{"type":"number","default":0},"showBio":{"type":"boolean","default":true},"showCourseCount":{"type":"boolean","default":true},"showStudentCount":{"type":"boolean","default":true}}}');(0,t.registerBlockType)(N,{edit:function(e){var t=e.attributes,a=e.setAttributes,i=(0,n.useBlockProps)(),c=D((0,o.useState)([]),2),m=c[0],p=c[1],f=D((0,o.useState)(!0),2),d=f[0],_=f[1];(0,o.useEffect)((function(){u()({path:"/wp/v2/users?per_page=100&_fields=id,name&roles=administrator,author,editor"}).then((function(e){return p(e.map((function(e){return{value:e.id,label:e.name}})))})).catch((function(){return p([])})).finally((function(){return _(!1)}))}),[]);var h=d?React.createElement(r.Spinner,null):React.createElement(r.ComboboxControl,{label:(0,l.__)("Select Instructor","skillpulse-lms"),value:t.instructorId||"",options:m,onChange:function(e){return a({instructorId:e?parseInt(e,10):0})},__next40pxDefaultSize:!0,__nextHasNoMarginBottom:!0});return t.instructorId?React.createElement("div",i,React.createElement(n.InspectorControls,null,React.createElement(r.PanelBody,{title:(0,l.__)("Instructor","skillpulse-lms")},h),React.createElement(r.PanelBody,{title:(0,l.__)("Display Options","skillpulse-lms"),initialOpen:!1},React.createElement(r.ToggleControl,{label:(0,l.__)("Show Bio","skillpulse-lms"),checked:t.showBio,onChange:function(e){return a({showBio:e})},__nextHasNoMarginBottom:!0}),React.createElement(r.ToggleControl,{label:(0,l.__)("Show Course Count","skillpulse-lms"),checked:t.showCourseCount,onChange:function(e){return a({showCourseCount:e})},__nextHasNoMarginBottom:!0}),React.createElement(r.ToggleControl,{label:(0,l.__)("Show Student Count","skillpulse-lms"),checked:t.showStudentCount,onChange:function(e){return a({showStudentCount:e})},__nextHasNoMarginBottom:!0}))),React.createElement(r.Disabled,null,React.createElement(s(),{block:"splms/course-instructor",attributes:t}))):React.createElement("div",i,React.createElement(r.Placeholder,{icon:"businessman",label:(0,l.__)("Course Instructor","skillpulse-lms"),instructions:(0,l.__)("Select an instructor to display.","skillpulse-lms")},h))}})})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/blocks/account-info/edit.js"
+/*!*****************************************!*\
+  !*** ./src/blocks/account-info/edit.js ***!
+  \*****************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/server-side-render */ "@wordpress/server-side-render");
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_3__);
+/**
+ * Account Info Block - Editor Component
+ *
+ * Displays a selected user profile field for the logged-in user.
+ * Uses SkillPulse LMS user fields instead of MemberPress fields.
+ *
+ * @since 1.0.0
+ */
+
+
+
+
+
+var FIELD_OPTIONS = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('--- User Info ---', 'skillpulse-lms'),
+  value: '',
+  disabled: true
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Display Name', 'skillpulse-lms'),
+  value: 'display_name'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('First Name', 'skillpulse-lms'),
+  value: 'first_name'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Last Name', 'skillpulse-lms'),
+  value: 'last_name'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Full Name', 'skillpulse-lms'),
+  value: 'full_name'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Username', 'skillpulse-lms'),
+  value: 'user_login'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Email', 'skillpulse-lms'),
+  value: 'user_email'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Nickname', 'skillpulse-lms'),
+  value: 'nickname'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Bio / Description', 'skillpulse-lms'),
+  value: 'description'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Profile Picture', 'skillpulse-lms'),
+  value: 'avatar'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Registration Date', 'skillpulse-lms'),
+  value: 'user_registered'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('User ID', 'skillpulse-lms'),
+  value: 'ID'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('User Role', 'skillpulse-lms'),
+  value: 'user_role'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('--- LMS Stats ---', 'skillpulse-lms'),
+  value: '',
+  disabled: true
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enrolled Courses Count', 'skillpulse-lms'),
+  value: 'enrolled_courses_count'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Completed Courses Count', 'skillpulse-lms'),
+  value: 'completed_courses_count'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Certificates Count', 'skillpulse-lms'),
+  value: 'certificates_count'
+}];
+var Edit = function Edit(_ref) {
+  var attributes = _ref.attributes,
+    setAttributes = _ref.setAttributes;
+  var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
+  return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Field Settings', 'skillpulse-lms')
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('User Field', 'skillpulse-lms'),
+    value: attributes.field,
+    options: FIELD_OPTIONS,
+    onChange: function onChange(field) {
+      return setAttributes({
+        field: field
+      });
+    },
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select which user field to display.', 'skillpulse-lms'),
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Disabled, null, /*#__PURE__*/React.createElement((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_3___default()), {
+    block: "splms/account-info",
+    attributes: attributes
+  })));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
+
+/***/ },
+
+/***/ "./src/blocks/account-info/index.js"
+/*!******************************************!*\
+  !*** ./src/blocks/account-info/index.js ***!
+  \******************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit */ "./src/blocks/account-info/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block.json */ "./src/blocks/account-info/block.json");
+/**
+ * Account Info Block
+ *
+ * @since 1.0.0
+ */
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_2__, {
+  edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"]
+});
+
+/***/ },
+
+/***/ "./src/blocks/course-card/edit.js"
+/*!****************************************!*\
+  !*** ./src/blocks/course-card/edit.js ***!
+  \****************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/server-side-render */ "@wordpress/server-side-render");
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__);
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/**
+ * Course Card Block - Editor Component
+ *
+ * @since 1.0.0
+ */
+
+
+
+
+
+
+
+var Edit = function Edit(_ref) {
+  var attributes = _ref.attributes,
+    setAttributes = _ref.setAttributes;
+  var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    courses = _useState2[0],
+    setCourses = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(true),
+    _useState4 = _slicedToArray(_useState3, 2),
+    loading = _useState4[0],
+    setLoading = _useState4[1];
+
+  // Load courses for the selector.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
+      path: '/wp/v2/sp-course?per_page=100&status=publish&_fields=id,title'
+    }).then(function (results) {
+      setCourses(results.map(function (c) {
+        return {
+          value: c.id,
+          label: c.title.rendered
+        };
+      }));
+    })["catch"](function () {
+      return setCourses([]);
+    })["finally"](function () {
+      return setLoading(false);
+    });
+  }, []);
+
+  // Course selector used in both placeholder and sidebar.
+  var courseSelector = loading ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, null) : /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ComboboxControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Course', 'skillpulse-lms'),
+    value: attributes.courseId || '',
+    options: courses,
+    onChange: function onChange(value) {
+      return setAttributes({
+        courseId: value ? parseInt(value, 10) : 0
+      });
+    },
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  });
+
+  // Show placeholder if no course selected.
+  if (!attributes.courseId) {
+    return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Placeholder, {
+      icon: "welcome-learn-more",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Course Card', 'skillpulse-lms'),
+      instructions: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select a course to display.', 'skillpulse-lms')
+    }, courseSelector));
+  }
+  return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Course', 'skillpulse-lms')
+  }, courseSelector), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Display Options', 'skillpulse-lms'),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Thumbnail', 'skillpulse-lms'),
+    checked: attributes.showThumbnail,
+    onChange: function onChange(showThumbnail) {
+      return setAttributes({
+        showThumbnail: showThumbnail
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Excerpt', 'skillpulse-lms'),
+    checked: attributes.showExcerpt,
+    onChange: function onChange(showExcerpt) {
+      return setAttributes({
+        showExcerpt: showExcerpt
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Price', 'skillpulse-lms'),
+    checked: attributes.showPrice,
+    onChange: function onChange(showPrice) {
+      return setAttributes({
+        showPrice: showPrice
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Rating', 'skillpulse-lms'),
+    checked: attributes.showRating,
+    onChange: function onChange(showRating) {
+      return setAttributes({
+        showRating: showRating
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Instructor', 'skillpulse-lms'),
+    checked: attributes.showInstructor,
+    onChange: function onChange(showInstructor) {
+      return setAttributes({
+        showInstructor: showInstructor
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Difficulty', 'skillpulse-lms'),
+    checked: attributes.showDifficulty,
+    onChange: function onChange(showDifficulty) {
+      return setAttributes({
+        showDifficulty: showDifficulty
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Action Button', 'skillpulse-lms'),
+    checked: attributes.showActionButton,
+    onChange: function onChange(showActionButton) {
+      return setAttributes({
+        showActionButton: showActionButton
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }))), /*#__PURE__*/React.createElement((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default()), {
+    block: "splms/course-card",
+    attributes: attributes
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
+
+/***/ },
+
+/***/ "./src/blocks/course-card/index.js"
+/*!*****************************************!*\
+  !*** ./src/blocks/course-card/index.js ***!
+  \*****************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit */ "./src/blocks/course-card/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block.json */ "./src/blocks/course-card/block.json");
+/**
+ * Course Card Block
+ *
+ * @since 1.0.0
+ */
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_2__, {
+  edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"]
+});
+
+/***/ },
+
+/***/ "./src/blocks/course-categories/edit.js"
+/*!**********************************************!*\
+  !*** ./src/blocks/course-categories/edit.js ***!
+  \**********************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/server-side-render */ "@wordpress/server-side-render");
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__);
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/**
+ * Course Categories Block - Editor Component
+ *
+ * @since 1.0.0
+ */
+
+
+
+
+
+
+
+var Edit = function Edit(_ref) {
+  var attributes = _ref.attributes,
+    setAttributes = _ref.setAttributes;
+  var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    categoryOptions = _useState2[0],
+    setCategoryOptions = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(true),
+    _useState4 = _slicedToArray(_useState3, 2),
+    loading = _useState4[0],
+    setLoading = _useState4[1];
+
+  // Load categories for the selector.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
+      path: '/wp/v2/sp-course-category?per_page=100&_fields=id,name'
+    }).then(function (results) {
+      setCategoryOptions(results.map(function (c) {
+        return {
+          id: c.id,
+          name: c.name
+        };
+      }));
+    })["catch"](function () {
+      return setCategoryOptions([]);
+    })["finally"](function () {
+      return setLoading(false);
+    });
+  }, []);
+  var selectedNames = attributes.categories.map(function (id) {
+    var _categoryOptions$find;
+    return (_categoryOptions$find = categoryOptions.find(function (c) {
+      return c.id === id;
+    })) === null || _categoryOptions$find === void 0 ? void 0 : _categoryOptions$find.name;
+  }).filter(Boolean);
+  var onCategoriesChange = function onCategoriesChange(names) {
+    var ids = names.map(function (name) {
+      var _categoryOptions$find2;
+      return (_categoryOptions$find2 = categoryOptions.find(function (c) {
+        return c.name === name;
+      })) === null || _categoryOptions$find2 === void 0 ? void 0 : _categoryOptions$find2.id;
+    }).filter(Boolean);
+    setAttributes({
+      categories: ids
+    });
+  };
+  return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout', 'skillpulse-lms')
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Columns', 'skillpulse-lms'),
+    value: attributes.columns,
+    onChange: function onChange(columns) {
+      return setAttributes({
+        columns: columns
+      });
+    },
+    min: 1,
+    max: 6,
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Categories', 'skillpulse-lms'),
+    initialOpen: false
+  }, loading ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, null) : /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FormTokenField, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Specific Categories', 'skillpulse-lms'),
+    value: selectedNames,
+    suggestions: categoryOptions.map(function (c) {
+      return c.name;
+    }),
+    onChange: onCategoriesChange,
+    __experimentalExpandOnFocus: true,
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: '12px',
+      color: '#757575',
+      marginTop: '4px'
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Leave empty to show all categories.', 'skillpulse-lms'))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Display Options', 'skillpulse-lms'),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Course Count', 'skillpulse-lms'),
+    checked: attributes.showCount,
+    onChange: function onChange(showCount) {
+      return setAttributes({
+        showCount: showCount
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Description', 'skillpulse-lms'),
+    checked: attributes.showDescription,
+    onChange: function onChange(showDescription) {
+      return setAttributes({
+        showDescription: showDescription
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hide Empty Categories', 'skillpulse-lms'),
+    checked: attributes.hideEmpty,
+    onChange: function onChange(hideEmpty) {
+      return setAttributes({
+        hideEmpty: hideEmpty
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }))), /*#__PURE__*/React.createElement((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default()), {
+    block: "splms/course-categories",
+    attributes: attributes
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
+
+/***/ },
+
+/***/ "./src/blocks/course-categories/index.js"
+/*!***********************************************!*\
+  !*** ./src/blocks/course-categories/index.js ***!
+  \***********************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit */ "./src/blocks/course-categories/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block.json */ "./src/blocks/course-categories/block.json");
+/**
+ * Course Categories Block
+ *
+ * @since 1.0.0
+ */
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_2__, {
+  edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"]
+});
+
+/***/ },
+
+/***/ "./src/blocks/course-curriculum/edit.js"
+/*!**********************************************!*\
+  !*** ./src/blocks/course-curriculum/edit.js ***!
+  \**********************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/server-side-render */ "@wordpress/server-side-render");
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__);
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+
+
+var Edit = function Edit(_ref) {
+  var attributes = _ref.attributes,
+    setAttributes = _ref.setAttributes;
+  var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    courses = _useState2[0],
+    setCourses = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(true),
+    _useState4 = _slicedToArray(_useState3, 2),
+    loading = _useState4[0],
+    setLoading = _useState4[1];
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
+      path: '/wp/v2/sp-course?per_page=100&status=publish&_fields=id,title'
+    }).then(function (results) {
+      return setCourses(results.map(function (c) {
+        return {
+          value: c.id,
+          label: c.title.rendered
+        };
+      }));
+    })["catch"](function () {
+      return setCourses([]);
+    })["finally"](function () {
+      return setLoading(false);
+    });
+  }, []);
+  var courseSelector = loading ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, null) : /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ComboboxControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Course', 'skillpulse-lms'),
+    value: attributes.courseId || '',
+    options: courses,
+    onChange: function onChange(value) {
+      return setAttributes({
+        courseId: value ? parseInt(value, 10) : 0
+      });
+    },
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  });
+  if (!attributes.courseId) {
+    return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Placeholder, {
+      icon: "list-view",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Course Curriculum', 'skillpulse-lms'),
+      instructions: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select a course to display its curriculum.', 'skillpulse-lms')
+    }, courseSelector));
+  }
+  return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Course', 'skillpulse-lms')
+  }, courseSelector), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Display Options', 'skillpulse-lms'),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Duration', 'skillpulse-lms'),
+    checked: attributes.showDuration,
+    onChange: function onChange(showDuration) {
+      return setAttributes({
+        showDuration: showDuration
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Lesson Type', 'skillpulse-lms'),
+    checked: attributes.showLessonType,
+    onChange: function onChange(showLessonType) {
+      return setAttributes({
+        showLessonType: showLessonType
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Expand All Sections', 'skillpulse-lms'),
+    checked: attributes.expandAll,
+    onChange: function onChange(expandAll) {
+      return setAttributes({
+        expandAll: expandAll
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Disabled, null, /*#__PURE__*/React.createElement((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default()), {
+    block: "splms/course-curriculum",
+    attributes: attributes
+  })));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
+
+/***/ },
+
+/***/ "./src/blocks/course-curriculum/index.js"
+/*!***********************************************!*\
+  !*** ./src/blocks/course-curriculum/index.js ***!
+  \***********************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit */ "./src/blocks/course-curriculum/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block.json */ "./src/blocks/course-curriculum/block.json");
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_2__, {
+  edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"]
+});
+
+/***/ },
+
+/***/ "./src/blocks/course-grid/edit.js"
+/*!****************************************!*\
+  !*** ./src/blocks/course-grid/edit.js ***!
+  \****************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/server-side-render */ "@wordpress/server-side-render");
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__);
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/**
+ * Course Grid Block - Editor Component
+ *
+ * @since 1.0.0
+ */
+
+
+
+
+
+
+
+var Edit = function Edit(_ref) {
+  var attributes = _ref.attributes,
+    setAttributes = _ref.setAttributes;
+  var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    categoryOptions = _useState2[0],
+    setCategoryOptions = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    tagOptions = _useState4[0],
+    setTagOptions = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(true),
+    _useState6 = _slicedToArray(_useState5, 2),
+    loading = _useState6[0],
+    setLoading = _useState6[1];
+
+  // Load categories and tags for selectors.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    Promise.all([_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
+      path: '/wp/v2/sp-course-category?per_page=100&_fields=id,name'
+    })["catch"](function () {
+      return [];
+    }), _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
+      path: '/wp/v2/sp-course-tag?per_page=100&_fields=id,name'
+    })["catch"](function () {
+      return [];
+    })]).then(function (_ref2) {
+      var _ref3 = _slicedToArray(_ref2, 2),
+        cats = _ref3[0],
+        tags = _ref3[1];
+      setCategoryOptions(cats.map(function (c) {
+        return {
+          id: c.id,
+          name: c.name
+        };
+      }));
+      setTagOptions(tags.map(function (t) {
+        return {
+          id: t.id,
+          name: t.name
+        };
+      }));
+      setLoading(false);
+    });
+  }, []);
+
+  // Helpers for FormTokenField — convert between IDs and names.
+  var selectedCategoryNames = attributes.categories.map(function (id) {
+    var _categoryOptions$find;
+    return (_categoryOptions$find = categoryOptions.find(function (c) {
+      return c.id === id;
+    })) === null || _categoryOptions$find === void 0 ? void 0 : _categoryOptions$find.name;
+  }).filter(Boolean);
+  var selectedTagNames = attributes.tags.map(function (id) {
+    var _tagOptions$find;
+    return (_tagOptions$find = tagOptions.find(function (t) {
+      return t.id === id;
+    })) === null || _tagOptions$find === void 0 ? void 0 : _tagOptions$find.name;
+  }).filter(Boolean);
+  var onCategoriesChange = function onCategoriesChange(names) {
+    var ids = names.map(function (name) {
+      var _categoryOptions$find2;
+      return (_categoryOptions$find2 = categoryOptions.find(function (c) {
+        return c.name === name;
+      })) === null || _categoryOptions$find2 === void 0 ? void 0 : _categoryOptions$find2.id;
+    }).filter(Boolean);
+    setAttributes({
+      categories: ids
+    });
+  };
+  var onTagsChange = function onTagsChange(names) {
+    var ids = names.map(function (name) {
+      var _tagOptions$find2;
+      return (_tagOptions$find2 = tagOptions.find(function (t) {
+        return t.name === name;
+      })) === null || _tagOptions$find2 === void 0 ? void 0 : _tagOptions$find2.id;
+    }).filter(Boolean);
+    setAttributes({
+      tags: ids
+    });
+  };
+  return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout', 'skillpulse-lms')
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Display Layout', 'skillpulse-lms'),
+    value: attributes.layout,
+    options: [{
+      value: 'grid',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Grid', 'skillpulse-lms')
+    }, {
+      value: 'list',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('List', 'skillpulse-lms')
+    }],
+    onChange: function onChange(layout) {
+      return setAttributes({
+        layout: layout
+      });
+    },
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Columns', 'skillpulse-lms'),
+    value: attributes.columns,
+    onChange: function onChange(columns) {
+      return setAttributes({
+        columns: columns
+      });
+    },
+    min: 1,
+    max: 4,
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Courses Per Page', 'skillpulse-lms'),
+    value: attributes.perPage,
+    onChange: function onChange(perPage) {
+      return setAttributes({
+        perPage: perPage
+      });
+    },
+    min: 1,
+    max: 24,
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Filters', 'skillpulse-lms'),
+    initialOpen: false
+  }, loading ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, null) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FormTokenField, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Categories', 'skillpulse-lms'),
+    value: selectedCategoryNames,
+    suggestions: categoryOptions.map(function (c) {
+      return c.name;
+    }),
+    onChange: onCategoriesChange,
+    __experimentalExpandOnFocus: true,
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FormTokenField, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Tags', 'skillpulse-lms'),
+    value: selectedTagNames,
+    suggestions: tagOptions.map(function (t) {
+      return t.name;
+    }),
+    onChange: onTagsChange,
+    __experimentalExpandOnFocus: true,
+    __nextHasNoMarginBottom: true
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Difficulty', 'skillpulse-lms'),
+    value: attributes.difficulty,
+    options: [{
+      value: 'all',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('All Levels', 'skillpulse-lms')
+    }, {
+      value: 'beginner',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Beginner', 'skillpulse-lms')
+    }, {
+      value: 'intermediate',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Intermediate', 'skillpulse-lms')
+    }, {
+      value: 'advanced',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Advanced', 'skillpulse-lms')
+    }],
+    onChange: function onChange(difficulty) {
+      return setAttributes({
+        difficulty: difficulty
+      });
+    },
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Order By', 'skillpulse-lms'),
+    value: attributes.orderBy,
+    options: [{
+      value: 'date',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Date', 'skillpulse-lms')
+    }, {
+      value: 'title',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Title', 'skillpulse-lms')
+    }, {
+      value: 'menu_order',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Menu Order', 'skillpulse-lms')
+    }],
+    onChange: function onChange(orderBy) {
+      return setAttributes({
+        orderBy: orderBy
+      });
+    },
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Order', 'skillpulse-lms'),
+    value: attributes.order,
+    options: [{
+      value: 'DESC',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Newest First', 'skillpulse-lms')
+    }, {
+      value: 'ASC',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Oldest First', 'skillpulse-lms')
+    }],
+    onChange: function onChange(order) {
+      return setAttributes({
+        order: order
+      });
+    },
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Display Options', 'skillpulse-lms'),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Pagination', 'skillpulse-lms'),
+    checked: attributes.showPagination,
+    onChange: function onChange(showPagination) {
+      return setAttributes({
+        showPagination: showPagination
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }))), /*#__PURE__*/React.createElement((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default()), {
+    block: "splms/course-grid",
+    attributes: attributes
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
+
+/***/ },
+
+/***/ "./src/blocks/course-grid/index.js"
+/*!*****************************************!*\
+  !*** ./src/blocks/course-grid/index.js ***!
+  \*****************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/blocks/course-grid/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./block.json */ "./src/blocks/course-grid/block.json");
+/**
+ * Course Grid Block
+ *
+ * @since 1.0.0
+ */
+
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_3__, {
+  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"]
+});
+
+/***/ },
+
+/***/ "./src/blocks/course-instructor/edit.js"
+/*!**********************************************!*\
+  !*** ./src/blocks/course-instructor/edit.js ***!
+  \**********************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/server-side-render */ "@wordpress/server-side-render");
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__);
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+
+
+var Edit = function Edit(_ref) {
+  var attributes = _ref.attributes,
+    setAttributes = _ref.setAttributes;
+  var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    users = _useState2[0],
+    setUsers = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(true),
+    _useState4 = _slicedToArray(_useState3, 2),
+    loading = _useState4[0],
+    setLoading = _useState4[1];
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
+      path: '/wp/v2/users?per_page=100&_fields=id,name&roles=administrator,author,editor'
+    }).then(function (results) {
+      return setUsers(results.map(function (u) {
+        return {
+          value: u.id,
+          label: u.name
+        };
+      }));
+    })["catch"](function () {
+      return setUsers([]);
+    })["finally"](function () {
+      return setLoading(false);
+    });
+  }, []);
+  var userSelector = loading ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, null) : /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ComboboxControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Instructor', 'skillpulse-lms'),
+    value: attributes.instructorId || '',
+    options: users,
+    onChange: function onChange(value) {
+      return setAttributes({
+        instructorId: value ? parseInt(value, 10) : 0
+      });
+    },
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  });
+  if (!attributes.instructorId) {
+    return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Placeholder, {
+      icon: "businessman",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Course Instructor', 'skillpulse-lms'),
+      instructions: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select an instructor to display.', 'skillpulse-lms')
+    }, userSelector));
+  }
+  return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Instructor', 'skillpulse-lms')
+  }, userSelector), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Display Options', 'skillpulse-lms'),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Bio', 'skillpulse-lms'),
+    checked: attributes.showBio,
+    onChange: function onChange(showBio) {
+      return setAttributes({
+        showBio: showBio
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Course Count', 'skillpulse-lms'),
+    checked: attributes.showCourseCount,
+    onChange: function onChange(showCourseCount) {
+      return setAttributes({
+        showCourseCount: showCourseCount
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Student Count', 'skillpulse-lms'),
+    checked: attributes.showStudentCount,
+    onChange: function onChange(showStudentCount) {
+      return setAttributes({
+        showStudentCount: showStudentCount
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Disabled, null, /*#__PURE__*/React.createElement((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default()), {
+    block: "splms/course-instructor",
+    attributes: attributes
+  })));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
+
+/***/ },
+
+/***/ "./src/blocks/course-instructor/index.js"
+/*!***********************************************!*\
+  !*** ./src/blocks/course-instructor/index.js ***!
+  \***********************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit */ "./src/blocks/course-instructor/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block.json */ "./src/blocks/course-instructor/block.json");
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_2__, {
+  edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"]
+});
+
+/***/ },
+
+/***/ "./src/blocks/course-progress/edit.js"
+/*!********************************************!*\
+  !*** ./src/blocks/course-progress/edit.js ***!
+  \********************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/server-side-render */ "@wordpress/server-side-render");
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__);
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+
+
+var Edit = function Edit(_ref) {
+  var attributes = _ref.attributes,
+    setAttributes = _ref.setAttributes;
+  var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    courses = _useState2[0],
+    setCourses = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(true),
+    _useState4 = _slicedToArray(_useState3, 2),
+    loading = _useState4[0],
+    setLoading = _useState4[1];
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
+      path: '/wp/v2/sp-course?per_page=100&status=publish&_fields=id,title'
+    }).then(function (results) {
+      return setCourses(results.map(function (c) {
+        return {
+          value: c.id,
+          label: c.title.rendered
+        };
+      }));
+    })["catch"](function () {
+      return setCourses([]);
+    })["finally"](function () {
+      return setLoading(false);
+    });
+  }, []);
+  var courseSelector = loading ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, null) : /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ComboboxControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Course', 'skillpulse-lms'),
+    value: attributes.courseId || '',
+    options: courses,
+    onChange: function onChange(value) {
+      return setAttributes({
+        courseId: value ? parseInt(value, 10) : 0
+      });
+    },
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  });
+  if (!attributes.courseId) {
+    return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Placeholder, {
+      icon: "chart-bar",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Course Progress', 'skillpulse-lms'),
+      instructions: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select a course to display progress.', 'skillpulse-lms')
+    }, courseSelector));
+  }
+  return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Course', 'skillpulse-lms')
+  }, courseSelector), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Display Options', 'skillpulse-lms'),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Percentage', 'skillpulse-lms'),
+    checked: attributes.showPercentage,
+    onChange: function onChange(showPercentage) {
+      return setAttributes({
+        showPercentage: showPercentage
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Item Count', 'skillpulse-lms'),
+    checked: attributes.showItemCount,
+    onChange: function onChange(showItemCount) {
+      return setAttributes({
+        showItemCount: showItemCount
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Custom Label', 'skillpulse-lms'),
+    value: attributes.label,
+    onChange: function onChange(label) {
+      return setAttributes({
+        label: label
+      });
+    },
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Progress', 'skillpulse-lms'),
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Disabled, null, /*#__PURE__*/React.createElement((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default()), {
+    block: "splms/course-progress",
+    attributes: attributes
+  })));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
+
+/***/ },
+
+/***/ "./src/blocks/course-progress/index.js"
+/*!*********************************************!*\
+  !*** ./src/blocks/course-progress/index.js ***!
+  \*********************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit */ "./src/blocks/course-progress/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block.json */ "./src/blocks/course-progress/block.json");
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_2__, {
+  edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"]
+});
+
+/***/ },
+
+/***/ "./src/blocks/course-search/edit.js"
+/*!******************************************!*\
+  !*** ./src/blocks/course-search/edit.js ***!
+  \******************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/server-side-render */ "@wordpress/server-side-render");
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_2__);
+/**
+ * Course Search Block - Editor Component
+ *
+ * @since 1.0.0
+ */
+
+
+
+
+var Edit = function Edit(_ref) {
+  var attributes = _ref.attributes;
+  var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
+  return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_2___default()), {
+    block: "splms/course-search",
+    attributes: attributes
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
+
+/***/ },
+
+/***/ "./src/blocks/course-search/index.js"
+/*!*******************************************!*\
+  !*** ./src/blocks/course-search/index.js ***!
+  \*******************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit */ "./src/blocks/course-search/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block.json */ "./src/blocks/course-search/block.json");
+/**
+ * Course Search Block
+ *
+ * @since 1.0.0
+ */
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_2__, {
+  edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"]
+});
+
+/***/ },
+
+/***/ "./src/blocks/enroll-button/edit.js"
+/*!******************************************!*\
+  !*** ./src/blocks/enroll-button/edit.js ***!
+  \******************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/server-side-render */ "@wordpress/server-side-render");
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__);
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+
+
+var Edit = function Edit(_ref) {
+  var attributes = _ref.attributes,
+    setAttributes = _ref.setAttributes;
+  var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    courses = _useState2[0],
+    setCourses = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(true),
+    _useState4 = _slicedToArray(_useState3, 2),
+    loading = _useState4[0],
+    setLoading = _useState4[1];
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
+      path: '/wp/v2/sp-course?per_page=100&status=publish&_fields=id,title'
+    }).then(function (results) {
+      return setCourses(results.map(function (c) {
+        return {
+          value: c.id,
+          label: c.title.rendered
+        };
+      }));
+    })["catch"](function () {
+      return setCourses([]);
+    })["finally"](function () {
+      return setLoading(false);
+    });
+  }, []);
+  var courseSelector = loading ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, null) : /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ComboboxControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Course', 'skillpulse-lms'),
+    value: attributes.courseId || '',
+    options: courses,
+    onChange: function onChange(value) {
+      return setAttributes({
+        courseId: value ? parseInt(value, 10) : 0
+      });
+    },
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  });
+  if (!attributes.courseId) {
+    return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Placeholder, {
+      icon: "cart",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enroll Button', 'skillpulse-lms'),
+      instructions: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select a course for the enrollment button.', 'skillpulse-lms')
+    }, courseSelector));
+  }
+  return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Course', 'skillpulse-lms')
+  }, courseSelector), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Display', 'skillpulse-lms'),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Price', 'skillpulse-lms'),
+    checked: attributes.showPrice,
+    onChange: function onChange(showPrice) {
+      return setAttributes({
+        showPrice: showPrice
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Disabled, null, /*#__PURE__*/React.createElement((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default()), {
+    block: "splms/enroll-button",
+    attributes: attributes
+  })));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
+
+/***/ },
+
+/***/ "./src/blocks/enroll-button/index.js"
+/*!*******************************************!*\
+  !*** ./src/blocks/enroll-button/index.js ***!
+  \*******************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit */ "./src/blocks/enroll-button/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block.json */ "./src/blocks/enroll-button/block.json");
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_2__, {
+  edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"]
+});
+
+/***/ },
+
+/***/ "./src/blocks/my-courses/edit.js"
+/*!***************************************!*\
+  !*** ./src/blocks/my-courses/edit.js ***!
+  \***************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/server-side-render */ "@wordpress/server-side-render");
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+var Edit = function Edit(_ref) {
+  var attributes = _ref.attributes,
+    setAttributes = _ref.setAttributes;
+  var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
+  return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout', 'skillpulse-lms')
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Columns', 'skillpulse-lms'),
+    value: attributes.columns,
+    onChange: function onChange(columns) {
+      return setAttributes({
+        columns: columns
+      });
+    },
+    min: 1,
+    max: 4,
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Filters', 'skillpulse-lms'),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Status', 'skillpulse-lms'),
+    value: attributes.status,
+    options: [{
+      value: 'all',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('All Courses', 'skillpulse-lms')
+    }, {
+      value: 'active',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('In Progress', 'skillpulse-lms')
+    }, {
+      value: 'completed',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Completed', 'skillpulse-lms')
+    }],
+    onChange: function onChange(status) {
+      return setAttributes({
+        status: status
+      });
+    },
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Display Options', 'skillpulse-lms'),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Progress Bar', 'skillpulse-lms'),
+    checked: attributes.showProgress,
+    onChange: function onChange(showProgress) {
+      return setAttributes({
+        showProgress: showProgress
+      });
+    },
+    __nextHasNoMarginBottom: true
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Empty Message', 'skillpulse-lms'),
+    value: attributes.emptyMessage,
+    onChange: function onChange(emptyMessage) {
+      return setAttributes({
+        emptyMessage: emptyMessage
+      });
+    },
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('You are not enrolled in any courses yet.', 'skillpulse-lms'),
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Disabled, null, /*#__PURE__*/React.createElement((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_3___default()), {
+    block: "splms/my-courses",
+    attributes: attributes
+  })));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
+
+/***/ },
+
+/***/ "./src/blocks/my-courses/index.js"
+/*!****************************************!*\
+  !*** ./src/blocks/my-courses/index.js ***!
+  \****************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit */ "./src/blocks/my-courses/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block.json */ "./src/blocks/my-courses/block.json");
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_2__, {
+  edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"]
+});
+
+/***/ },
+
+/***/ "@wordpress/api-fetch"
+/*!**********************************!*\
+  !*** external ["wp","apiFetch"] ***!
+  \**********************************/
+(module) {
+
+module.exports = window["wp"]["apiFetch"];
+
+/***/ },
+
+/***/ "@wordpress/block-editor"
+/*!*************************************!*\
+  !*** external ["wp","blockEditor"] ***!
+  \*************************************/
+(module) {
+
+module.exports = window["wp"]["blockEditor"];
+
+/***/ },
+
+/***/ "@wordpress/blocks"
+/*!********************************!*\
+  !*** external ["wp","blocks"] ***!
+  \********************************/
+(module) {
+
+module.exports = window["wp"]["blocks"];
+
+/***/ },
+
+/***/ "@wordpress/components"
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+(module) {
+
+module.exports = window["wp"]["components"];
+
+/***/ },
+
+/***/ "@wordpress/element"
+/*!*********************************!*\
+  !*** external ["wp","element"] ***!
+  \*********************************/
+(module) {
+
+module.exports = window["wp"]["element"];
+
+/***/ },
+
+/***/ "@wordpress/i18n"
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+(module) {
+
+module.exports = window["wp"]["i18n"];
+
+/***/ },
+
+/***/ "@wordpress/server-side-render"
+/*!******************************************!*\
+  !*** external ["wp","serverSideRender"] ***!
+  \******************************************/
+(module) {
+
+module.exports = window["wp"]["serverSideRender"];
+
+/***/ },
+
+/***/ "./src/blocks/account-info/block.json"
+/*!********************************************!*\
+  !*** ./src/blocks/account-info/block.json ***!
+  \********************************************/
+(module) {
+
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/account-info","title":"Account Info","category":"skillpulse-lms","description":"Display a user profile field value for the currently logged-in user.","keywords":["user","account","profile","info","lms"],"textdomain":"skillpulse-lms","icon":"admin-users","supports":{"html":false,"customClassName":false},"attributes":{"field":{"type":"string","default":"display_name"}}}');
+
+/***/ },
+
+/***/ "./src/blocks/course-card/block.json"
+/*!*******************************************!*\
+  !*** ./src/blocks/course-card/block.json ***!
+  \*******************************************/
+(module) {
+
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/course-card","title":"Course Card","category":"skillpulse-lms","description":"Display a single course card with thumbnail, price, rating, and CTA.","keywords":["course","card","lms"],"textdomain":"skillpulse-lms","icon":"welcome-learn-more","supports":{"html":false},"attributes":{"courseId":{"type":"number","default":0},"showThumbnail":{"type":"boolean","default":true},"showExcerpt":{"type":"boolean","default":true},"showPrice":{"type":"boolean","default":true},"showRating":{"type":"boolean","default":true},"showInstructor":{"type":"boolean","default":true},"showDifficulty":{"type":"boolean","default":true},"showActionButton":{"type":"boolean","default":true}}}');
+
+/***/ },
+
+/***/ "./src/blocks/course-categories/block.json"
+/*!*************************************************!*\
+  !*** ./src/blocks/course-categories/block.json ***!
+  \*************************************************/
+(module) {
+
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/course-categories","title":"Course Categories","category":"skillpulse-lms","description":"Display course categories as a grid of cards with course counts.","keywords":["categories","courses","taxonomy","lms"],"textdomain":"skillpulse-lms","icon":"category","supports":{"html":false,"align":["wide","full"]},"attributes":{"columns":{"type":"number","default":4},"showCount":{"type":"boolean","default":true},"showDescription":{"type":"boolean","default":false},"hideEmpty":{"type":"boolean","default":true},"categories":{"type":"array","default":[]}}}');
+
+/***/ },
+
+/***/ "./src/blocks/course-curriculum/block.json"
+/*!*************************************************!*\
+  !*** ./src/blocks/course-curriculum/block.json ***!
+  \*************************************************/
+(module) {
+
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/course-curriculum","title":"Course Curriculum","category":"skillpulse-lms","description":"Display a course curriculum with expandable sections, lessons, and quizzes.","keywords":["curriculum","syllabus","lessons","sections","lms"],"textdomain":"skillpulse-lms","icon":"list-view","supports":{"html":false,"align":["wide"]},"attributes":{"courseId":{"type":"number","default":0},"showDuration":{"type":"boolean","default":true},"showLessonType":{"type":"boolean","default":true},"expandAll":{"type":"boolean","default":false}}}');
+
+/***/ },
+
+/***/ "./src/blocks/course-grid/block.json"
+/*!*******************************************!*\
+  !*** ./src/blocks/course-grid/block.json ***!
+  \*******************************************/
+(module) {
+
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/course-grid","title":"Course Grid","category":"skillpulse-lms","description":"Display a filterable grid or list of courses.","keywords":["courses","grid","list","lms"],"textdomain":"skillpulse-lms","icon":"grid-view","supports":{"html":false,"align":["wide","full"]},"attributes":{"columns":{"type":"number","default":3},"perPage":{"type":"number","default":9},"categories":{"type":"array","default":[]},"tags":{"type":"array","default":[]},"difficulty":{"type":"string","default":"all"},"orderBy":{"type":"string","default":"date"},"order":{"type":"string","default":"DESC"},"showPagination":{"type":"boolean","default":true},"layout":{"type":"string","default":"grid"}}}');
+
+/***/ },
+
+/***/ "./src/blocks/course-instructor/block.json"
+/*!*************************************************!*\
+  !*** ./src/blocks/course-instructor/block.json ***!
+  \*************************************************/
+(module) {
+
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/course-instructor","title":"Course Instructor","category":"skillpulse-lms","description":"Display an instructor profile card with avatar, bio, and stats.","keywords":["instructor","teacher","author","profile","lms"],"textdomain":"skillpulse-lms","icon":"businessman","supports":{"html":false},"attributes":{"instructorId":{"type":"number","default":0},"showBio":{"type":"boolean","default":true},"showCourseCount":{"type":"boolean","default":true},"showStudentCount":{"type":"boolean","default":true}}}');
+
+/***/ },
+
+/***/ "./src/blocks/course-progress/block.json"
+/*!***********************************************!*\
+  !*** ./src/blocks/course-progress/block.json ***!
+  \***********************************************/
+(module) {
+
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/course-progress","title":"Course Progress","category":"skillpulse-lms","description":"Display a progress bar for a course.","keywords":["progress","bar","completion","lms"],"textdomain":"skillpulse-lms","icon":"chart-bar","supports":{"html":false},"attributes":{"courseId":{"type":"number","default":0},"showPercentage":{"type":"boolean","default":true},"showItemCount":{"type":"boolean","default":true},"label":{"type":"string","default":""}}}');
+
+/***/ },
+
+/***/ "./src/blocks/course-search/block.json"
+/*!*********************************************!*\
+  !*** ./src/blocks/course-search/block.json ***!
+  \*********************************************/
+(module) {
+
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/course-search","title":"Course Search","category":"skillpulse-lms","description":"Course search bar using the plugin\'s standard search template.","keywords":["search","courses","find","lms"],"textdomain":"skillpulse-lms","icon":"search","supports":{"html":false,"align":["wide"]},"attributes":{}}');
+
+/***/ },
+
+/***/ "./src/blocks/enroll-button/block.json"
+/*!*********************************************!*\
+  !*** ./src/blocks/enroll-button/block.json ***!
+  \*********************************************/
+(module) {
+
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/enroll-button","title":"Enroll Button","category":"skillpulse-lms","description":"Smart enrollment button that adapts based on the user\'s enrollment state.","keywords":["enroll","buy","purchase","cta","lms"],"textdomain":"skillpulse-lms","icon":"cart","supports":{"html":false,"align":["left","center","right"]},"attributes":{"courseId":{"type":"number","default":0},"showPrice":{"type":"boolean","default":true}}}');
+
+/***/ },
+
+/***/ "./src/blocks/my-courses/block.json"
+/*!******************************************!*\
+  !*** ./src/blocks/my-courses/block.json ***!
+  \******************************************/
+(module) {
+
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"splms/my-courses","title":"My Courses","category":"skillpulse-lms","description":"Display the current user\'s enrolled courses with progress bars.","keywords":["enrolled","my courses","dashboard","progress","lms"],"textdomain":"skillpulse-lms","icon":"book","supports":{"html":false,"align":["wide","full"]},"attributes":{"columns":{"type":"number","default":3},"status":{"type":"string","default":"all"},"showProgress":{"type":"boolean","default":true},"emptyMessage":{"type":"string","default":""}}}');
+
+/***/ }
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Check if module exists (development only)
+/******/ 		if (__webpack_modules__[moduleId] === undefined) {
+/******/ 			var e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+(() => {
+/*!*****************************!*\
+  !*** ./src/blocks/index.js ***!
+  \*****************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _course_grid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./course-grid */ "./src/blocks/course-grid/index.js");
+/* harmony import */ var _course_card__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./course-card */ "./src/blocks/course-card/index.js");
+/* harmony import */ var _course_categories__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./course-categories */ "./src/blocks/course-categories/index.js");
+/* harmony import */ var _course_search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./course-search */ "./src/blocks/course-search/index.js");
+/* harmony import */ var _account_info__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./account-info */ "./src/blocks/account-info/index.js");
+/* harmony import */ var _enroll_button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./enroll-button */ "./src/blocks/enroll-button/index.js");
+/* harmony import */ var _course_curriculum__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./course-curriculum */ "./src/blocks/course-curriculum/index.js");
+/* harmony import */ var _course_progress__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./course-progress */ "./src/blocks/course-progress/index.js");
+/* harmony import */ var _my_courses__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./my-courses */ "./src/blocks/my-courses/index.js");
+/* harmony import */ var _course_instructor__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./course-instructor */ "./src/blocks/course-instructor/index.js");
+/**
+ * SkillPulse LMS Gutenberg Blocks
+ *
+ * Entry point for all block registrations.
+ *
+ * @since 1.0.0
+ */
+
+
+
+
+
+
+
+
+
+
+
+})();
+
+/******/ })()
+;
+//# sourceMappingURL=blocks.js.map
