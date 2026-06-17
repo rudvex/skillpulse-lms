@@ -221,13 +221,3 @@ if ( ! function_exists( 'splms_load' ) ) {
  * @since 1.0.0
  */
 splms_load();
-
-// Load WP-CLI commands.
-if ( defined( 'WP_CLI' ) && WP_CLI ) {
-	require_once plugin_dir_path( __FILE__ ) . 'bin/class-cli-commands.php';
-}
-
-// Load API Documentation WordPress integration.
-if ( file_exists( plugin_dir_path( __FILE__ ) . 'api-docs/init.php' ) ) {
-	require_once plugin_dir_path( __FILE__ ) . 'api-docs/init.php';
-}
