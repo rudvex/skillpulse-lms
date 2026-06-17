@@ -22,7 +22,7 @@ import allIcons from './icons';
  * <SplmsIcon name="edit" size={20} />                   // Custom icon with size
  * <SplmsIcon mode="wp" name="yes" color="#333" />       // WordPress icon with color
  */
-const SplmsIcon = ({
+const SplmsIcon = React.forwardRef(({
   name,
   mode = 'custom',
   size = 24,
@@ -30,7 +30,7 @@ const SplmsIcon = ({
   className = '',
   style = {},
   ...props
-}) => {
+}, ref) => {
   // Handle WordPress icons mode
   if (mode === 'wp') {
     const wpIconStyle = {
@@ -46,6 +46,7 @@ const SplmsIcon = ({
         size={size}
         style={wpIconStyle}
         className={`wp-icon wp-icon-${name} ${className}`.trim()}
+        ref={ref}
         {...props}
       />
     );
@@ -73,9 +74,12 @@ const SplmsIcon = ({
   return React.cloneElement(IconComponent, {
     style: iconStyle,
     className: `splms-icon splms-icon-${name} ${className}`.trim(),
+    ref: ref,
     ...props
   });
-};
+});
+
+SplmsIcon.displayName = 'SplmsIcon';
 
 // Main export for Icon component (conflict-safe)
 export default SplmsIcon;
