@@ -282,7 +282,7 @@ export default compose([
             isDistractionFreeMode: select("core/edit-post").isFeatureActive(
                 "distractionFree"
             ),
-            isPublishSidebarOpened: select("core/edit-post").isPublishSidebarOpened(),
+            isPublishSidebarOpened: (select("core/editor").isPublishSidebarOpened || select("core/edit-post").isPublishSidebarOpened)(),
             activeGeneralSidebarName: select(
                 "core/edit-post"
             ).getActiveGeneralSidebarName(),
