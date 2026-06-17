@@ -48,7 +48,6 @@ let SPLMSCourseEditor = class {
 
     toggleMetaBoxes(action, elements = []) {
         const metaboxes = wp.data.select("core/edit-post").getAllMetaBoxes();
-        console.log("metaboxes",metaboxes);
         Object.entries(metaboxes).map(([key, metabox]) => {
             const metaboxEl = jQuery("#" + metabox.id);
 
@@ -102,7 +101,6 @@ let SPLMSCourseEditor = class {
 
     showCurriculumView() {
         this.toggleVisualEditor();
-        console.log(111);
         this.toggleMetaBoxes("show", ["splms-course-curriculum"]); // Show selected
     };
 
