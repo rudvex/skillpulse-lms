@@ -109,13 +109,13 @@ jobs:
 
       # NOTE: ZIP artifact upload and WordPress.org deployment are disabled for now.
       # Uncomment the sections below when ready for WordPress.org release.
-      #
-      # - name: Upload Zip to Artifact
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: ${{ github.event.repository.name }}-build.zip
-      #     path: output/${{ github.event.repository.name }}.zip
-      #     retention-days: 30
+
+      - name: Upload Zip to Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.event.repository.name }}-build.zip
+          path: output/${{ github.event.repository.name }}.zip
+          retention-days: 30
       #
       # - name: Deploy to WordPress.org
       #   uses: 10up/action-wordpress-plugin-deploy@stable
