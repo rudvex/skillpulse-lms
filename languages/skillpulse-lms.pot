@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SkillPulse LMS v1.0.1\n"
 "Report-Msgid-Bugs-To: https://skillpulselms.com/contact\n"
-"POT-Creation-Date: 2026-06-18 11:17:21+00:00\n"
+"POT-Creation-Date: 2026-06-18 13:27:23+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1007,55 +1007,55 @@ msgstr ""
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:309
+#: includes/admin/wizard/class-setup-wizard.php:308
 msgid "Step data saved successfully."
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:330
+#: includes/admin/wizard/class-setup-wizard.php:329
 msgid "Wizard completed successfully."
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:366
+#: includes/admin/wizard/class-setup-wizard.php:365
 msgid "UTC"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:370
+#: includes/admin/wizard/class-setup-wizard.php:369
 msgid "Eastern Time (US)"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:374
+#: includes/admin/wizard/class-setup-wizard.php:373
 msgid "Central Time (US)"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:378
+#: includes/admin/wizard/class-setup-wizard.php:377
 msgid "Mountain Time (US)"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:382
+#: includes/admin/wizard/class-setup-wizard.php:381
 msgid "Pacific Time (US)"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:386
+#: includes/admin/wizard/class-setup-wizard.php:385
 msgid "London"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:390
+#: includes/admin/wizard/class-setup-wizard.php:389
 msgid "Paris"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:394
+#: includes/admin/wizard/class-setup-wizard.php:393
 msgid "Berlin"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:398
+#: includes/admin/wizard/class-setup-wizard.php:397
 msgid "Tokyo"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:402
+#: includes/admin/wizard/class-setup-wizard.php:401
 msgid "Shanghai"
 msgstr ""
 
-#: includes/admin/wizard/class-setup-wizard.php:406
+#: includes/admin/wizard/class-setup-wizard.php:405
 msgid "Sydney"
 msgstr ""
 
