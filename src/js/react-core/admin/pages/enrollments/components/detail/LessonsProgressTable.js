@@ -126,7 +126,7 @@ class LessonsProgressTable extends Component {
         if (!enrollment) return null;
 
         const lessonEditUrl = (lessonId) => 
-            `${SPLMSCore_Data?.adminUrl || '/wp-admin'}/post.php?post=${lessonId}&action=edit`;
+            getPostTypeEditUrl('sp-lesson', lessonId);
 
         return (
             <Card>

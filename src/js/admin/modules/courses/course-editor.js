@@ -1,3 +1,5 @@
+import { getPostTypeListUrl } from '../../../react-core/utility/url';
+
 let SPLMSCourseEditor = class {
     constructor() {
         this.init();
@@ -31,7 +33,7 @@ let SPLMSCourseEditor = class {
     }
 
     updateFullscreenLogoLink() {
-        jQuery(".edit-post-fullscreen-mode-close").attr("href", SPLMSCore_Data.coursesUrl);
+        jQuery(".edit-post-fullscreen-mode-close").attr("href", getPostTypeListUrl('sp-course'));
     }
 
     addCSS(selector, rule) {
@@ -113,6 +115,5 @@ let SPLMSCourseEditor = class {
 
 
 }
-
 
 export { SPLMSCourseEditor };

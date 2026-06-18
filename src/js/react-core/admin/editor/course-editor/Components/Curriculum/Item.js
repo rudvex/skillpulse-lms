@@ -8,7 +8,8 @@ import { TextControl, Button, Icon, Animate, Tooltip } from '@wordpress/componen
 import { withSelect, withDispatch } from '@wordpress/data';
 
 import { SplmsIcon } from '../../../../../components/SplmsIcon';
-import { getPostEditUrl, getPostUrl } from "../../../../../utility/helper";
+import { getPostUrl } from "../../../../../utility/helper";
+import { getPostEditUrl } from "../../../../../utility/url";
 
 const Item = (props) => {
 

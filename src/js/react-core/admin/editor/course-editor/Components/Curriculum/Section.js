@@ -8,7 +8,7 @@ import React from 'react';
 import { withSelect, withDispatch  } from '@wordpress/data';
 
 import Item from './Item';
-import { getPostEditUrl } from '../../../../../utility/helper';
+import { getPostEditUrl } from '../../../../../utility/url';
 
 const Section = (props) => {
 

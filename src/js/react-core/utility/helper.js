@@ -1,6 +1,7 @@
 import { __ } from '@wordpress/i18n';
-const Url = require('url-parse');
+import { addQueryArgs } from '@wordpress/url';
 import { v4 as uuidv4 } from "uuid";
+import { getAdminUrl } from './url';
 
 /**
  * Generate a local SVG data URI for a user's initials avatar.
@@ -92,15 +93,9 @@ export const getActiveTabConfig = (tabs, activeTab) => {
 };
 
 
-export const getPostEditUrl = (postId) => {
-    const parsed = new Url( SPLMSCore_Data.posts_url )
-    parsed.set('query', {post: postId, action: "edit", curriculum: "1"});
-    return parsed.href;
-};
 
 export const getPostUrl = (href) => {
-    const parsed = new Url( href );
-    return parsed.href;
+    return href;
 };
 
 
@@ -419,27 +414,22 @@ function findValueInGlobalSettings(globalSettings, key) {
  * Compare two values with type coercion support
  */
 function compareValues(currentValue, expectedValue) {
-    // ✅ Handle arrays of values (show field if currentValue is in value[])
     if (Array.isArray(expectedValue)) {
         return expectedValue.includes(currentValue);
     }
 
-    // ✅ Handle boolean <-> string comparison (like "true"/false)
     if (typeof currentValue === 'boolean' && typeof expectedValue === 'string') {
         return currentValue.toString() === expectedValue;
     }
 
-    // ✅ Handle numeric-string comparison (e.g. "1" === 1)
     if (typeof currentValue === 'number' && typeof expectedValue === 'string') {
         return currentValue === Number(expectedValue);
     }
 
-    // ✅ Handle null/undefined
     if (currentValue == null) {
         return false;
     }
 
-    // ✅ Strict equality by default
     return currentValue === expectedValue;
 }
 
