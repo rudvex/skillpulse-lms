@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react';
-import { getAdminUrl } from '../../../../../utility/url';
+import { getAdminUrl, getAdminPageUrl } from '../../../../../utility/url';
 import { __ } from '@wordpress/i18n';
 import { Card, CardBody, CardHeader, Spinner, Button } from '@wordpress/components';
 import { SplmsIcon } from "../../../../../components/SplmsIcon";
