@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { getUserEditUrl } from '../../../../../utility/url';
+import { getUserEditUrl, getAdminPageUrl } from '../../../../../utility/url';
 import { getInitialsAvatar } from '../../../../../utility/helper';
 import { __ } from '@wordpress/i18n';
 import { Card, CardBody, CardHeader } from '@wordpress/components';

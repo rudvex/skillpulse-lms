@@ -8,7 +8,7 @@ import { SplmsIcon } from "../../../components/SplmsIcon";
 import AdminHeader from "../../../components/AdminHeader";
 
 import './styles/index.scss';
-import { getAdminUrl, getPostTypeCreateUrl } from '../../../utility/url';
+import { getAdminUrl, getPostTypeCreateUrl, getAdminPageUrl } from '../../../utility/url';
 
 
 class OverviewPage extends Component {
