@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import { getUserEditUrl } from '../../../../../utility/url';
 import { getInitialsAvatar } from '../../../../../utility/helper';
 import { __ } from '@wordpress/i18n';
 import { Card, CardBody, CardHeader } from '@wordpress/components';
@@ -11,8 +12,8 @@ import { SplmsIcon } from "../../../../../components/SplmsIcon";
 const StudentInfoCard = ({ enrollment }) => {
     if (!enrollment) return null;
 
-    const userEditUrl = `${SPLMSCore_Data?.adminUrl || '/wp-admin'}/user-edit.php?user_id=${enrollment.user_id}`;
-    const userEnrollmentsUrl = `${SPLMSCore_Data?.adminUrl || '/wp-admin'}/admin.php?page=splms-enrollments&user_id=${enrollment.user_id}`;
+    const userEditUrl = getUserEditUrl(enrollment.user_id);
+    const userEnrollmentsUrl = getAdminPageUrl('splms-enrollments', { user_id: enrollment.user_id });
 
     return (
         <Card>

@@ -3,6 +3,7 @@
  */
 
 import React, { Component } from 'react';
+import { getAdminUrl } from '../../../../../utility/url';
 import { __ } from '@wordpress/i18n';
 import { Card, CardBody, CardHeader, Spinner, Button } from '@wordpress/components';
 import { SplmsIcon } from "../../../../../components/SplmsIcon";
@@ -127,7 +128,7 @@ class QuizAttemptsTable extends Component {
 
     handleViewAttempt = (attemptId) => {
         // Navigate to quiz attempts detail page
-        const quizAttemptsUrl = `${SPLMSCore_Data?.adminUrl || '/wp-admin'}/admin.php?page=splms-quiz-attempts&attempt_id=${attemptId}`;
+        const quizAttemptsUrl = getAdminPageUrl('splms-quiz-attempts', { attempt_id: attemptId });
         window.open(quizAttemptsUrl, '_blank');
     }
 

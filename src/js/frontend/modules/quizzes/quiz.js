@@ -15,6 +15,7 @@ import {
     clearStorage,
     dispatchEvent 
 } from './quiz-utils.js';
+import { getAjaxUrl } from '../../../react-core/utility/url';
 
 class SPLMSQuiz {
     constructor() {
@@ -1400,7 +1401,7 @@ class SPLMSQuiz {
 
         // Fetch quiz attempts with detailed answers
         jQuery.ajax({
-            url: window.splms_frontend?.ajax_url || '/wp-admin/admin-ajax.php',
+            url: getAjaxUrl(),
             type: 'POST',
             data: {
                 action: 'splms_get_quiz_attempts',

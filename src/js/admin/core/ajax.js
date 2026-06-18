@@ -1,10 +1,12 @@
 /**
  * SkillPulse LMS Admin AJAX Handler
- * Handles AJAX requests for admin functionality
+ * Handles AJAX requests
  */
+import { getAjaxUrl } from '../../react-core/utility/url';
+
 export class SPLMSAdminAjax {
 	constructor() {
-		this.ajaxUrl = ajaxurl || '/wp-admin/admin-ajax.php';
+		this.ajaxUrl = getAjaxUrl();
 		this.nonce = SPLMSCore_Data?.nonce || '';
 	}
 

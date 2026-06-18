@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import { getPostTypeEditUrl } from '../../../../../utility/url';
 import { __ } from '@wordpress/i18n';
 import { Card, CardBody, CardHeader } from '@wordpress/components';
 import { SplmsIcon } from "../../../../../components/SplmsIcon";
@@ -10,8 +11,8 @@ import { SplmsIcon } from "../../../../../components/SplmsIcon";
 const CourseInfoCard = ({ enrollment }) => {
     if (!enrollment) return null;
 
-    const courseEditUrl = `${SPLMSCore_Data?.adminUrl || '/wp-admin'}/post.php?post=${enrollment.course_id}&action=edit`;
-    const courseEnrollmentsUrl = `${SPLMSCore_Data?.adminUrl || '/wp-admin'}/admin.php?page=splms-enrollments&course_id=${enrollment.course_id}`;
+    const courseEditUrl = getPostTypeEditUrl('sp-course', enrollment.course_id);
+    const courseEnrollmentsUrl = getAdminPageUrl('splms-enrollments', { course_id: enrollment.course_id });
 
     return (
         <Card>

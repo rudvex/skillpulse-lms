@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import { getAdminUrl } from '../../../../../utility/url';
 import { __ } from '@wordpress/i18n';
 import { Card, CardBody, CardHeader } from '@wordpress/components';
 import { SplmsIcon } from "../../../../../components/SplmsIcon";
@@ -13,7 +14,7 @@ const EnrollmentDetailsCard = ({ enrollment }) => {
     if (!enrollment) return null;
 
     const orderUrl = enrollment.order_id 
-        ? `${SPLMSCore_Data?.adminUrl || '/wp-admin'}/admin.php?page=splms-orders&order_id=${enrollment.order_id}`
+        ? getAdminPageUrl('splms-orders', { order_id: enrollment.order_id })
         : null;
 
     return (

@@ -221,7 +221,6 @@ class SPLMS_Setup_Wizard {
 				'siteName'      => get_bloginfo( 'name' ),
 				'timezone'      => get_option( 'timezone_string' ) ? get_option( 'timezone_string' ) : 'UTC',
 				'timezones'     => $this->get_wordpress_timezones(),
-				'mainUrl'       => admin_url( 'admin.php?page=skillpulse-lms' ),
 				'ajaxUrl'       => admin_url( 'admin-ajax.php' ),
 				'licenseNonce'  => wp_create_nonce( 'splms_license_nonce' ),
 				'licenseInfo'   => $this->get_license_info(),

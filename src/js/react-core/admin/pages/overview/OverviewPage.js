@@ -102,7 +102,7 @@ class OverviewPage extends Component {
                     </Button>
                     <Button 
                         isSecondary 
-                        href={`${adminUrl}/admin.php?page=splms-settings`}
+                        href={getAdminPageUrl('splms-settings')}
                         className="quick-action-button"
                     >
                         <SplmsIcon mode="wp" icon="admin-settings" />

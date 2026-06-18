@@ -4,7 +4,7 @@ import { __ } from '@wordpress/i18n';
 import { SplmsIcon } from '../SplmsIcon';
 import { fetchApiData, formatOptions } from '../../utility/apiHelper';
 import './styles.scss';
-import { getSiteUrl } from '../../utility/url';
+import { getSiteUrl, getAjaxUrl } from '../../utility/url';
 
 /**
  * SearchableSelect Component
@@ -140,7 +140,7 @@ const SearchableSelect = ({
             formData.append('page_type', pageType);
             formData.append('nonce', window.SPLMSCore_Data?.admin_nonce || '');
 
-            const response = await fetch(window.SPLMSCore_Data?.ajax_url || '/wp-admin/admin-ajax.php', {
+            const response = await fetch(getAjaxUrl(), {
                 method: 'POST',
                 body: formData
             });
