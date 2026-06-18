@@ -8,7 +8,8 @@ import { addQueryArgs } from '@wordpress/url';
  */
 export const getSiteUrl = () => {
     return window.SPLMSCore_Data?.siteUrl 
-        || window.SPLMSCore_Data?.homeUrl 
+        || window.SPLMSCore_Data?.homeUrl
+        || window.splmsWizardData?.siteUrl
         || window.splms_frontend?.homeUrl;
 };
 
