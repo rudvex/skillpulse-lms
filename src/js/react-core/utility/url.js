@@ -16,8 +16,14 @@ export const getSiteUrl = () => {
  * Retrieves the WordPress admin URL.
  */
 export const getAdminUrl = () => {
-    return window.SPLMSCore_Data?.adminUrl 
-        || `${getSiteUrl()}/wp-admin`;
+    return `${getSiteUrl()}/wp-admin`;
+};
+
+/**
+ * Retrieves the URL to list a specific post type.
+ */
+export const getPostTypeListUrl = (postType) => {
+    return addQueryArgs(`${getAdminUrl()}/edit.php`, { post_type: postType });
 };
 
 /**
@@ -32,6 +38,13 @@ export const getPostTypeCreateUrl = (postType) => {
  */
 export const getPostTypeEditUrl = (postType, postId) => {
     return addQueryArgs(`${getAdminUrl()}/post.php`, { post: postId, action: 'edit' });
+};
+
+/**
+ * Retrieves the URL to edit a specific post in the curriculum builder.
+ */
+export const getPostEditUrl = (postId) => {
+    return addQueryArgs(getPostTypeEditUrl(null, postId), { curriculum: '1' });
 };
 
 /**

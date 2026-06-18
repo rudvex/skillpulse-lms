@@ -8,6 +8,7 @@ import { compose } from '@wordpress/compose';
 import { withSelect, withDispatch } from '@wordpress/data';
 import { Component, Fragment } from '@wordpress/element';
 import { Icon, Button } from '@wordpress/components';
+import { getPostTypeListUrl } from '../../../../utility/url';
 
 class Header extends Component {
     constructor(props) {
@@ -171,11 +172,11 @@ class Header extends Component {
                         </div>
                         <div className="splms-header-icon">
                             <div className="splms-header-icon-help">
-                                {SPLMSCore_Data.back_cta_label && SPLMSCore_Data.coursesUrl && (
+                                {SPLMSCore_Data.back_cta_label && (
                                     <Button
                                         className="splms-header-icon-help-button"
                                         onClick={() => {
-                                            window.open(SPLMSCore_Data.coursesUrl, "_self");
+                                            window.open(getPostTypeListUrl('sp-course'), "_self");
                                         }}
                                         aria-label={__("Back to Courses", "skillpulse-lms")}
                                     >
