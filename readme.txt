@@ -126,6 +126,13 @@ You can create unlimited courses and lessons. Quiz questions are limited to 5 pe
 
 == Changelog ==
 
+= 1.0.1 =
+* Fix: Resolved Gutenberg race condition causing hidden metaboxes in the block editor.
+* Fix: Ensured visibility of metaboxes and properly saved user preferences in the edit post screen.
+* Fix: Updated sidebar toggle logic (isPublishSidebarOpened) for better compatibility with newer WordPress core editor packages (core/editor and core/edit-post).
+* Fix: Removed redundant console log statements from the course editor for a cleaner developer experience.
+* Enhancement: Refactored the SplmsIcon component to support React refs and improve SVG rendering stability.
+
 = 1.0.0 =
 * Initial release.
 * Unlimited course creation.
