@@ -9,7 +9,7 @@
  */
 
 import { __ } from '@wordpress/i18n';
-import { getSiteUrl, getAdminUrl, getPostTypeCreateUrl } from '../../../../../utility/url';
+import { getPostTypeCreateUrl, getAdminPageUrl } from '../../../../../utility/url';
 import { Button, Card, CardBody } from '@wordpress/components';
 import { SplmsIcon } from '../../../../../components/SplmsIcon';
 
@@ -48,16 +48,12 @@ const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
 				window.location.href = response.redirect_url;
 			} else {
 				// Fallback redirect to dashboard
-				const { siteUrl } = splmsWizardData || {};
-				const mainUrl = splmsWizardData?.mainUrl;
-				window.location.href = mainUrl;
+				window.location.href = getAdminPageUrl('skillpulse-lms');
 			}
 		} catch (err) {
 			console.error('Failed to complete wizard:', err);
 			// Fallback redirect even if completion fails
-			const { siteUrl } = splmsWizardData || {};
-			const mainUrl = splmsWizardData?.mainUrl;
-			window.location.href = mainUrl;
+			window.location.href = getAdminPageUrl('skillpulse-lms');
 		}
 	};
 
@@ -65,15 +61,12 @@ const FinishStep = ({ onNext, stepData, loading, wizardData }) => {
 	 * Quick actions for next steps
 	 */
 	const getQuickActions = () => {
-		const { siteUrl } = splmsWizardData || {};
-		const baseUrl = siteUrl || getSiteUrl();
-
 		return [
 			{
 				title: __('Manage Students', 'skillpulse-lms'),
 				description: __('Add students and manage enrollments', 'skillpulse-lms'),
 				icon: 'groups',
-				url: splmsWizardData?.dashboardUrl || `${baseUrl}/wp-admin/admin.php?page=skillpulse-lms`,
+				url: getAdminPageUrl('skillpulse-lms'),
 				primary: false
 			},
 			{
