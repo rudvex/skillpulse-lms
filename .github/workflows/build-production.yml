@@ -38,7 +38,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'npm'
 
       - name: Run Build Script
@@ -109,6 +109,21 @@ jobs:
 
       # NOTE: ZIP artifact upload and WordPress.org deployment are disabled for now.
       # Uncomment the sections below when ready for WordPress.org release.
+
+      - name: Prepare Artifact
+        run: |
+          PRODUCT_NAME=$(basename $PWD)
+          echo "Preparing artifact for: $PRODUCT_NAME"
+          mkdir -p ./output/${PRODUCT_NAME}/
+          unzip -q ./output/${PRODUCT_NAME}.zip -d ./output/${PRODUCT_NAME}/
+          rm ./output/${PRODUCT_NAME}.zip
+
+      - name: Create Final Plugin Zip
+        run: |
+          PRODUCT_NAME=$(basename $PWD)
+          cd output
+          zip ${PRODUCT_NAME}.zip ${PRODUCT_NAME} -r
+          ls -lh ${PRODUCT_NAME}.zip
 
       - name: Upload Zip to Artifact
         uses: actions/upload-artifact@v4
